@@ -412,10 +412,10 @@ class NetworksRestTransport(NetworksTransport):
         #               not required for GCE
         query_params = {
             "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "orderBy": request.order_by,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -464,13 +464,13 @@ class NetworksRestTransport(NetworksTransport):
         #               not required for GCE
         query_params = {
             "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
-            "region": request.region,
-            "peeringName": request.peering_name,
-            "returnPartialSuccess": request.return_partial_success,
-            "maxResults": request.max_results,
             "direction": request.direction,
+            "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "peeringName": request.peering_name,
+            "region": request.region,
+            "orderBy": request.order_by,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values

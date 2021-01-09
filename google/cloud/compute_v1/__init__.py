@@ -1152,6 +1152,7 @@ __all__ = (
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
+    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
     "Accelerators",
     "AccessConfig",
@@ -1493,7 +1494,6 @@ __all__ = (
     "GetXpnResourcesProjectsRequest",
     "GetZoneOperationRequest",
     "GetZoneRequest",
-    "GlobalAddressesClient",
     "GlobalForwardingRulesClient",
     "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
     "GlobalNetworkEndpointGroupsClient",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "AcceleratorTypesClient",
+    "GlobalAddressesClient",
 )

@@ -123,11 +123,11 @@ class TargetInstancesRestTransport(TargetInstancesTransport):
         #               not required for GCE
         query_params = {
             "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
-            "includeAllScopes": request.include_all_scopes,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "includeAllScopes": request.include_all_scopes,
+            "orderBy": request.order_by,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -395,10 +395,10 @@ class TargetInstancesRestTransport(TargetInstancesTransport):
         #               not required for GCE
         query_params = {
             "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "orderBy": request.order_by,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
