@@ -1152,6 +1152,7 @@ __all__ = (
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
+    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
     "Accelerators",
     "AccessConfig",
@@ -1676,7 +1677,6 @@ __all__ = (
     "InterconnectLocationRegionInfo",
     "InterconnectLocationsClient",
     "InterconnectOutageNotification",
-    "InterconnectsClient",
     "InterconnectsGetDiagnosticsResponse",
     "InvalidateCacheUrlMapRequest",
     "Items",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "AcceleratorTypesClient",
+    "InterconnectsClient",
 )

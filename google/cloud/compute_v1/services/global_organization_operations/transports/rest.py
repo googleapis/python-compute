@@ -253,11 +253,11 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "parentId": request.parent_id,
             "returnPartialSuccess": request.return_partial_success,
-            "filter": request.filter,
             "orderBy": request.order_by,
+            "parentId": request.parent_id,
+            "filter": request.filter,
+            "pageToken": request.page_token,
             "maxResults": request.max_results,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
