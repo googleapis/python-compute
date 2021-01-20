@@ -54,7 +54,7 @@ class InstancesRestTransport(InstancesTransport):
         credentials: credentials.Credentials = None,
         credentials_file: str = None,
         scopes: Sequence[str] = None,
-        ssl_channel_credentials: grpc.ChannelCredentials = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -73,8 +73,9 @@ class InstancesRestTransport(InstancesTransport):
                 This argument is ignored if ``channel`` is provided.
             scopes (Optional(Sequence[str])): A list of scopes. This argument is
                 ignored if ``channel`` is provided.
-            ssl_channel_credentials (grpc.ChannelCredentials): SSL credentials
-                for grpc channel. It is ignored if ``channel`` is provided.
+            client_cert_source_for_mtls (Callable[[], Tuple[bytes, bytes]]): Client
+                certificate to configure mutual TLS HTTP channel. It is ignored
+                if ``channel`` is provided.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
             client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
@@ -89,6 +90,8 @@ class InstancesRestTransport(InstancesTransport):
             host=host, credentials=credentials, client_info=client_info,
         )
         self._session = AuthorizedSession(self._credentials)
+        if client_cert_source_for_mtls:
+            self._session.configure_mtls_channel(client_cert_source_for_mtls)
 
     def add_access_config(
         self,
@@ -293,11 +296,11 @@ class InstancesRestTransport(InstancesTransport):
         #               not required for GCE
         query_params = {
             "includeAllScopes": request.include_all_scopes,
-            "returnPartialSuccess": request.return_partial_success,
-            "pageToken": request.page_token,
-            "orderBy": request.order_by,
-            "maxResults": request.max_results,
             "filter": request.filter,
+            "maxResults": request.max_results,
+            "orderBy": request.order_by,
+            "pageToken": request.page_token,
+            "returnPartialSuccess": request.return_partial_success,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -541,8 +544,8 @@ class InstancesRestTransport(InstancesTransport):
         #               not required for GCE
         query_params = {
             "networkInterface": request.network_interface,
-            "requestId": request.request_id,
             "accessConfig": request.access_config,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -621,8 +624,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "deviceName": request.device_name,
             "requestId": request.request_id,
+            "deviceName": request.device_name,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -727,8 +730,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "queryPath": request.query_path,
             "variableKey": request.variable_key,
+            "queryPath": request.query_path,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1061,8 +1064,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "sourceInstanceTemplate": request.source_instance_template,
             "requestId": request.request_id,
+            "sourceInstanceTemplate": request.source_instance_template,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1109,11 +1112,11 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "returnPartialSuccess": request.return_partial_success,
-            "pageToken": request.page_token,
-            "orderBy": request.order_by,
-            "maxResults": request.max_results,
             "filter": request.filter,
+            "maxResults": request.max_results,
+            "orderBy": request.order_by,
+            "pageToken": request.page_token,
+            "returnPartialSuccess": request.return_partial_success,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1166,11 +1169,11 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "returnPartialSuccess": request.return_partial_success,
-            "pageToken": request.page_token,
-            "orderBy": request.order_by,
-            "maxResults": request.max_results,
             "filter": request.filter,
+            "maxResults": request.max_results,
+            "orderBy": request.order_by,
+            "pageToken": request.page_token,
+            "returnPartialSuccess": request.return_partial_success,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1493,9 +1496,9 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "autoDelete": request.auto_delete,
-            "deviceName": request.device_name,
             "requestId": request.request_id,
+            "deviceName": request.device_name,
+            "autoDelete": request.auto_delete,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -2822,9 +2825,9 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "minimalAction": request.minimal_action,
-            "requestId": request.request_id,
             "mostDisruptiveAllowedAction": request.most_disruptive_allowed_action,
+            "requestId": request.request_id,
+            "minimalAction": request.minimal_action,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
