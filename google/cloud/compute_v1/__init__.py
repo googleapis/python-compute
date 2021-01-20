@@ -1152,6 +1152,7 @@ __all__ = (
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
+    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
     "Accelerators",
     "AccessConfig",
@@ -1390,7 +1391,6 @@ __all__ = (
     "ForwardingRuleAggregatedList",
     "ForwardingRuleList",
     "ForwardingRuleReference",
-    "ForwardingRulesClient",
     "ForwardingRulesScopedList",
     "GRPCHealthCheck",
     "GetAcceleratorTypeRequest",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "AcceleratorTypesClient",
+    "ForwardingRulesClient",
 )

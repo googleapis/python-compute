@@ -207,12 +207,12 @@ class InstanceGroupsRestTransport(InstanceGroupsTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "includeAllScopes": request.include_all_scopes,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -489,11 +489,11 @@ class InstanceGroupsRestTransport(InstanceGroupsTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -550,11 +550,11 @@ class InstanceGroupsRestTransport(InstanceGroupsTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values

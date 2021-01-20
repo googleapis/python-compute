@@ -158,8 +158,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "networkInterface": request.network_interface,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -292,12 +292,12 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "includeAllScopes": request.include_all_scopes,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -381,8 +381,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "forceAttach": request.force_attach,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -540,8 +540,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "networkInterface": request.network_interface,
+            "requestId": request.request_id,
             "accessConfig": request.access_config,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
@@ -621,8 +621,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "deviceName": request.device_name,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -727,8 +727,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "variableKey": request.variable_key,
             "queryPath": request.query_path,
+            "variableKey": request.variable_key,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1109,11 +1109,11 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1166,11 +1166,11 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "pageToken": request.page_token,
-            "filter": request.filter,
-            "orderBy": request.order_by,
             "returnPartialSuccess": request.return_partial_success,
+            "pageToken": request.page_token,
+            "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -1494,8 +1494,8 @@ class InstancesRestTransport(InstancesTransport):
         #               not required for GCE
         query_params = {
             "autoDelete": request.auto_delete,
-            "requestId": request.request_id,
             "deviceName": request.device_name,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -2822,8 +2822,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "minimalAction": request.minimal_action,
+            "requestId": request.request_id,
             "mostDisruptiveAllowedAction": request.most_disruptive_allowed_action,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
@@ -2908,8 +2908,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "networkInterface": request.network_interface,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -3077,8 +3077,8 @@ class InstancesRestTransport(InstancesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
             "networkInterface": request.network_interface,
+            "requestId": request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values

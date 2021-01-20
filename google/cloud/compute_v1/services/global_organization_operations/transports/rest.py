@@ -254,11 +254,11 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
         #               not required for GCE
         query_params = {
             "pageToken": request.page_token,
-            "parentId": request.parent_id,
             "returnPartialSuccess": request.return_partial_success,
-            "filter": request.filter,
+            "parentId": request.parent_id,
             "orderBy": request.order_by,
             "maxResults": request.max_results,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
