@@ -172,9 +172,6 @@ class NetworksRestTransport(NetworksTransport):
         # Send the request
         response = self._session.post(url, json=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.Operation.from_json(response.content)
 
@@ -251,9 +248,6 @@ class NetworksRestTransport(NetworksTransport):
         # Send the request
         response = self._session.delete(url)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.Operation.from_json(response.content)
 
@@ -304,9 +298,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.Network.from_json(response.content)
@@ -389,9 +380,6 @@ class NetworksRestTransport(NetworksTransport):
         # Send the request
         response = self._session.post(url, json=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.Operation.from_json(response.content)
 
@@ -426,11 +414,11 @@ class NetworksRestTransport(NetworksTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "filter": request.filter,
             "orderBy": request.order_by,
+            "pageToken": request.page_token,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -442,9 +430,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.NetworkList.from_json(response.content)
@@ -481,13 +466,13 @@ class NetworksRestTransport(NetworksTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "region": request.region,
-            "pageToken": request.page_token,
-            "direction": request.direction,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "filter": request.filter,
+            "direction": request.direction,
+            "region": request.region,
             "peeringName": request.peering_name,
+            "pageToken": request.page_token,
             "orderBy": request.order_by,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
@@ -500,9 +485,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.ExchangedPeeringRoutesList.from_json(response.content)
@@ -583,9 +565,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.patch(url, json=body,)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.Operation.from_json(response.content)
@@ -669,9 +648,6 @@ class NetworksRestTransport(NetworksTransport):
         # Send the request
         response = self._session.post(url, json=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.Operation.from_json(response.content)
 
@@ -747,9 +723,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.post(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.Operation.from_json(response.content)
@@ -832,9 +805,6 @@ class NetworksRestTransport(NetworksTransport):
 
         # Send the request
         response = self._session.patch(url, json=body,)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.Operation.from_json(response.content)

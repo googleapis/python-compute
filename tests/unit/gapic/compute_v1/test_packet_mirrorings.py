@@ -419,7 +419,6 @@ def test_aggregated_list_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroringAggregatedList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -464,7 +463,6 @@ def test_aggregated_list_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroringAggregatedList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -534,7 +532,6 @@ def test_delete_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -585,7 +582,6 @@ def test_delete_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -666,7 +662,6 @@ def test_get_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroring.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -717,7 +712,6 @@ def test_get_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroring.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -798,7 +792,6 @@ def test_insert_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -849,7 +842,6 @@ def test_insert_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -931,7 +923,6 @@ def test_list_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroringList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -971,7 +962,6 @@ def test_list_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.PacketMirroringList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1047,7 +1037,6 @@ def test_patch_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1098,7 +1087,6 @@ def test_patch_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1174,7 +1162,6 @@ def test_test_iam_permissions_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.TestPermissionsResponse.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1201,7 +1188,6 @@ def test_test_iam_permissions_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.TestPermissionsResponse.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 

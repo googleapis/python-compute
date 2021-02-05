@@ -407,7 +407,6 @@ def test_add_nodes_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -458,7 +457,6 @@ def test_add_nodes_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -545,7 +543,6 @@ def test_aggregated_list_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupAggregatedList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -588,7 +585,6 @@ def test_aggregated_list_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupAggregatedList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -658,7 +654,6 @@ def test_delete_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -709,7 +704,6 @@ def test_delete_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -788,7 +782,6 @@ def test_delete_nodes_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -839,7 +832,6 @@ def test_delete_nodes_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -924,7 +916,6 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNodeGroupRequ
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroup.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -968,7 +959,6 @@ def test_get_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroup.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1038,7 +1028,6 @@ def test_get_iam_policy_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Policy.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1077,7 +1066,6 @@ def test_get_iam_policy_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Policy.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1156,7 +1144,6 @@ def test_insert_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1207,7 +1194,6 @@ def test_insert_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1285,7 +1271,6 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListNodeGroupsR
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1323,7 +1308,6 @@ def test_list_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1384,7 +1368,6 @@ def test_list_nodes_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupsListNodes.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1422,7 +1405,6 @@ def test_list_nodes_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.NodeGroupsListNodes.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1501,7 +1483,6 @@ def test_patch_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1552,7 +1533,6 @@ def test_patch_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1636,7 +1616,6 @@ def test_set_iam_policy_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Policy.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1675,7 +1654,6 @@ def test_set_iam_policy_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Policy.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1768,7 +1746,6 @@ def test_set_node_template_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1819,7 +1796,6 @@ def test_set_node_template_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1891,7 +1867,6 @@ def test_test_iam_permissions_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.TestPermissionsResponse.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1918,7 +1893,6 @@ def test_test_iam_permissions_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.TestPermissionsResponse.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 

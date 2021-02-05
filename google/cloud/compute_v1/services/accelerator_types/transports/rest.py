@@ -126,12 +126,12 @@ class AcceleratorTypesRestTransport(AcceleratorTypesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "filter": request.filter,
             "includeAllScopes": request.include_all_scopes,
             "orderBy": request.order_by,
+            "pageToken": request.page_token,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -143,9 +143,6 @@ class AcceleratorTypesRestTransport(AcceleratorTypesTransport):
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.AcceleratorTypeAggregatedList.from_json(response.content)
@@ -204,9 +201,6 @@ class AcceleratorTypesRestTransport(AcceleratorTypesTransport):
         # Send the request
         response = self._session.get(url)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.AcceleratorType.from_json(response.content)
 
@@ -242,11 +236,11 @@ class AcceleratorTypesRestTransport(AcceleratorTypesTransport):
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "returnPartialSuccess": request.return_partial_success,
+            "filter": request.filter,
             "orderBy": request.order_by,
+            "pageToken": request.page_token,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -258,9 +252,6 @@ class AcceleratorTypesRestTransport(AcceleratorTypesTransport):
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.AcceleratorTypeList.from_json(response.content)
