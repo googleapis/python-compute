@@ -143,9 +143,6 @@ class LicenseCodesRestTransport(LicenseCodesTransport):
         # Send the request
         response = self._session.get(url)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.LicenseCode.from_json(response.content)
 
@@ -197,9 +194,6 @@ class LicenseCodesRestTransport(LicenseCodesTransport):
 
         # Send the request
         response = self._session.post(url, json=body,)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(response.content)

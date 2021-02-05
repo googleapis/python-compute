@@ -403,7 +403,6 @@ def test_add_peering_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -454,7 +453,6 @@ def test_add_peering_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -543,7 +541,6 @@ def test_delete_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -594,7 +591,6 @@ def test_delete_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -660,7 +656,6 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNetworkReques
         # Wrap the value into a proper Response obj
         json_return_value = compute.Network.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -702,7 +697,6 @@ def test_get_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Network.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -778,7 +772,6 @@ def test_insert_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -829,7 +822,6 @@ def test_insert_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -890,7 +882,6 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListNetworksReq
         # Wrap the value into a proper Response obj
         json_return_value = compute.NetworkList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -924,7 +915,6 @@ def test_list_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.NetworkList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -977,7 +967,6 @@ def test_list_peering_routes_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.ExchangedPeeringRoutesList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1013,7 +1002,6 @@ def test_list_peering_routes_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.ExchangedPeeringRoutesList.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1087,7 +1075,6 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRe
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1138,7 +1125,6 @@ def test_patch_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1223,7 +1209,6 @@ def test_remove_peering_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1274,7 +1259,6 @@ def test_remove_peering_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1364,7 +1348,6 @@ def test_switch_to_custom_mode_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1415,7 +1398,6 @@ def test_switch_to_custom_mode_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1491,7 +1473,6 @@ def test_update_peering_rest(
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1542,7 +1523,6 @@ def test_update_peering_rest_flattened():
         # Wrap the value into a proper Response obj
         json_return_value = compute.Operation.to_json(return_value)
         response_value = Response()
-        response_value.status_code = 200
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 

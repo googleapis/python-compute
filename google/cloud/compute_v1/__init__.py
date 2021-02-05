@@ -1152,6 +1152,7 @@ __all__ = (
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
+    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
     "Accelerators",
     "AccessConfig",
@@ -1971,7 +1972,6 @@ __all__ = (
     "ReservationAffinity",
     "ReservationAggregatedList",
     "ReservationList",
-    "ReservationsClient",
     "ReservationsResizeRequest",
     "ReservationsScopedList",
     "ResetInstanceRequest",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "AcceleratorTypesClient",
+    "ReservationsClient",
 )

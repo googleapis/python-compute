@@ -141,9 +141,6 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
         # Send the request
         response = self._session.delete(url)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.DeleteGlobalOrganizationOperationResponse.from_json(
             response.content
@@ -222,9 +219,6 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
         # Send the request
         response = self._session.get(url)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
-
         # Return the response
         return compute.Operation.from_json(response.content)
 
@@ -262,12 +256,12 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "orderBy": request.order_by,
-            "filter": request.filter,
-            "parentId": request.parent_id,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
             "maxResults": request.max_results,
+            "parentId": request.parent_id,
+            "returnPartialSuccess": request.return_partial_success,
+            "orderBy": request.order_by,
+            "pageToken": request.page_token,
+            "filter": request.filter,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
@@ -279,9 +273,6 @@ class GlobalOrganizationOperationsRestTransport(GlobalOrganizationOperationsTran
 
         # Send the request
         response = self._session.get(url)
-
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
 
         # Return the response
         return compute.OperationList.from_json(response.content)
