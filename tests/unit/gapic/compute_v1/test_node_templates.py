@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.node_templates import NodeTemplatesClient
+from google.cloud.compute_v1.services.node_templates import pagers
 from google.cloud.compute_v1.services.node_templates import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -414,11 +415,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.NodeTemplateAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.NodeTemplatesScopedList(
@@ -477,6 +476,74 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListNodeTemplatesRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = NodeTemplatesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.NodeTemplateAggregatedList(
+                items={
+                    "a": compute.NodeTemplatesScopedList(),
+                    "b": compute.NodeTemplatesScopedList(),
+                    "c": compute.NodeTemplatesScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.NodeTemplateAggregatedList(items={}, next_page_token="def",),
+            compute.NodeTemplateAggregatedList(
+                items={"g": compute.NodeTemplatesScopedList(),}, next_page_token="ghi",
+            ),
+            compute.NodeTemplateAggregatedList(
+                items={
+                    "h": compute.NodeTemplatesScopedList(),
+                    "i": compute.NodeTemplatesScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.NodeTemplateAggregatedList.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.NodeTemplatesScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (
+                str,
+                compute.NodeTemplatesScopedList,
+            )
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.NodeTemplatesScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(
@@ -1020,11 +1087,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.NodeTemplateList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.NodeTemplate(
@@ -1084,6 +1149,57 @@ def test_list_rest_flattened_error():
             project="project_value",
             region="region_value",
         )
+
+
+def test_list_pager():
+    client = NodeTemplatesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.NodeTemplateList(
+                items=[
+                    compute.NodeTemplate(),
+                    compute.NodeTemplate(),
+                    compute.NodeTemplate(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.NodeTemplateList(items=[], next_page_token="def",),
+            compute.NodeTemplateList(
+                items=[compute.NodeTemplate(),], next_page_token="ghi",
+            ),
+            compute.NodeTemplateList(
+                items=[compute.NodeTemplate(), compute.NodeTemplate(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.NodeTemplateList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.NodeTemplate) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_set_iam_policy_rest(

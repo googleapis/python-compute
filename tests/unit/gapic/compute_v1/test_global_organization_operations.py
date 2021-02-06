@@ -37,6 +37,7 @@ from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.global_organization_operations import (
     GlobalOrganizationOperationsClient,
 )
+from google.cloud.compute_v1.services.global_organization_operations import pagers
 from google.cloud.compute_v1.services.global_organization_operations import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -649,11 +650,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.OperationList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.Operation(client_operation_id="client_operation_id_value")
@@ -705,6 +704,51 @@ def test_list_rest_flattened_error():
     # fields is an error.
     with pytest.raises(ValueError):
         client.list(compute.ListGlobalOrganizationOperationsRequest(),)
+
+
+def test_list_pager():
+    client = GlobalOrganizationOperationsClient(
+        credentials=credentials.AnonymousCredentials(),
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.OperationList(
+                items=[compute.Operation(), compute.Operation(), compute.Operation(),],
+                next_page_token="abc",
+            ),
+            compute.OperationList(items=[], next_page_token="def",),
+            compute.OperationList(items=[compute.Operation(),], next_page_token="ghi",),
+            compute.OperationList(items=[compute.Operation(), compute.Operation(),],),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.OperationList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.Operation) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_credentials_transport_error():

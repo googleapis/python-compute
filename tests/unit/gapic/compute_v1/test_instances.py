@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.instances import InstancesClient
+from google.cloud.compute_v1.services.instances import pagers
 from google.cloud.compute_v1.services.instances import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -686,11 +687,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.InstancesScopedList(
@@ -745,6 +744,69 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListInstancesRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = InstancesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceAggregatedList(
+                items={
+                    "a": compute.InstancesScopedList(),
+                    "b": compute.InstancesScopedList(),
+                    "c": compute.InstancesScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.InstanceAggregatedList(items={}, next_page_token="def",),
+            compute.InstanceAggregatedList(
+                items={"g": compute.InstancesScopedList(),}, next_page_token="ghi",
+            ),
+            compute.InstanceAggregatedList(
+                items={
+                    "h": compute.InstancesScopedList(),
+                    "i": compute.InstancesScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.InstanceAggregatedList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.InstancesScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (str, compute.InstancesScopedList)
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.InstancesScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_attach_disk_rest(
@@ -2120,11 +2182,9 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListInstancesRe
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [compute.Instance(can_ip_forward=True)]
     assert response.kind == "kind_value"
@@ -2180,6 +2240,49 @@ def test_list_rest_flattened_error():
         )
 
 
+def test_list_pager():
+    client = InstancesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceList(
+                items=[compute.Instance(), compute.Instance(), compute.Instance(),],
+                next_page_token="abc",
+            ),
+            compute.InstanceList(items=[], next_page_token="def",),
+            compute.InstanceList(items=[compute.Instance(),], next_page_token="ghi",),
+            compute.InstanceList(items=[compute.Instance(), compute.Instance(),],),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.InstanceList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.Instance) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
 def test_list_referrers_rest(
     transport: str = "rest", request_type=compute.ListReferrersInstancesRequest
 ):
@@ -2211,11 +2314,9 @@ def test_list_referrers_rest(
 
         response = client.list_referrers(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceListReferrers)
+    assert isinstance(response, pagers.ListReferrersPager)
     assert response.id == "id_value"
     assert response.items == [compute.Reference(kind="kind_value")]
     assert response.kind == "kind_value"
@@ -2274,6 +2375,53 @@ def test_list_referrers_rest_flattened_error():
             zone="zone_value",
             instance="instance_value",
         )
+
+
+def test_list_referrers_pager():
+    client = InstancesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceListReferrers(
+                items=[compute.Reference(), compute.Reference(), compute.Reference(),],
+                next_page_token="abc",
+            ),
+            compute.InstanceListReferrers(items=[], next_page_token="def",),
+            compute.InstanceListReferrers(
+                items=[compute.Reference(),], next_page_token="ghi",
+            ),
+            compute.InstanceListReferrers(
+                items=[compute.Reference(), compute.Reference(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.InstanceListReferrers.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list_referrers(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.Reference) for i in results)
+
+        pages = list(client.list_referrers(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_remove_resource_policies_rest(

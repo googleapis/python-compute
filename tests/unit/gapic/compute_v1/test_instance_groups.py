@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.instance_groups import InstanceGroupsClient
+from google.cloud.compute_v1.services.instance_groups import pagers
 from google.cloud.compute_v1.services.instance_groups import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -557,11 +558,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceGroupAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.InstanceGroupsScopedList(
@@ -618,6 +617,74 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListInstanceGroupsRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = InstanceGroupsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceGroupAggregatedList(
+                items={
+                    "a": compute.InstanceGroupsScopedList(),
+                    "b": compute.InstanceGroupsScopedList(),
+                    "c": compute.InstanceGroupsScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.InstanceGroupAggregatedList(items={}, next_page_token="def",),
+            compute.InstanceGroupAggregatedList(
+                items={"g": compute.InstanceGroupsScopedList(),}, next_page_token="ghi",
+            ),
+            compute.InstanceGroupAggregatedList(
+                items={
+                    "h": compute.InstanceGroupsScopedList(),
+                    "i": compute.InstanceGroupsScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.InstanceGroupAggregatedList.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.InstanceGroupsScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (
+                str,
+                compute.InstanceGroupsScopedList,
+            )
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.InstanceGroupsScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(
@@ -1035,11 +1102,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceGroupList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.InstanceGroup(creation_timestamp="creation_timestamp_value")
@@ -1099,6 +1164,57 @@ def test_list_rest_flattened_error():
         )
 
 
+def test_list_pager():
+    client = InstanceGroupsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceGroupList(
+                items=[
+                    compute.InstanceGroup(),
+                    compute.InstanceGroup(),
+                    compute.InstanceGroup(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.InstanceGroupList(items=[], next_page_token="def",),
+            compute.InstanceGroupList(
+                items=[compute.InstanceGroup(),], next_page_token="ghi",
+            ),
+            compute.InstanceGroupList(
+                items=[compute.InstanceGroup(), compute.InstanceGroup(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.InstanceGroupList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.InstanceGroup) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
 def test_list_instances_rest(
     transport: str = "rest", request_type=compute.ListInstancesInstanceGroupsRequest
 ):
@@ -1130,11 +1246,9 @@ def test_list_instances_rest(
 
         response = client.list_instances(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.InstanceGroupsListInstances)
+    assert isinstance(response, pagers.ListInstancesPager)
     assert response.id == "id_value"
     assert response.items == [compute.InstanceWithNamedPorts(instance="instance_value")]
     assert response.kind == "kind_value"
@@ -1208,6 +1322,62 @@ def test_list_instances_rest_flattened_error():
                 instance_state=compute.InstanceGroupsListInstancesRequest.InstanceState.ALL
             ),
         )
+
+
+def test_list_instances_pager():
+    client = InstanceGroupsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.InstanceGroupsListInstances(
+                items=[
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.InstanceGroupsListInstances(items=[], next_page_token="def",),
+            compute.InstanceGroupsListInstances(
+                items=[compute.InstanceWithNamedPorts(),], next_page_token="ghi",
+            ),
+            compute.InstanceGroupsListInstances(
+                items=[
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                ],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.InstanceGroupsListInstances.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list_instances(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.InstanceWithNamedPorts) for i in results)
+
+        pages = list(client.list_instances(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_remove_instances_rest(

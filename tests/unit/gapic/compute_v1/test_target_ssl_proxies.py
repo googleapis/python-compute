@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.target_ssl_proxies import TargetSslProxiesClient
+from google.cloud.compute_v1.services.target_ssl_proxies import pagers
 from google.cloud.compute_v1.services.target_ssl_proxies import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -778,11 +779,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.TargetSslProxyList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.TargetSslProxy(creation_timestamp="creation_timestamp_value")
@@ -834,6 +833,57 @@ def test_list_rest_flattened_error():
         client.list(
             compute.ListTargetSslProxiesRequest(), project="project_value",
         )
+
+
+def test_list_pager():
+    client = TargetSslProxiesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.TargetSslProxyList(
+                items=[
+                    compute.TargetSslProxy(),
+                    compute.TargetSslProxy(),
+                    compute.TargetSslProxy(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.TargetSslProxyList(items=[], next_page_token="def",),
+            compute.TargetSslProxyList(
+                items=[compute.TargetSslProxy(),], next_page_token="ghi",
+            ),
+            compute.TargetSslProxyList(
+                items=[compute.TargetSslProxy(), compute.TargetSslProxy(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.TargetSslProxyList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.TargetSslProxy) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_set_backend_service_rest(

@@ -37,6 +37,7 @@ from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.region_instance_groups import (
     RegionInstanceGroupsClient,
 )
+from google.cloud.compute_v1.services.region_instance_groups import pagers
 from google.cloud.compute_v1.services.region_instance_groups import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -546,11 +547,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.RegionInstanceGroupList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.InstanceGroup(creation_timestamp="creation_timestamp_value")
@@ -610,6 +609,57 @@ def test_list_rest_flattened_error():
         )
 
 
+def test_list_pager():
+    client = RegionInstanceGroupsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.RegionInstanceGroupList(
+                items=[
+                    compute.InstanceGroup(),
+                    compute.InstanceGroup(),
+                    compute.InstanceGroup(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.RegionInstanceGroupList(items=[], next_page_token="def",),
+            compute.RegionInstanceGroupList(
+                items=[compute.InstanceGroup(),], next_page_token="ghi",
+            ),
+            compute.RegionInstanceGroupList(
+                items=[compute.InstanceGroup(), compute.InstanceGroup(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.RegionInstanceGroupList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.InstanceGroup) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
 def test_list_instances_rest(
     transport: str = "rest",
     request_type=compute.ListInstancesRegionInstanceGroupsRequest,
@@ -644,11 +694,9 @@ def test_list_instances_rest(
 
         response = client.list_instances(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.RegionInstanceGroupsListInstances)
+    assert isinstance(response, pagers.ListInstancesPager)
     assert response.id == "id_value"
     assert response.items == [compute.InstanceWithNamedPorts(instance="instance_value")]
     assert response.kind == "kind_value"
@@ -724,6 +772,62 @@ def test_list_instances_rest_flattened_error():
                 instance_state=compute.RegionInstanceGroupsListInstancesRequest.InstanceState.ALL
             ),
         )
+
+
+def test_list_instances_pager():
+    client = RegionInstanceGroupsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.RegionInstanceGroupsListInstances(
+                items=[
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.RegionInstanceGroupsListInstances(items=[], next_page_token="def",),
+            compute.RegionInstanceGroupsListInstances(
+                items=[compute.InstanceWithNamedPorts(),], next_page_token="ghi",
+            ),
+            compute.RegionInstanceGroupsListInstances(
+                items=[
+                    compute.InstanceWithNamedPorts(),
+                    compute.InstanceWithNamedPorts(),
+                ],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.RegionInstanceGroupsListInstances.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list_instances(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.InstanceWithNamedPorts) for i in results)
+
+        pages = list(client.list_instances(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_set_named_ports_rest(

@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.url_maps import UrlMapsClient
+from google.cloud.compute_v1.services.url_maps import pagers
 from google.cloud.compute_v1.services.url_maps import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -398,11 +399,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.UrlMapsAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.UrlMapsScopedList(
@@ -457,6 +456,69 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListUrlMapsRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = UrlMapsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.UrlMapsAggregatedList(
+                items={
+                    "a": compute.UrlMapsScopedList(),
+                    "b": compute.UrlMapsScopedList(),
+                    "c": compute.UrlMapsScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.UrlMapsAggregatedList(items={}, next_page_token="def",),
+            compute.UrlMapsAggregatedList(
+                items={"g": compute.UrlMapsScopedList(),}, next_page_token="ghi",
+            ),
+            compute.UrlMapsAggregatedList(
+                items={
+                    "h": compute.UrlMapsScopedList(),
+                    "i": compute.UrlMapsScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.UrlMapsAggregatedList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.UrlMapsScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (str, compute.UrlMapsScopedList)
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.UrlMapsScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(transport: str = "rest", request_type=compute.DeleteUrlMapRequest):
@@ -1019,11 +1081,9 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListUrlMapsRequ
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.UrlMapList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.UrlMap(creation_timestamp="creation_timestamp_value")
@@ -1075,6 +1135,49 @@ def test_list_rest_flattened_error():
         client.list(
             compute.ListUrlMapsRequest(), project="project_value",
         )
+
+
+def test_list_pager():
+    client = UrlMapsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.UrlMapList(
+                items=[compute.UrlMap(), compute.UrlMap(), compute.UrlMap(),],
+                next_page_token="abc",
+            ),
+            compute.UrlMapList(items=[], next_page_token="def",),
+            compute.UrlMapList(items=[compute.UrlMap(),], next_page_token="ghi",),
+            compute.UrlMapList(items=[compute.UrlMap(), compute.UrlMap(),],),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.UrlMapList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.UrlMap) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_patch_rest(transport: str = "rest", request_type=compute.PatchUrlMapRequest):

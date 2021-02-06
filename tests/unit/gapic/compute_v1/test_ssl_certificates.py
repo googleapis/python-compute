@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.ssl_certificates import SslCertificatesClient
+from google.cloud.compute_v1.services.ssl_certificates import pagers
 from google.cloud.compute_v1.services.ssl_certificates import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -420,11 +421,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.SslCertificateAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.SslCertificatesScopedList(
@@ -479,6 +478,75 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListSslCertificatesRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = SslCertificatesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.SslCertificateAggregatedList(
+                items={
+                    "a": compute.SslCertificatesScopedList(),
+                    "b": compute.SslCertificatesScopedList(),
+                    "c": compute.SslCertificatesScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.SslCertificateAggregatedList(items={}, next_page_token="def",),
+            compute.SslCertificateAggregatedList(
+                items={"g": compute.SslCertificatesScopedList(),},
+                next_page_token="ghi",
+            ),
+            compute.SslCertificateAggregatedList(
+                items={
+                    "h": compute.SslCertificatesScopedList(),
+                    "i": compute.SslCertificatesScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.SslCertificateAggregatedList.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.SslCertificatesScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (
+                str,
+                compute.SslCertificatesScopedList,
+            )
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.SslCertificatesScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(
@@ -889,11 +957,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.SslCertificateList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [compute.SslCertificate(certificate="certificate_value")]
     assert response.kind == "kind_value"
@@ -943,6 +1009,57 @@ def test_list_rest_flattened_error():
         client.list(
             compute.ListSslCertificatesRequest(), project="project_value",
         )
+
+
+def test_list_pager():
+    client = SslCertificatesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.SslCertificateList(
+                items=[
+                    compute.SslCertificate(),
+                    compute.SslCertificate(),
+                    compute.SslCertificate(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.SslCertificateList(items=[], next_page_token="def",),
+            compute.SslCertificateList(
+                items=[compute.SslCertificate(),], next_page_token="ghi",
+            ),
+            compute.SslCertificateList(
+                items=[compute.SslCertificate(), compute.SslCertificate(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.SslCertificateList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.SslCertificate) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_credentials_transport_error():

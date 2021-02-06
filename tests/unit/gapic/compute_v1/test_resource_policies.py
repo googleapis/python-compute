@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.resource_policies import ResourcePoliciesClient
+from google.cloud.compute_v1.services.resource_policies import pagers
 from google.cloud.compute_v1.services.resource_policies import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -424,11 +425,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.ResourcePolicyAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.etag == "etag_value"
     assert response.id == "id_value"
     assert response.items == {
@@ -486,6 +485,75 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListResourcePoliciesRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = ResourcePoliciesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.ResourcePolicyAggregatedList(
+                items={
+                    "a": compute.ResourcePoliciesScopedList(),
+                    "b": compute.ResourcePoliciesScopedList(),
+                    "c": compute.ResourcePoliciesScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.ResourcePolicyAggregatedList(items={}, next_page_token="def",),
+            compute.ResourcePolicyAggregatedList(
+                items={"g": compute.ResourcePoliciesScopedList(),},
+                next_page_token="ghi",
+            ),
+            compute.ResourcePolicyAggregatedList(
+                items={
+                    "h": compute.ResourcePoliciesScopedList(),
+                    "i": compute.ResourcePoliciesScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.ResourcePolicyAggregatedList.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.ResourcePoliciesScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (
+                str,
+                compute.ResourcePoliciesScopedList,
+            )
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.ResourcePoliciesScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(
@@ -1023,11 +1091,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.ResourcePolicyList)
+    assert isinstance(response, pagers.ListPager)
     assert response.etag == "etag_value"
     assert response.id == "id_value"
     assert response.items == [
@@ -1086,6 +1152,57 @@ def test_list_rest_flattened_error():
             project="project_value",
             region="region_value",
         )
+
+
+def test_list_pager():
+    client = ResourcePoliciesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.ResourcePolicyList(
+                items=[
+                    compute.ResourcePolicy(),
+                    compute.ResourcePolicy(),
+                    compute.ResourcePolicy(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.ResourcePolicyList(items=[], next_page_token="def",),
+            compute.ResourcePolicyList(
+                items=[compute.ResourcePolicy(),], next_page_token="ghi",
+            ),
+            compute.ResourcePolicyList(
+                items=[compute.ResourcePolicy(), compute.ResourcePolicy(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.ResourcePolicyList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.ResourcePolicy) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_set_iam_policy_rest(

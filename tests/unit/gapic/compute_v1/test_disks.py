@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.disks import DisksClient
+from google.cloud.compute_v1.services.disks import pagers
 from google.cloud.compute_v1.services.disks import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -541,11 +542,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.DiskAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.DisksScopedList(
@@ -600,6 +599,66 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListDisksRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = DisksClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.DiskAggregatedList(
+                items={
+                    "a": compute.DisksScopedList(),
+                    "b": compute.DisksScopedList(),
+                    "c": compute.DisksScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.DiskAggregatedList(items={}, next_page_token="def",),
+            compute.DiskAggregatedList(
+                items={"g": compute.DisksScopedList(),}, next_page_token="ghi",
+            ),
+            compute.DiskAggregatedList(
+                items={"h": compute.DisksScopedList(), "i": compute.DisksScopedList(),},
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.DiskAggregatedList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.DisksScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (str, compute.DisksScopedList)
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.DisksScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_create_snapshot_rest(
@@ -1304,11 +1363,9 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListDisksReques
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.DiskList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.Disk(creation_timestamp="creation_timestamp_value")
@@ -1364,6 +1421,49 @@ def test_list_rest_flattened_error():
         client.list(
             compute.ListDisksRequest(), project="project_value", zone="zone_value",
         )
+
+
+def test_list_pager():
+    client = DisksClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.DiskList(
+                items=[compute.Disk(), compute.Disk(), compute.Disk(),],
+                next_page_token="abc",
+            ),
+            compute.DiskList(items=[], next_page_token="def",),
+            compute.DiskList(items=[compute.Disk(),], next_page_token="ghi",),
+            compute.DiskList(items=[compute.Disk(), compute.Disk(),],),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.DiskList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.Disk) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_remove_resource_policies_rest(

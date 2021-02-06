@@ -37,6 +37,7 @@ from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.target_https_proxies import (
     TargetHttpsProxiesClient,
 )
+from google.cloud.compute_v1.services.target_https_proxies import pagers
 from google.cloud.compute_v1.services.target_https_proxies import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -426,11 +427,9 @@ def test_aggregated_list_rest(
 
         response = client.aggregated_list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.TargetHttpsProxyAggregatedList)
+    assert isinstance(response, pagers.AggregatedListPager)
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.TargetHttpsProxiesScopedList(
@@ -489,6 +488,75 @@ def test_aggregated_list_rest_flattened_error():
         client.aggregated_list(
             compute.AggregatedListTargetHttpsProxiesRequest(), project="project_value",
         )
+
+
+def test_aggregated_list_pager():
+    client = TargetHttpsProxiesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.TargetHttpsProxyAggregatedList(
+                items={
+                    "a": compute.TargetHttpsProxiesScopedList(),
+                    "b": compute.TargetHttpsProxiesScopedList(),
+                    "c": compute.TargetHttpsProxiesScopedList(),
+                },
+                next_page_token="abc",
+            ),
+            compute.TargetHttpsProxyAggregatedList(items={}, next_page_token="def",),
+            compute.TargetHttpsProxyAggregatedList(
+                items={"g": compute.TargetHttpsProxiesScopedList(),},
+                next_page_token="ghi",
+            ),
+            compute.TargetHttpsProxyAggregatedList(
+                items={
+                    "h": compute.TargetHttpsProxiesScopedList(),
+                    "i": compute.TargetHttpsProxiesScopedList(),
+                },
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(
+            compute.TargetHttpsProxyAggregatedList.to_json(x) for x in response
+        )
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.aggregated_list(request={})
+
+        assert pager._metadata == metadata
+
+        assert isinstance(pager.get("a"), compute.TargetHttpsProxiesScopedList)
+        assert pager.get("h") is None
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, tuple) for i in results)
+        for result in results:
+            assert isinstance(result, tuple)
+            assert tuple(type(t) for t in result) == (
+                str,
+                compute.TargetHttpsProxiesScopedList,
+            )
+
+        assert pager.get("a") is None
+        assert isinstance(pager.get("h"), compute.TargetHttpsProxiesScopedList)
+
+        pages = list(client.aggregated_list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_delete_rest(
@@ -897,11 +965,9 @@ def test_list_rest(
 
         response = client.list(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.TargetHttpsProxyList)
+    assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.TargetHttpsProxy(authorization_policy="authorization_policy_value")
@@ -953,6 +1019,57 @@ def test_list_rest_flattened_error():
         client.list(
             compute.ListTargetHttpsProxiesRequest(), project="project_value",
         )
+
+
+def test_list_pager():
+    client = TargetHttpsProxiesClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.TargetHttpsProxyList(
+                items=[
+                    compute.TargetHttpsProxy(),
+                    compute.TargetHttpsProxy(),
+                    compute.TargetHttpsProxy(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.TargetHttpsProxyList(items=[], next_page_token="def",),
+            compute.TargetHttpsProxyList(
+                items=[compute.TargetHttpsProxy(),], next_page_token="ghi",
+            ),
+            compute.TargetHttpsProxyList(
+                items=[compute.TargetHttpsProxy(), compute.TargetHttpsProxy(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.TargetHttpsProxyList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.TargetHttpsProxy) for i in results)
+
+        pages = list(client.list(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_set_quic_override_rest(

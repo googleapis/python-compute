@@ -35,6 +35,7 @@ from google.api_core import grpc_helpers_async
 from google.auth import credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.compute_v1.services.projects import ProjectsClient
+from google.cloud.compute_v1.services.projects import pagers
 from google.cloud.compute_v1.services.projects import transports
 from google.cloud.compute_v1.types import compute
 from google.oauth2 import service_account
@@ -1113,11 +1114,9 @@ def test_get_xpn_resources_rest(
 
         response = client.get_xpn_resources(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.ProjectsGetXpnResources)
+    assert isinstance(response, pagers.GetXpnResourcesPager)
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.resources == [compute.XpnResourceId(id="id_value")]
@@ -1166,6 +1165,57 @@ def test_get_xpn_resources_rest_flattened_error():
         )
 
 
+def test_get_xpn_resources_pager():
+    client = ProjectsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.ProjectsGetXpnResources(
+                resources=[
+                    compute.XpnResourceId(),
+                    compute.XpnResourceId(),
+                    compute.XpnResourceId(),
+                ],
+                next_page_token="abc",
+            ),
+            compute.ProjectsGetXpnResources(resources=[], next_page_token="def",),
+            compute.ProjectsGetXpnResources(
+                resources=[compute.XpnResourceId(),], next_page_token="ghi",
+            ),
+            compute.ProjectsGetXpnResources(
+                resources=[compute.XpnResourceId(), compute.XpnResourceId(),],
+            ),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.ProjectsGetXpnResources.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.get_xpn_resources(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.XpnResourceId) for i in results)
+
+        pages = list(client.get_xpn_resources(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
 def test_list_xpn_hosts_rest(
     transport: str = "rest", request_type=compute.ListXpnHostsProjectsRequest
 ):
@@ -1203,11 +1253,9 @@ def test_list_xpn_hosts_rest(
 
         response = client.list_xpn_hosts(request)
 
-    assert response.raw_page is response
-
     # Establish that the response is the type that we expect.
 
-    assert isinstance(response, compute.XpnHostList)
+    assert isinstance(response, pagers.ListXpnHostsPager)
     assert response.id == "id_value"
     assert response.items == [
         compute.Project(
@@ -1277,6 +1325,49 @@ def test_list_xpn_hosts_rest_flattened_error():
                 organization="organization_value"
             ),
         )
+
+
+def test_list_xpn_hosts_pager():
+    client = ProjectsClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Set the response as a series of pages
+
+        response = (
+            compute.XpnHostList(
+                items=[compute.Project(), compute.Project(), compute.Project(),],
+                next_page_token="abc",
+            ),
+            compute.XpnHostList(items=[], next_page_token="def",),
+            compute.XpnHostList(items=[compute.Project(),], next_page_token="ghi",),
+            compute.XpnHostList(items=[compute.Project(), compute.Project(),],),
+        )
+
+        # Two responses for two calls
+        response = response + response
+
+        # Wrap the values into proper Response objs
+        response = tuple(compute.XpnHostList.to_json(x) for x in response)
+        return_values = tuple(Response() for i in response)
+        for return_val, response_val in zip(return_values, response):
+            return_val._content = response_val.encode("UTF-8")
+            return_val.status_code = 200
+        req.side_effect = return_values
+
+        metadata = ()
+        pager = client.list_xpn_hosts(request={})
+
+        assert pager._metadata == metadata
+
+        results = list(pager)
+        assert len(results) == 6
+
+        assert all(isinstance(i, compute.Project) for i in results)
+
+        pages = list(client.list_xpn_hosts(request={}).pages)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_move_disk_rest(
