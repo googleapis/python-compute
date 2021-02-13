@@ -1518,7 +1518,6 @@ __all__ = (
     "HealthCheckServiceReference",
     "HealthCheckServicesList",
     "HealthChecksAggregatedList",
-    "HealthChecksClient",
     "HealthChecksScopedList",
     "HealthStatus",
     "HealthStatusForNetworkEndpoint",
@@ -2226,6 +2225,7 @@ __all__ = (
     "UrlMapTest",
     "UrlMapValidationResult",
     "UrlMapsAggregatedList",
+    "UrlMapsClient",
     "UrlMapsScopedList",
     "UrlMapsValidateRequest",
     "UrlMapsValidateResponse",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "UrlMapsClient",
+    "HealthChecksClient",
 )
