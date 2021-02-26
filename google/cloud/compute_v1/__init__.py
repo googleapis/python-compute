@@ -1953,7 +1953,6 @@ __all__ = (
     "RegionSetLabelsRequest",
     "RegionSetPolicyRequest",
     "RegionSslCertificatesClient",
-    "RegionTargetHttpProxiesClient",
     "RegionTargetHttpsProxiesClient",
     "RegionTargetHttpsProxiesSetSslCertificatesRequest",
     "RegionUrlMapsClient",
@@ -2226,6 +2225,7 @@ __all__ = (
     "UrlMapTest",
     "UrlMapValidationResult",
     "UrlMapsAggregatedList",
+    "UrlMapsClient",
     "UrlMapsScopedList",
     "UrlMapsValidateRequest",
     "UrlMapsValidateResponse",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "UrlMapsClient",
+    "RegionTargetHttpProxiesClient",
 )
