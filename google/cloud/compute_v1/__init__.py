@@ -1915,7 +1915,6 @@ __all__ = (
     "Reference",
     "Region",
     "RegionAutoscalerList",
-    "RegionAutoscalersClient",
     "RegionBackendServicesClient",
     "RegionCommitmentsClient",
     "RegionDiskTypeList",
@@ -1953,6 +1952,7 @@ __all__ = (
     "RegionSetLabelsRequest",
     "RegionSetPolicyRequest",
     "RegionSslCertificatesClient",
+    "RegionTargetHttpProxiesClient",
     "RegionTargetHttpsProxiesClient",
     "RegionTargetHttpsProxiesSetSslCertificatesRequest",
     "RegionUrlMapsClient",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "RegionTargetHttpProxiesClient",
+    "RegionAutoscalersClient",
 )
