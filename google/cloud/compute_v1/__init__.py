@@ -1495,7 +1495,6 @@ __all__ = (
     "GetZoneOperationRequest",
     "GetZoneRequest",
     "GlobalAddressesClient",
-    "GlobalForwardingRulesClient",
     "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
     "GlobalNetworkEndpointGroupsClient",
     "GlobalNetworkEndpointGroupsDetachEndpointsRequest",
@@ -1915,6 +1914,7 @@ __all__ = (
     "Reference",
     "Region",
     "RegionAutoscalerList",
+    "RegionAutoscalersClient",
     "RegionBackendServicesClient",
     "RegionCommitmentsClient",
     "RegionDiskTypeList",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "RegionAutoscalersClient",
+    "GlobalForwardingRulesClient",
 )
