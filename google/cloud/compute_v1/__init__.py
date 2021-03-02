@@ -1225,6 +1225,7 @@ __all__ = (
     "AutoscalerAggregatedList",
     "AutoscalerList",
     "AutoscalerStatusDetails",
+    "AutoscalersClient",
     "AutoscalersScopedList",
     "AutoscalingPolicy",
     "AutoscalingPolicyCpuUtilization",
@@ -1836,7 +1837,6 @@ __all__ = (
     "NodeTemplateAggregatedList",
     "NodeTemplateList",
     "NodeTemplateNodeTypeFlexibility",
-    "NodeTemplatesClient",
     "NodeTemplatesScopedList",
     "NodeType",
     "NodeTypeAggregatedList",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "AutoscalersClient",
+    "NodeTemplatesClient",
 )
