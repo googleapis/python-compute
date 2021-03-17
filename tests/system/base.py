@@ -24,7 +24,7 @@ from google.cloud.compute_v1.services.global_operations.client import GlobalOper
 class TestBase(unittest.TestCase):
 
     def setUp(self):
-        self.DEFAULT_PROJECT = 'cloud-sdk-integration-testing' #os.getenv('GCLOUD_PROJECT')
+        self.DEFAULT_PROJECT = os.getenv('GCLOUD_PROJECT')
         if not self.DEFAULT_PROJECT:
             self.fail('Need to set GCLOUD_PROJECT to run system tests')
         self.DEFAULT_ZONE = "us-central1-a"
