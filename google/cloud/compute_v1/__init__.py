@@ -1933,6 +1933,7 @@ __all__ = (
     "RegionInstanceGroupManagerUpdateInstanceConfigReq",
     "RegionInstanceGroupManagersAbandonInstancesRequest",
     "RegionInstanceGroupManagersApplyUpdatesRequest",
+    "RegionInstanceGroupManagersClient",
     "RegionInstanceGroupManagersCreateInstancesRequest",
     "RegionInstanceGroupManagersDeleteInstancesRequest",
     "RegionInstanceGroupManagersListErrorsResponse",
@@ -1951,7 +1952,6 @@ __all__ = (
     "RegionOperationsClient",
     "RegionSetLabelsRequest",
     "RegionSetPolicyRequest",
-    "RegionSslCertificatesClient",
     "RegionTargetHttpProxiesClient",
     "RegionTargetHttpsProxiesClient",
     "RegionTargetHttpsProxiesSetSslCertificatesRequest",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "RegionInstanceGroupManagersClient",
+    "RegionSslCertificatesClient",
 )
