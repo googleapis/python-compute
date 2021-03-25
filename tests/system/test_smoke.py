@@ -18,7 +18,7 @@ import requests
 
 from google.cloud.compute_v1.services.instances.client import InstancesClient
 from google.cloud.compute_v1.types import InsertInstanceRequest, Instance, AttachedDisk, NetworkInterface, \
-    AttachedDiskInitializeParams
+    AttachedDiskInitializeParams, ShieldedInstanceConfig
 from tests.system.base import TestBase
 
 
@@ -98,3 +98,28 @@ class TestComputeSmoke(TestBase):
         self.assertEqual(getattr(instance, 'name'), self.name)
         self.assertEqual(len(getattr(instance, 'network_interfaces')), 1)
         self.assertEqual(len(getattr(instance, 'disks')), 1)
+
+    def test_patch(self):
+        self.insert_instance()
+        instance = self.get_instance()
+        self.assertEqual(instance.shielded_instance_config.enable_secure_boot, False)
+        op = self.client.stop(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE, instance=self.name)
+        self.wait_for_zonal_operation(op.name)
+
+        resource = ShieldedInstanceConfig()
+        resource.enable_secure_boot = True
+        op = self.client.update_shielded_instance_config(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
+                                                         instance=self.name, shielded_instance_config_resource=resource)
+        self.wait_for_zonal_operation(op.name)
+        patched_instance = self.get_instance()
+        self.assertEqual(patched_instance.shielded_instance_config.enable_secure_boot, True)
+
+    def test_list(self):
+        presented = False
+        self.insert_instance()
+        result = self.client.list(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE)
+        for item in result:
+            if getattr(item, 'name') == self.name:
+                presented = True
+                break
+        self.assertTrue(presented)

@@ -16,6 +16,7 @@
 import os
 import unittest
 import uuid
+import google.auth
 from google.cloud.compute_v1.services.zone_operations.client import ZoneOperationsClient
 from google.cloud.compute_v1.services.region_operations.client import RegionOperationsClient
 from google.cloud.compute_v1.services.global_operations.client import GlobalOperationsClient
@@ -24,9 +25,9 @@ from google.cloud.compute_v1.services.global_operations.client import GlobalOper
 class TestBase(unittest.TestCase):
 
     def setUp(self):
-        self.DEFAULT_PROJECT = os.getenv('GCLOUD_PROJECT')
+        _, self.DEFAULT_PROJECT = google.auth.default()
         if not self.DEFAULT_PROJECT:
-            self.fail('Need to set GCLOUD_PROJECT to run system tests')
+            self.skipTest('GCP project was not found, skipping system test')
         self.DEFAULT_ZONE = "us-central1-a"
         self.DEFAULT_REGION = "us-central1"
         self.MACHINE_TYPE = "https://www.googleapis.com/compute/v1/projects/{}/" \
