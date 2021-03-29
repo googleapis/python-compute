@@ -19,7 +19,6 @@ from tests.system.base import TestBase
 
 
 class TestComputePagination(TestBase):
-
     def setUp(self) -> None:
         super().setUp()
         self.client = ZonesClient()
@@ -29,7 +28,7 @@ class TestComputePagination(TestBase):
         request.max_results = 1
         request.project = self.DEFAULT_PROJECT
         result = self.client.list(request=request)
-        self.assertEqual(len(getattr(result, 'items')), 1)
+        self.assertEqual(len(getattr(result, "items")), 1)
 
     def test_next_page_token(self):
         request = ListZonesRequest()
@@ -40,28 +39,28 @@ class TestComputePagination(TestBase):
         token_request = ListZonesRequest()
         token_request.max_results = 1
         token_request.project = self.DEFAULT_PROJECT
-        token_request.page_token = getattr(result, 'next_page_token')
+        token_request.page_token = getattr(result, "next_page_token")
         token_result = self.client.list(request=token_request)
-        self.assertNotEqual(getattr(result, 'items'), getattr(token_result, 'items'))
+        self.assertNotEqual(getattr(result, "items"), getattr(token_result, "items"))
 
     def test_filter(self):
         request = ListZonesRequest()
         request.project = self.DEFAULT_PROJECT
-        request.filter = 'name = us-central1-a'
+        request.filter = "name = us-central1-a"
         result = self.client.list(request=request)
-        description = getattr(getattr(result, 'items')[0], 'description')
-        self.assertEqual(len(getattr(result, 'items')), 1)
-        self.assertEqual(description, 'us-central1-a')
+        description = getattr(getattr(result, "items")[0], "description")
+        self.assertEqual(len(getattr(result, "items")), 1)
+        self.assertEqual(description, "us-central1-a")
 
     def test_auto_paging(self):
         request = ListZonesRequest()
         request.max_results = 1
         request.project = self.DEFAULT_PROJECT
-        request.filter = 'name = us-*'
+        request.filter = "name = us-*"
         result = self.client.list(request=request)
         presented = False
         for item in result:
-            desc = getattr(item, 'description')
+            desc = getattr(item, "description")
             if desc == self.DEFAULT_ZONE:
                 presented = True
                 break

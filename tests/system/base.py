@@ -13,45 +13,57 @@
 # limitations under the License.
 
 
-import os
 import unittest
 import uuid
 import google.auth
 from google.cloud.compute_v1.services.zone_operations.client import ZoneOperationsClient
-from google.cloud.compute_v1.services.region_operations.client import RegionOperationsClient
-from google.cloud.compute_v1.services.global_operations.client import GlobalOperationsClient
+from google.cloud.compute_v1.services.region_operations.client import (
+    RegionOperationsClient,
+)
+from google.cloud.compute_v1.services.global_operations.client import (
+    GlobalOperationsClient,
+)
 
 
 class TestBase(unittest.TestCase):
-
     def setUp(self):
         _, self.DEFAULT_PROJECT = google.auth.default()
         if not self.DEFAULT_PROJECT:
-            self.skipTest('GCP project was not found, skipping system test')
+            self.skipTest("GCP project was not found, skipping system test")
         self.DEFAULT_ZONE = "us-central1-a"
         self.DEFAULT_REGION = "us-central1"
-        self.MACHINE_TYPE = "https://www.googleapis.com/compute/v1/projects/{}/" \
-                            "zones/us-central1-a/machineTypes/n1-standard-1".format(self.DEFAULT_PROJECT)
+        self.MACHINE_TYPE = (
+            "https://www.googleapis.com/compute/v1/projects/{}/"
+            "zones/us-central1-a/machineTypes/n1-standard-1".format(
+                self.DEFAULT_PROJECT
+            )
+        )
         self.DISK_IMAGE = "projects/debian-cloud/global/images/family/debian-10"
 
     @staticmethod
-    def get_unique_name(placeholder=''):
+    def get_unique_name(placeholder=""):
         return "gapic" + placeholder + uuid.uuid4().hex
 
     def wait_for_zonal_operation(self, operation):
         client = ZoneOperationsClient()
-        result = client.wait(operation=operation, zone=self.DEFAULT_ZONE, project=self.DEFAULT_PROJECT)
+        result = client.wait(
+            operation=operation, zone=self.DEFAULT_ZONE, project=self.DEFAULT_PROJECT
+        )
         if result.error:
-            self.fail('Zonal operation {} has errors'.format(operation))
+            self.fail("Zonal operation {} has errors".format(operation))
 
     def wait_for_regional_operation(self, operation):
         client = RegionOperationsClient()
-        result = client.wait(operation=operation, region=self.DEFAULT_REGION, project=self.DEFAULT_PROJECT)
+        result = client.wait(
+            operation=operation,
+            region=self.DEFAULT_REGION,
+            project=self.DEFAULT_PROJECT,
+        )
         if result.error:
-            self.fail('Region operation {} has errors'.format(operation))
+            self.fail("Region operation {} has errors".format(operation))
 
     def wait_for_global_operation(self, operation):
         client = GlobalOperationsClient()
         result = client.wait(operation=operation, project=self.DEFAULT_PROJECT)
         if result.error:
-            self.fail('Global operation {} has errors'.format(operation))
+            self.fail("Global operation {} has errors".format(operation))

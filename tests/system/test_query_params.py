@@ -13,35 +13,51 @@
 # limitations under the License.
 
 from google.cloud.compute_v1.services.instances.client import InstancesClient
-from google.cloud.compute_v1.services.instance_group_managers.client import InstanceGroupManagersClient
-from google.cloud.compute_v1.services.instance_templates.client import InstanceTemplatesClient
-from google.cloud.compute_v1.types import InsertInstanceRequest, Instance, AttachedDisk, NetworkInterface, \
-    AttachedDiskInitializeParams, InstanceGroupManager, InstanceTemplate
+from google.cloud.compute_v1.services.instance_group_managers.client import (
+    InstanceGroupManagersClient,
+)
+from google.cloud.compute_v1.services.instance_templates.client import (
+    InstanceTemplatesClient,
+)
+from google.cloud.compute_v1.types import (
+    InsertInstanceRequest,
+    Instance,
+    AttachedDisk,
+    NetworkInterface,
+    AttachedDiskInitializeParams,
+)
 from tests.system.base import TestBase
 
 
 class TestInstanceGroups(TestBase):
-
     def setUp(self):
         super().setUp()
         self.instances = []
         self.igms = []
         self.templates = []
-        self.inst_client = InstancesClient(transport='rest')
-        self.name = self.get_unique_name('instance')
+        self.inst_client = InstancesClient(transport="rest")
+        self.name = self.get_unique_name("instance")
         self.igm_client = InstanceGroupManagersClient()
         self.template_client = InstanceTemplatesClient()
 
     def tearDown(self) -> None:
         for igm in self.igms:
-            op = self.igm_client.delete(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
-                                        instance_group_manager=igm)
+            op = self.igm_client.delete(
+                project=self.DEFAULT_PROJECT,
+                zone=self.DEFAULT_ZONE,
+                instance_group_manager=igm,
+            )
             self.wait_for_zonal_operation(op.name)
         for instance in self.instances:
-            op = self.inst_client.delete(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE, instance=instance)
+            op = self.inst_client.delete(
+                project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE, instance=instance
+            )
         for template in self.templates:
-            op = self.template_client.delete(project=self.DEFAULT_PROJECT, instance_template=template)
-    ''' Resize fails due to 
+            op = self.template_client.delete(
+                project=self.DEFAULT_PROJECT, instance_template=template
+            )
+
+    """ Resize fails due to
     def test_instance_group_resize(self):
         template_name = self.get_unique_name('template')
         igm_name = self.get_unique_name('igm')
@@ -77,7 +93,8 @@ class TestInstanceGroups(TestBase):
         igm = self.igm_client.get(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
                                   instance_group_manager=igm_name)
         self.assertEqual(igm.target_size, 0)
-    '''
+    """
+
     def insert_instance(self):
         disk = AttachedDisk()
         initialize_params = AttachedDiskInitializeParams()
@@ -88,7 +105,7 @@ class TestInstanceGroups(TestBase):
         disk.type_ = AttachedDisk.Type.PERSISTENT
 
         network_interface = NetworkInterface()
-        network_interface.name = 'default'
+        network_interface.name = "default"
 
         instance = Instance()
         instance.name = self.name

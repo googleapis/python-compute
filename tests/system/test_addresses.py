@@ -18,16 +18,19 @@ from tests.system.base import TestBase
 
 
 class TestAddresses(TestBase):
-
     def setUp(self) -> None:
         super().setUp()
-        self.client = AddressesClient(transport='rest')
-        self.name = self.get_unique_name('address')
+        self.client = AddressesClient(transport="rest")
+        self.name = self.get_unique_name("address")
         self.addresses = []
 
     def tearDown(self) -> None:
         for address in self.addresses:
-            self.client.delete(project=self.DEFAULT_PROJECT, region=self.DEFAULT_REGION, address=address)
+            self.client.delete(
+                project=self.DEFAULT_PROJECT,
+                region=self.DEFAULT_REGION,
+                address=address,
+            )
 
     def insert_address(self):
         address_res = Address()
@@ -43,17 +46,19 @@ class TestAddresses(TestBase):
 
     def test_create_read(self):
         self.insert_address()
-        address = self.client.get(project=self.DEFAULT_PROJECT, region=self.DEFAULT_REGION, address=self.name)
-        self.assertEqual(getattr(address, 'name'), self.name)
+        address = self.client.get(
+            project=self.DEFAULT_PROJECT, region=self.DEFAULT_REGION, address=self.name
+        )
+        self.assertEqual(getattr(address, "name"), self.name)
 
     def test_list(self):
         presented = False
         self.insert_address()
-        result = self.client.list(project=self.DEFAULT_PROJECT, region=self.DEFAULT_REGION)
+        result = self.client.list(
+            project=self.DEFAULT_PROJECT, region=self.DEFAULT_REGION
+        )
         for item in result:
-            if getattr(item, 'name') == self.name:
+            if getattr(item, "name") == self.name:
                 presented = True
                 break
         self.assertTrue(presented)
-
-
