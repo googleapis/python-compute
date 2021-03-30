@@ -128,7 +128,7 @@ class TestComputeSmoke(TestBase):
         timeout = time.time() + 120  # it takes some time for instance to stop
         while True:
             if time.time() > timeout:
-                self.fail('Instance was not stopped')
+                self.fail("Instance was not stopped")
             instance = self.get_instance()
             if instance.status == Instance.Status.TERMINATED:
                 break
