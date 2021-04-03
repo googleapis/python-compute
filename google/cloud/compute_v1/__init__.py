@@ -1497,6 +1497,7 @@ __all__ = (
     "GlobalAddressesClient",
     "GlobalForwardingRulesClient",
     "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
+    "GlobalNetworkEndpointGroupsClient",
     "GlobalNetworkEndpointGroupsDetachEndpointsRequest",
     "GlobalOperationsClient",
     "GlobalOrganizationOperationsClient",
@@ -2101,7 +2102,6 @@ __all__ = (
     "SimulateMaintenanceEventInstanceRequest",
     "Snapshot",
     "SnapshotList",
-    "SnapshotsClient",
     "SourceInstanceParams",
     "SslCertificate",
     "SslCertificateAggregatedList",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "GlobalNetworkEndpointGroupsClient",
+    "SnapshotsClient",
 )
