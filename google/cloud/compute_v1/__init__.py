@@ -1152,7 +1152,6 @@ __all__ = (
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
-    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
     "Accelerators",
     "AccessConfig",
@@ -1952,6 +1951,7 @@ __all__ = (
     "RegionOperationsClient",
     "RegionSetLabelsRequest",
     "RegionSetPolicyRequest",
+    "RegionSslCertificatesClient",
     "RegionTargetHttpProxiesClient",
     "RegionTargetHttpsProxiesClient",
     "RegionTargetHttpsProxiesSetSslCertificatesRequest",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "RegionSslCertificatesClient",
+    "AcceleratorTypesClient",
 )
