@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/python-compute",
-        "sha": "4bd51728e94a9deeaeeb7877d38463872518f2e7"
+        "sha": "85d9fde2926c9832f690f114abf15a210a1a2feb"
       }
     },
     {
@@ -18,14 +18,14 @@
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6d76df2138f8f841e5a5b9ac427f81def520c15f"
+        "sha": "ff39353f34a36e7643b86e97724e4027ab466dc6"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "6d76df2138f8f841e5a5b9ac427f81def520c15f"
+        "sha": "ff39353f34a36e7643b86e97724e4027ab466dc6"
       }
     }
   ],
