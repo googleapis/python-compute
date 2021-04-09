@@ -1497,6 +1497,7 @@ __all__ = (
     "GlobalAddressesClient",
     "GlobalForwardingRulesClient",
     "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
+    "GlobalNetworkEndpointGroupsClient",
     "GlobalNetworkEndpointGroupsDetachEndpointsRequest",
     "GlobalOperationsClient",
     "GlobalOrganizationOperationsClient",
@@ -1901,7 +1902,6 @@ __all__ = (
     "PreservedStatePreservedDisk",
     "PreviewRouterRequest",
     "Project",
-    "ProjectsClient",
     "ProjectsDisableXpnResourceRequest",
     "ProjectsEnableXpnResourceRequest",
     "ProjectsGetXpnResources",
@@ -2271,5 +2271,5 @@ __all__ = (
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
     "ZonesClient",
-    "GlobalNetworkEndpointGroupsClient",
+    "ProjectsClient",
 )
