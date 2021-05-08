@@ -162,7 +162,7 @@ class RegionTargetHttpProxiesRestTransport(RegionTargetHttpProxiesTransport):
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
         query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
+            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v is not None and '' != v
         ]
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
@@ -237,7 +237,7 @@ class RegionTargetHttpProxiesRestTransport(RegionTargetHttpProxiesTransport):
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
         query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
+            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v is not None and '' != v
         ]
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
@@ -325,7 +325,7 @@ class RegionTargetHttpProxiesRestTransport(RegionTargetHttpProxiesTransport):
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
         query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
+            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v is not None and '' != v
         ]
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
@@ -380,7 +380,7 @@ class RegionTargetHttpProxiesRestTransport(RegionTargetHttpProxiesTransport):
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
         query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
+            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v is not None and '' != v
         ]
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
@@ -471,7 +471,7 @@ class RegionTargetHttpProxiesRestTransport(RegionTargetHttpProxiesTransport):
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
         query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
+            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v is not None and '' != v
         ]
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
