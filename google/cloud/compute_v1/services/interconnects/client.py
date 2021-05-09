@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.interconnects import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import InterconnectsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import InterconnectsRestTransport
 
@@ -337,7 +334,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInterconnectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.Delete. See the method description for
                 details.
             project (str):
@@ -350,7 +348,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``interconnect`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -402,10 +399,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteInterconnectRequest):
             request = compute.DeleteInterconnectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if interconnect is not None:
@@ -436,7 +431,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInterconnectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.Get. See the method description for
                 details.
             project (str):
@@ -449,7 +445,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``interconnect`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -483,10 +478,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetInterconnectRequest):
             request = compute.GetInterconnectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if interconnect is not None:
@@ -517,7 +510,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetDiagnosticsInterconnectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.GetDiagnostics. See the method description
                 for details.
             project (str):
@@ -532,7 +526,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``interconnect`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -561,10 +554,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetDiagnosticsInterconnectRequest):
             request = compute.GetDiagnosticsInterconnectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if interconnect is not None:
@@ -595,7 +586,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInterconnectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.Insert. See the method description for
                 details.
             project (str):
@@ -608,7 +600,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``interconnect_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -660,10 +651,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertInterconnectRequest):
             request = compute.InsertInterconnectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if interconnect_resource is not None:
@@ -693,7 +682,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInterconnectsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.List. See the method description for
                 details.
             project (str):
@@ -701,7 +691,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -733,10 +722,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListInterconnectsRequest):
             request = compute.ListInterconnectsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -774,7 +761,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchInterconnectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Interconnects.Patch. See the method description for
                 details.
             project (str):
@@ -792,7 +780,6 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 This corresponds to the ``interconnect_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -844,10 +831,8 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchInterconnectRequest):
             request = compute.PatchInterconnectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if interconnect is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,23 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-
-from google.api_core import gapic_v1  # type: ignore
-from google import auth  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.api_core import gapic_v1       # type: ignore
+from google import auth                    # type: ignore
+from google.auth import credentials        # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
 
 from google.auth.transport.requests import AuthorizedSession
 
-
 from google.cloud.compute_v1.types import compute
-
 
 from .base import ProjectsTransport, DEFAULT_CLIENT_INFO
 
@@ -46,22 +41,20 @@ class ProjectsRestTransport(ProjectsTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-
-    def __init__(
-        self,
-        *,
-        host: str = "compute.googleapis.com",
-        credentials: credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id: Optional[str] = None,
-        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-    ) -> None:
+    def __init__(self, *,
+            host: str = 'compute.googleapis.com',
+            credentials: credentials.Credentials = None,
+            credentials_file: str = None,
+            scopes: Sequence[str] = None,
+            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+            quota_project_id: Optional[str] = None,
+            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+            ) -> None:
         """Instantiate the transport.
 
         Args:
-            host (Optional[str]): The hostname to connect to.
+            host (Optional[str]):
+                 The hostname to connect to.
             credentials (Optional[google.auth.credentials.Credentials]): The
                 authorization credentials to attach to requests. These
                 credentials identify the application to the service; if none
@@ -78,28 +71,32 @@ class ProjectsRestTransport(ProjectsTransport):
                 if ``channel`` is provided.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
-            client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
-                The client info used to send a user-agent string along with	
-                API requests. If ``None``, then default info will be used.	
-                Generally, you only need to set this if you're developing	
+            client_info (google.api_core.gapic_v1.client_info.ClientInfo):
+                The client info used to send a user-agent string along with
+                API requests. If ``None``, then default info will be used.
+                Generally, you only need to set this if you're developing
                 your own client library.
         """
         # Run the base constructor
         # TODO(yon-mg): resolve other ctor params i.e. scopes, quota, etc.
+        # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
+        # credentials object
         super().__init__(
-            host=host, credentials=credentials, client_info=client_info,
+            host=host,
+            credentials=credentials,
+            client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials)
-        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
+        self._prep_wrapped_messages(client_info)
 
-    def disable_xpn_host(
-        self,
-        request: compute.DisableXpnHostProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the disable xpn host method over HTTP.
+    def disable_xpn_host(self,
+            request: compute.DisableXpnHostProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        disable xpn host
+          method over HTTP.
 
         Args:
             request (~.compute.DisableXpnHostProjectRequest):
@@ -146,39 +143,43 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/disableXpnHost".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/disableXpnHost'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url)
+response = self._session.post(
+            url
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def disable_xpn_resource(
-        self,
-        request: compute.DisableXpnResourceProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the disable xpn resource method over HTTP.
+    def disable_xpn_resource(self,
+            request: compute.DisableXpnResourceProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        disable xpn resource
+          method over HTTP.
 
         Args:
             request (~.compute.DisableXpnResourceProjectRequest):
@@ -227,44 +228,50 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.ProjectsDisableXpnResourceRequest.to_json(
             request.projects_disable_xpn_resource_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/disableXpnResource".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/disableXpnResource'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def enable_xpn_host(
-        self,
-        request: compute.EnableXpnHostProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the enable xpn host method over HTTP.
+    def enable_xpn_host(self,
+            request: compute.EnableXpnHostProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        enable xpn host
+          method over HTTP.
 
         Args:
             request (~.compute.EnableXpnHostProjectRequest):
@@ -311,39 +318,43 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/enableXpnHost".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/enableXpnHost'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url)
+response = self._session.post(
+            url
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def enable_xpn_resource(
-        self,
-        request: compute.EnableXpnResourceProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the enable xpn resource method over HTTP.
+    def enable_xpn_resource(self,
+            request: compute.EnableXpnResourceProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        enable xpn resource
+          method over HTTP.
 
         Args:
             request (~.compute.EnableXpnResourceProjectRequest):
@@ -392,44 +403,50 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.ProjectsEnableXpnResourceRequest.to_json(
             request.projects_enable_xpn_resource_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/enableXpnResource".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/enableXpnResource'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def get(
-        self,
-        request: compute.GetProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Project:
-        r"""Call the get method over HTTP.
+    def get(self,
+            request: compute.GetProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Project:
+        r"""Call the
+        get
+          method over HTTP.
 
         Args:
             request (~.compute.GetProjectRequest):
@@ -453,37 +470,42 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {}
+        query_params = {
+        }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.get(url)
+response = self._session.get(
+            url
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Project.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Project.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def get_xpn_host(
-        self,
-        request: compute.GetXpnHostProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Project:
-        r"""Call the get xpn host method over HTTP.
+    def get_xpn_host(self,
+            request: compute.GetXpnHostProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Project:
+        r"""Call the
+        get xpn host
+          method over HTTP.
 
         Args:
             request (~.compute.GetXpnHostProjectRequest):
@@ -508,37 +530,42 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/getXpnHost".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/getXpnHost'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {}
+        query_params = {
+        }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.get(url)
+response = self._session.get(
+            url
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Project.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Project.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def get_xpn_resources(
-        self,
-        request: compute.GetXpnResourcesProjectsRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.ProjectsGetXpnResources:
-        r"""Call the get xpn resources method over HTTP.
+    def get_xpn_resources(self,
+            request: compute.GetXpnResourcesProjectsRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.ProjectsGetXpnResources:
+        r"""Call the
+        get xpn resources
+          method over HTTP.
 
         Args:
             request (~.compute.GetXpnResourcesProjectsRequest):
@@ -557,45 +584,47 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/getXpnResources".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/getXpnResources'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "maxResults": request.max_results,
-            "orderBy": request.order_by,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
+            'filter': request.filter,
+            'maxResults': request.max_results,
+            'orderBy': request.order_by,
+            'pageToken': request.page_token,
+            'returnPartialSuccess': request.return_partial_success,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.get(url)
+response = self._session.get(
+            url
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.ProjectsGetXpnResources.from_json(
-            response.content, ignore_unknown_fields=True
+            response.content,
+            ignore_unknown_fields=True
         )
 
-    def list_xpn_hosts(
-        self,
-        request: compute.ListXpnHostsProjectsRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.XpnHostList:
-        r"""Call the list xpn hosts method over HTTP.
+    def list_xpn_hosts(self,
+            request: compute.ListXpnHostsProjectsRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.XpnHostList:
+        r"""Call the
+        list xpn hosts
+          method over HTTP.
 
         Args:
             request (~.compute.ListXpnHostsProjectsRequest):
@@ -616,50 +645,54 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.ProjectsListXpnHostsRequest.to_json(
             request.projects_list_xpn_hosts_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/listXpnHosts".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/listXpnHosts'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "filter": request.filter,
-            "maxResults": request.max_results,
-            "orderBy": request.order_by,
-            "pageToken": request.page_token,
-            "returnPartialSuccess": request.return_partial_success,
+            'filter': request.filter,
+            'maxResults': request.max_results,
+            'orderBy': request.order_by,
+            'pageToken': request.page_token,
+            'returnPartialSuccess': request.return_partial_success,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.XpnHostList.from_json(
-            response.content, ignore_unknown_fields=True
+            response.content,
+            ignore_unknown_fields=True
         )
 
-    def move_disk(
-        self,
-        request: compute.MoveDiskProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the move disk method over HTTP.
+    def move_disk(self,
+            request: compute.MoveDiskProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        move disk
+          method over HTTP.
 
         Args:
             request (~.compute.MoveDiskProjectRequest):
@@ -708,44 +741,50 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.DiskMoveRequest.to_json(
             request.disk_move_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/moveDisk".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/moveDisk'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def move_instance(
-        self,
-        request: compute.MoveInstanceProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the move instance method over HTTP.
+    def move_instance(self,
+            request: compute.MoveInstanceProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        move instance
+          method over HTTP.
 
         Args:
             request (~.compute.MoveInstanceProjectRequest):
@@ -794,45 +833,51 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.InstanceMoveRequest.to_json(
             request.instance_move_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/moveInstance".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/moveInstance'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def set_common_instance_metadata(
-        self,
-        request: compute.SetCommonInstanceMetadataProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the set common instance
-        metadata method over HTTP.
+    def set_common_instance_metadata(self,
+            request: compute.SetCommonInstanceMetadataProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        set common instance
+        metadata
+          method over HTTP.
 
         Args:
             request (~.compute.SetCommonInstanceMetadataProjectRequest):
@@ -881,44 +926,50 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.Metadata.to_json(
             request.metadata_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/setCommonInstanceMetadata".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/setCommonInstanceMetadata'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def set_default_network_tier(
-        self,
-        request: compute.SetDefaultNetworkTierProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the set default network tier method over HTTP.
+    def set_default_network_tier(self,
+            request: compute.SetDefaultNetworkTierProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        set default network tier
+          method over HTTP.
 
         Args:
             request (~.compute.SetDefaultNetworkTierProjectRequest):
@@ -967,44 +1018,50 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.ProjectsSetDefaultNetworkTierRequest.to_json(
             request.projects_set_default_network_tier_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/setDefaultNetworkTier".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/setDefaultNetworkTier'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
-    def set_usage_export_bucket(
-        self,
-        request: compute.SetUsageExportBucketProjectRequest,
-        *,
-        metadata: Sequence[Tuple[str, str]] = (),
-    ) -> compute.Operation:
-        r"""Call the set usage export bucket method over HTTP.
+    def set_usage_export_bucket(self,
+            request: compute.SetUsageExportBucketProjectRequest, *,
+            metadata: Sequence[Tuple[str, str]] = (),
+            ) -> compute.Operation:
+        r"""Call the
+        set usage export bucket
+          method over HTTP.
 
         Args:
             request (~.compute.SetUsageExportBucketProjectRequest):
@@ -1053,36 +1110,44 @@ class ProjectsRestTransport(ProjectsTransport):
         body = compute.UsageExportLocation.to_json(
             request.usage_export_location_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False,
+            use_integers_for_enums=False
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/setUsageExportBucket".format(
-            host=self._host, project=request.project,
+        url = 'https://{host}/compute/v1/projects/{project}/setUsageExportBucket'.format(
+            host=self._host,
+            project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
         query_params = {
-            "requestId": request.request_id,
+            'requestId': request.request_id,
         }
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = [
-            "{k}={v}".format(k=k, v=v) for k, v in query_params.items() if v
-        ]
-        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
+        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
 
         # Send the request
-        response = self._session.post(url, data=body,)
+response = self._session.post(
+            url
+,
+            data=body,
+        )
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+        return compute.Operation.from_json(
+            response.content,
+            ignore_unknown_fields=True
+        )
 
 
-__all__ = ("ProjectsRestTransport",)
+__all__ = (
+    'ProjectsRestTransport',
+)

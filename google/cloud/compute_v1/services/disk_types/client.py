@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.disk_types import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import DiskTypesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import DiskTypesRestTransport
 
@@ -336,7 +333,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListDiskTypesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 DiskTypes.AggregatedList. See the method description for
                 details.
             project (str):
@@ -344,7 +342,6 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListDiskTypesRequest):
             request = compute.AggregatedListDiskTypesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -413,7 +408,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetDiskTypeRequest):
-                The request object. A request message for DiskTypes.Get.
+                The request object.
+                A request message for DiskTypes.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -432,7 +428,6 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
                 This corresponds to the ``disk_type`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -480,10 +475,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetDiskTypeRequest):
             request = compute.GetDiskTypeRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -516,7 +509,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListDiskTypesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 DiskTypes.List. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -530,7 +524,6 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -561,10 +554,8 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListDiskTypesRequest):
             request = compute.ListDiskTypesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

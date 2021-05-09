@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.global_organization_operations import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import GlobalOrganizationOperationsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import GlobalOrganizationOperationsRestTransport
 
@@ -342,7 +339,8 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalOrganizationOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOrganizationOperations.Delete. See the method
                 description for details.
             operation (str):
@@ -352,7 +350,6 @@ class GlobalOrganizationOperationsClient(
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -382,10 +379,8 @@ class GlobalOrganizationOperationsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteGlobalOrganizationOperationRequest):
             request = compute.DeleteGlobalOrganizationOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if operation is not None:
                 request.operation = operation
 
@@ -413,7 +408,8 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalOrganizationOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOrganizationOperations.Get. See the method
                 description for details.
             operation (str):
@@ -423,7 +419,6 @@ class GlobalOrganizationOperationsClient(
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -475,10 +470,8 @@ class GlobalOrganizationOperationsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.GetGlobalOrganizationOperationRequest):
             request = compute.GetGlobalOrganizationOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if operation is not None:
                 request.operation = operation
 
@@ -505,10 +498,10 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalOrganizationOperationsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOrganizationOperations.List. See the method
                 description for details.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -525,7 +518,6 @@ class GlobalOrganizationOperationsClient(
 
         """
         # Create or coerce a protobuf request object.
-
         # Minor optimization to avoid making a copy if the user passes
         # in a compute.ListGlobalOrganizationOperationsRequest.
         # There's no risk of modifying the input as we've already verified

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.addresses import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import AddressesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import AddressesRestTransport
 
@@ -336,7 +333,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListAddressesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Addresses.AggregatedList. See the method description for
                 details.
             project (str):
@@ -344,7 +342,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListAddressesRequest):
             request = compute.AggregatedListAddressesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -412,7 +407,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteAddressRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Addresses.Delete. See the method description for
                 details.
             project (str):
@@ -432,7 +428,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 This corresponds to the ``address`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -484,10 +479,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteAddressRequest):
             request = compute.DeleteAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -520,7 +513,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetAddressRequest):
-                The request object. A request message for Addresses.Get.
+                The request object.
+                A request message for Addresses.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -539,7 +533,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 This corresponds to the ``address`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -595,10 +588,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetAddressRequest):
             request = compute.GetAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -632,7 +623,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertAddressRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Addresses.Insert. See the method description for
                 details.
             project (str):
@@ -650,7 +642,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 This corresponds to the ``address_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -702,10 +693,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertAddressRequest):
             request = compute.InsertAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -738,7 +727,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListAddressesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Addresses.List. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -750,7 +740,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -781,10 +770,8 @@ class AddressesClient(metaclass=AddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListAddressesRequest):
             request = compute.ListAddressesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

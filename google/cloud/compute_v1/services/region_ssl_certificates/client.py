@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_ssl_certificates import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionSslCertificatesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionSslCertificatesRestTransport
 
@@ -343,7 +340,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionSslCertificates.Delete. See the method description
                 for details.
             project (str):
@@ -365,7 +363,6 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -417,10 +414,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionSslCertificateRequest):
             request = compute.DeleteRegionSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -455,7 +450,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionSslCertificates.Get. See the method description
                 for details.
             project (str):
@@ -477,7 +473,6 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -529,10 +524,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionSslCertificateRequest):
             request = compute.GetRegionSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -567,7 +560,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionSslCertificates.Insert. See the method description
                 for details.
             project (str):
@@ -587,7 +581,6 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -639,10 +632,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionSslCertificateRequest):
             request = compute.InsertRegionSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -676,7 +667,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionSslCertificatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionSslCertificates.List. See the method description
                 for details.
             project (str):
@@ -691,7 +683,6 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -723,10 +714,8 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionSslCertificatesRequest):
             request = compute.ListRegionSslCertificatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_commitments import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionCommitmentsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionCommitmentsRestTransport
 
@@ -340,7 +337,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListRegionCommitmentsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionCommitments.AggregatedList. See the method
                 description for details.
             project (str):
@@ -348,7 +346,6 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -378,10 +375,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListRegionCommitmentsRequest):
             request = compute.AggregatedListRegionCommitmentsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -418,7 +413,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionCommitmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionCommitments.Get. See the method description for
                 details.
             project (str):
@@ -436,7 +432,6 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
                 This corresponds to the ``commitment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -472,10 +467,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionCommitmentRequest):
             request = compute.GetRegionCommitmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -509,7 +502,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionCommitmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionCommitments.Insert. See the method description for
                 details.
             project (str):
@@ -527,7 +521,6 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
                 This corresponds to the ``commitment_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -579,10 +572,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionCommitmentRequest):
             request = compute.InsertRegionCommitmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -615,7 +606,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionCommitmentsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionCommitments.List. See the method description for
                 details.
             project (str):
@@ -628,7 +620,6 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -660,10 +651,8 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionCommitmentsRequest):
             request = compute.ListRegionCommitmentsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,6 +87,7 @@ from .services.vpn_gateways import VpnGatewaysClient
 from .services.vpn_tunnels import VpnTunnelsClient
 from .services.zone_operations import ZoneOperationsClient
 from .services.zones import ZonesClient
+
 from .types.compute import AbandonInstancesInstanceGroupManagerRequest
 from .types.compute import AbandonInstancesRegionInstanceGroupManagerRequest
 from .types.compute import AcceleratorConfig
@@ -1143,7 +1143,6 @@ from .types.compute import Zone
 from .types.compute import ZoneList
 from .types.compute import ZoneSetLabelsRequest
 from .types.compute import ZoneSetPolicyRequest
-
 
 __all__ = (
     "AbandonInstancesInstanceGroupManagerRequest",

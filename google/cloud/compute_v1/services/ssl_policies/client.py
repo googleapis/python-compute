@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.ssl_policies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import SslPoliciesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import SslPoliciesRestTransport
 
@@ -339,7 +336,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSslPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.Delete. See the method description for
                 details.
             project (str):
@@ -355,7 +353,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``ssl_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -407,10 +404,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteSslPolicyRequest):
             request = compute.DeleteSslPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_policy is not None:
@@ -441,7 +436,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSslPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -456,7 +452,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``ssl_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -490,10 +485,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetSslPolicyRequest):
             request = compute.GetSslPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_policy is not None:
@@ -525,7 +518,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSslPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.Insert. See the method description for
                 details.
             project (str):
@@ -538,7 +532,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``ssl_policy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -590,10 +583,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertSslPolicyRequest):
             request = compute.InsertSslPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_policy_resource is not None:
@@ -623,7 +614,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSslPoliciesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.List. See the method description for
                 details.
             project (str):
@@ -631,7 +623,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -661,10 +652,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListSslPoliciesRequest):
             request = compute.ListSslPoliciesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -698,7 +687,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListAvailableFeaturesSslPoliciesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.ListAvailableFeatures. See the method
                 description for details.
             project (str):
@@ -706,7 +696,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -733,10 +722,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListAvailableFeaturesSslPoliciesRequest):
             request = compute.ListAvailableFeaturesSslPoliciesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -766,7 +753,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchSslPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslPolicies.Patch. See the method description for
                 details.
             project (str):
@@ -787,7 +775,6 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 This corresponds to the ``ssl_policy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -839,10 +826,8 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchSslPolicyRequest):
             request = compute.PatchSslPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_policy is not None:

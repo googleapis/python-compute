@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.packet_mirrorings import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import PacketMirroringsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import PacketMirroringsRestTransport
 
@@ -338,7 +335,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListPacketMirroringsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.AggregatedList. See the method
                 description for details.
             project (str):
@@ -346,7 +344,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -377,10 +374,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListPacketMirroringsRequest):
             request = compute.AggregatedListPacketMirroringsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -415,7 +410,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeletePacketMirroringRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.Delete. See the method description for
                 details.
             project (str):
@@ -435,7 +431,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``packet_mirroring`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -487,10 +482,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeletePacketMirroringRequest):
             request = compute.DeletePacketMirroringRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -523,7 +516,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetPacketMirroringRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.Get. See the method description for
                 details.
             project (str):
@@ -543,7 +537,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``packet_mirroring`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -580,10 +573,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetPacketMirroringRequest):
             request = compute.GetPacketMirroringRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -618,7 +609,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertPacketMirroringRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.Insert. See the method description for
                 details.
             project (str):
@@ -636,7 +628,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``packet_mirroring_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -688,10 +679,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertPacketMirroringRequest):
             request = compute.InsertPacketMirroringRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -724,7 +713,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPacketMirroringsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.List. See the method description for
                 details.
             project (str):
@@ -737,7 +727,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -769,10 +758,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListPacketMirroringsRequest):
             request = compute.ListPacketMirroringsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -813,7 +800,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchPacketMirroringRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.Patch. See the method description for
                 details.
             project (str):
@@ -838,7 +826,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``packet_mirroring_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -892,10 +879,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchPacketMirroringRequest):
             request = compute.PatchPacketMirroringRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -932,7 +917,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsPacketMirroringRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 PacketMirrorings.TestIamPermissions. See the method
                 description for details.
             project (str):
@@ -959,7 +945,6 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -988,10 +973,8 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsPacketMirroringRequest):
             request = compute.TestIamPermissionsPacketMirroringRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

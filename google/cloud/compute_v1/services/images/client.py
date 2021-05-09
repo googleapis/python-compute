@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.images import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import ImagesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import ImagesRestTransport
 
@@ -337,7 +334,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteImageRequest):
-                The request object. A request message for Images.Delete.
+                The request object.
+                A request message for Images.Delete.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -349,7 +347,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``image`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -401,10 +398,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteImageRequest):
             request = compute.DeleteImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if image is not None:
@@ -437,7 +432,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeprecateImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.Deprecate. See the method description for
                 details.
             project (str):
@@ -455,7 +451,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``deprecation_status_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -507,10 +502,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeprecateImageRequest):
             request = compute.DeprecateImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if image is not None:
@@ -543,7 +536,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetImageRequest):
-                The request object. A request message for Images.Get.
+                The request object.
+                A request message for Images.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -555,7 +549,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``image`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -587,10 +580,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetImageRequest):
             request = compute.GetImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if image is not None:
@@ -621,7 +612,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetFromFamilyImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.GetFromFamily. See the method description for
                 details.
             project (str):
@@ -636,7 +628,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``family`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -668,10 +659,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetFromFamilyImageRequest):
             request = compute.GetFromFamilyImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if family is not None:
@@ -702,7 +691,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -717,7 +707,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -795,10 +784,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyImageRequest):
             request = compute.GetIamPolicyImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -829,7 +816,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertImageRequest):
-                The request object. A request message for Images.Insert.
+                The request object.
+                A request message for Images.Insert.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -841,7 +829,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``image_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -893,10 +880,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertImageRequest):
             request = compute.InsertImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if image_resource is not None:
@@ -932,14 +917,14 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListImagesRequest):
-                The request object. A request message for Images.List.
+                The request object.
+                A request message for Images.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -970,10 +955,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListImagesRequest):
             request = compute.ListImagesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -1010,7 +993,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchImageRequest):
-                The request object. A request message for Images.Patch.
+                The request object.
+                A request message for Images.Patch.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1027,7 +1011,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``image_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1079,10 +1062,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchImageRequest):
             request = compute.PatchImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if image is not None:
@@ -1116,7 +1097,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1136,7 +1118,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``global_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1216,10 +1197,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyImageRequest):
             request = compute.SetIamPolicyImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -1255,7 +1234,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.SetLabels. See the method description for
                 details.
             project (str):
@@ -1275,7 +1255,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``global_set_labels_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1329,10 +1308,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetLabelsImageRequest):
             request = compute.SetLabelsImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -1368,7 +1345,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsImageRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Images.TestIamPermissions. See the method description
                 for details.
             project (str):
@@ -1388,7 +1366,6 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1417,10 +1394,8 @@ class ImagesClient(metaclass=ImagesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsImageRequest):
             request = compute.TestIamPermissionsImageRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:

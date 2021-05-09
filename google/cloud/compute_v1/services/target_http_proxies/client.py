@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.target_http_proxies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import TargetHttpProxiesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import TargetHttpProxiesRestTransport
 
@@ -341,7 +338,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetHttpProxiesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.AggregatedList. See the method
                 description for details.
             project (str):
@@ -351,7 +349,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -381,10 +378,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListTargetHttpProxiesRequest):
             request = compute.AggregatedListTargetHttpProxiesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -418,7 +413,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.Delete. See the method description for
                 details.
             project (str):
@@ -433,7 +429,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``target_http_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -485,10 +480,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteTargetHttpProxyRequest):
             request = compute.DeleteTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_http_proxy is not None:
@@ -520,7 +513,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.Get. See the method description for
                 details.
             project (str):
@@ -535,7 +529,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``target_http_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -585,10 +578,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetTargetHttpProxyRequest):
             request = compute.GetTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_http_proxy is not None:
@@ -619,7 +610,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.Insert. See the method description for
                 details.
             project (str):
@@ -632,7 +624,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``target_http_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -684,10 +675,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertTargetHttpProxyRequest):
             request = compute.InsertTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_http_proxy_resource is not None:
@@ -717,7 +706,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetHttpProxiesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.List. See the method description for
                 details.
             project (str):
@@ -725,7 +715,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -756,10 +745,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListTargetHttpProxiesRequest):
             request = compute.ListTargetHttpProxiesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -797,7 +784,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.Patch. See the method description for
                 details.
             project (str):
@@ -817,7 +805,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``target_http_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -871,10 +858,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchTargetHttpProxyRequest):
             request = compute.PatchTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_http_proxy is not None:
@@ -907,7 +892,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetUrlMapTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetHttpProxies.SetUrlMap. See the method description
                 for details.
             project (str):
@@ -927,7 +913,6 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
                 This corresponds to the ``url_map_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -981,10 +966,8 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetUrlMapTargetHttpProxyRequest):
             request = compute.SetUrlMapTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_http_proxy is not None:

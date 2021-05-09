@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.zone_operations import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import ZoneOperationsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import ZoneOperationsRestTransport
 
@@ -341,7 +338,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteZoneOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ZoneOperations.Delete. See the method description for
                 details.
             project (str):
@@ -361,7 +359,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -391,10 +388,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteZoneOperationRequest):
             request = compute.DeleteZoneOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -428,7 +423,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetZoneOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ZoneOperations.Get. See the method description for
                 details.
             project (str):
@@ -448,7 +444,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -500,10 +495,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetZoneOperationRequest):
             request = compute.GetZoneOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -536,7 +529,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListZoneOperationsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ZoneOperations.List. See the method description for
                 details.
             project (str):
@@ -549,7 +543,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -581,10 +574,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListZoneOperationsRequest):
             request = compute.ListZoneOperationsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -635,7 +626,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.WaitZoneOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ZoneOperations.Wait. See the method description for
                 details.
             project (str):
@@ -655,7 +647,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -707,10 +698,8 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.WaitZoneOperationRequest):
             request = compute.WaitZoneOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

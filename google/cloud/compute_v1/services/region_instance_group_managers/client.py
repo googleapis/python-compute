@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_instance_group_managers import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionInstanceGroupManagersTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionInstanceGroupManagersRestTransport
 
@@ -361,7 +358,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.AbandonInstancesRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.AbandonInstances. See the
                 method description for details.
             project (str):
@@ -386,7 +384,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_abandon_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -447,10 +444,8 @@ class RegionInstanceGroupManagersClient(
             request, compute.AbandonInstancesRegionInstanceGroupManagerRequest
         ):
             request = compute.AbandonInstancesRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -492,7 +487,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.ApplyUpdatesToInstances. See
                 the method description for details.
             project (str):
@@ -519,7 +515,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_apply_updates_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -582,10 +577,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -635,7 +628,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.CreateInstancesRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.CreateInstances. See the
                 method description for details.
             project (str):
@@ -663,7 +657,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_create_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -724,10 +717,8 @@ class RegionInstanceGroupManagersClient(
             request, compute.CreateInstancesRegionInstanceGroupManagerRequest
         ):
             request = compute.CreateInstancesRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -768,7 +759,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.Delete. See the method
                 description for details.
             project (str):
@@ -790,7 +782,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -842,10 +833,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionInstanceGroupManagerRequest):
             request = compute.DeleteRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -894,7 +883,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstancesRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.DeleteInstances. See the
                 method description for details.
             project (str):
@@ -919,7 +909,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_delete_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -980,10 +969,8 @@ class RegionInstanceGroupManagersClient(
             request, compute.DeleteInstancesRegionInstanceGroupManagerRequest
         ):
             request = compute.DeleteInstancesRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1025,7 +1012,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.DeletePerInstanceConfigs.
                 See the method description for details.
             project (str):
@@ -1052,7 +1040,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_manager_delete_instance_config_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1115,10 +1102,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1161,7 +1146,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.Get. See the method
                 description for details.
             project (str):
@@ -1183,7 +1169,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1224,10 +1209,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionInstanceGroupManagerRequest):
             request = compute.GetRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1269,7 +1252,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.Insert. See the method
                 description for details.
             project (str):
@@ -1289,7 +1273,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1341,10 +1324,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionInstanceGroupManagerRequest):
             request = compute.InsertRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1379,7 +1360,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.List. See the method
                 description for details.
             project (str):
@@ -1394,7 +1376,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1426,10 +1407,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionInstanceGroupManagersRequest):
             request = compute.ListRegionInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1468,7 +1447,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListErrorsRegionInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.ListErrors. See the method
                 description for details.
             project (str):
@@ -1492,7 +1472,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1524,10 +1503,8 @@ class RegionInstanceGroupManagersClient(
             request, compute.ListErrorsRegionInstanceGroupManagersRequest
         ):
             request = compute.ListErrorsRegionInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1570,7 +1547,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListManagedInstancesRegionInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.ListManagedInstances. See
                 the method description for details.
             project (str):
@@ -1592,7 +1570,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1626,10 +1603,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.ListManagedInstancesRegionInstanceGroupManagersRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1670,7 +1645,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListPerInstanceConfigsRegionInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.ListPerInstanceConfigs. See
                 the method description for details.
             project (str):
@@ -1692,7 +1668,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1726,10 +1701,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.ListPerInstanceConfigsRegionInstanceGroupManagersRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1779,7 +1752,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.PatchRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.Patch. See the method
                 description for details.
             project (str):
@@ -1806,7 +1780,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``instance_group_manager_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1860,10 +1833,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.PatchRegionInstanceGroupManagerRequest):
             request = compute.PatchRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1904,7 +1875,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.PatchPerInstanceConfigs. See
                 the method description for details.
             project (str):
@@ -1931,7 +1903,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_manager_patch_instance_config_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1994,10 +1965,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -2053,7 +2022,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.RecreateInstancesRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.RecreateInstances. See the
                 method description for details.
             project (str):
@@ -2078,7 +2048,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_recreate_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2141,10 +2110,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.RecreateInstancesRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -2194,7 +2161,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ResizeRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.Resize. See the method
                 description for details.
             project (str):
@@ -2221,7 +2189,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``size`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2273,10 +2240,8 @@ class RegionInstanceGroupManagersClient(
         # there are no flattened fields.
         if not isinstance(request, compute.ResizeRegionInstanceGroupManagerRequest):
             request = compute.ResizeRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -2314,7 +2279,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.SetInstanceTemplateRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.SetInstanceTemplate. See the
                 method description for details.
             project (str):
@@ -2341,7 +2307,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_set_template_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2404,10 +2369,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.SetInstanceTemplateRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -2447,7 +2410,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetPoolsRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.SetTargetPools. See the
                 method description for details.
             project (str):
@@ -2472,7 +2436,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_managers_set_target_pools_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2533,10 +2496,8 @@ class RegionInstanceGroupManagersClient(
             request, compute.SetTargetPoolsRegionInstanceGroupManagerRequest
         ):
             request = compute.SetTargetPoolsRegionInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -2580,7 +2541,8 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroupManagers.UpdatePerInstanceConfigs.
                 See the method description for details.
             project (str):
@@ -2607,7 +2569,6 @@ class RegionInstanceGroupManagersClient(
                 This corresponds to the ``region_instance_group_manager_update_instance_config_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2670,10 +2631,8 @@ class RegionInstanceGroupManagersClient(
             request = compute.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

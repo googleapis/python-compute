@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.machine_types import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import MachineTypesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import MachineTypesRestTransport
 
@@ -336,7 +333,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListMachineTypesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 MachineTypes.AggregatedList. See the method description
                 for details.
             project (str):
@@ -344,7 +342,6 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListMachineTypesRequest):
             request = compute.AggregatedListMachineTypesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -413,7 +408,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetMachineTypeRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 MachineTypes.Get. See the method description for
                 details.
             project (str):
@@ -433,7 +429,6 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
                 This corresponds to the ``machine_type`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -467,10 +462,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetMachineTypeRequest):
             request = compute.GetMachineTypeRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -503,7 +496,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListMachineTypesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 MachineTypes.List. See the method description for
                 details.
             project (str):
@@ -518,7 +512,6 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -549,10 +542,8 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListMachineTypesRequest):
             request = compute.ListMachineTypesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

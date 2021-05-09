@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.target_ssl_proxies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import TargetSslProxiesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import TargetSslProxiesRestTransport
 
@@ -339,7 +336,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.Delete. See the method description for
                 details.
             project (str):
@@ -354,7 +352,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -406,10 +403,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteTargetSslProxyRequest):
             request = compute.DeleteTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:
@@ -441,7 +436,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.Get. See the method description for
                 details.
             project (str):
@@ -456,7 +452,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -491,10 +486,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetTargetSslProxyRequest):
             request = compute.GetTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:
@@ -525,7 +518,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.Insert. See the method description for
                 details.
             project (str):
@@ -538,7 +532,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -590,10 +583,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertTargetSslProxyRequest):
             request = compute.InsertTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy_resource is not None:
@@ -623,7 +614,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetSslProxiesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.List. See the method description for
                 details.
             project (str):
@@ -631,7 +623,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -663,10 +654,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListTargetSslProxiesRequest):
             request = compute.ListTargetSslProxiesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -701,7 +690,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetBackendServiceTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.SetBackendService. See the method
                 description for details.
             project (str):
@@ -722,7 +712,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxies_set_backend_service_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -780,10 +769,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetBackendServiceTargetSslProxyRequest):
             request = compute.SetBackendServiceTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:
@@ -818,7 +805,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetProxyHeaderTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.SetProxyHeader. See the method
                 description for details.
             project (str):
@@ -838,7 +826,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxies_set_proxy_header_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -896,10 +883,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetProxyHeaderTargetSslProxyRequest):
             request = compute.SetProxyHeaderTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:
@@ -934,7 +919,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslCertificatesTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.SetSslCertificates. See the method
                 description for details.
             project (str):
@@ -955,7 +941,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``target_ssl_proxies_set_ssl_certificates_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1013,10 +998,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetSslCertificatesTargetSslProxyRequest):
             request = compute.SetSslCertificatesTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:
@@ -1055,7 +1038,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslPolicyTargetSslProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetSslProxies.SetSslPolicy. See the method
                 description for details.
             project (str):
@@ -1077,7 +1061,6 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
                 This corresponds to the ``ssl_policy_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1131,10 +1114,8 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetSslPolicyTargetSslProxyRequest):
             request = compute.SetSslPolicyTargetSslProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_ssl_proxy is not None:

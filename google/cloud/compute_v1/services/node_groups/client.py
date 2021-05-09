@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.node_groups import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import NodeGroupsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import NodeGroupsRestTransport
 
@@ -339,7 +336,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddNodesNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.AddNodes. See the method description for
                 details.
             project (str):
@@ -364,7 +362,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_groups_add_nodes_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -418,10 +415,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AddNodesNodeGroupRequest):
             request = compute.AddNodesNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -458,7 +453,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListNodeGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.AggregatedList. See the method description
                 for details.
             project (str):
@@ -466,7 +462,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -496,10 +491,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListNodeGroupsRequest):
             request = compute.AggregatedListNodeGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -534,7 +527,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.Delete. See the method description for
                 details.
             project (str):
@@ -556,7 +550,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -608,10 +601,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteNodeGroupRequest):
             request = compute.DeleteNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -645,7 +636,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodesNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.DeleteNodes. See the method description for
                 details.
             project (str):
@@ -672,7 +664,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_groups_delete_nodes_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -726,10 +717,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteNodesNodeGroupRequest):
             request = compute.DeleteNodesNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -769,7 +758,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -788,7 +778,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -825,10 +814,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetNodeGroupRequest):
             request = compute.GetNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -862,7 +849,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -884,7 +872,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -962,10 +949,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyNodeGroupRequest):
             request = compute.GetIamPolicyNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1000,7 +985,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.Insert. See the method description for
                 details.
             project (str):
@@ -1027,7 +1013,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_group_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1081,10 +1066,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertNodeGroupRequest):
             request = compute.InsertNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1120,7 +1103,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodeGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.List. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1134,7 +1118,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1165,10 +1148,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListNodeGroupsRequest):
             request = compute.ListNodeGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1205,7 +1186,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodesNodeGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.ListNodes. See the method description for
                 details.
             project (str):
@@ -1227,7 +1209,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1257,10 +1238,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListNodesNodeGroupsRequest):
             request = compute.ListNodesNodeGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1300,7 +1279,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.Patch. See the method description for
                 details.
             project (str):
@@ -1327,7 +1307,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_group_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1379,10 +1358,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchNodeGroupRequest):
             request = compute.PatchNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1419,7 +1396,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1446,7 +1424,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``zone_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1526,10 +1503,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyNodeGroupRequest):
             request = compute.SetIamPolicyNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1567,7 +1542,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetNodeTemplateNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.SetNodeTemplate. See the method description
                 for details.
             project (str):
@@ -1594,7 +1570,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``node_groups_set_node_template_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1648,10 +1623,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetNodeTemplateNodeGroupRequest):
             request = compute.SetNodeTemplateNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1690,7 +1663,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsNodeGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeGroups.TestIamPermissions. See the method
                 description for details.
             project (str):
@@ -1717,7 +1691,6 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1746,10 +1719,8 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsNodeGroupRequest):
             request = compute.TestIamPermissionsNodeGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.autoscalers import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import AutoscalersTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import AutoscalersRestTransport
 
@@ -336,7 +333,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListAutoscalersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.AggregatedList. See the method description
                 for details.
             project (str):
@@ -344,7 +342,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListAutoscalersRequest):
             request = compute.AggregatedListAutoscalersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -412,7 +407,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.Delete. See the method description for
                 details.
             project (str):
@@ -430,7 +426,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``autoscaler`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -482,10 +477,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteAutoscalerRequest):
             request = compute.DeleteAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -520,7 +513,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -537,7 +531,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``autoscaler`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -584,10 +577,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetAutoscalerRequest):
             request = compute.GetAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -621,7 +612,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.Insert. See the method description for
                 details.
             project (str):
@@ -639,7 +631,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -691,10 +682,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertAutoscalerRequest):
             request = compute.InsertAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -727,7 +716,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListAutoscalersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.List. See the method description for
                 details.
             project (str):
@@ -740,7 +730,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -772,10 +761,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListAutoscalersRequest):
             request = compute.ListAutoscalersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -815,7 +802,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.Patch. See the method description for
                 details.
             project (str):
@@ -833,7 +821,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -885,10 +872,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchAutoscalerRequest):
             request = compute.PatchAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -922,7 +907,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Autoscalers.Update. See the method description for
                 details.
             project (str):
@@ -940,7 +926,6 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -992,10 +977,8 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateAutoscalerRequest):
             request = compute.UpdateAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

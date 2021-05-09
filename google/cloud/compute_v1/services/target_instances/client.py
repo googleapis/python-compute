@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.target_instances import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import TargetInstancesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import TargetInstancesRestTransport
 
@@ -338,7 +335,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetInstancesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetInstances.AggregatedList. See the method
                 description for details.
             project (str):
@@ -346,7 +344,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -376,10 +373,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListTargetInstancesRequest):
             request = compute.AggregatedListTargetInstancesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -414,7 +409,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetInstanceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetInstances.Delete. See the method description for
                 details.
             project (str):
@@ -436,7 +432,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
                 This corresponds to the ``target_instance`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -488,10 +483,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteTargetInstanceRequest):
             request = compute.DeleteTargetInstanceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -526,7 +519,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetInstanceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetInstances.Get. See the method description for
                 details.
             project (str):
@@ -548,7 +542,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
                 This corresponds to the ``target_instance`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -583,10 +576,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetTargetInstanceRequest):
             request = compute.GetTargetInstanceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -620,7 +611,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetInstanceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetInstances.Insert. See the method description for
                 details.
             project (str):
@@ -640,7 +632,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
                 This corresponds to the ``target_instance_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -692,10 +683,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertTargetInstanceRequest):
             request = compute.InsertTargetInstanceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -728,7 +717,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetInstancesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetInstances.List. See the method description for
                 details.
             project (str):
@@ -743,7 +733,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -775,10 +764,8 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListTargetInstancesRequest):
             request = compute.ListTargetInstancesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

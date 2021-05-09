@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.ssl_certificates import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import SslCertificatesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import SslCertificatesRestTransport
 
@@ -339,7 +336,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListSslCertificatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslCertificates.AggregatedList. See the method
                 description for details.
             project (str):
@@ -349,7 +347,6 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -379,10 +376,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListSslCertificatesRequest):
             request = compute.AggregatedListSslCertificatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -416,7 +411,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslCertificates.Delete. See the method description for
                 details.
             project (str):
@@ -431,7 +427,6 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -483,10 +478,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteSslCertificateRequest):
             request = compute.DeleteSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_certificate is not None:
@@ -518,7 +511,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslCertificates.Get. See the method description for
                 details.
             project (str):
@@ -533,7 +527,6 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -585,10 +578,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetSslCertificateRequest):
             request = compute.GetSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_certificate is not None:
@@ -619,7 +610,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSslCertificateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslCertificates.Insert. See the method description for
                 details.
             project (str):
@@ -632,7 +624,6 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 This corresponds to the ``ssl_certificate_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -684,10 +675,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertSslCertificateRequest):
             request = compute.InsertSslCertificateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if ssl_certificate_resource is not None:
@@ -717,7 +706,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSslCertificatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SslCertificates.List. See the method description for
                 details.
             project (str):
@@ -725,7 +715,6 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -757,10 +746,8 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListSslCertificatesRequest):
             request = compute.ListSslCertificatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 

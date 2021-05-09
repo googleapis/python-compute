@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.routers import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RoutersTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RoutersRestTransport
 
@@ -336,7 +333,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListRoutersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.AggregatedList. See the method description for
                 details.
             project (str):
@@ -344,7 +342,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -375,10 +372,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListRoutersRequest):
             request = compute.AggregatedListRoutersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -413,7 +408,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRouterRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.Delete. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -432,7 +428,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -484,10 +479,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRouterRequest):
             request = compute.DeleteRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -521,7 +514,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRouterRequest):
-                The request object. A request message for Routers.Get.
+                The request object.
+                A request message for Routers.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -540,7 +534,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -570,10 +563,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRouterRequest):
             request = compute.GetRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -607,7 +598,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNatMappingInfoRoutersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.GetNatMappingInfo. See the method description
                 for details.
             project (str):
@@ -628,7 +620,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -660,10 +651,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetNatMappingInfoRoutersRequest):
             request = compute.GetNatMappingInfoRoutersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -703,7 +692,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRouterStatusRouterRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.GetRouterStatus. See the method description for
                 details.
             project (str):
@@ -721,7 +711,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -748,10 +737,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRouterStatusRouterRequest):
             request = compute.GetRouterStatusRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -785,7 +772,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRouterRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.Insert. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -802,7 +790,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -854,10 +841,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRouterRequest):
             request = compute.InsertRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -890,7 +875,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRoutersRequest):
-                The request object. A request message for Routers.List.
+                The request object.
+                A request message for Routers.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -902,7 +888,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -933,10 +918,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRoutersRequest):
             request = compute.ListRoutersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -977,7 +960,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRouterRequest):
-                The request object. A request message for Routers.Patch.
+                The request object.
+                A request message for Routers.Patch.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -999,7 +983,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1051,10 +1034,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchRouterRequest):
             request = compute.PatchRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1092,7 +1073,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PreviewRouterRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.Preview. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1114,7 +1096,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1141,10 +1122,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PreviewRouterRequest):
             request = compute.PreviewRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1185,7 +1164,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateRouterRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Routers.Update. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1209,7 +1189,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
                 This corresponds to the ``router_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1261,10 +1240,8 @@ class RoutersClient(metaclass=RoutersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateRouterRequest):
             request = compute.UpdateRouterRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

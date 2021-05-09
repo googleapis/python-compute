@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.disks import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import DisksTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import DisksRestTransport
 
@@ -341,7 +338,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddResourcePoliciesDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.AddResourcePolicies. See the method description
                 for details.
             project (str):
@@ -366,7 +364,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disks_add_resource_policies_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -420,10 +417,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AddResourcePoliciesDiskRequest):
             request = compute.AddResourcePoliciesDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -458,7 +453,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListDisksRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.AggregatedList. See the method description for
                 details.
             project (str):
@@ -466,7 +462,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -496,10 +491,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListDisksRequest):
             request = compute.AggregatedListDisksRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -535,7 +528,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.CreateSnapshotDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.CreateSnapshot. See the method description for
                 details.
             project (str):
@@ -562,7 +556,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``snapshot_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -614,10 +607,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.CreateSnapshotDiskRequest):
             request = compute.CreateSnapshotDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -656,7 +647,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteDiskRequest):
-                The request object. A request message for Disks.Delete.
+                The request object.
+                A request message for Disks.Delete.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -677,7 +669,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disk`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -729,10 +720,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteDiskRequest):
             request = compute.DeleteDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -766,7 +755,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetDiskRequest):
-                The request object. A request message for Disks.Get. See
+                The request object.
+                A request message for Disks.Get. See
                 the method description for details.
             project (str):
                 Project ID for this request.
@@ -787,7 +777,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disk`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -836,10 +825,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetDiskRequest):
             request = compute.GetDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -873,7 +860,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -895,7 +883,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -973,10 +960,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyDiskRequest):
             request = compute.GetIamPolicyDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1015,7 +1000,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertDiskRequest):
-                The request object. A request message for Disks.Insert.
+                The request object.
+                A request message for Disks.Insert.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1034,7 +1020,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disk_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1086,10 +1071,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertDiskRequest):
             request = compute.InsertDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1122,7 +1105,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListDisksRequest):
-                The request object. A request message for Disks.List.
+                The request object.
+                A request message for Disks.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1136,7 +1120,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1167,10 +1150,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListDisksRequest):
             request = compute.ListDisksRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1208,7 +1189,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveResourcePoliciesDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.RemoveResourcePolicies. See the method description
                 for details.
             project (str):
@@ -1233,7 +1215,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disks_remove_resource_policies_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1287,10 +1268,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.RemoveResourcePoliciesDiskRequest):
             request = compute.RemoveResourcePoliciesDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1329,7 +1308,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResizeDiskRequest):
-                The request object. A request message for Disks.Resize.
+                The request object.
+                A request message for Disks.Resize.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1353,7 +1333,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``disks_resize_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1405,10 +1384,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ResizeDiskRequest):
             request = compute.ResizeDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1445,7 +1422,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1472,7 +1450,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``zone_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1552,10 +1529,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyDiskRequest):
             request = compute.SetIamPolicyDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1594,7 +1569,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.SetLabels. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1620,7 +1596,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``zone_set_labels_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1674,10 +1649,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetLabelsDiskRequest):
             request = compute.SetLabelsDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1716,7 +1689,8 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsDiskRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Disks.TestIamPermissions. See the method description for
                 details.
             project (str):
@@ -1743,7 +1717,6 @@ class DisksClient(metaclass=DisksClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1772,10 +1745,8 @@ class DisksClient(metaclass=DisksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsDiskRequest):
             request = compute.TestIamPermissionsDiskRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

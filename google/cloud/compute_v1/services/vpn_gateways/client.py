@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.vpn_gateways import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import VpnGatewaysTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import VpnGatewaysRestTransport
 
@@ -336,7 +333,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListVpnGatewaysRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.AggregatedList. See the method description
                 for details.
             project (str):
@@ -344,7 +342,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListVpnGatewaysRequest):
             request = compute.AggregatedListVpnGatewaysRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -412,7 +407,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.Delete. See the method description for
                 details.
             project (str):
@@ -430,7 +426,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``vpn_gateway`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -482,10 +477,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteVpnGatewayRequest):
             request = compute.DeleteVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -519,7 +512,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -536,7 +530,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``vpn_gateway`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -572,10 +565,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetVpnGatewayRequest):
             request = compute.GetVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -608,7 +599,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetStatusVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.GetStatus. See the method description for
                 details.
             project (str):
@@ -626,7 +618,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``vpn_gateway`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -653,10 +644,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetStatusVpnGatewayRequest):
             request = compute.GetStatusVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -690,7 +679,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.Insert. See the method description for
                 details.
             project (str):
@@ -708,7 +698,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``vpn_gateway_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -760,10 +749,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertVpnGatewayRequest):
             request = compute.InsertVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -796,7 +783,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListVpnGatewaysRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.List. See the method description for
                 details.
             project (str):
@@ -809,7 +797,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -841,10 +828,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListVpnGatewaysRequest):
             request = compute.ListVpnGatewaysRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -883,7 +868,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.SetLabels. See the method description for
                 details.
             project (str):
@@ -908,7 +894,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``region_set_labels_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -962,10 +947,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetLabelsVpnGatewayRequest):
             request = compute.SetLabelsVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1004,7 +987,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsVpnGatewayRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 VpnGateways.TestIamPermissions. See the method
                 description for details.
             project (str):
@@ -1031,7 +1015,6 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1060,10 +1043,8 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsVpnGatewayRequest):
             request = compute.TestIamPermissionsVpnGatewayRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

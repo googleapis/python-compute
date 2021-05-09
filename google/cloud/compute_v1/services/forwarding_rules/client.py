@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.forwarding_rules import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import ForwardingRulesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import ForwardingRulesRestTransport
 
@@ -338,7 +335,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListForwardingRulesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.AggregatedList. See the method
                 description for details.
             project (str):
@@ -346,7 +344,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -376,10 +373,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListForwardingRulesRequest):
             request = compute.AggregatedListForwardingRulesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -414,7 +409,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteForwardingRuleRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.Delete. See the method description for
                 details.
             project (str):
@@ -436,7 +432,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``forwarding_rule`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -488,10 +483,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteForwardingRuleRequest):
             request = compute.DeleteForwardingRuleRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -524,7 +517,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetForwardingRuleRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.Get. See the method description for
                 details.
             project (str):
@@ -546,7 +540,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``forwarding_rule`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -595,10 +588,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetForwardingRuleRequest):
             request = compute.GetForwardingRuleRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -633,7 +624,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertForwardingRuleRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.Insert. See the method description for
                 details.
             project (str):
@@ -653,7 +645,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``forwarding_rule_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -705,10 +696,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertForwardingRuleRequest):
             request = compute.InsertForwardingRuleRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -741,7 +730,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListForwardingRulesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.List. See the method description for
                 details.
             project (str):
@@ -756,7 +746,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -788,10 +777,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListForwardingRulesRequest):
             request = compute.ListForwardingRulesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -832,7 +819,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchForwardingRuleRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.Patch. See the method description for
                 details.
             project (str):
@@ -859,7 +847,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``forwarding_rule_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -913,10 +900,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchForwardingRuleRequest):
             request = compute.PatchForwardingRuleRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -953,7 +938,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetForwardingRuleRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 ForwardingRules.SetTarget. See the method description
                 for details.
             project (str):
@@ -980,7 +966,6 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
                 This corresponds to the ``target_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1034,10 +1019,8 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetTargetForwardingRuleRequest):
             request = compute.SetTargetForwardingRuleRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

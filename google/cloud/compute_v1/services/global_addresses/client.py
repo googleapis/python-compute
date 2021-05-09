@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.global_addresses import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import GlobalAddressesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import GlobalAddressesRestTransport
 
@@ -339,7 +336,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalAddressRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalAddresses.Delete. See the method description for
                 details.
             project (str):
@@ -354,7 +352,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
                 This corresponds to the ``address`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -406,10 +403,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteGlobalAddressRequest):
             request = compute.DeleteGlobalAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if address is not None:
@@ -440,7 +435,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalAddressRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalAddresses.Get. See the method description for
                 details.
             project (str):
@@ -455,7 +451,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
                 This corresponds to the ``address`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -511,10 +506,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetGlobalAddressRequest):
             request = compute.GetGlobalAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if address is not None:
@@ -545,7 +538,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertGlobalAddressRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalAddresses.Insert. See the method description for
                 details.
             project (str):
@@ -558,7 +552,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
                 This corresponds to the ``address_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -610,10 +603,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertGlobalAddressRequest):
             request = compute.InsertGlobalAddressRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if address_resource is not None:
@@ -642,7 +633,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalAddressesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalAddresses.List. See the method description for
                 details.
             project (str):
@@ -650,7 +642,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -681,10 +672,8 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListGlobalAddressesRequest):
             request = compute.ListGlobalAddressesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 

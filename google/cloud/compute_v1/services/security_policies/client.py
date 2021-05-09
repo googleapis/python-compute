@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.security_policies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import SecurityPoliciesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import SecurityPoliciesRestTransport
 
@@ -340,7 +337,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddRuleSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.AddRule. See the method description for
                 details.
             project (str):
@@ -360,7 +358,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy_rule_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -414,10 +411,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AddRuleSecurityPolicyRequest):
             request = compute.AddRuleSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -449,7 +444,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.Delete. See the method description for
                 details.
             project (str):
@@ -464,7 +460,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -516,10 +511,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteSecurityPolicyRequest):
             request = compute.DeleteSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -550,7 +543,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.Get. See the method description for
                 details.
             project (str):
@@ -563,7 +557,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -598,10 +591,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetSecurityPolicyRequest):
             request = compute.GetSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -631,7 +622,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRuleSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.GetRule. See the method description for
                 details.
             project (str):
@@ -646,7 +638,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -677,10 +668,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRuleSecurityPolicyRequest):
             request = compute.GetRuleSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -711,7 +700,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.Insert. See the method description for
                 details.
             project (str):
@@ -724,7 +714,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -776,10 +765,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertSecurityPolicyRequest):
             request = compute.InsertSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy_resource is not None:
@@ -809,7 +796,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSecurityPoliciesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.List. See the method description for
                 details.
             project (str):
@@ -817,7 +805,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -847,10 +834,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListSecurityPoliciesRequest):
             request = compute.ListSecurityPoliciesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -884,7 +869,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPreconfiguredExpressionSetsSecurityPoliciesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.ListPreconfiguredExpressionSets. See
                 the method description for details.
             project (str):
@@ -892,7 +878,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -923,10 +908,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
             request = compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -960,7 +943,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.Patch. See the method description for
                 details.
             project (str):
@@ -980,7 +964,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1032,10 +1015,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchSecurityPolicyRequest):
             request = compute.PatchSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -1068,7 +1049,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRuleSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.PatchRule. See the method description
                 for details.
             project (str):
@@ -1088,7 +1070,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy_rule_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1142,10 +1123,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchRuleSecurityPolicyRequest):
             request = compute.PatchRuleSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:
@@ -1177,7 +1156,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveRuleSecurityPolicyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 SecurityPolicies.RemoveRule. See the method description
                 for details.
             project (str):
@@ -1192,7 +1172,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``security_policy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1244,10 +1223,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.RemoveRuleSecurityPolicyRequest):
             request = compute.RemoveRuleSecurityPolicyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if security_policy is not None:

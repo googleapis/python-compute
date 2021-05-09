@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.target_grpc_proxies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import TargetGrpcProxiesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import TargetGrpcProxiesRestTransport
 
@@ -342,7 +339,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetGrpcProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetGrpcProxies.Delete. See the method description for
                 details.
             project (str):
@@ -357,7 +355,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
                 This corresponds to the ``target_grpc_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -409,10 +406,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteTargetGrpcProxyRequest):
             request = compute.DeleteTargetGrpcProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_grpc_proxy is not None:
@@ -443,7 +438,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetGrpcProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetGrpcProxies.Get. See the method description for
                 details.
             project (str):
@@ -458,7 +454,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
                 This corresponds to the ``target_grpc_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -494,10 +489,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetTargetGrpcProxyRequest):
             request = compute.GetTargetGrpcProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_grpc_proxy is not None:
@@ -529,7 +522,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetGrpcProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetGrpcProxies.Insert. See the method description for
                 details.
             project (str):
@@ -542,7 +536,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
                 This corresponds to the ``target_grpc_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -594,10 +587,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertTargetGrpcProxyRequest):
             request = compute.InsertTargetGrpcProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_grpc_proxy_resource is not None:
@@ -627,7 +618,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetGrpcProxiesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetGrpcProxies.List. See the method description for
                 details.
             project (str):
@@ -635,7 +627,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -665,10 +656,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListTargetGrpcProxiesRequest):
             request = compute.ListTargetGrpcProxiesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -706,7 +695,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchTargetGrpcProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 TargetGrpcProxies.Patch. See the method description for
                 details.
             project (str):
@@ -726,7 +716,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
                 This corresponds to the ``target_grpc_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -780,10 +769,8 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchTargetGrpcProxyRequest):
             request = compute.PatchTargetGrpcProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if target_grpc_proxy is not None:

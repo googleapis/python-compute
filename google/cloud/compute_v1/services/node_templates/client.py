@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.node_templates import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import NodeTemplatesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import NodeTemplatesRestTransport
 
@@ -336,7 +333,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListNodeTemplatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.AggregatedList. See the method description
                 for details.
             project (str):
@@ -344,7 +342,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -374,10 +371,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListNodeTemplatesRequest):
             request = compute.AggregatedListNodeTemplatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -412,7 +407,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.Delete. See the method description for
                 details.
             project (str):
@@ -434,7 +430,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``node_template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -486,10 +481,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteNodeTemplateRequest):
             request = compute.DeleteNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -523,7 +516,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.Get. See the method description for
                 details.
             project (str):
@@ -543,7 +537,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``node_template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -576,10 +569,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetNodeTemplateRequest):
             request = compute.GetNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -613,7 +604,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.GetIamPolicy. See the method description
                 for details.
             project (str):
@@ -635,7 +627,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -713,10 +704,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyNodeTemplateRequest):
             request = compute.GetIamPolicyNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -750,7 +739,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.Insert. See the method description for
                 details.
             project (str):
@@ -770,7 +760,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``node_template_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -822,10 +811,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertNodeTemplateRequest):
             request = compute.InsertNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -858,7 +845,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodeTemplatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.List. See the method description for
                 details.
             project (str):
@@ -873,7 +861,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -904,10 +891,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListNodeTemplatesRequest):
             request = compute.ListNodeTemplatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -946,7 +931,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.SetIamPolicy. See the method description
                 for details.
             project (str):
@@ -973,7 +959,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``region_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1053,10 +1038,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyNodeTemplateRequest):
             request = compute.SetIamPolicyNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1095,7 +1078,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsNodeTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 NodeTemplates.TestIamPermissions. See the method
                 description for details.
             project (str):
@@ -1122,7 +1106,6 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1151,10 +1134,8 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsNodeTemplateRequest):
             request = compute.TestIamPermissionsNodeTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

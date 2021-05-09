@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_network_endpoint_groups import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionNetworkEndpointGroupsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionNetworkEndpointGroupsRestTransport
 
@@ -346,7 +343,8 @@ class RegionNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionNetworkEndpointGroups.Delete. See the method
                 description for details.
             project (str):
@@ -370,7 +368,6 @@ class RegionNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -422,10 +419,8 @@ class RegionNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionNetworkEndpointGroupRequest):
             request = compute.DeleteRegionNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -460,7 +455,8 @@ class RegionNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionNetworkEndpointGroups.Get. See the method
                 description for details.
             project (str):
@@ -483,7 +479,6 @@ class RegionNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -524,10 +519,8 @@ class RegionNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionNetworkEndpointGroupRequest):
             request = compute.GetRegionNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -562,7 +555,8 @@ class RegionNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionNetworkEndpointGroups.Insert. See the method
                 description for details.
             project (str):
@@ -583,7 +577,6 @@ class RegionNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -635,10 +628,8 @@ class RegionNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionNetworkEndpointGroupRequest):
             request = compute.InsertRegionNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -674,7 +665,8 @@ class RegionNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionNetworkEndpointGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionNetworkEndpointGroups.List. See the method
                 description for details.
             project (str):
@@ -690,7 +682,6 @@ class RegionNetworkEndpointGroupsClient(
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -720,10 +711,8 @@ class RegionNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionNetworkEndpointGroupsRequest):
             request = compute.ListRegionNetworkEndpointGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

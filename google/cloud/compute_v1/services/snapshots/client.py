@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.snapshots import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import SnapshotsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import SnapshotsRestTransport
 
@@ -343,7 +340,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSnapshotRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.Delete. See the method description for
                 details.
             project (str):
@@ -358,7 +356,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``snapshot`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -410,10 +407,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteSnapshotRequest):
             request = compute.DeleteSnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if snapshot is not None:
@@ -444,7 +439,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSnapshotRequest):
-                The request object. A request message for Snapshots.Get.
+                The request object.
+                A request message for Snapshots.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -458,7 +454,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``snapshot`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -491,10 +486,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetSnapshotRequest):
             request = compute.GetSnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if snapshot is not None:
@@ -525,7 +518,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicySnapshotRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -540,7 +534,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -618,10 +611,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicySnapshotRequest):
             request = compute.GetIamPolicySnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -651,14 +642,14 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSnapshotsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.List. See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -690,10 +681,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListSnapshotsRequest):
             request = compute.ListSnapshotsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -729,7 +718,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicySnapshotRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -749,7 +739,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``global_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -829,10 +818,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicySnapshotRequest):
             request = compute.SetIamPolicySnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -868,7 +855,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsSnapshotRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.SetLabels. See the method description for
                 details.
             project (str):
@@ -888,7 +876,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``global_set_labels_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -942,10 +929,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetLabelsSnapshotRequest):
             request = compute.SetLabelsSnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -981,7 +966,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsSnapshotRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Snapshots.TestIamPermissions. See the method description
                 for details.
             project (str):
@@ -1001,7 +987,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1030,10 +1015,8 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsSnapshotRequest):
             request = compute.TestIamPermissionsSnapshotRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:

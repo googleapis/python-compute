@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_target_http_proxies import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionTargetHttpProxiesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionTargetHttpProxiesRestTransport
 
@@ -342,7 +339,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionTargetHttpProxies.Delete. See the method
                 description for details.
             project (str):
@@ -364,7 +362,6 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 This corresponds to the ``target_http_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -416,10 +413,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionTargetHttpProxyRequest):
             request = compute.DeleteRegionTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -454,7 +449,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionTargetHttpProxies.Get. See the method description
                 for details.
             project (str):
@@ -476,7 +472,6 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 This corresponds to the ``target_http_proxy`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -526,10 +521,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionTargetHttpProxyRequest):
             request = compute.GetRegionTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -564,7 +557,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionTargetHttpProxies.Insert. See the method
                 description for details.
             project (str):
@@ -584,7 +578,6 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 This corresponds to the ``target_http_proxy_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -636,10 +629,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionTargetHttpProxyRequest):
             request = compute.InsertRegionTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -673,7 +664,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionTargetHttpProxiesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionTargetHttpProxies.List. See the method description
                 for details.
             project (str):
@@ -688,7 +680,6 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -719,10 +710,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionTargetHttpProxiesRequest):
             request = compute.ListRegionTargetHttpProxiesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -760,7 +749,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.SetUrlMapRegionTargetHttpProxyRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionTargetHttpProxies.SetUrlMap. See the method
                 description for details.
             project (str):
@@ -787,7 +777,6 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 This corresponds to the ``url_map_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -841,10 +830,8 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.SetUrlMapRegionTargetHttpProxyRequest):
             request = compute.SetUrlMapRegionTargetHttpProxyRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

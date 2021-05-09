@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.backend_services import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import BackendServicesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import BackendServicesRestTransport
 
@@ -341,7 +338,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddSignedUrlKeyBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.AddSignedUrlKey. See the method
                 description for details.
             project (str):
@@ -363,7 +361,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``signed_url_key_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -415,10 +412,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AddSignedUrlKeyBackendServiceRequest):
             request = compute.AddSignedUrlKeyBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -450,7 +445,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListBackendServicesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.AggregatedList. See the method
                 description for details.
             project (str):
@@ -460,7 +456,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -492,10 +487,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListBackendServicesRequest):
             request = compute.AggregatedListBackendServicesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -529,7 +522,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.Delete. See the method description for
                 details.
             project (str):
@@ -544,7 +538,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``backend_service`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -596,10 +589,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteBackendServiceRequest):
             request = compute.DeleteBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -631,7 +622,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSignedUrlKeyBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.DeleteSignedUrlKey. See the method
                 description for details.
             project (str):
@@ -655,7 +647,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``key_name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -707,10 +698,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteSignedUrlKeyBackendServiceRequest):
             request = compute.DeleteSignedUrlKeyBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -743,7 +732,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.Get. See the method description for
                 details.
             project (str):
@@ -758,7 +748,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``backend_service`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -807,10 +796,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetBackendServiceRequest):
             request = compute.GetBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -846,7 +833,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetHealthBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.GetHealth. See the method description
                 for details.
             project (str):
@@ -866,7 +854,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``resource_group_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -895,10 +882,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetHealthBackendServiceRequest):
             request = compute.GetHealthBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -934,7 +919,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.Insert. See the method description for
                 details.
             project (str):
@@ -947,7 +933,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``backend_service_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -999,10 +984,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertBackendServiceRequest):
             request = compute.InsertBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service_resource is not None:
@@ -1032,7 +1015,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListBackendServicesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.List. See the method description for
                 details.
             project (str):
@@ -1040,7 +1024,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1072,10 +1055,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListBackendServicesRequest):
             request = compute.ListBackendServicesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -1114,7 +1095,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.Patch. See the method description for
                 details.
             project (str):
@@ -1134,7 +1116,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``backend_service_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1186,10 +1167,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchBackendServiceRequest):
             request = compute.PatchBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -1223,7 +1202,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSecurityPolicyBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.SetSecurityPolicy. See the method
                 description for details.
             project (str):
@@ -1244,7 +1224,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``security_policy_reference_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1298,10 +1277,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetSecurityPolicyBackendServiceRequest):
             request = compute.SetSecurityPolicyBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:
@@ -1338,7 +1315,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateBackendServiceRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 BackendServices.Update. See the method description for
                 details.
             project (str):
@@ -1358,7 +1336,6 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
                 This corresponds to the ``backend_service_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1410,10 +1387,8 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateBackendServiceRequest):
             request = compute.UpdateBackendServiceRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if backend_service is not None:

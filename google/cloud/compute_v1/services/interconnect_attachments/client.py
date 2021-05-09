@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.interconnect_attachments import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import InterconnectAttachmentsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import InterconnectAttachmentsRestTransport
 
@@ -341,7 +338,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInterconnectAttachmentsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.AggregatedList. See the method
                 description for details.
             project (str):
@@ -349,7 +347,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -381,10 +378,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
             request, compute.AggregatedListInterconnectAttachmentsRequest
         ):
             request = compute.AggregatedListInterconnectAttachmentsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -419,7 +414,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInterconnectAttachmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.Delete. See the method
                 description for details.
             project (str):
@@ -439,7 +435,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``interconnect_attachment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -491,10 +486,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteInterconnectAttachmentRequest):
             request = compute.DeleteInterconnectAttachmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -527,7 +520,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.GetInterconnectAttachmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.Get. See the method description
                 for details.
             project (str):
@@ -547,7 +541,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``interconnect_attachment`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -582,10 +575,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.GetInterconnectAttachmentRequest):
             request = compute.GetInterconnectAttachmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -619,7 +610,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.InsertInterconnectAttachmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.Insert. See the method
                 description for details.
             project (str):
@@ -637,7 +629,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``interconnect_attachment_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -689,10 +680,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.InsertInterconnectAttachmentRequest):
             request = compute.InsertInterconnectAttachmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -727,7 +716,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.ListInterconnectAttachmentsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.List. See the method description
                 for details.
             project (str):
@@ -740,7 +730,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -772,10 +761,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.ListInterconnectAttachmentsRequest):
             request = compute.ListInterconnectAttachmentsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -816,7 +803,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.PatchInterconnectAttachmentRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InterconnectAttachments.Patch. See the method
                 description for details.
             project (str):
@@ -843,7 +831,6 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
                 This corresponds to the ``interconnect_attachment_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -897,10 +884,8 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         # there are no flattened fields.
         if not isinstance(request, compute.PatchInterconnectAttachmentRequest):
             request = compute.PatchInterconnectAttachmentRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

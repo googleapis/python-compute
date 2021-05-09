@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_autoscalers import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionAutoscalersTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionAutoscalersRestTransport
 
@@ -342,7 +339,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.Delete. See the method description for
                 details.
             project (str):
@@ -362,7 +360,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``autoscaler`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -414,10 +411,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionAutoscalerRequest):
             request = compute.DeleteRegionAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -450,7 +445,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.Get. See the method description for
                 details.
             project (str):
@@ -470,7 +466,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``autoscaler`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -517,10 +512,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionAutoscalerRequest):
             request = compute.GetRegionAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -554,7 +547,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.Insert. See the method description for
                 details.
             project (str):
@@ -574,7 +568,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -626,10 +619,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionAutoscalerRequest):
             request = compute.InsertRegionAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -662,7 +653,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionAutoscalersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.List. See the method description for
                 details.
             project (str):
@@ -677,7 +669,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -708,10 +699,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionAutoscalersRequest):
             request = compute.ListRegionAutoscalersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -751,7 +740,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRegionAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.Patch. See the method description for
                 details.
             project (str):
@@ -771,7 +761,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -823,10 +812,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchRegionAutoscalerRequest):
             request = compute.PatchRegionAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -860,7 +847,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateRegionAutoscalerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionAutoscalers.Update. See the method description for
                 details.
             project (str):
@@ -880,7 +868,6 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
                 This corresponds to the ``autoscaler_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -932,10 +919,8 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateRegionAutoscalerRequest):
             request = compute.UpdateRegionAutoscalerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

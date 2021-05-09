@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.zones import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import ZonesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import ZonesRestTransport
 
@@ -338,7 +335,8 @@ class ZonesClient(metaclass=ZonesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetZoneRequest):
-                The request object. A request message for Zones.Get. See
+                The request object.
+                A request message for Zones.Get. See
                 the method description for details.
             project (str):
                 Project ID for this request.
@@ -350,7 +348,6 @@ class ZonesClient(metaclass=ZonesClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -384,10 +381,8 @@ class ZonesClient(metaclass=ZonesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetZoneRequest):
             request = compute.GetZoneRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -417,14 +412,14 @@ class ZonesClient(metaclass=ZonesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListZonesRequest):
-                The request object. A request message for Zones.List.
+                The request object.
+                A request message for Zones.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -455,10 +450,8 @@ class ZonesClient(metaclass=ZonesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListZonesRequest):
             request = compute.ListZonesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 

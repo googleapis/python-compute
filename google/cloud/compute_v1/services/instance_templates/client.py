@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.instance_templates import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import InstanceTemplatesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import InstanceTemplatesRestTransport
 
@@ -344,7 +341,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.Delete. See the method description for
                 details.
             project (str):
@@ -359,7 +357,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``instance_template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -411,10 +408,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteInstanceTemplateRequest):
             request = compute.DeleteInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if instance_template is not None:
@@ -446,7 +441,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.Get. See the method description for
                 details.
             project (str):
@@ -459,7 +455,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``instance_template`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -492,10 +487,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetInstanceTemplateRequest):
             request = compute.GetInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if instance_template is not None:
@@ -526,7 +519,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.GetIamPolicy. See the method
                 description for details.
             project (str):
@@ -541,7 +535,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -619,10 +612,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyInstanceTemplateRequest):
             request = compute.GetIamPolicyInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -657,7 +648,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.Insert. See the method description for
                 details.
             project (str):
@@ -670,7 +662,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``instance_template_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -722,10 +713,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertInstanceTemplateRequest):
             request = compute.InsertInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if instance_template_resource is not None:
@@ -755,7 +744,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstanceTemplatesRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.List. See the method description for
                 details.
             project (str):
@@ -763,7 +753,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -794,10 +783,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListInstanceTemplatesRequest):
             request = compute.ListInstanceTemplatesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -833,7 +820,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.SetIamPolicy. See the method
                 description for details.
             project (str):
@@ -853,7 +841,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``global_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -933,10 +920,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyInstanceTemplateRequest):
             request = compute.SetIamPolicyInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -972,7 +957,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsInstanceTemplateRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceTemplates.TestIamPermissions. See the method
                 description for details.
             project (str):
@@ -992,7 +978,6 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1021,10 +1006,8 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsInstanceTemplateRequest):
             request = compute.TestIamPermissionsInstanceTemplateRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:

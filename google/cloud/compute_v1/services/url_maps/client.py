@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.url_maps import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import UrlMapsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import UrlMapsRestTransport
 
@@ -337,7 +334,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListUrlMapsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.AggregatedList. See the method description for
                 details.
             project (str):
@@ -347,7 +345,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -377,10 +374,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListUrlMapsRequest):
             request = compute.AggregatedListUrlMapsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -414,7 +409,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.Delete. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -428,7 +424,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_map`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -480,10 +475,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteUrlMapRequest):
             request = compute.DeleteUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:
@@ -514,7 +507,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetUrlMapRequest):
-                The request object. A request message for UrlMaps.Get.
+                The request object.
+                A request message for UrlMaps.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -528,7 +522,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_map`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -588,10 +581,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetUrlMapRequest):
             request = compute.GetUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:
@@ -622,7 +613,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.Insert. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -634,7 +626,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -686,10 +677,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertUrlMapRequest):
             request = compute.InsertUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map_resource is not None:
@@ -724,7 +713,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InvalidateCacheUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.InvalidateCache. See the method description for
                 details.
             project (str):
@@ -744,7 +734,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``cache_invalidation_rule_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -796,10 +785,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InvalidateCacheUrlMapRequest):
             request = compute.InvalidateCacheUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:
@@ -833,14 +820,14 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListUrlMapsRequest):
-                The request object. A request message for UrlMaps.List.
+                The request object.
+                A request message for UrlMaps.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -871,10 +858,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListUrlMapsRequest):
             request = compute.ListUrlMapsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -912,7 +897,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchUrlMapRequest):
-                The request object. A request message for UrlMaps.Patch.
+                The request object.
+                A request message for UrlMaps.Patch.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -929,7 +915,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -981,10 +966,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchUrlMapRequest):
             request = compute.PatchUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:
@@ -1018,7 +1001,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.Update. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1037,7 +1021,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1089,10 +1072,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateUrlMapRequest):
             request = compute.UpdateUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:
@@ -1127,7 +1108,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ValidateUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 UrlMaps.Validate. See the method description for
                 details.
             project (str):
@@ -1147,7 +1129,6 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
                 This corresponds to the ``url_maps_validate_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1176,10 +1157,8 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ValidateUrlMapRequest):
             request = compute.ValidateUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if url_map is not None:

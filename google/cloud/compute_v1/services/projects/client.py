@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.projects import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import ProjectsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import ProjectsRestTransport
 
@@ -336,7 +333,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DisableXpnHostProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.DisableXpnHost. See the method description for
                 details.
             project (str):
@@ -344,7 +342,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -396,10 +393,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DisableXpnHostProjectRequest):
             request = compute.DisableXpnHostProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -428,7 +423,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DisableXpnResourceProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.DisableXpnResource. See the method description
                 for details.
             project (str):
@@ -441,7 +437,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``projects_disable_xpn_resource_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -495,10 +490,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DisableXpnResourceProjectRequest):
             request = compute.DisableXpnResourceProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if projects_disable_xpn_resource_request_resource is not None:
@@ -529,7 +522,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.EnableXpnHostProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.EnableXpnHost. See the method description for
                 details.
             project (str):
@@ -537,7 +531,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -589,10 +582,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.EnableXpnHostProjectRequest):
             request = compute.EnableXpnHostProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -622,7 +613,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.EnableXpnResourceProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.EnableXpnResource. See the method description
                 for details.
             project (str):
@@ -635,7 +627,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``projects_enable_xpn_resource_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -689,10 +680,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.EnableXpnResourceProjectRequest):
             request = compute.EnableXpnResourceProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if projects_enable_xpn_resource_request_resource is not None:
@@ -723,14 +712,14 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetProjectRequest):
-                The request object. A request message for Projects.Get.
+                The request object.
+                A request message for Projects.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -763,10 +752,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetProjectRequest):
             request = compute.GetProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -794,7 +781,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetXpnHostProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.GetXpnHost. See the method description for
                 details.
             project (str):
@@ -802,7 +790,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -835,10 +822,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetXpnHostProjectRequest):
             request = compute.GetXpnHostProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -866,7 +851,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetXpnResourcesProjectsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.GetXpnResources. See the method description for
                 details.
             project (str):
@@ -874,7 +860,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -904,10 +889,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetXpnResourcesProjectsRequest):
             request = compute.GetXpnResourcesProjectsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -942,7 +925,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListXpnHostsProjectsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.ListXpnHosts. See the method description for
                 details.
             project (str):
@@ -955,7 +939,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``projects_list_xpn_hosts_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -985,10 +968,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListXpnHostsProjectsRequest):
             request = compute.ListXpnHostsProjectsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if projects_list_xpn_hosts_request_resource is not None:
@@ -1026,7 +1007,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.MoveDiskProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.MoveDisk. See the method description for
                 details.
             project (str):
@@ -1039,7 +1021,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``disk_move_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1091,10 +1072,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.MoveDiskProjectRequest):
             request = compute.MoveDiskProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if disk_move_request_resource is not None:
@@ -1125,7 +1104,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.MoveInstanceProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.MoveInstance. See the method description for
                 details.
             project (str):
@@ -1138,7 +1118,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``instance_move_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1190,10 +1169,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.MoveInstanceProjectRequest):
             request = compute.MoveInstanceProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if instance_move_request_resource is not None:
@@ -1225,7 +1202,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetCommonInstanceMetadataProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.SetCommonInstanceMetadata. See the method
                 description for details.
             project (str):
@@ -1238,7 +1216,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``metadata_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1290,10 +1267,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetCommonInstanceMetadataProjectRequest):
             request = compute.SetCommonInstanceMetadataProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if metadata_resource is not None:
@@ -1328,7 +1303,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetDefaultNetworkTierProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.SetDefaultNetworkTier. See the method
                 description for details.
             project (str):
@@ -1341,7 +1317,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``projects_set_default_network_tier_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1395,10 +1370,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetDefaultNetworkTierProjectRequest):
             request = compute.SetDefaultNetworkTierProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if projects_set_default_network_tier_request_resource is not None:
@@ -1433,7 +1406,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetUsageExportBucketProjectRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Projects.SetUsageExportBucket. See the method
                 description for details.
             project (str):
@@ -1446,7 +1420,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
                 This corresponds to the ``usage_export_location_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1498,10 +1471,8 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetUsageExportBucketProjectRequest):
             request = compute.SetUsageExportBucketProjectRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if usage_export_location_resource is not None:

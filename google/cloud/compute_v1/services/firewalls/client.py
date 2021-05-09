@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.firewalls import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import FirewallsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import FirewallsRestTransport
 
@@ -337,7 +334,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteFirewallRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Firewalls.Delete. See the method description for
                 details.
             project (str):
@@ -350,7 +348,6 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
                 This corresponds to the ``firewall`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -402,10 +399,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteFirewallRequest):
             request = compute.DeleteFirewallRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if firewall is not None:
@@ -435,7 +430,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetFirewallRequest):
-                The request object. A request message for Firewalls.Get.
+                The request object.
+                A request message for Firewalls.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -447,7 +443,6 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
                 This corresponds to the ``firewall`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -479,10 +474,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetFirewallRequest):
             request = compute.GetFirewallRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if firewall is not None:
@@ -513,7 +506,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertFirewallRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Firewalls.Insert. See the method description for
                 details.
             project (str):
@@ -526,7 +520,6 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
                 This corresponds to the ``firewall_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -578,10 +571,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertFirewallRequest):
             request = compute.InsertFirewallRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if firewall_resource is not None:
@@ -611,14 +602,14 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListFirewallsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Firewalls.List. See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -649,10 +640,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListFirewallsRequest):
             request = compute.ListFirewallsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -690,7 +679,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchFirewallRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Firewalls.Patch. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -707,7 +697,6 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
                 This corresponds to the ``firewall_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -759,10 +748,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchFirewallRequest):
             request = compute.PatchFirewallRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if firewall is not None:
@@ -799,7 +786,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateFirewallRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Firewalls.Update. See the method description for
                 details.
             project (str):
@@ -817,7 +805,6 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
                 This corresponds to the ``firewall_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -869,10 +856,8 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateFirewallRequest):
             request = compute.UpdateFirewallRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if firewall is not None:

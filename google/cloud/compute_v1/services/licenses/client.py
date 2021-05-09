@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.licenses import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import LicensesTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import LicensesRestTransport
 
@@ -339,7 +336,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteLicenseRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Licenses.Delete. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -353,7 +351,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``license_`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -405,10 +402,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteLicenseRequest):
             request = compute.DeleteLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if license_ is not None:
@@ -440,7 +435,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetLicenseRequest):
-                The request object. A request message for Licenses.Get.
+                The request object.
+                A request message for Licenses.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -454,7 +450,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``license_`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -488,10 +483,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetLicenseRequest):
             request = compute.GetLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if license_ is not None:
@@ -524,7 +517,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyLicenseRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Licenses.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -539,7 +533,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -617,10 +610,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetIamPolicyLicenseRequest):
             request = compute.GetIamPolicyLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -653,7 +644,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertLicenseRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Licenses.Insert. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -665,7 +657,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``license_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -717,10 +708,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertLicenseRequest):
             request = compute.InsertLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if license_resource is not None:
@@ -758,14 +747,14 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListLicensesRequest):
-                The request object. A request message for Licenses.List.
+                The request object.
+                A request message for Licenses.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -795,10 +784,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListLicensesRequest):
             request = compute.ListLicensesRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -836,7 +823,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyLicenseRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Licenses.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -856,7 +844,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``global_set_policy_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -936,10 +923,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetIamPolicyLicenseRequest):
             request = compute.SetIamPolicyLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:
@@ -977,7 +962,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsLicenseRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 Licenses.TestIamPermissions. See the method description
                 for details.
             project (str):
@@ -997,7 +983,6 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 This corresponds to the ``test_permissions_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1026,10 +1011,8 @@ class LicensesClient(metaclass=LicensesClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.TestIamPermissionsLicenseRequest):
             request = compute.TestIamPermissionsLicenseRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if resource is not None:

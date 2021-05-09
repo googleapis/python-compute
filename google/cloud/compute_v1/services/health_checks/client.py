@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.health_checks import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import HealthChecksTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import HealthChecksRestTransport
 
@@ -337,7 +334,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListHealthChecksRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.AggregatedList. See the method description
                 for details.
             project (str):
@@ -347,7 +345,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -377,10 +374,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListHealthChecksRequest):
             request = compute.AggregatedListHealthChecksRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -414,7 +409,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteHealthCheckRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.Delete. See the method description for
                 details.
             project (str):
@@ -429,7 +425,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``health_check`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -481,10 +476,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteHealthCheckRequest):
             request = compute.DeleteHealthCheckRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if health_check is not None:
@@ -516,7 +509,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetHealthCheckRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.Get. See the method description for
                 details.
             project (str):
@@ -531,7 +525,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``health_check`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -586,10 +579,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetHealthCheckRequest):
             request = compute.GetHealthCheckRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if health_check is not None:
@@ -620,7 +611,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertHealthCheckRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.Insert. See the method description for
                 details.
             project (str):
@@ -633,7 +625,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``health_check_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -685,10 +676,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertHealthCheckRequest):
             request = compute.InsertHealthCheckRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if health_check_resource is not None:
@@ -718,7 +707,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListHealthChecksRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.List. See the method description for
                 details.
             project (str):
@@ -726,7 +716,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -758,10 +747,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListHealthChecksRequest):
             request = compute.ListHealthChecksRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -799,7 +786,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchHealthCheckRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.Patch. See the method description for
                 details.
             project (str):
@@ -819,7 +807,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``health_check_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -871,10 +858,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchHealthCheckRequest):
             request = compute.PatchHealthCheckRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if health_check is not None:
@@ -908,7 +893,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateHealthCheckRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 HealthChecks.Update. See the method description for
                 details.
             project (str):
@@ -928,7 +914,6 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
                 This corresponds to the ``health_check_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -980,10 +965,8 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateHealthCheckRequest):
             request = compute.UpdateHealthCheckRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if health_check is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_instance_groups import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionInstanceGroupsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionInstanceGroupsRestTransport
 
@@ -342,7 +339,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionInstanceGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroups.Get. See the method description for
                 details.
             project (str):
@@ -364,7 +362,6 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
                 This corresponds to the ``instance_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -413,10 +410,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionInstanceGroupRequest):
             request = compute.GetRegionInstanceGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -449,7 +444,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionInstanceGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroups.List. See the method description
                 for details.
             project (str):
@@ -464,7 +460,6 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -496,10 +491,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionInstanceGroupsRequest):
             request = compute.ListRegionInstanceGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -541,7 +534,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstancesRegionInstanceGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroups.ListInstances. See the method
                 description for details.
             project (str):
@@ -568,7 +562,6 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
                 This corresponds to the ``region_instance_groups_list_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -605,10 +598,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListInstancesRegionInstanceGroupsRequest):
             request = compute.ListInstancesRegionInstanceGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -653,7 +644,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetNamedPortsRegionInstanceGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionInstanceGroups.SetNamedPorts. See the method
                 description for details.
             project (str):
@@ -680,7 +672,6 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
                 This corresponds to the ``region_instance_groups_set_named_ports_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -739,10 +730,8 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetNamedPortsRegionInstanceGroupRequest):
             request = compute.SetNamedPortsRegionInstanceGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:

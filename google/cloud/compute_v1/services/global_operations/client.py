@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.global_operations import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import GlobalOperationsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import GlobalOperationsRestTransport
 
@@ -338,7 +335,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListGlobalOperationsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOperations.AggregatedList. See the method
                 description for details.
             project (str):
@@ -346,7 +344,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -376,10 +373,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListGlobalOperationsRequest):
             request = compute.AggregatedListGlobalOperationsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -413,7 +408,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOperations.Delete. See the method description for
                 details.
             project (str):
@@ -428,7 +424,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -458,10 +453,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteGlobalOperationRequest):
             request = compute.DeleteGlobalOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if operation is not None:
@@ -492,7 +485,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOperations.Get. See the method description for
                 details.
             project (str):
@@ -507,7 +501,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -559,10 +552,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetGlobalOperationRequest):
             request = compute.GetGlobalOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if operation is not None:
@@ -592,7 +583,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalOperationsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOperations.List. See the method description for
                 details.
             project (str):
@@ -600,7 +592,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -632,10 +623,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListGlobalOperationsRequest):
             request = compute.ListGlobalOperationsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -683,7 +672,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.WaitGlobalOperationRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalOperations.Wait. See the method description for
                 details.
             project (str):
@@ -698,7 +688,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
                 This corresponds to the ``operation`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -750,10 +739,8 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.WaitGlobalOperationRequest):
             request = compute.WaitGlobalOperationRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if operation is not None:

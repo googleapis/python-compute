@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.global_network_endpoint_groups import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import GlobalNetworkEndpointGroupsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import GlobalNetworkEndpointGroupsRestTransport
 
@@ -345,7 +342,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.AttachNetworkEndpoints. See
                 the method description for details.
             project (str):
@@ -367,7 +365,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``global_network_endpoint_groups_attach_endpoints_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -429,10 +426,8 @@ class GlobalNetworkEndpointGroupsClient(
             request = compute.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group is not None:
@@ -471,7 +466,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.Delete. See the method
                 description for details.
             project (str):
@@ -487,7 +483,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -539,10 +534,8 @@ class GlobalNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteGlobalNetworkEndpointGroupRequest):
             request = compute.DeleteGlobalNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group is not None:
@@ -574,7 +567,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.DetachNetworkEndpoints. See
                 the method description for details.
             project (str):
@@ -596,7 +590,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``global_network_endpoint_groups_detach_endpoints_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -658,10 +651,8 @@ class GlobalNetworkEndpointGroupsClient(
             request = compute.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group is not None:
@@ -700,7 +691,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.Get. See the method
                 description for details.
             project (str):
@@ -715,7 +707,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -756,10 +747,8 @@ class GlobalNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.GetGlobalNetworkEndpointGroupRequest):
             request = compute.GetGlobalNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group is not None:
@@ -791,7 +780,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.InsertGlobalNetworkEndpointGroupRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.Insert. See the method
                 description for details.
             project (str):
@@ -804,7 +794,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -856,10 +845,8 @@ class GlobalNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.InsertGlobalNetworkEndpointGroupRequest):
             request = compute.InsertGlobalNetworkEndpointGroupRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group_resource is not None:
@@ -891,7 +878,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalNetworkEndpointGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.List. See the method
                 description for details.
             project (str):
@@ -899,7 +887,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -929,10 +916,8 @@ class GlobalNetworkEndpointGroupsClient(
         # there are no flattened fields.
         if not isinstance(request, compute.ListGlobalNetworkEndpointGroupsRequest):
             request = compute.ListGlobalNetworkEndpointGroupsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -967,7 +952,8 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 GlobalNetworkEndpointGroups.ListNetworkEndpoints. See
                 the method description for details.
             project (str):
@@ -984,7 +970,6 @@ class GlobalNetworkEndpointGroupsClient(
                 This corresponds to the ``network_endpoint_group`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1018,10 +1003,8 @@ class GlobalNetworkEndpointGroupsClient(
             request = compute.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if network_endpoint_group is not None:

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.instance_group_managers import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import InstanceGroupManagersTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import InstanceGroupManagersRestTransport
 
@@ -359,7 +356,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AbandonInstancesInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.AbandonInstances. See the method
                 description for details.
             project (str):
@@ -386,7 +384,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_abandon_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -445,10 +442,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AbandonInstancesInstanceGroupManagerRequest):
             request = compute.AbandonInstancesInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -484,7 +479,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.AggregatedList. See the method
                 description for details.
             project (str):
@@ -492,7 +488,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -522,10 +517,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.AggregatedListInstanceGroupManagersRequest):
             request = compute.AggregatedListInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
 
@@ -563,7 +556,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ApplyUpdatesToInstancesInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.ApplyUpdatesToInstances. See the
                 method description for details.
             project (str):
@@ -591,7 +585,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_apply_updates_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -654,10 +647,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request = compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -704,7 +695,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.CreateInstancesInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.CreateInstances. See the method
                 description for details.
             project (str):
@@ -732,7 +724,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_create_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -791,10 +782,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.CreateInstancesInstanceGroupManagerRequest):
             request = compute.CreateInstancesInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -834,7 +823,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.Delete. See the method description
                 for details.
             project (str):
@@ -856,7 +846,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -908,10 +897,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteInstanceGroupManagerRequest):
             request = compute.DeleteInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -959,7 +946,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstancesInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.DeleteInstances. See the method
                 description for details.
             project (str):
@@ -986,7 +974,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_delete_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1045,10 +1032,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteInstancesInstanceGroupManagerRequest):
             request = compute.DeleteInstancesInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1087,7 +1072,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeletePerInstanceConfigsInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.DeletePerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -1115,7 +1101,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_delete_per_instance_configs_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1178,10 +1163,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request = compute.DeletePerInstanceConfigsInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1225,7 +1208,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.Get. See the method description
                 for details.
             project (str):
@@ -1247,7 +1231,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1288,10 +1271,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetInstanceGroupManagerRequest):
             request = compute.GetInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1334,7 +1315,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.Insert. See the method description
                 for details.
             project (str):
@@ -1354,7 +1336,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1406,10 +1387,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertInstanceGroupManagerRequest):
             request = compute.InsertInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1444,7 +1423,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.List. See the method description
                 for details.
             project (str):
@@ -1459,7 +1439,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``zone`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1490,10 +1469,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListInstanceGroupManagersRequest):
             request = compute.ListInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1532,7 +1509,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListErrorsInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.ListErrors. See the method
                 description for details.
             project (str):
@@ -1557,7 +1535,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1587,10 +1564,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListErrorsInstanceGroupManagersRequest):
             request = compute.ListErrorsInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1636,7 +1611,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListManagedInstancesInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.ListManagedInstances. See the
                 method description for details.
             project (str):
@@ -1658,7 +1634,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1690,10 +1665,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request, compute.ListManagedInstancesInstanceGroupManagersRequest
         ):
             request = compute.ListManagedInstancesInstanceGroupManagersRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1734,7 +1707,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPerInstanceConfigsInstanceGroupManagersRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.ListPerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -1757,7 +1731,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1791,10 +1764,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request = compute.ListPerInstanceConfigsInstanceGroupManagersRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1844,7 +1815,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.Patch. See the method description
                 for details.
             project (str):
@@ -1871,7 +1843,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_manager_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1925,10 +1896,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchInstanceGroupManagerRequest):
             request = compute.PatchInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -1969,7 +1938,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchPerInstanceConfigsInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.PatchPerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -1997,7 +1967,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_patch_per_instance_configs_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2060,10 +2029,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request = compute.PatchPerInstanceConfigsInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -2119,7 +2086,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RecreateInstancesInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.RecreateInstances. See the method
                 description for details.
             project (str):
@@ -2146,7 +2114,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_recreate_instances_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2207,10 +2174,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request, compute.RecreateInstancesInstanceGroupManagerRequest
         ):
             request = compute.RecreateInstancesInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -2269,7 +2234,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResizeInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.Resize. See the method description
                 for details.
             project (str):
@@ -2302,7 +2268,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``size`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2354,10 +2319,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ResizeInstanceGroupManagerRequest):
             request = compute.ResizeInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -2397,7 +2360,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetInstanceTemplateInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.SetInstanceTemplate. See the
                 method description for details.
             project (str):
@@ -2424,7 +2388,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_set_instance_template_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2485,10 +2448,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request, compute.SetInstanceTemplateInstanceGroupManagerRequest
         ):
             request = compute.SetInstanceTemplateInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -2536,7 +2497,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetPoolsInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.SetTargetPools. See the method
                 description for details.
             project (str):
@@ -2563,7 +2525,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_set_target_pools_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2622,10 +2583,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.SetTargetPoolsInstanceGroupManagerRequest):
             request = compute.SetTargetPoolsInstanceGroupManagerRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:
@@ -2666,7 +2625,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdatePerInstanceConfigsInstanceGroupManagerRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 InstanceGroupManagers.UpdatePerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -2694,7 +2654,6 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
                 This corresponds to the ``instance_group_managers_update_per_instance_configs_req_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -2757,10 +2716,8 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
             request = compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest(
                 request
             )
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if zone is not None:

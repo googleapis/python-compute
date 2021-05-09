@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -34,7 +32,6 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.compute_v1.services.region_url_maps import pagers
 from google.cloud.compute_v1.types import compute
-
 from .transports.base import RegionUrlMapsTransport, DEFAULT_CLIENT_INFO
 from .transports.rest import RegionUrlMapsRestTransport
 
@@ -338,7 +335,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Delete. See the method description for
                 details.
             project (str):
@@ -360,7 +358,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``url_map`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -412,10 +409,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.DeleteRegionUrlMapRequest):
             request = compute.DeleteRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -449,7 +444,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Get. See the method description for
                 details.
             project (str):
@@ -471,7 +467,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``url_map`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -531,10 +526,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.GetRegionUrlMapRequest):
             request = compute.GetRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -568,7 +561,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Insert. See the method description for
                 details.
             project (str):
@@ -588,7 +582,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -640,10 +633,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.InsertRegionUrlMapRequest):
             request = compute.InsertRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -676,7 +667,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionUrlMapsRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.List. See the method description for
                 details.
             project (str):
@@ -691,7 +683,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``region`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -722,10 +713,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ListRegionUrlMapsRequest):
             request = compute.ListRegionUrlMapsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -766,7 +755,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Patch. See the method description for
                 details.
             project (str):
@@ -791,7 +781,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -843,10 +832,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.PatchRegionUrlMapRequest):
             request = compute.PatchRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -883,7 +870,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Update. See the method description for
                 details.
             project (str):
@@ -910,7 +898,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``url_map_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -962,10 +949,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.UpdateRegionUrlMapRequest):
             request = compute.UpdateRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
@@ -1003,7 +988,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ValidateRegionUrlMapRequest):
-                The request object. A request message for
+                The request object.
+                A request message for
                 RegionUrlMaps.Validate. See the method description for
                 details.
             project (str):
@@ -1030,7 +1016,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
                 This corresponds to the ``region_url_maps_validate_request_resource`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1059,10 +1044,8 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         # there are no flattened fields.
         if not isinstance(request, compute.ValidateRegionUrlMapRequest):
             request = compute.ValidateRegionUrlMapRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if project is not None:
                 request.project = project
             if region is not None:
