@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetTcpProxiesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetTcpProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.Delete. See the method description for
                 details.
             project (str):
@@ -436,8 +435,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetTcpProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.Get. See the method description for
                 details.
             project (str):
@@ -518,8 +516,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetTcpProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.Insert. See the method description for
                 details.
             project (str):
@@ -614,8 +611,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetTcpProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.List. See the method description for
                 details.
             project (str):
@@ -690,8 +686,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetBackendServiceTargetTcpProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.SetBackendService. See the method
                 description for details.
             project (str):
@@ -805,8 +800,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetProxyHeaderTargetTcpProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetTcpProxies.SetProxyHeader. See the method
                 description for details.
             project (str):

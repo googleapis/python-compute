@@ -23,8 +23,8 @@ from google.cloud.compute_v1.services.backend_buckets.client import BackendBucke
 from google.cloud.compute_v1.services.backend_services.client import (
     BackendServicesClient,
 )
-from google.cloud.compute_v1.services.disk_types.client import DiskTypesClient
 from google.cloud.compute_v1.services.disks.client import DisksClient
+from google.cloud.compute_v1.services.disk_types.client import DiskTypesClient
 from google.cloud.compute_v1.services.external_vpn_gateways.client import (
     ExternalVpnGatewaysClient,
 )
@@ -53,10 +53,10 @@ from google.cloud.compute_v1.services.instance_group_managers.client import (
     InstanceGroupManagersClient,
 )
 from google.cloud.compute_v1.services.instance_groups.client import InstanceGroupsClient
+from google.cloud.compute_v1.services.instances.client import InstancesClient
 from google.cloud.compute_v1.services.instance_templates.client import (
     InstanceTemplatesClient,
 )
-from google.cloud.compute_v1.services.instances.client import InstancesClient
 from google.cloud.compute_v1.services.interconnect_attachments.client import (
     InterconnectAttachmentsClient,
 )
@@ -87,15 +87,15 @@ from google.cloud.compute_v1.services.region_backend_services.client import (
 from google.cloud.compute_v1.services.region_commitments.client import (
     RegionCommitmentsClient,
 )
+from google.cloud.compute_v1.services.region_disks.client import RegionDisksClient
 from google.cloud.compute_v1.services.region_disk_types.client import (
     RegionDiskTypesClient,
 )
-from google.cloud.compute_v1.services.region_disks.client import RegionDisksClient
-from google.cloud.compute_v1.services.region_health_check_services.client import (
-    RegionHealthCheckServicesClient,
-)
 from google.cloud.compute_v1.services.region_health_checks.client import (
     RegionHealthChecksClient,
+)
+from google.cloud.compute_v1.services.region_health_check_services.client import (
+    RegionHealthCheckServicesClient,
 )
 from google.cloud.compute_v1.services.region_instance_group_managers.client import (
     RegionInstanceGroupManagersClient,
@@ -112,6 +112,7 @@ from google.cloud.compute_v1.services.region_notification_endpoints.client impor
 from google.cloud.compute_v1.services.region_operations.client import (
     RegionOperationsClient,
 )
+from google.cloud.compute_v1.services.regions.client import RegionsClient
 from google.cloud.compute_v1.services.region_ssl_certificates.client import (
     RegionSslCertificatesClient,
 )
@@ -122,7 +123,6 @@ from google.cloud.compute_v1.services.region_target_https_proxies.client import 
     RegionTargetHttpsProxiesClient,
 )
 from google.cloud.compute_v1.services.region_url_maps.client import RegionUrlMapsClient
-from google.cloud.compute_v1.services.regions.client import RegionsClient
 from google.cloud.compute_v1.services.reservations.client import ReservationsClient
 from google.cloud.compute_v1.services.resource_policies.client import (
     ResourcePoliciesClient,
@@ -165,6 +165,7 @@ from google.cloud.compute_v1.services.vpn_gateways.client import VpnGatewaysClie
 from google.cloud.compute_v1.services.vpn_tunnels.client import VpnTunnelsClient
 from google.cloud.compute_v1.services.zone_operations.client import ZoneOperationsClient
 from google.cloud.compute_v1.services.zones.client import ZonesClient
+
 from google.cloud.compute_v1.types.compute import (
     AbandonInstancesInstanceGroupManagerRequest,
 )
@@ -172,34 +173,34 @@ from google.cloud.compute_v1.types.compute import (
     AbandonInstancesRegionInstanceGroupManagerRequest,
 )
 from google.cloud.compute_v1.types.compute import AcceleratorConfig
+from google.cloud.compute_v1.types.compute import Accelerators
 from google.cloud.compute_v1.types.compute import AcceleratorType
 from google.cloud.compute_v1.types.compute import AcceleratorTypeAggregatedList
 from google.cloud.compute_v1.types.compute import AcceleratorTypeList
 from google.cloud.compute_v1.types.compute import AcceleratorTypesScopedList
-from google.cloud.compute_v1.types.compute import Accelerators
 from google.cloud.compute_v1.types.compute import AccessConfig
 from google.cloud.compute_v1.types.compute import AddAccessConfigInstanceRequest
 from google.cloud.compute_v1.types.compute import AddHealthCheckTargetPoolRequest
-from google.cloud.compute_v1.types.compute import AddInstanceTargetPoolRequest
 from google.cloud.compute_v1.types.compute import AddInstancesInstanceGroupRequest
+from google.cloud.compute_v1.types.compute import AddInstanceTargetPoolRequest
 from google.cloud.compute_v1.types.compute import AddNodesNodeGroupRequest
 from google.cloud.compute_v1.types.compute import AddPeeringNetworkRequest
 from google.cloud.compute_v1.types.compute import AddResourcePoliciesDiskRequest
 from google.cloud.compute_v1.types.compute import AddResourcePoliciesInstanceRequest
 from google.cloud.compute_v1.types.compute import AddResourcePoliciesRegionDiskRequest
+from google.cloud.compute_v1.types.compute import Address
+from google.cloud.compute_v1.types.compute import AddressAggregatedList
+from google.cloud.compute_v1.types.compute import AddressesScopedList
+from google.cloud.compute_v1.types.compute import AddressList
 from google.cloud.compute_v1.types.compute import AddRuleSecurityPolicyRequest
 from google.cloud.compute_v1.types.compute import AddSignedUrlKeyBackendBucketRequest
 from google.cloud.compute_v1.types.compute import AddSignedUrlKeyBackendServiceRequest
-from google.cloud.compute_v1.types.compute import Address
-from google.cloud.compute_v1.types.compute import AddressAggregatedList
-from google.cloud.compute_v1.types.compute import AddressList
-from google.cloud.compute_v1.types.compute import AddressesScopedList
 from google.cloud.compute_v1.types.compute import AggregatedListAcceleratorTypesRequest
 from google.cloud.compute_v1.types.compute import AggregatedListAddressesRequest
 from google.cloud.compute_v1.types.compute import AggregatedListAutoscalersRequest
 from google.cloud.compute_v1.types.compute import AggregatedListBackendServicesRequest
-from google.cloud.compute_v1.types.compute import AggregatedListDiskTypesRequest
 from google.cloud.compute_v1.types.compute import AggregatedListDisksRequest
+from google.cloud.compute_v1.types.compute import AggregatedListDiskTypesRequest
 from google.cloud.compute_v1.types.compute import AggregatedListForwardingRulesRequest
 from google.cloud.compute_v1.types.compute import AggregatedListGlobalOperationsRequest
 from google.cloud.compute_v1.types.compute import AggregatedListHealthChecksRequest
@@ -251,22 +252,22 @@ from google.cloud.compute_v1.types.compute import (
     ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
 )
 from google.cloud.compute_v1.types.compute import AttachDiskInstanceRequest
+from google.cloud.compute_v1.types.compute import AttachedDisk
+from google.cloud.compute_v1.types.compute import AttachedDiskInitializeParams
 from google.cloud.compute_v1.types.compute import (
     AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest,
 )
 from google.cloud.compute_v1.types.compute import (
     AttachNetworkEndpointsNetworkEndpointGroupRequest,
 )
-from google.cloud.compute_v1.types.compute import AttachedDisk
-from google.cloud.compute_v1.types.compute import AttachedDiskInitializeParams
 from google.cloud.compute_v1.types.compute import AuditConfig
 from google.cloud.compute_v1.types.compute import AuditLogConfig
 from google.cloud.compute_v1.types.compute import AuthorizationLoggingOptions
 from google.cloud.compute_v1.types.compute import Autoscaler
 from google.cloud.compute_v1.types.compute import AutoscalerAggregatedList
 from google.cloud.compute_v1.types.compute import AutoscalerList
-from google.cloud.compute_v1.types.compute import AutoscalerStatusDetails
 from google.cloud.compute_v1.types.compute import AutoscalersScopedList
+from google.cloud.compute_v1.types.compute import AutoscalerStatusDetails
 from google.cloud.compute_v1.types.compute import AutoscalingPolicy
 from google.cloud.compute_v1.types.compute import AutoscalingPolicyCpuUtilization
 from google.cloud.compute_v1.types.compute import (
@@ -344,21 +345,21 @@ from google.cloud.compute_v1.types.compute import DeleteImageRequest
 from google.cloud.compute_v1.types.compute import DeleteInstanceGroupManagerRequest
 from google.cloud.compute_v1.types.compute import DeleteInstanceGroupRequest
 from google.cloud.compute_v1.types.compute import DeleteInstanceRequest
-from google.cloud.compute_v1.types.compute import DeleteInstanceTemplateRequest
 from google.cloud.compute_v1.types.compute import (
     DeleteInstancesInstanceGroupManagerRequest,
 )
 from google.cloud.compute_v1.types.compute import (
     DeleteInstancesRegionInstanceGroupManagerRequest,
 )
+from google.cloud.compute_v1.types.compute import DeleteInstanceTemplateRequest
 from google.cloud.compute_v1.types.compute import DeleteInterconnectAttachmentRequest
 from google.cloud.compute_v1.types.compute import DeleteInterconnectRequest
 from google.cloud.compute_v1.types.compute import DeleteLicenseRequest
 from google.cloud.compute_v1.types.compute import DeleteNetworkEndpointGroupRequest
 from google.cloud.compute_v1.types.compute import DeleteNetworkRequest
 from google.cloud.compute_v1.types.compute import DeleteNodeGroupRequest
-from google.cloud.compute_v1.types.compute import DeleteNodeTemplateRequest
 from google.cloud.compute_v1.types.compute import DeleteNodesNodeGroupRequest
+from google.cloud.compute_v1.types.compute import DeleteNodeTemplateRequest
 from google.cloud.compute_v1.types.compute import DeletePacketMirroringRequest
 from google.cloud.compute_v1.types.compute import (
     DeletePerInstanceConfigsInstanceGroupManagerRequest,
@@ -429,14 +430,14 @@ from google.cloud.compute_v1.types.compute import DiskAggregatedList
 from google.cloud.compute_v1.types.compute import DiskInstantiationConfig
 from google.cloud.compute_v1.types.compute import DiskList
 from google.cloud.compute_v1.types.compute import DiskMoveRequest
-from google.cloud.compute_v1.types.compute import DiskType
-from google.cloud.compute_v1.types.compute import DiskTypeAggregatedList
-from google.cloud.compute_v1.types.compute import DiskTypeList
-from google.cloud.compute_v1.types.compute import DiskTypesScopedList
 from google.cloud.compute_v1.types.compute import DisksAddResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import DisksRemoveResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import DisksResizeRequest
 from google.cloud.compute_v1.types.compute import DisksScopedList
+from google.cloud.compute_v1.types.compute import DiskType
+from google.cloud.compute_v1.types.compute import DiskTypeAggregatedList
+from google.cloud.compute_v1.types.compute import DiskTypeList
+from google.cloud.compute_v1.types.compute import DiskTypesScopedList
 from google.cloud.compute_v1.types.compute import DisplayDevice
 from google.cloud.compute_v1.types.compute import DistributionPolicy
 from google.cloud.compute_v1.types.compute import DistributionPolicyZoneConfiguration
@@ -462,7 +463,6 @@ from google.cloud.compute_v1.types.compute import ForwardingRuleAggregatedList
 from google.cloud.compute_v1.types.compute import ForwardingRuleList
 from google.cloud.compute_v1.types.compute import ForwardingRuleReference
 from google.cloud.compute_v1.types.compute import ForwardingRulesScopedList
-from google.cloud.compute_v1.types.compute import GRPCHealthCheck
 from google.cloud.compute_v1.types.compute import GetAcceleratorTypeRequest
 from google.cloud.compute_v1.types.compute import GetAddressRequest
 from google.cloud.compute_v1.types.compute import GetAutoscalerRequest
@@ -573,37 +573,38 @@ from google.cloud.compute_v1.types.compute import (
 )
 from google.cloud.compute_v1.types.compute import GlobalSetLabelsRequest
 from google.cloud.compute_v1.types.compute import GlobalSetPolicyRequest
+from google.cloud.compute_v1.types.compute import GRPCHealthCheck
 from google.cloud.compute_v1.types.compute import GuestAttributes
 from google.cloud.compute_v1.types.compute import GuestAttributesEntry
 from google.cloud.compute_v1.types.compute import GuestAttributesValue
 from google.cloud.compute_v1.types.compute import GuestOsFeature
-from google.cloud.compute_v1.types.compute import HTTP2HealthCheck
-from google.cloud.compute_v1.types.compute import HTTPHealthCheck
-from google.cloud.compute_v1.types.compute import HTTPSHealthCheck
 from google.cloud.compute_v1.types.compute import HealthCheck
 from google.cloud.compute_v1.types.compute import HealthCheckList
 from google.cloud.compute_v1.types.compute import HealthCheckLogConfig
 from google.cloud.compute_v1.types.compute import HealthCheckReference
+from google.cloud.compute_v1.types.compute import HealthChecksAggregatedList
 from google.cloud.compute_v1.types.compute import HealthCheckService
 from google.cloud.compute_v1.types.compute import HealthCheckServiceReference
 from google.cloud.compute_v1.types.compute import HealthCheckServicesList
-from google.cloud.compute_v1.types.compute import HealthChecksAggregatedList
 from google.cloud.compute_v1.types.compute import HealthChecksScopedList
 from google.cloud.compute_v1.types.compute import HealthStatus
 from google.cloud.compute_v1.types.compute import HealthStatusForNetworkEndpoint
 from google.cloud.compute_v1.types.compute import HostRule
+from google.cloud.compute_v1.types.compute import HTTP2HealthCheck
 from google.cloud.compute_v1.types.compute import HttpFaultAbort
 from google.cloud.compute_v1.types.compute import HttpFaultDelay
 from google.cloud.compute_v1.types.compute import HttpFaultInjection
 from google.cloud.compute_v1.types.compute import HttpHeaderAction
 from google.cloud.compute_v1.types.compute import HttpHeaderMatch
 from google.cloud.compute_v1.types.compute import HttpHeaderOption
+from google.cloud.compute_v1.types.compute import HTTPHealthCheck
 from google.cloud.compute_v1.types.compute import HttpQueryParameterMatch
 from google.cloud.compute_v1.types.compute import HttpRedirectAction
 from google.cloud.compute_v1.types.compute import HttpRetryPolicy
 from google.cloud.compute_v1.types.compute import HttpRouteAction
 from google.cloud.compute_v1.types.compute import HttpRouteRule
 from google.cloud.compute_v1.types.compute import HttpRouteRuleMatch
+from google.cloud.compute_v1.types.compute import HTTPSHealthCheck
 from google.cloud.compute_v1.types.compute import Image
 from google.cloud.compute_v1.types.compute import ImageList
 from google.cloud.compute_v1.types.compute import InitialStateConfig
@@ -682,16 +683,6 @@ from google.cloud.compute_v1.types.compute import InstanceGroupManagerActionsSum
 from google.cloud.compute_v1.types.compute import InstanceGroupManagerAggregatedList
 from google.cloud.compute_v1.types.compute import InstanceGroupManagerAutoHealingPolicy
 from google.cloud.compute_v1.types.compute import InstanceGroupManagerList
-from google.cloud.compute_v1.types.compute import InstanceGroupManagerStatus
-from google.cloud.compute_v1.types.compute import InstanceGroupManagerStatusStateful
-from google.cloud.compute_v1.types.compute import (
-    InstanceGroupManagerStatusStatefulPerInstanceConfigs,
-)
-from google.cloud.compute_v1.types.compute import (
-    InstanceGroupManagerStatusVersionTarget,
-)
-from google.cloud.compute_v1.types.compute import InstanceGroupManagerUpdatePolicy
-from google.cloud.compute_v1.types.compute import InstanceGroupManagerVersion
 from google.cloud.compute_v1.types.compute import (
     InstanceGroupManagersAbandonInstancesRequest,
 )
@@ -729,9 +720,19 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import (
     InstanceGroupManagersSetTargetPoolsRequest,
 )
+from google.cloud.compute_v1.types.compute import InstanceGroupManagerStatus
+from google.cloud.compute_v1.types.compute import InstanceGroupManagerStatusStateful
+from google.cloud.compute_v1.types.compute import (
+    InstanceGroupManagerStatusStatefulPerInstanceConfigs,
+)
+from google.cloud.compute_v1.types.compute import (
+    InstanceGroupManagerStatusVersionTarget,
+)
 from google.cloud.compute_v1.types.compute import (
     InstanceGroupManagersUpdatePerInstanceConfigsReq,
 )
+from google.cloud.compute_v1.types.compute import InstanceGroupManagerUpdatePolicy
+from google.cloud.compute_v1.types.compute import InstanceGroupManagerVersion
 from google.cloud.compute_v1.types.compute import InstanceGroupsAddInstancesRequest
 from google.cloud.compute_v1.types.compute import InstanceGroupsListInstances
 from google.cloud.compute_v1.types.compute import InstanceGroupsListInstancesRequest
@@ -750,9 +751,6 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import InstanceMoveRequest
 from google.cloud.compute_v1.types.compute import InstanceProperties
 from google.cloud.compute_v1.types.compute import InstanceReference
-from google.cloud.compute_v1.types.compute import InstanceTemplate
-from google.cloud.compute_v1.types.compute import InstanceTemplateList
-from google.cloud.compute_v1.types.compute import InstanceWithNamedPorts
 from google.cloud.compute_v1.types.compute import InstancesAddResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import InstancesRemoveResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import InstancesScopedList
@@ -762,6 +760,9 @@ from google.cloud.compute_v1.types.compute import InstancesSetMachineTypeRequest
 from google.cloud.compute_v1.types.compute import InstancesSetMinCpuPlatformRequest
 from google.cloud.compute_v1.types.compute import InstancesSetServiceAccountRequest
 from google.cloud.compute_v1.types.compute import InstancesStartWithEncryptionKeyRequest
+from google.cloud.compute_v1.types.compute import InstanceTemplate
+from google.cloud.compute_v1.types.compute import InstanceTemplateList
+from google.cloud.compute_v1.types.compute import InstanceWithNamedPorts
 from google.cloud.compute_v1.types.compute import Int64RangeMatch
 from google.cloud.compute_v1.types.compute import Interconnect
 from google.cloud.compute_v1.types.compute import InterconnectAttachment
@@ -800,8 +801,8 @@ from google.cloud.compute_v1.types.compute import (
 )
 from google.cloud.compute_v1.types.compute import ListBackendBucketsRequest
 from google.cloud.compute_v1.types.compute import ListBackendServicesRequest
-from google.cloud.compute_v1.types.compute import ListDiskTypesRequest
 from google.cloud.compute_v1.types.compute import ListDisksRequest
+from google.cloud.compute_v1.types.compute import ListDiskTypesRequest
 from google.cloud.compute_v1.types.compute import ListErrorsInstanceGroupManagersRequest
 from google.cloud.compute_v1.types.compute import (
     ListErrorsRegionInstanceGroupManagersRequest,
@@ -820,12 +821,12 @@ from google.cloud.compute_v1.types.compute import ListHealthChecksRequest
 from google.cloud.compute_v1.types.compute import ListImagesRequest
 from google.cloud.compute_v1.types.compute import ListInstanceGroupManagersRequest
 from google.cloud.compute_v1.types.compute import ListInstanceGroupsRequest
-from google.cloud.compute_v1.types.compute import ListInstanceTemplatesRequest
 from google.cloud.compute_v1.types.compute import ListInstancesInstanceGroupsRequest
 from google.cloud.compute_v1.types.compute import (
     ListInstancesRegionInstanceGroupsRequest,
 )
 from google.cloud.compute_v1.types.compute import ListInstancesRequest
+from google.cloud.compute_v1.types.compute import ListInstanceTemplatesRequest
 from google.cloud.compute_v1.types.compute import ListInterconnectAttachmentsRequest
 from google.cloud.compute_v1.types.compute import ListInterconnectLocationsRequest
 from google.cloud.compute_v1.types.compute import ListInterconnectsRequest
@@ -846,9 +847,9 @@ from google.cloud.compute_v1.types.compute import (
 )
 from google.cloud.compute_v1.types.compute import ListNetworksRequest
 from google.cloud.compute_v1.types.compute import ListNodeGroupsRequest
+from google.cloud.compute_v1.types.compute import ListNodesNodeGroupsRequest
 from google.cloud.compute_v1.types.compute import ListNodeTemplatesRequest
 from google.cloud.compute_v1.types.compute import ListNodeTypesRequest
-from google.cloud.compute_v1.types.compute import ListNodesNodeGroupsRequest
 from google.cloud.compute_v1.types.compute import ListPacketMirroringsRequest
 from google.cloud.compute_v1.types.compute import ListPeeringRoutesNetworksRequest
 from google.cloud.compute_v1.types.compute import (
@@ -864,8 +865,8 @@ from google.cloud.compute_v1.types.compute import ListReferrersInstancesRequest
 from google.cloud.compute_v1.types.compute import ListRegionAutoscalersRequest
 from google.cloud.compute_v1.types.compute import ListRegionBackendServicesRequest
 from google.cloud.compute_v1.types.compute import ListRegionCommitmentsRequest
-from google.cloud.compute_v1.types.compute import ListRegionDiskTypesRequest
 from google.cloud.compute_v1.types.compute import ListRegionDisksRequest
+from google.cloud.compute_v1.types.compute import ListRegionDiskTypesRequest
 from google.cloud.compute_v1.types.compute import ListRegionHealthCheckServicesRequest
 from google.cloud.compute_v1.types.compute import ListRegionHealthChecksRequest
 from google.cloud.compute_v1.types.compute import ListRegionInstanceGroupManagersRequest
@@ -873,11 +874,11 @@ from google.cloud.compute_v1.types.compute import ListRegionInstanceGroupsReques
 from google.cloud.compute_v1.types.compute import ListRegionNetworkEndpointGroupsRequest
 from google.cloud.compute_v1.types.compute import ListRegionNotificationEndpointsRequest
 from google.cloud.compute_v1.types.compute import ListRegionOperationsRequest
+from google.cloud.compute_v1.types.compute import ListRegionsRequest
 from google.cloud.compute_v1.types.compute import ListRegionSslCertificatesRequest
 from google.cloud.compute_v1.types.compute import ListRegionTargetHttpProxiesRequest
 from google.cloud.compute_v1.types.compute import ListRegionTargetHttpsProxiesRequest
 from google.cloud.compute_v1.types.compute import ListRegionUrlMapsRequest
-from google.cloud.compute_v1.types.compute import ListRegionsRequest
 from google.cloud.compute_v1.types.compute import ListReservationsRequest
 from google.cloud.compute_v1.types.compute import ListResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import ListRoutersRequest
@@ -1052,12 +1053,12 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import Reference
 from google.cloud.compute_v1.types.compute import Region
 from google.cloud.compute_v1.types.compute import RegionAutoscalerList
-from google.cloud.compute_v1.types.compute import RegionDiskTypeList
 from google.cloud.compute_v1.types.compute import RegionDisksAddResourcePoliciesRequest
 from google.cloud.compute_v1.types.compute import (
     RegionDisksRemoveResourcePoliciesRequest,
 )
 from google.cloud.compute_v1.types.compute import RegionDisksResizeRequest
+from google.cloud.compute_v1.types.compute import RegionDiskTypeList
 from google.cloud.compute_v1.types.compute import RegionInstanceGroupList
 from google.cloud.compute_v1.types.compute import (
     RegionInstanceGroupManagerDeleteInstanceConfigReq,
@@ -1065,9 +1066,6 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import RegionInstanceGroupManagerList
 from google.cloud.compute_v1.types.compute import (
     RegionInstanceGroupManagerPatchInstanceConfigReq,
-)
-from google.cloud.compute_v1.types.compute import (
-    RegionInstanceGroupManagerUpdateInstanceConfigReq,
 )
 from google.cloud.compute_v1.types.compute import (
     RegionInstanceGroupManagersAbandonInstancesRequest,
@@ -1099,6 +1097,9 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import (
     RegionInstanceGroupManagersSetTemplateRequest,
 )
+from google.cloud.compute_v1.types.compute import (
+    RegionInstanceGroupManagerUpdateInstanceConfigReq,
+)
 from google.cloud.compute_v1.types.compute import RegionInstanceGroupsListInstances
 from google.cloud.compute_v1.types.compute import (
     RegionInstanceGroupsListInstancesRequest,
@@ -1114,8 +1115,8 @@ from google.cloud.compute_v1.types.compute import (
 )
 from google.cloud.compute_v1.types.compute import RegionUrlMapsValidateRequest
 from google.cloud.compute_v1.types.compute import RemoveHealthCheckTargetPoolRequest
-from google.cloud.compute_v1.types.compute import RemoveInstanceTargetPoolRequest
 from google.cloud.compute_v1.types.compute import RemoveInstancesInstanceGroupRequest
+from google.cloud.compute_v1.types.compute import RemoveInstanceTargetPoolRequest
 from google.cloud.compute_v1.types.compute import RemovePeeringNetworkRequest
 from google.cloud.compute_v1.types.compute import RemoveResourcePoliciesDiskRequest
 from google.cloud.compute_v1.types.compute import RemoveResourcePoliciesInstanceRequest
@@ -1171,14 +1172,13 @@ from google.cloud.compute_v1.types.compute import RouterList
 from google.cloud.compute_v1.types.compute import RouterNat
 from google.cloud.compute_v1.types.compute import RouterNatLogConfig
 from google.cloud.compute_v1.types.compute import RouterNatSubnetworkToNat
+from google.cloud.compute_v1.types.compute import RoutersPreviewResponse
+from google.cloud.compute_v1.types.compute import RoutersScopedList
 from google.cloud.compute_v1.types.compute import RouterStatus
 from google.cloud.compute_v1.types.compute import RouterStatusBgpPeerStatus
 from google.cloud.compute_v1.types.compute import RouterStatusNatStatus
 from google.cloud.compute_v1.types.compute import RouterStatusResponse
-from google.cloud.compute_v1.types.compute import RoutersPreviewResponse
-from google.cloud.compute_v1.types.compute import RoutersScopedList
 from google.cloud.compute_v1.types.compute import Rule
-from google.cloud.compute_v1.types.compute import SSLHealthCheck
 from google.cloud.compute_v1.types.compute import Scheduling
 from google.cloud.compute_v1.types.compute import SchedulingNodeAffinity
 from google.cloud.compute_v1.types.compute import ScratchDisks
@@ -1296,6 +1296,7 @@ from google.cloud.compute_v1.types.compute import (
     SslCertificateSelfManagedSslCertificate,
 )
 from google.cloud.compute_v1.types.compute import SslCertificatesScopedList
+from google.cloud.compute_v1.types.compute import SSLHealthCheck
 from google.cloud.compute_v1.types.compute import SslPoliciesList
 from google.cloud.compute_v1.types.compute import (
     SslPoliciesListAvailableFeaturesResponse,
@@ -1319,7 +1320,6 @@ from google.cloud.compute_v1.types.compute import (
     SubnetworksSetPrivateIpGoogleAccessRequest,
 )
 from google.cloud.compute_v1.types.compute import SwitchToCustomModeNetworkRequest
-from google.cloud.compute_v1.types.compute import TCPHealthCheck
 from google.cloud.compute_v1.types.compute import Tags
 from google.cloud.compute_v1.types.compute import TargetGrpcProxy
 from google.cloud.compute_v1.types.compute import TargetGrpcProxyList
@@ -1370,6 +1370,7 @@ from google.cloud.compute_v1.types.compute import TargetVpnGateway
 from google.cloud.compute_v1.types.compute import TargetVpnGatewayAggregatedList
 from google.cloud.compute_v1.types.compute import TargetVpnGatewayList
 from google.cloud.compute_v1.types.compute import TargetVpnGatewaysScopedList
+from google.cloud.compute_v1.types.compute import TCPHealthCheck
 from google.cloud.compute_v1.types.compute import TestFailure
 from google.cloud.compute_v1.types.compute import TestIamPermissionsDiskRequest
 from google.cloud.compute_v1.types.compute import (
@@ -1428,16 +1429,16 @@ from google.cloud.compute_v1.types.compute import UpdateUrlMapRequest
 from google.cloud.compute_v1.types.compute import UrlMap
 from google.cloud.compute_v1.types.compute import UrlMapList
 from google.cloud.compute_v1.types.compute import UrlMapReference
-from google.cloud.compute_v1.types.compute import UrlMapTest
-from google.cloud.compute_v1.types.compute import UrlMapValidationResult
 from google.cloud.compute_v1.types.compute import UrlMapsAggregatedList
 from google.cloud.compute_v1.types.compute import UrlMapsScopedList
 from google.cloud.compute_v1.types.compute import UrlMapsValidateRequest
 from google.cloud.compute_v1.types.compute import UrlMapsValidateResponse
+from google.cloud.compute_v1.types.compute import UrlMapTest
+from google.cloud.compute_v1.types.compute import UrlMapValidationResult
 from google.cloud.compute_v1.types.compute import UrlRewrite
 from google.cloud.compute_v1.types.compute import UsableSubnetwork
-from google.cloud.compute_v1.types.compute import UsableSubnetworkSecondaryRange
 from google.cloud.compute_v1.types.compute import UsableSubnetworksAggregatedList
+from google.cloud.compute_v1.types.compute import UsableSubnetworkSecondaryRange
 from google.cloud.compute_v1.types.compute import UsageExportLocation
 from google.cloud.compute_v1.types.compute import ValidateRegionUrlMapRequest
 from google.cloud.compute_v1.types.compute import ValidateUrlMapRequest
@@ -1449,6 +1450,8 @@ from google.cloud.compute_v1.types.compute import VmEndpointNatMappingsList
 from google.cloud.compute_v1.types.compute import VpnGateway
 from google.cloud.compute_v1.types.compute import VpnGatewayAggregatedList
 from google.cloud.compute_v1.types.compute import VpnGatewayList
+from google.cloud.compute_v1.types.compute import VpnGatewaysGetStatusResponse
+from google.cloud.compute_v1.types.compute import VpnGatewaysScopedList
 from google.cloud.compute_v1.types.compute import VpnGatewayStatus
 from google.cloud.compute_v1.types.compute import (
     VpnGatewayStatusHighAvailabilityRequirementState,
@@ -1456,8 +1459,6 @@ from google.cloud.compute_v1.types.compute import (
 from google.cloud.compute_v1.types.compute import VpnGatewayStatusTunnel
 from google.cloud.compute_v1.types.compute import VpnGatewayStatusVpnConnection
 from google.cloud.compute_v1.types.compute import VpnGatewayVpnGatewayInterface
-from google.cloud.compute_v1.types.compute import VpnGatewaysGetStatusResponse
-from google.cloud.compute_v1.types.compute import VpnGatewaysScopedList
 from google.cloud.compute_v1.types.compute import VpnTunnel
 from google.cloud.compute_v1.types.compute import VpnTunnelAggregatedList
 from google.cloud.compute_v1.types.compute import VpnTunnelList
@@ -1478,39 +1479,110 @@ from google.cloud.compute_v1.types.compute import ZoneSetLabelsRequest
 from google.cloud.compute_v1.types.compute import ZoneSetPolicyRequest
 
 __all__ = (
+    "AcceleratorTypesClient",
+    "AddressesClient",
+    "AutoscalersClient",
+    "BackendBucketsClient",
+    "BackendServicesClient",
+    "DisksClient",
+    "DiskTypesClient",
+    "ExternalVpnGatewaysClient",
+    "FirewallsClient",
+    "ForwardingRulesClient",
+    "GlobalAddressesClient",
+    "GlobalForwardingRulesClient",
+    "GlobalNetworkEndpointGroupsClient",
+    "GlobalOperationsClient",
+    "GlobalOrganizationOperationsClient",
+    "HealthChecksClient",
+    "ImagesClient",
+    "InstanceGroupManagersClient",
+    "InstanceGroupsClient",
+    "InstancesClient",
+    "InstanceTemplatesClient",
+    "InterconnectAttachmentsClient",
+    "InterconnectLocationsClient",
+    "InterconnectsClient",
+    "LicenseCodesClient",
+    "LicensesClient",
+    "MachineTypesClient",
+    "NetworkEndpointGroupsClient",
+    "NetworksClient",
+    "NodeGroupsClient",
+    "NodeTemplatesClient",
+    "NodeTypesClient",
+    "PacketMirroringsClient",
+    "ProjectsClient",
+    "RegionAutoscalersClient",
+    "RegionBackendServicesClient",
+    "RegionCommitmentsClient",
+    "RegionDisksClient",
+    "RegionDiskTypesClient",
+    "RegionHealthChecksClient",
+    "RegionHealthCheckServicesClient",
+    "RegionInstanceGroupManagersClient",
+    "RegionInstanceGroupsClient",
+    "RegionNetworkEndpointGroupsClient",
+    "RegionNotificationEndpointsClient",
+    "RegionOperationsClient",
+    "RegionsClient",
+    "RegionSslCertificatesClient",
+    "RegionTargetHttpProxiesClient",
+    "RegionTargetHttpsProxiesClient",
+    "RegionUrlMapsClient",
+    "ReservationsClient",
+    "ResourcePoliciesClient",
+    "RoutersClient",
+    "RoutesClient",
+    "SecurityPoliciesClient",
+    "SnapshotsClient",
+    "SslCertificatesClient",
+    "SslPoliciesClient",
+    "SubnetworksClient",
+    "TargetGrpcProxiesClient",
+    "TargetHttpProxiesClient",
+    "TargetHttpsProxiesClient",
+    "TargetInstancesClient",
+    "TargetPoolsClient",
+    "TargetSslProxiesClient",
+    "TargetTcpProxiesClient",
+    "TargetVpnGatewaysClient",
+    "UrlMapsClient",
+    "VpnGatewaysClient",
+    "VpnTunnelsClient",
+    "ZoneOperationsClient",
+    "ZonesClient",
     "AbandonInstancesInstanceGroupManagerRequest",
     "AbandonInstancesRegionInstanceGroupManagerRequest",
     "AcceleratorConfig",
+    "Accelerators",
     "AcceleratorType",
     "AcceleratorTypeAggregatedList",
     "AcceleratorTypeList",
-    "AcceleratorTypesClient",
     "AcceleratorTypesScopedList",
-    "Accelerators",
     "AccessConfig",
     "AddAccessConfigInstanceRequest",
     "AddHealthCheckTargetPoolRequest",
-    "AddInstanceTargetPoolRequest",
     "AddInstancesInstanceGroupRequest",
+    "AddInstanceTargetPoolRequest",
     "AddNodesNodeGroupRequest",
     "AddPeeringNetworkRequest",
     "AddResourcePoliciesDiskRequest",
     "AddResourcePoliciesInstanceRequest",
     "AddResourcePoliciesRegionDiskRequest",
+    "Address",
+    "AddressAggregatedList",
+    "AddressesScopedList",
+    "AddressList",
     "AddRuleSecurityPolicyRequest",
     "AddSignedUrlKeyBackendBucketRequest",
     "AddSignedUrlKeyBackendServiceRequest",
-    "Address",
-    "AddressAggregatedList",
-    "AddressList",
-    "AddressesClient",
-    "AddressesScopedList",
     "AggregatedListAcceleratorTypesRequest",
     "AggregatedListAddressesRequest",
     "AggregatedListAutoscalersRequest",
     "AggregatedListBackendServicesRequest",
-    "AggregatedListDiskTypesRequest",
     "AggregatedListDisksRequest",
+    "AggregatedListDiskTypesRequest",
     "AggregatedListForwardingRulesRequest",
     "AggregatedListGlobalOperationsRequest",
     "AggregatedListHealthChecksRequest",
@@ -1546,19 +1618,18 @@ __all__ = (
     "ApplyUpdatesToInstancesInstanceGroupManagerRequest",
     "ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest",
     "AttachDiskInstanceRequest",
-    "AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest",
-    "AttachNetworkEndpointsNetworkEndpointGroupRequest",
     "AttachedDisk",
     "AttachedDiskInitializeParams",
+    "AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest",
+    "AttachNetworkEndpointsNetworkEndpointGroupRequest",
     "AuditConfig",
     "AuditLogConfig",
     "AuthorizationLoggingOptions",
     "Autoscaler",
     "AutoscalerAggregatedList",
     "AutoscalerList",
-    "AutoscalerStatusDetails",
-    "AutoscalersClient",
     "AutoscalersScopedList",
+    "AutoscalerStatusDetails",
     "AutoscalingPolicy",
     "AutoscalingPolicyCpuUtilization",
     "AutoscalingPolicyCustomMetricUtilization",
@@ -1568,7 +1639,6 @@ __all__ = (
     "BackendBucket",
     "BackendBucketCdnPolicy",
     "BackendBucketList",
-    "BackendBucketsClient",
     "BackendService",
     "BackendServiceAggregatedList",
     "BackendServiceCdnPolicy",
@@ -1578,7 +1648,6 @@ __all__ = (
     "BackendServiceList",
     "BackendServiceLogConfig",
     "BackendServiceReference",
-    "BackendServicesClient",
     "BackendServicesScopedList",
     "Binding",
     "CacheInvalidationRule",
@@ -1622,17 +1691,17 @@ __all__ = (
     "DeleteInstanceGroupManagerRequest",
     "DeleteInstanceGroupRequest",
     "DeleteInstanceRequest",
-    "DeleteInstanceTemplateRequest",
     "DeleteInstancesInstanceGroupManagerRequest",
     "DeleteInstancesRegionInstanceGroupManagerRequest",
+    "DeleteInstanceTemplateRequest",
     "DeleteInterconnectAttachmentRequest",
     "DeleteInterconnectRequest",
     "DeleteLicenseRequest",
     "DeleteNetworkEndpointGroupRequest",
     "DeleteNetworkRequest",
     "DeleteNodeGroupRequest",
-    "DeleteNodeTemplateRequest",
     "DeleteNodesNodeGroupRequest",
+    "DeleteNodeTemplateRequest",
     "DeletePacketMirroringRequest",
     "DeletePerInstanceConfigsInstanceGroupManagerRequest",
     "DeletePerInstanceConfigsRegionInstanceGroupManagerRequest",
@@ -1687,16 +1756,14 @@ __all__ = (
     "DiskInstantiationConfig",
     "DiskList",
     "DiskMoveRequest",
-    "DiskType",
-    "DiskTypeAggregatedList",
-    "DiskTypeList",
-    "DiskTypesClient",
-    "DiskTypesScopedList",
     "DisksAddResourcePoliciesRequest",
-    "DisksClient",
     "DisksRemoveResourcePoliciesRequest",
     "DisksResizeRequest",
     "DisksScopedList",
+    "DiskType",
+    "DiskTypeAggregatedList",
+    "DiskTypeList",
+    "DiskTypesScopedList",
     "DisplayDevice",
     "DistributionPolicy",
     "DistributionPolicyZoneConfiguration",
@@ -1712,20 +1779,16 @@ __all__ = (
     "ExternalVpnGateway",
     "ExternalVpnGatewayInterface",
     "ExternalVpnGatewayList",
-    "ExternalVpnGatewaysClient",
     "FileContentBuffer",
     "Firewall",
     "FirewallList",
     "FirewallLogConfig",
-    "FirewallsClient",
     "FixedOrPercent",
     "ForwardingRule",
     "ForwardingRuleAggregatedList",
     "ForwardingRuleList",
     "ForwardingRuleReference",
-    "ForwardingRulesClient",
     "ForwardingRulesScopedList",
-    "GRPCHealthCheck",
     "GetAcceleratorTypeRequest",
     "GetAddressRequest",
     "GetAutoscalerRequest",
@@ -1826,50 +1889,44 @@ __all__ = (
     "GetXpnResourcesProjectsRequest",
     "GetZoneOperationRequest",
     "GetZoneRequest",
-    "GlobalAddressesClient",
-    "GlobalForwardingRulesClient",
     "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
-    "GlobalNetworkEndpointGroupsClient",
     "GlobalNetworkEndpointGroupsDetachEndpointsRequest",
-    "GlobalOperationsClient",
-    "GlobalOrganizationOperationsClient",
     "GlobalSetLabelsRequest",
     "GlobalSetPolicyRequest",
+    "GRPCHealthCheck",
     "GuestAttributes",
     "GuestAttributesEntry",
     "GuestAttributesValue",
     "GuestOsFeature",
-    "HTTP2HealthCheck",
-    "HTTPHealthCheck",
-    "HTTPSHealthCheck",
     "HealthCheck",
     "HealthCheckList",
     "HealthCheckLogConfig",
     "HealthCheckReference",
+    "HealthChecksAggregatedList",
     "HealthCheckService",
     "HealthCheckServiceReference",
     "HealthCheckServicesList",
-    "HealthChecksAggregatedList",
-    "HealthChecksClient",
     "HealthChecksScopedList",
     "HealthStatus",
     "HealthStatusForNetworkEndpoint",
     "HostRule",
+    "HTTP2HealthCheck",
     "HttpFaultAbort",
     "HttpFaultDelay",
     "HttpFaultInjection",
     "HttpHeaderAction",
     "HttpHeaderMatch",
     "HttpHeaderOption",
+    "HTTPHealthCheck",
     "HttpQueryParameterMatch",
     "HttpRedirectAction",
     "HttpRetryPolicy",
     "HttpRouteAction",
     "HttpRouteRule",
     "HttpRouteRuleMatch",
+    "HTTPSHealthCheck",
     "Image",
     "ImageList",
-    "ImagesClient",
     "InitialStateConfig",
     "InsertAddressRequest",
     "InsertAutoscalerRequest",
@@ -1938,15 +1995,8 @@ __all__ = (
     "InstanceGroupManagerAggregatedList",
     "InstanceGroupManagerAutoHealingPolicy",
     "InstanceGroupManagerList",
-    "InstanceGroupManagerStatus",
-    "InstanceGroupManagerStatusStateful",
-    "InstanceGroupManagerStatusStatefulPerInstanceConfigs",
-    "InstanceGroupManagerStatusVersionTarget",
-    "InstanceGroupManagerUpdatePolicy",
-    "InstanceGroupManagerVersion",
     "InstanceGroupManagersAbandonInstancesRequest",
     "InstanceGroupManagersApplyUpdatesRequest",
-    "InstanceGroupManagersClient",
     "InstanceGroupManagersCreateInstancesRequest",
     "InstanceGroupManagersDeleteInstancesRequest",
     "InstanceGroupManagersDeletePerInstanceConfigsReq",
@@ -1958,9 +2008,14 @@ __all__ = (
     "InstanceGroupManagersScopedList",
     "InstanceGroupManagersSetInstanceTemplateRequest",
     "InstanceGroupManagersSetTargetPoolsRequest",
+    "InstanceGroupManagerStatus",
+    "InstanceGroupManagerStatusStateful",
+    "InstanceGroupManagerStatusStatefulPerInstanceConfigs",
+    "InstanceGroupManagerStatusVersionTarget",
     "InstanceGroupManagersUpdatePerInstanceConfigsReq",
+    "InstanceGroupManagerUpdatePolicy",
+    "InstanceGroupManagerVersion",
     "InstanceGroupsAddInstancesRequest",
-    "InstanceGroupsClient",
     "InstanceGroupsListInstances",
     "InstanceGroupsListInstancesRequest",
     "InstanceGroupsRemoveInstancesRequest",
@@ -1974,12 +2029,7 @@ __all__ = (
     "InstanceMoveRequest",
     "InstanceProperties",
     "InstanceReference",
-    "InstanceTemplate",
-    "InstanceTemplateList",
-    "InstanceTemplatesClient",
-    "InstanceWithNamedPorts",
     "InstancesAddResourcePoliciesRequest",
-    "InstancesClient",
     "InstancesRemoveResourcePoliciesRequest",
     "InstancesScopedList",
     "InstancesSetLabelsRequest",
@@ -1988,6 +2038,9 @@ __all__ = (
     "InstancesSetMinCpuPlatformRequest",
     "InstancesSetServiceAccountRequest",
     "InstancesStartWithEncryptionKeyRequest",
+    "InstanceTemplate",
+    "InstanceTemplateList",
+    "InstanceWithNamedPorts",
     "Int64RangeMatch",
     "Interconnect",
     "InterconnectAttachment",
@@ -1995,7 +2048,6 @@ __all__ = (
     "InterconnectAttachmentList",
     "InterconnectAttachmentPartnerMetadata",
     "InterconnectAttachmentPrivateInfo",
-    "InterconnectAttachmentsClient",
     "InterconnectAttachmentsScopedList",
     "InterconnectCircuitInfo",
     "InterconnectDiagnostics",
@@ -2007,19 +2059,15 @@ __all__ = (
     "InterconnectLocation",
     "InterconnectLocationList",
     "InterconnectLocationRegionInfo",
-    "InterconnectLocationsClient",
     "InterconnectOutageNotification",
-    "InterconnectsClient",
     "InterconnectsGetDiagnosticsResponse",
     "InvalidateCacheUrlMapRequest",
     "Items",
     "License",
     "LicenseCode",
     "LicenseCodeLicenseAlias",
-    "LicenseCodesClient",
     "LicenseResourceCommitment",
     "LicenseResourceRequirements",
-    "LicensesClient",
     "LicensesListResponse",
     "ListAcceleratorTypesRequest",
     "ListAddressesRequest",
@@ -2027,8 +2075,8 @@ __all__ = (
     "ListAvailableFeaturesSslPoliciesRequest",
     "ListBackendBucketsRequest",
     "ListBackendServicesRequest",
-    "ListDiskTypesRequest",
     "ListDisksRequest",
+    "ListDiskTypesRequest",
     "ListErrorsInstanceGroupManagersRequest",
     "ListErrorsRegionInstanceGroupManagersRequest",
     "ListExternalVpnGatewaysRequest",
@@ -2043,10 +2091,10 @@ __all__ = (
     "ListImagesRequest",
     "ListInstanceGroupManagersRequest",
     "ListInstanceGroupsRequest",
-    "ListInstanceTemplatesRequest",
     "ListInstancesInstanceGroupsRequest",
     "ListInstancesRegionInstanceGroupsRequest",
     "ListInstancesRequest",
+    "ListInstanceTemplatesRequest",
     "ListInterconnectAttachmentsRequest",
     "ListInterconnectLocationsRequest",
     "ListInterconnectsRequest",
@@ -2059,9 +2107,9 @@ __all__ = (
     "ListNetworkEndpointsNetworkEndpointGroupsRequest",
     "ListNetworksRequest",
     "ListNodeGroupsRequest",
+    "ListNodesNodeGroupsRequest",
     "ListNodeTemplatesRequest",
     "ListNodeTypesRequest",
-    "ListNodesNodeGroupsRequest",
     "ListPacketMirroringsRequest",
     "ListPeeringRoutesNetworksRequest",
     "ListPerInstanceConfigsInstanceGroupManagersRequest",
@@ -2071,8 +2119,8 @@ __all__ = (
     "ListRegionAutoscalersRequest",
     "ListRegionBackendServicesRequest",
     "ListRegionCommitmentsRequest",
-    "ListRegionDiskTypesRequest",
     "ListRegionDisksRequest",
+    "ListRegionDiskTypesRequest",
     "ListRegionHealthCheckServicesRequest",
     "ListRegionHealthChecksRequest",
     "ListRegionInstanceGroupManagersRequest",
@@ -2080,11 +2128,11 @@ __all__ = (
     "ListRegionNetworkEndpointGroupsRequest",
     "ListRegionNotificationEndpointsRequest",
     "ListRegionOperationsRequest",
+    "ListRegionsRequest",
     "ListRegionSslCertificatesRequest",
     "ListRegionTargetHttpProxiesRequest",
     "ListRegionTargetHttpsProxiesRequest",
     "ListRegionUrlMapsRequest",
-    "ListRegionsRequest",
     "ListReservationsRequest",
     "ListResourcePoliciesRequest",
     "ListRoutersRequest",
@@ -2118,7 +2166,6 @@ __all__ = (
     "MachineType",
     "MachineTypeAggregatedList",
     "MachineTypeList",
-    "MachineTypesClient",
     "MachineTypesScopedList",
     "ManagedInstance",
     "ManagedInstanceInstanceHealth",
@@ -2139,7 +2186,6 @@ __all__ = (
     "NetworkEndpointGroupCloudRun",
     "NetworkEndpointGroupList",
     "NetworkEndpointGroupsAttachEndpointsRequest",
-    "NetworkEndpointGroupsClient",
     "NetworkEndpointGroupsDetachEndpointsRequest",
     "NetworkEndpointGroupsListEndpointsRequest",
     "NetworkEndpointGroupsListNetworkEndpoints",
@@ -2150,7 +2196,6 @@ __all__ = (
     "NetworkPeering",
     "NetworkRoutingConfig",
     "NetworksAddPeeringRequest",
-    "NetworksClient",
     "NetworksRemovePeeringRequest",
     "NetworksUpdatePeeringRequest",
     "NodeGroup",
@@ -2160,7 +2205,6 @@ __all__ = (
     "NodeGroupMaintenanceWindow",
     "NodeGroupNode",
     "NodeGroupsAddNodesRequest",
-    "NodeGroupsClient",
     "NodeGroupsDeleteNodesRequest",
     "NodeGroupsListNodes",
     "NodeGroupsScopedList",
@@ -2169,12 +2213,10 @@ __all__ = (
     "NodeTemplateAggregatedList",
     "NodeTemplateList",
     "NodeTemplateNodeTypeFlexibility",
-    "NodeTemplatesClient",
     "NodeTemplatesScopedList",
     "NodeType",
     "NodeTypeAggregatedList",
     "NodeTypeList",
-    "NodeTypesClient",
     "NodeTypesScopedList",
     "NotificationEndpoint",
     "NotificationEndpointGrpcSettings",
@@ -2193,7 +2235,6 @@ __all__ = (
     "PacketMirroringMirroredResourceInfoInstanceInfo",
     "PacketMirroringMirroredResourceInfoSubnetInfo",
     "PacketMirroringNetworkInfo",
-    "PacketMirroringsClient",
     "PacketMirroringsScopedList",
     "PatchAutoscalerRequest",
     "PatchBackendBucketRequest",
@@ -2234,7 +2275,6 @@ __all__ = (
     "PreservedStatePreservedDisk",
     "PreviewRouterRequest",
     "Project",
-    "ProjectsClient",
     "ProjectsDisableXpnResourceRequest",
     "ProjectsEnableXpnResourceRequest",
     "ProjectsGetXpnResources",
@@ -2247,25 +2287,16 @@ __all__ = (
     "Reference",
     "Region",
     "RegionAutoscalerList",
-    "RegionAutoscalersClient",
-    "RegionBackendServicesClient",
-    "RegionCommitmentsClient",
-    "RegionDiskTypeList",
-    "RegionDiskTypesClient",
     "RegionDisksAddResourcePoliciesRequest",
-    "RegionDisksClient",
     "RegionDisksRemoveResourcePoliciesRequest",
     "RegionDisksResizeRequest",
-    "RegionHealthCheckServicesClient",
-    "RegionHealthChecksClient",
+    "RegionDiskTypeList",
     "RegionInstanceGroupList",
     "RegionInstanceGroupManagerDeleteInstanceConfigReq",
     "RegionInstanceGroupManagerList",
     "RegionInstanceGroupManagerPatchInstanceConfigReq",
-    "RegionInstanceGroupManagerUpdateInstanceConfigReq",
     "RegionInstanceGroupManagersAbandonInstancesRequest",
     "RegionInstanceGroupManagersApplyUpdatesRequest",
-    "RegionInstanceGroupManagersClient",
     "RegionInstanceGroupManagersCreateInstancesRequest",
     "RegionInstanceGroupManagersDeleteInstancesRequest",
     "RegionInstanceGroupManagersListErrorsResponse",
@@ -2274,26 +2305,18 @@ __all__ = (
     "RegionInstanceGroupManagersRecreateRequest",
     "RegionInstanceGroupManagersSetTargetPoolsRequest",
     "RegionInstanceGroupManagersSetTemplateRequest",
-    "RegionInstanceGroupsClient",
+    "RegionInstanceGroupManagerUpdateInstanceConfigReq",
     "RegionInstanceGroupsListInstances",
     "RegionInstanceGroupsListInstancesRequest",
     "RegionInstanceGroupsSetNamedPortsRequest",
     "RegionList",
-    "RegionNetworkEndpointGroupsClient",
-    "RegionNotificationEndpointsClient",
-    "RegionOperationsClient",
     "RegionSetLabelsRequest",
     "RegionSetPolicyRequest",
-    "RegionSslCertificatesClient",
-    "RegionTargetHttpProxiesClient",
-    "RegionTargetHttpsProxiesClient",
     "RegionTargetHttpsProxiesSetSslCertificatesRequest",
-    "RegionUrlMapsClient",
     "RegionUrlMapsValidateRequest",
-    "RegionsClient",
     "RemoveHealthCheckTargetPoolRequest",
-    "RemoveInstanceTargetPoolRequest",
     "RemoveInstancesInstanceGroupRequest",
+    "RemoveInstanceTargetPoolRequest",
     "RemovePeeringNetworkRequest",
     "RemoveResourcePoliciesDiskRequest",
     "RemoveResourcePoliciesInstanceRequest",
@@ -2304,7 +2327,6 @@ __all__ = (
     "ReservationAffinity",
     "ReservationAggregatedList",
     "ReservationList",
-    "ReservationsClient",
     "ReservationsResizeRequest",
     "ReservationsScopedList",
     "ResetInstanceRequest",
@@ -2315,7 +2337,6 @@ __all__ = (
     "ResizeReservationRequest",
     "ResourceCommitment",
     "ResourceGroupReference",
-    "ResourcePoliciesClient",
     "ResourcePoliciesScopedList",
     "ResourcePolicy",
     "ResourcePolicyAggregatedList",
@@ -2341,21 +2362,17 @@ __all__ = (
     "RouterNat",
     "RouterNatLogConfig",
     "RouterNatSubnetworkToNat",
+    "RoutersPreviewResponse",
+    "RoutersScopedList",
     "RouterStatus",
     "RouterStatusBgpPeerStatus",
     "RouterStatusNatStatus",
     "RouterStatusResponse",
-    "RoutersClient",
-    "RoutersPreviewResponse",
-    "RoutersScopedList",
-    "RoutesClient",
     "Rule",
-    "SSLHealthCheck",
     "Scheduling",
     "SchedulingNodeAffinity",
     "ScratchDisks",
     "Screenshot",
-    "SecurityPoliciesClient",
     "SecurityPoliciesListPreconfiguredExpressionSetsResponse",
     "SecurityPoliciesWafConfig",
     "SecurityPolicy",
@@ -2434,16 +2451,14 @@ __all__ = (
     "SimulateMaintenanceEventInstanceRequest",
     "Snapshot",
     "SnapshotList",
-    "SnapshotsClient",
     "SourceInstanceParams",
     "SslCertificate",
     "SslCertificateAggregatedList",
     "SslCertificateList",
     "SslCertificateManagedSslCertificate",
     "SslCertificateSelfManagedSslCertificate",
-    "SslCertificatesClient",
     "SslCertificatesScopedList",
-    "SslPoliciesClient",
+    "SSLHealthCheck",
     "SslPoliciesList",
     "SslPoliciesListAvailableFeaturesResponse",
     "SslPolicy",
@@ -2459,22 +2474,17 @@ __all__ = (
     "SubnetworkList",
     "SubnetworkLogConfig",
     "SubnetworkSecondaryRange",
-    "SubnetworksClient",
     "SubnetworksExpandIpCidrRangeRequest",
     "SubnetworksScopedList",
     "SubnetworksSetPrivateIpGoogleAccessRequest",
     "SwitchToCustomModeNetworkRequest",
-    "TCPHealthCheck",
     "Tags",
-    "TargetGrpcProxiesClient",
     "TargetGrpcProxy",
     "TargetGrpcProxyList",
-    "TargetHttpProxiesClient",
     "TargetHttpProxiesScopedList",
     "TargetHttpProxy",
     "TargetHttpProxyAggregatedList",
     "TargetHttpProxyList",
-    "TargetHttpsProxiesClient",
     "TargetHttpsProxiesScopedList",
     "TargetHttpsProxiesSetQuicOverrideRequest",
     "TargetHttpsProxiesSetSslCertificatesRequest",
@@ -2484,7 +2494,6 @@ __all__ = (
     "TargetInstance",
     "TargetInstanceAggregatedList",
     "TargetInstanceList",
-    "TargetInstancesClient",
     "TargetInstancesScopedList",
     "TargetPool",
     "TargetPoolAggregatedList",
@@ -2492,18 +2501,15 @@ __all__ = (
     "TargetPoolList",
     "TargetPoolsAddHealthCheckRequest",
     "TargetPoolsAddInstanceRequest",
-    "TargetPoolsClient",
     "TargetPoolsRemoveHealthCheckRequest",
     "TargetPoolsRemoveInstanceRequest",
     "TargetPoolsScopedList",
     "TargetReference",
-    "TargetSslProxiesClient",
     "TargetSslProxiesSetBackendServiceRequest",
     "TargetSslProxiesSetProxyHeaderRequest",
     "TargetSslProxiesSetSslCertificatesRequest",
     "TargetSslProxy",
     "TargetSslProxyList",
-    "TargetTcpProxiesClient",
     "TargetTcpProxiesSetBackendServiceRequest",
     "TargetTcpProxiesSetProxyHeaderRequest",
     "TargetTcpProxy",
@@ -2511,8 +2517,8 @@ __all__ = (
     "TargetVpnGateway",
     "TargetVpnGatewayAggregatedList",
     "TargetVpnGatewayList",
-    "TargetVpnGatewaysClient",
     "TargetVpnGatewaysScopedList",
+    "TCPHealthCheck",
     "TestFailure",
     "TestIamPermissionsDiskRequest",
     "TestIamPermissionsExternalVpnGatewayRequest",
@@ -2555,17 +2561,16 @@ __all__ = (
     "UrlMap",
     "UrlMapList",
     "UrlMapReference",
-    "UrlMapTest",
-    "UrlMapValidationResult",
     "UrlMapsAggregatedList",
-    "UrlMapsClient",
     "UrlMapsScopedList",
     "UrlMapsValidateRequest",
     "UrlMapsValidateResponse",
+    "UrlMapTest",
+    "UrlMapValidationResult",
     "UrlRewrite",
     "UsableSubnetwork",
-    "UsableSubnetworkSecondaryRange",
     "UsableSubnetworksAggregatedList",
+    "UsableSubnetworkSecondaryRange",
     "UsageExportLocation",
     "ValidateRegionUrlMapRequest",
     "ValidateUrlMapRequest",
@@ -2575,18 +2580,16 @@ __all__ = (
     "VpnGateway",
     "VpnGatewayAggregatedList",
     "VpnGatewayList",
+    "VpnGatewaysGetStatusResponse",
+    "VpnGatewaysScopedList",
     "VpnGatewayStatus",
     "VpnGatewayStatusHighAvailabilityRequirementState",
     "VpnGatewayStatusTunnel",
     "VpnGatewayStatusVpnConnection",
     "VpnGatewayVpnGatewayInterface",
-    "VpnGatewaysClient",
-    "VpnGatewaysGetStatusResponse",
-    "VpnGatewaysScopedList",
     "VpnTunnel",
     "VpnTunnelAggregatedList",
     "VpnTunnelList",
-    "VpnTunnelsClient",
     "VpnTunnelsScopedList",
     "WafExpressionSet",
     "WafExpressionSetExpression",
@@ -2600,8 +2603,6 @@ __all__ = (
     "XpnResourceId",
     "Zone",
     "ZoneList",
-    "ZoneOperationsClient",
     "ZoneSetLabelsRequest",
     "ZoneSetPolicyRequest",
-    "ZonesClient",
 )

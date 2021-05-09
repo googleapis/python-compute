@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, ProjectsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -333,8 +333,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DisableXpnHostProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.DisableXpnHost. See the method description for
                 details.
             project (str):
@@ -423,8 +422,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DisableXpnResourceProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.DisableXpnResource. See the method description
                 for details.
             project (str):
@@ -522,8 +520,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.EnableXpnHostProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.EnableXpnHost. See the method description for
                 details.
             project (str):
@@ -613,8 +610,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.EnableXpnResourceProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.EnableXpnResource. See the method description
                 for details.
             project (str):
@@ -712,8 +708,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetProjectRequest):
-                The request object.
-                A request message for Projects.Get.
+                The request object. A request message for Projects.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -781,8 +776,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetXpnHostProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.GetXpnHost. See the method description for
                 details.
             project (str):
@@ -851,8 +845,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetXpnResourcesProjectsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.GetXpnResources. See the method description for
                 details.
             project (str):
@@ -925,8 +918,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListXpnHostsProjectsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.ListXpnHosts. See the method description for
                 details.
             project (str):
@@ -1007,8 +999,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.MoveDiskProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.MoveDisk. See the method description for
                 details.
             project (str):
@@ -1104,8 +1095,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.MoveInstanceProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.MoveInstance. See the method description for
                 details.
             project (str):
@@ -1202,8 +1192,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetCommonInstanceMetadataProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.SetCommonInstanceMetadata. See the method
                 description for details.
             project (str):
@@ -1303,8 +1292,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetDefaultNetworkTierProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.SetDefaultNetworkTier. See the method
                 description for details.
             project (str):
@@ -1406,8 +1394,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetUsageExportBucketProjectRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Projects.SetUsageExportBucket. See the method
                 description for details.
             project (str):

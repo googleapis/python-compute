@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, InstanceGroupsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -341,8 +341,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddInstancesInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.AddInstances. See the method description
                 for details.
             project (str):
@@ -464,8 +463,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInstanceGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.AggregatedList. See the method
                 description for details.
             project (str):
@@ -541,8 +539,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.Delete. See the method description for
                 details.
             project (str):
@@ -653,8 +650,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.Get. See the method description for
                 details.
             project (str):
@@ -757,8 +753,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.Insert. See the method description for
                 details.
             project (str):
@@ -866,8 +861,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstanceGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.List. See the method description for
                 details.
             project (str):
@@ -952,8 +946,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstancesInstanceGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.ListInstances. See the method description
                 for details.
             project (str):
@@ -1067,8 +1060,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveInstancesInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.RemoveInstances. See the method
                 description for details.
             project (str):
@@ -1193,8 +1185,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetNamedPortsInstanceGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroups.SetNamedPorts. See the method description
                 for details.
             project (str):

@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class ReservationsRestTransport(ReservationsTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class ReservationsRestTransport(ReservationsTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def aggregated_list(self,
-            request: compute.AggregatedListReservationsRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.ReservationAggregatedList:
-        r"""Call the
-        aggregated list
-          method over HTTP.
+    def aggregated_list(
+        self,
+        request: compute.AggregatedListReservationsRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.ReservationAggregatedList:
+        r"""Call the aggregated list method over HTTP.
 
         Args:
             request (~.compute.AggregatedListReservationsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.AggregatedList. See the
                 method description for details.
 
@@ -115,53 +117,54 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/aggregated/reservations'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/aggregated/reservations".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'includeAllScopes': request.include_all_scopes,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.AggregatedListReservationsRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.AggregatedListReservationsRequest.include_all_scopes in request:
+            query_params["includeAllScopes"] = request.include_all_scopes
+        if compute.AggregatedListReservationsRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.AggregatedListReservationsRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.AggregatedListReservationsRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.AggregatedListReservationsRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.ReservationAggregatedList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def delete(self,
-            request: compute.DeleteReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.Delete. See the method
                 description for details.
 
@@ -203,7 +206,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -212,41 +215,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteReservationRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Reservation:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Reservation:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.Get. See the method
                 description for details.
 
@@ -265,7 +263,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -274,40 +272,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.Reservation.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def get_iam_policy(self,
-            request: compute.GetIamPolicyReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Policy:
-        r"""Call the
-        get iam policy
-          method over HTTP.
+    def get_iam_policy(
+        self,
+        request: compute.GetIamPolicyReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Policy:
+        r"""Call the get iam policy method over HTTP.
 
         Args:
             request (~.compute.GetIamPolicyReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.GetIamPolicy. See the
                 method description for details.
 
@@ -371,7 +365,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/getIamPolicy'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/getIamPolicy".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -380,41 +374,41 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'optionsRequestedPolicyVersion': request.options_requested_policy_version,
-        }
+        query_params = {}
+        if (
+            compute.GetIamPolicyReservationRequest.options_requested_policy_version
+            in request
+        ):
+            query_params[
+                "optionsRequestedPolicyVersion"
+            ] = request.options_requested_policy_version
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Policy.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def insert(self,
-            request: compute.InsertReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.Insert. See the method
                 description for details.
 
@@ -458,56 +452,47 @@ response = self._session.get(
         body = compute.Reservation.to_json(
             request.reservation_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations'.format(
-            host=self._host,
-            project=request.project,
-            zone=request.zone,
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations".format(
+            host=self._host, project=request.project, zone=request.zone,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertReservationRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListReservationsRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.ReservationList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListReservationsRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.ReservationList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListReservationsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.List. See the method
                 description for details.
 
@@ -521,53 +506,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations'.format(
-            host=self._host,
-            project=request.project,
-            zone=request.zone,
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations".format(
+            host=self._host, project=request.project, zone=request.zone,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListReservationsRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListReservationsRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListReservationsRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListReservationsRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListReservationsRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.ReservationList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def resize(self,
-            request: compute.ResizeReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        resize
-          method over HTTP.
+    def resize(
+        self,
+        request: compute.ResizeReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the resize method over HTTP.
 
         Args:
             request (~.compute.ResizeReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.Resize. See the method
                 description for details.
 
@@ -611,12 +595,12 @@ response = self._session.get(
         body = compute.ReservationsResizeRequest.to_json(
             request.reservations_resize_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}/resize'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}/resize".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -625,43 +609,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.ResizeReservationRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_iam_policy(self,
-            request: compute.SetIamPolicyReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Policy:
-        r"""Call the
-        set iam policy
-          method over HTTP.
+    def set_iam_policy(
+        self,
+        request: compute.SetIamPolicyReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Policy:
+        r"""Call the set iam policy method over HTTP.
 
         Args:
             request (~.compute.SetIamPolicyReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.SetIamPolicy. See the
                 method description for details.
 
@@ -727,12 +704,12 @@ response = self._session.post(
         body = compute.ZoneSetPolicyRequest.to_json(
             request.zone_set_policy_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/setIamPolicy'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/setIamPolicy".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -741,42 +718,34 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Policy.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def test_iam_permissions(self,
-            request: compute.TestIamPermissionsReservationRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TestPermissionsResponse:
-        r"""Call the
-        test iam permissions
-          method over HTTP.
+    def test_iam_permissions(
+        self,
+        request: compute.TestIamPermissionsReservationRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TestPermissionsResponse:
+        r"""Call the test iam permissions method over HTTP.
 
         Args:
             request (~.compute.TestIamPermissionsReservationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Reservations.TestIamPermissions. See the
                 method description for details.
 
@@ -792,12 +761,12 @@ response = self._session.post(
         body = compute.TestPermissionsRequest.to_json(
             request.test_permissions_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/testIamPermissions'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/testIamPermissions".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -806,31 +775,24 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'ReservationsRestTransport',
-)
+__all__ = ("ReservationsRestTransport",)

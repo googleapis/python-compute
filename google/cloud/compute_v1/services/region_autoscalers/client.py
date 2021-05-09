@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RegionAutoscalersTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -339,8 +339,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionAutoscalerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.Delete. See the method description for
                 details.
             project (str):
@@ -445,8 +444,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionAutoscalerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.Get. See the method description for
                 details.
             project (str):
@@ -547,8 +545,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionAutoscalerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.Insert. See the method description for
                 details.
             project (str):
@@ -653,8 +650,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionAutoscalersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.List. See the method description for
                 details.
             project (str):
@@ -740,8 +736,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRegionAutoscalerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.Patch. See the method description for
                 details.
             project (str):
@@ -847,8 +842,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateRegionAutoscalerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionAutoscalers.Update. See the method description for
                 details.
             project (str):

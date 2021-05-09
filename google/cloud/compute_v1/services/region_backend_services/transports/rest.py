@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class RegionBackendServicesRestTransport(RegionBackendServicesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class RegionBackendServicesRestTransport(RegionBackendServicesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def delete(self,
-            request: compute.DeleteRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.Delete. See the
                 method description for details.
 
@@ -143,7 +145,7 @@ class RegionBackendServicesRestTransport(RegionBackendServicesTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -152,41 +154,36 @@ class RegionBackendServicesRestTransport(RegionBackendServicesTransport):
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteRegionBackendServiceRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.BackendService:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.BackendService:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.Get. See the
                 method description for details.
 
@@ -222,7 +219,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -231,40 +228,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.BackendService.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def get_health(self,
-            request: compute.GetHealthRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.BackendServiceGroupHealth:
-        r"""Call the
-        get health
-          method over HTTP.
+    def get_health(
+        self,
+        request: compute.GetHealthRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.BackendServiceGroupHealth:
+        r"""Call the get health method over HTTP.
 
         Args:
             request (~.compute.GetHealthRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.GetHealth. See the
                 method description for details.
 
@@ -280,12 +273,12 @@ response = self._session.get(
         body = compute.ResourceGroupReference.to_json(
             request.resource_group_reference_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}/getHealth'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}/getHealth".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -294,42 +287,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.BackendServiceGroupHealth.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.Insert. See the
                 method description for details.
 
@@ -373,56 +360,47 @@ response = self._session.post(
         body = compute.BackendService.to_json(
             request.backend_service_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertRegionBackendServiceRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListRegionBackendServicesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.BackendServiceList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListRegionBackendServicesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.BackendServiceList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListRegionBackendServicesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.List. See the
                 method description for details.
 
@@ -438,53 +416,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListRegionBackendServicesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListRegionBackendServicesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListRegionBackendServicesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListRegionBackendServicesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListRegionBackendServicesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.BackendServiceList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def patch(self,
-            request: compute.PatchRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        patch
-          method over HTTP.
+    def patch(
+        self,
+        request: compute.PatchRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch method over HTTP.
 
         Args:
             request (~.compute.PatchRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.Patch. See the
                 method description for details.
 
@@ -528,12 +505,12 @@ response = self._session.get(
         body = compute.BackendService.to_json(
             request.backend_service_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -542,43 +519,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.PatchRegionBackendServiceRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.patch(
-            url
-,
-            data=body,
-        )
+        response = self._session.patch(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def update(self,
-            request: compute.UpdateRegionBackendServiceRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        update
-          method over HTTP.
+    def update(
+        self,
+        request: compute.UpdateRegionBackendServiceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the update method over HTTP.
 
         Args:
             request (~.compute.UpdateRegionBackendServiceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionBackendServices.Update. See the
                 method description for details.
 
@@ -622,12 +592,12 @@ response = self._session.patch(
         body = compute.BackendService.to_json(
             request.backend_service_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/backendServices/{backend_service}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -636,32 +606,24 @@ response = self._session.patch(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.UpdateRegionBackendServiceRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.put(
-            url
-,
-            data=body,
-        )
+        response = self._session.put(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
 
-__all__ = (
-    'RegionBackendServicesRestTransport',
-)
+__all__ = ("RegionBackendServicesRestTransport",)

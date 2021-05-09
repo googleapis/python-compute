@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, InterconnectAttachmentsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInterconnectAttachmentsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.AggregatedList. See the method
                 description for details.
             project (str):
@@ -414,8 +413,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInterconnectAttachmentRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.Delete. See the method
                 description for details.
             project (str):
@@ -520,8 +518,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.GetInterconnectAttachmentRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.Get. See the method description
                 for details.
             project (str):
@@ -610,8 +607,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.InsertInterconnectAttachmentRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.Insert. See the method
                 description for details.
             project (str):
@@ -716,8 +712,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.ListInterconnectAttachmentsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.List. See the method description
                 for details.
             project (str):
@@ -803,8 +798,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         Args:
             request (google.cloud.compute_v1.types.PatchInterconnectAttachmentRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InterconnectAttachments.Patch. See the method
                 description for details.
             project (str):

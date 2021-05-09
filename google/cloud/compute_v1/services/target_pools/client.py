@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetPoolsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddHealthCheckTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.AddHealthCheck. See the method description
                 for details.
             project (str):
@@ -461,8 +460,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddInstanceTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.AddInstance. See the method description for
                 details.
             project (str):
@@ -578,8 +576,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetPoolsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.AggregatedList. See the method description
                 for details.
             project (str):
@@ -652,8 +649,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.Delete. See the method description for
                 details.
             project (str):
@@ -761,8 +757,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -854,8 +849,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetHealthTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.GetHealth. See the method description for
                 details.
             project (str):
@@ -947,8 +941,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.Insert. See the method description for
                 details.
             project (str):
@@ -1053,8 +1046,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetPoolsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.List. See the method description for
                 details.
             project (str):
@@ -1139,8 +1131,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveHealthCheckTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.RemoveHealthCheck. See the method
                 description for details.
             project (str):
@@ -1262,8 +1253,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveInstanceTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.RemoveInstance. See the method description
                 for details.
             project (str):
@@ -1387,8 +1377,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetBackupTargetPoolRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetPools.SetBackup. See the method description for
                 details.
             project (str):

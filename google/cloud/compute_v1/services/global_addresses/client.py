@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GlobalAddressesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalAddressRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalAddresses.Delete. See the method description for
                 details.
             project (str):
@@ -435,8 +434,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalAddressRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalAddresses.Get. See the method description for
                 details.
             project (str):
@@ -538,8 +536,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertGlobalAddressRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalAddresses.Insert. See the method description for
                 details.
             project (str):
@@ -633,8 +630,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalAddressesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalAddresses.List. See the method description for
                 details.
             project (str):

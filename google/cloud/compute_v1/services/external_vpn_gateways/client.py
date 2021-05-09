@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, ExternalVpnGatewaysTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteExternalVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.Delete. See the method description
                 for details.
             project (str):
@@ -438,8 +437,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetExternalVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.Get. See the method description for
                 details.
             project (str):
@@ -528,8 +526,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertExternalVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.Insert. See the method description
                 for details.
             project (str):
@@ -624,8 +621,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListExternalVpnGatewaysRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.List. See the method description for
                 details.
             project (str):
@@ -702,8 +698,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsExternalVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.SetLabels. See the method
                 description for details.
             project (str):
@@ -813,8 +808,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsExternalVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 ExternalVpnGateways.TestIamPermissions. See the method
                 description for details.
             project (str):

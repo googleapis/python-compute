@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class RoutesRestTransport(RoutesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class RoutesRestTransport(RoutesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def delete(self,
-            request: compute.DeleteRouteRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteRouteRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteRouteRequest):
-                The request object.
-                A request message for Routes.Delete.
+                The request object. A request message for Routes.Delete.
                 See the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -142,49 +144,42 @@ class RoutesRestTransport(RoutesTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/routes/{route}'.format(
-            host=self._host,
-            project=request.project,
-            route=request.route,
+        url = "https://{host}/compute/v1/projects/{project}/global/routes/{route}".format(
+            host=self._host, project=request.project, route=request.route,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteRouteRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetRouteRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Route:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetRouteRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Route:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetRouteRequest):
-                The request object.
-                A request message for Routes.Get. See
+                The request object. A request message for Routes.Get. See
                 the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -204,48 +199,40 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/routes/{route}'.format(
-            host=self._host,
-            project=request.project,
-            route=request.route,
+        url = "https://{host}/compute/v1/projects/{project}/global/routes/{route}".format(
+            host=self._host, project=request.project, route=request.route,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Route.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Route.from_json(response.content, ignore_unknown_fields=True)
 
-    def insert(self,
-            request: compute.InsertRouteRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertRouteRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertRouteRequest):
-                The request object.
-                A request message for Routes.Insert.
+                The request object. A request message for Routes.Insert.
                 See the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -288,55 +275,47 @@ response = self._session.get(
         body = compute.Route.to_json(
             request.route_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/routes'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/routes".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertRouteRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListRoutesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.RouteList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListRoutesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.RouteList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListRoutesRequest):
-                The request object.
-                A request message for Routes.List.
+                The request object. A request message for Routes.List.
                 See the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -349,41 +328,38 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/routes'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/routes".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListRoutesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListRoutesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListRoutesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListRoutesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListRoutesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.RouteList.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.RouteList.from_json(response.content, ignore_unknown_fields=True)
 
 
-__all__ = (
-    'RoutesRestTransport',
-)
+__all__ = ("RoutesRestTransport",)

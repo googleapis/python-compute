@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class RegionHealthChecksRestTransport(RegionHealthChecksTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class RegionHealthChecksRestTransport(RegionHealthChecksTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def delete(self,
-            request: compute.DeleteRegionHealthCheckRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteRegionHealthCheckRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteRegionHealthCheckRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.Delete. See the
                 method description for details.
 
@@ -143,7 +145,7 @@ class RegionHealthChecksRestTransport(RegionHealthChecksTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -152,41 +154,36 @@ class RegionHealthChecksRestTransport(RegionHealthChecksTransport):
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteRegionHealthCheckRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetRegionHealthCheckRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.HealthCheck:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetRegionHealthCheckRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.HealthCheck:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetRegionHealthCheckRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.Get. See the method
                 description for details.
 
@@ -228,7 +225,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -237,40 +234,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.HealthCheck.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertRegionHealthCheckRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertRegionHealthCheckRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertRegionHealthCheckRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.Insert. See the
                 method description for details.
 
@@ -314,56 +307,47 @@ response = self._session.get(
         body = compute.HealthCheck.to_json(
             request.health_check_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertRegionHealthCheckRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListRegionHealthChecksRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.HealthCheckList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListRegionHealthChecksRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.HealthCheckList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListRegionHealthChecksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.List. See the method
                 description for details.
 
@@ -379,53 +363,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListRegionHealthChecksRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListRegionHealthChecksRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListRegionHealthChecksRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListRegionHealthChecksRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListRegionHealthChecksRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.HealthCheckList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def patch(self,
-            request: compute.PatchRegionHealthCheckRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        patch
-          method over HTTP.
+    def patch(
+        self,
+        request: compute.PatchRegionHealthCheckRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch method over HTTP.
 
         Args:
             request (~.compute.PatchRegionHealthCheckRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.Patch. See the method
                 description for details.
 
@@ -469,12 +452,12 @@ response = self._session.get(
         body = compute.HealthCheck.to_json(
             request.health_check_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -483,43 +466,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.PatchRegionHealthCheckRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.patch(
-            url
-,
-            data=body,
-        )
+        response = self._session.patch(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def update(self,
-            request: compute.UpdateRegionHealthCheckRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        update
-          method over HTTP.
+    def update(
+        self,
+        request: compute.UpdateRegionHealthCheckRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the update method over HTTP.
 
         Args:
             request (~.compute.UpdateRegionHealthCheckRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionHealthChecks.Update. See the
                 method description for details.
 
@@ -563,12 +539,12 @@ response = self._session.patch(
         body = compute.HealthCheck.to_json(
             request.health_check_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/healthChecks/{health_check}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -577,32 +553,24 @@ response = self._session.patch(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.UpdateRegionHealthCheckRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.put(
-            url
-,
-            data=body,
-        )
+        response = self._session.put(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
 
-__all__ = (
-    'RegionHealthChecksRestTransport',
-)
+__all__ = ("RegionHealthChecksRestTransport",)

@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -216,7 +216,7 @@ class GlobalOrganizationOperationsClient(
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GlobalOrganizationOperationsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -339,8 +339,7 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalOrganizationOperationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalOrganizationOperations.Delete. See the method
                 description for details.
             operation (str):
@@ -408,8 +407,7 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalOrganizationOperationRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalOrganizationOperations.Get. See the method
                 description for details.
             operation (str):
@@ -498,8 +496,7 @@ class GlobalOrganizationOperationsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalOrganizationOperationsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalOrganizationOperations.List. See the method
                 description for details.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,

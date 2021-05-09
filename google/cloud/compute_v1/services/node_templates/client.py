@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, NodeTemplatesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -333,8 +333,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListNodeTemplatesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.AggregatedList. See the method description
                 for details.
             project (str):
@@ -407,8 +406,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.Delete. See the method description for
                 details.
             project (str):
@@ -516,8 +514,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.Get. See the method description for
                 details.
             project (str):
@@ -604,8 +601,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.GetIamPolicy. See the method description
                 for details.
             project (str):
@@ -739,8 +735,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.Insert. See the method description for
                 details.
             project (str):
@@ -845,8 +840,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodeTemplatesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.List. See the method description for
                 details.
             project (str):
@@ -931,8 +925,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.SetIamPolicy. See the method description
                 for details.
             project (str):
@@ -1078,8 +1071,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsNodeTemplateRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeTemplates.TestIamPermissions. See the method
                 description for details.
             project (str):

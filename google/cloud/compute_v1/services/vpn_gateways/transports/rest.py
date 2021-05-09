@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class VpnGatewaysRestTransport(VpnGatewaysTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class VpnGatewaysRestTransport(VpnGatewaysTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def aggregated_list(self,
-            request: compute.AggregatedListVpnGatewaysRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.VpnGatewayAggregatedList:
-        r"""Call the
-        aggregated list
-          method over HTTP.
+    def aggregated_list(
+        self,
+        request: compute.AggregatedListVpnGatewaysRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.VpnGatewayAggregatedList:
+        r"""Call the aggregated list method over HTTP.
 
         Args:
             request (~.compute.AggregatedListVpnGatewaysRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.AggregatedList. See the
                 method description for details.
 
@@ -115,53 +117,54 @@ class VpnGatewaysRestTransport(VpnGatewaysTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/aggregated/vpnGateways'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/aggregated/vpnGateways".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'includeAllScopes': request.include_all_scopes,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.AggregatedListVpnGatewaysRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.AggregatedListVpnGatewaysRequest.include_all_scopes in request:
+            query_params["includeAllScopes"] = request.include_all_scopes
+        if compute.AggregatedListVpnGatewaysRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.AggregatedListVpnGatewaysRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.AggregatedListVpnGatewaysRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.AggregatedListVpnGatewaysRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.VpnGatewayAggregatedList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def delete(self,
-            request: compute.DeleteVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.Delete. See the method
                 description for details.
 
@@ -203,7 +206,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -212,41 +215,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteVpnGatewayRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.VpnGateway:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.VpnGateway:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.Get. See the method
                 description for details.
 
@@ -269,7 +267,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -278,40 +276,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.VpnGateway.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def get_status(self,
-            request: compute.GetStatusVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.VpnGatewaysGetStatusResponse:
-        r"""Call the
-        get status
-          method over HTTP.
+    def get_status(
+        self,
+        request: compute.GetStatusVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.VpnGatewaysGetStatusResponse:
+        r"""Call the get status method over HTTP.
 
         Args:
             request (~.compute.GetStatusVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.GetStatus. See the method
                 description for details.
 
@@ -325,7 +319,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}/getStatus'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{vpn_gateway}/getStatus".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -334,40 +328,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.VpnGatewaysGetStatusResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.Insert. See the method
                 description for details.
 
@@ -411,56 +401,47 @@ response = self._session.get(
         body = compute.VpnGateway.to_json(
             request.vpn_gateway_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertVpnGatewayRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListVpnGatewaysRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.VpnGatewayList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListVpnGatewaysRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.VpnGatewayList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListVpnGatewaysRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.List. See the method
                 description for details.
 
@@ -476,53 +457,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListVpnGatewaysRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListVpnGatewaysRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListVpnGatewaysRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListVpnGatewaysRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListVpnGatewaysRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.VpnGatewayList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def set_labels(self,
-            request: compute.SetLabelsVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set labels
-          method over HTTP.
+    def set_labels(
+        self,
+        request: compute.SetLabelsVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set labels method over HTTP.
 
         Args:
             request (~.compute.SetLabelsVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.SetLabels. See the method
                 description for details.
 
@@ -566,12 +546,12 @@ response = self._session.get(
         body = compute.RegionSetLabelsRequest.to_json(
             request.region_set_labels_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{resource}/setLabels'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{resource}/setLabels".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -580,43 +560,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetLabelsVpnGatewayRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def test_iam_permissions(self,
-            request: compute.TestIamPermissionsVpnGatewayRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TestPermissionsResponse:
-        r"""Call the
-        test iam permissions
-          method over HTTP.
+    def test_iam_permissions(
+        self,
+        request: compute.TestIamPermissionsVpnGatewayRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TestPermissionsResponse:
+        r"""Call the test iam permissions method over HTTP.
 
         Args:
             request (~.compute.TestIamPermissionsVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 VpnGateways.TestIamPermissions. See the
                 method description for details.
 
@@ -632,12 +605,12 @@ response = self._session.post(
         body = compute.TestPermissionsRequest.to_json(
             request.test_permissions_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -646,31 +619,24 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'VpnGatewaysRestTransport',
-)
+__all__ = ("VpnGatewaysRestTransport",)

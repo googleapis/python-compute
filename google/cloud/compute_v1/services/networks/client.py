@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, NetworksTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -335,8 +335,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddPeeringNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.AddPeering. See the method description for
                 details.
             project (str):
@@ -444,8 +443,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.Delete. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -540,8 +538,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNetworkRequest):
-                The request object.
-                A request message for Networks.Get.
+                The request object. A request message for Networks.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -617,8 +614,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.Insert. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -712,8 +708,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNetworksRequest):
-                The request object.
-                A request message for Networks.List.
+                The request object. A request message for Networks.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -786,8 +781,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPeeringRoutesNetworksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.ListPeeringRoutes. See the method description
                 for details.
             project (str):
@@ -869,8 +863,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.Patch. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -972,8 +965,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemovePeeringNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.RemovePeering. See the method description for
                 details.
             project (str):
@@ -1082,8 +1074,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SwitchToCustomModeNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.SwitchToCustomMode. See the method description
                 for details.
             project (str):
@@ -1182,8 +1173,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdatePeeringNetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Networks.UpdatePeering. See the method description for
                 details.
             project (str):

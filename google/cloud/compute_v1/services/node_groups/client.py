@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, NodeGroupsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddNodesNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.AddNodes. See the method description for
                 details.
             project (str):
@@ -453,8 +452,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListNodeGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.AggregatedList. See the method description
                 for details.
             project (str):
@@ -527,8 +525,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.Delete. See the method description for
                 details.
             project (str):
@@ -636,8 +633,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNodesNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.DeleteNodes. See the method description for
                 details.
             project (str):
@@ -758,8 +754,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -849,8 +844,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -985,8 +979,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.Insert. See the method description for
                 details.
             project (str):
@@ -1103,8 +1096,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodeGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.List. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1186,8 +1178,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNodesNodeGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.ListNodes. See the method description for
                 details.
             project (str):
@@ -1279,8 +1270,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.Patch. See the method description for
                 details.
             project (str):
@@ -1396,8 +1386,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1542,8 +1531,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetNodeTemplateNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.SetNodeTemplate. See the method description
                 for details.
             project (str):
@@ -1663,8 +1651,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsNodeGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NodeGroups.TestIamPermissions. See the method
                 description for details.
             project (str):

@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class PacketMirroringsRestTransport(PacketMirroringsTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class PacketMirroringsRestTransport(PacketMirroringsTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def aggregated_list(self,
-            request: compute.AggregatedListPacketMirroringsRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.PacketMirroringAggregatedList:
-        r"""Call the
-        aggregated list
-          method over HTTP.
+    def aggregated_list(
+        self,
+        request: compute.AggregatedListPacketMirroringsRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.PacketMirroringAggregatedList:
+        r"""Call the aggregated list method over HTTP.
 
         Args:
             request (~.compute.AggregatedListPacketMirroringsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.AggregatedList. See the
                 method description for details.
 
@@ -115,53 +117,57 @@ class PacketMirroringsRestTransport(PacketMirroringsTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/aggregated/packetMirrorings'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/aggregated/packetMirrorings".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'includeAllScopes': request.include_all_scopes,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.AggregatedListPacketMirroringsRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.AggregatedListPacketMirroringsRequest.include_all_scopes in request:
+            query_params["includeAllScopes"] = request.include_all_scopes
+        if compute.AggregatedListPacketMirroringsRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.AggregatedListPacketMirroringsRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.AggregatedListPacketMirroringsRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if (
+            compute.AggregatedListPacketMirroringsRequest.return_partial_success
+            in request
+        ):
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.PacketMirroringAggregatedList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def delete(self,
-            request: compute.DeletePacketMirroringRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeletePacketMirroringRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeletePacketMirroringRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.Delete. See the method
                 description for details.
 
@@ -203,7 +209,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -212,41 +218,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeletePacketMirroringRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetPacketMirroringRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.PacketMirroring:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetPacketMirroringRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.PacketMirroring:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetPacketMirroringRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.Get. See the method
                 description for details.
 
@@ -269,7 +270,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -278,40 +279,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.PacketMirroring.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertPacketMirroringRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertPacketMirroringRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertPacketMirroringRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.Insert. See the method
                 description for details.
 
@@ -355,56 +352,47 @@ response = self._session.get(
         body = compute.PacketMirroring.to_json(
             request.packet_mirroring_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertPacketMirroringRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListPacketMirroringsRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.PacketMirroringList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListPacketMirroringsRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.PacketMirroringList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListPacketMirroringsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.List. See the method
                 description for details.
 
@@ -420,53 +408,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListPacketMirroringsRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListPacketMirroringsRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListPacketMirroringsRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListPacketMirroringsRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListPacketMirroringsRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.PacketMirroringList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def patch(self,
-            request: compute.PatchPacketMirroringRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        patch
-          method over HTTP.
+    def patch(
+        self,
+        request: compute.PatchPacketMirroringRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch method over HTTP.
 
         Args:
             request (~.compute.PatchPacketMirroringRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.Patch. See the method
                 description for details.
 
@@ -510,12 +497,12 @@ response = self._session.get(
         body = compute.PacketMirroring.to_json(
             request.packet_mirroring_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{packet_mirroring}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -524,43 +511,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.PatchPacketMirroringRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.patch(
-            url
-,
-            data=body,
-        )
+        response = self._session.patch(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def test_iam_permissions(self,
-            request: compute.TestIamPermissionsPacketMirroringRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TestPermissionsResponse:
-        r"""Call the
-        test iam permissions
-          method over HTTP.
+    def test_iam_permissions(
+        self,
+        request: compute.TestIamPermissionsPacketMirroringRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TestPermissionsResponse:
+        r"""Call the test iam permissions method over HTTP.
 
         Args:
             request (~.compute.TestIamPermissionsPacketMirroringRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 PacketMirrorings.TestIamPermissions. See
                 the method description for details.
 
@@ -576,12 +556,12 @@ response = self._session.patch(
         body = compute.TestPermissionsRequest.to_json(
             request.test_permissions_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{resource}/testIamPermissions'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/packetMirrorings/{resource}/testIamPermissions".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -590,31 +570,24 @@ response = self._session.patch(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'PacketMirroringsRestTransport',
-)
+__all__ = ("PacketMirroringsRestTransport",)

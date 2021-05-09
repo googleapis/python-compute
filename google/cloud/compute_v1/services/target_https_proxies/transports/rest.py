@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class TargetHttpsProxiesRestTransport(TargetHttpsProxiesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class TargetHttpsProxiesRestTransport(TargetHttpsProxiesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def aggregated_list(self,
-            request: compute.AggregatedListTargetHttpsProxiesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TargetHttpsProxyAggregatedList:
-        r"""Call the
-        aggregated list
-          method over HTTP.
+    def aggregated_list(
+        self,
+        request: compute.AggregatedListTargetHttpsProxiesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TargetHttpsProxyAggregatedList:
+        r"""Call the aggregated list method over HTTP.
 
         Args:
             request (~.compute.AggregatedListTargetHttpsProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.AggregatedList. See
                 the method description for details.
 
@@ -115,53 +117,60 @@ class TargetHttpsProxiesRestTransport(TargetHttpsProxiesTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/aggregated/targetHttpsProxies'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/aggregated/targetHttpsProxies".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'includeAllScopes': request.include_all_scopes,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.AggregatedListTargetHttpsProxiesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if (
+            compute.AggregatedListTargetHttpsProxiesRequest.include_all_scopes
+            in request
+        ):
+            query_params["includeAllScopes"] = request.include_all_scopes
+        if compute.AggregatedListTargetHttpsProxiesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.AggregatedListTargetHttpsProxiesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.AggregatedListTargetHttpsProxiesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if (
+            compute.AggregatedListTargetHttpsProxiesRequest.return_partial_success
+            in request
+        ):
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TargetHttpsProxyAggregatedList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def delete(self,
-            request: compute.DeleteTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Delete. See the
                 method description for details.
 
@@ -203,7 +212,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -211,41 +220,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TargetHttpsProxy:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TargetHttpsProxy:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Get. See the method
                 description for details.
 
@@ -281,7 +285,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -289,40 +293,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TargetHttpsProxy.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Insert. See the
                 method description for details.
 
@@ -366,55 +366,47 @@ response = self._session.get(
         body = compute.TargetHttpsProxy.to_json(
             request.target_https_proxy_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListTargetHttpsProxiesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TargetHttpsProxyList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListTargetHttpsProxiesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TargetHttpsProxyList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListTargetHttpsProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.List. See the method
                 description for details.
 
@@ -430,52 +422,52 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListTargetHttpsProxiesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListTargetHttpsProxiesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListTargetHttpsProxiesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListTargetHttpsProxiesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListTargetHttpsProxiesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TargetHttpsProxyList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def set_quic_override(self,
-            request: compute.SetQuicOverrideTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set quic override
-          method over HTTP.
+    def set_quic_override(
+        self,
+        request: compute.SetQuicOverrideTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set quic override method over HTTP.
 
         Args:
             request (~.compute.SetQuicOverrideTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetQuicOverride. See
                 the method description for details.
 
@@ -519,12 +511,12 @@ response = self._session.get(
         body = compute.TargetHttpsProxiesSetQuicOverrideRequest.to_json(
             request.target_https_proxies_set_quic_override_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setQuicOverride'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setQuicOverride".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -532,43 +524,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetQuicOverrideTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_ssl_certificates(self,
-            request: compute.SetSslCertificatesTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set ssl certificates
-          method over HTTP.
+    def set_ssl_certificates(
+        self,
+        request: compute.SetSslCertificatesTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set ssl certificates method over HTTP.
 
         Args:
             request (~.compute.SetSslCertificatesTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetSslCertificates.
                 See the method description for details.
 
@@ -612,12 +597,12 @@ response = self._session.post(
         body = compute.TargetHttpsProxiesSetSslCertificatesRequest.to_json(
             request.target_https_proxies_set_ssl_certificates_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setSslCertificates'.format(
+        url = "https://{host}/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setSslCertificates".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -625,43 +610,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetSslCertificatesTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_ssl_policy(self,
-            request: compute.SetSslPolicyTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set ssl policy
-          method over HTTP.
+    def set_ssl_policy(
+        self,
+        request: compute.SetSslPolicyTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set ssl policy method over HTTP.
 
         Args:
             request (~.compute.SetSslPolicyTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetSslPolicy. See the
                 method description for details.
 
@@ -705,12 +683,12 @@ response = self._session.post(
         body = compute.SslPolicyReference.to_json(
             request.ssl_policy_reference_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setSslPolicy'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setSslPolicy".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -718,43 +696,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetSslPolicyTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_url_map(self,
-            request: compute.SetUrlMapTargetHttpsProxyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set url map
-          method over HTTP.
+    def set_url_map(
+        self,
+        request: compute.SetUrlMapTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set url map method over HTTP.
 
         Args:
             request (~.compute.SetUrlMapTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetUrlMap. See the
                 method description for details.
 
@@ -798,12 +769,12 @@ response = self._session.post(
         body = compute.UrlMapReference.to_json(
             request.url_map_reference_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setUrlMap'.format(
+        url = "https://{host}/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setUrlMap".format(
             host=self._host,
             project=request.project,
             target_https_proxy=request.target_https_proxy,
@@ -811,32 +782,24 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetUrlMapTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
 
-__all__ = (
-    'TargetHttpsProxiesRestTransport',
-)
+__all__ = ("TargetHttpsProxiesRestTransport",)

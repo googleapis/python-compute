@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetSslProxiesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.Delete. See the method description for
                 details.
             project (str):
@@ -436,8 +435,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.Get. See the method description for
                 details.
             project (str):
@@ -518,8 +516,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.Insert. See the method description for
                 details.
             project (str):
@@ -614,8 +611,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetSslProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.List. See the method description for
                 details.
             project (str):
@@ -690,8 +686,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetBackendServiceTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.SetBackendService. See the method
                 description for details.
             project (str):
@@ -805,8 +800,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetProxyHeaderTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.SetProxyHeader. See the method
                 description for details.
             project (str):
@@ -919,8 +913,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslCertificatesTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.SetSslCertificates. See the method
                 description for details.
             project (str):
@@ -1038,8 +1031,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslPolicyTargetSslProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetSslProxies.SetSslPolicy. See the method
                 description for details.
             project (str):

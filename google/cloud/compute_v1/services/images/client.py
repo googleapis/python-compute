@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, ImagesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -334,8 +334,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteImageRequest):
-                The request object.
-                A request message for Images.Delete.
+                The request object. A request message for Images.Delete.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -432,8 +431,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeprecateImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.Deprecate. See the method description for
                 details.
             project (str):
@@ -536,8 +534,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetImageRequest):
-                The request object.
-                A request message for Images.Get.
+                The request object. A request message for Images.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -612,8 +609,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetFromFamilyImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.GetFromFamily. See the method description for
                 details.
             project (str):
@@ -691,8 +687,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -816,8 +811,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertImageRequest):
-                The request object.
-                A request message for Images.Insert.
+                The request object. A request message for Images.Insert.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -917,8 +911,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListImagesRequest):
-                The request object.
-                A request message for Images.List.
+                The request object. A request message for Images.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -993,8 +986,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchImageRequest):
-                The request object.
-                A request message for Images.Patch.
+                The request object. A request message for Images.Patch.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1097,8 +1089,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1234,8 +1225,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.SetLabels. See the method description for
                 details.
             project (str):
@@ -1345,8 +1335,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsImageRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Images.TestIamPermissions. See the method description
                 for details.
             project (str):

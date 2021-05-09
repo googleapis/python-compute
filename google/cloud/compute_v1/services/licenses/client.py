@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, LicensesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteLicenseRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Licenses.Delete. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -435,8 +434,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetLicenseRequest):
-                The request object.
-                A request message for Licenses.Get.
+                The request object. A request message for Licenses.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -517,8 +515,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyLicenseRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Licenses.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -644,8 +641,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertLicenseRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Licenses.Insert. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -747,8 +743,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListLicensesRequest):
-                The request object.
-                A request message for Licenses.List.
+                The request object. A request message for Licenses.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -823,8 +818,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyLicenseRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Licenses.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -962,8 +956,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsLicenseRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Licenses.TestIamPermissions. See the method description
                 for details.
             project (str):

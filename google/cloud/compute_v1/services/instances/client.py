@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, InstancesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddAccessConfigInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.AddAccessConfig. See the method description
                 for details.
             project (str):
@@ -465,8 +464,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddResourcePoliciesInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.AddResourcePolicies. See the method
                 description for details.
             project (str):
@@ -581,8 +579,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInstancesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.AggregatedList. See the method description for
                 details.
             project (str):
@@ -660,8 +657,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AttachDiskInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.AttachDisk. See the method description for
                 details.
             project (str):
@@ -774,8 +770,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Delete. See the method description for
                 details.
             project (str):
@@ -885,8 +880,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteAccessConfigInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.DeleteAccessConfig. See the method description
                 for details.
             project (str):
@@ -1010,8 +1004,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DetachDiskInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.DetachDisk. See the method description for
                 details.
             project (str):
@@ -1128,8 +1121,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInstanceRequest):
-                The request object.
-                A request message for Instances.Get.
+                The request object. A request message for Instances.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1216,8 +1208,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetGuestAttributesInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.GetGuestAttributes. See the method description
                 for details.
             project (str):
@@ -1300,8 +1291,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1434,8 +1424,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetScreenshotInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.GetScreenshot. See the method description for
                 details.
             project (str):
@@ -1518,8 +1507,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSerialPortOutputInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.GetSerialPortOutput. See the method
                 description for details.
             project (str):
@@ -1601,8 +1589,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetShieldedInstanceIdentityInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.GetShieldedInstanceIdentity. See the method
                 description for details.
             project (str):
@@ -1687,8 +1674,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Insert. See the method description for
                 details.
             project (str):
@@ -1793,8 +1779,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstancesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.List. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1881,8 +1866,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListReferrersInstancesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.ListReferrers. See the method description for
                 details.
             project (str):
@@ -1978,8 +1962,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveResourcePoliciesInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.RemoveResourcePolicies. See the method
                 description for details.
             project (str):
@@ -2102,8 +2085,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResetInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Reset. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -2209,8 +2191,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetDeletionProtectionInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetDeletionProtection. See the method
                 description for details.
             project (str):
@@ -2320,8 +2301,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetDiskAutoDeleteInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetDiskAutoDelete. See the method description
                 for details.
             project (str):
@@ -2448,8 +2428,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -2595,8 +2574,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetLabels. See the method description for
                 details.
             project (str):
@@ -2716,8 +2694,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetMachineResourcesInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetMachineResources. See the method
                 description for details.
             project (str):
@@ -2837,8 +2814,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetMachineTypeInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetMachineType. See the method description for
                 details.
             project (str):
@@ -2958,8 +2934,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetMetadataInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetMetadata. See the method description for
                 details.
             project (str):
@@ -3077,8 +3052,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetMinCpuPlatformInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetMinCpuPlatform. See the method description
                 for details.
             project (str):
@@ -3200,8 +3174,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSchedulingInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetScheduling. See the method description for
                 details.
             project (str):
@@ -3316,8 +3289,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetServiceAccountInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetServiceAccount. See the method description
                 for details.
             project (str):
@@ -3439,8 +3411,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetShieldedInstanceIntegrityPolicyInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetShieldedInstanceIntegrityPolicy. See the
                 method description for details.
             project (str):
@@ -3564,8 +3535,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetTagsInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SetTags. See the method description for
                 details.
             project (str):
@@ -3679,8 +3649,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SimulateMaintenanceEventInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.SimulateMaintenanceEvent. See the method
                 description for details.
             project (str):
@@ -3791,8 +3760,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.StartInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Start. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -3901,8 +3869,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.StartWithEncryptionKeyInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.StartWithEncryptionKey. See the method
                 description for details.
             project (str):
@@ -4033,8 +4000,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.StopInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Stop. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -4142,8 +4108,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.TestIamPermissions. See the method description
                 for details.
             project (str):
@@ -4240,8 +4205,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.Update. See the method description for
                 details.
             project (str):
@@ -4360,8 +4324,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateAccessConfigInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.UpdateAccessConfig. See the method description
                 for details.
             project (str):
@@ -4488,8 +4451,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateDisplayDeviceInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.UpdateDisplayDevice. See the method
                 description for details.
             project (str):
@@ -4606,8 +4568,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateNetworkInterfaceInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.UpdateNetworkInterface. See the method
                 description for details.
             project (str):
@@ -4734,8 +4695,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdateShieldedInstanceConfigInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Instances.UpdateShieldedInstanceConfig. See the method
                 description for details.
             project (str):

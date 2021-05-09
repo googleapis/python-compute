@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def add_rule(self,
-            request: compute.AddRuleSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        add rule
-          method over HTTP.
+    def add_rule(
+        self,
+        request: compute.AddRuleSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the add rule method over HTTP.
 
         Args:
             request (~.compute.AddRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.AddRule. See the method
                 description for details.
 
@@ -145,12 +147,12 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         body = compute.SecurityPolicyRule.to_json(
             request.security_policy_rule_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/addRule'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/addRule".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -158,42 +160,34 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def delete(self,
-            request: compute.DeleteSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Delete. See the method
                 description for details.
 
@@ -235,7 +229,7 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -243,41 +237,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteSecurityPolicyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.SecurityPolicy:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.SecurityPolicy:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Get. See the method
                 description for details.
 
@@ -298,7 +287,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -306,40 +295,36 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.SecurityPolicy.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def get_rule(self,
-            request: compute.GetRuleSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.SecurityPolicyRule:
-        r"""Call the
-        get rule
-          method over HTTP.
+    def get_rule(
+        self,
+        request: compute.GetRuleSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.SecurityPolicyRule:
+        r"""Call the get rule method over HTTP.
 
         Args:
             request (~.compute.GetRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.GetRule. See the method
                 description for details.
 
@@ -357,7 +342,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/getRule'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/getRule".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -365,41 +350,38 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'priority': request.priority,
-        }
+        query_params = {}
+        if compute.GetRuleSecurityPolicyRequest.priority in request:
+            query_params["priority"] = request.priority
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.SecurityPolicyRule.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def insert(self,
-            request: compute.InsertSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Insert. See the method
                 description for details.
 
@@ -443,55 +425,47 @@ response = self._session.get(
         body = compute.SecurityPolicy.to_json(
             request.security_policy_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.InsertSecurityPolicyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListSecurityPoliciesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.SecurityPolicyList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListSecurityPoliciesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.SecurityPolicyList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListSecurityPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.List. See the method
                 description for details.
 
@@ -505,53 +479,53 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListSecurityPoliciesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListSecurityPoliciesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListSecurityPoliciesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListSecurityPoliciesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListSecurityPoliciesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.SecurityPolicyList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def list_preconfigured_expression_sets(self,
-            request: compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse:
-        r"""Call the
-        list preconfigured
-        expression sets
-          method over HTTP.
+    def list_preconfigured_expression_sets(
+        self,
+        request: compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse:
+        r"""Call the list preconfigured
+        expression sets method over HTTP.
 
         Args:
             request (~.compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.ListPreconfiguredExpressionSets.
                 See the method description for details.
 
@@ -565,52 +539,67 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/listPreconfiguredExpressionSets'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/listPreconfiguredExpressionSets".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if (
+            compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.filter
+            in request
+        ):
+            query_params["filter"] = request.filter
+        if (
+            compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.max_results
+            in request
+        ):
+            query_params["maxResults"] = request.max_results
+        if (
+            compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.order_by
+            in request
+        ):
+            query_params["orderBy"] = request.order_by
+        if (
+            compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.page_token
+            in request
+        ):
+            query_params["pageToken"] = request.page_token
+        if (
+            compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.return_partial_success
+            in request
+        ):
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def patch(self,
-            request: compute.PatchSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        patch
-          method over HTTP.
+    def patch(
+        self,
+        request: compute.PatchSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch method over HTTP.
 
         Args:
             request (~.compute.PatchSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Patch. See the method
                 description for details.
 
@@ -654,12 +643,12 @@ response = self._session.get(
         body = compute.SecurityPolicy.to_json(
             request.security_policy_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -667,43 +656,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.PatchSecurityPolicyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.patch(
-            url
-,
-            data=body,
-        )
+        response = self._session.patch(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def patch_rule(self,
-            request: compute.PatchRuleSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        patch rule
-          method over HTTP.
+    def patch_rule(
+        self,
+        request: compute.PatchRuleSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch rule method over HTTP.
 
         Args:
             request (~.compute.PatchRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.PatchRule. See the
                 method description for details.
 
@@ -747,12 +729,12 @@ response = self._session.patch(
         body = compute.SecurityPolicyRule.to_json(
             request.security_policy_rule_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/patchRule'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/patchRule".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -760,43 +742,36 @@ response = self._session.patch(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'priority': request.priority,
-        }
+        query_params = {}
+        if compute.PatchRuleSecurityPolicyRequest.priority in request:
+            query_params["priority"] = request.priority
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def remove_rule(self,
-            request: compute.RemoveRuleSecurityPolicyRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        remove rule
-          method over HTTP.
+    def remove_rule(
+        self,
+        request: compute.RemoveRuleSecurityPolicyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the remove rule method over HTTP.
 
         Args:
             request (~.compute.RemoveRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.RemoveRule. See the
                 method description for details.
 
@@ -838,7 +813,7 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/removeRule'.format(
+        url = "https://{host}/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/removeRule".format(
             host=self._host,
             project=request.project,
             security_policy=request.security_policy,
@@ -846,30 +821,24 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'priority': request.priority,
-        }
+        query_params = {}
+        if compute.RemoveRuleSecurityPolicyRequest.priority in request:
+            query_params["priority"] = request.priority
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-        )
+        response = self._session.post(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
 
-__all__ = (
-    'SecurityPoliciesRestTransport',
-)
+__all__ = ("SecurityPoliciesRestTransport",)

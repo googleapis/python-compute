@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class DiskTypesRestTransport(DiskTypesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class DiskTypesRestTransport(DiskTypesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def aggregated_list(self,
-            request: compute.AggregatedListDiskTypesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.DiskTypeAggregatedList:
-        r"""Call the
-        aggregated list
-          method over HTTP.
+    def aggregated_list(
+        self,
+        request: compute.AggregatedListDiskTypesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.DiskTypeAggregatedList:
+        r"""Call the aggregated list method over HTTP.
 
         Args:
             request (~.compute.AggregatedListDiskTypesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 DiskTypes.AggregatedList. See the method
                 description for details.
 
@@ -115,53 +117,54 @@ class DiskTypesRestTransport(DiskTypesTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/aggregated/diskTypes'.format(
-            host=self._host,
-            project=request.project,
+        url = "https://{host}/compute/v1/projects/{project}/aggregated/diskTypes".format(
+            host=self._host, project=request.project,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'includeAllScopes': request.include_all_scopes,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.AggregatedListDiskTypesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.AggregatedListDiskTypesRequest.include_all_scopes in request:
+            query_params["includeAllScopes"] = request.include_all_scopes
+        if compute.AggregatedListDiskTypesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.AggregatedListDiskTypesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.AggregatedListDiskTypesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.AggregatedListDiskTypesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.DiskTypeAggregatedList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def get(self,
-            request: compute.GetDiskTypeRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.DiskType:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetDiskTypeRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.DiskType:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetDiskTypeRequest):
-                The request object.
-                A request message for DiskTypes.Get.
+                The request object. A request message for DiskTypes.Get.
                 See the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -194,7 +197,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/diskTypes/{disk_type}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/diskTypes/{disk_type}".format(
             host=self._host,
             project=request.project,
             zone=request.zone,
@@ -203,40 +206,34 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.DiskType.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.DiskType.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListDiskTypesRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.DiskTypeList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListDiskTypesRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.DiskTypeList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListDiskTypesRequest):
-                The request object.
-                A request message for DiskTypes.List.
+                The request object. A request message for DiskTypes.List.
                 See the method description for details.
 
             metadata (Sequence[Tuple[str, str]]): Strings which should be
@@ -249,42 +246,40 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/zones/{zone}/diskTypes'.format(
-            host=self._host,
-            project=request.project,
-            zone=request.zone,
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/diskTypes".format(
+            host=self._host, project=request.project, zone=request.zone,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListDiskTypesRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListDiskTypesRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListDiskTypesRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListDiskTypesRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListDiskTypesRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.DiskTypeList.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'DiskTypesRestTransport',
-)
+__all__ = ("DiskTypesRestTransport",)

@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, InstanceGroupManagersTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -356,8 +356,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AbandonInstancesInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.AbandonInstances. See the method
                 description for details.
             project (str):
@@ -479,8 +478,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.AggregatedList. See the method
                 description for details.
             project (str):
@@ -556,8 +554,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ApplyUpdatesToInstancesInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.ApplyUpdatesToInstances. See the
                 method description for details.
             project (str):
@@ -695,8 +692,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.CreateInstancesInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.CreateInstances. See the method
                 description for details.
             project (str):
@@ -823,8 +819,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.Delete. See the method description
                 for details.
             project (str):
@@ -946,8 +941,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstancesInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.DeleteInstances. See the method
                 description for details.
             project (str):
@@ -1072,8 +1066,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeletePerInstanceConfigsInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.DeletePerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -1208,8 +1201,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.Get. See the method description
                 for details.
             project (str):
@@ -1315,8 +1307,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.Insert. See the method description
                 for details.
             project (str):
@@ -1423,8 +1414,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.List. See the method description
                 for details.
             project (str):
@@ -1509,8 +1499,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListErrorsInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.ListErrors. See the method
                 description for details.
             project (str):
@@ -1611,8 +1600,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListManagedInstancesInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.ListManagedInstances. See the
                 method description for details.
             project (str):
@@ -1707,8 +1695,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPerInstanceConfigsInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.ListPerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -1815,8 +1802,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.Patch. See the method description
                 for details.
             project (str):
@@ -1938,8 +1924,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchPerInstanceConfigsInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.PatchPerInstanceConfigs. See the
                 method description for details.
             project (str):
@@ -2086,8 +2071,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RecreateInstancesInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.RecreateInstances. See the method
                 description for details.
             project (str):
@@ -2234,8 +2218,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResizeInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.Resize. See the method description
                 for details.
             project (str):
@@ -2360,8 +2343,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetInstanceTemplateInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.SetInstanceTemplate. See the
                 method description for details.
             project (str):
@@ -2497,8 +2479,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetPoolsInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.SetTargetPools. See the method
                 description for details.
             project (str):
@@ -2625,8 +2606,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.UpdatePerInstanceConfigsInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 InstanceGroupManagers.UpdatePerInstanceConfigs. See the
                 method description for details.
             project (str):

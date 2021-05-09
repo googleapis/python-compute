@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetInstancesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -335,8 +335,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetInstancesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetInstances.AggregatedList. See the method
                 description for details.
             project (str):
@@ -409,8 +408,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetInstances.Delete. See the method description for
                 details.
             project (str):
@@ -519,8 +517,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetInstances.Get. See the method description for
                 details.
             project (str):
@@ -611,8 +608,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetInstanceRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetInstances.Insert. See the method description for
                 details.
             project (str):
@@ -717,8 +713,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetInstancesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetInstances.List. See the method description for
                 details.
             project (str):

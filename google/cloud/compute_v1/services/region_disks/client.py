@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RegionDisksTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddResourcePoliciesRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.AddResourcePolicies. See the method
                 description for details.
             project (str):
@@ -456,8 +455,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.CreateSnapshotRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.CreateSnapshot. See the method description
                 for details.
             project (str):
@@ -573,8 +571,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Delete. See the method description for
                 details.
             project (str):
@@ -679,8 +676,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -782,8 +778,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -917,8 +912,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Insert. See the method description for
                 details.
             project (str):
@@ -1021,8 +1015,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionDisksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.List. See the method description for
                 details.
             project (str):
@@ -1104,8 +1097,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveResourcePoliciesRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.RemoveResourcePolicies. See the method
                 description for details.
             project (str):
@@ -1227,8 +1219,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResizeRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Resize. See the method description for
                 details.
             project (str):
@@ -1344,8 +1335,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1490,8 +1480,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.SetLabels. See the method description for
                 details.
             project (str):
@@ -1609,8 +1598,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.TestIamPermissions. See the method
                 description for details.
             project (str):

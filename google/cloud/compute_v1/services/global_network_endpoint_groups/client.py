@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -216,7 +216,7 @@ class GlobalNetworkEndpointGroupsClient(
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GlobalNetworkEndpointGroupsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -342,8 +342,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.AttachNetworkEndpoints. See
                 the method description for details.
             project (str):
@@ -466,8 +465,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.Delete. See the method
                 description for details.
             project (str):
@@ -567,8 +565,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.DetachNetworkEndpoints. See
                 the method description for details.
             project (str):
@@ -691,8 +688,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.Get. See the method
                 description for details.
             project (str):
@@ -780,8 +776,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.InsertGlobalNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.Insert. See the method
                 description for details.
             project (str):
@@ -878,8 +873,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalNetworkEndpointGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.List. See the method
                 description for details.
             project (str):
@@ -952,8 +946,7 @@ class GlobalNetworkEndpointGroupsClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalNetworkEndpointGroups.ListNetworkEndpoints. See
                 the method description for details.
             project (str):

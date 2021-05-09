@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, NetworkEndpointGroupsTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListNetworkEndpointGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.AggregatedList. See the method
                 description for details.
             project (str):
@@ -414,8 +413,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AttachNetworkEndpointsNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.AttachNetworkEndpoints. See the
                 method description for details.
             project (str):
@@ -547,8 +545,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.Delete. See the method description
                 for details.
             project (str):
@@ -659,8 +656,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DetachNetworkEndpointsNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.DetachNetworkEndpoints. See the
                 method description for details.
             project (str):
@@ -790,8 +786,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.Get. See the method description
                 for details.
             project (str):
@@ -890,8 +885,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.Insert. See the method description
                 for details.
             project (str):
@@ -999,8 +993,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNetworkEndpointGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.List. See the method description
                 for details.
             project (str):
@@ -1085,8 +1078,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListNetworkEndpointsNetworkEndpointGroupsRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.ListNetworkEndpoints. See the
                 method description for details.
             project (str):
@@ -1200,8 +1192,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsNetworkEndpointGroupRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 NetworkEndpointGroups.TestIamPermissions. See the method
                 description for details.
             project (str):

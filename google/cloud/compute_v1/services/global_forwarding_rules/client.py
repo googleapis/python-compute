@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, GlobalForwardingRulesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteGlobalForwardingRuleRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.Delete. See the method description
                 for details.
             project (str):
@@ -438,8 +437,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetGlobalForwardingRuleRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.Get. See the method description
                 for details.
             project (str):
@@ -535,8 +533,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertGlobalForwardingRuleRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.Insert. See the method description
                 for details.
             project (str):
@@ -631,8 +628,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListGlobalForwardingRulesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.List. See the method description
                 for details.
             project (str):
@@ -710,8 +706,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchGlobalForwardingRuleRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.Patch. See the method description
                 for details.
             project (str):
@@ -818,8 +813,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetGlobalForwardingRuleRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 GlobalForwardingRules.SetTarget. See the method
                 description for details.
             project (str):

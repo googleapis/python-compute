@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetHttpsProxiesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetHttpsProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.AggregatedList. See the method
                 description for details.
             project (str):
@@ -413,8 +412,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Delete. See the method description
                 for details.
             project (str):
@@ -513,8 +511,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Get. See the method description for
                 details.
             project (str):
@@ -610,8 +607,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.Insert. See the method description
                 for details.
             project (str):
@@ -706,8 +702,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetHttpsProxiesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.List. See the method description for
                 details.
             project (str):
@@ -782,8 +777,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetQuicOverrideTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetQuicOverride. See the method
                 description for details.
             project (str):
@@ -897,8 +891,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslCertificatesTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetSslCertificates. See the method
                 description for details.
             project (str):
@@ -1015,8 +1008,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetSslPolicyTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetSslPolicy. See the method
                 description for details.
             project (str):
@@ -1125,8 +1117,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetUrlMapTargetHttpsProxyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetHttpsProxies.SetUrlMap. See the method description
                 for details.
             project (str):

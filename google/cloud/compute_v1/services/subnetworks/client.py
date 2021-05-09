@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, SubnetworksTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -333,8 +333,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListSubnetworksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.AggregatedList. See the method description
                 for details.
             project (str):
@@ -407,8 +406,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.Delete. See the method description for
                 details.
             project (str):
@@ -517,8 +515,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ExpandIpCidrRangeSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.ExpandIpCidrRange. See the method
                 description for details.
             project (str):
@@ -642,8 +639,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -733,8 +729,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicySubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -868,8 +863,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.Insert. See the method description for
                 details.
             project (str):
@@ -974,8 +968,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSubnetworksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.List. See the method description for
                 details.
             project (str):
@@ -1058,8 +1051,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListUsableSubnetworksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.ListUsable. See the method description for
                 details.
             project (str):
@@ -1137,8 +1129,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.Patch. See the method description for
                 details.
             project (str):
@@ -1254,8 +1245,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicySubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1402,8 +1392,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetPrivateIpGoogleAccessSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.SetPrivateIpGoogleAccess. See the method
                 description for details.
             project (str):
@@ -1528,8 +1517,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsSubnetworkRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Subnetworks.TestIamPermissions. See the method
                 description for details.
             project (str):

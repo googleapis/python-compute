@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -216,7 +216,7 @@ class RegionInstanceGroupManagersClient(
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RegionInstanceGroupManagersTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -358,8 +358,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.AbandonInstancesRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.AbandonInstances. See the
                 method description for details.
             project (str):
@@ -487,8 +486,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.ApplyUpdatesToInstances. See
                 the method description for details.
             project (str):
@@ -628,8 +626,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.CreateInstancesRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.CreateInstances. See the
                 method description for details.
             project (str):
@@ -759,8 +756,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.Delete. See the method
                 description for details.
             project (str):
@@ -883,8 +879,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstancesRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.DeleteInstances. See the
                 method description for details.
             project (str):
@@ -1012,8 +1007,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.DeletePerInstanceConfigs.
                 See the method description for details.
             project (str):
@@ -1146,8 +1140,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.GetRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.Get. See the method
                 description for details.
             project (str):
@@ -1252,8 +1245,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.InsertRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.Insert. See the method
                 description for details.
             project (str):
@@ -1360,8 +1352,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListRegionInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.List. See the method
                 description for details.
             project (str):
@@ -1447,8 +1438,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListErrorsRegionInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.ListErrors. See the method
                 description for details.
             project (str):
@@ -1547,8 +1537,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListManagedInstancesRegionInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.ListManagedInstances. See
                 the method description for details.
             project (str):
@@ -1645,8 +1634,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ListPerInstanceConfigsRegionInstanceGroupManagersRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.ListPerInstanceConfigs. See
                 the method description for details.
             project (str):
@@ -1752,8 +1740,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.PatchRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.Patch. See the method
                 description for details.
             project (str):
@@ -1875,8 +1862,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.PatchPerInstanceConfigs. See
                 the method description for details.
             project (str):
@@ -2022,8 +2008,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.RecreateInstancesRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.RecreateInstances. See the
                 method description for details.
             project (str):
@@ -2161,8 +2146,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.ResizeRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.Resize. See the method
                 description for details.
             project (str):
@@ -2279,8 +2263,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.SetInstanceTemplateRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.SetInstanceTemplate. See the
                 method description for details.
             project (str):
@@ -2410,8 +2393,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.SetTargetPoolsRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.SetTargetPools. See the
                 method description for details.
             project (str):
@@ -2541,8 +2523,7 @@ class RegionInstanceGroupManagersClient(
 
         Args:
             request (google.cloud.compute_v1.types.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionInstanceGroupManagers.UpdatePerInstanceConfigs.
                 See the method description for details.
             project (str):

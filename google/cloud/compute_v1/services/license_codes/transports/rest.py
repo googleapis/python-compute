@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class LicenseCodesRestTransport(LicenseCodesTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class LicenseCodesRestTransport(LicenseCodesTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def get(self,
-            request: compute.GetLicenseCodeRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.LicenseCode:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetLicenseCodeRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.LicenseCode:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetLicenseCodeRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 LicenseCodes.Get. See the method
                 description for details.
 
@@ -122,48 +124,42 @@ class LicenseCodesRestTransport(LicenseCodesTransport):
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/licenseCodes/{license_code}'.format(
-            host=self._host,
-            project=request.project,
-            license_code=request.license_code,
+        url = "https://{host}/compute/v1/projects/{project}/global/licenseCodes/{license_code}".format(
+            host=self._host, project=request.project, license_code=request.license_code,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.LicenseCode.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
-    def test_iam_permissions(self,
-            request: compute.TestIamPermissionsLicenseCodeRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TestPermissionsResponse:
-        r"""Call the
-        test iam permissions
-          method over HTTP.
+    def test_iam_permissions(
+        self,
+        request: compute.TestIamPermissionsLicenseCodeRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TestPermissionsResponse:
+        r"""Call the test iam permissions method over HTTP.
 
         Args:
             request (~.compute.TestIamPermissionsLicenseCodeRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 LicenseCodes.TestIamPermissions. See the
                 method description for details.
 
@@ -179,44 +175,35 @@ response = self._session.get(
         body = compute.TestPermissionsRequest.to_json(
             request.test_permissions_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/global/licenseCodes/{resource}/testIamPermissions'.format(
-            host=self._host,
-            project=request.project,
-            resource=request.resource,
+        url = "https://{host}/compute/v1/projects/{project}/global/licenseCodes/{resource}/testIamPermissions".format(
+            host=self._host, project=request.project, resource=request.resource,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'LicenseCodesRestTransport',
-)
+__all__ = ("LicenseCodesRestTransport",)

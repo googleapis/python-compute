@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -214,7 +214,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, TargetVpnGatewaysTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -337,8 +337,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListTargetVpnGatewaysRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetVpnGateways.AggregatedList. See the method
                 description for details.
             project (str):
@@ -411,8 +410,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteTargetVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetVpnGateways.Delete. See the method description for
                 details.
             project (str):
@@ -519,8 +517,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetTargetVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetVpnGateways.Get. See the method description for
                 details.
             project (str):
@@ -607,8 +604,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertTargetVpnGatewayRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetVpnGateways.Insert. See the method description for
                 details.
             project (str):
@@ -711,8 +707,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListTargetVpnGatewaysRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 TargetVpnGateways.List. See the method description for
                 details.
             project (str):

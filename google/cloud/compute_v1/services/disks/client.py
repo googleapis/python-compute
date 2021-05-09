@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class DisksClient(metaclass=DisksClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, DisksTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -338,8 +338,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddResourcePoliciesDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.AddResourcePolicies. See the method description
                 for details.
             project (str):
@@ -453,8 +452,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AggregatedListDisksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.AggregatedList. See the method description for
                 details.
             project (str):
@@ -528,8 +526,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.CreateSnapshotDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.CreateSnapshot. See the method description for
                 details.
             project (str):
@@ -647,8 +644,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteDiskRequest):
-                The request object.
-                A request message for Disks.Delete.
+                The request object. A request message for Disks.Delete.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -755,8 +751,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetDiskRequest):
-                The request object.
-                A request message for Disks.Get. See
+                The request object. A request message for Disks.Get. See
                 the method description for details.
             project (str):
                 Project ID for this request.
@@ -860,8 +855,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetIamPolicyDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.GetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1000,8 +994,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertDiskRequest):
-                The request object.
-                A request message for Disks.Insert.
+                The request object. A request message for Disks.Insert.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1105,8 +1098,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListDisksRequest):
-                The request object.
-                A request message for Disks.List.
+                The request object. A request message for Disks.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1189,8 +1181,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveResourcePoliciesDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.RemoveResourcePolicies. See the method description
                 for details.
             project (str):
@@ -1308,8 +1299,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ResizeDiskRequest):
-                The request object.
-                A request message for Disks.Resize.
+                The request object. A request message for Disks.Resize.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1422,8 +1412,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetIamPolicyDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.SetIamPolicy. See the method description for
                 details.
             project (str):
@@ -1569,8 +1558,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.SetLabelsDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.SetLabels. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -1689,8 +1677,7 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.TestIamPermissionsDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 Disks.TestIamPermissions. See the method description for
                 details.
             project (str):

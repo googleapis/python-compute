@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -212,7 +212,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, SecurityPoliciesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -337,8 +337,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.AddRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.AddRule. See the method description for
                 details.
             project (str):
@@ -444,8 +443,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Delete. See the method description for
                 details.
             project (str):
@@ -543,8 +541,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Get. See the method description for
                 details.
             project (str):
@@ -622,8 +619,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.GetRule. See the method description for
                 details.
             project (str):
@@ -700,8 +696,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Insert. See the method description for
                 details.
             project (str):
@@ -796,8 +791,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSecurityPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.List. See the method description for
                 details.
             project (str):
@@ -869,8 +863,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListPreconfiguredExpressionSetsSecurityPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.ListPreconfiguredExpressionSets. See
                 the method description for details.
             project (str):
@@ -943,8 +936,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.Patch. See the method description for
                 details.
             project (str):
@@ -1049,8 +1041,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.PatchRule. See the method description
                 for details.
             project (str):
@@ -1156,8 +1147,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.RemoveRuleSecurityPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SecurityPolicies.RemoveRule. See the method description
                 for details.
             project (str):

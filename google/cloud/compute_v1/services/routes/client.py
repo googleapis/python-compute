@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, RoutesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -334,8 +334,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteRouteRequest):
-                The request object.
-                A request message for Routes.Delete.
+                The request object. A request message for Routes.Delete.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -430,8 +429,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetRouteRequest):
-                The request object.
-                A request message for Routes.Get.
+                The request object. A request message for Routes.Get.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -508,8 +506,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertRouteRequest):
-                The request object.
-                A request message for Routes.Insert.
+                The request object. A request message for Routes.Insert.
                 See the method description for details.
             project (str):
                 Project ID for this request.
@@ -603,8 +600,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListRoutesRequest):
-                The request object.
-                A request message for Routes.List.
+                The request object. A request message for Routes.List.
                 See the method description for details.
             project (str):
                 Project ID for this request.

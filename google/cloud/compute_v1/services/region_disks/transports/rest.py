@@ -16,9 +16,8 @@
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1       # type: ignore
-from google import auth                    # type: ignore
-from google.auth import credentials        # type: ignore
+from google.api_core import gapic_v1  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
 import grpc  # type: ignore
@@ -41,15 +40,18 @@ class RegionDisksRestTransport(RegionDisksTransport):
 
     It sends JSON representations of protocol buffers over HTTP/1.1
     """
-    def __init__(self, *,
-            host: str = 'compute.googleapis.com',
-            credentials: credentials.Credentials = None,
-            credentials_file: str = None,
-            scopes: Sequence[str] = None,
-            client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            ) -> None:
+
+    def __init__(
+        self,
+        *,
+        host: str = "compute.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -82,26 +84,26 @@ class RegionDisksRestTransport(RegionDisksTransport):
         # TODO: When custom host (api_endpoint) is set, `scopes` must *also* be set on the
         # credentials object
         super().__init__(
-            host=host,
-            credentials=credentials,
-            client_info=client_info,
+            host=host, credentials=credentials, client_info=client_info,
         )
-        self._session = AuthorizedSession(self._credentials, default_host=self.DEFAULT_HOST)        if client_cert_source_for_mtls:
+        self._session = AuthorizedSession(
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
+        if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def add_resource_policies(self,
-            request: compute.AddResourcePoliciesRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        add resource policies
-          method over HTTP.
+    def add_resource_policies(
+        self,
+        request: compute.AddResourcePoliciesRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the add resource policies method over HTTP.
 
         Args:
             request (~.compute.AddResourcePoliciesRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.AddResourcePolicies. See the
                 method description for details.
 
@@ -145,12 +147,12 @@ class RegionDisksRestTransport(RegionDisksTransport):
         body = compute.RegionDisksAddResourcePoliciesRequest.to_json(
             request.region_disks_add_resource_policies_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/addResourcePolicies'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/addResourcePolicies".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -159,43 +161,36 @@ class RegionDisksRestTransport(RegionDisksTransport):
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.AddResourcePoliciesRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def create_snapshot(self,
-            request: compute.CreateSnapshotRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        create snapshot
-          method over HTTP.
+    def create_snapshot(
+        self,
+        request: compute.CreateSnapshotRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the create snapshot method over HTTP.
 
         Args:
             request (~.compute.CreateSnapshotRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.CreateSnapshot. See the
                 method description for details.
 
@@ -239,12 +234,12 @@ response = self._session.post(
         body = compute.Snapshot.to_json(
             request.snapshot_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/createSnapshot'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/createSnapshot".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -253,43 +248,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.CreateSnapshotRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def delete(self,
-            request: compute.DeleteRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        delete
-          method over HTTP.
+    def delete(
+        self,
+        request: compute.DeleteRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the delete method over HTTP.
 
         Args:
             request (~.compute.DeleteRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Delete. See the method
                 description for details.
 
@@ -331,7 +319,7 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -340,41 +328,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.DeleteRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.delete(
-            url
-        )
+        response = self._session.delete(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(self,
-            request: compute.GetRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Disk:
-        r"""Call the
-        get
-          method over HTTP.
+    def get(
+        self,
+        request: compute.GetRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Disk:
+        r"""Call the get method over HTTP.
 
         Args:
             request (~.compute.GetRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Get. See the method
                 description for details.
 
@@ -408,7 +391,7 @@ response = self._session.delete(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -417,40 +400,34 @@ response = self._session.delete(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Disk.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Disk.from_json(response.content, ignore_unknown_fields=True)
 
-    def get_iam_policy(self,
-            request: compute.GetIamPolicyRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Policy:
-        r"""Call the
-        get iam policy
-          method over HTTP.
+    def get_iam_policy(
+        self,
+        request: compute.GetIamPolicyRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Policy:
+        r"""Call the get iam policy method over HTTP.
 
         Args:
             request (~.compute.GetIamPolicyRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.GetIamPolicy. See the method
                 description for details.
 
@@ -514,7 +491,7 @@ response = self._session.get(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/getIamPolicy'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/getIamPolicy".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -523,41 +500,41 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'optionsRequestedPolicyVersion': request.options_requested_policy_version,
-        }
+        query_params = {}
+        if (
+            compute.GetIamPolicyRegionDiskRequest.options_requested_policy_version
+            in request
+        ):
+            query_params[
+                "optionsRequestedPolicyVersion"
+            ] = request.options_requested_policy_version
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Policy.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def insert(self,
-            request: compute.InsertRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        insert
-          method over HTTP.
+    def insert(
+        self,
+        request: compute.InsertRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the insert method over HTTP.
 
         Args:
             request (~.compute.InsertRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Insert. See the method
                 description for details.
 
@@ -601,57 +578,49 @@ response = self._session.get(
         body = compute.Disk.to_json(
             request.disk_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-            'sourceImage': request.source_image,
-        }
+        query_params = {}
+        if compute.InsertRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+        if compute.InsertRegionDiskRequest.source_image in request:
+            query_params["sourceImage"] = request.source_image
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(self,
-            request: compute.ListRegionDisksRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.DiskList:
-        r"""Call the
-        list
-          method over HTTP.
+    def list(
+        self,
+        request: compute.ListRegionDisksRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.DiskList:
+        r"""Call the list method over HTTP.
 
         Args:
             request (~.compute.ListRegionDisksRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.List. See the method
                 description for details.
 
@@ -665,53 +634,50 @@ response = self._session.post(
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks'.format(
-            host=self._host,
-            project=request.project,
-            region=request.region,
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks".format(
+            host=self._host, project=request.project, region=request.region,
         )
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'filter': request.filter,
-            'maxResults': request.max_results,
-            'orderBy': request.order_by,
-            'pageToken': request.page_token,
-            'returnPartialSuccess': request.return_partial_success,
-        }
+        query_params = {}
+        if compute.ListRegionDisksRequest.filter in request:
+            query_params["filter"] = request.filter
+        if compute.ListRegionDisksRequest.max_results in request:
+            query_params["maxResults"] = request.max_results
+        if compute.ListRegionDisksRequest.order_by in request:
+            query_params["orderBy"] = request.order_by
+        if compute.ListRegionDisksRequest.page_token in request:
+            query_params["pageToken"] = request.page_token
+        if compute.ListRegionDisksRequest.return_partial_success in request:
+            query_params["returnPartialSuccess"] = request.return_partial_success
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.get(
-            url
-        )
+        response = self._session.get(url,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.DiskList.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.DiskList.from_json(response.content, ignore_unknown_fields=True)
 
-    def remove_resource_policies(self,
-            request: compute.RemoveResourcePoliciesRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        remove resource policies
-          method over HTTP.
+    def remove_resource_policies(
+        self,
+        request: compute.RemoveResourcePoliciesRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the remove resource policies method over HTTP.
 
         Args:
             request (~.compute.RemoveResourcePoliciesRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.RemoveResourcePolicies. See
                 the method description for details.
 
@@ -755,12 +721,12 @@ response = self._session.get(
         body = compute.RegionDisksRemoveResourcePoliciesRequest.to_json(
             request.region_disks_remove_resource_policies_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/removeResourcePolicies'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/removeResourcePolicies".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -769,43 +735,36 @@ response = self._session.get(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.RemoveResourcePoliciesRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def resize(self,
-            request: compute.ResizeRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        resize
-          method over HTTP.
+    def resize(
+        self,
+        request: compute.ResizeRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the resize method over HTTP.
 
         Args:
             request (~.compute.ResizeRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.Resize. See the method
                 description for details.
 
@@ -849,12 +808,12 @@ response = self._session.post(
         body = compute.RegionDisksResizeRequest.to_json(
             request.region_disks_resize_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/resize'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{disk}/resize".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -863,43 +822,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.ResizeRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_iam_policy(self,
-            request: compute.SetIamPolicyRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Policy:
-        r"""Call the
-        set iam policy
-          method over HTTP.
+    def set_iam_policy(
+        self,
+        request: compute.SetIamPolicyRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Policy:
+        r"""Call the set iam policy method over HTTP.
 
         Args:
             request (~.compute.SetIamPolicyRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.SetIamPolicy. See the method
                 description for details.
 
@@ -965,12 +917,12 @@ response = self._session.post(
         body = compute.RegionSetPolicyRequest.to_json(
             request.region_set_policy_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/setIamPolicy'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/setIamPolicy".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -979,42 +931,34 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Policy.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_labels(self,
-            request: compute.SetLabelsRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.Operation:
-        r"""Call the
-        set labels
-          method over HTTP.
+    def set_labels(
+        self,
+        request: compute.SetLabelsRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the set labels method over HTTP.
 
         Args:
             request (~.compute.SetLabelsRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.SetLabels. See the method
                 description for details.
 
@@ -1058,12 +1002,12 @@ response = self._session.post(
         body = compute.RegionSetLabelsRequest.to_json(
             request.region_set_labels_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/setLabels'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/setLabels".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -1072,43 +1016,36 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-            'requestId': request.request_id,
-        }
+        query_params = {}
+        if compute.SetLabelsRegionDiskRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
-        return compute.Operation.from_json(
-            response.content,
-            ignore_unknown_fields=True
-        )
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def test_iam_permissions(self,
-            request: compute.TestIamPermissionsRegionDiskRequest, *,
-            metadata: Sequence[Tuple[str, str]] = (),
-            ) -> compute.TestPermissionsResponse:
-        r"""Call the
-        test iam permissions
-          method over HTTP.
+    def test_iam_permissions(
+        self,
+        request: compute.TestIamPermissionsRegionDiskRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.TestPermissionsResponse:
+        r"""Call the test iam permissions method over HTTP.
 
         Args:
             request (~.compute.TestIamPermissionsRegionDiskRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 RegionDisks.TestIamPermissions. See the
                 method description for details.
 
@@ -1124,12 +1061,12 @@ response = self._session.post(
         body = compute.TestPermissionsRequest.to_json(
             request.test_permissions_request_resource,
             including_default_value_fields=False,
-            use_integers_for_enums=False
+            use_integers_for_enums=False,
         )
 
         # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
         #               current impl assumes basic case of grpc transcoding
-        url = 'https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/testIamPermissions'.format(
+        url = "https://{host}/compute/v1/projects/{project}/regions/{region}/disks/{resource}/testIamPermissions".format(
             host=self._host,
             project=request.project,
             region=request.region,
@@ -1138,31 +1075,24 @@ response = self._session.post(
 
         # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
         #               not required for GCE
-        query_params = {
-        }
+        query_params = {}
+
         # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
         #               discards default values
         # TODO(yon-mg): add test for proper url encoded strings
-        query_params = ['{k}={v}'.format(k=k, v=v) for k, v in query_params.items() if v]
-        url += '?{}'.format('&'.join(query_params)).replace(' ', '+')
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-response = self._session.post(
-            url
-,
-            data=body,
-        )
+        response = self._session.post(url, data=body,)
 
         # Raise requests.exceptions.HTTPError if the status code is >= 400
         response.raise_for_status()
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
-            response.content,
-            ignore_unknown_fields=True
+            response.content, ignore_unknown_fields=True
         )
 
 
-__all__ = (
-    'RegionDisksRestTransport',
-)
+__all__ = ("RegionDisksRestTransport",)

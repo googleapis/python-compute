@@ -21,10 +21,10 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
@@ -210,7 +210,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, SslPoliciesTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -336,8 +336,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.DeleteSslPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.Delete. See the method description for
                 details.
             project (str):
@@ -436,8 +435,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.GetSslPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.Get. See the method description for details.
             project (str):
                 Project ID for this request.
@@ -518,8 +516,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.InsertSslPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.Insert. See the method description for
                 details.
             project (str):
@@ -614,8 +611,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListSslPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.List. See the method description for
                 details.
             project (str):
@@ -687,8 +683,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.ListAvailableFeaturesSslPoliciesRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.ListAvailableFeatures. See the method
                 description for details.
             project (str):
@@ -753,8 +748,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Args:
             request (google.cloud.compute_v1.types.PatchSslPolicyRequest):
-                The request object.
-                A request message for
+                The request object. A request message for
                 SslPolicies.Patch. See the method description for
                 details.
             project (str):
