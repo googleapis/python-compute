@@ -667,11 +667,11 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNetworkReques
     with mock.patch.object(Session, "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Network(
+            I_pv4_range="I_pv4_range_value",
             auto_create_subnetworks=True,
             creation_timestamp="creation_timestamp_value",
             description="description_value",
             gateway_i_pv4="gateway_i_pv4_value",
-            i_pv4_range="i_pv4_range_value",
             id="id_value",
             kind="kind_value",
             mtu=342,
@@ -694,11 +694,11 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNetworkReques
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Network)
+    assert response.I_pv4_range == "I_pv4_range_value"
     assert response.auto_create_subnetworks is True
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
     assert response.gateway_i_pv4 == "gateway_i_pv4_value"
-    assert response.i_pv4_range == "i_pv4_range_value"
     assert response.id == "id_value"
     assert response.kind == "kind_value"
     assert response.mtu == 342
@@ -856,7 +856,7 @@ def test_insert_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        network_resource = compute.Network(auto_create_subnetworks=True)
+        network_resource = compute.Network(I_pv4_range="I_pv4_range_value")
         client.insert(
             project="project_value", network_resource=network_resource,
         )
@@ -883,7 +883,7 @@ def test_insert_rest_flattened_error():
         client.insert(
             compute.InsertNetworkRequest(),
             project="project_value",
-            network_resource=compute.Network(auto_create_subnetworks=True),
+            network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
 
 
@@ -901,7 +901,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListNetworksReq
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworkList(
             id="id_value",
-            items=[compute.Network(auto_create_subnetworks=True)],
+            items=[compute.Network(I_pv4_range="I_pv4_range_value")],
             kind="kind_value",
             next_page_token="next_page_token_value",
             self_link="self_link_value",
@@ -919,7 +919,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListNetworksReq
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
-    assert response.items == [compute.Network(auto_create_subnetworks=True)]
+    assert response.items == [compute.Network(I_pv4_range="I_pv4_range_value")]
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
@@ -1247,7 +1247,7 @@ def test_patch_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        network_resource = compute.Network(auto_create_subnetworks=True)
+        network_resource = compute.Network(I_pv4_range="I_pv4_range_value")
         client.patch(
             project="project_value",
             network="network_value",
@@ -1278,7 +1278,7 @@ def test_patch_rest_flattened_error():
             compute.PatchNetworkRequest(),
             project="project_value",
             network="network_value",
-            network_resource=compute.Network(auto_create_subnetworks=True),
+            network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
 
 

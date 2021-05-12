@@ -6260,7 +6260,7 @@ class FileContentBuffer(proto.Message):
 class Allowed(proto.Message):
     r"""
     Attributes:
-        i_p_protocol (str):
+        I_p_protocol (str):
             The IP protocol to which this rule applies.
             The protocol type is required when creating a
             firewall rule. This value can either be one of
@@ -6278,14 +6278,14 @@ class Allowed(proto.Message):
             ["12345-12349"].
     """
 
-    i_p_protocol = proto.Field(proto.STRING, number=323774237, optional=True,)
+    I_p_protocol = proto.Field(proto.STRING, number=488094525, optional=True,)
     ports = proto.RepeatedField(proto.STRING, number=106854418,)
 
 
 class Denied(proto.Message):
     r"""
     Attributes:
-        i_p_protocol (str):
+        I_p_protocol (str):
             The IP protocol to which this rule applies.
             The protocol type is required when creating a
             firewall rule. This value can either be one of
@@ -6303,7 +6303,7 @@ class Denied(proto.Message):
             ["12345-12349"].
     """
 
-    i_p_protocol = proto.Field(proto.STRING, number=323774237, optional=True,)
+    I_p_protocol = proto.Field(proto.STRING, number=488094525, optional=True,)
     ports = proto.RepeatedField(proto.STRING, number=106854418,)
 
 
@@ -6638,6 +6638,55 @@ class ForwardingRule(proto.Message):
     {$api_version}.regionForwardingRules ==)
 
     Attributes:
+        I_p_address (str):
+            IP address that this forwarding rule serves. When a client
+            sends traffic to this IP address, the forwarding rule
+            directs the traffic to the target that you specify in the
+            forwarding rule.
+
+            If you don't specify a reserved IP address, an ephemeral IP
+            address is assigned. Methods for specifying an IP address:
+
+            -  IPv4 dotted decimal, as in ``100.1.2.3`` \* Full URL, as
+               in
+               https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name
+               \* Partial URL or by name, as in:
+
+            -  projects/project_id/regions/region/addresses/address-name
+            -  regions/region/addresses/address-name
+            -  global/addresses/address-name
+            -  address-name
+
+            The loadBalancingScheme and the forwarding rule's target
+            determine the type of IP address that you can use. For
+            detailed information, refer to `IP address
+            specifications </load-balancing/docs/forwarding-rule-concepts#ip_address_specifications>`__.
+
+            Must be set to ``0.0.0.0`` when the target is
+            targetGrpcProxy that has validateForProxyless field set to
+            true.
+
+            For Private Service Connect forwarding rules that forward
+            traffic to Google APIs, IP address must be provided.
+        I_p_protocol (google.cloud.compute_v1.types.ForwardingRule.IPProtocol):
+            The IP protocol to which this rule applies.
+
+            For protocol forwarding, valid options are TCP, UDP, ESP,
+            AH, SCTP and ICMP.
+
+            The valid IP protocols are different for different load
+            balancing products:
+
+            -  Internal TCP/UDP Load Balancing: The load balancing
+               scheme is INTERNAL, and one of TCP, UDP or ALL is valid.
+            -  Traffic Director: The load balancing scheme is
+               INTERNAL_SELF_MANAGED, and only TCP is valid.
+            -  Internal HTTP(S) Load Balancing: The load balancing
+               scheme is INTERNAL_MANAGED, and only TCP is valid.
+            -  HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The
+               load balancing scheme is EXTERNAL and only TCP is valid.
+            -  Network Load Balancing: The load balancing scheme is
+               EXTERNAL, and one of TCP or UDP is valid.
         all_ports (bool):
             This field is used along with the backend_service field for
             internal load balancing or with the target field for
@@ -6677,55 +6726,6 @@ class ForwardingRule(proto.Message):
             from another concurrent request.  To see the
             latest fingerprint, make a get() request to
             retrieve a ForwardingRule.
-        i_p_address (str):
-            IP address that this forwarding rule serves. When a client
-            sends traffic to this IP address, the forwarding rule
-            directs the traffic to the target that you specify in the
-            forwarding rule.
-
-            If you don't specify a reserved IP address, an ephemeral IP
-            address is assigned. Methods for specifying an IP address:
-
-            -  IPv4 dotted decimal, as in ``100.1.2.3`` \* Full URL, as
-               in
-               https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name
-               \* Partial URL or by name, as in:
-
-            -  projects/project_id/regions/region/addresses/address-name
-            -  regions/region/addresses/address-name
-            -  global/addresses/address-name
-            -  address-name
-
-            The loadBalancingScheme and the forwarding rule's target
-            determine the type of IP address that you can use. For
-            detailed information, refer to `IP address
-            specifications </load-balancing/docs/forwarding-rule-concepts#ip_address_specifications>`__.
-
-            Must be set to ``0.0.0.0`` when the target is
-            targetGrpcProxy that has validateForProxyless field set to
-            true.
-
-            For Private Service Connect forwarding rules that forward
-            traffic to Google APIs, IP address must be provided.
-        i_p_protocol (google.cloud.compute_v1.types.ForwardingRule.IPProtocol):
-            The IP protocol to which this rule applies.
-
-            For protocol forwarding, valid options are TCP, UDP, ESP,
-            AH, SCTP and ICMP.
-
-            The valid IP protocols are different for different load
-            balancing products:
-
-            -  Internal TCP/UDP Load Balancing: The load balancing
-               scheme is INTERNAL, and one of TCP, UDP or ALL is valid.
-            -  Traffic Director: The load balancing scheme is
-               INTERNAL_SELF_MANAGED, and only TCP is valid.
-            -  Internal HTTP(S) Load Balancing: The load balancing
-               scheme is INTERNAL_MANAGED, and only TCP is valid.
-            -  HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The
-               load balancing scheme is EXTERNAL and only TCP is valid.
-            -  Network Load Balancing: The load balancing scheme is
-               EXTERNAL, and one of TCP or UDP is valid.
         id (str):
             [Output Only] The unique identifier for the resource. This
             identifier is defined by the server.
@@ -6992,16 +6992,16 @@ class ForwardingRule(proto.Message):
         PREMIUM = 399530551
         STANDARD = 484642493
 
+    I_p_address = proto.Field(proto.STRING, number=42976943, optional=True,)
+    I_p_protocol = proto.Field(
+        proto.ENUM, number=488094525, optional=True, enum=IPProtocol,
+    )
     all_ports = proto.Field(proto.BOOL, number=445175796, optional=True,)
     allow_global_access = proto.Field(proto.BOOL, number=499409674, optional=True,)
     backend_service = proto.Field(proto.STRING, number=306946058, optional=True,)
     creation_timestamp = proto.Field(proto.STRING, number=30525366, optional=True,)
     description = proto.Field(proto.STRING, number=422937596, optional=True,)
     fingerprint = proto.Field(proto.STRING, number=234678500, optional=True,)
-    i_p_address = proto.Field(proto.STRING, number=522591951, optional=True,)
-    i_p_protocol = proto.Field(
-        proto.ENUM, number=323774237, optional=True, enum=IPProtocol,
-    )
     id = proto.Field(proto.STRING, number=3355, optional=True,)
     ip_version = proto.Field(
         proto.ENUM, number=294959552, optional=True, enum=IpVersion,
@@ -14203,6 +14203,13 @@ class Network(proto.Message):
     resource_for {$api_version}.networks ==)
 
     Attributes:
+        I_pv4_range (str):
+            Deprecated in favor of subnet mode networks.
+            The range of internal addresses that are legal
+            on this network. This range is a CIDR
+            specification, for example: 192.168.0.0/16.
+            Provided by the client when the network is
+            created.
         auto_create_subnetworks (bool):
             Must be set to create a VPC network. If not
             set, a legacy network is created.
@@ -14223,13 +14230,6 @@ class Network(proto.Message):
         gateway_i_pv4 (str):
             [Output Only] The gateway address for default routing out of
             the network, selected by GCP.
-        i_pv4_range (str):
-            Deprecated in favor of subnet mode networks.
-            The range of internal addresses that are legal
-            on this network. This range is a CIDR
-            specification, for example: 192.168.0.0/16.
-            Provided by the client when the network is
-            created.
         id (str):
             [Output Only] The unique identifier for the resource. This
             identifier is defined by the server.
@@ -14264,11 +14264,11 @@ class Network(proto.Message):
             subnetworks in this VPC network.
     """
 
+    I_pv4_range = proto.Field(proto.STRING, number=59234358, optional=True,)
     auto_create_subnetworks = proto.Field(proto.BOOL, number=256156690, optional=True,)
     creation_timestamp = proto.Field(proto.STRING, number=30525366, optional=True,)
     description = proto.Field(proto.STRING, number=422937596, optional=True,)
     gateway_i_pv4 = proto.Field(proto.STRING, number=178678877, optional=True,)
-    i_pv4_range = proto.Field(proto.STRING, number=1978454, optional=True,)
     id = proto.Field(proto.STRING, number=3355, optional=True,)
     kind = proto.Field(proto.STRING, number=3292052, optional=True,)
     mtu = proto.Field(proto.INT32, number=108462, optional=True,)
@@ -16098,6 +16098,13 @@ class PacketMirroringForwardingRuleInfo(proto.Message):
 class PacketMirroringFilter(proto.Message):
     r"""
     Attributes:
+        I_p_protocols (Sequence[str]):
+            Protocols that apply as filter on mirrored
+            traffic. If no protocols are specified, all
+            traffic that matches the specified CIDR ranges
+            is mirrored. If neither cidrRanges nor
+            IPProtocols is specified, all traffic is
+            mirrored.
         cidr_ranges (Sequence[str]):
             IP CIDR ranges that apply as filter on the
             source (ingress) or destination (egress) IP in
@@ -16109,13 +16116,6 @@ class PacketMirroringFilter(proto.Message):
         direction (google.cloud.compute_v1.types.PacketMirroringFilter.Direction):
             Direction of traffic to mirror, either
             INGRESS, EGRESS, or BOTH. The default is BOTH.
-        i_p_protocols (Sequence[str]):
-            Protocols that apply as filter on mirrored
-            traffic. If no protocols are specified, all
-            traffic that matches the specified CIDR ranges
-            is mirrored. If neither cidrRanges nor
-            IPProtocols is specified, all traffic is
-            mirrored.
     """
 
     class Direction(proto.Enum):
@@ -16127,11 +16127,11 @@ class PacketMirroringFilter(proto.Message):
         EGRESS = 432880501
         INGRESS = 516931221
 
+    I_p_protocols = proto.RepeatedField(proto.STRING, number=98544854,)
     cidr_ranges = proto.RepeatedField(proto.STRING, number=487901697,)
     direction = proto.Field(
         proto.ENUM, number=111150975, optional=True, enum=Direction,
     )
-    i_p_protocols = proto.RepeatedField(proto.STRING, number=373325046,)
 
 
 class PacketMirroringMirroredResourceInfo(proto.Message):

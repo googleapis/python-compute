@@ -737,7 +737,7 @@ def test_get_rest(
             creation_timestamp="creation_timestamp_value",
             description="description_value",
             enable=compute.PacketMirroring.Enable.FALSE,
-            filter=compute.PacketMirroringFilter(cidr_ranges=["cidr_ranges_value"]),
+            filter=compute.PacketMirroringFilter(I_p_protocols=["I_p_protocols_value"]),
             id="id_value",
             kind="kind_value",
             mirrored_resources=compute.PacketMirroringMirroredResourceInfo(
@@ -773,7 +773,7 @@ def test_get_rest(
     assert response.description == "description_value"
     assert response.enable == compute.PacketMirroring.Enable.FALSE
     assert response.filter == compute.PacketMirroringFilter(
-        cidr_ranges=["cidr_ranges_value"]
+        I_p_protocols=["I_p_protocols_value"]
     )
     assert response.id == "id_value"
     assert response.kind == "kind_value"

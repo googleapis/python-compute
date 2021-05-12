@@ -434,7 +434,9 @@ def test_aggregated_list_rest(
             id="id_value",
             items={
                 "key_value": compute.ForwardingRulesScopedList(
-                    forwarding_rules=[compute.ForwardingRule(all_ports=True)]
+                    forwarding_rules=[
+                        compute.ForwardingRule(I_p_address="I_p_address_value")
+                    ]
                 )
             },
             kind="kind_value",
@@ -457,7 +459,7 @@ def test_aggregated_list_rest(
     assert response.id == "id_value"
     assert response.items == {
         "key_value": compute.ForwardingRulesScopedList(
-            forwarding_rules=[compute.ForwardingRule(all_ports=True)]
+            forwarding_rules=[compute.ForwardingRule(I_p_address="I_p_address_value")]
         )
     }
     assert response.kind == "kind_value"
@@ -718,14 +720,14 @@ def test_get_rest(
     with mock.patch.object(Session, "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ForwardingRule(
+            I_p_address="I_p_address_value",
+            I_p_protocol=compute.ForwardingRule.IPProtocol.AH,
             all_ports=True,
             allow_global_access=True,
             backend_service="backend_service_value",
             creation_timestamp="creation_timestamp_value",
             description="description_value",
             fingerprint="fingerprint_value",
-            i_p_address="i_p_address_value",
-            i_p_protocol=compute.ForwardingRule.IPProtocol.AH,
             id="id_value",
             ip_version=compute.ForwardingRule.IpVersion.IPV4,
             is_mirroring_collector=True,
@@ -759,14 +761,14 @@ def test_get_rest(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.ForwardingRule)
+    assert response.I_p_address == "I_p_address_value"
+    assert response.I_p_protocol == compute.ForwardingRule.IPProtocol.AH
     assert response.all_ports is True
     assert response.allow_global_access is True
     assert response.backend_service == "backend_service_value"
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
     assert response.fingerprint == "fingerprint_value"
-    assert response.i_p_address == "i_p_address_value"
-    assert response.i_p_protocol == compute.ForwardingRule.IPProtocol.AH
     assert response.id == "id_value"
     assert response.ip_version == compute.ForwardingRule.IpVersion.IPV4
     assert response.is_mirroring_collector is True
@@ -942,7 +944,9 @@ def test_insert_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        forwarding_rule_resource = compute.ForwardingRule(all_ports=True)
+        forwarding_rule_resource = compute.ForwardingRule(
+            I_p_address="I_p_address_value"
+        )
         client.insert(
             project="project_value",
             region="region_value",
@@ -973,7 +977,9 @@ def test_insert_rest_flattened_error():
             compute.InsertForwardingRuleRequest(),
             project="project_value",
             region="region_value",
-            forwarding_rule_resource=compute.ForwardingRule(all_ports=True),
+            forwarding_rule_resource=compute.ForwardingRule(
+                I_p_address="I_p_address_value"
+            ),
         )
 
 
@@ -993,7 +999,7 @@ def test_list_rest(
         # Designate an appropriate value for the returned response.
         return_value = compute.ForwardingRuleList(
             id="id_value",
-            items=[compute.ForwardingRule(all_ports=True)],
+            items=[compute.ForwardingRule(I_p_address="I_p_address_value")],
             kind="kind_value",
             next_page_token="next_page_token_value",
             self_link="self_link_value",
@@ -1011,7 +1017,7 @@ def test_list_rest(
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
-    assert response.items == [compute.ForwardingRule(all_ports=True)]
+    assert response.items == [compute.ForwardingRule(I_p_address="I_p_address_value")]
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
@@ -1211,7 +1217,9 @@ def test_patch_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        forwarding_rule_resource = compute.ForwardingRule(all_ports=True)
+        forwarding_rule_resource = compute.ForwardingRule(
+            I_p_address="I_p_address_value"
+        )
         client.patch(
             project="project_value",
             region="region_value",
@@ -1245,7 +1253,9 @@ def test_patch_rest_flattened_error():
             project="project_value",
             region="region_value",
             forwarding_rule="forwarding_rule_value",
-            forwarding_rule_resource=compute.ForwardingRule(all_ports=True),
+            forwarding_rule_resource=compute.ForwardingRule(
+                I_p_address="I_p_address_value"
+            ),
         )
 
 
