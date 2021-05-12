@@ -14,27 +14,17 @@
 
 """This script is used to synthesize generated parts of this library."""
 
-import os
-
 import synthtool as s
 import synthtool.gcp as gcp
-from synthtool.languages import python
 
-gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
-# ----------------------------------------------------------------------------
-# Generate Compute Engine GAPIC layer
-# ----------------------------------------------------------------------------
-versions = ["v1"]
-for version in versions:
-    library = gapic.py_library(
-        service="compute",
-        version="v1",
-        bazel_target="//google/cloud/compute/v1:compute-v1-py",
-        diregapic=True,
-    )
+default_version = "v1"
+
+for library in s.get_staging_dirs(default_version):
     s.move(library, excludes=["setup.py", "README.rst", "docs/index.rst", "docs/multiprocessing.rst", "scripts/fixup*"])
+
+s.remove_staging_dirs()
 
 # ----------------------------------------------------------------------------
 # Add templated files
