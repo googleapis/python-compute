@@ -4,28 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-compute.git",
-        "sha": "d5f02ad82d9bf360b61211d5598d73b5a8b9be7a"
+        "sha": "4c139541aefe65545f278795470d02c3fcd0e673"
       }
     },
     {
       "git": {
         "name": "googleapis-discovery",
         "remote": "https://github.com/googleapis/googleapis-discovery.git",
-        "sha": "806768fb4ee175390ce625331cdcb05293786c8f"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "0780323da96d5a53925fe0547757181fe76e8f1e"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "0780323da96d5a53925fe0547757181fe76e8f1e"
+        "sha": "8f48e81408f5582f8bf17d0b959711d955988bb9"
       }
     }
   ],
@@ -73,16 +59,21 @@
     ".kokoro/samples/lint/presubmit.cfg",
     ".kokoro/samples/python3.6/common.cfg",
     ".kokoro/samples/python3.6/continuous.cfg",
+    ".kokoro/samples/python3.6/periodic-head.cfg",
     ".kokoro/samples/python3.6/periodic.cfg",
     ".kokoro/samples/python3.6/presubmit.cfg",
     ".kokoro/samples/python3.7/common.cfg",
     ".kokoro/samples/python3.7/continuous.cfg",
+    ".kokoro/samples/python3.7/periodic-head.cfg",
     ".kokoro/samples/python3.7/periodic.cfg",
     ".kokoro/samples/python3.7/presubmit.cfg",
     ".kokoro/samples/python3.8/common.cfg",
     ".kokoro/samples/python3.8/continuous.cfg",
+    ".kokoro/samples/python3.8/periodic-head.cfg",
     ".kokoro/samples/python3.8/periodic.cfg",
     ".kokoro/samples/python3.8/presubmit.cfg",
+    ".kokoro/test-samples-against-head.sh",
+    ".kokoro/test-samples-impl.sh",
     ".kokoro/test-samples.sh",
     ".kokoro/trampoline.sh",
     ".kokoro/trampoline_v2.sh",
@@ -174,6 +165,7 @@
     "google/cloud/compute/__init__.py",
     "google/cloud/compute/py.typed",
     "google/cloud/compute_v1/__init__.py",
+    "google/cloud/compute_v1/gapic_metadata.json",
     "google/cloud/compute_v1/py.typed",
     "google/cloud/compute_v1/services/__init__.py",
     "google/cloud/compute_v1/services/accelerator_types/__init__.py",
@@ -619,7 +611,6 @@
     "noxfile.py",
     "renovate.json",
     "scripts/decrypt-secrets.sh",
-    "scripts/fixup_compute_v1_keywords.py",
     "scripts/readme-gen/readme_gen.py",
     "scripts/readme-gen/templates/README.tmpl.rst",
     "scripts/readme-gen/templates/auth.tmpl.rst",
@@ -628,6 +619,9 @@
     "scripts/readme-gen/templates/install_portaudio.tmpl.rst",
     "setup.cfg",
     "testing/.gitignore",
+    "tests/__init__.py",
+    "tests/unit/__init__.py",
+    "tests/unit/gapic/__init__.py",
     "tests/unit/gapic/compute_v1/__init__.py",
     "tests/unit/gapic/compute_v1/test_accelerator_types.py",
     "tests/unit/gapic/compute_v1/test_addresses.py",
