@@ -182,6 +182,24 @@ Build the docs via:
 
    $ nox -s docs
 
+*************************
+Samples and code snippets
+*************************
+
+Code samples and snippets live in the `samples/` catalogue. Feel free to
+provide more examples, but make sure to write tests for those examples.
+
+The tests will run against a real Google Cloud Project, so you should
+configure them just like the System Tests.
+
+- To run sample tests, you can execute::
+
+   # Run all system tests
+   $ nox -s samples-3.8
+
+   # Run a single sample test
+   $ nox -s system-3.8 -- -k <name of test>
+
 ********************************************
 Note About ``README`` as it pertains to PyPI
 ********************************************

@@ -25,11 +25,12 @@ import nox
 
 
 BLACK_VERSION = "black==19.10b0"
-BLACK_PATHS = ["docs", "google", "tests", "noxfile.py", "setup.py"]
+BLACK_PATHS = ["docs", "google", "samples", "tests", "noxfile.py", "setup.py"]
 
 DEFAULT_PYTHON_VERSION = "3.8"
 SYSTEM_TEST_PYTHON_VERSIONS = ["3.8"]
 UNIT_TEST_PYTHON_VERSIONS = ["3.6", "3.7", "3.8", "3.9"]
+SAMPLE_TEST_PYTHON_VERSIONS = ["3.8", "3.9"]
 
 CURRENT_DIRECTORY = pathlib.Path(__file__).parent.absolute()
 
@@ -59,7 +60,7 @@ def lint(session):
     session.run(
         "black", "--check", *BLACK_PATHS,
     )
-    session.run("flake8", "google", "tests")
+    session.run("flake8", "google", "tests", "samples")
 
 
 @nox.session(python=DEFAULT_PYTHON_VERSION)
@@ -110,6 +111,25 @@ def default(session):
 def unit(session):
     """Run the unit test suite."""
     default(session)
+
+
+@nox.session(python=SAMPLE_TEST_PYTHON_VERSIONS)
+def samples(session):
+    """Run tests for samples"""
+    samples_test_folder_path = CURRENT_DIRECTORY / "samples"
+    requirements_path = (
+        CURRENT_DIRECTORY / "samples" / "snippets" / "requirements-test.txt"
+    )
+
+    if not samples_test_folder_path.is_dir():
+        session.skip("Sample tests not found.")
+        return
+
+    session.install("-U", "pip", "setuptools")
+    session.install("-Ur", str(requirements_path))
+    session.install("-e", ".")
+
+    session.run("py.test", "--quiet", str(samples_test_folder_path), *session.posargs)
 
 
 @nox.session(python=SYSTEM_TEST_PYTHON_VERSIONS)
