@@ -60,8 +60,37 @@ def list_instances(project_id: str, zone: str) -> typing.Iterable[compute_v1.Ins
 
 # [END compute_instances_list]
 
-
 # [START compute_instances_list_all]
+def list_all_instances(
+    project_id: str,
+) -> typing.Dict[str, typing.Iterable[compute_v1.Instance]]:
+    """
+    Returns a dictionary of all instances present in a project, grouped by their zone.
+
+    Args:
+        project_id: ID or number of the project you want to use.
+
+    Returns:
+        A dictionary with zone names as keys (in form of "zones/{zone_name}") and
+        iterable collections of Instance objects as values.
+    """
+    instance_client = compute_v1.InstancesClient()
+    agg_list = instance_client.aggregated_list(project=project_id)
+    all_instances = {}
+    print("Instances found:")
+    for zone, response in agg_list:
+        if response.instances:
+            all_instances[zone] = response.instances
+            print(f" {zone}:")
+            for instance in response.instances:
+                print(f" - {instance.name} ({instance.machine_type})")
+    return all_instances
+
+
+# [END compute_instances_list_all]
+
+
+# [START compute_instances_create]
 def create_instance(
     project_id: str,
     zone: str,
@@ -138,38 +167,6 @@ def create_instance(
         pass
     print(f"Instance {instance_name} created.")
     return instance
-
-
-# [END compute_instances_list_all]
-
-
-def list_all_instances(
-    project_id: str,
-) -> typing.Dict[str, typing.Iterable[compute_v1.Instance]]:
-    """
-    Returns a dictionary of all instances present in a project, grouped by their zone.
-
-    Args:
-        project_id: ID or number of the project you want to use.
-
-    Returns:
-        A dictionary with zone names as keys (in form of "zones/{zone_name}") and
-        iterable collections of Instance objects as values.
-    """
-    instance_client = compute_v1.InstancesClient()
-    agg_list = instance_client.aggregated_list(project=project_id)
-    all_instances = {}
-    print("Instances found:")
-    for zone, response in agg_list:
-        if response.instances:
-            all_instances[zone] = response.instances
-            print(f" {zone}:")
-            for instance in response.instances:
-                print(f" - {instance.name} ({instance.machine_type})")
-    return all_instances
-
-
-# [START compute_instances_create]
 
 
 # [END compute_instances_create]
