@@ -60,10 +60,34 @@ class TestInstanceGroups(TestBase):
             )
 
     def test_instance_group_resize(self):
+        initialize_params = AttachedDiskInitializeParams(source_image=self.DISK_IMAGE)
+        disk = AttachedDisk(
+            auto_delete=True,
+            boot=True,
+            type_=AttachedDisk.Type.PERSISTENT,
+            initialize_params=initialize_params,
+        )
+        network_interface = NetworkInterface(name="default")
+        instance = Instance(
+            name=self.name,
+            description="test",
+            disks=[disk],
+            machine_type=self.MACHINE_TYPE,
+            network_interfaces=[network_interface],
+        )
+        request = InsertInstanceRequest(
+            zone=self.DEFAULT_ZONE,
+            project=self.DEFAULT_PROJECT,
+            instance_resource=instance,
+        )
+        operation = self.inst_client.insert(request=request)
+        self.wait_for_zonal_operation(operation.name)
+        self.instances.append(self.name)
+
         template_name = self.get_unique_name("template")
         igm_name = self.get_unique_name("igm")
 
-        instance = self.insert_instance().target_link
+        instance = operation.target_link
 
         template_resource = InstanceTemplate(
             name=template_name, source_instance=instance
@@ -118,30 +142,3 @@ class TestInstanceGroups(TestBase):
         # igm = self.igm_client.get(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
         #                          instance_group_manager=igm_name)
         # self.assertEqual(igm.target_size, 0)
-
-    def insert_instance(self):
-        disk = AttachedDisk()
-        initialize_params = AttachedDiskInitializeParams()
-        initialize_params.source_image = self.DISK_IMAGE
-        disk.initialize_params = initialize_params
-        disk.auto_delete = True
-        disk.boot = True
-        disk.type_ = AttachedDisk.Type.PERSISTENT
-
-        network_interface = NetworkInterface()
-        network_interface.name = "default"
-
-        instance = Instance()
-        instance.name = self.name
-        instance.disks = [disk]
-        instance.machine_type = self.MACHINE_TYPE
-        instance.network_interfaces = [network_interface]
-
-        request = InsertInstanceRequest()
-        request.zone = self.DEFAULT_ZONE
-        request.project = self.DEFAULT_PROJECT
-        request.instance_resource = instance
-        operation = self.inst_client.insert(request=request)
-        self.wait_for_zonal_operation(operation.name)
-        self.instances.append(self.name)
-        return operation

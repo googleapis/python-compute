@@ -166,28 +166,27 @@ class TestComputeSmoke(TestBase):
         self.assertEqual(len(getattr(instance, "disks")), 1)
 
     def insert_instance(self):
-        disk = AttachedDisk()
-        initialize_params = AttachedDiskInitializeParams()
-        initialize_params.source_image = self.DISK_IMAGE
-        disk.initialize_params = initialize_params
-        disk.auto_delete = True
-        disk.boot = True
-        disk.type_ = AttachedDisk.Type.PERSISTENT
+        initialize_params = AttachedDiskInitializeParams(source_image=self.DISK_IMAGE)
+        disk = AttachedDisk(
+            auto_delete=True,
+            boot=True,
+            type_=AttachedDisk.Type.PERSISTENT,
+            initialize_params=initialize_params,
+        )
+        network_interface = NetworkInterface(name="default")
+        instance = Instance(
+            name=self.name,
+            description="test",
+            disks=[disk],
+            machine_type=self.MACHINE_TYPE,
+            network_interfaces=[network_interface],
+        )
 
-        network_interface = NetworkInterface()
-        network_interface.name = "default"
-
-        instance = Instance()
-        instance.name = self.name
-        instance.description = "test"
-        instance.disks = [disk]
-        instance.machine_type = self.MACHINE_TYPE
-        instance.network_interfaces = [network_interface]
-
-        request = InsertInstanceRequest()
-        request.zone = self.DEFAULT_ZONE
-        request.project = self.DEFAULT_PROJECT
-        request.instance_resource = instance
+        request = InsertInstanceRequest(
+            zone=self.DEFAULT_ZONE,
+            project=self.DEFAULT_PROJECT,
+            instance_resource=instance,
+        )
         operation = self.client.insert(request=request)
         self.wait_for_zonal_operation(operation.name)
         self.instances.append(self.name)
