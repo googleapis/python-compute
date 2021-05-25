@@ -31,8 +31,8 @@ pip install -r requirements.txt
 
 ### Run the demo
 
-Run the quickstart script, providing it with your project name, a GCP zone and a name for the instance that will be created and destroyed:
+Run the quickstart script, it will create and destroy a `n1-standard-1` 
+type machine in the `europe-central2-b` zone.
 ```bash
-# For example, to create machine "test-instance" in europe-central2-a in project "my-test-project":
-python quickstart.py my-test-project europe-central2-a test-instance
+python quickstart.py
 ```
