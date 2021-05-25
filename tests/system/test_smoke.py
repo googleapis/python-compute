@@ -46,32 +46,6 @@ class TestComputeSmoke(TestBase):
         self.insert_instance()
         self.assert_instance()
 
-    def insert_instance(self):
-        disk = AttachedDisk()
-        initialize_params = AttachedDiskInitializeParams()
-        initialize_params.source_image = self.DISK_IMAGE
-        disk.initialize_params = initialize_params
-        disk.auto_delete = True
-        disk.boot = True
-        disk.type_ = AttachedDisk.Type.PERSISTENT
-
-        network_interface = NetworkInterface()
-        network_interface.name = "default"
-
-        instance = Instance()
-        instance.name = self.name
-        instance.disks = [disk]
-        instance.machine_type = self.MACHINE_TYPE
-        instance.network_interfaces = [network_interface]
-
-        request = InsertInstanceRequest()
-        request.zone = self.DEFAULT_ZONE
-        request.project = self.DEFAULT_PROJECT
-        request.instance_resource = instance
-        operation = self.client.insert(request=request)
-        self.wait_for_zonal_operation(operation.name)
-        self.instances.append(self.name)
-
     def test_aggregated_list(self):
         presented = False
         self.insert_instance()
@@ -104,17 +78,6 @@ class TestComputeSmoke(TestBase):
             "0 has type int, but expected one of: bytes, unicode",
             str(ex.exception.args),
         )
-
-    def get_instance(self):
-        return self.client.get(
-            project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE, instance=self.name
-        )
-
-    def assert_instance(self):
-        instance = self.get_instance()
-        self.assertEqual(getattr(instance, "name"), self.name)
-        self.assertEqual(len(getattr(instance, "network_interfaces")), 1)
-        self.assertEqual(len(getattr(instance, "disks")), 1)
 
     def test_patch(self):
         self.insert_instance()
@@ -158,3 +121,73 @@ class TestComputeSmoke(TestBase):
                 presented = True
                 break
         self.assertTrue(presented)
+
+    def test_update_description_empty(self):
+        self.insert_instance()
+        instance = self.get_instance()
+        self.assertEqual(instance.description, "test")
+        self.assertEqual(instance.scheduling.min_node_cpus, 0)
+        instance.description = ""
+        update_op = self.client.update(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            instance=self.name,
+            instance_resource=instance,
+        )
+        self.wait_for_zonal_operation(update_op.name)
+        fetched = self.get_instance()
+        self.assertEqual(fetched.description, "")
+        self.assertEqual(fetched.scheduling.min_node_cpus, 0)
+
+    def test_update_description_non_ascii(self):
+        self.insert_instance()
+        instance = self.get_instance()
+        self.assertEqual(instance.description, "test")
+        instance.description = "тест"
+        update_op = self.client.update(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            instance=self.name,
+            instance_resource=instance,
+        )
+        self.wait_for_zonal_operation(update_op.name)
+        fetched = self.get_instance()
+        self.assertEqual(fetched.description, "тест")
+
+    def get_instance(self):
+        return self.client.get(
+            project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE, instance=self.name
+        )
+
+    def assert_instance(self):
+        instance = self.get_instance()
+        self.assertEqual(getattr(instance, "name"), self.name)
+        self.assertEqual(len(getattr(instance, "network_interfaces")), 1)
+        self.assertEqual(len(getattr(instance, "disks")), 1)
+
+    def insert_instance(self):
+        disk = AttachedDisk()
+        initialize_params = AttachedDiskInitializeParams()
+        initialize_params.source_image = self.DISK_IMAGE
+        disk.initialize_params = initialize_params
+        disk.auto_delete = True
+        disk.boot = True
+        disk.type_ = AttachedDisk.Type.PERSISTENT
+
+        network_interface = NetworkInterface()
+        network_interface.name = "default"
+
+        instance = Instance()
+        instance.name = self.name
+        instance.description = "test"
+        instance.disks = [disk]
+        instance.machine_type = self.MACHINE_TYPE
+        instance.network_interfaces = [network_interface]
+
+        request = InsertInstanceRequest()
+        request.zone = self.DEFAULT_ZONE
+        request.project = self.DEFAULT_PROJECT
+        request.instance_resource = instance
+        operation = self.client.insert(request=request)
+        self.wait_for_zonal_operation(operation.name)
+        self.instances.append(self.name)

@@ -21,6 +21,8 @@ from google.cloud.compute_v1.services.instance_templates.client import (
 )
 from google.cloud.compute_v1.types import (
     InsertInstanceRequest,
+    InstanceGroupManager,
+    InstanceTemplate,
     Instance,
     AttachedDisk,
     NetworkInterface,
@@ -57,19 +59,18 @@ class TestInstanceGroups(TestBase):
                 project=self.DEFAULT_PROJECT, instance_template=template
             )
 
-    """ Resize fails due to
     def test_instance_group_resize(self):
-        template_name = self.get_unique_name('template')
-        igm_name = self.get_unique_name('igm')
+        template_name = self.get_unique_name("template")
+        igm_name = self.get_unique_name("igm")
 
         instance = self.insert_instance().target_link
 
         template_resource = InstanceTemplate(
-            name=template_name,
-            source_instance=instance
+            name=template_name, source_instance=instance
         )
-        operation = self.template_client.insert(project=self.DEFAULT_PROJECT,
-                                                instance_template_resource=template_resource)
+        operation = self.template_client.insert(
+            project=self.DEFAULT_PROJECT, instance_template_resource=template_resource
+        )
         self.wait_for_global_operation(operation.name)
         self.templates.append(template_name)
         template = operation.target_link
@@ -78,22 +79,45 @@ class TestInstanceGroups(TestBase):
             base_instance_name="gapicinst",
             instance_template=template,
             name=igm_name,
-            target_size=1)
-        operation = self.igm_client.insert(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
-                                           instance_group_manager_resource=igm_resource)
+            target_size=0,
+        )
+        operation = self.igm_client.insert(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            instance_group_manager_resource=igm_resource,
+        )
         self.wait_for_zonal_operation(operation.name)
         self.igms.append(igm_name)
 
-        instance_group = self.igm_client.get(project=self.DEFAULT_PROJECT,
-                                             zone=self.DEFAULT_ZONE, instance_group_manager=igm_name)
-        self.assertEqual(instance_group.target_size, 1)
-        resize_op = self.igm_client.resize(project=self.DEFAULT_PROJECT,
-                                           zone=self.DEFAULT_ZONE, size=0, instance_group_manager=igm_name)
+        instance_group = self.igm_client.get(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            instance_group_manager=igm_name,
+        )
+        self.assertEqual(instance_group.target_size, 0)
+
+        resize_op = self.igm_client.resize(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            size=1,
+            instance_group_manager=igm_name,
+        )
         self.wait_for_zonal_operation(resize_op.name)
-        igm = self.igm_client.get(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
-                                  instance_group_manager=igm_name)
-        self.assertEqual(igm.target_size, 0)
-    """
+
+        instance_group = self.igm_client.get(
+            project=self.DEFAULT_PROJECT,
+            zone=self.DEFAULT_ZONE,
+            instance_group_manager=igm_name,
+        )
+        self.assertEqual(instance_group.target_size, 1)
+
+        # Resize to zero fails, uncomment once fixed b/189145532.
+        # resize_0_op = self.igm_client.resize(project=self.DEFAULT_PROJECT,
+        #                                     zone=self.DEFAULT_ZONE, size=0, instance_group_manager=igm_name)
+        # self.wait_for_zonal_operation(resize_0_op.name)
+        # igm = self.igm_client.get(project=self.DEFAULT_PROJECT, zone=self.DEFAULT_ZONE,
+        #                          instance_group_manager=igm_name)
+        # self.assertEqual(igm.target_size, 0)
 
     def insert_instance(self):
         disk = AttachedDisk()
