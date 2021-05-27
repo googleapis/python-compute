@@ -23,27 +23,27 @@ from synthtool.languages import python
 gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
 
-# # ----------------------------------------------------------------------------
-# # Generate Compute Engine GAPIC layer
-# # ----------------------------------------------------------------------------
-# versions = ["v1"]
-# for version in versions:
-#     library = gapic.py_library(
-#         service="compute",
-#         version="v1",
-#         bazel_target="//google/cloud/compute/v1:compute-v1-py",
-#         diregapic=True,
-#     )
-#     s.move(library, excludes=["setup.py", "README.rst", "docs/index.rst", "docs/multiprocessing.rst", "scripts/fixup*"])
+# ----------------------------------------------------------------------------
+# Generate Compute Engine GAPIC layer
+# ----------------------------------------------------------------------------
+versions = ["v1"]
+for version in versions:
+    library = gapic.py_library(
+        service="compute",
+        version="v1",
+        bazel_target="//google/cloud/compute/v1:compute-v1-py",
+        diregapic=True,
+    )
+    s.move(library, excludes=["setup.py", "README.rst", "docs/index.rst", "docs/multiprocessing.rst", "scripts/fixup*"])
 
-# # ----------------------------------------------------------------------------
-# # Add templated files
-# # ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
+# Add templated files
+# ----------------------------------------------------------------------------
 
-# templated_files = common.py_library(cov_level=99, microgenerator=True)
-# s.move(
-#   templated_files, excludes=[".coveragerc"] # the microgenerator has a good coveragerc file
-# )
+templated_files = common.py_library(cov_level=99, microgenerator=True)
+s.move(
+  templated_files, excludes=[".coveragerc"] # the microgenerator has a good coveragerc file
+)
 
 # --------------------------------------------------------------------------
 # Samples templates
