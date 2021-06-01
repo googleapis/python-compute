@@ -19,20 +19,22 @@ instances using the google-cloud-compute library. It can be run from command
 line to create, list and delete an instance in a given project in a given zone.
 """
 
-# [START compute_instances_list]
-# [START compute_instances_list_all]
 # [START compute_instances_create]
 # [START compute_instances_delete]
+import sys
+
+# [START compute_instances_list]
+# [START compute_instances_list_all]
 # [START compute_instances_operation_check]
 import typing
 
 import google.cloud.compute_v1 as compute_v1
 
 # [END compute_instances_operation_check]
-# [END compute_instances_delete]
-# [END compute_instances_create]
 # [END compute_instances_list_all]
 # [END compute_instances_list]
+# [END compute_instances_delete]
+# [END compute_instances_create]
 
 
 # [START compute_instances_list]
@@ -159,12 +161,15 @@ def create_instance(
 
     print(f"Creating the {instance_name} instance in {zone}...")
     operation = instance_client.insert(request=request)
-    # wait_result = operation_client.wait(operation=operation.name, zone=zone, project=project)
-    operation = wait_for_operation(operation, project_id)
+    if operation.status == compute_v1.Operation.Status.RUNNING:
+        operation_client = compute_v1.ZoneOperationsClient()
+        operation = operation_client.wait(
+            operation=operation.name, zone=zone, project=project_id
+        )
     if operation.error:
-        pass
+        print("Error during creation:", operation.error, file=sys.stderr)
     if operation.warnings:
-        pass
+        print("Warning during creation:", operation.warnings, file=sys.stderr)
     print(f"Instance {instance_name} created.")
     return instance
 
@@ -188,11 +193,15 @@ def delete_instance(project_id: str, zone: str, machine_name: str) -> None:
     operation = instance_client.delete(
         project=project_id, zone=zone, instance=machine_name
     )
-    operation = wait_for_operation(operation, project_id)
+    if operation.status == compute_v1.Operation.Status.RUNNING:
+        operation_client = compute_v1.ZoneOperationsClient()
+        operation = operation_client.wait(
+            operation=operation.name, zone=zone, project=project_id
+        )
     if operation.error:
-        pass
+        print("Error during deletion:", operation.error, file=sys.stderr)
     if operation.warnings:
-        pass
+        print("Warning during deletion:", operation.warnings, file=sys.stderr)
     print(f"Instance {machine_name} deleted.")
     return
 
