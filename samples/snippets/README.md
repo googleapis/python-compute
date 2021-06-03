@@ -10,15 +10,8 @@ with the Google Compute Engine API.
 1. If you haven't already, set up a Python Development Environment by following the [python setup guide](https://cloud.google.com/python/setup) and 
 [create a project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project).
 
-1. Create a service account with the 'Editor' permissions by following these 
-[instructions](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
-
-1. [Download a JSON key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) to use to authenticate your script.
-
-1. Configure your local environment to use the acquired key.
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service/account/key.json
-```
+1. Use `gcloud auth application-default login` to allow the script to authenticate using
+your credentials to the Google Cloud APIs.
 
 ### Install requirements
 

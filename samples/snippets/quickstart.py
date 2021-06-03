@@ -270,6 +270,6 @@ if __name__ == "__main__":
             "or set GOOGLE_APPLICATION_CREDENTIALS to use this script."
         )
     else:
-        test_instance_name = "i" + uuid.uuid4().hex[:10]
+        instance_name = "quickstart-" + uuid.uuid4().hex[:10]
         instance_zone = "europe-central2-b"
-        main(default_project_id, instance_zone, test_instance_name)
+        main(default_project_id, instance_zone, instance_name)
