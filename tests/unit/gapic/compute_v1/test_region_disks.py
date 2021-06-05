@@ -425,6 +425,7 @@ def test_add_resource_policies_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -460,6 +461,7 @@ def test_add_resource_policies_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -565,6 +567,7 @@ def test_create_snapshot_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -600,6 +603,7 @@ def test_create_snapshot_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -701,6 +705,7 @@ def test_delete_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -736,6 +741,7 @@ def test_delete_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -832,12 +838,15 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionDiskReq
             last_detach_timestamp="last_detach_timestamp_value",
             license_codes=["license_codes_value"],
             licenses=["licenses_value"],
+            location_hint="location_hint_value",
             name="name_value",
             options="options_value",
             physical_block_size_bytes="physical_block_size_bytes_value",
+            provisioned_iops="provisioned_iops_value",
             region="region_value",
             replica_zones=["replica_zones_value"],
             resource_policies=["resource_policies_value"],
+            satisfies_pzs=True,
             self_link="self_link_value",
             size_gb="size_gb_value",
             source_disk="source_disk_value",
@@ -852,6 +861,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionDiskReq
                 kms_key_name="kms_key_name_value"
             ),
             source_snapshot_id="source_snapshot_id_value",
+            source_storage_object="source_storage_object_value",
             status=compute.Disk.Status.CREATING,
             type_="type__value",
             users=["users_value"],
@@ -886,12 +896,15 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionDiskReq
     assert response.last_detach_timestamp == "last_detach_timestamp_value"
     assert response.license_codes == ["license_codes_value"]
     assert response.licenses == ["licenses_value"]
+    assert response.location_hint == "location_hint_value"
     assert response.name == "name_value"
     assert response.options == "options_value"
     assert response.physical_block_size_bytes == "physical_block_size_bytes_value"
+    assert response.provisioned_iops == "provisioned_iops_value"
     assert response.region == "region_value"
     assert response.replica_zones == ["replica_zones_value"]
     assert response.resource_policies == ["resource_policies_value"]
+    assert response.satisfies_pzs is True
     assert response.self_link == "self_link_value"
     assert response.size_gb == "size_gb_value"
     assert response.source_disk == "source_disk_value"
@@ -906,6 +919,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionDiskReq
         kms_key_name="kms_key_name_value"
     )
     assert response.source_snapshot_id == "source_snapshot_id_value"
+    assert response.source_storage_object == "source_storage_object_value"
     assert response.status == compute.Disk.Status.CREATING
     assert response.type_ == "type__value"
     assert response.users == ["users_value"]
@@ -1091,6 +1105,7 @@ def test_insert_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1126,6 +1141,7 @@ def test_insert_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1353,6 +1369,7 @@ def test_remove_resource_policies_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1388,6 +1405,7 @@ def test_remove_resource_policies_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1493,6 +1511,7 @@ def test_resize_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1528,6 +1547,7 @@ def test_resize_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1751,6 +1771,7 @@ def test_set_labels_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1786,6 +1807,7 @@ def test_set_labels_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"

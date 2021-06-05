@@ -457,6 +457,92 @@ class TargetHttpsProxiesRestTransport(TargetHttpsProxiesTransport):
             response.content, ignore_unknown_fields=True
         )
 
+    def patch(
+        self,
+        request: compute.PatchTargetHttpsProxyRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the patch method over HTTP.
+
+        Args:
+            request (~.compute.PatchTargetHttpsProxyRequest):
+                The request object. A request message for
+                TargetHttpsProxies.Patch. See the method
+                description for details.
+
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.compute.Operation:
+                Represents an Operation resource.
+
+                Google Compute Engine has three Operation resources:
+
+                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
+                   \*
+                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
+                   \*
+                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
+
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses.
+
+                Operations can be global, regional or zonal.
+
+                -  For global operations, use the ``globalOperations``
+                   resource.
+                -  For regional operations, use the ``regionOperations``
+                   resource.
+                -  For zonal operations, use the ``zonalOperations``
+                   resource.
+
+                For more information, read Global, Regional, and Zonal
+                Resources. (== resource_for
+                {$api_version}.globalOperations ==) (== resource_for
+                {$api_version}.regionOperations ==) (== resource_for
+                {$api_version}.zoneOperations ==)
+
+        """
+
+        # Jsonify the request body
+        body = compute.TargetHttpsProxy.to_json(
+            request.target_https_proxy_resource,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+
+        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
+        #               current impl assumes basic case of grpc transcoding
+        url = "https://{host}/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}".format(
+            host=self._host,
+            project=request.project,
+            target_https_proxy=request.target_https_proxy,
+        )
+
+        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
+        #               not required for GCE
+        query_params = {}
+        if compute.PatchTargetHttpsProxyRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
+        # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
+        #               discards default values
+        # TODO(yon-mg): add test for proper url encoded strings
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+
+        # Send the request
+        response = self._session.patch(url, data=body,)
+
+        # Raise requests.exceptions.HTTPError if the status code is >= 400
+        response.raise_for_status()
+
+        # Return the response
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
     def set_quic_override(
         self,
         request: compute.SetQuicOverrideTargetHttpsProxyRequest,

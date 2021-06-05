@@ -1188,8 +1188,9 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
-        r"""Sets the security policy for the specified backend
-        service.
+        r"""Sets the Google Cloud Armor security policy for the
+        specified backend service. For more information, see
+        Google Cloud Armor Overview
 
         Args:
             request (google.cloud.compute_v1.types.SetSecurityPolicyBackendServiceRequest):

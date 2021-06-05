@@ -414,6 +414,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -449,6 +450,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -536,6 +538,7 @@ def test_deprecate_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -571,6 +574,7 @@ def test_deprecate_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -680,6 +684,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetImageRequest)
             licenses=["licenses_value"],
             name="name_value",
             raw_disk=compute.RawDisk(container_type=compute.RawDisk.ContainerType.TAR),
+            satisfies_pzs=True,
             self_link="self_link_value",
             shielded_instance_initial_state=compute.InitialStateConfig(
                 dbs=[compute.FileContentBuffer(content="content_value")]
@@ -738,6 +743,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetImageRequest)
     assert response.raw_disk == compute.RawDisk(
         container_type=compute.RawDisk.ContainerType.TAR
     )
+    assert response.satisfies_pzs is True
     assert response.self_link == "self_link_value"
     assert response.shielded_instance_initial_state == compute.InitialStateConfig(
         dbs=[compute.FileContentBuffer(content="content_value")]
@@ -844,6 +850,7 @@ def test_get_from_family_rest(
             licenses=["licenses_value"],
             name="name_value",
             raw_disk=compute.RawDisk(container_type=compute.RawDisk.ContainerType.TAR),
+            satisfies_pzs=True,
             self_link="self_link_value",
             shielded_instance_initial_state=compute.InitialStateConfig(
                 dbs=[compute.FileContentBuffer(content="content_value")]
@@ -902,6 +909,7 @@ def test_get_from_family_rest(
     assert response.raw_disk == compute.RawDisk(
         container_type=compute.RawDisk.ContainerType.TAR
     )
+    assert response.satisfies_pzs is True
     assert response.self_link == "self_link_value"
     assert response.shielded_instance_initial_state == compute.InitialStateConfig(
         dbs=[compute.FileContentBuffer(content="content_value")]
@@ -1099,6 +1107,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1134,6 +1143,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1349,6 +1359,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1384,6 +1395,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1595,6 +1607,7 @@ def test_set_labels_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1630,6 +1643,7 @@ def test_set_labels_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"

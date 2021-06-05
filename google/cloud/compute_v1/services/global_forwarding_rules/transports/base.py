@@ -182,6 +182,9 @@ class GlobalForwardingRulesTransport(abc.ABC):
             self.patch: gapic_v1.method.wrap_method(
                 self.patch, default_timeout=None, client_info=client_info,
             ),
+            self.set_labels: gapic_v1.method.wrap_method(
+                self.set_labels, default_timeout=None, client_info=client_info,
+            ),
             self.set_target: gapic_v1.method.wrap_method(
                 self.set_target, default_timeout=None, client_info=client_info,
             ),
@@ -228,6 +231,15 @@ class GlobalForwardingRulesTransport(abc.ABC):
         self,
     ) -> Callable[
         [compute.PatchGlobalForwardingRuleRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def set_labels(
+        self,
+    ) -> Callable[
+        [compute.SetLabelsGlobalForwardingRuleRequest],
         Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()

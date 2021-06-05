@@ -181,6 +181,9 @@ class InstancesTransport(abc.ABC):
             self.attach_disk: gapic_v1.method.wrap_method(
                 self.attach_disk, default_timeout=None, client_info=client_info,
             ),
+            self.bulk_insert: gapic_v1.method.wrap_method(
+                self.bulk_insert, default_timeout=None, client_info=client_info,
+            ),
             self.delete: gapic_v1.method.wrap_method(
                 self.delete, default_timeout=None, client_info=client_info,
             ),
@@ -194,6 +197,11 @@ class InstancesTransport(abc.ABC):
             ),
             self.get: gapic_v1.method.wrap_method(
                 self.get, default_timeout=None, client_info=client_info,
+            ),
+            self.get_effective_firewalls: gapic_v1.method.wrap_method(
+                self.get_effective_firewalls,
+                default_timeout=None,
+                client_info=client_info,
             ),
             self.get_guest_attributes: gapic_v1.method.wrap_method(
                 self.get_guest_attributes,
@@ -364,6 +372,15 @@ class InstancesTransport(abc.ABC):
         raise NotImplementedError()
 
     @property
+    def bulk_insert(
+        self,
+    ) -> Callable[
+        [compute.BulkInsertInstanceRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
     def delete(
         self,
     ) -> Callable[
@@ -396,6 +413,18 @@ class InstancesTransport(abc.ABC):
     ) -> Callable[
         [compute.GetInstanceRequest],
         Union[compute.Instance, Awaitable[compute.Instance]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def get_effective_firewalls(
+        self,
+    ) -> Callable[
+        [compute.GetEffectiveFirewallsInstanceRequest],
+        Union[
+            compute.InstancesGetEffectiveFirewallsResponse,
+            Awaitable[compute.InstancesGetEffectiveFirewallsResponse],
+        ],
     ]:
         raise NotImplementedError()
 

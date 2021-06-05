@@ -176,6 +176,11 @@ class NetworksTransport(abc.ABC):
             self.get: gapic_v1.method.wrap_method(
                 self.get, default_timeout=None, client_info=client_info,
             ),
+            self.get_effective_firewalls: gapic_v1.method.wrap_method(
+                self.get_effective_firewalls,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.insert: gapic_v1.method.wrap_method(
                 self.insert, default_timeout=None, client_info=client_info,
             ),
@@ -224,6 +229,18 @@ class NetworksTransport(abc.ABC):
         self,
     ) -> Callable[
         [compute.GetNetworkRequest], Union[compute.Network, Awaitable[compute.Network]]
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def get_effective_firewalls(
+        self,
+    ) -> Callable[
+        [compute.GetEffectiveFirewallsNetworkRequest],
+        Union[
+            compute.NetworksGetEffectiveFirewallsResponse,
+            Awaitable[compute.NetworksGetEffectiveFirewallsResponse],
+        ],
     ]:
         raise NotImplementedError()
 

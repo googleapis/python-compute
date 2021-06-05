@@ -306,6 +306,55 @@ class NetworksRestTransport(NetworksTransport):
         # Return the response
         return compute.Network.from_json(response.content, ignore_unknown_fields=True)
 
+    def get_effective_firewalls(
+        self,
+        request: compute.GetEffectiveFirewallsNetworkRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.NetworksGetEffectiveFirewallsResponse:
+        r"""Call the get effective firewalls method over HTTP.
+
+        Args:
+            request (~.compute.GetEffectiveFirewallsNetworkRequest):
+                The request object. A request message for
+                Networks.GetEffectiveFirewalls. See the
+                method description for details.
+
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.compute.NetworksGetEffectiveFirewallsResponse:
+
+        """
+
+        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
+        #               current impl assumes basic case of grpc transcoding
+        url = "https://{host}/compute/v1/projects/{project}/global/networks/{network}/getEffectiveFirewalls".format(
+            host=self._host, project=request.project, network=request.network,
+        )
+
+        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
+        #               not required for GCE
+        query_params = {}
+
+        # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
+        #               discards default values
+        # TODO(yon-mg): add test for proper url encoded strings
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+
+        # Send the request
+        response = self._session.get(url,)
+
+        # Raise requests.exceptions.HTTPError if the status code is >= 400
+        response.raise_for_status()
+
+        # Return the response
+        return compute.NetworksGetEffectiveFirewallsResponse.from_json(
+            response.content, ignore_unknown_fields=True
+        )
+
     def insert(
         self,
         request: compute.InsertNetworkRequest,

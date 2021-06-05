@@ -581,6 +581,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteRouterR
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -616,6 +617,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteRouterR
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -704,6 +706,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRouterRequest
             ],
             creation_timestamp="creation_timestamp_value",
             description="description_value",
+            encrypted_interconnect_router=True,
             id="id_value",
             interfaces=[compute.RouterInterface(ip_range="ip_range_value")],
             kind="kind_value",
@@ -732,6 +735,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRouterRequest
     ]
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
+    assert response.encrypted_interconnect_router is True
     assert response.id == "id_value"
     assert response.interfaces == [compute.RouterInterface(ip_range="ip_range_value")]
     assert response.kind == "kind_value"
@@ -1046,6 +1050,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertRouterR
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1081,6 +1086,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertRouterR
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1319,6 +1325,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchRouterReq
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1354,6 +1361,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchRouterReq
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1561,6 +1569,7 @@ def test_update_rest(transport: str = "rest", request_type=compute.UpdateRouterR
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1596,6 +1605,7 @@ def test_update_rest(transport: str = "rest", request_type=compute.UpdateRouterR
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"

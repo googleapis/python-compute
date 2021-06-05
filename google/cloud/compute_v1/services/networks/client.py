@@ -599,6 +599,76 @@ class NetworksClient(metaclass=NetworksClientMeta):
         # Done; return the response.
         return response
 
+    def get_effective_firewalls(
+        self,
+        request: compute.GetEffectiveFirewallsNetworkRequest = None,
+        *,
+        project: str = None,
+        network: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.NetworksGetEffectiveFirewallsResponse:
+        r"""Returns the effective firewalls on a given network.
+
+        Args:
+            request (google.cloud.compute_v1.types.GetEffectiveFirewallsNetworkRequest):
+                The request object. A request message for
+                Networks.GetEffectiveFirewalls. See the method
+                description for details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            network (str):
+                Name of the network for this request.
+                This corresponds to the ``network`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.NetworksGetEffectiveFirewallsResponse:
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([project, network])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.GetEffectiveFirewallsNetworkRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.GetEffectiveFirewallsNetworkRequest):
+            request = compute.GetEffectiveFirewallsNetworkRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if network is not None:
+                request.network = network
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.get_effective_firewalls]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
     def insert(
         self,
         request: compute.InsertNetworkRequest = None,

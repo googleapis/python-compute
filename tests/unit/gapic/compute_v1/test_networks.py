@@ -419,6 +419,7 @@ def test_add_peering_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -454,6 +455,7 @@ def test_add_peering_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -556,6 +558,7 @@ def test_delete_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -591,6 +594,7 @@ def test_delete_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -758,6 +762,104 @@ def test_get_rest_flattened_error():
         )
 
 
+def test_get_effective_firewalls_rest(
+    transport: str = "rest", request_type=compute.GetEffectiveFirewallsNetworkRequest
+):
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.NetworksGetEffectiveFirewallsResponse(
+            firewall_policys=[
+                compute.NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy(
+                    display_name="display_name_value"
+                )
+            ],
+            firewalls=[
+                compute.Firewall(
+                    allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
+                )
+            ],
+        )
+
+        # Wrap the value into a proper Response obj
+        json_return_value = compute.NetworksGetEffectiveFirewallsResponse.to_json(
+            return_value
+        )
+        response_value = Response()
+        response_value.status_code = 200
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.get_effective_firewalls(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, compute.NetworksGetEffectiveFirewallsResponse)
+    assert response.firewall_policys == [
+        compute.NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy(
+            display_name="display_name_value"
+        )
+    ]
+    assert response.firewalls == [
+        compute.Firewall(allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")])
+    ]
+
+
+def test_get_effective_firewalls_rest_from_dict():
+    test_get_effective_firewalls_rest(request_type=dict)
+
+
+def test_get_effective_firewalls_rest_flattened():
+    client = NetworksClient(credentials=ga_credentials.AnonymousCredentials(),)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.NetworksGetEffectiveFirewallsResponse()
+
+        # Wrap the value into a proper Response obj
+        json_return_value = compute.NetworksGetEffectiveFirewallsResponse.to_json(
+            return_value
+        )
+        response_value = Response()
+        response_value.status_code = 200
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        client.get_effective_firewalls(
+            project="project_value", network="network_value",
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, http_call, http_params = req.mock_calls[0]
+        body = http_params.get("data")
+        assert "project_value" in http_call[1] + str(body)
+        assert "network_value" in http_call[1] + str(body)
+
+
+def test_get_effective_firewalls_rest_flattened_error():
+    client = NetworksClient(credentials=ga_credentials.AnonymousCredentials(),)
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.get_effective_firewalls(
+            compute.GetEffectiveFirewallsNetworkRequest(),
+            project="project_value",
+            network="network_value",
+        )
+
+
 def test_insert_rest(
     transport: str = "rest", request_type=compute.InsertNetworkRequest
 ):
@@ -784,6 +886,7 @@ def test_insert_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -819,6 +922,7 @@ def test_insert_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1175,6 +1279,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRe
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1210,6 +1315,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRe
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1308,6 +1414,7 @@ def test_remove_peering_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1343,6 +1450,7 @@ def test_remove_peering_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1445,6 +1553,7 @@ def test_switch_to_custom_mode_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1480,6 +1589,7 @@ def test_switch_to_custom_mode_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1569,6 +1679,7 @@ def test_update_peering_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1604,6 +1715,7 @@ def test_update_peering_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1753,6 +1865,7 @@ def test_networks_base_transport():
         "add_peering",
         "delete",
         "get",
+        "get_effective_firewalls",
         "insert",
         "list",
         "list_peering_routes",

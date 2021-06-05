@@ -610,6 +610,7 @@ def test_delete_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -645,6 +646,7 @@ def test_delete_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -733,9 +735,17 @@ def test_get_rest(
                 availability_domain_count=2650
             ),
             id="id_value",
+            instance_schedule_policy=compute.ResourcePolicyInstanceSchedulePolicy(
+                expiration_time="expiration_time_value"
+            ),
             kind="kind_value",
             name="name_value",
             region="region_value",
+            resource_status=compute.ResourcePolicyResourceStatus(
+                instance_schedule_policy=compute.ResourcePolicyResourceStatusInstanceSchedulePolicyStatus(
+                    last_run_start_time="last_run_start_time_value"
+                )
+            ),
             self_link="self_link_value",
             snapshot_schedule_policy=compute.ResourcePolicySnapshotSchedulePolicy(
                 retention_policy=compute.ResourcePolicySnapshotSchedulePolicyRetentionPolicy(
@@ -762,9 +772,20 @@ def test_get_rest(
         == compute.ResourcePolicyGroupPlacementPolicy(availability_domain_count=2650)
     )
     assert response.id == "id_value"
+    assert (
+        response.instance_schedule_policy
+        == compute.ResourcePolicyInstanceSchedulePolicy(
+            expiration_time="expiration_time_value"
+        )
+    )
     assert response.kind == "kind_value"
     assert response.name == "name_value"
     assert response.region == "region_value"
+    assert response.resource_status == compute.ResourcePolicyResourceStatus(
+        instance_schedule_policy=compute.ResourcePolicyResourceStatusInstanceSchedulePolicyStatus(
+            last_run_start_time="last_run_start_time_value"
+        )
+    )
     assert response.self_link == "self_link_value"
     assert (
         response.snapshot_schedule_policy
@@ -958,6 +979,7 @@ def test_insert_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -993,6 +1015,7 @@ def test_insert_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"

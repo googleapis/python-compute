@@ -640,6 +640,7 @@ def test_delete_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -675,6 +676,7 @@ def test_delete_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -770,9 +772,11 @@ def test_get_rest(
             dataplane_version=1807,
             description="description_value",
             edge_availability_domain=compute.InterconnectAttachment.EdgeAvailabilityDomain.AVAILABILITY_DOMAIN_1,
+            encryption=compute.InterconnectAttachment.Encryption.IPSEC,
             google_reference_id="google_reference_id_value",
             id="id_value",
             interconnect="interconnect_value",
+            ipsec_internal_addresses=["ipsec_internal_addresses_value"],
             kind="kind_value",
             mtu=342,
             name="name_value",
@@ -815,9 +819,11 @@ def test_get_rest(
         response.edge_availability_domain
         == compute.InterconnectAttachment.EdgeAvailabilityDomain.AVAILABILITY_DOMAIN_1
     )
+    assert response.encryption == compute.InterconnectAttachment.Encryption.IPSEC
     assert response.google_reference_id == "google_reference_id_value"
     assert response.id == "id_value"
     assert response.interconnect == "interconnect_value"
+    assert response.ipsec_internal_addresses == ["ipsec_internal_addresses_value"]
     assert response.kind == "kind_value"
     assert response.mtu == 342
     assert response.name == "name_value"
@@ -923,6 +929,7 @@ def test_insert_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -958,6 +965,7 @@ def test_insert_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1211,6 +1219,7 @@ def test_patch_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1246,6 +1255,7 @@ def test_patch_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"

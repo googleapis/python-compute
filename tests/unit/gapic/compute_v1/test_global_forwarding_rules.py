@@ -463,6 +463,7 @@ def test_delete_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -498,6 +499,7 @@ def test_delete_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -592,6 +594,8 @@ def test_get_rest(
             ip_version=compute.ForwardingRule.IpVersion.IPV4,
             is_mirroring_collector=True,
             kind="kind_value",
+            label_fingerprint="label_fingerprint_value",
+            labels={"key_value": "value_value"},
             load_balancing_scheme=compute.ForwardingRule.LoadBalancingScheme.EXTERNAL,
             metadata_filters=[
                 compute.MetadataFilter(
@@ -603,8 +607,14 @@ def test_get_rest(
             network_tier=compute.ForwardingRule.NetworkTier.PREMIUM,
             port_range="port_range_value",
             ports=["ports_value"],
+            psc_connection_id="psc_connection_id_value",
             region="region_value",
             self_link="self_link_value",
+            service_directory_registrations=[
+                compute.ForwardingRuleServiceDirectoryRegistration(
+                    namespace="namespace_value"
+                )
+            ],
             service_label="service_label_value",
             service_name="service_name_value",
             subnetwork="subnetwork_value",
@@ -633,6 +643,8 @@ def test_get_rest(
     assert response.ip_version == compute.ForwardingRule.IpVersion.IPV4
     assert response.is_mirroring_collector is True
     assert response.kind == "kind_value"
+    assert response.label_fingerprint == "label_fingerprint_value"
+    assert response.labels == {"key_value": "value_value"}
     assert (
         response.load_balancing_scheme
         == compute.ForwardingRule.LoadBalancingScheme.EXTERNAL
@@ -647,8 +659,12 @@ def test_get_rest(
     assert response.network_tier == compute.ForwardingRule.NetworkTier.PREMIUM
     assert response.port_range == "port_range_value"
     assert response.ports == ["ports_value"]
+    assert response.psc_connection_id == "psc_connection_id_value"
     assert response.region == "region_value"
     assert response.self_link == "self_link_value"
+    assert response.service_directory_registrations == [
+        compute.ForwardingRuleServiceDirectoryRegistration(namespace="namespace_value")
+    ]
     assert response.service_label == "service_label_value"
     assert response.service_name == "service_name_value"
     assert response.subnetwork == "subnetwork_value"
@@ -732,6 +748,7 @@ def test_insert_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -767,6 +784,7 @@ def test_insert_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1006,6 +1024,7 @@ def test_patch_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1041,6 +1060,7 @@ def test_patch_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1121,6 +1141,149 @@ def test_patch_rest_flattened_error():
         )
 
 
+def test_set_labels_rest(
+    transport: str = "rest", request_type=compute.SetLabelsGlobalForwardingRuleRequest
+):
+    client = GlobalForwardingRulesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            error=compute.Error(errors=[compute.Errors(code="code_value")]),
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id="id_value",
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id="target_id_value",
+            target_link="target_link_value",
+            user="user_value",
+            warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
+            zone="zone_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        json_return_value = compute.Operation.to_json(return_value)
+        response_value = Response()
+        response_value.status_code = 200
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.set_labels(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, compute.Operation)
+    assert response.client_operation_id == "client_operation_id_value"
+    assert response.creation_timestamp == "creation_timestamp_value"
+    assert response.description == "description_value"
+    assert response.end_time == "end_time_value"
+    assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
+    assert response.http_error_message == "http_error_message_value"
+    assert response.http_error_status_code == 2374
+    assert response.id == "id_value"
+    assert response.insert_time == "insert_time_value"
+    assert response.kind == "kind_value"
+    assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
+    assert response.operation_type == "operation_type_value"
+    assert response.progress == 885
+    assert response.region == "region_value"
+    assert response.self_link == "self_link_value"
+    assert response.start_time == "start_time_value"
+    assert response.status == compute.Operation.Status.DONE
+    assert response.status_message == "status_message_value"
+    assert response.target_id == "target_id_value"
+    assert response.target_link == "target_link_value"
+    assert response.user == "user_value"
+    assert response.warnings == [
+        compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)
+    ]
+    assert response.zone == "zone_value"
+
+
+def test_set_labels_rest_from_dict():
+    test_set_labels_rest(request_type=dict)
+
+
+def test_set_labels_rest_flattened():
+    client = GlobalForwardingRulesClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.Operation()
+
+        # Wrap the value into a proper Response obj
+        json_return_value = compute.Operation.to_json(return_value)
+        response_value = Response()
+        response_value.status_code = 200
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        # Call the method with a truthy value for each flattened field,
+        # using the keyword arguments to the method.
+        global_set_labels_request_resource = compute.GlobalSetLabelsRequest(
+            label_fingerprint="label_fingerprint_value"
+        )
+        client.set_labels(
+            project="project_value",
+            resource="resource_value",
+            global_set_labels_request_resource=global_set_labels_request_resource,
+        )
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, http_call, http_params = req.mock_calls[0]
+        body = http_params.get("data")
+        assert "project_value" in http_call[1] + str(body)
+        assert "resource_value" in http_call[1] + str(body)
+        assert compute.GlobalSetLabelsRequest.to_json(
+            global_set_labels_request_resource,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        ) in http_call[1] + str(body)
+
+
+def test_set_labels_rest_flattened_error():
+    client = GlobalForwardingRulesClient(
+        credentials=ga_credentials.AnonymousCredentials(),
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.set_labels(
+            compute.SetLabelsGlobalForwardingRuleRequest(),
+            project="project_value",
+            resource="resource_value",
+            global_set_labels_request_resource=compute.GlobalSetLabelsRequest(
+                label_fingerprint="label_fingerprint_value"
+            ),
+        )
+
+
 def test_set_target_rest(
     transport: str = "rest", request_type=compute.SetTargetGlobalForwardingRuleRequest
 ):
@@ -1147,6 +1310,7 @@ def test_set_target_rest(
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
+            operation_group_id="operation_group_id_value",
             operation_type="operation_type_value",
             progress=885,
             region="region_value",
@@ -1182,6 +1346,7 @@ def test_set_target_rest(
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
     assert response.operation_type == "operation_type_value"
     assert response.progress == 885
     assert response.region == "region_value"
@@ -1335,6 +1500,7 @@ def test_global_forwarding_rules_base_transport():
         "insert",
         "list",
         "patch",
+        "set_labels",
         "set_target",
     )
     for method in methods:

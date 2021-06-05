@@ -413,6 +413,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetZoneRequest):
             region="region_value",
             self_link="self_link_value",
             status=compute.Zone.Status.DOWN,
+            supports_pzs=True,
         )
 
         # Wrap the value into a proper Response obj
@@ -435,6 +436,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetZoneRequest):
     assert response.region == "region_value"
     assert response.self_link == "self_link_value"
     assert response.status == compute.Zone.Status.DOWN
+    assert response.supports_pzs is True
 
 
 def test_get_rest_from_dict():

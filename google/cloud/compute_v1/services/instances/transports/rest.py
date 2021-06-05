@@ -419,6 +419,90 @@ class InstancesRestTransport(InstancesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
+    def bulk_insert(
+        self,
+        request: compute.BulkInsertInstanceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Call the bulk insert method over HTTP.
+
+        Args:
+            request (~.compute.BulkInsertInstanceRequest):
+                The request object. A request message for
+                Instances.BulkInsert. See the method
+                description for details.
+
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.compute.Operation:
+                Represents an Operation resource.
+
+                Google Compute Engine has three Operation resources:
+
+                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
+                   \*
+                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
+                   \*
+                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
+
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses.
+
+                Operations can be global, regional or zonal.
+
+                -  For global operations, use the ``globalOperations``
+                   resource.
+                -  For regional operations, use the ``regionOperations``
+                   resource.
+                -  For zonal operations, use the ``zonalOperations``
+                   resource.
+
+                For more information, read Global, Regional, and Zonal
+                Resources. (== resource_for
+                {$api_version}.globalOperations ==) (== resource_for
+                {$api_version}.regionOperations ==) (== resource_for
+                {$api_version}.zoneOperations ==)
+
+        """
+
+        # Jsonify the request body
+        body = compute.BulkInsertInstanceResource.to_json(
+            request.bulk_insert_instance_resource_resource,
+            including_default_value_fields=False,
+            use_integers_for_enums=False,
+        )
+
+        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
+        #               current impl assumes basic case of grpc transcoding
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/instances/bulkInsert".format(
+            host=self._host, project=request.project, zone=request.zone,
+        )
+
+        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
+        #               not required for GCE
+        query_params = {}
+        if compute.BulkInsertInstanceRequest.request_id in request:
+            query_params["requestId"] = request.request_id
+
+        # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
+        #               discards default values
+        # TODO(yon-mg): add test for proper url encoded strings
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+
+        # Send the request
+        response = self._session.post(url, data=body,)
+
+        # Raise requests.exceptions.HTTPError if the status code is >= 400
+        response.raise_for_status()
+
+        # Return the response
+        return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
     def delete(
         self,
         request: compute.DeleteInstanceRequest,
@@ -719,6 +803,60 @@ class InstancesRestTransport(InstancesTransport):
 
         # Return the response
         return compute.Instance.from_json(response.content, ignore_unknown_fields=True)
+
+    def get_effective_firewalls(
+        self,
+        request: compute.GetEffectiveFirewallsInstanceRequest,
+        *,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.InstancesGetEffectiveFirewallsResponse:
+        r"""Call the get effective firewalls method over HTTP.
+
+        Args:
+            request (~.compute.GetEffectiveFirewallsInstanceRequest):
+                The request object. A request message for
+                Instances.GetEffectiveFirewalls. See the
+                method description for details.
+
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.compute.InstancesGetEffectiveFirewallsResponse:
+
+        """
+
+        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
+        #               current impl assumes basic case of grpc transcoding
+        url = "https://{host}/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getEffectiveFirewalls".format(
+            host=self._host,
+            project=request.project,
+            zone=request.zone,
+            instance=request.instance,
+        )
+
+        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
+        #               not required for GCE
+        query_params = {}
+        if request.network_interface:
+            query_params["networkInterface"] = request.network_interface
+
+        # TODO(yon-mg): further discussion needed whether 'python truthiness' is appropriate here
+        #               discards default values
+        # TODO(yon-mg): add test for proper url encoded strings
+        query_params = ["{k}={v}".format(k=k, v=v) for k, v in query_params.items()]
+        url += "?{}".format("&".join(query_params)).replace(" ", "+")
+
+        # Send the request
+        response = self._session.get(url,)
+
+        # Raise requests.exceptions.HTTPError if the status code is >= 400
+        response.raise_for_status()
+
+        # Return the response
+        return compute.InstancesGetEffectiveFirewallsResponse.from_json(
+            response.content, ignore_unknown_fields=True
+        )
 
     def get_guest_attributes(
         self,

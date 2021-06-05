@@ -414,6 +414,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionRequest
             quotas=[compute.Quota(limit=0.543)],
             self_link="self_link_value",
             status=compute.Region.Status.DOWN,
+            supports_pzs=True,
             zones=["zones_value"],
         )
 
@@ -436,6 +437,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetRegionRequest
     assert response.quotas == [compute.Quota(limit=0.543)]
     assert response.self_link == "self_link_value"
     assert response.status == compute.Region.Status.DOWN
+    assert response.supports_pzs is True
     assert response.zones == ["zones_value"]
 
 

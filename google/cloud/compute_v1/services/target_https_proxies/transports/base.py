@@ -182,6 +182,9 @@ class TargetHttpsProxiesTransport(abc.ABC):
             self.list: gapic_v1.method.wrap_method(
                 self.list, default_timeout=None, client_info=client_info,
             ),
+            self.patch: gapic_v1.method.wrap_method(
+                self.patch, default_timeout=None, client_info=client_info,
+            ),
             self.set_quic_override: gapic_v1.method.wrap_method(
                 self.set_quic_override, default_timeout=None, client_info=client_info,
             ),
@@ -243,6 +246,15 @@ class TargetHttpsProxiesTransport(abc.ABC):
     ) -> Callable[
         [compute.ListTargetHttpsProxiesRequest],
         Union[compute.TargetHttpsProxyList, Awaitable[compute.TargetHttpsProxyList]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def patch(
+        self,
+    ) -> Callable[
+        [compute.PatchTargetHttpsProxyRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()
 

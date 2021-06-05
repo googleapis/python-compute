@@ -754,6 +754,116 @@ class InstancesClient(metaclass=InstancesClientMeta):
         # Done; return the response.
         return response
 
+    def bulk_insert(
+        self,
+        request: compute.BulkInsertInstanceRequest = None,
+        *,
+        project: str = None,
+        zone: str = None,
+        bulk_insert_instance_resource_resource: compute.BulkInsertInstanceResource = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Creates multiple instances. Count specifies the
+        number of instances to create.
+
+        Args:
+            request (google.cloud.compute_v1.types.BulkInsertInstanceRequest):
+                The request object. A request message for
+                Instances.BulkInsert. See the method description for
+                details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            zone (str):
+                The name of the zone for this
+                request.
+
+                This corresponds to the ``zone`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            bulk_insert_instance_resource_resource (google.cloud.compute_v1.types.BulkInsertInstanceResource):
+                The body resource for this request
+                This corresponds to the ``bulk_insert_instance_resource_resource`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.Operation:
+                Represents an Operation resource.
+
+                   Google Compute Engine has three Operation resources:
+
+                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
+                      \*
+                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
+                      \*
+                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
+
+                   You can use an operation resource to manage
+                   asynchronous API requests. For more information, read
+                   Handling API responses.
+
+                   Operations can be global, regional or zonal. - For
+                   global operations, use the globalOperations resource.
+                   - For regional operations, use the regionOperations
+                   resource. - For zonal operations, use the
+                   zonalOperations resource.
+
+                   For more information, read Global, Regional, and
+                   Zonal Resources. (== resource_for
+                   {$api_version}.globalOperations ==) (== resource_for
+                   {$api_version}.regionOperations ==) (== resource_for
+                   {$api_version}.zoneOperations ==)
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any(
+            [project, zone, bulk_insert_instance_resource_resource]
+        )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.BulkInsertInstanceRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.BulkInsertInstanceRequest):
+            request = compute.BulkInsertInstanceRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if zone is not None:
+                request.zone = zone
+            if bulk_insert_instance_resource_resource is not None:
+                request.bulk_insert_instance_resource_resource = (
+                    bulk_insert_instance_resource_resource
+                )
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.bulk_insert]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
     def delete(
         self,
         request: compute.DeleteInstanceRequest = None,
@@ -766,7 +876,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified Instance resource. For more
-        information, see Stopping or Deleting an Instance.
+        information, see Deleting an instance.
 
         Args:
             request (google.cloud.compute_v1.types.DeleteInstanceRequest):
@@ -1186,6 +1296,99 @@ class InstancesClient(metaclass=InstancesClientMeta):
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[self._transport.get]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
+    def get_effective_firewalls(
+        self,
+        request: compute.GetEffectiveFirewallsInstanceRequest = None,
+        *,
+        project: str = None,
+        zone: str = None,
+        instance: str = None,
+        network_interface: str = None,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.InstancesGetEffectiveFirewallsResponse:
+        r"""Returns effective firewalls applied to an interface
+        of the instance.
+
+        Args:
+            request (google.cloud.compute_v1.types.GetEffectiveFirewallsInstanceRequest):
+                The request object. A request message for
+                Instances.GetEffectiveFirewalls. See the method
+                description for details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            zone (str):
+                The name of the zone for this
+                request.
+
+                This corresponds to the ``zone`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            instance (str):
+                Name of the instance scoping this
+                request.
+
+                This corresponds to the ``instance`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            network_interface (str):
+                The name of the network interface to
+                get the effective firewalls.
+
+                This corresponds to the ``network_interface`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.InstancesGetEffectiveFirewallsResponse:
+
+        """
+        # Create or coerce a protobuf request object.
+        # Sanity check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([project, zone, instance, network_interface])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.GetEffectiveFirewallsInstanceRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.GetEffectiveFirewallsInstanceRequest):
+            request = compute.GetEffectiveFirewallsInstanceRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if zone is not None:
+                request.zone = zone
+            if instance is not None:
+                request.instance = instance
+            if network_interface is not None:
+                request.network_interface = network_interface
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.get_effective_firewalls]
 
         # Send the request.
         response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
@@ -4564,6 +4767,11 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates an instance's network interface. This method
+        can only update an interface's alias IP range and
+        attached network. See Modifying alias IP ranges for an
+        existing instance for instructions on changing alias IP
+        ranges. See Migrating a VM between networks for
+        instructions on migrating an interface. This method
         follows PATCH semantics.
 
         Args:
