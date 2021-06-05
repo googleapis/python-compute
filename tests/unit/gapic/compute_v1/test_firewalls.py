@@ -530,9 +530,9 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetFirewallReque
     with mock.patch.object(Session, "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Firewall(
-            allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")],
+            allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")],
             creation_timestamp="creation_timestamp_value",
-            denied=[compute.Denied(i_p_protocol="i_p_protocol_value")],
+            denied=[compute.Denied(I_p_protocol="I_p_protocol_value")],
             description="description_value",
             destination_ranges=["destination_ranges_value"],
             direction=compute.Firewall.Direction.EGRESS,
@@ -561,9 +561,9 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetFirewallReque
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Firewall)
-    assert response.allowed == [compute.Allowed(i_p_protocol="i_p_protocol_value")]
+    assert response.allowed == [compute.Allowed(I_p_protocol="I_p_protocol_value")]
     assert response.creation_timestamp == "creation_timestamp_value"
-    assert response.denied == [compute.Denied(i_p_protocol="i_p_protocol_value")]
+    assert response.denied == [compute.Denied(I_p_protocol="I_p_protocol_value")]
     assert response.description == "description_value"
     assert response.destination_ranges == ["destination_ranges_value"]
     assert response.direction == compute.Firewall.Direction.EGRESS
@@ -728,7 +728,7 @@ def test_insert_rest_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         firewall_resource = compute.Firewall(
-            allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+            allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
         )
         client.insert(
             project="project_value", firewall_resource=firewall_resource,
@@ -757,7 +757,7 @@ def test_insert_rest_flattened_error():
             compute.InsertFirewallRequest(),
             project="project_value",
             firewall_resource=compute.Firewall(
-                allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+                allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
             ),
         )
 
@@ -778,7 +778,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListFirewallsRe
             id="id_value",
             items=[
                 compute.Firewall(
-                    allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+                    allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
                 )
             ],
             kind="kind_value",
@@ -799,7 +799,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListFirewallsRe
     assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
     assert response.items == [
-        compute.Firewall(allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")])
+        compute.Firewall(allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")])
     ]
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
@@ -986,7 +986,7 @@ def test_patch_rest_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         firewall_resource = compute.Firewall(
-            allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+            allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
         )
         client.patch(
             project="project_value",
@@ -1019,7 +1019,7 @@ def test_patch_rest_flattened_error():
             project="project_value",
             firewall="firewall_value",
             firewall_resource=compute.Firewall(
-                allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+                allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
             ),
         )
 
@@ -1123,7 +1123,7 @@ def test_update_rest_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         firewall_resource = compute.Firewall(
-            allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+            allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
         )
         client.update(
             project="project_value",
@@ -1156,7 +1156,7 @@ def test_update_rest_flattened_error():
             project="project_value",
             firewall="firewall_value",
             firewall_resource=compute.Firewall(
-                allowed=[compute.Allowed(i_p_protocol="i_p_protocol_value")]
+                allowed=[compute.Allowed(I_p_protocol="I_p_protocol_value")]
             ),
         )
 
