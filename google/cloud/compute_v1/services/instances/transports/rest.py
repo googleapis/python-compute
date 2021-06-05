@@ -17,6 +17,7 @@ import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple
 
 from google.api_core import gapic_v1  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 
@@ -174,10 +175,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -261,10 +266,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -320,10 +329,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.InstanceAggregatedList.from_json(
@@ -411,10 +424,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -495,10 +512,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -575,10 +596,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.delete(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.delete(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -659,10 +684,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -741,10 +770,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -796,10 +829,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Instance.from_json(response.content, ignore_unknown_fields=True)
@@ -848,10 +885,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.InstancesGetEffectiveFirewallsResponse.from_json(
@@ -904,10 +945,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.GuestAttributes.from_json(
@@ -1013,10 +1058,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
@@ -1063,10 +1112,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Screenshot.from_json(
@@ -1119,10 +1172,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.SerialPortOutput.from_json(
@@ -1172,10 +1229,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.ShieldedInstanceIdentity.from_json(
@@ -1260,10 +1321,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1316,10 +1381,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.InstanceList.from_json(
@@ -1380,10 +1449,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.get(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.get(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.InstanceListReferrers.from_json(
@@ -1469,10 +1542,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1549,10 +1626,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1631,10 +1712,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1715,10 +1800,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1822,10 +1911,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
@@ -1909,10 +2002,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -1996,10 +2093,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2083,10 +2184,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2170,10 +2275,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2257,10 +2366,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2344,10 +2457,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2431,10 +2548,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2522,10 +2643,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.patch(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.patch(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2609,10 +2734,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2688,10 +2817,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2768,10 +2901,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2855,10 +2992,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2934,10 +3075,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -2991,10 +3136,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.TestPermissionsResponse.from_json(
@@ -3086,10 +3235,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.put(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.put(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -3175,10 +3328,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.post(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.post(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -3262,10 +3419,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.patch(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.patch(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -3351,10 +3512,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.patch(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.patch(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
@@ -3439,10 +3604,14 @@ class InstancesRestTransport(InstancesTransport):
         url += "?{}".format("&".join(query_params)).replace(" ", "+")
 
         # Send the request
-        response = self._session.patch(url, data=body,)
+        headers = dict(metadata)
+        headers["Content-Type"] = "application/json"
+        response = self._session.patch(url, headers=headers, data=body,)
 
-        # Raise requests.exceptions.HTTPError if the status code is >= 400
-        response.raise_for_status()
+        # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
+        # subclass.
+        if response.status_code >= 400:
+            raise core_exceptions.from_http_response(response)
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
