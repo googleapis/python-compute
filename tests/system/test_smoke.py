@@ -84,11 +84,15 @@ class TestComputeSmoke(TestBase):
         self.assertTrue(presented)
 
     def test_client_error(self):
-        with self.assertRaises(expected_exception=google.api_core.exceptions.BadRequest) as ex:
+        with self.assertRaises(
+            expected_exception=google.api_core.exceptions.BadRequest
+        ) as ex:
             self.client.get(instance=self.name, zone=self.DEFAULT_ZONE)
 
     def test_api_error(self):
-        with self.assertRaises(expected_exception=google.api_core.exceptions.NotFound) as ex:
+        with self.assertRaises(
+            expected_exception=google.api_core.exceptions.NotFound
+        ) as ex:
             self.client.get(
                 project=self.DEFAULT_PROJECT,
                 zone=self.DEFAULT_ZONE,
