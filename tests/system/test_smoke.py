@@ -86,7 +86,6 @@ class TestComputeSmoke(TestBase):
     def test_client_error(self):
         with self.assertRaises(expected_exception=google.api_core.exceptions.BadRequest) as ex:
             self.client.get(instance=self.name, zone=self.DEFAULT_ZONE)
-        self.assertIn("Bad Request", str(ex.exception.args))
 
     def test_api_error(self):
         with self.assertRaises(expected_exception=google.api_core.exceptions.NotFound) as ex:
@@ -95,7 +94,6 @@ class TestComputeSmoke(TestBase):
                 zone=self.DEFAULT_ZONE,
                 instance="nonexistent9999123412314",
             )
-        self.assertIn("Not Found", str(ex.exception.args))
 
     def test_zero_values(self):
         with self.assertRaises(expected_exception=TypeError) as ex:
