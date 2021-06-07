@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-import requests
 import time
 import google.api_core.exceptions
 
@@ -86,13 +85,11 @@ class TestComputeSmoke(TestBase):
     def test_client_error(self):
         with self.assertRaises(
             expected_exception=google.api_core.exceptions.BadRequest
-        ) as ex:
+        ):
             self.client.get(instance=self.name, zone=self.DEFAULT_ZONE)
 
     def test_api_error(self):
-        with self.assertRaises(
-            expected_exception=google.api_core.exceptions.NotFound
-        ) as ex:
+        with self.assertRaises(expected_exception=google.api_core.exceptions.NotFound):
             self.client.get(
                 project=self.DEFAULT_PROJECT,
                 zone=self.DEFAULT_ZONE,
