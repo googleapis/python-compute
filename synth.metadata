@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-compute.git",
-        "sha": "ce057e7b80baca7ef577ee1495ba034cdb3a491a"
+        "sha": "700402485d8cfb43f3ffd525412b85bf7b19df73"
       }
     },
     {
@@ -644,6 +644,7 @@
     "mypy.ini",
     "noxfile.py",
     "renovate.json",
+    "samples/snippets/noxfile.py",
     "scripts/decrypt-secrets.sh",
     "scripts/readme-gen/readme_gen.py",
     "scripts/readme-gen/templates/README.tmpl.rst",
