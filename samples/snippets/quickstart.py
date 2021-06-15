@@ -40,11 +40,13 @@ import google.cloud.compute_v1 as compute_v1
 # [START compute_instances_list]
 def list_instances(project_id: str, zone: str) -> typing.Iterable[compute_v1.Instance]:
     """
-    List all instances in the given zone in the specified project.
+    Gets a list of instances created in given project in given zone.
+    Returns an iterable collection of Instance objects.
 
     Args:
-        project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        project_id: ID or number of the project you want to use.
+        zone: Name of the zone you want to check, for example: us-west3-b
+
     Returns:
         An iterable collection of Instance objects.
     """
@@ -65,9 +67,11 @@ def list_all_instances(
     project_id: str,
 ) -> typing.Dict[str, typing.Iterable[compute_v1.Instance]]:
     """
-    Return a dictionary of all instances present in a project, grouped by their zone.
+    Returns a dictionary of all instances present in a project, grouped by their zone.
+
     Args:
-        project_id: project ID or project number of the Cloud project you want to use.
+        project_id: ID or number of the project you want to use.
+
     Returns:
         A dictionary with zone names as keys (in form of "zones/{zone_name}") and
         iterable collections of Instance objects as values.
@@ -98,28 +102,33 @@ def create_instance(
     network_name: str = "global/networks/default",
 ) -> compute_v1.Instance:
     """
-    Send an instance creation request to the Compute Engine API and wait for it to complete.
+    Sends an instance creation request to GCP and waits for it to complete.
+
     Args:
-        project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
-        machine_type: machine type of the VM being created. This value uses the
-            following format: "zones/{zone}/machineTypes/{type_name}".
-            For example: "zones/europe-west3-c/machineTypes/f1-micro"
-        source_image: path to the operating system image to mount on your boot
+        project_id: ID or number of the project you want to use.
+        zone: Name of the zone you want to use, for example: us-west3-b
+        instance_name: Name of the new machine.
+        machine_type: Machine type you want to create in following format:
+            "zones/{zone}/machineTypes/{type_name}". For example:
+            "zones/europe-west3-c/machineTypes/f1-micro"
+            You can find the list of available machine types using:
+            https://cloud.google.com/sdk/gcloud/reference/compute/machine-types/list
+        source_image: Path the the disk image you want to use for your boot
             disk. This can be one of the public images
-            (like "projects/debian-cloud/global/images/family/debian-10")
+            (e.g. "projects/debian-cloud/global/images/family/debian-10")
             or a private image you have access to.
-        network_name: name of the network you want the new instance to use.
-            For example: "global/networks/default" represents the `default`
-            network interface, which is created automatically for each project.
+            You can check the list of available public images using:
+            $ gcloud compute images list
+        network_name: Name of the network you want the new instance to use.
+            For example: global/networks/default - if you want to use the
+            default network.
+
     Returns:
         Instance object.
     """
     instance_client = compute_v1.InstancesClient()
 
-    # Describe the size and source image of the boot disk to attach to the
-    # instance.
+    # Every machine requires at least one persistent disk
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
     initialize_params.source_image = (
@@ -131,11 +140,12 @@ def create_instance(
     disk.boot = True
     disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT
 
-    # Use the network interface provided in the network_name argument.
+    # Every machine needs to be connected to a VPC network.
+    # The 'default' network is created automatically in every project.
     network_interface = compute_v1.NetworkInterface()
     network_interface.name = network_name
 
-    # Collect information into the Instance object.
+    # Collecting all the information into the Instance object
     instance = compute_v1.Instance()
     instance.name = instance_name
     instance.disks = [disk]
@@ -143,13 +153,12 @@ def create_instance(
     instance.machine_type = full_machine_type_name
     instance.network_interfaces = [network_interface]
 
-    # Prepare the request to insert an instance.
+    # Preparing the InsertInstanceRequest
     request = compute_v1.InsertInstanceRequest()
     request.zone = zone
     request.project = project_id
     request.instance_resource = instance
 
-    # Wait for the create operation to complete.
     print(f"Creating the {instance_name} instance in {zone}...")
     operation = instance_client.insert(request=request)
     if operation.status == compute_v1.Operation.Status.RUNNING:
@@ -171,11 +180,12 @@ def create_instance(
 # [START compute_instances_delete]
 def delete_instance(project_id: str, zone: str, machine_name: str) -> None:
     """
-    Send an instance deletion request to the Compute Engine API and wait for it to complete.
+    Sends a delete request to GCP and waits for it to complete.
+
     Args:
-        project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        machine_name: name of the machine you want to delete.
+        project_id: ID or number of the project you want to use.
+        zone: Name of the zone you want to use, for example: us-west3-b
+        machine_name: Name of the machine you want to delete.
     """
     instance_client = compute_v1.InstancesClient()
 
@@ -183,8 +193,6 @@ def delete_instance(project_id: str, zone: str, machine_name: str) -> None:
     operation = instance_client.delete(
         project=project_id, zone=zone, instance=machine_name
     )
-
-    # Wait for the delete operation to complete.
     if operation.status == compute_v1.Operation.Status.RUNNING:
         operation_client = compute_v1.ZoneOperationsClient()
         operation = operation_client.wait(
@@ -206,12 +214,14 @@ def wait_for_operation(
     operation: compute_v1.Operation, project_id: str
 ) -> compute_v1.Operation:
     """
-    Wait for an operation to be completed. Call this function
-    to block until the operation is finished.
+    This method waits for an operation to be completed. Calling this function
+    will block until the operation is finished.
+
     Args:
-        operation: the Operation object that represents the operation you want to
+        operation: The Operation object representing the operation you want to
             wait on.
-        project_id: project ID or project number of the project that owns the operation.
+        project_id: ID or number of the project owning the operation.
+
     Returns:
         Finished Operation object.
     """
@@ -222,7 +232,7 @@ def wait_for_operation(
         kwargs["zone"] = operation.zone.rsplit("/", maxsplit=1)[1]
     elif operation.region:
         client = compute_v1.RegionOperationsClient()
-        # Operation.region is a full URL address of a region, so we need to extract just the name
+        # Operation.region is a full URL address of a zone, so we need to extract just the name
         kwargs["region"] = operation.region.rsplit("/", maxsplit=1)[1]
     else:
         client = compute_v1.GlobalOperationsClient()
