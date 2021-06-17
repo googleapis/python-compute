@@ -48,9 +48,9 @@ def set_usage_export_bucket(project_id: str, bucket_name: str,
     })
 
     if not report_name_prefix:
-        # Sending empty value for report_name_prefix, will result with the
-        # next usage report generated will have the default prefix value
-        # "usage_gce". (ref: https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
+        # Sending an empty value for report_name_prefix will result in the
+        # next usage report generated to have the default prefix value
+        # "usage_gce". (ref: https://cloud.google.com/compute/docs/reference/rest/v1/projects/setUsageExportBucket)
         print("Setting report_name_prefix to empty value will cause the report "
               "to have the default prefix of `usage_gce`.")
 
@@ -103,12 +103,10 @@ def disable_usage_export(project_id: str) -> None:
         project_id: project ID or project number of the project to update.
     """
     projects_client = compute_v1.ProjectsClient()
-    export_location = compute_v1.UsageExportLocation(
-        {'bucket_name': '', 'report_name_prefix': ''})
 
-    # Updating the setting with empty bucket name will disable the
+    # Updating the setting with None will disable the
     # usage report generation.
     projects_client.set_usage_export_bucket(
-        project=project_id, usage_export_location_resource=export_location)
+        project=project_id, usage_export_location_resource=None)
     return
 # [END compute_usage_report_disable]
