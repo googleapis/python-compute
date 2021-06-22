@@ -55,8 +55,11 @@ def set_usage_export_bucket(project_id: str, bucket_name: str,
               "to have the default prefix of `usage_gce`.")
 
     projects_client = compute_v1.ProjectsClient()
-    projects_client.set_usage_export_bucket(
+    operation = projects_client.set_usage_export_bucket(
         project=project_id, usage_export_location_resource=usage_export_location)
+
+    op_client = compute_v1.GlobalOperationsClient()
+    op_client.wait(project=project_id, operation=operation.name)
     return
 # [END compute_usage_report_set]
 
@@ -82,6 +85,7 @@ def get_usage_export_bucket(project_id: str) -> compute_v1.UsageExportLocation:
     if not uel.bucket_name:
         # The Usage Reports are disabled.
         return uel
+
     if not uel.report_name_prefix:
         # Although the server sent the empty value, the next usage report
         # generated with these settings still has the default prefix value
@@ -106,7 +110,10 @@ def disable_usage_export(project_id: str) -> None:
 
     # Updating the setting with None will disable the
     # usage report generation.
-    projects_client.set_usage_export_bucket(
+    operation = projects_client.set_usage_export_bucket(
         project=project_id, usage_export_location_resource=None)
+
+    op_client = compute_v1.GlobalOperationsClient()
+    op_client.wait(project=project_id, operation=operation.name)
     return
 # [END compute_usage_report_disable]
