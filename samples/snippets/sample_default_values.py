@@ -35,17 +35,17 @@ def set_usage_export_bucket(project_id: str, bucket_name: str,
     This sample presents how to interpret default value for the name prefix
     parameter.
 
-    Params:
+    Args:
         project_id: project ID or project number of the project to update.
         bucket_name: Google Cloud Storage Bucket used to store Compute Engine
             usage reports. An existing Google Cloud Storage bucket is required.
         report_name_prefix: Report Name Prefix which defaults to an empty string
             to showcase default values behaviour.
     """
-    usage_export_location = compute_v1.UsageExportLocation({
-        'bucket_name': bucket_name,
-        'report_name_prefix': report_name_prefix
-    })
+    usage_export_location = compute_v1.UsageExportLocation(
+        bucket_name=bucket_name,
+        report_name_prefix=report_name_prefix
+    )
 
     if not report_name_prefix:
         # Sending an empty value for report_name_prefix will result in the
@@ -60,7 +60,6 @@ def set_usage_export_bucket(project_id: str, bucket_name: str,
 
     op_client = compute_v1.GlobalOperationsClient()
     op_client.wait(project=project_id, operation=operation.name)
-    return
 # [END compute_usage_report_set]
 
 
@@ -71,7 +70,7 @@ def get_usage_export_bucket(project_id: str) -> compute_v1.UsageExportLocation:
     Replaces the empty value returned by the API with the default value used
     to generate report file names.
 
-    Params:
+    Args:
         project_id: project ID or project number of the project to update.
     Returns:
         UsageExportLocation object describing the current usage export settings
@@ -103,7 +102,7 @@ def disable_usage_export(project_id: str) -> None:
     """
     Disable Compute Engine usage export bucket for the Cloud Project.
 
-    Params:
+    Args:
         project_id: project ID or project number of the project to update.
     """
     projects_client = compute_v1.ProjectsClient()
@@ -115,5 +114,4 @@ def disable_usage_export(project_id: str) -> None:
 
     op_client = compute_v1.GlobalOperationsClient()
     op_client.wait(project=project_id, operation=operation.name)
-    return
 # [END compute_usage_report_disable]
