@@ -17,7 +17,6 @@
 A sample script showing how to handle default values when communicating
 with the Compute Engine API.
 """
-# [START compute_instances_verify_default_value]
 # [START compute_usage_report_set]
 # [START compute_usage_report_get]
 # [START compute_usage_report_disable]
@@ -94,7 +93,6 @@ def get_usage_export_bucket(project_id: str) -> compute_v1.UsageExportLocation:
         uel.report_name_prefix = 'usage_gce'
     return uel
 # [END compute_usage_report_get]
-# [END compute_instances_verify_default_value]
 
 
 # [START compute_usage_report_disable]
