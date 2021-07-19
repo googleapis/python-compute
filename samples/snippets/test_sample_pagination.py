@@ -23,6 +23,7 @@ def test_pagination(capsys: typing.Any) -> None:
     out, _ = capsys.readouterr()
     assert(len(out.splitlines()) > 2)
 
+
 def test_pagination_page(capsys: typing.Any) -> None:
     print_images_list_by_page(PROJECT, 2)
     out, _ = capsys.readouterr()
