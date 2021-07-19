@@ -14,10 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+# [START compute_images_list_page ]
+# [START compute_images_list ]
 import google.cloud.compute_v1 as compute_v1
+# [END compute_images_list ]
+# [END compute_images_list_page ]
 
 
+# [START compute_images_list ]
 def print_images_list(project: str) -> None:
     """
     Prints a list of all non-deprecated image names available in given project.
@@ -38,8 +42,10 @@ def print_images_list(project: str) -> None:
     # all the images, while the library makes multiple requests to the API for you.
     for img in images_client.list(request=images_list_request):
         print(f" -  {img.name}")
+# [END compute_images_list ]
 
 
+# [START compute_images_list_page ]
 def print_images_list_by_page(project: str, page_size: int = 10) -> None:
     """
     Prints a list of all non-deprecated image names available in given project,
@@ -64,6 +70,7 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
         print(f"Page {page_num}: ")
         for img in page.items:
             print(f" - {img.name}")
+# [END compute_images_list_page ]
 
 
 if __name__ == '__main__':
