@@ -37,9 +37,9 @@ def print_images_list(project: str) -> None:
     images_list_request = compute_v1.ListImagesRequest(project=project, max_results=3,
                                                        filter="deprecated.state != DEPRECATED")
 
-    # Although the max_results parameter is specified as 3 in the request, the iterable returned
-    # by the `list()` method hides the pagination mechanic and allows you to simply iterate over
-    # all the images, while the library makes multiple requests to the API for you.
+    # Although the `max_results` parameter is specified in the request, the iterable returned
+    # by the `list()` method hides the pagination mechanic. The library makes multiple
+    # requests to the API for you, so you can simply iterate over all the images.
     for img in images_client.list(request=images_list_request):
         print(f" -  {img.name}")
 # [END compute_images_list ]
@@ -48,8 +48,8 @@ def print_images_list(project: str) -> None:
 # [START compute_images_list_page ]
 def print_images_list_by_page(project: str, page_size: int = 10) -> None:
     """
-    Prints a list of all non-deprecated image names available in given project,
-    divided into pages, as returned by the GCE API.
+    Prints a list of all non-deprecated image names available in a given project,
+    divided into pages as returned by the Compute Engine API.
 
     Args:
         project: project ID or project number of the Cloud project you want to list images from.
@@ -63,9 +63,9 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
     images_list_request = compute_v1.ListImagesRequest(project=project, max_results=page_size,
                                                        filter="deprecated.state != DEPRECATED")
 
-    # By using the `pages` attribute of returned iterable, you can have more granular control over
-    # the way you iterate over paginated results retrieved from the API. Each time you want to
-    # access next page, the library retrieves it from the API.
+    # Use the `pages` attribute of returned iterable to have more granular control of
+    # iteration over paginated results from the API. Each time you want to access the
+    # next page, the library retrieves that page from the API.
     for page_num, page in enumerate(images_client.list(request=images_list_request).pages, start=1):
         print(f"Page {page_num}: ")
         for img in page.items:
