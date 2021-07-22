@@ -73,7 +73,6 @@ def list_all_instances(
         iterable collections of Instance objects as values.
     """
     instance_client = compute_v1.InstancesClient()
-    # Requesting a list of Instances, aggregated by the zone they are located in.
     # Use the `max_results` parameter to limit the number of results that the API returns per response page.
     request = compute_v1.AggregatedListInstancesRequest(project=project_id, max_results=5)
     agg_list = instance_client.aggregated_list(request=request)
