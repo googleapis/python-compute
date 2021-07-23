@@ -16,3 +16,4 @@ TEST_CONFIG_OVERRIDE = {
     # Tests in test_sample_default_values.py require separate projects to not interfere with each other.
     'gcloud_project_env': 'BUILD_SPECIFIC_GCLOUD_PROJECT',
 }
+print('Noxfile_config loaded')
