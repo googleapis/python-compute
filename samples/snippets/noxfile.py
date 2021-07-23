@@ -71,7 +71,6 @@ except ImportError as e:
 
 # Update the TEST_CONFIG with the user supplied values.
 TEST_CONFIG.update(TEST_CONFIG_OVERRIDE)
-print('Using test config: ', TEST_CONFIG)
 
 
 def get_pytest_env_vars() -> Dict[str, str]:
@@ -196,8 +195,6 @@ def _session_tests(session: nox.sessions.Session, post_install: Callable = None)
 
     if post_install:
         post_install(session)
-
-    print('Testing with envs: ', get_pytest_env_vars())
 
     session.run(
         "pytest",
