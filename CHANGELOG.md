@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/googleapis/python-compute/compare/v0.4.2...v0.5.0) (2021-08-04)
+
+
+### Features
+
+* adding samples to start/stop/reset operations ([#75](https://www.github.com/googleapis/python-compute/issues/75)) ([0df87a9](https://www.github.com/googleapis/python-compute/commit/0df87a9cc65c9a68c2ba6ae6bea2f6906626d488))
+
 ### [0.4.2](https://www.github.com/googleapis/python-compute/compare/v0.4.1...v0.4.2) (2021-07-26)
 
 ### Bug Fixes
