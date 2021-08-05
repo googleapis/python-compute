@@ -421,7 +421,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetZoneRequest):
             creation_timestamp="creation_timestamp_value",
             deprecated=compute.DeprecationStatus(deleted="deleted_value"),
             description="description_value",
-            id="id_value",
+            id=205,
             kind="kind_value",
             name="name_value",
             region="region_value",
@@ -444,7 +444,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetZoneRequest):
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.deprecated == compute.DeprecationStatus(deleted="deleted_value")
     assert response.description == "description_value"
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.name == "name_value"
     assert response.region == "region_value"

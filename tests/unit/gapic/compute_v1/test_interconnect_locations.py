@@ -473,15 +473,11 @@ def test_get_rest(
             description="description_value",
             facility_provider="facility_provider_value",
             facility_provider_facility_id="facility_provider_facility_id_value",
-            id="id_value",
+            id=205,
             kind="kind_value",
             name="name_value",
             peeringdb_facility_id="peeringdb_facility_id_value",
-            region_infos=[
-                compute.InterconnectLocationRegionInfo(
-                    expected_rtt_ms="expected_rtt_ms_value"
-                )
-            ],
+            region_infos=[compute.InterconnectLocationRegionInfo(expected_rtt_ms=1610)],
             self_link="self_link_value",
             status=compute.InterconnectLocation.Status.AVAILABLE,
         )
@@ -506,12 +502,12 @@ def test_get_rest(
     assert (
         response.facility_provider_facility_id == "facility_provider_facility_id_value"
     )
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.name == "name_value"
     assert response.peeringdb_facility_id == "peeringdb_facility_id_value"
     assert response.region_infos == [
-        compute.InterconnectLocationRegionInfo(expected_rtt_ms="expected_rtt_ms_value")
+        compute.InterconnectLocationRegionInfo(expected_rtt_ms=1610)
     ]
     assert response.self_link == "self_link_value"
     assert response.status == compute.InterconnectLocation.Status.AVAILABLE

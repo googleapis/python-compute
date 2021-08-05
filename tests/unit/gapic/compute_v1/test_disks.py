@@ -426,7 +426,7 @@ def test_add_resource_policies_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -438,7 +438,7 @@ def test_add_resource_policies_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -462,7 +462,7 @@ def test_add_resource_policies_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -474,7 +474,7 @@ def test_add_resource_policies_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -718,7 +718,7 @@ def test_create_snapshot_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -730,7 +730,7 @@ def test_create_snapshot_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -754,7 +754,7 @@ def test_create_snapshot_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -766,7 +766,7 @@ def test_create_snapshot_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -854,7 +854,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteDiskReq
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -866,7 +866,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteDiskReq
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -890,7 +890,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteDiskReq
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -902,7 +902,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteDiskReq
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -983,25 +983,25 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetDiskRequest):
                     type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
                 )
             ],
-            id="id_value",
+            id=205,
             kind="kind_value",
             label_fingerprint="label_fingerprint_value",
             labels={"key_value": "value_value"},
             last_attach_timestamp="last_attach_timestamp_value",
             last_detach_timestamp="last_detach_timestamp_value",
-            license_codes=["license_codes_value"],
+            license_codes=[1360],
             licenses=["licenses_value"],
             location_hint="location_hint_value",
             name="name_value",
             options="options_value",
-            physical_block_size_bytes="physical_block_size_bytes_value",
-            provisioned_iops="provisioned_iops_value",
+            physical_block_size_bytes=2663,
+            provisioned_iops=1740,
             region="region_value",
             replica_zones=["replica_zones_value"],
             resource_policies=["resource_policies_value"],
             satisfies_pzs=True,
             self_link="self_link_value",
-            size_gb="size_gb_value",
+            size_gb=739,
             source_disk="source_disk_value",
             source_disk_id="source_disk_id_value",
             source_image="source_image_value",
@@ -1041,25 +1041,25 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetDiskRequest):
             type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
         )
     ]
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.label_fingerprint == "label_fingerprint_value"
     assert response.labels == {"key_value": "value_value"}
     assert response.last_attach_timestamp == "last_attach_timestamp_value"
     assert response.last_detach_timestamp == "last_detach_timestamp_value"
-    assert response.license_codes == ["license_codes_value"]
+    assert response.license_codes == [1360]
     assert response.licenses == ["licenses_value"]
     assert response.location_hint == "location_hint_value"
     assert response.name == "name_value"
     assert response.options == "options_value"
-    assert response.physical_block_size_bytes == "physical_block_size_bytes_value"
-    assert response.provisioned_iops == "provisioned_iops_value"
+    assert response.physical_block_size_bytes == 2663
+    assert response.provisioned_iops == 1740
     assert response.region == "region_value"
     assert response.replica_zones == ["replica_zones_value"]
     assert response.resource_policies == ["resource_policies_value"]
     assert response.satisfies_pzs is True
     assert response.self_link == "self_link_value"
-    assert response.size_gb == "size_gb_value"
+    assert response.size_gb == 739
     assert response.source_disk == "source_disk_value"
     assert response.source_disk_id == "source_disk_id_value"
     assert response.source_image == "source_image_value"
@@ -1252,7 +1252,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertDiskReq
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1264,7 +1264,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertDiskReq
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1288,7 +1288,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertDiskReq
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1300,7 +1300,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertDiskReq
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1511,7 +1511,7 @@ def test_remove_resource_policies_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1523,7 +1523,7 @@ def test_remove_resource_policies_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1547,7 +1547,7 @@ def test_remove_resource_policies_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1559,7 +1559,7 @@ def test_remove_resource_policies_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1651,7 +1651,7 @@ def test_resize_rest(transport: str = "rest", request_type=compute.ResizeDiskReq
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1663,7 +1663,7 @@ def test_resize_rest(transport: str = "rest", request_type=compute.ResizeDiskReq
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1687,7 +1687,7 @@ def test_resize_rest(transport: str = "rest", request_type=compute.ResizeDiskReq
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1699,7 +1699,7 @@ def test_resize_rest(transport: str = "rest", request_type=compute.ResizeDiskReq
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1729,9 +1729,7 @@ def test_resize_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        disks_resize_request_resource = compute.DisksResizeRequest(
-            size_gb="size_gb_value"
-        )
+        disks_resize_request_resource = compute.DisksResizeRequest(size_gb=739)
         client.resize(
             project="project_value",
             zone="zone_value",
@@ -1765,9 +1763,7 @@ def test_resize_rest_flattened_error():
             project="project_value",
             zone="zone_value",
             disk="disk_value",
-            disks_resize_request_resource=compute.DisksResizeRequest(
-                size_gb="size_gb_value"
-            ),
+            disks_resize_request_resource=compute.DisksResizeRequest(size_gb=739),
         )
 
 
@@ -1911,7 +1907,7 @@ def test_set_labels_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1923,7 +1919,7 @@ def test_set_labels_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1947,7 +1943,7 @@ def test_set_labels_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1959,7 +1955,7 @@ def test_set_labels_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [

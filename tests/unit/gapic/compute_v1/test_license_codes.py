@@ -425,7 +425,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetLicenseCodeRe
         return_value = compute.LicenseCode(
             creation_timestamp="creation_timestamp_value",
             description="description_value",
-            id="id_value",
+            id=205,
             kind="kind_value",
             license_alias=[
                 compute.LicenseCodeLicenseAlias(description="description_value")
@@ -448,7 +448,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetLicenseCodeRe
     assert isinstance(response, compute.LicenseCode)
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.license_alias == [
         compute.LicenseCodeLicenseAlias(description="description_value")

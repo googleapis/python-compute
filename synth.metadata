@@ -11,7 +11,7 @@
       "git": {
         "name": "googleapis-discovery",
         "remote": "https://github.com/googleapis/googleapis-discovery.git",
-        "sha": "abf4cec1ce9e02e4d7d650bf66137c347cdd0d44"
+        "sha": "c5bb8d324832f638d86bc1348fb45fb3d9c1fb30"
       }
     }
   ],

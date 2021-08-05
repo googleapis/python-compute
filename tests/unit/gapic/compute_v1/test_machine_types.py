@@ -595,12 +595,12 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetMachineTypeRe
             deprecated=compute.DeprecationStatus(deleted="deleted_value"),
             description="description_value",
             guest_cpus=1090,
-            id="id_value",
+            id=205,
             image_space_gb=1430,
             is_shared_cpu=True,
             kind="kind_value",
             maximum_persistent_disks=2603,
-            maximum_persistent_disks_size_gb="maximum_persistent_disks_size_gb_value",
+            maximum_persistent_disks_size_gb=3437,
             memory_mb=967,
             name="name_value",
             scratch_disks=[compute.ScratchDisks(disk_gb=723)],
@@ -623,15 +623,12 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetMachineTypeRe
     assert response.deprecated == compute.DeprecationStatus(deleted="deleted_value")
     assert response.description == "description_value"
     assert response.guest_cpus == 1090
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.image_space_gb == 1430
     assert response.is_shared_cpu is True
     assert response.kind == "kind_value"
     assert response.maximum_persistent_disks == 2603
-    assert (
-        response.maximum_persistent_disks_size_gb
-        == "maximum_persistent_disks_size_gb_value"
-    )
+    assert response.maximum_persistent_disks_size_gb == 3437
     assert response.memory_mb == 967
     assert response.name == "name_value"
     assert response.scratch_disks == [compute.ScratchDisks(disk_gb=723)]
