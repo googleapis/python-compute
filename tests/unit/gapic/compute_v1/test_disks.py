@@ -109,28 +109,23 @@ def test_disks_client_from_service_account_info(client_class):
         assert client.transport._host == "compute.googleapis.com:443"
 
 
-@pytest.mark.parametrize("client_class", [DisksClient,])
-def test_disks_client_service_account_always_use_jwt(client_class):
-    with mock.patch.object(
-        service_account.Credentials, "with_always_use_jwt_access", create=True
-    ) as use_jwt:
-        creds = service_account.Credentials(None, None, None)
-        client = client_class(credentials=creds)
-        use_jwt.assert_not_called()
-
-
 @pytest.mark.parametrize(
     "transport_class,transport_name", [(transports.DisksRestTransport, "rest"),]
 )
-def test_disks_client_service_account_always_use_jwt_true(
-    transport_class, transport_name
-):
+def test_disks_client_service_account_always_use_jwt(transport_class, transport_name):
     with mock.patch.object(
         service_account.Credentials, "with_always_use_jwt_access", create=True
     ) as use_jwt:
         creds = service_account.Credentials(None, None, None)
         transport = transport_class(credentials=creds, always_use_jwt_access=True)
         use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize("client_class", [DisksClient,])
@@ -519,14 +514,15 @@ def test_add_resource_policies_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
         assert compute.DisksAddResourcePoliciesRequest.to_json(
             disks_add_resource_policies_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_add_resource_policies_rest_flattened_error():
@@ -625,7 +621,8 @@ def test_aggregated_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_aggregated_list_rest_flattened_error():
@@ -809,14 +806,15 @@ def test_create_snapshot_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
         assert compute.Snapshot.to_json(
             snapshot_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_create_snapshot_rest_flattened_error():
@@ -941,9 +939,10 @@ def test_delete_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
 
 
 def test_delete_rest_flattened_error():
@@ -1109,9 +1108,10 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_rest_flattened_error():
@@ -1213,9 +1213,10 @@ def test_get_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "resource_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_iam_policy_rest_flattened_error():
@@ -1340,13 +1341,14 @@ def test_insert_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
         assert compute.Disk.to_json(
             disk_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_insert_rest_flattened_error():
@@ -1434,8 +1436,9 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
 
 
 def test_list_rest_flattened_error():
@@ -1604,14 +1607,15 @@ def test_remove_resource_policies_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
         assert compute.DisksRemoveResourcePoliciesRequest.to_json(
             disks_remove_resource_policies_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_remove_resource_policies_rest_flattened_error():
@@ -1742,14 +1746,15 @@ def test_resize_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "disk_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "disk_value" in http_call[1] + str(body) + str(params)
         assert compute.DisksResizeRequest.to_json(
             disks_resize_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_resize_rest_flattened_error():
@@ -1858,14 +1863,15 @@ def test_set_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "resource_value" in http_call[1] + str(body) + str(params)
         assert compute.ZoneSetPolicyRequest.to_json(
             zone_set_policy_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_iam_policy_rest_flattened_error():
@@ -2000,14 +2006,15 @@ def test_set_labels_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "resource_value" in http_call[1] + str(body) + str(params)
         assert compute.ZoneSetLabelsRequest.to_json(
             zone_set_labels_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_labels_rest_flattened_error():
@@ -2094,14 +2101,15 @@ def test_test_iam_permissions_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
-        assert "zone_value" in http_call[1] + str(body)
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
+        assert "zone_value" in http_call[1] + str(body) + str(params)
+        assert "resource_value" in http_call[1] + str(body) + str(params)
         assert compute.TestPermissionsRequest.to_json(
             test_permissions_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_test_iam_permissions_rest_flattened_error():

@@ -112,20 +112,10 @@ def test_projects_client_from_service_account_info(client_class):
         assert client.transport._host == "compute.googleapis.com:443"
 
 
-@pytest.mark.parametrize("client_class", [ProjectsClient,])
-def test_projects_client_service_account_always_use_jwt(client_class):
-    with mock.patch.object(
-        service_account.Credentials, "with_always_use_jwt_access", create=True
-    ) as use_jwt:
-        creds = service_account.Credentials(None, None, None)
-        client = client_class(credentials=creds)
-        use_jwt.assert_not_called()
-
-
 @pytest.mark.parametrize(
     "transport_class,transport_name", [(transports.ProjectsRestTransport, "rest"),]
 )
-def test_projects_client_service_account_always_use_jwt_true(
+def test_projects_client_service_account_always_use_jwt(
     transport_class, transport_name
 ):
     with mock.patch.object(
@@ -134,6 +124,13 @@ def test_projects_client_service_account_always_use_jwt_true(
         creds = service_account.Credentials(None, None, None)
         transport = transport_class(credentials=creds, always_use_jwt_access=True)
         use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize("client_class", [ProjectsClient,])
@@ -514,7 +511,8 @@ def test_disable_xpn_host_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_disable_xpn_host_rest_flattened_error():
@@ -641,12 +639,13 @@ def test_disable_xpn_resource_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.ProjectsDisableXpnResourceRequest.to_json(
             projects_disable_xpn_resource_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_disable_xpn_resource_rest_flattened_error():
@@ -771,7 +770,8 @@ def test_enable_xpn_host_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_enable_xpn_host_rest_flattened_error():
@@ -898,12 +898,13 @@ def test_enable_xpn_resource_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.ProjectsEnableXpnResourceRequest.to_json(
             projects_enable_xpn_resource_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_enable_xpn_resource_rest_flattened_error():
@@ -1008,7 +1009,8 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_rest_flattened_error():
@@ -1111,7 +1113,8 @@ def test_get_xpn_host_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_xpn_host_rest_flattened_error():
@@ -1188,7 +1191,8 @@ def test_get_xpn_resources_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_xpn_resources_rest_flattened_error():
@@ -1335,12 +1339,13 @@ def test_list_xpn_hosts_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.ProjectsListXpnHostsRequest.to_json(
             projects_list_xpn_hosts_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_list_xpn_hosts_rest_flattened_error():
@@ -1511,12 +1516,13 @@ def test_move_disk_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.DiskMoveRequest.to_json(
             disk_move_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_move_disk_rest_flattened_error():
@@ -1647,12 +1653,13 @@ def test_move_instance_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.InstanceMoveRequest.to_json(
             instance_move_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_move_instance_rest_flattened_error():
@@ -1781,12 +1788,13 @@ def test_set_common_instance_metadata_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.Metadata.to_json(
             metadata_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_common_instance_metadata_rest_flattened_error():
@@ -1915,12 +1923,13 @@ def test_set_default_network_tier_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.ProjectsSetDefaultNetworkTierRequest.to_json(
             projects_set_default_network_tier_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_default_network_tier_rest_flattened_error():
@@ -2051,12 +2060,13 @@ def test_set_usage_export_bucket_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "project_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "project_value" in http_call[1] + str(body) + str(params)
         assert compute.UsageExportLocation.to_json(
             usage_export_location_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_usage_export_bucket_rest_flattened_error():

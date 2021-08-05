@@ -118,21 +118,11 @@ def test_firewall_policies_client_from_service_account_info(client_class):
         assert client.transport._host == "compute.googleapis.com:443"
 
 
-@pytest.mark.parametrize("client_class", [FirewallPoliciesClient,])
-def test_firewall_policies_client_service_account_always_use_jwt(client_class):
-    with mock.patch.object(
-        service_account.Credentials, "with_always_use_jwt_access", create=True
-    ) as use_jwt:
-        creds = service_account.Credentials(None, None, None)
-        client = client_class(credentials=creds)
-        use_jwt.assert_not_called()
-
-
 @pytest.mark.parametrize(
     "transport_class,transport_name",
     [(transports.FirewallPoliciesRestTransport, "rest"),],
 )
-def test_firewall_policies_client_service_account_always_use_jwt_true(
+def test_firewall_policies_client_service_account_always_use_jwt(
     transport_class, transport_name
 ):
     with mock.patch.object(
@@ -141,6 +131,13 @@ def test_firewall_policies_client_service_account_always_use_jwt_true(
         creds = service_account.Credentials(None, None, None)
         transport = transport_class(credentials=creds, always_use_jwt_access=True)
         use_jwt.assert_called_once_with(True)
+
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        transport = transport_class(credentials=creds, always_use_jwt_access=False)
+        use_jwt.assert_not_called()
 
 
 @pytest.mark.parametrize("client_class", [FirewallPoliciesClient,])
@@ -543,12 +540,13 @@ def test_add_association_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
         assert compute.FirewallPolicyAssociation.to_json(
             firewall_policy_association_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_add_association_rest_flattened_error():
@@ -679,12 +677,13 @@ def test_add_rule_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
         assert compute.FirewallPolicyRule.to_json(
             firewall_policy_rule_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_add_rule_rest_flattened_error():
@@ -809,7 +808,8 @@ def test_clone_rules_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_clone_rules_rest_flattened_error():
@@ -931,7 +931,8 @@ def test_delete_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_delete_rest_flattened_error():
@@ -1037,7 +1038,8 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_rest_flattened_error():
@@ -1118,7 +1120,8 @@ def test_get_association_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_association_rest_flattened_error():
@@ -1216,7 +1219,8 @@ def test_get_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "resource_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_iam_policy_rest_flattened_error():
@@ -1313,7 +1317,8 @@ def test_get_rule_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_get_rule_rest_flattened_error():
@@ -1442,11 +1447,12 @@ def test_insert_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
+        params = http_params.get("params")
         assert compute.FirewallPolicy.to_json(
             firewall_policy_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_insert_rest_flattened_error():
@@ -1550,6 +1556,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
+        params = http_params.get("params")
 
 
 def test_list_rest_flattened_error():
@@ -1680,6 +1687,7 @@ def test_list_associations_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
+        params = http_params.get("params")
 
 
 def test_list_associations_rest_flattened_error():
@@ -1798,7 +1806,8 @@ def test_move_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_move_rest_flattened_error():
@@ -1930,12 +1939,13 @@ def test_patch_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
         assert compute.FirewallPolicy.to_json(
             firewall_policy_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_patch_rest_flattened_error():
@@ -2070,12 +2080,13 @@ def test_patch_rule_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
         assert compute.FirewallPolicyRule.to_json(
             firewall_policy_rule_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_patch_rule_rest_flattened_error():
@@ -2200,7 +2211,8 @@ def test_remove_association_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_remove_association_rest_flattened_error():
@@ -2322,7 +2334,8 @@ def test_remove_rule_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "firewall_policy_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "firewall_policy_value" in http_call[1] + str(body) + str(params)
 
 
 def test_remove_rule_rest_flattened_error():
@@ -2426,12 +2439,13 @@ def test_set_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "resource_value" in http_call[1] + str(body) + str(params)
         assert compute.GlobalOrganizationSetPolicyRequest.to_json(
             global_organization_set_policy_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_set_iam_policy_rest_flattened_error():
@@ -2515,12 +2529,13 @@ def test_test_iam_permissions_rest_flattened():
         assert len(req.mock_calls) == 1
         _, http_call, http_params = req.mock_calls[0]
         body = http_params.get("data")
-        assert "resource_value" in http_call[1] + str(body)
+        params = http_params.get("params")
+        assert "resource_value" in http_call[1] + str(body) + str(params)
         assert compute.TestPermissionsRequest.to_json(
             test_permissions_request_resource,
             including_default_value_fields=False,
             use_integers_for_enums=False,
-        ) in http_call[1] + str(body)
+        ) in http_call[1] + str(body) + str(params)
 
 
 def test_test_iam_permissions_rest_flattened_error():
