@@ -123,6 +123,18 @@ def test_region_health_check_services_client_from_service_account_info(client_cl
 
 
 @pytest.mark.parametrize("client_class", [RegionHealthCheckServicesClient,])
+def test_region_health_check_services_client_service_account_always_use_jwt(
+    client_class,
+):
+    with mock.patch.object(
+        service_account.Credentials, "with_always_use_jwt_access", create=True
+    ) as use_jwt:
+        creds = service_account.Credentials(None, None, None)
+        client = client_class(credentials=creds)
+        use_jwt.assert_called_with(True)
+
+
+@pytest.mark.parametrize("client_class", [RegionHealthCheckServicesClient,])
 def test_region_health_check_services_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
     with mock.patch.object(
