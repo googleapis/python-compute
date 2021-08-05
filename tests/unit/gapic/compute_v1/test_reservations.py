@@ -589,7 +589,7 @@ def test_delete_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -601,7 +601,7 @@ def test_delete_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -625,7 +625,7 @@ def test_delete_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -637,7 +637,7 @@ def test_delete_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -711,14 +711,12 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetReservationRe
             commitment="commitment_value",
             creation_timestamp="creation_timestamp_value",
             description="description_value",
-            id="id_value",
+            id=205,
             kind="kind_value",
             name="name_value",
             satisfies_pzs=True,
             self_link="self_link_value",
-            specific_reservation=compute.AllocationSpecificSKUReservation(
-                count="count_value"
-            ),
+            specific_reservation=compute.AllocationSpecificSKUReservation(count=553),
             specific_reservation_required=True,
             status=compute.Reservation.Status.CREATING,
             zone="zone_value",
@@ -737,13 +735,13 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetReservationRe
     assert response.commitment == "commitment_value"
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.name == "name_value"
     assert response.satisfies_pzs is True
     assert response.self_link == "self_link_value"
     assert response.specific_reservation == compute.AllocationSpecificSKUReservation(
-        count="count_value"
+        count=553
     )
     assert response.specific_reservation_required is True
     assert response.status == compute.Reservation.Status.CREATING
@@ -925,7 +923,7 @@ def test_insert_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -937,7 +935,7 @@ def test_insert_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -961,7 +959,7 @@ def test_insert_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -973,7 +971,7 @@ def test_insert_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1196,7 +1194,7 @@ def test_resize_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1208,7 +1206,7 @@ def test_resize_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1232,7 +1230,7 @@ def test_resize_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1244,7 +1242,7 @@ def test_resize_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1275,7 +1273,7 @@ def test_resize_rest_flattened():
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         reservations_resize_request_resource = compute.ReservationsResizeRequest(
-            specific_sku_count="specific_sku_count_value"
+            specific_sku_count=1920
         )
         client.resize(
             project="project_value",
@@ -1311,7 +1309,7 @@ def test_resize_rest_flattened_error():
             zone="zone_value",
             reservation="reservation_value",
             reservations_resize_request_resource=compute.ReservationsResizeRequest(
-                specific_sku_count="specific_sku_count_value"
+                specific_sku_count=1920
             ),
         )
 

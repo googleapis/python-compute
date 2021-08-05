@@ -580,7 +580,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNodeTypeReque
             deprecated=compute.DeprecationStatus(deleted="deleted_value"),
             description="description_value",
             guest_cpus=1090,
-            id="id_value",
+            id=205,
             kind="kind_value",
             local_ssd_gb=1244,
             memory_mb=967,
@@ -604,7 +604,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNodeTypeReque
     assert response.deprecated == compute.DeprecationStatus(deleted="deleted_value")
     assert response.description == "description_value"
     assert response.guest_cpus == 1090
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.local_ssd_gb == 1244
     assert response.memory_mb == 967

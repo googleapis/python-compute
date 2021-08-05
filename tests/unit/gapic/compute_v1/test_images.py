@@ -424,7 +424,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -436,7 +436,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -460,7 +460,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -472,7 +472,7 @@ def test_delete_rest(transport: str = "rest", request_type=compute.DeleteImageRe
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -548,7 +548,7 @@ def test_deprecate_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -560,7 +560,7 @@ def test_deprecate_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -584,7 +584,7 @@ def test_deprecate_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -596,7 +596,7 @@ def test_deprecate_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -676,25 +676,25 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetImageRequest)
     with mock.patch.object(Session, "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Image(
-            archive_size_bytes="archive_size_bytes_value",
+            archive_size_bytes=1922,
             creation_timestamp="creation_timestamp_value",
             deprecated=compute.DeprecationStatus(deleted="deleted_value"),
             description="description_value",
-            disk_size_gb="disk_size_gb_value",
+            disk_size_gb=1261,
             family="family_value",
             guest_os_features=[
                 compute.GuestOsFeature(
                     type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
                 )
             ],
-            id="id_value",
+            id=205,
             image_encryption_key=compute.CustomerEncryptionKey(
                 kms_key_name="kms_key_name_value"
             ),
             kind="kind_value",
             label_fingerprint="label_fingerprint_value",
             labels={"key_value": "value_value"},
-            license_codes=["license_codes_value"],
+            license_codes=[1360],
             licenses=["licenses_value"],
             name="name_value",
             raw_disk=compute.RawDisk(container_type=compute.RawDisk.ContainerType.TAR),
@@ -733,25 +733,25 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetImageRequest)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Image)
-    assert response.archive_size_bytes == "archive_size_bytes_value"
+    assert response.archive_size_bytes == 1922
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.deprecated == compute.DeprecationStatus(deleted="deleted_value")
     assert response.description == "description_value"
-    assert response.disk_size_gb == "disk_size_gb_value"
+    assert response.disk_size_gb == 1261
     assert response.family == "family_value"
     assert response.guest_os_features == [
         compute.GuestOsFeature(
             type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
         )
     ]
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.image_encryption_key == compute.CustomerEncryptionKey(
         kms_key_name="kms_key_name_value"
     )
     assert response.kind == "kind_value"
     assert response.label_fingerprint == "label_fingerprint_value"
     assert response.labels == {"key_value": "value_value"}
-    assert response.license_codes == ["license_codes_value"]
+    assert response.license_codes == [1360]
     assert response.licenses == ["licenses_value"]
     assert response.name == "name_value"
     assert response.raw_disk == compute.RawDisk(
@@ -842,25 +842,25 @@ def test_get_from_family_rest(
     with mock.patch.object(Session, "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Image(
-            archive_size_bytes="archive_size_bytes_value",
+            archive_size_bytes=1922,
             creation_timestamp="creation_timestamp_value",
             deprecated=compute.DeprecationStatus(deleted="deleted_value"),
             description="description_value",
-            disk_size_gb="disk_size_gb_value",
+            disk_size_gb=1261,
             family="family_value",
             guest_os_features=[
                 compute.GuestOsFeature(
                     type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
                 )
             ],
-            id="id_value",
+            id=205,
             image_encryption_key=compute.CustomerEncryptionKey(
                 kms_key_name="kms_key_name_value"
             ),
             kind="kind_value",
             label_fingerprint="label_fingerprint_value",
             labels={"key_value": "value_value"},
-            license_codes=["license_codes_value"],
+            license_codes=[1360],
             licenses=["licenses_value"],
             name="name_value",
             raw_disk=compute.RawDisk(container_type=compute.RawDisk.ContainerType.TAR),
@@ -899,25 +899,25 @@ def test_get_from_family_rest(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Image)
-    assert response.archive_size_bytes == "archive_size_bytes_value"
+    assert response.archive_size_bytes == 1922
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.deprecated == compute.DeprecationStatus(deleted="deleted_value")
     assert response.description == "description_value"
-    assert response.disk_size_gb == "disk_size_gb_value"
+    assert response.disk_size_gb == 1261
     assert response.family == "family_value"
     assert response.guest_os_features == [
         compute.GuestOsFeature(
             type_=compute.GuestOsFeature.Type.FEATURE_TYPE_UNSPECIFIED
         )
     ]
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.image_encryption_key == compute.CustomerEncryptionKey(
         kms_key_name="kms_key_name_value"
     )
     assert response.kind == "kind_value"
     assert response.label_fingerprint == "label_fingerprint_value"
     assert response.labels == {"key_value": "value_value"}
-    assert response.license_codes == ["license_codes_value"]
+    assert response.license_codes == [1360]
     assert response.licenses == ["licenses_value"]
     assert response.name == "name_value"
     assert response.raw_disk == compute.RawDisk(
@@ -1117,7 +1117,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1129,7 +1129,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1153,7 +1153,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1165,7 +1165,7 @@ def test_insert_rest(transport: str = "rest", request_type=compute.InsertImageRe
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1195,7 +1195,7 @@ def test_insert_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        image_resource = compute.Image(archive_size_bytes="archive_size_bytes_value")
+        image_resource = compute.Image(archive_size_bytes=1922)
         client.insert(
             project="project_value", image_resource=image_resource,
         )
@@ -1222,7 +1222,7 @@ def test_insert_rest_flattened_error():
         client.insert(
             compute.InsertImageRequest(),
             project="project_value",
-            image_resource=compute.Image(archive_size_bytes="archive_size_bytes_value"),
+            image_resource=compute.Image(archive_size_bytes=1922),
         )
 
 
@@ -1240,7 +1240,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListImagesReque
         # Designate an appropriate value for the returned response.
         return_value = compute.ImageList(
             id="id_value",
-            items=[compute.Image(archive_size_bytes="archive_size_bytes_value")],
+            items=[compute.Image(archive_size_bytes=1922)],
             kind="kind_value",
             next_page_token="next_page_token_value",
             self_link="self_link_value",
@@ -1258,9 +1258,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListImagesReque
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListPager)
     assert response.id == "id_value"
-    assert response.items == [
-        compute.Image(archive_size_bytes="archive_size_bytes_value")
-    ]
+    assert response.items == [compute.Image(archive_size_bytes=1922)]
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
@@ -1369,7 +1367,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1381,7 +1379,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1405,7 +1403,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1417,7 +1415,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchImageRequ
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -1447,7 +1445,7 @@ def test_patch_rest_flattened():
 
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
-        image_resource = compute.Image(archive_size_bytes="archive_size_bytes_value")
+        image_resource = compute.Image(archive_size_bytes=1922)
         client.patch(
             project="project_value", image="image_value", image_resource=image_resource,
         )
@@ -1476,7 +1474,7 @@ def test_patch_rest_flattened_error():
             compute.PatchImageRequest(),
             project="project_value",
             image="image_value",
-            image_resource=compute.Image(archive_size_bytes="archive_size_bytes_value"),
+            image_resource=compute.Image(archive_size_bytes=1922),
         )
 
 
@@ -1617,7 +1615,7 @@ def test_set_labels_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1629,7 +1627,7 @@ def test_set_labels_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1653,7 +1651,7 @@ def test_set_labels_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1665,7 +1663,7 @@ def test_set_labels_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [

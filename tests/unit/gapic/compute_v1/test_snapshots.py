@@ -429,7 +429,7 @@ def test_delete_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -441,7 +441,7 @@ def test_delete_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -465,7 +465,7 @@ def test_delete_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -477,7 +477,7 @@ def test_delete_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
@@ -550,13 +550,13 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetSnapshotReque
             chain_name="chain_name_value",
             creation_timestamp="creation_timestamp_value",
             description="description_value",
-            disk_size_gb="disk_size_gb_value",
-            download_bytes="download_bytes_value",
-            id="id_value",
+            disk_size_gb=1261,
+            download_bytes=1502,
+            id=205,
             kind="kind_value",
             label_fingerprint="label_fingerprint_value",
             labels={"key_value": "value_value"},
-            license_codes=["license_codes_value"],
+            license_codes=[1360],
             licenses=["licenses_value"],
             location_hint="location_hint_value",
             name="name_value",
@@ -571,7 +571,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetSnapshotReque
             ),
             source_disk_id="source_disk_id_value",
             status=compute.Snapshot.Status.CREATING,
-            storage_bytes="storage_bytes_value",
+            storage_bytes=1403,
             storage_bytes_status=compute.Snapshot.StorageBytesStatus.UPDATING,
             storage_locations=["storage_locations_value"],
         )
@@ -590,13 +590,13 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetSnapshotReque
     assert response.chain_name == "chain_name_value"
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
-    assert response.disk_size_gb == "disk_size_gb_value"
-    assert response.download_bytes == "download_bytes_value"
-    assert response.id == "id_value"
+    assert response.disk_size_gb == 1261
+    assert response.download_bytes == 1502
+    assert response.id == 205
     assert response.kind == "kind_value"
     assert response.label_fingerprint == "label_fingerprint_value"
     assert response.labels == {"key_value": "value_value"}
-    assert response.license_codes == ["license_codes_value"]
+    assert response.license_codes == [1360]
     assert response.licenses == ["licenses_value"]
     assert response.location_hint == "location_hint_value"
     assert response.name == "name_value"
@@ -611,7 +611,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetSnapshotReque
     )
     assert response.source_disk_id == "source_disk_id_value"
     assert response.status == compute.Snapshot.Status.CREATING
-    assert response.storage_bytes == "storage_bytes_value"
+    assert response.storage_bytes == 1403
     assert response.storage_bytes_status == compute.Snapshot.StorageBytesStatus.UPDATING
     assert response.storage_locations == ["storage_locations_value"]
 
@@ -1023,7 +1023,7 @@ def test_set_labels_rest(
             error=compute.Error(errors=[compute.Errors(code="code_value")]),
             http_error_message="http_error_message_value",
             http_error_status_code=2374,
-            id="id_value",
+            id=205,
             insert_time="insert_time_value",
             kind="kind_value",
             name="name_value",
@@ -1035,7 +1035,7 @@ def test_set_labels_rest(
             start_time="start_time_value",
             status=compute.Operation.Status.DONE,
             status_message="status_message_value",
-            target_id="target_id_value",
+            target_id=947,
             target_link="target_link_value",
             user="user_value",
             warnings=[compute.Warnings(code=compute.Warnings.Code.CLEANUP_FAILED)],
@@ -1059,7 +1059,7 @@ def test_set_labels_rest(
     assert response.error == compute.Error(errors=[compute.Errors(code="code_value")])
     assert response.http_error_message == "http_error_message_value"
     assert response.http_error_status_code == 2374
-    assert response.id == "id_value"
+    assert response.id == 205
     assert response.insert_time == "insert_time_value"
     assert response.kind == "kind_value"
     assert response.name == "name_value"
@@ -1071,7 +1071,7 @@ def test_set_labels_rest(
     assert response.start_time == "start_time_value"
     assert response.status == compute.Operation.Status.DONE
     assert response.status_message == "status_message_value"
-    assert response.target_id == "target_id_value"
+    assert response.target_id == 947
     assert response.target_link == "target_link_value"
     assert response.user == "user_value"
     assert response.warnings == [
