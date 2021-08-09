@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.5.0](https://www.github.com/googleapis/python-compute/compare/v0.4.2...v0.5.0) (2021-08-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* uint64/int64 fields accept ints instead of strings
+* uint64/int64 fields accept ints instead of strings (#92)
+
+### Features
+
+* add always_use_jwt_access ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* adding samples to start/stop/reset operations ([#75](https://www.github.com/googleapis/python-compute/issues/75)) ([0df87a9](https://www.github.com/googleapis/python-compute/commit/0df87a9cc65c9a68c2ba6ae6bea2f6906626d488))
+
+
+### Bug Fixes
+
+* fix required query params handling (closes [#12](https://www.github.com/googleapis/python-compute/issues/12)) ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* uint64/int64 fields accept ints instead of strings ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* uint64/int64 fields accept ints instead of strings ([#92](https://www.github.com/googleapis/python-compute/issues/92)) ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+
+
+### Miscellaneous Chores
+
+* release as 0.4.3 ([#89](https://www.github.com/googleapis/python-compute/issues/89)) ([fbc1a28](https://www.github.com/googleapis/python-compute/commit/fbc1a2869932883d0e7e8e498e16d2273fb25048))
+
 ### [0.4.2](https://www.github.com/googleapis/python-compute/compare/v0.4.1...v0.4.2) (2021-07-26)
 
 ### Bug Fixes
