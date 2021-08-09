@@ -15,7 +15,6 @@
 ### Bug Fixes
 
 * fix required query params handling (closes [#12](https://www.github.com/googleapis/python-compute/issues/12)) ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
-* uint64/int64 fields accept ints instead of strings ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
 * uint64/int64 fields accept ints instead of strings ([#92](https://www.github.com/googleapis/python-compute/issues/92)) ([4d673cf](https://www.github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
 
 ### Documentation
