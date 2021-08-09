@@ -30,7 +30,7 @@ def print_images_list(project: str) -> None:
         project: project ID or project number of the Cloud project you want to list images from.
 
     Returns:
-        None
+        None.
     """
     images_client = compute_v1.ImagesClient()
     # Listing only non-deprecated images to reduce the size of the reply.
@@ -56,7 +56,7 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
         page_size: size of the pages you want the API to return on each call.
 
     Returns:
-        None
+        None.
     """
     images_client = compute_v1.ImagesClient()
     # Listing only non-deprecated images to reduce the size of the reply.

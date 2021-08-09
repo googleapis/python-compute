@@ -80,7 +80,7 @@ def list_all_instances(
     print("Instances found:")
     # Despite using the `max_results` parameter, you don't need to handle the pagination
     # yourself. The returned `AggregatedListPager` object handles pagination
-    # automatically, requesting next pages as you iterate over the results.
+    # automatically, returning separated pages as you iterate over the results.
     for zone, response in agg_list:
         if response.instances:
             all_instances[zone] = response.instances
