@@ -4824,20 +4824,20 @@ class CacheKeyPolicy(proto.Message):
             cached separately.
         include_query_string (bool):
             If true, include query string parameters in the cache key
-            according to query_string_whitelist and
-            query_string_blacklist. If neither is set, the entire query
+            according to query_string_includelist and
+            query_string_excludelist. If neither is set, the entire query
             string will be included. If false, the query string will be
             excluded from the cache key entirely.
-        query_string_blacklist (Sequence[str]):
+        query_string_excludelist (Sequence[str]):
             Names of query string parameters to exclude in cache keys.
             All other parameters will be included. Either specify
-            query_string_whitelist or query_string_blacklist, not both.
+            query_string_includelist or query_string_excludelist, not both.
             '&' and '=' will be percent encoded and not treated as
             delimiters.
-        query_string_whitelist (Sequence[str]):
+        query_string_includelist (Sequence[str]):
             Names of query string parameters to include in cache keys.
             All other parameters will be excluded. Either specify
-            query_string_whitelist or query_string_blacklist, not both.
+            query_string_includelist or query_string_excludelist, not both.
             '&' and '=' will be percent encoded and not treated as
             delimiters.
     """
@@ -4845,8 +4845,8 @@ class CacheKeyPolicy(proto.Message):
     include_host = proto.Field(proto.BOOL, number=486867679, optional=True,)
     include_protocol = proto.Field(proto.BOOL, number=303507535, optional=True,)
     include_query_string = proto.Field(proto.BOOL, number=474036639, optional=True,)
-    query_string_blacklist = proto.RepeatedField(proto.STRING, number=354964742,)
-    query_string_whitelist = proto.RepeatedField(proto.STRING, number=52456496,)
+    query_string_excludelist = proto.RepeatedField(proto.STRING, number=354964742,)
+    query_string_includelist = proto.RepeatedField(proto.STRING, number=52456496,)
 
 
 class BackendServiceCdnPolicyNegativeCachingPolicy(proto.Message):
