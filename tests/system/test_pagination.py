@@ -22,11 +22,6 @@ from google.cloud.compute_v1.types import ListZonesRequest
 from tests.system.base import TestBase
 
 
-import logging
-
-LOGGER = logging.getLogger(__name__)
-
-
 class TestComputePagination(TestBase):
     def setUp(self) -> None:
         super().setUp()
