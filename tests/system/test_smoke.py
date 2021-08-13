@@ -212,8 +212,8 @@ class TestComputeImages(TestBase):
         )
         images_client = ImagesClient(transport="rest")
         request = InsertImageRequest(project=self.DEFAULT_PROJECT, image_resource=image)
+        op = images_client.insert(request)
         try:
-            op = images_client.insert(request)
             self.wait_for_global_operation(op.name)
 
             fetched = images_client.get(project=self.DEFAULT_PROJECT, image=name)
@@ -236,8 +236,8 @@ class TestComputeFirewalls(TestBase):
             source_ranges=["0.0.0.0/0"],
             allowed=[Allowed(I_p_protocol="tcp", ports=["80"])],
         )
+        op = client.insert(project=self.DEFAULT_PROJECT, firewall_resource=firewall)
         try:
-            op = client.insert(project=self.DEFAULT_PROJECT, firewall_resource=firewall)
             self.wait_for_global_operation(op.name)
 
             fetched = client.get(project=self.DEFAULT_PROJECT, firewall=name)
