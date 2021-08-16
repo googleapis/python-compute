@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import collections
 
 from google.cloud.compute_v1.services.accelerator_types.client import (
     AcceleratorTypesClient,
@@ -81,11 +82,8 @@ class TestPaginationAggregatedList(TestBase):
             project=self.DEFAULT_PROJECT, max_results=3
         )
         result = client.aggregated_list(request=request)
-        presented = False
+        zone_acc_types = collections.defaultdict(list)
         for zone, types in result:
-            if zone == "zones/" + self.DEFAULT_ZONE:
-                for ac_type in types.accelerator_types:
-                    if ac_type.name == "nvidia-tesla-t4":
-                        presented = True
-                        break
-        self.assertTrue(presented)
+            zone_acc_types[zone].extend(at.name for at in types.accelerator_types)
+        default_zone = "zones/" + self.DEFAULT_ZONE
+        self.assertIn("nvidia-tesla-t4", zone_acc_types[default_zone])
