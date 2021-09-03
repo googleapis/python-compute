@@ -15,9 +15,18 @@
 
 from typing import Iterable
 
+# [START compute_firewall_list]
+# [START compute_firewall_create]
+# [START compute_firewall_patch]
+# [START compute_firewall_delete]
 import google.cloud.compute_v1 as compute_v1
+# [END compute_firewall_delete]
+# [END compute_firewall_patch]
+# [END compute_firewall_create]
+# [END compute_firewall_list]
 
 
+# [START compute_firewall_list]
 def list_firewall_rules(project_id: str) -> Iterable:
     """
     Return a list of all the firewall rules in specified project.
@@ -31,6 +40,7 @@ def list_firewall_rules(project_id: str) -> Iterable:
     firewall_client = compute_v1.FirewallsClient()
     firewalls_list = firewall_client.list(project=project_id)
     return firewalls_list
+# [END compute_firewall_list]
 
 
 def print_firewall_rule(project_id: str, firewall_rule_name: str):
@@ -38,6 +48,7 @@ def print_firewall_rule(project_id: str, firewall_rule_name: str):
     print(firewall_client.get(project=project_id, firewall=firewall_rule_name))
 
 
+# [START compute_firewall_create]
 def create_firewall_rule(project_id: str, firewall_rule_name: str):
     """
     Creates a simple firewall rule allowing for incoming HTTP and HTTPS access from the entire Internet.
@@ -49,9 +60,11 @@ def create_firewall_rule(project_id: str, firewall_rule_name: str):
     firewall_rule = compute_v1.Firewall()
     firewall_rule.name = firewall_rule_name
     firewall_rule.direction = compute_v1.Firewall.Direction.INGRESS
+
     tcp_80_443_allowed = compute_v1.Allowed()
     tcp_80_443_allowed.I_p_protocol = "tcp"
     tcp_80_443_allowed.ports = ["80", "443"]
+
     firewall_rule.allowed = [tcp_80_443_allowed]
     firewall_rule.source_ranges = ["0.0.0.0/0"]
     firewall_rule.network = "global/networks/default"
@@ -71,8 +84,10 @@ def create_firewall_rule(project_id: str, firewall_rule_name: str):
     op_client.wait(project=project_id, operation=op.name)
 
     return
+# [END compute_firewall_create]
 
 
+# [START compute_firewall_patch]
 def patch_firewall_priority(project_id: str, firewall_rule_name: str, priority: int):
     """
     Modifies the priority of a given firewall rule.
@@ -93,8 +108,10 @@ def patch_firewall_priority(project_id: str, firewall_rule_name: str, priority: 
     operation_client = compute_v1.GlobalOperationsClient()
     operation_client.wait(project=project_id, operation=operation.name)
     return
+# [END compute_firewall_patch]
 
 
+# [START compute_firewall_delete]
 def delete_firewall_rule(project_id: str, firewall_rule_name: str):
     """
     Deleted a firewall rule from the project.
@@ -109,6 +126,7 @@ def delete_firewall_rule(project_id: str, firewall_rule_name: str):
     operation_client = compute_v1.GlobalOperationsClient()
     operation_client.wait(project=project_id, operation=operation.name)
     return
+# [END compute_firewall_delete]
 
 
 if __name__ == '__main__':
