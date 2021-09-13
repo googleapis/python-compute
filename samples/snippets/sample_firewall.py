@@ -29,7 +29,8 @@ import google.cloud.compute_v1 as compute_v1
 # [START compute_firewall_list]
 def list_firewall_rules(project_id: str) -> Iterable:
     """
-    Return a list of all the firewall rules in specified project.
+    Return a list of all the firewall rules in specified project. Also prints the
+    list of firewall names and their descriptions.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -39,6 +40,10 @@ def list_firewall_rules(project_id: str) -> Iterable:
     """
     firewall_client = compute_v1.FirewallsClient()
     firewalls_list = firewall_client.list(project=project_id)
+
+    for firewall in firewalls_list:
+        print(f" - {firewall.name}: {firewall.description}")
+
     return firewalls_list
 # [END compute_firewall_list]
 
@@ -49,13 +54,17 @@ def print_firewall_rule(project_id: str, firewall_rule_name: str):
 
 
 # [START compute_firewall_create]
-def create_firewall_rule(project_id: str, firewall_rule_name: str):
+def create_firewall_rule(project_id: str, firewall_rule_name: str, network: str = "global/networks/default"):
     """
     Creates a simple firewall rule allowing for incoming HTTP and HTTPS access from the entire Internet.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         firewall_rule_name: name of the rule that is created.
+        network: name of the network the rule will be applied to. Available name formats:
+            * https://www.googleapis.com/compute/v1/projects/{project_id}/global/networks/{network}
+            * projects/{project_id}/global/networks/{network}
+            * global/networks/{network}
     """
     firewall_rule = compute_v1.Firewall()
     firewall_rule.name = firewall_rule_name
@@ -67,13 +76,14 @@ def create_firewall_rule(project_id: str, firewall_rule_name: str):
 
     firewall_rule.allowed = [tcp_80_443_allowed]
     firewall_rule.source_ranges = ["0.0.0.0/0"]
-    firewall_rule.network = "global/networks/default"
+    firewall_rule.network = network
     firewall_rule.description = "Allowing TCP traffic on port 80 and 443 from Internet."
 
     # Note that the default value of priority for the firewall API is 1000.
     # If you check the value of `firewall_rule.priority` at this point it
-    # will be equal to 0. If you want to create a rule that has priority == 0,
-    # you'll need to explicitly set it so:
+    # will be equal to 0, however it is not treated as "set" by the library and thus
+    # the default will be applied to the new rule. If you want to create a rule that
+    # has priority == 0, you need to explicitly set it so:
 
     # firewall_rule.priority = 0
 
@@ -145,6 +155,7 @@ if __name__ == '__main__':
         import uuid
         rule_name = "firewall-sample-" + uuid.uuid4().hex[:10]
         print(f'Creating firewall rule {rule_name}...')
+        # The rule will be created with default priority of 1000.
         create_firewall_rule(default_project_id, rule_name)
         try:
             print('Rule created:')
