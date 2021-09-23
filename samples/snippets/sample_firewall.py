@@ -54,7 +54,9 @@ def print_firewall_rule(project_id: str, firewall_rule_name: str):
 
 
 # [START compute_firewall_create]
-def create_firewall_rule(project_id: str, firewall_rule_name: str, network: str = "global/networks/default"):
+def create_firewall_rule(
+    project_id: str, firewall_rule_name: str, network: str = "global/networks/default"
+):
     """
     Creates a simple firewall rule allowing for incoming HTTP and HTTPS access from the entire Internet.
 
@@ -113,7 +115,9 @@ def patch_firewall_priority(project_id: str, firewall_rule_name: str, priority: 
     # The patch operation doesn't require the full definition of a Firewall object. It will only update
     # the values that were set in it, in this case it will only change the priority.
     firewall_client = compute_v1.FirewallsClient()
-    operation = firewall_client.patch(project=project_id, firewall=firewall_rule_name, firewall_resource=firewall_rule)
+    operation = firewall_client.patch(
+        project=project_id, firewall=firewall_rule_name, firewall_resource=firewall_rule
+    )
 
     operation_client = compute_v1.GlobalOperationsClient()
     operation_client.wait(project=project_id, operation=operation.name)
@@ -139,13 +143,13 @@ def delete_firewall_rule(project_id: str, firewall_rule_name: str):
 # [END compute_firewall_delete]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import google.auth
     import google.auth.exceptions
 
     try:
         default_project_id = google.auth.default()[1]
-        print(f'Using project {default_project_id}.')
+        print(f"Using project {default_project_id}.")
     except google.auth.exceptions.DefaultCredentialsError:
         print(
             "Please use `gcloud auth application-default login` "
@@ -153,18 +157,19 @@ if __name__ == '__main__':
         )
     else:
         import uuid
+
         rule_name = "firewall-sample-" + uuid.uuid4().hex[:10]
-        print(f'Creating firewall rule {rule_name}...')
+        print(f"Creating firewall rule {rule_name}...")
         # The rule will be created with default priority of 1000.
         create_firewall_rule(default_project_id, rule_name)
         try:
-            print('Rule created:')
+            print("Rule created:")
             print_firewall_rule(default_project_id, rule_name)
-            print('Updating rule priority to 10...')
+            print("Updating rule priority to 10...")
             patch_firewall_priority(default_project_id, rule_name, 10)
-            print('Rule updated: ')
+            print("Rule updated: ")
             print_firewall_rule(default_project_id, rule_name)
-            print(f'Deleting rule {rule_name}...')
+            print(f"Deleting rule {rule_name}...")
         finally:
             delete_firewall_rule(default_project_id, rule_name)
-        print('Done.')
+        print("Done.")

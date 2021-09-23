@@ -20,11 +20,12 @@ from google.cloud import compute_v1
 
 import pytest
 
-try:
-    from samples.snippets.sample_firewall import (create_firewall_rule, patch_firewall_priority,
-                                                  delete_firewall_rule, list_firewall_rules)
-except ImportError:
-    from sample_firewall import create_firewall_rule, patch_firewall_priority, delete_firewall_rule, list_firewall_rules
+from sample_firewall import (
+    create_firewall_rule,
+    patch_firewall_priority,
+    delete_firewall_rule,
+    list_firewall_rules,
+)
 
 PROJECT = google.auth.default()[1]
 
@@ -64,8 +65,8 @@ def test_create_delete():
 
 def test_patch_rule(firewall_rule):
     fw_client = compute_v1.FirewallsClient()
-    assert(firewall_rule.priority == 1000)
+    assert firewall_rule.priority == 1000
     patch_firewall_priority(PROJECT, firewall_rule.name, 500)
     time.sleep(2)
     updated_firewall_rule = fw_client.get(project=PROJECT, firewall=firewall_rule.name)
-    assert(updated_firewall_rule.priority == 500)
+    assert updated_firewall_rule.priority == 500
