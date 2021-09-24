@@ -14,17 +14,16 @@
 import time
 import uuid
 
-
 import google.auth
 from google.cloud import compute_v1
-
 import pytest
+
 
 from sample_firewall import (
     create_firewall_rule,
-    patch_firewall_priority,
     delete_firewall_rule,
     list_firewall_rules,
+    patch_firewall_priority,
 )
 
 PROJECT = google.auth.default()[1]
