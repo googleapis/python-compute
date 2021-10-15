@@ -41,21 +41,21 @@ def disk_from_image(
     disk_type: str, disk_size_gb: int, boot: bool, source_image: str
 ) -> compute_v1.AttachedDisk:
     """
-    Create an AttachedDisk object to be used in VM instance creation. Uses an Image as the
+    Create an AttachedDisk object to be used in VM instance creation. Uses an image as the
     source for the new disk.
 
     Args:
-         disk_type: the type of disk you want to create. The value uses following format:
+         disk_type: the type of disk you want to create. This value uses the following format:
             "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
             For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
-        boot: flag indicating if this disk should be used as a boot disk of an instance
-        source_image: a link pointing to an image you have read access to. This can be one
+        boot: boolean flag indicating whether this disk should be used as a boot disk of an instance
+        source_image: source image to use when creating this disk. You must have read access to this disk. This can be one
             of the publicly available images or an image from one of your projects.
-            This value uses following format: "projects/{project_name}/global/images/{image_name}"
+            This value uses the following format: "projects/{project_name}/global/images/{image_name}"
 
     Returns:
-        AttachedDisk object configured to be created as a copy of specified image.
+        AttachedDisk object configured to be created using the specified image.
     """
     boot_disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
@@ -65,6 +65,8 @@ def disk_from_image(
     initialize_params.disk_size_gb = disk_size_gb
     initialize_params.disk_type = disk_type
     boot_disk.initialize_params = initialize_params
+    # Remember to set auto_delete to True if you want the disk to be deleted when you delete
+    # your VM instance.
     boot_disk.auto_delete = True
     boot_disk.boot = boot
     return boot_disk
@@ -80,11 +82,11 @@ def disk_from_image(
 # [START compute_instances_create_from_image_plus_empty_disk]
 def empty_disk(disk_type: str, disk_size_gb: int) -> compute_v1.AttachedDisk():
     """
-    Create an AttachedDisk object to be used in VM instance creation. The created disk will be
-    empty and will require formatting before it can be used.
+    Create an AttachedDisk object to be used in VM instance creation. The created disk contains
+    no data and requires formatting before it can be used.
 
     Args:
-         disk_type: the type of disk you want to create. The value uses following format:
+         disk_type: the type of disk you want to create. This value uses the following format:
             "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
             For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
@@ -93,10 +95,12 @@ def empty_disk(disk_type: str, disk_size_gb: int) -> compute_v1.AttachedDisk():
         AttachedDisk object configured to be created as an empty disk.
     """
     disk = compute_v1.AttachedDisk()
-    init_params = compute_v1.AttachedDiskInitializeParams()
-    init_params.disk_type = disk_type
-    init_params.disk_size_gb = disk_size_gb
-    disk.initialize_params = init_params
+    initialize_params = compute_v1.AttachedDiskInitializeParams()
+    initialize_params.disk_type = disk_type
+    initialize_params.disk_size_gb = disk_size_gb
+    disk.initialize_params = initialize_params
+    # Remember to set auto_delete to True if you want the disk to be deleted when you delete
+    # your VM instance.
     disk.auto_delete = True
     disk.boot = False
     return disk
@@ -108,32 +112,34 @@ def empty_disk(disk_type: str, disk_size_gb: int) -> compute_v1.AttachedDisk():
 # [START compute_instances_create_from_image_plus_snapshot_disk]
 # [START compute_instances_create_from_snapshot]
 def disk_from_snapshot(
-    disk_type: str, disk_size_gb: int, boot: bool, snapshot_url: str
+    disk_type: str, disk_size_gb: int, boot: bool, disk_snapshot: str
 ) -> compute_v1.AttachedDisk():
     """
-    Create an AttachedDisk object to be used in VM instance creation. Uses an Image as the
+    Create an AttachedDisk object to be used in VM instance creation. Uses a disk snapshot as the
     source for the new disk.
 
     Args:
-         disk_type: the type of disk you want to create. The value uses following format:
+         disk_type: the type of disk you want to create. This value uses the following format:
             "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
             For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
-        boot: flag indicating if this disk should be used as a boot disk of an instance
-        snapshot_url: a link pointing to a snapshot you have read access to.
-            This value uses following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
+        boot: boolean flag indicating whether this disk should be used as a boot disk of an instance
+        disk_snapshot: disk snapshot to use when creating this disk. You must have read access to this disk.
+            This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
     Returns:
-        AttachedDisk object configured to be created as a copy of specified snapshot.
+        AttachedDisk object configured to be created using the specified snapshot.
     """
     disk = compute_v1.AttachedDisk()
-    init_params = compute_v1.AttachedDiskInitializeParams()
-    init_params.disk_type = disk_type
-    init_params.disk_size_gb = disk_size_gb
+    initialize_params = compute_v1.AttachedDiskInitializeParams()
+    initialize_params.disk_type = disk_type
+    initialize_params.disk_size_gb = disk_size_gb
 
-    init_params.source_snapshot = snapshot_url
+    initialize_params.source_snapshot = disk_snapshot
 
-    disk.initialize_params = init_params
+    disk.initialize_params = initialize_params
+    # Remember to set auto_delete to True if you want the disk to be deleted when you delete
+    # your VM instance.
     disk.auto_delete = True
     disk.boot = boot
     return disk
@@ -155,7 +161,6 @@ def create_with_disks(
     instance_name: str,
     disks: List[compute_v1.AttachedDisk],
     machine_type: str = "n1-standard-1",
-    # source_image: str = "projects/debian-cloud/global/images/family/debian-10",
     network_link: str = "global/networks/default",
     subnetwork_link: str = None,
 ) -> compute_v1.Instance:
@@ -164,18 +169,19 @@ def create_with_disks(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
         machine_type: machine type of the VM being created. This value uses the
             following format: "zones/{zone}/machineTypes/{type_name}".
             For example: "zones/europe-west3-c/machineTypes/f1-micro"
         disks: a list of compute_v1.AttachedDisk objects describing the disks
             you want to attach to your new instance.
         network_link: name of the network you want the new instance to use.
-            For example: "global/networks/default" represents the `default`
-            network interface, which is created automatically for each project.
+            For example: "global/networks/default" represents the network
+            named "default", which is created automatically for each project.
         subnetwork_link: name of the subnetwork you want the new instance to use.
-            Format used: "regions/{region}/subnetworks/{subnetwork_name}"
+            This value uses the following format:
+            "regions/{region}/subnetworks/{subnetwork_name}"
     Returns:
         Instance object.
     """
@@ -239,14 +245,14 @@ def create_from_public_image(project_id: str, zone: str, instance_name: str):
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
 
     Returns:
         Instance object.
     """
     image_client = compute_v1.ImagesClient()
-    # List of image families: https://cloud.google.com/compute/docs/images/os-details
+    # List of public operating system (OS) images: https://cloud.google.com/compute/docs/images/os-details
     newest_debian = image_client.get_from_family(
         project="debian-cloud", family="debian-10"
     )
@@ -268,8 +274,8 @@ def create_from_custom_image(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
         custom_image_link: link to the custom image you want to use in the form of:
             "projects/{project_name}/global/images/{image_name}"
 
@@ -288,19 +294,19 @@ def create_from_custom_image(
 # [START compute_instances_create_from_image_plus_empty_disk]
 def create_with_additional_disk(project_id: str, zone: str, instance_name: str):
     """
-    Create a new VM instance with Debian 10 operating system and a 11Gb additional
+    Create a new VM instance with Debian 10 operating system and a 11 GB additional
     empty disk.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
 
     Returns:
         Instance object.
     """
     image_client = compute_v1.ImagesClient()
-    # List of image families: https://cloud.google.com/compute/docs/images/os-details
+    # List of public operating system (OS) images: https://cloud.google.com/compute/docs/images/os-details
     newest_debian = image_client.get_from_family(
         project="debian-cloud", family="debian-10"
     )
@@ -325,8 +331,8 @@ def create_from_snapshot(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
         snapshot_link: link to the snapshot you want to use as the source of your
             boot disk in the form of: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
@@ -351,8 +357,8 @@ def create_with_snapshotted_data_disk(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
         snapshot_link: link to the snapshot you want to use as the source of your
             data disk in the form of: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
@@ -360,7 +366,7 @@ def create_with_snapshotted_data_disk(
         Instance object.
     """
     image_client = compute_v1.ImagesClient()
-    # List of image families: https://cloud.google.com/compute/docs/images/os-details
+    # List of public operating system (OS) images: https://cloud.google.com/compute/docs/images/os-details
     newest_debian = image_client.get_from_family(
         project="debian-cloud", family="debian-10"
     )
@@ -385,19 +391,20 @@ def create_with_subnet(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
-        instance_name: name of the new virtual machine.
+        zone: name of the zone to create the instance in. For example: "us-west3-b"
+        instance_name: name of the new virtual machine (VM) instance.
         network_link: name of the network you want the new instance to use.
-            For example: "global/networks/default" represents the `default`
-            network interface, which is created automatically for each project.
+            For example: "global/networks/default" represents the network
+            named "default", which is created automatically for each project.
         subnetwork_link: name of the subnetwork you want the new instance to use.
-            Format used: "regions/{region}/subnetworks/{subnetwork_name}"
+            This value uses the following format:
+            "regions/{region}/subnetworks/{subnetwork_name}"
 
     Returns:
         Instance object.
     """
     image_client = compute_v1.ImagesClient()
-    # List of image families: https://cloud.google.com/compute/docs/images/os-details
+    # List of public operating system (OS) images: https://cloud.google.com/compute/docs/images/os-details
     newest_debian = image_client.get_from_family(
         project="debian-cloud", family="debian-10"
     )
