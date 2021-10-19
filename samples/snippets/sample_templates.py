@@ -17,17 +17,45 @@ from google.cloud import compute_v1
 
 
 def get_instance_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
+    """
+    Retrieve information about given instance template.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        template_name: name of the template you want to get.
+
+    Returns:
+        InstanceTemplate object containing information about given template.
+    """
     template_client = compute_v1.InstanceTemplatesClient()
     return template_client.get(project=project_id, instance_template=template_name)
 
 
 def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemplate]:
+    """
+    Get a list of InstanceTemplate objects available in given project.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+
+    Returns:
+        Iterable list of InstanceTemplate objects.
+    """
     template_client = compute_v1.InstanceTemplatesClient()
     return template_client.list(project=project_id)
 
 
 def create_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
+    """
+    Create a new template in given project with provided name.
 
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        template_name: name of the new template that is created.
+
+    Returns:
+        InstanceTemplate object describing the new instance template.
+    """
     # Describe the size and source image of the boot disk to attach to the instance.
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
@@ -65,10 +93,19 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     return template_client.get(project=project_id, instance_template=template_name)
 
 
-def create_template_from_instance(
-    project_id: str, instance_link: str, template_name: str
-) -> compute_v1.InstanceTemplate:
+def create_template_from_instance(project_id: str, instance: str, template_name: str) -> compute_v1.InstanceTemplate:
+    """
+    Create a new instance template based on an existing instance.
 
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        instance: the instance the new template will be based on. This value uses
+            the following format: "projects/{project}/zones/{zone}/instances/{instance_name}"
+        template_name: name of the new template that is created.
+
+    Returns:
+        InstanceTemplate object describing the new instance template.
+    """
     disk = compute_v1.DiskInstantiationConfig()
     # This name must match the name of a disk attached to the instance you are
     # basing your template on.
@@ -83,7 +120,7 @@ def create_template_from_instance(
 
     template = compute_v1.InstanceTemplate()
     template.name = template_name
-    template.source_instance = instance_link
+    template.source_instance = instance
     template.source_instance_params = compute_v1.SourceInstanceParams()
     template.source_instance_params.disk_configs = [disk]
 
@@ -101,6 +138,16 @@ def create_template_with_subnet(
     """
     Create an instance template that will use a provided subnet.
 
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        network: the network to be used in the new template. This value uses
+            the following format: "projects/{project}/global/networks/{network}"
+        subnetwork: the subnetwork to be used in the new template. This value
+            uses the following format: "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
+        template_name: name of the new template that is created.
+
+    Returns:
+        InstanceTemplate object describing the new instance template.
     """
     # Describe the size and source image of the boot disk to attach to the instance.
     disk = compute_v1.AttachedDisk()
@@ -134,6 +181,13 @@ def create_template_with_subnet(
 
 
 def delete_instance_template(project_id: str, template_name: str):
+    """
+    Delete an instance template.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        template_name: name of the new template to delete.
+    """
     template_client = compute_v1.InstanceTemplatesClient()
     operation_client = compute_v1.GlobalOperationsClient()
     op = template_client.delete(project=project_id, instance_template=template_name)
