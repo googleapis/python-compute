@@ -59,9 +59,7 @@ def disk_from_image(
     """
     boot_disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
-
     initialize_params.source_image = source_image
-
     initialize_params.disk_size_gb = disk_size_gb
     initialize_params.disk_type = disk_type
     boot_disk.initialize_params = initialize_params
@@ -132,11 +130,9 @@ def disk_from_snapshot(
     """
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
+    initialize_params.source_snapshot = disk_snapshot
     initialize_params.disk_type = disk_type
     initialize_params.disk_size_gb = disk_size_gb
-
-    initialize_params.source_snapshot = disk_snapshot
-
     disk.initialize_params = initialize_params
     # Remember to set auto_delete to True if you want the disk to be deleted when you delete
     # your VM instance.
@@ -203,10 +199,11 @@ def create_with_disks(
     instance.network_interfaces = [network_interface]
 
     # Shielded Instance settings
-    instance.shielded_instance_config = compute_v1.ShieldedInstanceConfig()
-    instance.shielded_instance_config.enable_secure_boot = False
-    instance.shielded_instance_config.enable_vtpm = False
-    instance.shielded_instance_config.enable_integrity_monitoring = False
+    # Values presented here are the defaults.
+    # instance.shielded_instance_config = compute_v1.ShieldedInstanceConfig()
+    # instance.shielded_instance_config.enable_secure_boot = False
+    # instance.shielded_instance_config.enable_vtpm = True
+    # instance.shielded_instance_config.enable_integrity_monitoring = True
 
     # Prepare the request to insert an instance.
     request = compute_v1.InsertInstanceRequest()
