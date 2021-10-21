@@ -18,14 +18,15 @@ from google.cloud import compute_v1
 
 def get_instance_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
-    Retrieve information about given instance template.
+    Retrieve an instance template, which you can use to create virtual machine
+    (VM) instances and managed instance groups (MIGs).
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
-        template_name: name of the template you want to get.
+        template_name: name of the template to retrieve.
 
     Returns:
-        InstanceTemplate object containing information about given template.
+        InstanceTemplate object that represents the retrieved template.
     """
     template_client = compute_v1.InstanceTemplatesClient()
     return template_client.get(project=project_id, instance_template=template_name)
@@ -33,7 +34,7 @@ def get_instance_template(project_id: str, template_name: str) -> compute_v1.Ins
 
 def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemplate]:
     """
-    Get a list of InstanceTemplate objects available in given project.
+    Get a list of InstanceTemplate objects available in a project.
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
@@ -47,16 +48,18 @@ def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemp
 
 def create_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
-    Create a new template in given project with provided name.
+    Create a new instance template with the provided name and a specific
+    instance configuration.
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
-        template_name: name of the new template that is created.
+        template_name: name of the new template to create.
 
     Returns:
-        InstanceTemplate object describing the new instance template.
+        InstanceTemplate object that represents the new instance template.
     """
-    # Describe the size and source image of the boot disk to attach to the instance.
+    # The template describes the size and source image of the boot disk
+    # to attach to the instance.
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
     initialize_params.source_image = (
@@ -67,11 +70,12 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     disk.auto_delete = True
     disk.boot = True
 
-    # Use the default network, without specifying a subnetwork.
+    # The template connects the instance to the `default` network,
+    # without specifying a subnetwork.
     network_interface = compute_v1.NetworkInterface()
     network_interface.name = "global/networks/default"
 
-    # Let the instance have external IP
+    # The template lets the instance use an external IP address.
     network_interface.access_configs = [compute_v1.AccessConfig()]
     network_interface.access_configs[0].name = "External NAT"
     network_interface.access_configs[0].type_ = compute_v1.AccessConfig.Type.ONE_TO_ONE_NAT
@@ -96,26 +100,27 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
 def create_template_from_instance(project_id: str, instance: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
     Create a new instance template based on an existing instance.
+    This new template specifies a different boot disk.
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
-        instance: the instance the new template will be based on. This value uses
+        instance: the instance to base the new template on. This value uses
             the following format: "projects/{project}/zones/{zone}/instances/{instance_name}"
-        template_name: name of the new template that is created.
+        template_name: name of the new template to create.
 
     Returns:
-        InstanceTemplate object describing the new instance template.
+        InstanceTemplate object that represents the new instance template.
     """
     disk = compute_v1.DiskInstantiationConfig()
-    # This name must match the name of a disk attached to the instance you are
+    # Device name must match the name of a disk attached to the instance you are
     # basing your template on.
     disk.device_name = "disk-1"
-    # Replace the original disk image used in your instance with a Rocky Linux image.
+    # Replace the original boot disk image used in your instance with a Rocky Linux image.
     disk.instantiate_from = (
         compute_v1.DiskInstantiationConfig.InstantiateFrom.CUSTOM_IMAGE
     )
     disk.custom_image = "projects/rocky-linux-cloud/global/images/family/rocky-linux-8"
-    # You can override the auto_delete setting.
+    # Override the auto_delete setting.
     disk.auto_delete = True
 
     template = compute_v1.InstanceTemplate()
@@ -136,7 +141,7 @@ def create_template_with_subnet(
     project_id: str, network: str, subnetwork: str, template_name: str
 ) -> compute_v1.InstanceTemplate:
     """
-    Create an instance template that will use a provided subnet.
+    Create an instance template that uses a provided subnet.
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
@@ -144,12 +149,13 @@ def create_template_with_subnet(
             the following format: "projects/{project}/global/networks/{network}"
         subnetwork: the subnetwork to be used in the new template. This value
             uses the following format: "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
-        template_name: name of the new template that is created.
+        template_name: name of the new template to create.
 
     Returns:
-        InstanceTemplate object describing the new instance template.
+        InstanceTemplate object that represents the new instance template.
     """
-    # Describe the size and source image of the boot disk to attach to the instance.
+    # The template describes the size and source image of the book disk to
+    # attach to the instance.
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
     initialize_params.source_image = (
@@ -166,7 +172,7 @@ def create_template_with_subnet(
     template.properties.disks = [disk]
     template.properties.machine_type = "e2-standard-4"
 
-    # Make this template use provided subnetwork.
+    # The template connects the instance to the specified network and subnetwork.
     network_interface = compute_v1.NetworkInterface()
     network_interface.network = network
     network_interface.subnetwork = subnetwork
@@ -186,7 +192,7 @@ def delete_instance_template(project_id: str, template_name: str):
 
     Args:
         project_id: project ID or project number of the Cloud project you use.
-        template_name: name of the new template to delete.
+        template_name: name of the template to delete.
     """
     template_client = compute_v1.InstanceTemplatesClient()
     operation_client = compute_v1.GlobalOperationsClient()
