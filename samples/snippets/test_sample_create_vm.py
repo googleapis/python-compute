@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import time
 import uuid
 
 import google.auth
@@ -107,7 +108,9 @@ def subnetwork():
     op = network_client.insert(project=PROJECT, network_resource=network)
     wait_for_operation(op, PROJECT)
     network = network_client.get(project=PROJECT, network=network.name)
-
+    # Was getting some "resource not ready" errors, so let's see if giving more
+    # time will make them go away.
+    time.sleep(5)
     subnet = compute_v1.Subnetwork()
     subnet.name = "test-subnet-" + uuid.uuid4().hex[:10]
     subnet.network = network_client.get(project=PROJECT, network=network.name).self_link
