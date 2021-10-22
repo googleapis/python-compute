@@ -15,4 +15,7 @@
 TEST_CONFIG_OVERRIDE = {
     # Tests in test_sample_default_values.py require separate projects to not interfere with each other.
     'gcloud_project_env': 'BUILD_SPECIFIC_GCLOUD_PROJECT',
+    # Temporarily blocking all versions except 3.8, as I have
+    # viewer access only to 3.8 test project.
+    'ignored_versions': ["3.6", "3.7", "3.9", "3.10"]
 }

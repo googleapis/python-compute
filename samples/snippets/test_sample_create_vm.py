@@ -48,13 +48,13 @@ def src_disk(request):
     op = disk_client.insert(project=PROJECT, zone=INSTANCE_ZONE, disk_resource=disk)
 
     wait_for_operation(op, PROJECT)
-    disk = disk_client.get(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
-    request.cls.disk = disk
-
-    yield disk
-
-    op = disk_client.delete(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
-    wait_for_operation(op, PROJECT)
+    try:
+        disk = disk_client.get(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
+        request.cls.disk = disk
+        yield disk
+    finally:
+        op = disk_client.delete(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
+        wait_for_operation(op, PROJECT)
 
 
 @pytest.fixture(scope="class")
@@ -70,14 +70,14 @@ def snapshot(request, src_disk):
         snapshot_resource=snapshot,
     )
     wait_for_operation(op, PROJECT)
+    try:
+        request.cls.snapshot = snapshot_client.get(project=PROJECT, snapshot=snapshot.name)
+        snapshot = request.cls.snapshot
 
-    request.cls.snapshot = snapshot_client.get(project=PROJECT, snapshot=snapshot.name)
-    snapshot = request.cls.snapshot
-
-    yield snapshot
-
-    op = snapshot_client.delete(project=PROJECT, snapshot=snapshot.name)
-    wait_for_operation(op, PROJECT)
+        yield snapshot
+    finally:
+        op = snapshot_client.delete(project=PROJECT, snapshot=snapshot.name)
+        wait_for_operation(op, PROJECT)
 
 
 @pytest.fixture(scope="class")
@@ -89,13 +89,13 @@ def image(request, src_disk):
     op = image_client.insert(project=PROJECT, image_resource=image)
 
     wait_for_operation(op, PROJECT)
-
-    image = image_client.get(project=PROJECT, image=image.name)
-    request.cls.image = image
-    yield image
-
-    op = image_client.delete(project=PROJECT, image=image.name)
-    wait_for_operation(op, PROJECT)
+    try:
+        image = image_client.get(project=PROJECT, image=image.name)
+        request.cls.image = image
+        yield image
+    finally:
+        op = image_client.delete(project=PROJECT, image=image.name)
+        wait_for_operation(op, PROJECT)
 
 
 @pytest.fixture()
@@ -106,29 +106,31 @@ def subnetwork():
     network.auto_create_subnetworks = True
     op = network_client.insert(project=PROJECT, network_resource=network)
     wait_for_operation(op, PROJECT)
-    network = network_client.get(project=PROJECT, network=network.name)
+    try:
+        network = network_client.get(project=PROJECT, network=network.name)
 
-    subnet = compute_v1.Subnetwork()
-    subnet.name = "test-subnet-" + uuid.uuid4().hex[:10]
-    subnet.network = network_client.get(project=PROJECT, network=network.name).self_link
-    subnet.region = "europe-central2"
-    subnet.ip_cidr_range = "10.0.0.0/20"
-    subnet_client = compute_v1.SubnetworksClient()
-    op = subnet_client.insert(
-        project=PROJECT, region="europe-central2", subnetwork_resource=subnet
-    )
-    wait_for_operation(op, PROJECT)
-    subnet = subnet_client.get(
-        project=PROJECT, region="europe-central2", subnetwork=subnet.name
-    )
+        subnet = compute_v1.Subnetwork()
+        subnet.name = "test-subnet-" + uuid.uuid4().hex[:10]
+        subnet.network = network_client.get(project=PROJECT, network=network.name).self_link
+        subnet.region = "europe-central2"
+        subnet.ip_cidr_range = "10.0.0.0/20"
+        subnet_client = compute_v1.SubnetworksClient()
+        op = subnet_client.insert(
+            project=PROJECT, region="europe-central2", subnetwork_resource=subnet
+        )
+        wait_for_operation(op, PROJECT)
+        try:
+            subnet = subnet_client.get(
+                project=PROJECT, region="europe-central2", subnetwork=subnet.name
+            )
 
-    yield subnet
-
-    op = subnet_client.delete(project=PROJECT, region='europe-central2', subnetwork=subnet.name)
-    wait_for_operation(op, PROJECT)
-
-    op = network_client.delete(project=PROJECT, network=network.name)
-    wait_for_operation(op, PROJECT)
+            yield subnet
+        finally:
+            op = subnet_client.delete(project=PROJECT, region='europe-central2', subnetwork=subnet.name)
+            wait_for_operation(op, PROJECT)
+    finally:
+        op = network_client.delete(project=PROJECT, network=network.name)
+        wait_for_operation(op, PROJECT)
 
 
 @pytest.mark.usefixtures("image", "snapshot")
