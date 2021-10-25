@@ -11,8 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import time
 import uuid
+from collections import deque
 
+from google.api_core.exceptions import NotFound
 import google.auth
 from google.cloud import compute_v1
 import pytest
@@ -29,7 +32,8 @@ from sample_create_vm import (
 )
 
 PROJECT = google.auth.default()[1]
-INSTANCE_ZONE = "europe-central2-b"
+REGION = 'us-central1'
+INSTANCE_ZONE = "us-central1-b"
 
 
 def get_active_debian():
@@ -71,7 +75,9 @@ def snapshot(request, src_disk):
     )
     wait_for_operation(op, PROJECT)
     try:
-        request.cls.snapshot = snapshot_client.get(project=PROJECT, snapshot=snapshot.name)
+        request.cls.snapshot = snapshot_client.get(
+            project=PROJECT, snapshot=snapshot.name
+        )
         snapshot = request.cls.snapshot
 
         yield snapshot
@@ -112,96 +118,134 @@ def subnetwork():
         subnet = compute_v1.Subnetwork()
         subnet.name = "test-subnet-" + uuid.uuid4().hex[:10]
         subnet.network = network_client.get(project=PROJECT, network=network.name).self_link
-        subnet.region = "europe-central2"
+        subnet.region = REGION
         subnet.ip_cidr_range = "10.0.0.0/20"
         subnet_client = compute_v1.SubnetworksClient()
         op = subnet_client.insert(
-            project=PROJECT, region="europe-central2", subnetwork_resource=subnet
+            project=PROJECT, region=REGION, subnetwork_resource=subnet
         )
         wait_for_operation(op, PROJECT)
         try:
             subnet = subnet_client.get(
-                project=PROJECT, region="europe-central2", subnetwork=subnet.name
+                project=PROJECT, region=REGION, subnetwork=subnet.name
             )
 
             yield subnet
         finally:
-            op = subnet_client.delete(project=PROJECT, region='europe-central2', subnetwork=subnet.name)
+            op = subnet_client.delete(
+                project=PROJECT, region=REGION, subnetwork=subnet.name
+            )
             wait_for_operation(op, PROJECT)
     finally:
-        op = network_client.delete(project=PROJECT, network=network.name)
-        wait_for_operation(op, PROJECT)
+        firewall_client = compute_v1.FirewallsClient()
+        firewall_request = compute_v1.ListFirewallsRequest()
+        firewall_request.project = PROJECT
+        firewall_request.filter = f'network = "{network.self_link}"'
+        network_request = compute_v1.ListNetworksRequest()
+        network_request.project = PROJECT
+        network_request.filter = f'name = "{network.name}"'
+        networks = network_client.list(network_request)
+        start_time = time.time()
+        while networks:
+            # Repeat until the test network is gone.
+            ops = deque()
+            # Get all firewall rules associated with the test network.
+            firewalls = firewall_client.list(firewall_request)
+            # while firewalls:
+                # Repeat until all firewall rules are gone.
+            for firewall in firewalls:
+                # Start deleting all firewall rules for test network.
+                ops.append(firewall_client.delete(project=PROJECT, firewall=firewall.name))
+                # for op in ops:
+                    # Wait for the delete operations to finish.
+                    # wait_for_operation(op, PROJECT)
+                # Update firewall rules list, to make sure they are all gone.
+                # firewalls = firewall_client.list(firewall_request)
+            # Attempt deleting the test network. Hopefully, the firewall
+            # rules were not re-added by the enforcer.
+            try:
+                op = network_client.delete(project=PROJECT, network=network.name)
+                wait_for_operation(op, PROJECT)
+            except NotFound:
+                pass
+            # Update list of networks to make sure the network is gone.
+            networks = network_client.list(network_request)
+            if time.time() - start_time >= 300:
+                # If we fail to remove the the network for 5 minutes
+                # We fail with a bang!
+                raise RuntimeError(f"Couldn't clean up network: {network.name}. "
+                                   f"This will need manual clean-up!!!")
 
 
 @pytest.mark.usefixtures("image", "snapshot")
 class TestCreation:
-    def test_create_from_custom_image(self):
-        instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_from_custom_image(
-            PROJECT, INSTANCE_ZONE, instance_name, self.image.self_link
-        )
-        try:
-            assert (
-                instance.disks[0].initialize_params.source_image == self.image.self_link
-            )
-        finally:
-            delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
-
-    def test_create_from_public_image(self):
-        instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_from_public_image(
-            PROJECT,
-            INSTANCE_ZONE,
-            instance_name,
-        )
-        try:
-            assert "debian-cloud" in instance.disks[0].initialize_params.source_image
-            assert "debian-10" in instance.disks[0].initialize_params.source_image
-        finally:
-            delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
-
-    def test_create_from_snapshot(self):
-        instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_from_snapshot(
-            PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
-        )
-        try:
-            assert (
-                instance.disks[0].initialize_params.source_snapshot
-                == self.snapshot.self_link
-            )
-        finally:
-            delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
-
-    def test_create_with_additional_disk(self):
-        instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_with_additional_disk(PROJECT, INSTANCE_ZONE, instance_name)
-        try:
-            assert any(
-                disk.initialize_params.disk_size_gb == 11 for disk in instance.disks
-            )
-            assert any(
-                disk.initialize_params.disk_size_gb == 10 for disk in instance.disks
-            )
-            assert len(instance.disks) == 2
-        finally:
-            delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
-
-    def test_create_with_snapshotted_data_disk(self):
-        instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_with_snapshotted_data_disk(
-            PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
-        )
-        try:
-            assert any(
-                disk.initialize_params.disk_size_gb == 11 for disk in instance.disks
-            )
-            assert any(
-                disk.initialize_params.disk_size_gb == 10 for disk in instance.disks
-            )
-            assert len(instance.disks) == 2
-        finally:
-            delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
+    # def test_create_from_custom_image(self):
+    #     instance_name = "i" + uuid.uuid4().hex[:10]
+    #     instance = create_from_custom_image(
+    #         PROJECT, INSTANCE_ZONE, instance_name, self.image.self_link
+    #     )
+    #     try:
+    #         assert (
+    #             instance.disks[0].initialize_params.source_image == self.image.self_link
+    #         )
+    #     finally:
+    #         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
+    #
+    # def test_create_from_public_image(self):
+    #     instance_name = "i" + uuid.uuid4().hex[:10]
+    #     instance = create_from_public_image(
+    #         PROJECT,
+    #         INSTANCE_ZONE,
+    #         instance_name,
+    #     )
+    #     try:
+    #         assert "debian-cloud" in instance.disks[0].initialize_params.source_image
+    #         assert "debian-10" in instance.disks[0].initialize_params.source_image
+    #     finally:
+    #         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
+    #
+    # def test_create_from_snapshot(self):
+    #     instance_name = "i" + uuid.uuid4().hex[:10]
+    #     instance = create_from_snapshot(
+    #         PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
+    #     )
+    #     try:
+    #         assert (
+    #             instance.disks[0].initialize_params.source_snapshot
+    #             == self.snapshot.self_link
+    #         )
+    #     finally:
+    #         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
+    #
+    # def test_create_with_additional_disk(self):
+    #     instance_name = "i" + uuid.uuid4().hex[:10]
+    #     instance = create_with_additional_disk(PROJECT, INSTANCE_ZONE, instance_name)
+    #     try:
+    #         assert any(
+    #             disk.initialize_params.disk_size_gb == 11 for disk in instance.disks
+    #         )
+    #         assert any(
+    #             disk.initialize_params.disk_size_gb == 10 for disk in instance.disks
+    #         )
+    #         assert len(instance.disks) == 2
+    #     finally:
+    #         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
+    #
+    # def test_create_with_snapshotted_data_disk(self):
+    #     instance_name = "i" + uuid.uuid4().hex[:10]
+    #     instance = create_with_snapshotted_data_disk(
+    #         PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
+    #     )
+    #     try:
+    #         assert any(
+    #             disk.initialize_params.disk_size_gb == 11 for disk in instance.disks
+    #         )
+    #         assert any(
+    #             disk.initialize_params.disk_size_gb == 10 for disk in instance.disks
+    #         )
+    #         assert len(instance.disks) == 2
+    #     finally:
+    #         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
 
     def test_create_with_subnet(self, subnetwork):
         instance_name = "i" + uuid.uuid4().hex[:10]
@@ -212,6 +256,7 @@ class TestCreation:
             subnetwork.network,
             subnetwork.self_link,
         )
+        time.sleep(120)
         try:
             assert instance.network_interfaces[0].name == subnetwork.network
             assert instance.network_interfaces[0].subnetwork == subnetwork.self_link
