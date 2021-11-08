@@ -54,7 +54,7 @@ def test_create_instance():
     )
 
 
-def test_create_from_instance(compute_instance):
+def test_create_from_instance(compute_instance):  # noqa: F811
     template_name = "i" + uuid.uuid4().hex[:10]
     template = create_template_from_instance(
         PROJECT, compute_instance.self_link, template_name

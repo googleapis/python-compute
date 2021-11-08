@@ -64,6 +64,7 @@ def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemp
     return template_client.list(project=project_id)
 # [END compute_template_list ]
 
+
 # [START compute_template_create ]
 def create_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
@@ -209,6 +210,7 @@ def create_template_with_subnet(
 
     return template_client.get(project=project_id, instance_template=template_name)
 # [END compute_template_create_with_subnet ]
+
 
 # [START compute_template_delete ]
 def delete_instance_template(project_id: str, template_name: str):
