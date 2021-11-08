@@ -29,6 +29,7 @@ from google.cloud import compute_v1
 # [END compute_start_enc_instance]
 # [END compute_start_instance]
 
+
 # [START compute_start_instance]
 def start_instance(project_id: str, zone: str, instance_name: str):
     """
