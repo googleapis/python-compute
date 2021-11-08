@@ -116,7 +116,7 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     operation_client.wait(project=project_id, operation=op.name)
 
     return template_client.get(project=project_id, instance_template=template_name)
-# [START compute_template_create ]
+# [END compute_template_create ]
 
 
 # [START compute_template_create_from_instance ]
