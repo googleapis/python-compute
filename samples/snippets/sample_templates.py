@@ -11,11 +11,27 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# [START compute_template_list ]
 from typing import Iterable
+# [END compute_template_list ]
 
+# [START compute_template_create ]
+# [START compute_template_list ]
+# [START compute_template_get ]
+# [START compute_template_create_from_instance ]
+# [START compute_template_create_with_subnet ]
+# [START compute_template_delete ]
 from google.cloud import compute_v1
+# [END compute_template_delete ]
+# [END compute_template_create_with_subnet ]
+# [END compute_template_create_from_instance ]
+# [END compute_template_get ]
+# [END compute_template_list ]
+# [END compute_template_create ]
 
 
+# [START compute_template_get ]
 def get_instance_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
     Retrieve an instance template, which you can use to create virtual machine
@@ -30,8 +46,10 @@ def get_instance_template(project_id: str, template_name: str) -> compute_v1.Ins
     """
     template_client = compute_v1.InstanceTemplatesClient()
     return template_client.get(project=project_id, instance_template=template_name)
+# [END compute_template_get ]
 
 
+# [START compute_template_list ]
 def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemplate]:
     """
     Get a list of InstanceTemplate objects available in a project.
@@ -44,8 +62,9 @@ def list_instance_templates(project_id: str) -> Iterable[compute_v1.InstanceTemp
     """
     template_client = compute_v1.InstanceTemplatesClient()
     return template_client.list(project=project_id)
+# [END compute_template_list ]
 
-
+# [START compute_template_create ]
 def create_template(project_id: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
     Create a new instance template with the provided name and a specific
@@ -76,12 +95,13 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     network_interface.name = "global/networks/default"
 
     # The template lets the instance use an external IP address.
-    network_interface.access_configs = [compute_v1.AccessConfig()]
-    network_interface.access_configs[0].name = "External NAT"
-    network_interface.access_configs[0].type_ = compute_v1.AccessConfig.Type.ONE_TO_ONE_NAT
-    network_interface.access_configs[0].network_tier = (
+    access_config = compute_v1.AccessConfig()
+    access_config.name = "External NAT"
+    access_config.type_ = compute_v1.AccessConfig.Type.ONE_TO_ONE_NAT
+    access_config.network_tier = (
         compute_v1.AccessConfig.NetworkTier.PREMIUM
     )
+    network_interface.access_configs = [access_config]
 
     template = compute_v1.InstanceTemplate()
     template.name = template_name
@@ -95,8 +115,10 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     operation_client.wait(project=project_id, operation=op.name)
 
     return template_client.get(project=project_id, instance_template=template_name)
+# [START compute_template_create ]
 
 
+# [START compute_template_create_from_instance ]
 def create_template_from_instance(project_id: str, instance: str, template_name: str) -> compute_v1.InstanceTemplate:
     """
     Create a new instance template based on an existing instance.
@@ -135,8 +157,10 @@ def create_template_from_instance(project_id: str, instance: str, template_name:
     operation_client.wait(project=project_id, operation=op.name)
 
     return template_client.get(project=project_id, instance_template=template_name)
+# [END compute_template_create_from_instance ]
 
 
+# [START compute_template_create_with_subnet ]
 def create_template_with_subnet(
     project_id: str, network: str, subnetwork: str, template_name: str
 ) -> compute_v1.InstanceTemplate:
@@ -184,8 +208,9 @@ def create_template_with_subnet(
     operation_client.wait(project=project_id, operation=op.name)
 
     return template_client.get(project=project_id, instance_template=template_name)
+# [END compute_template_create_with_subnet ]
 
-
+# [START compute_template_delete ]
 def delete_instance_template(project_id: str, template_name: str):
     """
     Delete an instance template.
@@ -199,3 +224,4 @@ def delete_instance_template(project_id: str, template_name: str):
     op = template_client.delete(project=project_id, instance_template=template_name)
     operation_client.wait(project=project_id, operation=op.name)
     return
+# [END compute_template_delete ]
