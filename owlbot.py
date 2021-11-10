@@ -38,6 +38,10 @@ s.replace(
     Attributes"""
 )
 
+# Work around formatting issues with docstrings
+s.replace("google/cloud/**/types/compute.py", """\"IT_\"""", """`IT_`""")
+s.replace("google/cloud/**/types/compute.py", """\"NS_\"""", """`NS_`""")
+
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
