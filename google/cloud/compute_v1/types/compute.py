@@ -1188,6 +1188,8 @@ class AbandonInstancesInstanceGroupManagerRequest(proto.Message):
     A request message for InstanceGroupManagers.AbandonInstances.
     See the method description for details.
 
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         instance_group_manager (str):
             The name of the managed instance group.
