@@ -63,9 +63,7 @@ class TestComputeSmoke(TestBase):
         self.assertTrue(presented)
 
     def test_client_error(self):
-        with self.assertRaises(
-            expected_exception=ValueError
-        ):
+        with self.assertRaises(expected_exception=ValueError):
             self.client.get(instance=self.name, zone=self.DEFAULT_ZONE)
 
     def test_api_error(self):
