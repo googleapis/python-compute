@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-compute.git",
-        "sha": "6248fdd993c914ed4b94ab483a8168fb3fcd615e"
+        "sha": "24836917b08eecf65e6dd00d33a28f22d050e733"
       }
     },
     {
@@ -29,6 +29,7 @@
   "generatedFiles": [
     ".coveragerc",
     ".flake8",
+    ".github/CODEOWNERS",
     ".github/CONTRIBUTING.md",
     ".github/ISSUE_TEMPLATE/bug_report.md",
     ".github/ISSUE_TEMPLATE/feature_request.md",
