@@ -27,8 +27,7 @@ from sample_templates import (
 
 # Turning off F401 check because flake8 doesn't recognize using
 # PyTest fixture as parameter as usage.
-# Uncomment this import if you want to run test from only this file.
-# from test_sample_start_stop import compute_instance  # noqa: F401
+from test_sample_start_stop import compute_instance  # noqa: F401
 
 PROJECT = google.auth.default()[1]
 
