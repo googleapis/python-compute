@@ -15,6 +15,7 @@
 import uuid
 
 import google.auth
+import pytest
 
 from sample_templates import (
     create_template,
@@ -26,73 +27,83 @@ from sample_templates import (
 
 # Turning off F401 check because flake8 doesn't recognize using
 # PyTest fixture as parameter as usage.
-from test_sample_start_stop import compute_instance  # noqa: F401
+# Uncomment this import if you want to run test from only this file.
+# from test_sample_start_stop import compute_instance  # noqa: F401
 
 PROJECT = google.auth.default()[1]
 
 INSTANCE_ZONE = "europe-central2-b"
 
 
-def test_create_instance():
+@pytest.fixture
+def deletable_template_name():
+    template_name = "i" + uuid.uuid4().hex[:10]
+    yield template_name
+    delete_instance_template(PROJECT, template_name)
+
+
+@pytest.fixture
+def template_to_be_deleted():
     template_name = "i" + uuid.uuid4().hex[:10]
     template = create_template(PROJECT, template_name)
+    yield template
 
-    try:
-        assert template.name == template_name
-        assert template.properties.disks[0].initialize_params.disk_size_gb == 250
-        assert (
-            "debian-11" in template.properties.disks[0].initialize_params.source_image
-        )
-        assert (
-            template.properties.network_interfaces[0].name == "global/networks/default"
-        )
-        assert template.properties.machine_type == "e2-standard-4"
-    finally:
-        delete_instance_template(PROJECT, template_name)
-    assert all(
-        template.name != template_name for template in list_instance_templates(PROJECT)
+
+def test_create_template_and_list(deletable_template_name):
+
+    template = create_template(PROJECT, deletable_template_name)
+
+    assert template.name == deletable_template_name
+    assert any(
+        template.name == deletable_template_name
+        for template in list_instance_templates(PROJECT)
     )
+    assert template.properties.disks[0].initialize_params.disk_size_gb == 250
+    assert "debian-11" in template.properties.disks[0].initialize_params.source_image
+    assert template.properties.network_interfaces[0].name == "global/networks/default"
+    assert template.properties.machine_type == "e2-standard-4"
 
 
-def test_create_from_instance(compute_instance):  # noqa: F811
-    template_name = "i" + uuid.uuid4().hex[:10]
+def test_create_from_instance(compute_instance, deletable_template_name):  # noqa: F811
+
     template = create_template_from_instance(
-        PROJECT, compute_instance.self_link, template_name
+        PROJECT, compute_instance.self_link, deletable_template_name
     )
 
-    try:
-        assert template.name == template_name
-        assert template.properties.machine_type in compute_instance.machine_type
-        assert (
-            template.properties.disks[0].disk_size_gb
-            == compute_instance.disks[0].disk_size_gb
-        )
-        assert (
-            template.properties.disks[0].initialize_params.source_image
-            == "projects/rocky-linux-cloud/global/images/family/rocky-linux-8"
-        )
-    finally:
-        delete_instance_template(PROJECT, template_name)
+    assert template.name == deletable_template_name
+    assert template.properties.machine_type in compute_instance.machine_type
+    assert (
+        template.properties.disks[0].disk_size_gb
+        == compute_instance.disks[0].disk_size_gb
+    )
+    assert (
+        template.properties.disks[0].initialize_params.source_image
+        == "projects/rocky-linux-cloud/global/images/family/rocky-linux-8"
+    )
 
 
-def test_create_template_with_subnet():
-    template_name = "i" + uuid.uuid4().hex[:10]
+def test_create_template_with_subnet(deletable_template_name):
     template = create_template_with_subnet(
         PROJECT,
         "global/networks/default",
         "regions/asia-east1/subnetworks/default",
-        template_name,
+        deletable_template_name,
     )
 
-    try:
-        assert template.name == template_name
-        assert (
-            "global/networks/default"
-            in template.properties.network_interfaces[0].network
-        )
-        assert (
-            "regions/asia-east1/subnetworks/default"
-            in template.properties.network_interfaces[0].subnetwork
-        )
-    finally:
-        delete_instance_template(PROJECT, template_name)
+    assert template.name == deletable_template_name
+    assert (
+        "global/networks/default" in template.properties.network_interfaces[0].network
+    )
+    assert (
+        "regions/asia-east1/subnetworks/default"
+        in template.properties.network_interfaces[0].subnetwork
+    )
+
+
+def test_delete_template(template_to_be_deleted):
+    delete_instance_template(PROJECT, template_to_be_deleted.name)
+
+    assert all(
+        template.name != template_to_be_deleted.name
+        for template in list_instance_templates(PROJECT)
+    )
