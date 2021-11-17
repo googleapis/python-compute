@@ -159,7 +159,8 @@ class CustomMachineType:
     @classmethod
     def from_str(cls, machine_type: str):
         """
-        Parse provided string to recreate a custom machine type. The string must be a valid
+        Parse provided string to recreate a custom machine type. The string must be a valid machine type string, for
+        example coming from the API.
         """
         zone = None
         if machine_type.startswith("http"):
@@ -186,7 +187,14 @@ class CustomMachineType:
                 cpu = cls.CPUSeries.N2D
             elif cpu_series == "e2":
                 cpu = cls.CPUSeries.E2
-                if cores in ("micro", "small", "medium"):
+                if cores == "micro":
+                    cpu = cls.CPUSeries.E2_MICRO
+                    cores = 2
+                elif cores == "small":
+                    cpu = cls.CPUSeries.E2_SMALL
+                    cores = 2
+                elif cores == "medium":
+                    cpu = cls.CPUSeries.E2_MEDIUM
                     cores = 2
             else:
                 raise RuntimeError("Unknown CPU series.")

@@ -138,3 +138,57 @@ def test_add_extended_memory_to_instance(instance):
         PROJECT, INSTANCE_ZONE, instance.name, 819200
     )
     assert instance.machine_type.endswith("819200-ext")
+
+
+def test_from_str_creation():
+    cmt = CustomMachineType.from_str(
+        "https://www.googleapis.com/compute/v1/projects/diregapic-mestiv/zones/us-central1-b/machineTypes/e2-custom-4-8192"
+    )
+    assert cmt.zone == "us-central1-b"
+    assert cmt.memory_mb == 8192
+    assert cmt.extra_memory_used is False
+    assert cmt.cpu_series is CustomMachineType.CPUSeries.E2
+    assert cmt.core_count == 4
+
+    cmt = CustomMachineType.from_str(
+        "zones/europe-west4-b/machineTypes/n2-custom-8-81920-ext"
+    )
+    assert cmt.zone == "europe-west4-b"
+    assert cmt.memory_mb == 81920
+    assert cmt.extra_memory_used is True
+    assert cmt.cpu_series is CustomMachineType.CPUSeries.N2
+    assert cmt.core_count == 8
+
+    cmt = CustomMachineType.from_str(
+        "zones/europe-west4-b/machineTypes/e2-custom-small-4096"
+    )
+    assert cmt.zone == "europe-west4-b"
+    assert cmt.memory_mb == 4096
+    assert cmt.extra_memory_used is False
+    assert cmt.cpu_series == CustomMachineType.CPUSeries.E2_SMALL
+    assert cmt.core_count == 2
+
+    cmt = CustomMachineType.from_str(
+        "zones/europe-central2-b/machineTypes/custom-2-2048"
+    )
+    assert cmt.zone == "europe-central2-b"
+    assert cmt.memory_mb == 2048
+    assert cmt.extra_memory_used is False
+    assert cmt.cpu_series is CustomMachineType.CPUSeries.N1
+    assert cmt.core_count == 2
+
+    try:
+        CustomMachineType.from_str(
+            "zones/europe-central2-b/machineTypes/n8-custom-2-1024"
+        )
+    except RuntimeError as err:
+        assert err.args[0] == "Unknown CPU series."
+    else:
+        assert not "This was supposed to raise a RuntimeError."
+
+    cmt = CustomMachineType.from_str("n2d-custom-8-81920-ext")
+    assert cmt.zone is None
+    assert cmt.memory_mb == 81920
+    assert cmt.extra_memory_used is True
+    assert cmt.cpu_series is CustomMachineType.CPUSeries.N2D
+    assert cmt.core_count == 8
