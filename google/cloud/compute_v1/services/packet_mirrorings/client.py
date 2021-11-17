@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.packet_mirrorings import pagers
 from google.cloud.compute_v1.types import compute
@@ -263,8 +267,15 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -326,21 +337,22 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListPacketMirroringsRequest = None,
+        request: Union[compute.AggregatedListPacketMirroringsRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of packetMirrorings.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListPacketMirroringsRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListPacketMirroringsRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.AggregatedList. See the method
                 description for details.
@@ -402,19 +414,19 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def delete(
         self,
-        request: compute.DeletePacketMirroringRequest = None,
+        request: Union[compute.DeletePacketMirroringRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         packet_mirroring: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified PacketMirroring resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeletePacketMirroringRequest):
+            request (Union[google.cloud.compute_v1.types.DeletePacketMirroringRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.Delete. See the method description for
                 details.
@@ -443,31 +455,21 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -507,19 +509,19 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def get(
         self,
-        request: compute.GetPacketMirroringRequest = None,
+        request: Union[compute.GetPacketMirroringRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         packet_mirroring: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PacketMirroring:
         r"""Returns the specified PacketMirroring resource.
 
         Args:
-            request (google.cloud.compute_v1.types.GetPacketMirroringRequest):
+            request (Union[google.cloud.compute_v1.types.GetPacketMirroringRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.Get. See the method description for
                 details.
@@ -548,16 +550,16 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.PacketMirroring:
-                Represents a Packet Mirroring resource.
-
-                   Packet Mirroring clones the traffic of specified
-                   instances in your Virtual Private Cloud (VPC) network
-                   and forwards it to a collector destination, such as
-                   an instance group of an internal TCP/UDP load
-                   balancer, for analysis or examination. For more
-                   information about setting up Packet Mirroring, see
-                   Using Packet Mirroring. (== resource_for
-                   {$api_version}.packetMirrorings ==)
+                Represents a Packet Mirroring
+                resource. Packet Mirroring clones the
+                traffic of specified instances in your
+                Virtual Private Cloud (VPC) network and
+                forwards it to a collector destination,
+                such as an instance group of an internal
+                TCP/UDP load balancer, for analysis or
+                examination. For more information about
+                setting up Packet Mirroring, see Using
+                Packet Mirroring.
 
         """
         # Create or coerce a protobuf request object.
@@ -597,12 +599,12 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def insert(
         self,
-        request: compute.InsertPacketMirroringRequest = None,
+        request: Union[compute.InsertPacketMirroringRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         packet_mirroring_resource: compute.PacketMirroring = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -611,7 +613,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertPacketMirroringRequest):
+            request (Union[google.cloud.compute_v1.types.InsertPacketMirroringRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.Insert. See the method description for
                 details.
@@ -638,31 +640,21 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -702,11 +694,11 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def list(
         self,
-        request: compute.ListPacketMirroringsRequest = None,
+        request: Union[compute.ListPacketMirroringsRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -714,7 +706,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         available to the specified project and region.
 
         Args:
-            request (google.cloud.compute_v1.types.ListPacketMirroringsRequest):
+            request (Union[google.cloud.compute_v1.types.ListPacketMirroringsRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.List. See the method description for
                 details.
@@ -784,13 +776,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def patch(
         self,
-        request: compute.PatchPacketMirroringRequest = None,
+        request: Union[compute.PatchPacketMirroringRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         packet_mirroring: str = None,
         packet_mirroring_resource: compute.PacketMirroring = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -800,7 +792,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         processing rules.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchPacketMirroringRequest):
+            request (Union[google.cloud.compute_v1.types.PatchPacketMirroringRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.Patch. See the method description for
                 details.
@@ -834,31 +826,21 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -902,13 +884,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def test_iam_permissions(
         self,
-        request: compute.TestIamPermissionsPacketMirroringRequest = None,
+        request: Union[compute.TestIamPermissionsPacketMirroringRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
         test_permissions_request_resource: compute.TestPermissionsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
@@ -916,7 +898,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         specified resource.
 
         Args:
-            request (google.cloud.compute_v1.types.TestIamPermissionsPacketMirroringRequest):
+            request (Union[google.cloud.compute_v1.types.TestIamPermissionsPacketMirroringRequest, dict]):
                 The request object. A request message for
                 PacketMirrorings.TestIamPermissions. See the method
                 description for details.
@@ -994,6 +976,19 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

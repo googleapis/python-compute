@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.region_instance_groups import pagers
 from google.cloud.compute_v1.types import compute
@@ -265,8 +269,15 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -328,23 +339,24 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def get(
         self,
-        request: compute.GetRegionInstanceGroupRequest = None,
+        request: Union[compute.GetRegionInstanceGroupRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         instance_group: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceGroup:
         r"""Returns the specified instance group resource.
 
         Args:
-            request (google.cloud.compute_v1.types.GetRegionInstanceGroupRequest):
+            request (Union[google.cloud.compute_v1.types.GetRegionInstanceGroupRequest, dict]):
                 The request object. A request message for
                 RegionInstanceGroups.Get. See the method description for
                 details.
@@ -375,28 +387,20 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.InstanceGroup:
-                Represents an Instance Group resource.
-
-                   Instance Groups can be used to configure a target for
-                   load balancing.
-
-                   Instance groups can either be managed or unmanaged.
-
-                   To create managed instance groups, use the
-                   instanceGroupManager or regionInstanceGroupManager
-                   resource instead.
-
-                   Use zonal unmanaged instance groups if you need to
-                   apply load balancing to groups of heterogeneous
-                   instances or if you need to manage the instances
-                   yourself. You cannot create regional unmanaged
-                   instance groups.
-
-                   For more information, read Instance groups.
-
-                   (== resource_for {$api_version}.instanceGroups ==)
-                   (== resource_for {$api_version}.regionInstanceGroups
-                   ==)
+                Represents an Instance Group
+                resource. Instance Groups can be used to
+                configure a target for load balancing.
+                Instance groups can either be managed or
+                unmanaged. To create managed instance
+                groups, use the instanceGroupManager or
+                regionInstanceGroupManager resource
+                instead. Use zonal unmanaged instance
+                groups if you need to apply load
+                balancing to groups of heterogeneous
+                instances or if you need to manage the
+                instances yourself. You cannot create
+                regional unmanaged instance groups. For
+                more information, read Instance groups.
 
         """
         # Create or coerce a protobuf request object.
@@ -436,11 +440,11 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def list(
         self,
-        request: compute.ListRegionInstanceGroupsRequest = None,
+        request: Union[compute.ListRegionInstanceGroupsRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -448,7 +452,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         contained within the specified region.
 
         Args:
-            request (google.cloud.compute_v1.types.ListRegionInstanceGroupsRequest):
+            request (Union[google.cloud.compute_v1.types.ListRegionInstanceGroupsRequest, dict]):
                 The request object. A request message for
                 RegionInstanceGroups.List. See the method description
                 for details.
@@ -520,13 +524,13 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def list_instances(
         self,
-        request: compute.ListInstancesRegionInstanceGroupsRequest = None,
+        request: Union[compute.ListInstancesRegionInstanceGroupsRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         instance_group: str = None,
         region_instance_groups_list_instances_request_resource: compute.RegionInstanceGroupsListInstancesRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListInstancesPager:
@@ -537,7 +541,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         The orderBy query parameter is not supported.
 
         Args:
-            request (google.cloud.compute_v1.types.ListInstancesRegionInstanceGroupsRequest):
+            request (Union[google.cloud.compute_v1.types.ListInstancesRegionInstanceGroupsRequest, dict]):
                 The request object. A request message for
                 RegionInstanceGroups.ListInstances. See the method
                 description for details.
@@ -632,13 +636,13 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def set_named_ports(
         self,
-        request: compute.SetNamedPortsRegionInstanceGroupRequest = None,
+        request: Union[compute.SetNamedPortsRegionInstanceGroupRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         instance_group: str = None,
         region_instance_groups_set_named_ports_request_resource: compute.RegionInstanceGroupsSetNamedPortsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -646,7 +650,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         instance group.
 
         Args:
-            request (google.cloud.compute_v1.types.SetNamedPortsRegionInstanceGroupRequest):
+            request (Union[google.cloud.compute_v1.types.SetNamedPortsRegionInstanceGroupRequest, dict]):
                 The request object. A request message for
                 RegionInstanceGroups.SetNamedPorts. See the method
                 description for details.
@@ -682,31 +686,21 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -754,6 +748,19 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

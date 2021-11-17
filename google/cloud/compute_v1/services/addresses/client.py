@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.addresses import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class AddressesClient(metaclass=AddressesClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,21 +335,22 @@ class AddressesClient(metaclass=AddressesClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListAddressesRequest = None,
+        request: Union[compute.AggregatedListAddressesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of addresses.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListAddressesRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListAddressesRequest, dict]):
                 The request object. A request message for
                 Addresses.AggregatedList. See the method description for
                 details.
@@ -399,19 +411,19 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteAddressRequest = None,
+        request: Union[compute.DeleteAddressRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         address: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteAddressRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteAddressRequest, dict]):
                 The request object. A request message for
                 Addresses.Delete. See the method description for
                 details.
@@ -440,31 +452,21 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -504,19 +506,19 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def get(
         self,
-        request: compute.GetAddressRequest = None,
+        request: Union[compute.GetAddressRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         address: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Address:
         r"""Returns the specified address resource.
 
         Args:
-            request (google.cloud.compute_v1.types.GetAddressRequest):
+            request (Union[google.cloud.compute_v1.types.GetAddressRequest, dict]):
                 The request object. A request message for Addresses.Get.
                 See the method description for details.
             project (str):
@@ -544,35 +546,13 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Address:
-                Use global external addresses for GFE-based external
-                HTTP(S) load balancers in Premium Tier.
-
-                   Use global internal addresses for reserved peering
-                   network range.
-
-                   Use regional external addresses for the following
-                   resources:
-
-                   -  External IP addresses for VM instances - Regional
-                      external forwarding rules - Cloud NAT external IP
-                      addresses - GFE based LBs in Standard Tier -
-                      Network LBs in Premium or Standard Tier - Cloud
-                      VPN gateways (both Classic and HA)
-
-                   Use regional internal IP addresses for subnet IP
-                   ranges (primary and secondary). This includes:
-
-                   -  Internal IP addresses for VM instances - Alias IP
-                      ranges of VM instances (/32 only) - Regional
-                      internal forwarding rules - Internal TCP/UDP load
-                      balancer addresses - Internal HTTP(S) load
-                      balancer addresses - Cloud DNS inbound forwarding
-                      IP addresses
-
-                   For more information, read reserved IP address.
-
-                   (== resource_for {$api_version}.addresses ==) (==
-                   resource_for {$api_version}.globalAddresses ==)
+                Represents an IP Address resource. Google Compute Engine
+                has two IP Address resources: \* [Global (external and
+                internal)](\ https://cloud.google.com/compute/docs/reference/rest/v1/globalAddresses)
+                \* [Regional (external and
+                internal)](\ https://cloud.google.com/compute/docs/reference/rest/v1/addresses)
+                For more information, see Reserving a static external IP
+                address.
 
         """
         # Create or coerce a protobuf request object.
@@ -612,12 +592,12 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def insert(
         self,
-        request: compute.InsertAddressRequest = None,
+        request: Union[compute.InsertAddressRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         address_resource: compute.Address = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -625,7 +605,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
         by using the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertAddressRequest):
+            request (Union[google.cloud.compute_v1.types.InsertAddressRequest, dict]):
                 The request object. A request message for
                 Addresses.Insert. See the method description for
                 details.
@@ -652,31 +632,21 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -716,11 +686,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def list(
         self,
-        request: compute.ListAddressesRequest = None,
+        request: Union[compute.ListAddressesRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -728,7 +698,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
         specified region.
 
         Args:
-            request (google.cloud.compute_v1.types.ListAddressesRequest):
+            request (Union[google.cloud.compute_v1.types.ListAddressesRequest, dict]):
                 The request object. A request message for
                 Addresses.List. See the method description for details.
             project (str):
@@ -793,6 +763,19 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

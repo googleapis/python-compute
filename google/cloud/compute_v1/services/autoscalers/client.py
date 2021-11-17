@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.autoscalers import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,21 +335,22 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListAutoscalersRequest = None,
+        request: Union[compute.AggregatedListAutoscalersRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of autoscalers.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListAutoscalersRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListAutoscalersRequest, dict]):
                 The request object. A request message for
                 Autoscalers.AggregatedList. See the method description
                 for details.
@@ -399,19 +411,19 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteAutoscalerRequest = None,
+        request: Union[compute.DeleteAutoscalerRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         autoscaler: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteAutoscalerRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteAutoscalerRequest, dict]):
                 The request object. A request message for
                 Autoscalers.Delete. See the method description for
                 details.
@@ -438,31 +450,21 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -502,12 +504,12 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def get(
         self,
-        request: compute.GetAutoscalerRequest = None,
+        request: Union[compute.GetAutoscalerRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         autoscaler: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Autoscaler:
@@ -516,7 +518,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetAutoscalerRequest):
+            request (Union[google.cloud.compute_v1.types.GetAutoscalerRequest, dict]):
                 The request object. A request message for
                 Autoscalers.Get. See the method description for details.
             project (str):
@@ -542,26 +544,17 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Autoscaler:
-                Represents an Autoscaler resource.
-
-                   Google Compute Engine has two Autoscaler resources:
-
-                   -  [Zonal](/compute/docs/reference/rest/{$api_version}/autoscalers)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionAutoscalers)
-
-                   Use autoscalers to automatically add or delete
-                   instances from a managed instance group according to
-                   your defined autoscaling policy. For more
-                   information, read Autoscaling Groups of Instances.
-
-                   For zonal managed instance groups resource, use the
-                   autoscaler resource.
-
-                   For regional managed instance groups, use the
-                   regionAutoscalers resource. (== resource_for
-                   {$api_version}.autoscalers ==) (== resource_for
-                   {$api_version}.regionAutoscalers ==)
+                Represents an Autoscaler resource. Google Compute Engine
+                has two Autoscaler resources: \*
+                [Zonal](/compute/docs/reference/rest/v1/autoscalers) \*
+                [Regional](/compute/docs/reference/rest/v1/regionAutoscalers)
+                Use autoscalers to automatically add or delete instances
+                from a managed instance group according to your defined
+                autoscaling policy. For more information, read
+                Autoscaling Groups of Instances. For zonal managed
+                instance groups resource, use the autoscaler resource.
+                For regional managed instance groups, use the
+                regionAutoscalers resource.
 
         """
         # Create or coerce a protobuf request object.
@@ -601,12 +594,12 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def insert(
         self,
-        request: compute.InsertAutoscalerRequest = None,
+        request: Union[compute.InsertAutoscalerRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         autoscaler_resource: compute.Autoscaler = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -614,7 +607,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertAutoscalerRequest):
+            request (Union[google.cloud.compute_v1.types.InsertAutoscalerRequest, dict]):
                 The request object. A request message for
                 Autoscalers.Insert. See the method description for
                 details.
@@ -641,31 +634,21 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -705,11 +688,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def list(
         self,
-        request: compute.ListAutoscalersRequest = None,
+        request: Union[compute.ListAutoscalersRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -717,7 +700,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         specified zone.
 
         Args:
-            request (google.cloud.compute_v1.types.ListAutoscalersRequest):
+            request (Union[google.cloud.compute_v1.types.ListAutoscalersRequest, dict]):
                 The request object. A request message for
                 Autoscalers.List. See the method description for
                 details.
@@ -787,12 +770,12 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def patch(
         self,
-        request: compute.PatchAutoscalerRequest = None,
+        request: Union[compute.PatchAutoscalerRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         autoscaler_resource: compute.Autoscaler = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -802,7 +785,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         processing rules.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchAutoscalerRequest):
+            request (Union[google.cloud.compute_v1.types.PatchAutoscalerRequest, dict]):
                 The request object. A request message for
                 Autoscalers.Patch. See the method description for
                 details.
@@ -829,31 +812,21 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -893,12 +866,12 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def update(
         self,
-        request: compute.UpdateAutoscalerRequest = None,
+        request: Union[compute.UpdateAutoscalerRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         autoscaler_resource: compute.Autoscaler = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -906,7 +879,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.UpdateAutoscalerRequest):
+            request (Union[google.cloud.compute_v1.types.UpdateAutoscalerRequest, dict]):
                 The request object. A request message for
                 Autoscalers.Update. See the method description for
                 details.
@@ -933,31 +906,21 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -994,6 +957,19 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

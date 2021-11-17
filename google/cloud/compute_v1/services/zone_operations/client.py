@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.zone_operations import pagers
 from google.cloud.compute_v1.types import compute
@@ -263,8 +267,15 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -326,16 +337,17 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def delete(
         self,
-        request: compute.DeleteZoneOperationRequest = None,
+        request: Union[compute.DeleteZoneOperationRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         operation: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteZoneOperationResponse:
@@ -343,7 +355,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteZoneOperationRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteZoneOperationRequest, dict]):
                 The request object. A request message for
                 ZoneOperations.Delete. See the method description for
                 details.
@@ -414,12 +426,12 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def get(
         self,
-        request: compute.GetZoneOperationRequest = None,
+        request: Union[compute.GetZoneOperationRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         operation: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -427,7 +439,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         resource.
 
         Args:
-            request (google.cloud.compute_v1.types.GetZoneOperationRequest):
+            request (Union[google.cloud.compute_v1.types.GetZoneOperationRequest, dict]):
                 The request object. A request message for
                 ZoneOperations.Get. See the method description for
                 details.
@@ -456,31 +468,21 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -520,11 +522,11 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def list(
         self,
-        request: compute.ListZoneOperationsRequest = None,
+        request: Union[compute.ListZoneOperationsRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -532,7 +534,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         within the specified zone.
 
         Args:
-            request (google.cloud.compute_v1.types.ListZoneOperationsRequest):
+            request (Union[google.cloud.compute_v1.types.ListZoneOperationsRequest, dict]):
                 The request object. A request message for
                 ZoneOperations.List. See the method description for
                 details.
@@ -602,33 +604,30 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def wait(
         self,
-        request: compute.WaitZoneOperationRequest = None,
+        request: Union[compute.WaitZoneOperationRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         operation: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Waits for the specified Operation resource to return as ``DONE``
         or for the request to approach the 2 minute deadline, and
-        retrieves the specified Operation resource. This method differs
-        from the ``GET`` method in that it waits for no more than the
-        default deadline (2 minutes) and then returns the current state
-        of the operation, which might be ``DONE`` or still in progress.
-
-        This method is called on a best-effort basis. Specifically:
-
-        -  In uncommon cases, when the server is overloaded, the request
-           might return before the default deadline is reached, or might
-           return after zero seconds.
-        -  If the default deadline is reached, there is no guarantee
-           that the operation is actually done when the method returns.
-           Be prepared to retry if the operation is not ``DONE``.
+        retrieves the specified Operation resource. This method waits
+        for no more than the 2 minutes and then returns the current
+        state of the operation, which might be ``DONE`` or still in
+        progress. This method is called on a best-effort basis.
+        Specifically: - In uncommon cases, when the server is
+        overloaded, the request might return before the default deadline
+        is reached, or might return after zero seconds. - If the default
+        deadline is reached, there is no guarantee that the operation is
+        actually done when the method returns. Be prepared to retry if
+        the operation is not ``DONE``.
 
         Args:
-            request (google.cloud.compute_v1.types.WaitZoneOperationRequest):
+            request (Union[google.cloud.compute_v1.types.WaitZoneOperationRequest, dict]):
                 The request object. A request message for
                 ZoneOperations.Wait. See the method description for
                 details.
@@ -657,31 +656,21 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -718,6 +707,19 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

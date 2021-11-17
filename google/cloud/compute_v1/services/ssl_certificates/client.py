@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.ssl_certificates import pagers
 from google.cloud.compute_v1.types import compute
@@ -263,8 +267,15 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -326,14 +337,15 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListSslCertificatesRequest = None,
+        request: Union[compute.AggregatedListSslCertificatesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
@@ -341,7 +353,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         regional and global, available to the specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListSslCertificatesRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListSslCertificatesRequest, dict]):
                 The request object. A request message for
                 SslCertificates.AggregatedList. See the method
                 description for details.
@@ -404,18 +416,18 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteSslCertificateRequest = None,
+        request: Union[compute.DeleteSslCertificateRequest, dict] = None,
         *,
         project: str = None,
         ssl_certificate: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteSslCertificateRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteSslCertificateRequest, dict]):
                 The request object. A request message for
                 SslCertificates.Delete. See the method description for
                 details.
@@ -439,31 +451,21 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -501,11 +503,11 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
     def get(
         self,
-        request: compute.GetSslCertificateRequest = None,
+        request: Union[compute.GetSslCertificateRequest, dict] = None,
         *,
         project: str = None,
         ssl_certificate: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslCertificate:
@@ -514,7 +516,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetSslCertificateRequest):
+            request (Union[google.cloud.compute_v1.types.GetSslCertificateRequest, dict]):
                 The request object. A request message for
                 SslCertificates.Get. See the method description for
                 details.
@@ -538,31 +540,22 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.SslCertificate:
-                Represents an SSL Certificate resource.
-
-                   Google Compute Engine has two SSL Certificate
-                   resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/sslCertificates)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionSslCertificates)
-
-                   The sslCertificates are used by: - external HTTPS
-                   load balancers - SSL proxy load balancers
-
-                   The regionSslCertificates are used by internal HTTPS
-                   load balancers.
-
-                   Optionally, certificate file contents that you upload
-                   can contain a set of up to five PEM-encoded
-                   certificates. The API call creates an object
-                   (sslCertificate) that holds this data. You can use
-                   SSL keys and certificates to secure connections to a
-                   load balancer. For more information, read Creating
-                   and using SSL certificates, SSL certificates quotas
-                   and limits, and Troubleshooting SSL certificates. (==
-                   resource_for {$api_version}.sslCertificates ==) (==
-                   resource_for {$api_version}.regionSslCertificates ==)
+                Represents an SSL Certificate resource. Google Compute
+                Engine has two SSL Certificate resources: \*
+                [Global](/compute/docs/reference/rest/v1/sslCertificates)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionSslCertificates)
+                The sslCertificates are used by: - external HTTPS load
+                balancers - SSL proxy load balancers The
+                regionSslCertificates are used by internal HTTPS load
+                balancers. Optionally, certificate file contents that
+                you upload can contain a set of up to five PEM-encoded
+                certificates. The API call creates an object
+                (sslCertificate) that holds this data. You can use SSL
+                keys and certificates to secure connections to a load
+                balancer. For more information, read Creating and using
+                SSL certificates, SSL certificates quotas and limits,
+                and Troubleshooting SSL certificates.
 
         """
         # Create or coerce a protobuf request object.
@@ -600,11 +593,11 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
     def insert(
         self,
-        request: compute.InsertSslCertificateRequest = None,
+        request: Union[compute.InsertSslCertificateRequest, dict] = None,
         *,
         project: str = None,
         ssl_certificate_resource: compute.SslCertificate = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -612,7 +605,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project using the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertSslCertificateRequest):
+            request (Union[google.cloud.compute_v1.types.InsertSslCertificateRequest, dict]):
                 The request object. A request message for
                 SslCertificates.Insert. See the method description for
                 details.
@@ -634,31 +627,21 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -696,10 +679,10 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
     def list(
         self,
-        request: compute.ListSslCertificatesRequest = None,
+        request: Union[compute.ListSslCertificatesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -707,7 +690,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         available to the specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListSslCertificatesRequest):
+            request (Union[google.cloud.compute_v1.types.ListSslCertificatesRequest, dict]):
                 The request object. A request message for
                 SslCertificates.List. See the method description for
                 details.
@@ -767,6 +750,19 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

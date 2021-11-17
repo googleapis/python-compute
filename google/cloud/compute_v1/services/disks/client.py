@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.disks import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class DisksClient(metaclass=DisksClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,17 +335,18 @@ class DisksClient(metaclass=DisksClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def add_resource_policies(
         self,
-        request: compute.AddResourcePoliciesDiskRequest = None,
+        request: Union[compute.AddResourcePoliciesDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
         disks_add_resource_policies_request_resource: compute.DisksAddResourcePoliciesRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -343,7 +355,7 @@ class DisksClient(metaclass=DisksClientMeta):
         for scheduling snapshot creation.
 
         Args:
-            request (google.cloud.compute_v1.types.AddResourcePoliciesDiskRequest):
+            request (Union[google.cloud.compute_v1.types.AddResourcePoliciesDiskRequest, dict]):
                 The request object. A request message for
                 Disks.AddResourcePolicies. See the method description
                 for details.
@@ -377,31 +389,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -447,17 +449,17 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListDisksRequest = None,
+        request: Union[compute.AggregatedListDisksRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of persistent disks.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListDisksRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListDisksRequest, dict]):
                 The request object. A request message for
                 Disks.AggregatedList. See the method description for
                 details.
@@ -518,20 +520,20 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def create_snapshot(
         self,
-        request: compute.CreateSnapshotDiskRequest = None,
+        request: Union[compute.CreateSnapshotDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
         snapshot_resource: compute.Snapshot = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a snapshot of a specified persistent disk.
 
         Args:
-            request (google.cloud.compute_v1.types.CreateSnapshotDiskRequest):
+            request (Union[google.cloud.compute_v1.types.CreateSnapshotDiskRequest, dict]):
                 The request object. A request message for
                 Disks.CreateSnapshot. See the method description for
                 details.
@@ -567,31 +569,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -633,12 +625,12 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteDiskRequest = None,
+        request: Union[compute.DeleteDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -649,7 +641,7 @@ class DisksClient(metaclass=DisksClientMeta):
         delete snapshots.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteDiskRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteDiskRequest, dict]):
                 The request object. A request message for Disks.Delete.
                 See the method description for details.
             project (str):
@@ -679,31 +671,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -743,12 +725,12 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def get(
         self,
-        request: compute.GetDiskRequest = None,
+        request: Union[compute.GetDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Disk:
@@ -756,7 +738,7 @@ class DisksClient(metaclass=DisksClientMeta):
         available persistent disks by making a list() request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetDiskRequest):
+            request (Union[google.cloud.compute_v1.types.GetDiskRequest, dict]):
                 The request object. A request message for Disks.Get. See
                 the method description for details.
             project (str):
@@ -786,28 +768,18 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Disk:
-                Represents a Persistent Disk resource.
-
-                   Google Compute Engine has two Disk resources:
-
-                   -  [Zonal](/compute/docs/reference/rest/{$api_version}/disks)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionDisks)
-
-                   Persistent disks are required for running your VM
-                   instances. Create both boot and non-boot (data)
-                   persistent disks. For more information, read
-                   Persistent Disks. For more storage options, read
-                   Storage options.
-
-                   The disks resource represents a zonal persistent
-                   disk. For more information, read Zonal persistent
-                   disks.
-
-                   The regionDisks resource represents a regional
-                   persistent disk. For more information, read Regional
-                   resources. (== resource_for {$api_version}.disks ==)
-                   (== resource_for {$api_version}.regionDisks ==)
+                Represents a Persistent Disk resource. Google Compute
+                Engine has two Disk resources: \*
+                [Zonal](/compute/docs/reference/rest/v1/disks) \*
+                [Regional](/compute/docs/reference/rest/v1/regionDisks)
+                Persistent disks are required for running your VM
+                instances. Create both boot and non-boot (data)
+                persistent disks. For more information, read Persistent
+                Disks. For more storage options, read Storage options.
+                The disks resource represents a zonal persistent disk.
+                For more information, read Zonal persistent disks. The
+                regionDisks resource represents a regional persistent
+                disk. For more information, read Regional resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -847,12 +819,12 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def get_iam_policy(
         self,
-        request: compute.GetIamPolicyDiskRequest = None,
+        request: Union[compute.GetIamPolicyDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         resource: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -860,7 +832,7 @@ class DisksClient(metaclass=DisksClientMeta):
         empty if no such policy or resource exists.
 
         Args:
-            request (google.cloud.compute_v1.types.GetIamPolicyDiskRequest):
+            request (Union[google.cloud.compute_v1.types.GetIamPolicyDiskRequest, dict]):
                 The request object. A request message for
                 Disks.GetIamPolicy. See the method description for
                 details.
@@ -892,56 +864,44 @@ class DisksClient(metaclass=DisksClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -981,12 +941,12 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def insert(
         self,
-        request: compute.InsertDiskRequest = None,
+        request: Union[compute.InsertDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk_resource: compute.Disk = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -999,7 +959,7 @@ class DisksClient(metaclass=DisksClientMeta):
         property.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertDiskRequest):
+            request (Union[google.cloud.compute_v1.types.InsertDiskRequest, dict]):
                 The request object. A request message for Disks.Insert.
                 See the method description for details.
             project (str):
@@ -1027,31 +987,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1091,11 +1041,11 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def list(
         self,
-        request: compute.ListDisksRequest = None,
+        request: Union[compute.ListDisksRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -1103,7 +1053,7 @@ class DisksClient(metaclass=DisksClientMeta):
         the specified zone.
 
         Args:
-            request (google.cloud.compute_v1.types.ListDisksRequest):
+            request (Union[google.cloud.compute_v1.types.ListDisksRequest, dict]):
                 The request object. A request message for Disks.List.
                 See the method description for details.
             project (str):
@@ -1173,20 +1123,20 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def remove_resource_policies(
         self,
-        request: compute.RemoveResourcePoliciesDiskRequest = None,
+        request: Union[compute.RemoveResourcePoliciesDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
         disks_remove_resource_policies_request_resource: compute.DisksRemoveResourcePoliciesRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes resource policies from a disk.
 
         Args:
-            request (google.cloud.compute_v1.types.RemoveResourcePoliciesDiskRequest):
+            request (Union[google.cloud.compute_v1.types.RemoveResourcePoliciesDiskRequest, dict]):
                 The request object. A request message for
                 Disks.RemoveResourcePolicies. See the method description
                 for details.
@@ -1220,31 +1170,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1290,13 +1230,13 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def resize(
         self,
-        request: compute.ResizeDiskRequest = None,
+        request: Union[compute.ResizeDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         disk: str = None,
         disks_resize_request_resource: compute.DisksResizeRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -1304,7 +1244,7 @@ class DisksClient(metaclass=DisksClientMeta):
         increase the size of the disk.
 
         Args:
-            request (google.cloud.compute_v1.types.ResizeDiskRequest):
+            request (Union[google.cloud.compute_v1.types.ResizeDiskRequest, dict]):
                 The request object. A request message for Disks.Resize.
                 See the method description for details.
             project (str):
@@ -1337,31 +1277,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1403,13 +1333,13 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def set_iam_policy(
         self,
-        request: compute.SetIamPolicyDiskRequest = None,
+        request: Union[compute.SetIamPolicyDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         resource: str = None,
         zone_set_policy_request_resource: compute.ZoneSetPolicyRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -1417,7 +1347,7 @@ class DisksClient(metaclass=DisksClientMeta):
         resource. Replaces any existing policy.
 
         Args:
-            request (google.cloud.compute_v1.types.SetIamPolicyDiskRequest):
+            request (Union[google.cloud.compute_v1.types.SetIamPolicyDiskRequest, dict]):
                 The request object. A request message for
                 Disks.SetIamPolicy. See the method description for
                 details.
@@ -1454,56 +1384,44 @@ class DisksClient(metaclass=DisksClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -1549,13 +1467,13 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def set_labels(
         self,
-        request: compute.SetLabelsDiskRequest = None,
+        request: Union[compute.SetLabelsDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         resource: str = None,
         zone_set_labels_request_resource: compute.ZoneSetLabelsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -1563,7 +1481,7 @@ class DisksClient(metaclass=DisksClientMeta):
         labels, read the Labeling Resources documentation.
 
         Args:
-            request (google.cloud.compute_v1.types.SetLabelsDiskRequest):
+            request (Union[google.cloud.compute_v1.types.SetLabelsDiskRequest, dict]):
                 The request object. A request message for
                 Disks.SetLabels. See the method description for details.
             project (str):
@@ -1598,31 +1516,21 @@ class DisksClient(metaclass=DisksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1668,13 +1576,13 @@ class DisksClient(metaclass=DisksClientMeta):
 
     def test_iam_permissions(
         self,
-        request: compute.TestIamPermissionsDiskRequest = None,
+        request: Union[compute.TestIamPermissionsDiskRequest, dict] = None,
         *,
         project: str = None,
         zone: str = None,
         resource: str = None,
         test_permissions_request_resource: compute.TestPermissionsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
@@ -1682,7 +1590,7 @@ class DisksClient(metaclass=DisksClientMeta):
         specified resource.
 
         Args:
-            request (google.cloud.compute_v1.types.TestIamPermissionsDiskRequest):
+            request (Union[google.cloud.compute_v1.types.TestIamPermissionsDiskRequest, dict]):
                 The request object. A request message for
                 Disks.TestIamPermissions. See the method description for
                 details.
@@ -1760,6 +1668,19 @@ class DisksClient(metaclass=DisksClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

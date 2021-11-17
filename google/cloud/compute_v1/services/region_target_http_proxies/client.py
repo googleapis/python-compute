@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.region_target_http_proxies import pagers
 from google.cloud.compute_v1.types import compute
@@ -265,8 +269,15 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -328,23 +339,24 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def delete(
         self,
-        request: compute.DeleteRegionTargetHttpProxyRequest = None,
+        request: Union[compute.DeleteRegionTargetHttpProxyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         target_http_proxy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpProxy resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteRegionTargetHttpProxyRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteRegionTargetHttpProxyRequest, dict]):
                 The request object. A request message for
                 RegionTargetHttpProxies.Delete. See the method
                 description for details.
@@ -375,31 +387,21 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -439,12 +441,12 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def get(
         self,
-        request: compute.GetRegionTargetHttpProxyRequest = None,
+        request: Union[compute.GetRegionTargetHttpProxyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         target_http_proxy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetHttpProxy:
@@ -453,7 +455,7 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         proxies by making a list() request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetRegionTargetHttpProxyRequest):
+            request (Union[google.cloud.compute_v1.types.GetRegionTargetHttpProxyRequest, dict]):
                 The request object. A request message for
                 RegionTargetHttpProxies.Get. See the method description
                 for details.
@@ -484,29 +486,19 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Returns:
             google.cloud.compute_v1.types.TargetHttpProxy:
-                Represents a Target HTTP Proxy resource.
-
-                   Google Compute Engine has two Target HTTP Proxy
-                   resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/targetHttpProxies)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionTargetHttpProxies)
-
-                   A target HTTP proxy is a component of GCP HTTP load
-                   balancers.
-
-                   -  targetHttpProxies are used by external HTTP load
-                      balancers and Traffic Director. \*
-                      regionTargetHttpProxies are used by internal HTTP
-                      load balancers.
-
-                   Forwarding rules reference a target HTTP proxy, and
-                   the target proxy then references a URL map. For more
-                   information, read Using Target Proxies and Forwarding
-                   rule concepts. (== resource_for
-                   {$api_version}.targetHttpProxies ==) (== resource_for
-                   {$api_version}.regionTargetHttpProxies ==)
+                Represents a Target HTTP Proxy resource. Google Compute
+                Engine has two Target HTTP Proxy resources: \*
+                [Global](/compute/docs/reference/rest/v1/targetHttpProxies)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionTargetHttpProxies)
+                A target HTTP proxy is a component of GCP HTTP load
+                balancers. \* targetHttpProxies are used by external
+                HTTP load balancers and Traffic Director. \*
+                regionTargetHttpProxies are used by internal HTTP load
+                balancers. Forwarding rules reference a target HTTP
+                proxy, and the target proxy then references a URL map.
+                For more information, read Using Target Proxies and
+                Forwarding rule concepts.
 
         """
         # Create or coerce a protobuf request object.
@@ -546,12 +538,12 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def insert(
         self,
-        request: compute.InsertRegionTargetHttpProxyRequest = None,
+        request: Union[compute.InsertRegionTargetHttpProxyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         target_http_proxy_resource: compute.TargetHttpProxy = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -560,7 +552,7 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertRegionTargetHttpProxyRequest):
+            request (Union[google.cloud.compute_v1.types.InsertRegionTargetHttpProxyRequest, dict]):
                 The request object. A request message for
                 RegionTargetHttpProxies.Insert. See the method
                 description for details.
@@ -589,31 +581,21 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -653,11 +635,11 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def list(
         self,
-        request: compute.ListRegionTargetHttpProxiesRequest = None,
+        request: Union[compute.ListRegionTargetHttpProxiesRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -666,7 +648,7 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         region.
 
         Args:
-            request (google.cloud.compute_v1.types.ListRegionTargetHttpProxiesRequest):
+            request (Union[google.cloud.compute_v1.types.ListRegionTargetHttpProxiesRequest, dict]):
                 The request object. A request message for
                 RegionTargetHttpProxies.List. See the method description
                 for details.
@@ -737,20 +719,20 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def set_url_map(
         self,
-        request: compute.SetUrlMapRegionTargetHttpProxyRequest = None,
+        request: Union[compute.SetUrlMapRegionTargetHttpProxyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         target_http_proxy: str = None,
         url_map_reference_resource: compute.UrlMapReference = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpProxy.
 
         Args:
-            request (google.cloud.compute_v1.types.SetUrlMapRegionTargetHttpProxyRequest):
+            request (Union[google.cloud.compute_v1.types.SetUrlMapRegionTargetHttpProxyRequest, dict]):
                 The request object. A request message for
                 RegionTargetHttpProxies.SetUrlMap. See the method
                 description for details.
@@ -786,31 +768,21 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -851,6 +823,19 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

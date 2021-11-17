@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.interconnects import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,22 +335,23 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def delete(
         self,
-        request: compute.DeleteInterconnectRequest = None,
+        request: Union[compute.DeleteInterconnectRequest, dict] = None,
         *,
         project: str = None,
         interconnect: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified interconnect.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteInterconnectRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteInterconnectRequest, dict]):
                 The request object. A request message for
                 Interconnects.Delete. See the method description for
                 details.
@@ -361,31 +373,21 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -423,11 +425,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get(
         self,
-        request: compute.GetInterconnectRequest = None,
+        request: Union[compute.GetInterconnectRequest, dict] = None,
         *,
         project: str = None,
         interconnect: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Interconnect:
@@ -435,7 +437,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         available interconnects by making a list() request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetInterconnectRequest):
+            request (Union[google.cloud.compute_v1.types.GetInterconnectRequest, dict]):
                 The request object. A request message for
                 Interconnects.Get. See the method description for
                 details.
@@ -458,12 +460,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         Returns:
             google.cloud.compute_v1.types.Interconnect:
                 Represents an Interconnect resource.
-
-                   An Interconnect resource is a dedicated connection
-                   between the GCP network and your on-premises network.
-                   For more information, read the Dedicated Interconnect
-                   Overview. (== resource_for
-                   {$api_version}.interconnects ==)
+                An Interconnect resource is a dedicated
+                connection between the GCP network and
+                your on-premises network. For more
+                information, read the Dedicated
+                Interconnect Overview.
 
         """
         # Create or coerce a protobuf request object.
@@ -501,11 +502,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get_diagnostics(
         self,
-        request: compute.GetDiagnosticsInterconnectRequest = None,
+        request: Union[compute.GetDiagnosticsInterconnectRequest, dict] = None,
         *,
         project: str = None,
         interconnect: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectsGetDiagnosticsResponse:
@@ -513,7 +514,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         interconnect.
 
         Args:
-            request (google.cloud.compute_v1.types.GetDiagnosticsInterconnectRequest):
+            request (Union[google.cloud.compute_v1.types.GetDiagnosticsInterconnectRequest, dict]):
                 The request object. A request message for
                 Interconnects.GetDiagnostics. See the method description
                 for details.
@@ -576,11 +577,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def insert(
         self,
-        request: compute.InsertInterconnectRequest = None,
+        request: Union[compute.InsertInterconnectRequest, dict] = None,
         *,
         project: str = None,
         interconnect_resource: compute.Interconnect = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -588,7 +589,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertInterconnectRequest):
+            request (Union[google.cloud.compute_v1.types.InsertInterconnectRequest, dict]):
                 The request object. A request message for
                 Interconnects.Insert. See the method description for
                 details.
@@ -610,31 +611,21 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -672,10 +663,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def list(
         self,
-        request: compute.ListInterconnectsRequest = None,
+        request: Union[compute.ListInterconnectsRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -683,7 +674,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListInterconnectsRequest):
+            request (Union[google.cloud.compute_v1.types.ListInterconnectsRequest, dict]):
                 The request object. A request message for
                 Interconnects.List. See the method description for
                 details.
@@ -746,12 +737,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def patch(
         self,
-        request: compute.PatchInterconnectRequest = None,
+        request: Union[compute.PatchInterconnectRequest, dict] = None,
         *,
         project: str = None,
         interconnect: str = None,
         interconnect_resource: compute.Interconnect = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -761,7 +752,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         processing rules.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchInterconnectRequest):
+            request (Union[google.cloud.compute_v1.types.PatchInterconnectRequest, dict]):
                 The request object. A request message for
                 Interconnects.Patch. See the method description for
                 details.
@@ -788,31 +779,21 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -849,6 +830,19 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

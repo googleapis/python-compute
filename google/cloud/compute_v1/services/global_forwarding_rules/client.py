@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.global_forwarding_rules import pagers
 from google.cloud.compute_v1.types import compute
@@ -265,8 +269,15 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -328,22 +339,23 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def delete(
         self,
-        request: compute.DeleteGlobalForwardingRuleRequest = None,
+        request: Union[compute.DeleteGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         forwarding_rule: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified GlobalForwardingRule resource.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.Delete. See the method description
                 for details.
@@ -367,31 +379,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -429,11 +431,11 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def get(
         self,
-        request: compute.GetGlobalForwardingRuleRequest = None,
+        request: Union[compute.GetGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         forwarding_rule: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ForwardingRule:
@@ -442,7 +444,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         list() request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.GetGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.Get. See the method description
                 for details.
@@ -466,28 +468,18 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.ForwardingRule:
-                Represents a Forwarding Rule resource.
-
-                   Forwarding rule resources in GCP can be either
-                   regional or global in scope:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalForwardingRules)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/forwardingRules)
-
-                   A forwarding rule and its corresponding IP address
-                   represent the frontend configuration of a Google
-                   Cloud Platform load balancer. Forwarding rules can
-                   also reference target instances and Cloud VPN Classic
-                   gateways (targetVpnGateway).
-
-                   For more information, read Forwarding rule concepts
-                   and Using protocol forwarding.
-
-                   (== resource_for {$api_version}.forwardingRules ==)
-                   (== resource_for {$api_version}.globalForwardingRules
-                   ==) (== resource_for
-                   {$api_version}.regionForwardingRules ==)
+                Represents a Forwarding Rule resource. Forwarding rule
+                resources in Google Cloud can be either regional or
+                global in scope: \*
+                [Global](https://cloud.google.com/compute/docs/reference/rest/v1/globalForwardingRules)
+                \*
+                [Regional](https://cloud.google.com/compute/docs/reference/rest/v1/forwardingRules)
+                A forwarding rule and its corresponding IP address
+                represent the frontend configuration of a Google Cloud
+                Platform load balancer. Forwarding rules can also
+                reference target instances and Cloud VPN Classic
+                gateways (targetVpnGateway). For more information, read
+                Forwarding rule concepts and Using protocol forwarding.
 
         """
         # Create or coerce a protobuf request object.
@@ -525,11 +517,11 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def insert(
         self,
-        request: compute.InsertGlobalForwardingRuleRequest = None,
+        request: Union[compute.InsertGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         forwarding_rule_resource: compute.ForwardingRule = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -538,7 +530,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.InsertGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.Insert. See the method description
                 for details.
@@ -560,31 +552,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -622,10 +604,10 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def list(
         self,
-        request: compute.ListGlobalForwardingRulesRequest = None,
+        request: Union[compute.ListGlobalForwardingRulesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -633,7 +615,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         available to the specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListGlobalForwardingRulesRequest):
+            request (Union[google.cloud.compute_v1.types.ListGlobalForwardingRulesRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.List. See the method description
                 for details.
@@ -696,12 +678,12 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def patch(
         self,
-        request: compute.PatchGlobalForwardingRuleRequest = None,
+        request: Union[compute.PatchGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         forwarding_rule: str = None,
         forwarding_rule_resource: compute.ForwardingRule = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -711,7 +693,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         only patch the network_tier field.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.PatchGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.Patch. See the method description
                 for details.
@@ -740,31 +722,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -804,21 +776,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def set_labels(
         self,
-        request: compute.SetLabelsGlobalForwardingRuleRequest = None,
+        request: Union[compute.SetLabelsGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         resource: str = None,
         global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on the specified resource. To learn
-        more about labels, read the Labeling Resources
+        more about labels, read the Labeling resources
         documentation.
 
         Args:
-            request (google.cloud.compute_v1.types.SetLabelsGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.SetLabelsGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.SetLabels. See the method
                 description for details.
@@ -847,31 +819,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -915,12 +877,12 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
     def set_target(
         self,
-        request: compute.SetTargetGlobalForwardingRuleRequest = None,
+        request: Union[compute.SetTargetGlobalForwardingRuleRequest, dict] = None,
         *,
         project: str = None,
         forwarding_rule: str = None,
         target_reference_resource: compute.TargetReference = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -929,7 +891,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         the old target.
 
         Args:
-            request (google.cloud.compute_v1.types.SetTargetGlobalForwardingRuleRequest):
+            request (Union[google.cloud.compute_v1.types.SetTargetGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
                 GlobalForwardingRules.SetTarget. See the method
                 description for details.
@@ -958,31 +920,21 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1021,6 +973,19 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

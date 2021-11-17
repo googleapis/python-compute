@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.subnetworks import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,21 +335,22 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListSubnetworksRequest = None,
+        request: Union[compute.AggregatedListSubnetworksRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of subnetworks.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListSubnetworksRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListSubnetworksRequest, dict]):
                 The request object. A request message for
                 Subnetworks.AggregatedList. See the method description
                 for details.
@@ -399,19 +411,19 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteSubnetworkRequest = None,
+        request: Union[compute.DeleteSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified subnetwork.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.Delete. See the method description for
                 details.
@@ -442,31 +454,21 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -506,13 +508,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def expand_ip_cidr_range(
         self,
-        request: compute.ExpandIpCidrRangeSubnetworkRequest = None,
+        request: Union[compute.ExpandIpCidrRangeSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork: str = None,
         subnetworks_expand_ip_cidr_range_request_resource: compute.SubnetworksExpandIpCidrRangeRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -520,7 +522,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified value.
 
         Args:
-            request (google.cloud.compute_v1.types.ExpandIpCidrRangeSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.ExpandIpCidrRangeSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.ExpandIpCidrRange. See the method
                 description for details.
@@ -556,31 +558,21 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -631,12 +623,12 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def get(
         self,
-        request: compute.GetSubnetworkRequest = None,
+        request: Union[compute.GetSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Subnetwork:
@@ -644,7 +636,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         available subnetworks list() request.
 
         Args:
-            request (google.cloud.compute_v1.types.GetSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.GetSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.Get. See the method description for details.
             project (str):
@@ -674,14 +666,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Subnetwork:
-                Represents a Subnetwork resource.
-
-                   A subnetwork (also known as a subnet) is a logical
-                   partition of a Virtual Private Cloud network with one
-                   primary IP range and zero or more secondary IP
-                   ranges. For more information, read Virtual Private
-                   Cloud (VPC) Network. (== resource_for
-                   {$api_version}.subnetworks ==)
+                Represents a Subnetwork resource. A
+                subnetwork (also known as a subnet) is a
+                logical partition of a Virtual Private
+                Cloud network with one primary IP range
+                and zero or more secondary IP ranges.
+                For more information, read Virtual
+                Private Cloud (VPC) Network.
 
         """
         # Create or coerce a protobuf request object.
@@ -721,12 +712,12 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def get_iam_policy(
         self,
-        request: compute.GetIamPolicySubnetworkRequest = None,
+        request: Union[compute.GetIamPolicySubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -734,7 +725,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         empty if no such policy or resource exists.
 
         Args:
-            request (google.cloud.compute_v1.types.GetIamPolicySubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.GetIamPolicySubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.GetIamPolicy. See the method description for
                 details.
@@ -766,56 +757,44 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -855,12 +834,12 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def insert(
         self,
-        request: compute.InsertSubnetworkRequest = None,
+        request: Union[compute.InsertSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork_resource: compute.Subnetwork = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -868,7 +847,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         the data included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.InsertSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.Insert. See the method description for
                 details.
@@ -897,31 +876,21 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -961,11 +930,11 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def list(
         self,
-        request: compute.ListSubnetworksRequest = None,
+        request: Union[compute.ListSubnetworksRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -973,7 +942,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListSubnetworksRequest):
+            request (Union[google.cloud.compute_v1.types.ListSubnetworksRequest, dict]):
                 The request object. A request message for
                 Subnetworks.List. See the method description for
                 details.
@@ -1045,10 +1014,10 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def list_usable(
         self,
-        request: compute.ListUsableSubnetworksRequest = None,
+        request: Union[compute.ListUsableSubnetworksRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListUsablePager:
@@ -1056,7 +1025,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         subnetworks in the project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListUsableSubnetworksRequest):
+            request (Union[google.cloud.compute_v1.types.ListUsableSubnetworksRequest, dict]):
                 The request object. A request message for
                 Subnetworks.ListUsable. See the method description for
                 details.
@@ -1117,13 +1086,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def patch(
         self,
-        request: compute.PatchSubnetworkRequest = None,
+        request: Union[compute.PatchSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork: str = None,
         subnetwork_resource: compute.Subnetwork = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -1134,7 +1103,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         of the subnetwork resource being patched.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.PatchSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.Patch. See the method description for
                 details.
@@ -1170,31 +1139,21 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1236,13 +1195,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def set_iam_policy(
         self,
-        request: compute.SetIamPolicySubnetworkRequest = None,
+        request: Union[compute.SetIamPolicySubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
         region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -1250,7 +1209,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         resource. Replaces any existing policy.
 
         Args:
-            request (google.cloud.compute_v1.types.SetIamPolicySubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.SetIamPolicySubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.SetIamPolicy. See the method description for
                 details.
@@ -1287,56 +1246,44 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -1382,13 +1329,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def set_private_ip_google_access(
         self,
-        request: compute.SetPrivateIpGoogleAccessSubnetworkRequest = None,
+        request: Union[compute.SetPrivateIpGoogleAccessSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         subnetwork: str = None,
         subnetworks_set_private_ip_google_access_request_resource: compute.SubnetworksSetPrivateIpGoogleAccessRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -1397,7 +1344,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         Private Google Access.
 
         Args:
-            request (google.cloud.compute_v1.types.SetPrivateIpGoogleAccessSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.SetPrivateIpGoogleAccessSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.SetPrivateIpGoogleAccess. See the method
                 description for details.
@@ -1431,31 +1378,21 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -1508,13 +1445,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def test_iam_permissions(
         self,
-        request: compute.TestIamPermissionsSubnetworkRequest = None,
+        request: Union[compute.TestIamPermissionsSubnetworkRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
         test_permissions_request_resource: compute.TestPermissionsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
@@ -1522,7 +1459,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified resource.
 
         Args:
-            request (google.cloud.compute_v1.types.TestIamPermissionsSubnetworkRequest):
+            request (Union[google.cloud.compute_v1.types.TestIamPermissionsSubnetworkRequest, dict]):
                 The request object. A request message for
                 Subnetworks.TestIamPermissions. See the method
                 description for details.
@@ -1600,6 +1537,19 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

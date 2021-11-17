@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.ssl_policies import pagers
 from google.cloud.compute_v1.types import compute
@@ -261,8 +265,15 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -324,15 +335,16 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def delete(
         self,
-        request: compute.DeleteSslPolicyRequest = None,
+        request: Union[compute.DeleteSslPolicyRequest, dict] = None,
         *,
         project: str = None,
         ssl_policy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -341,7 +353,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         TargetHttpsProxy or TargetSslProxy resources.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteSslPolicyRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteSslPolicyRequest, dict]):
                 The request object. A request message for
                 SslPolicies.Delete. See the method description for
                 details.
@@ -366,31 +378,21 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -428,11 +430,11 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
     def get(
         self,
-        request: compute.GetSslPolicyRequest = None,
+        request: Union[compute.GetSslPolicyRequest, dict] = None,
         *,
         project: str = None,
         ssl_policy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslPolicy:
@@ -440,7 +442,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         specified policy.
 
         Args:
-            request (google.cloud.compute_v1.types.GetSslPolicyRequest):
+            request (Union[google.cloud.compute_v1.types.GetSslPolicyRequest, dict]):
                 The request object. A request message for
                 SslPolicies.Get. See the method description for details.
             project (str):
@@ -465,12 +467,11 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         Returns:
             google.cloud.compute_v1.types.SslPolicy:
                 Represents an SSL Policy resource.
-
-                   Use SSL policies to control the SSL features, such as
-                   versions and cipher suites, offered by an HTTPS or
-                   SSL Proxy load balancer. For more information, read
-                   SSL Policy Concepts. (== resource_for
-                   {$api_version}.sslPolicies ==)
+                Use SSL policies to control the SSL
+                features, such as versions and cipher
+                suites, offered by an HTTPS or SSL Proxy
+                load balancer. For more information,
+                read SSL Policy Concepts.
 
         """
         # Create or coerce a protobuf request object.
@@ -508,11 +509,11 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
     def insert(
         self,
-        request: compute.InsertSslPolicyRequest = None,
+        request: Union[compute.InsertSslPolicyRequest, dict] = None,
         *,
         project: str = None,
         ssl_policy_resource: compute.SslPolicy = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -521,7 +522,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         request.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertSslPolicyRequest):
+            request (Union[google.cloud.compute_v1.types.InsertSslPolicyRequest, dict]):
                 The request object. A request message for
                 SslPolicies.Insert. See the method description for
                 details.
@@ -543,31 +544,21 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -605,10 +596,10 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
     def list(
         self,
-        request: compute.ListSslPoliciesRequest = None,
+        request: Union[compute.ListSslPoliciesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -616,7 +607,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         for the specified project.
 
         Args:
-            request (google.cloud.compute_v1.types.ListSslPoliciesRequest):
+            request (Union[google.cloud.compute_v1.types.ListSslPoliciesRequest, dict]):
                 The request object. A request message for
                 SslPolicies.List. See the method description for
                 details.
@@ -677,10 +668,10 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
     def list_available_features(
         self,
-        request: compute.ListAvailableFeaturesSslPoliciesRequest = None,
+        request: Union[compute.ListAvailableFeaturesSslPoliciesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslPoliciesListAvailableFeaturesResponse:
@@ -688,7 +679,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         policy when using custom profile.
 
         Args:
-            request (google.cloud.compute_v1.types.ListAvailableFeaturesSslPoliciesRequest):
+            request (Union[google.cloud.compute_v1.types.ListAvailableFeaturesSslPoliciesRequest, dict]):
                 The request object. A request message for
                 SslPolicies.ListAvailableFeatures. See the method
                 description for details.
@@ -740,12 +731,12 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
     def patch(
         self,
-        request: compute.PatchSslPolicyRequest = None,
+        request: Union[compute.PatchSslPolicyRequest, dict] = None,
         *,
         project: str = None,
         ssl_policy: str = None,
         ssl_policy_resource: compute.SslPolicy = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
@@ -753,7 +744,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         included in the request.
 
         Args:
-            request (google.cloud.compute_v1.types.PatchSslPolicyRequest):
+            request (Union[google.cloud.compute_v1.types.PatchSslPolicyRequest, dict]):
                 The request object. A request message for
                 SslPolicies.Patch. See the method description for
                 details.
@@ -783,31 +774,21 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -844,6 +825,19 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:

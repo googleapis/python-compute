@@ -1,3 +1,22 @@
+from google.auth.transport.requests import AuthorizedSession  # type: ignore
+import json  # type: ignore
+import grpc  # type: ignore
+from google.auth.transport.grpc import SslCredentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
+from google.api_core import exceptions as core_exceptions
+from google.api_core import retry as retries
+from google.api_core import rest_helpers
+from google.api_core import path_template
+from google.api_core import gapic_v1
+from requests import __version__ as requests_version
+from typing import Callable, Dict, Optional, Sequence, Tuple, Union
+import warnings
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
+
 # -*- coding: utf-8 -*-
 # Copyright 2020 Google LLC
 #
@@ -13,21 +32,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import warnings
-from typing import Callable, Dict, Optional, Sequence, Tuple
 
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.auth import credentials as ga_credentials  # type: ignore
-from google.auth.transport.grpc import SslCredentials  # type: ignore
-
-import grpc  # type: ignore
-
-from google.auth.transport.requests import AuthorizedSession
 
 from google.cloud.compute_v1.types import compute
 
-from .base import ImagesTransport, DEFAULT_CLIENT_INFO
+from .base import ImagesTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+
+
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=BASE_DEFAULT_CLIENT_INFO.gapic_version,
+    grpc_version=None,
+    rest_version=requests_version,
+)
 
 
 class ImagesRestTransport(ImagesTransport):
@@ -53,6 +69,7 @@ class ImagesRestTransport(ImagesTransport):
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
     ) -> None:
         """Instantiate the transport.
 
@@ -80,6 +97,11 @@ class ImagesRestTransport(ImagesTransport):
                 API requests. If ``None``, then default info will be used.
                 Generally, you only need to set this if you're developing
                 your own client library.
+            always_use_jwt_access (Optional[bool]): Whether self signed JWT should
+                be used for service account credentials.
+            url_scheme: the protocol scheme for the API endpoint.  Normally
+                "https", but for testing or local servers,
+                "http" can be specified.
         """
         # Run the base constructor
         # TODO(yon-mg): resolve other ctor params i.e. scopes, quota, etc.
@@ -98,10 +120,12 @@ class ImagesRestTransport(ImagesTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
-    def delete(
+    def _delete(
         self,
         request: compute.DeleteImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Call the delete method over HTTP.
@@ -111,58 +135,79 @@ class ImagesRestTransport(ImagesTransport):
                 The request object. A request message for Images.Delete.
                 See the method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Operation:
-                Represents an Operation resource.
-
-                Google Compute Engine has three Operation resources:
-
-                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
-                   \*
-                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
-                   \*
-                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
-
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                `Global </compute/docs/reference/rest/v1/globalOperations>`__
+                \*
+                `Regional </compute/docs/reference/rest/v1/regionOperations>`__
+                \*
+                `Zonal </compute/docs/reference/rest/v1/zoneOperations>`__
                 You can use an operation resource to manage asynchronous
                 API requests. For more information, read Handling API
-                responses.
-
-                Operations can be global, regional or zonal.
-
-                -  For global operations, use the ``globalOperations``
-                   resource.
-                -  For regional operations, use the ``regionOperations``
-                   resource.
-                -  For zonal operations, use the ``zonalOperations``
-                   resource.
-
-                For more information, read Global, Regional, and Zonal
-                Resources. (== resource_for
-                {$api_version}.globalOperations ==) (== resource_for
-                {$api_version}.regionOperations ==) (== resource_for
-                {$api_version}.zoneOperations ==)
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the ``globalOperations``
+                resource. - For regional operations, use the
+                ``regionOperations`` resource. - For zonal operations,
+                use the ``zonalOperations`` resource. For more
+                information, read Global, Regional, and Zonal Resources.
 
         """
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{image}".format(
-            host=self._host, project=request.project, image=request.image,
+        http_options = [
+            {
+                "method": "delete",
+                "uri": "/compute/v1/projects/{project}/global/images/{image}",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("image", "image"),
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.DeleteImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
+
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.DeleteImageRequest.to_json(
+                compute.DeleteImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.DeleteImageRequest.request_id in request:
-            query_params["requestId"] = request.request_id
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.delete(url, headers=headers, params=query_params,)
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+        )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
         # subclass.
@@ -172,10 +217,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def deprecate(
+    def _deprecate(
         self,
         request: compute.DeprecateImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Call the deprecate method over HTTP.
@@ -186,66 +233,86 @@ class ImagesRestTransport(ImagesTransport):
                 Images.Deprecate. See the method
                 description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Operation:
-                Represents an Operation resource.
-
-                Google Compute Engine has three Operation resources:
-
-                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
-                   \*
-                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
-                   \*
-                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
-
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                `Global </compute/docs/reference/rest/v1/globalOperations>`__
+                \*
+                `Regional </compute/docs/reference/rest/v1/regionOperations>`__
+                \*
+                `Zonal </compute/docs/reference/rest/v1/zoneOperations>`__
                 You can use an operation resource to manage asynchronous
                 API requests. For more information, read Handling API
-                responses.
-
-                Operations can be global, regional or zonal.
-
-                -  For global operations, use the ``globalOperations``
-                   resource.
-                -  For regional operations, use the ``regionOperations``
-                   resource.
-                -  For zonal operations, use the ``zonalOperations``
-                   resource.
-
-                For more information, read Global, Regional, and Zonal
-                Resources. (== resource_for
-                {$api_version}.globalOperations ==) (== resource_for
-                {$api_version}.regionOperations ==) (== resource_for
-                {$api_version}.zoneOperations ==)
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the ``globalOperations``
+                resource. - For regional operations, use the
+                ``regionOperations`` resource. - For zonal operations,
+                use the ``zonalOperations`` resource. For more
+                information, read Global, Regional, and Zonal Resources.
 
         """
 
+        http_options = [
+            {
+                "method": "post",
+                "uri": "/compute/v1/projects/{project}/global/images/{image}/deprecate",
+                "body": "deprecation_status_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("image", "image"),
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.DeprecateImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.DeprecationStatus.to_json(
-            request.deprecation_status_resource,
+            compute.DeprecationStatus(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{image}/deprecate".format(
-            host=self._host, project=request.project, image=request.image,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.DeprecateImageRequest.to_json(
+                compute.DeprecateImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.DeprecateImageRequest.request_id in request:
-            query_params["requestId"] = request.request_id
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.post(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -256,10 +323,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def get(
+    def _get(
         self,
         request: compute.GetImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Image:
         r"""Call the get method over HTTP.
@@ -269,33 +338,68 @@ class ImagesRestTransport(ImagesTransport):
                 The request object. A request message for Images.Get. See
                 the method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Image:
-                Represents an Image resource.
-
-                You can use images to create boot disks for your VM
-                instances. For more information, read Images. (==
-                resource_for {$api_version}.images ==)
+                Represents an Image resource. You can
+                use images to create boot disks for your
+                VM instances. For more information, read
+                Images.
 
         """
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{image}".format(
-            host=self._host, project=request.project, image=request.image,
+        http_options = [
+            {
+                "method": "get",
+                "uri": "/compute/v1/projects/{project}/global/images/{image}",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("image", "image"),
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.GetImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
+
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.GetImageRequest.to_json(
+                compute.GetImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.get(url, headers=headers, params=query_params,)
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+        )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
         # subclass.
@@ -305,10 +409,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Image.from_json(response.content, ignore_unknown_fields=True)
 
-    def get_from_family(
+    def _get_from_family(
         self,
         request: compute.GetFromFamilyImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Image:
         r"""Call the get from family method over HTTP.
@@ -319,33 +425,68 @@ class ImagesRestTransport(ImagesTransport):
                 Images.GetFromFamily. See the method
                 description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Image:
-                Represents an Image resource.
-
-                You can use images to create boot disks for your VM
-                instances. For more information, read Images. (==
-                resource_for {$api_version}.images ==)
+                Represents an Image resource. You can
+                use images to create boot disks for your
+                VM instances. For more information, read
+                Images.
 
         """
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/family/{family}".format(
-            host=self._host, project=request.project, family=request.family,
+        http_options = [
+            {
+                "method": "get",
+                "uri": "/compute/v1/projects/{project}/global/images/family/{family}",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("family", "family"),
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.GetFromFamilyImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
+
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.GetFromFamilyImageRequest.to_json(
+                compute.GetFromFamilyImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.get(url, headers=headers, params=query_params,)
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+        )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
         # subclass.
@@ -355,10 +496,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Image.from_json(response.content, ignore_unknown_fields=True)
 
-    def get_iam_policy(
+    def _get_iam_policy(
         self,
         request: compute.GetIamPolicyImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Call the get iam policy method over HTTP.
@@ -369,34 +512,31 @@ class ImagesRestTransport(ImagesTransport):
                 Images.GetIamPolicy. See the method
                 description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                A ``Policy`` is a collection of ``bindings``. A
+                specifies access controls for Google Cloud resources. A
+                ``Policy`` is a collection of ``bindings``. A
                 ``binding`` binds one or more ``members`` to a single
                 ``role``. Members can be user accounts, service
                 accounts, Google groups, and domains (such as G Suite).
                 A ``role`` is a named list of permissions; each ``role``
                 can be an IAM predefined role or a user-created custom
-                role.
-
-                For some types of Google Cloud resources, a ``binding``
-                can also specify a ``condition``, which is a logical
-                expression that allows access to a resource only if the
-                expression evaluates to ``true``. A condition can add
-                constraints based on attributes of the request, the
+                role. For some types of Google Cloud resources, a
+                ``binding`` can also specify a ``condition``, which is a
+                logical expression that allows access to a resource only
+                if the expression evaluates to ``true``. A condition can
+                add constraints based on attributes of the request, the
                 resource, or both. To learn which resources support
                 conditions in their IAM policies, see the `IAM
                 documentation <https://cloud.google.com/iam/help/conditions/resource-policies>`__.
-
-                **JSON example:**
-
-                { "bindings": [ { "role":
+                **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
                 "user:mike@example.com", "group:admins@example.com",
                 "domain:google.com",
@@ -407,10 +547,7 @@ class ImagesRestTransport(ImagesTransport):
                 "expirable access", "description": "Does not grant
                 access after Sep 2020", "expression": "request.time <
                 timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
-                "BwWWja0YfJA=", "version": 3 }
-
-                **YAML example:**
-
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
                 bindings: - members: - user:mike@example.com -
                 group:admins@example.com - domain:google.com -
                 serviceAccount:my-project-id@appspot.gserviceaccount.com
@@ -419,32 +556,60 @@ class ImagesRestTransport(ImagesTransport):
                 roles/resourcemanager.organizationViewer condition:
                 title: expirable access description: Does not grant
                 access after Sep 2020 expression: request.time <
-                timestamp('2020-10-01T00:00:00.000Z') - etag:
-                BwWWja0YfJA= - version: 3
-
-                For a description of IAM and its features, see the `IAM
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the `IAM
                 documentation <https://cloud.google.com/iam/docs/>`__.
 
         """
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{resource}/getIamPolicy".format(
-            host=self._host, project=request.project, resource=request.resource,
+        http_options = [
+            {
+                "method": "get",
+                "uri": "/compute/v1/projects/{project}/global/images/{resource}/getIamPolicy",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+            ("resource", "resource"),
+        ]
+
+        request_kwargs = compute.GetIamPolicyImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
+
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.GetIamPolicyImageRequest.to_json(
+                compute.GetIamPolicyImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.GetIamPolicyImageRequest.options_requested_policy_version in request:
-            query_params[
-                "optionsRequestedPolicyVersion"
-            ] = request.options_requested_policy_version
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.get(url, headers=headers, params=query_params,)
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+        )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
         # subclass.
@@ -454,10 +619,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def insert(
+    def _insert(
         self,
         request: compute.InsertImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Call the insert method over HTTP.
@@ -467,68 +634,85 @@ class ImagesRestTransport(ImagesTransport):
                 The request object. A request message for Images.Insert.
                 See the method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Operation:
-                Represents an Operation resource.
-
-                Google Compute Engine has three Operation resources:
-
-                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
-                   \*
-                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
-                   \*
-                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
-
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                `Global </compute/docs/reference/rest/v1/globalOperations>`__
+                \*
+                `Regional </compute/docs/reference/rest/v1/regionOperations>`__
+                \*
+                `Zonal </compute/docs/reference/rest/v1/zoneOperations>`__
                 You can use an operation resource to manage asynchronous
                 API requests. For more information, read Handling API
-                responses.
-
-                Operations can be global, regional or zonal.
-
-                -  For global operations, use the ``globalOperations``
-                   resource.
-                -  For regional operations, use the ``regionOperations``
-                   resource.
-                -  For zonal operations, use the ``zonalOperations``
-                   resource.
-
-                For more information, read Global, Regional, and Zonal
-                Resources. (== resource_for
-                {$api_version}.globalOperations ==) (== resource_for
-                {$api_version}.regionOperations ==) (== resource_for
-                {$api_version}.zoneOperations ==)
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the ``globalOperations``
+                resource. - For regional operations, use the
+                ``regionOperations`` resource. - For zonal operations,
+                use the ``zonalOperations`` resource. For more
+                information, read Global, Regional, and Zonal Resources.
 
         """
 
+        http_options = [
+            {
+                "method": "post",
+                "uri": "/compute/v1/projects/{project}/global/images",
+                "body": "image_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.InsertImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.Image.to_json(
-            request.image_resource,
+            compute.Image(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images".format(
-            host=self._host, project=request.project,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.InsertImageRequest.to_json(
+                compute.InsertImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.InsertImageRequest.force_create in request:
-            query_params["forceCreate"] = request.force_create
-        if compute.InsertImageRequest.request_id in request:
-            query_params["requestId"] = request.request_id
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.post(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -539,10 +723,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def list(
+    def _list(
         self,
         request: compute.ListImagesRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ImageList:
         r"""Call the list method over HTTP.
@@ -552,6 +738,9 @@ class ImagesRestTransport(ImagesTransport):
                 The request object. A request message for Images.List.
                 See the method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
@@ -560,30 +749,49 @@ class ImagesRestTransport(ImagesTransport):
                 Contains a list of images.
         """
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images".format(
-            host=self._host, project=request.project,
+        http_options = [
+            {"method": "get", "uri": "/compute/v1/projects/{project}/global/images",},
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.ListImagesRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
+
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.ListImagesRequest.to_json(
+                compute.ListImagesRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.ListImagesRequest.filter in request:
-            query_params["filter"] = request.filter
-        if compute.ListImagesRequest.max_results in request:
-            query_params["maxResults"] = request.max_results
-        if compute.ListImagesRequest.order_by in request:
-            query_params["orderBy"] = request.order_by
-        if compute.ListImagesRequest.page_token in request:
-            query_params["pageToken"] = request.page_token
-        if compute.ListImagesRequest.return_partial_success in request:
-            query_params["returnPartialSuccess"] = request.return_partial_success
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.get(url, headers=headers, params=query_params,)
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+        )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
         # subclass.
@@ -593,10 +801,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.ImageList.from_json(response.content, ignore_unknown_fields=True)
 
-    def patch(
+    def _patch(
         self,
         request: compute.PatchImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Call the patch method over HTTP.
@@ -606,66 +816,86 @@ class ImagesRestTransport(ImagesTransport):
                 The request object. A request message for Images.Patch.
                 See the method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Operation:
-                Represents an Operation resource.
-
-                Google Compute Engine has three Operation resources:
-
-                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
-                   \*
-                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
-                   \*
-                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
-
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                `Global </compute/docs/reference/rest/v1/globalOperations>`__
+                \*
+                `Regional </compute/docs/reference/rest/v1/regionOperations>`__
+                \*
+                `Zonal </compute/docs/reference/rest/v1/zoneOperations>`__
                 You can use an operation resource to manage asynchronous
                 API requests. For more information, read Handling API
-                responses.
-
-                Operations can be global, regional or zonal.
-
-                -  For global operations, use the ``globalOperations``
-                   resource.
-                -  For regional operations, use the ``regionOperations``
-                   resource.
-                -  For zonal operations, use the ``zonalOperations``
-                   resource.
-
-                For more information, read Global, Regional, and Zonal
-                Resources. (== resource_for
-                {$api_version}.globalOperations ==) (== resource_for
-                {$api_version}.regionOperations ==) (== resource_for
-                {$api_version}.zoneOperations ==)
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the ``globalOperations``
+                resource. - For regional operations, use the
+                ``regionOperations`` resource. - For zonal operations,
+                use the ``zonalOperations`` resource. For more
+                information, read Global, Regional, and Zonal Resources.
 
         """
 
+        http_options = [
+            {
+                "method": "patch",
+                "uri": "/compute/v1/projects/{project}/global/images/{image}",
+                "body": "image_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("image", "image"),
+            ("project", "project"),
+        ]
+
+        request_kwargs = compute.PatchImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.Image.to_json(
-            request.image_resource,
+            compute.Image(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{image}".format(
-            host=self._host, project=request.project, image=request.image,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.PatchImageRequest.to_json(
+                compute.PatchImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
-        if compute.PatchImageRequest.request_id in request:
-            query_params["requestId"] = request.request_id
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.patch(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -676,10 +906,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_iam_policy(
+    def _set_iam_policy(
         self,
         request: compute.SetIamPolicyImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Call the set iam policy method over HTTP.
@@ -690,34 +922,31 @@ class ImagesRestTransport(ImagesTransport):
                 Images.SetIamPolicy. See the method
                 description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                A ``Policy`` is a collection of ``bindings``. A
+                specifies access controls for Google Cloud resources. A
+                ``Policy`` is a collection of ``bindings``. A
                 ``binding`` binds one or more ``members`` to a single
                 ``role``. Members can be user accounts, service
                 accounts, Google groups, and domains (such as G Suite).
                 A ``role`` is a named list of permissions; each ``role``
                 can be an IAM predefined role or a user-created custom
-                role.
-
-                For some types of Google Cloud resources, a ``binding``
-                can also specify a ``condition``, which is a logical
-                expression that allows access to a resource only if the
-                expression evaluates to ``true``. A condition can add
-                constraints based on attributes of the request, the
+                role. For some types of Google Cloud resources, a
+                ``binding`` can also specify a ``condition``, which is a
+                logical expression that allows access to a resource only
+                if the expression evaluates to ``true``. A condition can
+                add constraints based on attributes of the request, the
                 resource, or both. To learn which resources support
                 conditions in their IAM policies, see the `IAM
                 documentation <https://cloud.google.com/iam/help/conditions/resource-policies>`__.
-
-                **JSON example:**
-
-                { "bindings": [ { "role":
+                **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
                 "user:mike@example.com", "group:admins@example.com",
                 "domain:google.com",
@@ -728,10 +957,7 @@ class ImagesRestTransport(ImagesTransport):
                 "expirable access", "description": "Does not grant
                 access after Sep 2020", "expression": "request.time <
                 timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
-                "BwWWja0YfJA=", "version": 3 }
-
-                **YAML example:**
-
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
                 bindings: - members: - user:mike@example.com -
                 group:admins@example.com - domain:google.com -
                 serviceAccount:my-project-id@appspot.gserviceaccount.com
@@ -740,36 +966,67 @@ class ImagesRestTransport(ImagesTransport):
                 roles/resourcemanager.organizationViewer condition:
                 title: expirable access description: Does not grant
                 access after Sep 2020 expression: request.time <
-                timestamp('2020-10-01T00:00:00.000Z') - etag:
-                BwWWja0YfJA= - version: 3
-
-                For a description of IAM and its features, see the `IAM
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the `IAM
                 documentation <https://cloud.google.com/iam/docs/>`__.
 
         """
 
+        http_options = [
+            {
+                "method": "post",
+                "uri": "/compute/v1/projects/{project}/global/images/{resource}/setIamPolicy",
+                "body": "global_set_policy_request_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+            ("resource", "resource"),
+        ]
+
+        request_kwargs = compute.SetIamPolicyImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.GlobalSetPolicyRequest.to_json(
-            request.global_set_policy_request_resource,
+            compute.GlobalSetPolicyRequest(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{resource}/setIamPolicy".format(
-            host=self._host, project=request.project, resource=request.resource,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.SetIamPolicyImageRequest.to_json(
+                compute.SetIamPolicyImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.post(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -780,10 +1037,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
 
-    def set_labels(
+    def _set_labels(
         self,
         request: compute.SetLabelsImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Call the set labels method over HTTP.
@@ -794,64 +1053,86 @@ class ImagesRestTransport(ImagesTransport):
                 Images.SetLabels. See the method
                 description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
         Returns:
             ~.compute.Operation:
-                Represents an Operation resource.
-
-                Google Compute Engine has three Operation resources:
-
-                -  `Global </compute/docs/reference/rest/{$api_version}/globalOperations>`__
-                   \*
-                   `Regional </compute/docs/reference/rest/{$api_version}/regionOperations>`__
-                   \*
-                   `Zonal </compute/docs/reference/rest/{$api_version}/zoneOperations>`__
-
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                `Global </compute/docs/reference/rest/v1/globalOperations>`__
+                \*
+                `Regional </compute/docs/reference/rest/v1/regionOperations>`__
+                \*
+                `Zonal </compute/docs/reference/rest/v1/zoneOperations>`__
                 You can use an operation resource to manage asynchronous
                 API requests. For more information, read Handling API
-                responses.
-
-                Operations can be global, regional or zonal.
-
-                -  For global operations, use the ``globalOperations``
-                   resource.
-                -  For regional operations, use the ``regionOperations``
-                   resource.
-                -  For zonal operations, use the ``zonalOperations``
-                   resource.
-
-                For more information, read Global, Regional, and Zonal
-                Resources. (== resource_for
-                {$api_version}.globalOperations ==) (== resource_for
-                {$api_version}.regionOperations ==) (== resource_for
-                {$api_version}.zoneOperations ==)
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the ``globalOperations``
+                resource. - For regional operations, use the
+                ``regionOperations`` resource. - For zonal operations,
+                use the ``zonalOperations`` resource. For more
+                information, read Global, Regional, and Zonal Resources.
 
         """
 
+        http_options = [
+            {
+                "method": "post",
+                "uri": "/compute/v1/projects/{project}/global/images/{resource}/setLabels",
+                "body": "global_set_labels_request_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+            ("resource", "resource"),
+        ]
+
+        request_kwargs = compute.SetLabelsImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.GlobalSetLabelsRequest.to_json(
-            request.global_set_labels_request_resource,
+            compute.GlobalSetLabelsRequest(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{resource}/setLabels".format(
-            host=self._host, project=request.project, resource=request.resource,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.SetLabelsImageRequest.to_json(
+                compute.SetLabelsImageRequest(transcoded_request["query_params"]),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.post(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -862,10 +1143,12 @@ class ImagesRestTransport(ImagesTransport):
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
 
-    def test_iam_permissions(
+    def _test_iam_permissions(
         self,
         request: compute.TestIamPermissionsImageRequest,
         *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Call the test iam permissions method over HTTP.
@@ -876,6 +1159,9 @@ class ImagesRestTransport(ImagesTransport):
                 Images.TestIamPermissions. See the
                 method description for details.
 
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
             metadata (Sequence[Tuple[str, str]]): Strings which should be
                 sent along with the request as metadata.
 
@@ -884,28 +1170,62 @@ class ImagesRestTransport(ImagesTransport):
 
         """
 
+        http_options = [
+            {
+                "method": "post",
+                "uri": "/compute/v1/projects/{project}/global/images/{resource}/testIamPermissions",
+                "body": "test_permissions_request_resource",
+            },
+        ]
+
+        required_fields = [
+            # (snake_case_name, camel_case_name)
+            ("project", "project"),
+            ("resource", "resource"),
+        ]
+
+        request_kwargs = compute.TestIamPermissionsImageRequest.to_dict(request)
+        transcoded_request = path_template.transcode(http_options, **request_kwargs)
+
         # Jsonify the request body
         body = compute.TestPermissionsRequest.to_json(
-            request.test_permissions_request_resource,
+            compute.TestPermissionsRequest(transcoded_request["body"]),
             including_default_value_fields=False,
             use_integers_for_enums=False,
         )
+        uri = transcoded_request["uri"]
+        method = transcoded_request["method"]
 
-        # TODO(yon-mg): need to handle grpc transcoding and parse url correctly
-        #               current impl assumes basic case of grpc transcoding
-        url = "https://{host}/compute/v1/projects/{project}/global/images/{resource}/testIamPermissions".format(
-            host=self._host, project=request.project, resource=request.resource,
+        # Jsonify the query params
+        query_params = json.loads(
+            compute.TestIamPermissionsImageRequest.to_json(
+                compute.TestIamPermissionsImageRequest(
+                    transcoded_request["query_params"]
+                ),
+                including_default_value_fields=False,
+                use_integers_for_enums=False,
+            )
         )
 
-        # TODO(yon-mg): handle nested fields corerctly rather than using only top level fields
-        #               not required for GCE
-        query_params = {}
+        # Ensure required fields have values in query_params.
+        # If a required field has a default value, it can get lost
+        # by the to_json call above.
+        orig_query_params = transcoded_request["query_params"]
+        for snake_case_name, camel_case_name in required_fields:
+            if snake_case_name in orig_query_params:
+                if camel_case_name not in query_params:
+                    query_params[camel_case_name] = orig_query_params[snake_case_name]
 
         # Send the request
         headers = dict(metadata)
         headers["Content-Type"] = "application/json"
-        response = self._session.post(
-            url, headers=headers, params=query_params, data=body,
+        response = getattr(self._session, method)(
+            # Replace with proper schema configuration (http/https) logic
+            "https://{host}{uri}".format(host=self._host, uri=uri),
+            timeout=timeout,
+            headers=headers,
+            params=rest_helpers.flatten_query_params(query_params),
+            data=body,
         )
 
         # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
@@ -917,6 +1237,65 @@ class ImagesRestTransport(ImagesTransport):
         return compute.TestPermissionsResponse.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    @property
+    def delete(self) -> Callable[[compute.DeleteImageRequest], compute.Operation]:
+        return self._delete
+
+    @property
+    def deprecate(self) -> Callable[[compute.DeprecateImageRequest], compute.Operation]:
+        return self._deprecate
+
+    @property
+    def get(self) -> Callable[[compute.GetImageRequest], compute.Image]:
+        return self._get
+
+    @property
+    def get_from_family(
+        self,
+    ) -> Callable[[compute.GetFromFamilyImageRequest], compute.Image]:
+        return self._get_from_family
+
+    @property
+    def get_iam_policy(
+        self,
+    ) -> Callable[[compute.GetIamPolicyImageRequest], compute.Policy]:
+        return self._get_iam_policy
+
+    @property
+    def insert(self) -> Callable[[compute.InsertImageRequest], compute.Operation]:
+        return self._insert
+
+    @property
+    def list(self) -> Callable[[compute.ListImagesRequest], compute.ImageList]:
+        return self._list
+
+    @property
+    def patch(self) -> Callable[[compute.PatchImageRequest], compute.Operation]:
+        return self._patch
+
+    @property
+    def set_iam_policy(
+        self,
+    ) -> Callable[[compute.SetIamPolicyImageRequest], compute.Policy]:
+        return self._set_iam_policy
+
+    @property
+    def set_labels(
+        self,
+    ) -> Callable[[compute.SetLabelsImageRequest], compute.Operation]:
+        return self._set_labels
+
+    @property
+    def test_iam_permissions(
+        self,
+    ) -> Callable[
+        [compute.TestIamPermissionsImageRequest], compute.TestPermissionsResponse
+    ]:
+        return self._test_iam_permissions
+
+    def close(self):
+        self._session.close()
 
 
 __all__ = ("ImagesRestTransport",)

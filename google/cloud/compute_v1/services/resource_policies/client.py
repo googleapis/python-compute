@@ -14,21 +14,25 @@
 # limitations under the License.
 #
 from collections import OrderedDict
-from distutils import util
 import os
 import re
-from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
-from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions as core_exceptions  # type: ignore
-from google.api_core import gapic_v1  # type: ignore
-from google.api_core import retry as retries  # type: ignore
+from google.api_core import client_options as client_options_lib
+from google.api_core import exceptions as core_exceptions
+from google.api_core import gapic_v1
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+try:
+    OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
+except AttributeError:  # pragma: NO COVER
+    OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 from google.cloud.compute_v1.services.resource_policies import pagers
 from google.cloud.compute_v1.types import compute
@@ -263,8 +267,15 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
             client_options = client_options_lib.ClientOptions()
 
         # Create SSL credentials for mutual TLS if needed.
-        use_client_cert = bool(
-            util.strtobool(os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"))
+        if os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") not in (
+            "true",
+            "false",
+        ):
+            raise ValueError(
+                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
+            )
+        use_client_cert = (
+            os.getenv("GOOGLE_API_USE_CLIENT_CERTIFICATE", "false") == "true"
         )
 
         client_cert_source_func = None
@@ -326,21 +337,22 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
                 client_cert_source_for_mtls=client_cert_source_func,
                 quota_project_id=client_options.quota_project_id,
                 client_info=client_info,
+                always_use_jwt_access=True,
             )
 
     def aggregated_list(
         self,
-        request: compute.AggregatedListResourcePoliciesRequest = None,
+        request: Union[compute.AggregatedListResourcePoliciesRequest, dict] = None,
         *,
         project: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of resource policies.
 
         Args:
-            request (google.cloud.compute_v1.types.AggregatedListResourcePoliciesRequest):
+            request (Union[google.cloud.compute_v1.types.AggregatedListResourcePoliciesRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.AggregatedList. See the method
                 description for details.
@@ -402,19 +414,19 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def delete(
         self,
-        request: compute.DeleteResourcePolicyRequest = None,
+        request: Union[compute.DeleteResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource_policy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified resource policy.
 
         Args:
-            request (google.cloud.compute_v1.types.DeleteResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.DeleteResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.Delete. See the method description for
                 details.
@@ -443,31 +455,21 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -507,12 +509,12 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def get(
         self,
-        request: compute.GetResourcePolicyRequest = None,
+        request: Union[compute.GetResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource_policy: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ResourcePolicy:
@@ -520,7 +522,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         policy.
 
         Args:
-            request (google.cloud.compute_v1.types.GetResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.GetResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.Get. See the method description for
                 details.
@@ -549,12 +551,12 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.ResourcePolicy:
-                Represents a Resource Policy resource. You can use
-                resource policies to schedule actions for some Compute
-                Engine resources. For example, you can use them to
-                schedule persistent disk snapshots.
-
-                   (== resource_for {$api_version}.resourcePolicies ==)
+                Represents a Resource Policy
+                resource. You can use resource policies
+                to schedule actions for some Compute
+                Engine resources. For example, you can
+                use them to schedule persistent disk
+                snapshots.
 
         """
         # Create or coerce a protobuf request object.
@@ -594,12 +596,12 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def get_iam_policy(
         self,
-        request: compute.GetIamPolicyResourcePolicyRequest = None,
+        request: Union[compute.GetIamPolicyResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -607,7 +609,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         empty if no such policy or resource exists.
 
         Args:
-            request (google.cloud.compute_v1.types.GetIamPolicyResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.GetIamPolicyResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.GetIamPolicy. See the method
                 description for details.
@@ -639,56 +641,44 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -728,19 +718,19 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def insert(
         self,
-        request: compute.InsertResourcePolicyRequest = None,
+        request: Union[compute.InsertResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource_policy_resource: compute.ResourcePolicy = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new resource policy.
 
         Args:
-            request (google.cloud.compute_v1.types.InsertResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.InsertResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.Insert. See the method description for
                 details.
@@ -767,31 +757,21 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.Operation:
-                Represents an Operation resource.
-
-                   Google Compute Engine has three Operation resources:
-
-                   -  [Global](/compute/docs/reference/rest/{$api_version}/globalOperations)
-                      \*
-                      [Regional](/compute/docs/reference/rest/{$api_version}/regionOperations)
-                      \*
-                      [Zonal](/compute/docs/reference/rest/{$api_version}/zoneOperations)
-
-                   You can use an operation resource to manage
-                   asynchronous API requests. For more information, read
-                   Handling API responses.
-
-                   Operations can be global, regional or zonal. - For
-                   global operations, use the globalOperations resource.
-                   - For regional operations, use the regionOperations
-                   resource. - For zonal operations, use the
-                   zonalOperations resource.
-
-                   For more information, read Global, Regional, and
-                   Zonal Resources. (== resource_for
-                   {$api_version}.globalOperations ==) (== resource_for
-                   {$api_version}.regionOperations ==) (== resource_for
-                   {$api_version}.zoneOperations ==)
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
 
         """
         # Create or coerce a protobuf request object.
@@ -831,11 +811,11 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def list(
         self,
-        request: compute.ListResourcePoliciesRequest = None,
+        request: Union[compute.ListResourcePoliciesRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
@@ -844,7 +824,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         region.
 
         Args:
-            request (google.cloud.compute_v1.types.ListResourcePoliciesRequest):
+            request (Union[google.cloud.compute_v1.types.ListResourcePoliciesRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.List. See the method description for
                 details.
@@ -912,13 +892,13 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def set_iam_policy(
         self,
-        request: compute.SetIamPolicyResourcePolicyRequest = None,
+        request: Union[compute.SetIamPolicyResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
         region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
@@ -926,7 +906,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         resource. Replaces any existing policy.
 
         Args:
-            request (google.cloud.compute_v1.types.SetIamPolicyResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.SetIamPolicyResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.SetIamPolicy. See the method
                 description for details.
@@ -963,56 +943,44 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         Returns:
             google.cloud.compute_v1.types.Policy:
                 An Identity and Access Management (IAM) policy, which
-                specifies access controls for Google Cloud resources.
-
-                   A Policy is a collection of bindings. A binding binds
-                   one or more members to a single role. Members can be
-                   user accounts, service accounts, Google groups, and
-                   domains (such as G Suite). A role is a named list of
-                   permissions; each role can be an IAM predefined role
-                   or a user-created custom role.
-
-                   For some types of Google Cloud resources, a binding
-                   can also specify a condition, which is a logical
-                   expression that allows access to a resource only if
-                   the expression evaluates to true. A condition can add
-                   constraints based on attributes of the request, the
-                   resource, or both. To learn which resources support
-                   conditions in their IAM policies, see the [IAM
-                   documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
-
-                   **JSON example:**
-
-                   { "bindings": [ { "role":
-                   "roles/resourcemanager.organizationAdmin", "members":
-                   [ "user:mike@example.com",
-                   "group:admins@example.com", "domain:google.com",
-                   "serviceAccount:my-project-id@appspot.gserviceaccount.com"
-                   ] }, { "role":
-                   "roles/resourcemanager.organizationViewer",
-                   "members": [ "user:eve@example.com" ], "condition": {
-                   "title": "expirable access", "description": "Does not
-                   grant access after Sep 2020", "expression":
-                   "request.time <
-                   timestamp('2020-10-01T00:00:00.000Z')", } } ],
-                   "etag": "BwWWja0YfJA=", "version": 3 }
-
-                   **YAML example:**
-
-                   bindings: - members: - user:\ mike@example.com -
-                   group:\ admins@example.com - domain:google.com -
-                   serviceAccount:\ my-project-id@appspot.gserviceaccount.com
-                   role: roles/resourcemanager.organizationAdmin -
-                   members: - user:\ eve@example.com role:
-                   roles/resourcemanager.organizationViewer condition:
-                   title: expirable access description: Does not grant
-                   access after Sep 2020 expression: request.time <
-                   timestamp('2020-10-01T00:00:00.000Z') - etag:
-                   BwWWja0YfJA= - version: 3
-
-                   For a description of IAM and its features, see the
-                   [IAM
-                   documentation](\ https://cloud.google.com/iam/docs/).
+                specifies access controls for Google Cloud resources. A
+                Policy is a collection of bindings. A binding binds one
+                or more members to a single role. Members can be user
+                accounts, service accounts, Google groups, and domains
+                (such as G Suite). A role is a named list of
+                permissions; each role can be an IAM predefined role or
+                a user-created custom role. For some types of Google
+                Cloud resources, a binding can also specify a condition,
+                which is a logical expression that allows access to a
+                resource only if the expression evaluates to true. A
+                condition can add constraints based on attributes of the
+                request, the resource, or both. To learn which resources
+                support conditions in their IAM policies, see the [IAM
+                documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
+                **JSON example:** { "bindings": [ { "role":
+                "roles/resourcemanager.organizationAdmin", "members": [
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com"
+                ] }, { "role":
+                "roles/resourcemanager.organizationViewer", "members": [
+                "user:eve@example.com" ], "condition": { "title":
+                "expirable access", "description": "Does not grant
+                access after Sep 2020", "expression": "request.time <
+                timestamp('2020-10-01T00:00:00.000Z')", } } ], "etag":
+                "BwWWja0YfJA=", "version": 3 } **YAML example:**
+                bindings: - members: - user:\ mike@example.com -
+                group:\ admins@example.com - domain:google.com -
+                serviceAccount:\ my-project-id@appspot.gserviceaccount.com
+                role: roles/resourcemanager.organizationAdmin - members:
+                - user:\ eve@example.com role:
+                roles/resourcemanager.organizationViewer condition:
+                title: expirable access description: Does not grant
+                access after Sep 2020 expression: request.time <
+                timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA=
+                version: 3 For a description of IAM and its features,
+                see the [IAM
+                documentation](\ https://cloud.google.com/iam/docs/).
 
         """
         # Create or coerce a protobuf request object.
@@ -1058,13 +1026,13 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: compute.TestIamPermissionsResourcePolicyRequest = None,
+        request: Union[compute.TestIamPermissionsResourcePolicyRequest, dict] = None,
         *,
         project: str = None,
         region: str = None,
         resource: str = None,
         test_permissions_request_resource: compute.TestPermissionsRequest = None,
-        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
@@ -1072,7 +1040,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         specified resource.
 
         Args:
-            request (google.cloud.compute_v1.types.TestIamPermissionsResourcePolicyRequest):
+            request (Union[google.cloud.compute_v1.types.TestIamPermissionsResourcePolicyRequest, dict]):
                 The request object. A request message for
                 ResourcePolicies.TestIamPermissions. See the method
                 description for details.
@@ -1150,6 +1118,19 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         # Done; return the response.
         return response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        """Releases underlying transport's resources.
+
+        .. warning::
+            ONLY use as a context manager if the transport is NOT shared
+            with other clients! Exiting the with block will CLOSE the transport
+            and may cause errors in other clients!
+        """
+        self.transport.close()
 
 
 try:
