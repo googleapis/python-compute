@@ -12,7 +12,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+# [START compute_instances_create_from_template]
+# [START compute_instances_create_from_template_with_overrides]
 from google.cloud import compute_v1
+# [END compute_instances_create_from_template_with_overrides]
 
 
 def create_instance_from_template(
@@ -50,6 +53,10 @@ def create_instance_from_template(
     return instance_client.get(project=project_id, zone=zone, instance=instance_name)
 
 
+# [END compute_instances_create_from_template]
+
+
+# [START compute_instances_create_from_template_with_overrides]
 def create_instance_from_template_with_overrides(
     project_id: str,
     zone: str,
@@ -123,3 +130,6 @@ def create_instance_from_template_with_overrides(
     operation_client.wait(project=project_id, zone=zone, operation=op.name)
 
     return instance_client.get(project=project_id, zone=zone, instance=instance_name)
+
+
+# [END compute_instances_create_from_template_with_overrides]
