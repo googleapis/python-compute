@@ -127,7 +127,7 @@ def test_custom_machine_type_bad_cpu_count():
         CustomMachineType(INSTANCE_ZONE, CustomMachineType.CPUSeries.N2, 8194, 66)
     except RuntimeError as err:
         assert err.args[0].startswith(
-            "Invalid number of cores requested. Allowed amount of cores for"
+            "Invalid number of cores requested. Allowed number of cores for"
         )
     else:
         assert not "This test should have raised an exception!"
