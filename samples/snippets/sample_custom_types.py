@@ -31,7 +31,7 @@ def gb_to_mb(value: int) -> int:
 
 class CustomMachineType:
     """
-    Allows to create custom machine types to be used with the Google Compute Engine instances.
+    Allows to create custom machine types to be used with the VM instances.
     """
 
     @unique
@@ -99,8 +99,8 @@ class CustomMachineType:
 
     def _check(self):
         """
-        Check if the requested parameters are allowed. Find more information about custom type limitations at:
-        https://cloud.google.com/compute/docs/general-purpose-machines#custom_machine_types
+        Check whether the requested parameters are allowed. Find more information about limitations of custom machine
+        types at: https://cloud.google.com/compute/docs/general-purpose-machines#custom_machine_types
         """
         # Check the number of cores
         if (
@@ -108,17 +108,17 @@ class CustomMachineType:
             and self.core_count not in self.limits.allowed_cores
         ):
             raise RuntimeError(
-                f"Invalid number of cores requested. Allowed amount of cores for {self.cpu_series.name} is: {sorted(self.limits.allowed_cores)}"
+                f"Invalid number of cores requested. Allowed number of cores for {self.cpu_series.name} is: {sorted(self.limits.allowed_cores)}"
             )
 
         # Memory must be a multiple of 256 MB
         if self.memory_mb % 256 != 0:
-            raise RuntimeError("Requested memory must be multiple of 256 MB.")
+            raise RuntimeError("Requested memory must be a multiple of 256 MB.")
 
         # Check if the requested memory isn't too little
         if self.memory_mb < self.core_count * self.limits.min_mem_per_core:
             raise RuntimeError(
-                f"Too little memory requested. Minimal memory allowed for {self.cpu_series.name} is {self.limits.min_mem_per_core} MB per core."
+                f"Requested memory is too low. Minimal memory for {self.cpu_series.name} is {self.limits.min_mem_per_core} MB per core."
             )
 
         # Check if the requested memory isn't too much
@@ -126,16 +126,16 @@ class CustomMachineType:
             if self.limits.allow_extra_memory:
                 if self.memory_mb > self.limits.extra_memory_limit:
                     raise RuntimeError(
-                        f"Too much memory requested. Maximum memory allowed for {self.cpu_series.name} is {self.limits.extra_memory_limit} MB."
+                        f"Requested memory is too large.. Maximum memory allowed for {self.cpu_series.name} is {self.limits.extra_memory_limit} MB."
                     )
             else:
                 raise RuntimeError(
-                    f"Too much memory requested. Maximum memory allowed for {self.cpu_series.name} is {self.limits.max_mem_per_core} MB per core."
+                    f"Requested memory is too large.. Maximum memory allowed for {self.cpu_series.name} is {self.limits.max_mem_per_core} MB per core."
                 )
 
     def __str__(self) -> str:
         """
-        Present the custom machine type in a format acceptable by GCP API.
+        Return the custom machine type in form of a string acceptable by Compute Engine API.
         """
         if self.cpu_series in {
             self.CPUSeries.E2_SMALL,
@@ -151,16 +151,18 @@ class CustomMachineType:
 
     def short_type_str(self) -> str:
         """
-        Return a type in a format without zone information, i.e. n2-custom-8-10240.
-        This can use used to create Instance Templates.
+        Return machine type in a format without the zone. For example, n2-custom-0-10240.
+        This format is used to create instance templates.
         """
         return str(self).rsplit("/", maxsplit=1)[1]
 
     @classmethod
     def from_str(cls, machine_type: str):
         """
-        Parse provided string to recreate a custom machine type. The string must be a valid machine type string, for
-        example coming from the API.
+        Construct a new object from a string. The string needs to be a valid custom machine type like:
+         - https://www.googleapis.com/compute/v1/projects/diregapic-mestiv/zones/us-central1-b/machineTypes/e2-custom-4-8192
+         - zones/us-central1-b/machineTypes/e2-custom-4-8192
+         - e2-custom-4-8192 (in this case, the zone parameter will not be set)
         """
         zone = None
         if machine_type.startswith("http"):
@@ -294,16 +296,16 @@ def create_custom_machine(
     memory: int,
 ) -> compute_v1.Instance:
     """
-    Create a new VM instance with a custom type.
+    Create a new VM instance with a custom machine type.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
-        cpu_series: The type of CPU you want to use. Pick one value from the CustomMachineType.CPUSeries enum.
+        cpu_series: the type of CPU you want to use. Select one value from the CustomMachineType.CPUSeries enum.
             For example: CustomMachineType.CPUSeries.N2
-        core_count: Number of CPU cores you want to use.
-        memory: Number of megabytes of memory you want to use.
+        core_count: number of CPU cores you want to use.
+        memory: the amount of memory for the VM instance, in megabytes.
 
     Return:
         Instance object.
@@ -336,9 +338,9 @@ def create_custom_shared_core_machine(
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
-        cpu_series: The type of CPU you want to use. Pick one value from the CustomMachineType.CPUSeries enum.
+        cpu_series: the type of CPU you want to use. Pick one value from the CustomMachineType.CPUSeries enum.
             For example: CustomMachineType.CPUSeries.E2_MICRO
-        memory: Number of megabytes of memory you want to use.
+        memory: the amount of memory for the VM instance, in megabytes.
 
     Return:
         Instance object.
@@ -366,8 +368,8 @@ def create_custom_machines_no_helper(
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
-        core_count: Number of CPU cores you want to use.
-        memory: Number of megabytes of memory you want to use.
+        core_count: number of CPU cores you want to use.
+        memory: the amount of memory for the VM instance, in megabytes.
 
     Returns:
         List of Instance objects.
@@ -428,14 +430,14 @@ def create_custom_machines_extra_mem_no_helper(
     project_id: str, zone: str, instance_name: str, core_count: int, memory: int
 ):
     """
-    Create new VM instances without using a CustomMachineType helper function.
+    Create new VM instances with extra memory without using a CustomMachineType helper class.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
-        core_count: Number of CPU cores you want to use.
-        memory: Number of megabytes of memory you want to use.
+        core_count: number of CPU cores you want to use.
+        memory: the amount of memory for the VM instance, in megabytes.
 
     Returns:
         List of Instance objects.
@@ -478,7 +480,7 @@ def add_extended_memory_to_instance(
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
-        new_memory: Number of megabytes of memory you want to use.
+        new_memory: the amount of memory for the VM instance, in megabytes.
 
     Returns:
         Instance object.

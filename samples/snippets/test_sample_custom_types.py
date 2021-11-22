@@ -112,7 +112,7 @@ def test_custom_machine_type_bad_memory_256():
     try:
         CustomMachineType(INSTANCE_ZONE, CustomMachineType.CPUSeries.N1, 8194, 8)
     except RuntimeError as err:
-        assert err.args[0] == "Requested memory must be multiple of 256 MB."
+        assert err.args[0] == "Requested memory must be a multiple of 256 MB."
     else:
         assert not "This test should have raised an exception!"
 
