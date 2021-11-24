@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.8.1](https://www.github.com/googleapis/python-compute/compare/v0.8.0...v0.8.1) (2021-11-24)
+
+
+### Documentation
+
+* **samples:** Adding samples for instance from template creation ([#159](https://www.github.com/googleapis/python-compute/issues/159)) ([34092b5](https://www.github.com/googleapis/python-compute/commit/34092b5e0801364a417837eefb98f72ba6474564))
+* **samples:** Adding template samples ([#136](https://www.github.com/googleapis/python-compute/issues/136)) ([bc721a7](https://www.github.com/googleapis/python-compute/commit/bc721a7e0933c13c5894336a5500c362c7d1d0ac))
+
 ## [0.8.0](https://www.github.com/googleapis/python-compute/compare/v0.7.0...v0.8.0) (2021-11-16)
 
 
