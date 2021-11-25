@@ -139,37 +139,37 @@ def compute_encrypted_instance():
 
 
 def test_instance_operations(compute_instance):
-    assert _get_status(compute_instance) == compute_v1.Instance.Status.RUNNING
+    assert _get_status(compute_instance) == "RUNNING"
 
     stop_instance(PROJECT, INSTANCE_ZONE, compute_instance.name)
 
-    while _get_status(compute_instance) == compute_v1.Instance.Status.STOPPING:
+    while _get_status(compute_instance) == "STOPPING":
         # Since we can't configure timeout parameter for operation wait() (b/188037306)
         # We need to do some manual waiting for the stopping to finish...
         time.sleep(5)
 
-    assert _get_status(compute_instance) == compute_v1.Instance.Status.TERMINATED
+    assert _get_status(compute_instance) == "TERMINATED"
 
     start_instance(PROJECT, INSTANCE_ZONE, compute_instance.name)
-    assert _get_status(compute_instance) == compute_v1.Instance.Status.RUNNING
+    assert _get_status(compute_instance) == "RUNNING"
 
 
 def test_instance_encrypted(compute_encrypted_instance):
-    assert _get_status(compute_encrypted_instance) == compute_v1.Instance.Status.RUNNING
+    assert _get_status(compute_encrypted_instance) == "RUNNING"
 
     stop_instance(PROJECT, INSTANCE_ZONE, compute_encrypted_instance.name)
     while (
-        _get_status(compute_encrypted_instance) == compute_v1.Instance.Status.STOPPING
+        _get_status(compute_encrypted_instance) == "STOPPING"
     ):
         # Since we can't configure timeout parameter for operation wait() (b/188037306)
         # We need to do some manual waiting for the stopping to finish...
         time.sleep(5)
 
     assert (
-        _get_status(compute_encrypted_instance) == compute_v1.Instance.Status.TERMINATED
+        _get_status(compute_encrypted_instance) == "TERMINATED"
     )
 
     start_instance_with_encryption_key(
         PROJECT, INSTANCE_ZONE, compute_encrypted_instance.name, KEY_B64
     )
-    assert _get_status(compute_encrypted_instance) == compute_v1.Instance.Status.RUNNING
+    assert _get_status(compute_encrypted_instance) == "RUNNING"

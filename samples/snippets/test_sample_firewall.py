@@ -34,7 +34,7 @@ PROJECT = google.auth.default()[1]
 def firewall_rule():
     firewall_rule = compute_v1.Firewall()
     firewall_rule.name = "firewall-sample-test" + uuid.uuid4().hex[:10]
-    firewall_rule.direction = compute_v1.Firewall.Direction.INGRESS
+    firewall_rule.direction = "INGRESS"
     allowed_ports = compute_v1.Allowed()
     allowed_ports.I_p_protocol = "tcp"
     allowed_ports.ports = ["80"]

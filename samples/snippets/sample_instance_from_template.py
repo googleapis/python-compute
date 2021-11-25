@@ -117,7 +117,7 @@ def create_instance_from_template_with_overrides(
     new_disk.initialize_params.source_image = new_disk_source_image
     new_disk.auto_delete = True
     new_disk.boot = False
-    new_disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT
+    new_disk.type_ = "PERSISTENT"
 
     instance.disks.append(new_disk)
 

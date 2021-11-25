@@ -73,7 +73,7 @@ def create_firewall_rule(
     """
     firewall_rule = compute_v1.Firewall()
     firewall_rule.name = firewall_rule_name
-    firewall_rule.direction = compute_v1.Firewall.Direction.INGRESS
+    firewall_rule.direction = "INGRESS"
 
     allowed_ports = compute_v1.Allowed()
     allowed_ports.I_p_protocol = "tcp"

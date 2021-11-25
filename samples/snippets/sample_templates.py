@@ -106,8 +106,8 @@ def create_template(project_id: str, template_name: str) -> compute_v1.InstanceT
     # The template lets the instance use an external IP address.
     access_config = compute_v1.AccessConfig()
     access_config.name = "External NAT"
-    access_config.type_ = compute_v1.AccessConfig.Type.ONE_TO_ONE_NAT
-    access_config.network_tier = compute_v1.AccessConfig.NetworkTier.PREMIUM
+    access_config.type_ = "ONE_TO_ONE_NAT"
+    access_config.network_tier = "PREMIUM"
     network_interface.access_configs = [access_config]
 
     template = compute_v1.InstanceTemplate()
@@ -149,9 +149,7 @@ def create_template_from_instance(
     # basing your template on.
     disk.device_name = "disk-1"
     # Replace the original boot disk image used in your instance with a Rocky Linux image.
-    disk.instantiate_from = (
-        compute_v1.DiskInstantiationConfig.InstantiateFrom.CUSTOM_IMAGE
-    )
+    disk.instantiate_from = "CUSTOM_IMAGE"
     disk.custom_image = "projects/rocky-linux-cloud/global/images/family/rocky-linux-8"
     # Override the auto_delete setting.
     disk.auto_delete = True
