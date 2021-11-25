@@ -158,16 +158,12 @@ def test_instance_encrypted(compute_encrypted_instance):
     assert _get_status(compute_encrypted_instance) == "RUNNING"
 
     stop_instance(PROJECT, INSTANCE_ZONE, compute_encrypted_instance.name)
-    while (
-        _get_status(compute_encrypted_instance) == "STOPPING"
-    ):
+    while _get_status(compute_encrypted_instance) == "STOPPING":
         # Since we can't configure timeout parameter for operation wait() (b/188037306)
         # We need to do some manual waiting for the stopping to finish...
         time.sleep(5)
 
-    assert (
-        _get_status(compute_encrypted_instance) == "TERMINATED"
-    )
+    assert _get_status(compute_encrypted_instance) == "TERMINATED"
 
     start_instance_with_encryption_key(
         PROJECT, INSTANCE_ZONE, compute_encrypted_instance.name, KEY_B64
