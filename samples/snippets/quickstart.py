@@ -133,7 +133,7 @@ def create_instance(
     disk.initialize_params = initialize_params
     disk.auto_delete = True
     disk.boot = True
-    disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT
+    disk.type_ = "PERSISTENT"
 
     # Use the network interface provided in the network_name argument.
     network_interface = compute_v1.NetworkInterface()

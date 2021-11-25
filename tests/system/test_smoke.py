@@ -173,7 +173,7 @@ class TestComputeSmoke(TestBase):
         disk = AttachedDisk(
             auto_delete=True,
             boot=True,
-            type_=AttachedDisk.Type.PERSISTENT,
+            type_="PERSISTENT",
             initialize_params=initialize_params,
         )
         network_interface = NetworkInterface(name="default")

@@ -42,7 +42,7 @@ def _make_disk(raw_key: bytes = None):
     disk.initialize_params = initialize_params
     disk.auto_delete = True
     disk.boot = True
-    disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT
+    disk.type_ = "PERSISTENT"
     disk.device_name = 'disk-1'
 
     if raw_key:
