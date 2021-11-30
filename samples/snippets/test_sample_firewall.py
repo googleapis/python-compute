@@ -57,7 +57,7 @@ def firewall_rule():
         op = firewall_client.delete(project=PROJECT, firewall=firewall_rule.name)
         op_client.wait(project=PROJECT, operation=op.name)
     except google.api_core.exceptions.BadRequest as err:
-        if err.code == 400 and 'is not ready' in err.message:
+        if err.code == 400 and "is not ready" in err.message:
             # This means GCE enforcer has already deleted that rule.
             pass
         else:
