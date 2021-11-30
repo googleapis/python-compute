@@ -17,6 +17,7 @@ import typing
 import uuid
 
 import google.auth
+import sys
 
 from samples.snippets.quickstart import main
 
@@ -28,7 +29,9 @@ INSTANCE_ZONE = "europe-central2-b"
 def test_main(capsys: typing.Any) -> None:
     main(PROJECT, INSTANCE_ZONE, INSTANCE_NAME)
 
-    out, _ = capsys.readouterr()
+    out, err = capsys.readouterr()
+    sys.stdout.write(out)
+    sys.stderr.write(err)
 
     assert f"Instance {INSTANCE_NAME} created." in out
     assert re.search(f"Instances found in {INSTANCE_ZONE}:.+{INSTANCE_NAME}", out)
