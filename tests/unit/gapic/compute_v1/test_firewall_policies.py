@@ -1424,7 +1424,7 @@ def test_get_rule_rest(
         return_value = compute.FirewallPolicyRule(
             action="action_value",
             description="description_value",
-            direction=compute.FirewallPolicyRule.Direction.EGRESS,
+            direction="direction_value",
             disabled=True,
             enable_logging=True,
             kind="kind_value",
@@ -1446,7 +1446,7 @@ def test_get_rule_rest(
     assert isinstance(response, compute.FirewallPolicyRule)
     assert response.action == "action_value"
     assert response.description == "description_value"
-    assert response.direction == compute.FirewallPolicyRule.Direction.EGRESS
+    assert response.direction == "direction_value"
     assert response.disabled is True
     assert response.enable_logging is True
     assert response.kind == "kind_value"
@@ -1671,6 +1671,7 @@ def test_insert_rest_flattened(transport: str = "rest"):
 
         # get truthy value for each flattened field
         mock_args = dict(
+            parent_id="parent_id_value",
             firewall_policy_resource=compute.FirewallPolicy(
                 associations=[
                     compute.FirewallPolicyAssociation(
@@ -1703,6 +1704,7 @@ def test_insert_rest_flattened_error(transport: str = "rest"):
     with pytest.raises(ValueError):
         client.insert(
             compute.InsertFirewallPolicyRequest(),
+            parent_id="parent_id_value",
             firewall_policy_resource=compute.FirewallPolicy(
                 associations=[
                     compute.FirewallPolicyAssociation(
@@ -2004,7 +2006,9 @@ def test_move_rest_flattened(transport: str = "rest"):
         sample_request = {"firewall_policy": "sample1"}
 
         # get truthy value for each flattened field
-        mock_args = dict(firewall_policy="firewall_policy_value",)
+        mock_args = dict(
+            firewall_policy="firewall_policy_value", parent_id="parent_id_value",
+        )
         mock_args.update(sample_request)
         client.move(**mock_args)
 
@@ -2030,6 +2034,7 @@ def test_move_rest_flattened_error(transport: str = "rest"):
         client.move(
             compute.MoveFirewallPolicyRequest(),
             firewall_policy="firewall_policy_value",
+            parent_id="parent_id_value",
         )
 
 
