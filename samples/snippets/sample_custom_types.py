@@ -167,7 +167,7 @@ class CustomMachineType:
         """
         zone = None
         if machine_type.startswith("http"):
-            machine_type = machine_type[machine_type.find("zones/"):]
+            machine_type = machine_type[machine_type.find("zones/") :]
 
         if machine_type.startswith("zones/"):
             _, zone, _, machine_type = machine_type.split("/")
