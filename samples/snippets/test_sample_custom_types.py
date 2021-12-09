@@ -19,8 +19,8 @@ import pytest
 from quickstart import create_instance, delete_instance
 from sample_custom_types import (
     add_extended_memory_to_instance,
-    create_custom_machine,
-    create_custom_shared_core_machine,
+    create_custom_instance,
+    create_custom_shared_core_instance,
     CustomMachineType,
 )
 
@@ -47,14 +47,8 @@ def instance():
 
 
 def test_custom_instance_creation(auto_delete_instance_name):
-    instance = create_custom_machine(
-        PROJECT,
-        INSTANCE_ZONE,
-        auto_delete_instance_name,
-        CustomMachineType.CPUSeries.E2,
-        4,
-        8192,
-    )
+    instance = create_custom_instance(PROJECT, INSTANCE_ZONE, auto_delete_instance_name, CustomMachineType.CPUSeries.E2,
+                                      4, 8192)
 
     assert instance.name == auto_delete_instance_name
     assert instance.machine_type.endswith(
@@ -63,7 +57,7 @@ def test_custom_instance_creation(auto_delete_instance_name):
 
 
 def test_custom_shared_instance_creation(auto_delete_instance_name):
-    instance = create_custom_shared_core_machine(
+    instance = create_custom_shared_core_instance(
         PROJECT,
         INSTANCE_ZONE,
         auto_delete_instance_name,

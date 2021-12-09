@@ -56,22 +56,22 @@ class CustomMachineType:
     )
 
     LIMITS = {
-        CPUSeries.E2: TypeLimits(range(2, 33, 2), 512, 8192, False, 0),
-        CPUSeries.E2_MICRO: TypeLimits([], 1024, 2048, False, 0),
-        CPUSeries.E2_SMALL: TypeLimits([], 2048, 4096, False, 0),
-        CPUSeries.E2_MEDIUM: TypeLimits([], 4096, 8192, False, 0),
+        CPUSeries.E2: TypeLimits(frozenset(range(2, 33, 2)), 512, 8192, False, 0),
+        CPUSeries.E2_MICRO: TypeLimits(frozenset(), 1024, 2048, False, 0),
+        CPUSeries.E2_SMALL: TypeLimits(frozenset(), 2048, 4096, False, 0),
+        CPUSeries.E2_MEDIUM: TypeLimits(frozenset(), 4096, 8192, False, 0),
         CPUSeries.N2: TypeLimits(
-            set(range(2, 33, 2)).union(set(range(36, 129, 4))),
+            frozenset(range(2, 33, 2)).union(set(range(36, 129, 4))),
             512,
             8192,
             True,
             gb_to_mb(624),
         ),
         CPUSeries.N2D: TypeLimits(
-            [2, 4, 8, 16, 32, 48, 64, 80, 96], 512, 8192, True, gb_to_mb(768)
+            frozenset({2, 4, 8, 16, 32, 48, 64, 80, 96}), 512, 8192, True, gb_to_mb(768)
         ),
         CPUSeries.N1: TypeLimits(
-            {1}.union(range(2, 97, 2)), 922, 6656, True, gb_to_mb(624)
+            frozenset({1}.union(range(2, 97, 2))), 922, 6656, True, gb_to_mb(624)
         ),
     }
 
@@ -83,14 +83,15 @@ class CustomMachineType:
         self.limits = self.LIMITS[self.cpu_series]
         self.core_count = 2 if self.is_shared() else core_count
         self.memory_mb = memory_mb
+
         self._check()
         self.extra_memory_used = self._check_extra_memory()
 
     def is_shared(self):
         return self.cpu_series in (
-            self.CPUSeries.E2_SMALL,
-            self.CPUSeries.E2_MICRO,
-            self.CPUSeries.E2_MEDIUM,
+            CustomMachineType.CPUSeries.E2_SMALL,
+            CustomMachineType.CPUSeries.E2_MICRO,
+            CustomMachineType.CPUSeries.E2_MEDIUM,
         )
 
     def _check_extra_memory(self) -> bool:
@@ -166,23 +167,21 @@ class CustomMachineType:
         """
         zone = None
         if machine_type.startswith("http"):
-            machine_type = machine_type[machine_type.find("zones/") :]
+            machine_type = machine_type[machine_type.find("zones/"):]
 
         if machine_type.startswith("zones/"):
-            _, zone, _, type_desc = machine_type.split("/")
-        else:
-            type_desc = machine_type
+            _, zone, _, machine_type = machine_type.split("/")
 
-        extra_mem = type_desc.endswith("-ext")
+        extra_mem = machine_type.endswith("-ext")
 
-        if type_desc.startswith("custom"):
+        if machine_type.startswith("custom"):
             cpu = cls.CPUSeries.N1
-            _, cores, memory = type_desc.rsplit("-", maxsplit=2)
+            _, cores, memory = machine_type.rsplit("-", maxsplit=2)
         else:
             if extra_mem:
-                cpu_series, _, cores, memory, _ = type_desc.split("-")
+                cpu_series, _, cores, memory, _ = machine_type.split("-")
             else:
-                cpu_series, _, cores, memory = type_desc.split("-")
+                cpu_series, _, cores, memory = machine_type.split("-")
             if cpu_series == "n2":
                 cpu = cls.CPUSeries.N2
             elif cpu_series == "n2d":
@@ -287,7 +286,7 @@ def create_instance(
 
 
 # [START compute_custom_machine_type_create_with_helper ]
-def create_custom_machine(
+def create_custom_instance(
     project_id: str,
     zone: str,
     instance_name: str,
@@ -324,7 +323,7 @@ def create_custom_machine(
 
 
 # [START compute_custom_machine_type_create_shared_with_helper ]
-def create_custom_shared_core_machine(
+def create_custom_shared_core_instance(
     project_id: str,
     zone: str,
     instance_name: str,
@@ -358,7 +357,7 @@ def create_custom_shared_core_machine(
 
 
 # [START compute_custom_machine_type_create_without_helper ]
-def create_custom_machines_no_helper(
+def create_custom_instances_no_helper(
     project_id: str, zone: str, instance_name: str, core_count: int, memory: int
 ):
     """
@@ -426,7 +425,7 @@ def create_custom_machines_no_helper(
 
 
 # [START compute_custom_machine_type_extra_mem_no_helper ]
-def create_custom_machines_extra_mem_no_helper(
+def create_custom_instances_extra_mem_no_helper(
     project_id: str, zone: str, instance_name: str, core_count: int, memory: int
 ):
     """
