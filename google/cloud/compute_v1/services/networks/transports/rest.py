@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import NetworksTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,19 @@ class NetworksRestTransport(NetworksTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __add_peering_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _add_peering_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__add_peering_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _add_peering(
         self,
         request: compute.AddPeeringNetworkRequest,
@@ -170,12 +182,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.AddPeeringNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -197,14 +203,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._add_peering_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -225,6 +224,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __delete_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -275,12 +287,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DeleteNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -296,14 +302,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -323,6 +322,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -362,12 +374,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -383,14 +389,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -410,6 +409,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Network.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_effective_firewalls_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_effective_firewalls_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__get_effective_firewalls_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_effective_firewalls(
         self,
@@ -445,12 +457,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetEffectiveFirewallsNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -468,14 +474,9 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_effective_firewalls_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -497,6 +498,18 @@ class NetworksRestTransport(NetworksTransport):
         return compute.NetworksGetEffectiveFirewallsResponse.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -548,11 +561,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.InsertNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -574,14 +582,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -602,6 +603,18 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -633,11 +646,6 @@ class NetworksRestTransport(NetworksTransport):
             {"method": "get", "uri": "/compute/v1/projects/{project}/global/networks",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListNetworksRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -653,14 +661,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -682,6 +683,19 @@ class NetworksRestTransport(NetworksTransport):
         return compute.NetworkList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __list_peering_routes_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_peering_routes_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__list_peering_routes_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list_peering_routes(
         self,
@@ -717,12 +731,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListPeeringRoutesNetworksRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -740,14 +748,9 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._list_peering_routes_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -769,6 +772,19 @@ class NetworksRestTransport(NetworksTransport):
         return compute.ExchangedPeeringRoutesList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __patch_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _patch_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__patch_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch(
         self,
@@ -819,12 +835,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.PatchNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -846,14 +856,7 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -874,6 +877,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_peering_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _remove_peering_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__remove_peering_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_peering(
         self,
@@ -925,12 +941,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.RemovePeeringNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -952,14 +962,9 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._remove_peering_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -980,6 +985,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __switch_to_custom_mode_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _switch_to_custom_mode_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__switch_to_custom_mode_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _switch_to_custom_mode(
         self,
@@ -1030,12 +1048,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.SwitchToCustomModeNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1053,14 +1065,9 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._switch_to_custom_mode_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1080,6 +1087,19 @@ class NetworksRestTransport(NetworksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __update_peering_required_fields_default_values = {
+        "network": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _update_peering_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in NetworksRestTransport.__update_peering_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _update_peering(
         self,
@@ -1131,12 +1151,6 @@ class NetworksRestTransport(NetworksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network", "network"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.UpdatePeeringNetworkRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1158,14 +1172,9 @@ class NetworksRestTransport(NetworksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._update_peering_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

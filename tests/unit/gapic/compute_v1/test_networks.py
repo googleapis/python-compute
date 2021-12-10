@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
@@ -397,7 +398,7 @@ def test_networks_client_client_options_credentials_file(
         )
 
 
-def test_add_peering_rest(
+def test_add_peering_unary_rest(
     transport: str = "rest", request_type=compute.AddPeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -445,7 +446,7 @@ def test_add_peering_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.add_peering(request)
+        response = client.add_peering_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -473,7 +474,87 @@ def test_add_peering_rest(
     assert response.zone == "zone_value"
 
 
-def test_add_peering_rest_bad_request(
+def test_add_peering_unary_rest_required_fields(
+    request_type=compute.AddPeeringNetworkRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._add_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._add_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.add_peering_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_add_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddPeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -496,14 +577,14 @@ def test_add_peering_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.add_peering(request)
+        client.add_peering_unary(request)
 
 
-def test_add_peering_rest_from_dict():
-    test_add_peering_rest(request_type=dict)
+def test_add_peering_unary_rest_from_dict():
+    test_add_peering_unary_rest(request_type=dict)
 
 
-def test_add_peering_rest_flattened(transport: str = "rest"):
+def test_add_peering_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -533,7 +614,7 @@ def test_add_peering_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.add_peering(**mock_args)
+        client.add_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -546,7 +627,7 @@ def test_add_peering_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_add_peering_rest_flattened_error(transport: str = "rest"):
+def test_add_peering_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -554,7 +635,7 @@ def test_add_peering_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.add_peering(
+        client.add_peering_unary(
             compute.AddPeeringNetworkRequest(),
             project="project_value",
             network="network_value",
@@ -564,7 +645,7 @@ def test_add_peering_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_delete_rest(
+def test_delete_unary_rest(
     transport: str = "rest", request_type=compute.DeleteNetworkRequest
 ):
     client = NetworksClient(
@@ -609,7 +690,7 @@ def test_delete_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.delete(request)
+        response = client.delete_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -637,7 +718,80 @@ def test_delete_rest(
     assert response.zone == "zone_value"
 
 
-def test_delete_rest_bad_request(
+def test_delete_unary_rest_required_fields(request_type=compute.DeleteNetworkRequest):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._delete_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._delete_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteNetworkRequest
 ):
     client = NetworksClient(
@@ -657,14 +811,14 @@ def test_delete_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.delete(request)
+        client.delete_unary(request)
 
 
-def test_delete_rest_from_dict():
-    test_delete_rest(request_type=dict)
+def test_delete_unary_rest_from_dict():
+    test_delete_unary_rest(request_type=dict)
 
 
-def test_delete_rest_flattened(transport: str = "rest"):
+def test_delete_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -688,7 +842,7 @@ def test_delete_rest_flattened(transport: str = "rest"):
         # get truthy value for each flattened field
         mock_args = dict(project="project_value", network="network_value",)
         mock_args.update(sample_request)
-        client.delete(**mock_args)
+        client.delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -701,7 +855,7 @@ def test_delete_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_delete_rest_flattened_error(transport: str = "rest"):
+def test_delete_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -709,7 +863,7 @@ def test_delete_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.delete(
+        client.delete_unary(
             compute.DeleteNetworkRequest(),
             project="project_value",
             network="network_value",
@@ -763,6 +917,79 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetNetworkReques
     assert response.name == "name_value"
     assert response.self_link == "self_link_value"
     assert response.subnetworks == ["subnetworks_value"]
+
+
+def test_get_rest_required_fields(request_type=compute.GetNetworkRequest):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Network()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Network.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_rest_bad_request(
@@ -874,6 +1101,87 @@ def test_get_effective_firewalls_rest(
     assert isinstance(response, compute.NetworksGetEffectiveFirewallsResponse)
 
 
+def test_get_effective_firewalls_rest_required_fields(
+    request_type=compute.GetEffectiveFirewallsNetworkRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._get_effective_firewalls_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._get_effective_firewalls_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.NetworksGetEffectiveFirewallsResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.NetworksGetEffectiveFirewallsResponse.to_json(
+                return_value
+            )
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_effective_firewalls(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_effective_firewalls_rest_bad_request(
     transport: str = "rest", request_type=compute.GetEffectiveFirewallsNetworkRequest
 ):
@@ -955,7 +1263,7 @@ def test_get_effective_firewalls_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_insert_rest(
+def test_insert_unary_rest(
     transport: str = "rest", request_type=compute.InsertNetworkRequest
 ):
     client = NetworksClient(
@@ -1001,7 +1309,7 @@ def test_insert_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.insert(request)
+        response = client.insert_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1029,7 +1337,74 @@ def test_insert_rest(
     assert response.zone == "zone_value"
 
 
-def test_insert_rest_bad_request(
+def test_insert_unary_rest_required_fields(request_type=compute.InsertNetworkRequest):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._insert_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._insert_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.insert_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertNetworkRequest
 ):
     client = NetworksClient(
@@ -1050,14 +1425,14 @@ def test_insert_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.insert(request)
+        client.insert_unary(request)
 
 
-def test_insert_rest_from_dict():
-    test_insert_rest(request_type=dict)
+def test_insert_unary_rest_from_dict():
+    test_insert_unary_rest(request_type=dict)
 
 
-def test_insert_rest_flattened(transport: str = "rest"):
+def test_insert_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1084,7 +1459,7 @@ def test_insert_rest_flattened(transport: str = "rest"):
             network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
         mock_args.update(sample_request)
-        client.insert(**mock_args)
+        client.insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1097,7 +1472,7 @@ def test_insert_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_insert_rest_flattened_error(transport: str = "rest"):
+def test_insert_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1105,7 +1480,7 @@ def test_insert_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.insert(
+        client.insert_unary(
             compute.InsertNetworkRequest(),
             project="project_value",
             network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
@@ -1145,6 +1520,72 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListNetworksReq
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListNetworksRequest):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._list_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._list_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.NetworkList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.NetworkList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -1224,8 +1665,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = NetworksClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1300,6 +1743,85 @@ def test_list_peering_routes_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_peering_routes_rest_required_fields(
+    request_type=compute.ListPeeringRoutesNetworksRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._list_peering_routes_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._list_peering_routes_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ExchangedPeeringRoutesList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ExchangedPeeringRoutesList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_peering_routes(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_peering_routes_rest_bad_request(
@@ -1381,8 +1903,10 @@ def test_list_peering_routes_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_peering_routes_rest_pager():
-    client = NetworksClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_peering_routes_rest_pager(transport: str = "rest"):
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1435,7 +1959,9 @@ def test_list_peering_routes_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRequest):
+def test_patch_unary_rest(
+    transport: str = "rest", request_type=compute.PatchNetworkRequest
+):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1479,7 +2005,7 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRe
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.patch(request)
+        response = client.patch_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1507,7 +2033,81 @@ def test_patch_rest(transport: str = "rest", request_type=compute.PatchNetworkRe
     assert response.zone == "zone_value"
 
 
-def test_patch_rest_bad_request(
+def test_patch_unary_rest_required_fields(request_type=compute.PatchNetworkRequest):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._patch_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._patch_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.patch_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchNetworkRequest
 ):
     client = NetworksClient(
@@ -1528,14 +2128,14 @@ def test_patch_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.patch(request)
+        client.patch_unary(request)
 
 
-def test_patch_rest_from_dict():
-    test_patch_rest(request_type=dict)
+def test_patch_unary_rest_from_dict():
+    test_patch_unary_rest(request_type=dict)
 
 
-def test_patch_rest_flattened(transport: str = "rest"):
+def test_patch_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1563,7 +2163,7 @@ def test_patch_rest_flattened(transport: str = "rest"):
             network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
         mock_args.update(sample_request)
-        client.patch(**mock_args)
+        client.patch_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1576,7 +2176,7 @@ def test_patch_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_patch_rest_flattened_error(transport: str = "rest"):
+def test_patch_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1584,7 +2184,7 @@ def test_patch_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.patch(
+        client.patch_unary(
             compute.PatchNetworkRequest(),
             project="project_value",
             network="network_value",
@@ -1592,7 +2192,7 @@ def test_patch_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_remove_peering_rest(
+def test_remove_peering_unary_rest(
     transport: str = "rest", request_type=compute.RemovePeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -1640,7 +2240,7 @@ def test_remove_peering_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.remove_peering(request)
+        response = client.remove_peering_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1668,7 +2268,87 @@ def test_remove_peering_rest(
     assert response.zone == "zone_value"
 
 
-def test_remove_peering_rest_bad_request(
+def test_remove_peering_unary_rest_required_fields(
+    request_type=compute.RemovePeeringNetworkRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._remove_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._remove_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.remove_peering_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_remove_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemovePeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -1691,14 +2371,14 @@ def test_remove_peering_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.remove_peering(request)
+        client.remove_peering_unary(request)
 
 
-def test_remove_peering_rest_from_dict():
-    test_remove_peering_rest(request_type=dict)
+def test_remove_peering_unary_rest_from_dict():
+    test_remove_peering_unary_rest(request_type=dict)
 
 
-def test_remove_peering_rest_flattened(transport: str = "rest"):
+def test_remove_peering_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1728,7 +2408,7 @@ def test_remove_peering_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.remove_peering(**mock_args)
+        client.remove_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1741,7 +2421,7 @@ def test_remove_peering_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_remove_peering_rest_flattened_error(transport: str = "rest"):
+def test_remove_peering_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1749,7 +2429,7 @@ def test_remove_peering_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.remove_peering(
+        client.remove_peering_unary(
             compute.RemovePeeringNetworkRequest(),
             project="project_value",
             network="network_value",
@@ -1759,7 +2439,7 @@ def test_remove_peering_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_switch_to_custom_mode_rest(
+def test_switch_to_custom_mode_unary_rest(
     transport: str = "rest", request_type=compute.SwitchToCustomModeNetworkRequest
 ):
     client = NetworksClient(
@@ -1804,7 +2484,7 @@ def test_switch_to_custom_mode_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.switch_to_custom_mode(request)
+        response = client.switch_to_custom_mode_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1832,7 +2512,86 @@ def test_switch_to_custom_mode_rest(
     assert response.zone == "zone_value"
 
 
-def test_switch_to_custom_mode_rest_bad_request(
+def test_switch_to_custom_mode_unary_rest_required_fields(
+    request_type=compute.SwitchToCustomModeNetworkRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._switch_to_custom_mode_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._switch_to_custom_mode_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.switch_to_custom_mode_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_switch_to_custom_mode_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SwitchToCustomModeNetworkRequest
 ):
     client = NetworksClient(
@@ -1852,14 +2611,14 @@ def test_switch_to_custom_mode_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.switch_to_custom_mode(request)
+        client.switch_to_custom_mode_unary(request)
 
 
-def test_switch_to_custom_mode_rest_from_dict():
-    test_switch_to_custom_mode_rest(request_type=dict)
+def test_switch_to_custom_mode_unary_rest_from_dict():
+    test_switch_to_custom_mode_unary_rest(request_type=dict)
 
 
-def test_switch_to_custom_mode_rest_flattened(transport: str = "rest"):
+def test_switch_to_custom_mode_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1883,7 +2642,7 @@ def test_switch_to_custom_mode_rest_flattened(transport: str = "rest"):
         # get truthy value for each flattened field
         mock_args = dict(project="project_value", network="network_value",)
         mock_args.update(sample_request)
-        client.switch_to_custom_mode(**mock_args)
+        client.switch_to_custom_mode_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1896,7 +2655,7 @@ def test_switch_to_custom_mode_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_switch_to_custom_mode_rest_flattened_error(transport: str = "rest"):
+def test_switch_to_custom_mode_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1904,14 +2663,14 @@ def test_switch_to_custom_mode_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.switch_to_custom_mode(
+        client.switch_to_custom_mode_unary(
             compute.SwitchToCustomModeNetworkRequest(),
             project="project_value",
             network="network_value",
         )
 
 
-def test_update_peering_rest(
+def test_update_peering_unary_rest(
     transport: str = "rest", request_type=compute.UpdatePeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -1961,7 +2720,7 @@ def test_update_peering_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update_peering(request)
+        response = client.update_peering_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1989,7 +2748,87 @@ def test_update_peering_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_peering_rest_bad_request(
+def test_update_peering_unary_rest_required_fields(
+    request_type=compute.UpdatePeeringNetworkRequest,
+):
+    transport_class = transports.NetworksRestTransport
+
+    request_init = {}
+    request_init["network"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "network" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._update_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == request_init["network"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["network"] = "network_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._update_peering_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "network" in jsonified_request
+    assert jsonified_request["network"] == "network_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = NetworksClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_peering_unary(request)
+
+            expected_params = [("network", "")("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdatePeeringNetworkRequest
 ):
     client = NetworksClient(
@@ -2014,14 +2853,14 @@ def test_update_peering_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update_peering(request)
+        client.update_peering_unary(request)
 
 
-def test_update_peering_rest_from_dict():
-    test_update_peering_rest(request_type=dict)
+def test_update_peering_unary_rest_from_dict():
+    test_update_peering_unary_rest(request_type=dict)
 
 
-def test_update_peering_rest_flattened(transport: str = "rest"):
+def test_update_peering_unary_rest_flattened(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2051,7 +2890,7 @@ def test_update_peering_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.update_peering(**mock_args)
+        client.update_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -2064,7 +2903,7 @@ def test_update_peering_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_update_peering_rest_flattened_error(transport: str = "rest"):
+def test_update_peering_unary_rest_flattened_error(transport: str = "rest"):
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2072,7 +2911,7 @@ def test_update_peering_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update_peering(
+        client.update_peering_unary(
             compute.UpdatePeeringNetworkRequest(),
             project="project_value",
             network="network_value",

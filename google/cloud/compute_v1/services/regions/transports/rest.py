@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import RegionsTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,19 @@ class RegionsRestTransport(RegionsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __get_required_fields_default_values = {
+        "project": "",
+        "region": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _get(
         self,
         request: compute.GetRegionRequest,
@@ -157,12 +169,6 @@ class RegionsRestTransport(RegionsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-        ]
-
         request_kwargs = compute.GetRegionRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -178,14 +184,7 @@ class RegionsRestTransport(RegionsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -205,6 +204,18 @@ class RegionsRestTransport(RegionsTransport):
 
         # Return the response
         return compute.Region.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -236,11 +247,6 @@ class RegionsRestTransport(RegionsTransport):
             {"method": "get", "uri": "/compute/v1/projects/{project}/regions",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListRegionsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -256,14 +262,7 @@ class RegionsRestTransport(RegionsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

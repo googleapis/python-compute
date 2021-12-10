@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,20 @@ class ImageFamilyViewsRestTransport(ImageFamilyViewsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __get_required_fields_default_values = {
+        "family": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ImageFamilyViewsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _get(
         self,
         request: compute.GetImageFamilyViewRequest,
@@ -157,13 +170,6 @@ class ImageFamilyViewsRestTransport(ImageFamilyViewsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("family", "family"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetImageFamilyViewRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -179,14 +185,7 @@ class ImageFamilyViewsRestTransport(ImageFamilyViewsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

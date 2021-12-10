@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,19 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __attach_network_endpoints_required_fields_default_values = {
+        "networkEndpointGroup": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _attach_network_endpoints_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__attach_network_endpoints_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _attach_network_endpoints(
         self,
         request: compute.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest,
@@ -173,12 +185,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network_endpoint_group", "networkEndpointGroup"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest.to_dict(
             request
         )
@@ -206,14 +212,9 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._attach_network_endpoints_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -234,6 +235,19 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __delete_required_fields_default_values = {
+        "networkEndpointGroup": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -284,12 +298,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network_endpoint_group", "networkEndpointGroup"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DeleteGlobalNetworkEndpointGroupRequest.to_dict(
             request
         )
@@ -309,14 +317,7 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -336,6 +337,19 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __detach_network_endpoints_required_fields_default_values = {
+        "networkEndpointGroup": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _detach_network_endpoints_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__detach_network_endpoints_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _detach_network_endpoints(
         self,
@@ -387,12 +401,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network_endpoint_group", "networkEndpointGroup"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest.to_dict(
             request
         )
@@ -420,14 +428,9 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._detach_network_endpoints_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -448,6 +451,19 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "networkEndpointGroup": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -494,12 +510,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network_endpoint_group", "networkEndpointGroup"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetGlobalNetworkEndpointGroupRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -517,14 +527,7 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -546,6 +549,18 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
         return compute.NetworkEndpointGroup.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -597,11 +612,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.InsertGlobalNetworkEndpointGroupRequest.to_dict(
             request
         )
@@ -627,14 +637,7 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -655,6 +658,18 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -690,11 +705,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListGlobalNetworkEndpointGroupsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -712,14 +722,7 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -741,6 +744,19 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
         return compute.NetworkEndpointGroupList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __list_network_endpoints_required_fields_default_values = {
+        "networkEndpointGroup": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_network_endpoints_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in GlobalNetworkEndpointGroupsRestTransport.__list_network_endpoints_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list_network_endpoints(
         self,
@@ -776,12 +792,6 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("network_endpoint_group", "networkEndpointGroup"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest.to_dict(
             request
         )
@@ -801,14 +811,9 @@ class GlobalNetworkEndpointGroupsRestTransport(GlobalNetworkEndpointGroupsTransp
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._list_network_endpoints_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

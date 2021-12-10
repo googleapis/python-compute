@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import TargetPoolsTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __add_health_check_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _add_health_check_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__add_health_check_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _add_health_check(
         self,
         request: compute.AddHealthCheckTargetPoolRequest,
@@ -170,13 +183,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.AddHealthCheckTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -200,14 +206,9 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._add_health_check_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -228,6 +229,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __add_instance_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _add_instance_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__add_instance_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _add_instance(
         self,
@@ -279,13 +294,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.AddInstanceTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -309,14 +317,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._add_instance_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -337,6 +338,18 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __aggregated_list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _aggregated_list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__aggregated_list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _aggregated_list(
         self,
@@ -372,11 +385,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.AggregatedListTargetPoolsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -394,14 +402,9 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._aggregated_list_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -423,6 +426,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
         return compute.TargetPoolAggregatedList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __delete_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -473,13 +490,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.DeleteTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -495,14 +505,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -522,6 +525,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -565,13 +582,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.GetTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -587,14 +597,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -616,6 +619,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
         return compute.TargetPool.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_health_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _get_health_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__get_health_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_health(
         self,
@@ -652,13 +669,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.GetHealthTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -680,14 +690,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_health_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -710,6 +713,19 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
         return compute.TargetPoolInstanceHealth.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+        "region": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -761,12 +777,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-        ]
-
         request_kwargs = compute.InsertTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -788,14 +798,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -816,6 +819,19 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+        "region": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -853,12 +869,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-        ]
-
         request_kwargs = compute.ListTargetPoolsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -874,14 +884,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -903,6 +906,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
         return compute.TargetPoolList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __remove_health_check_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _remove_health_check_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__remove_health_check_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_health_check(
         self,
@@ -954,13 +971,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.RemoveHealthCheckTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -984,14 +994,9 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._remove_health_check_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1012,6 +1017,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_instance_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _remove_instance_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__remove_instance_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_instance(
         self,
@@ -1063,13 +1082,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.RemoveInstanceTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1093,14 +1105,9 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._remove_instance_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1121,6 +1128,20 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_backup_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "targetPool": "",
+    }
+
+    @staticmethod
+    def _set_backup_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetPoolsRestTransport.__set_backup_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_backup(
         self,
@@ -1172,13 +1193,6 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("target_pool", "targetPool"),
-        ]
-
         request_kwargs = compute.SetBackupTargetPoolRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1200,14 +1214,7 @@ class TargetPoolsRestTransport(TargetPoolsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._set_backup_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

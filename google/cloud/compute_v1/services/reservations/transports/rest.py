@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import ReservationsTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,18 @@ class ReservationsRestTransport(ReservationsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __aggregated_list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _aggregated_list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__aggregated_list_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _aggregated_list(
         self,
         request: compute.AggregatedListReservationsRequest,
@@ -154,11 +165,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.AggregatedListReservationsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -176,14 +182,9 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._aggregated_list_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -205,6 +206,20 @@ class ReservationsRestTransport(ReservationsTransport):
         return compute.ReservationAggregatedList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __delete_required_fields_default_values = {
+        "project": "",
+        "reservation": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -255,13 +270,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("reservation", "reservation"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.DeleteReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -277,14 +285,7 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -304,6 +305,20 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+        "reservation": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -345,13 +360,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("reservation", "reservation"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -367,14 +375,7 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -396,6 +397,20 @@ class ReservationsRestTransport(ReservationsTransport):
         return compute.Reservation.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_iam_policy_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__get_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_iam_policy(
         self,
@@ -471,13 +486,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetIamPolicyReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -495,14 +503,9 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -522,6 +525,19 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __insert_required_fields_default_values = {
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -573,12 +589,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.InsertReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -600,14 +610,7 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -628,6 +631,19 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -663,12 +679,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.ListReservationsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -684,14 +694,7 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -713,6 +716,20 @@ class ReservationsRestTransport(ReservationsTransport):
         return compute.ReservationList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __resize_required_fields_default_values = {
+        "project": "",
+        "reservation": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _resize_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__resize_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _resize(
         self,
@@ -764,13 +781,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("reservation", "reservation"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.ResizeReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -792,14 +802,7 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._resize_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -820,6 +823,20 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_iam_policy_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _set_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__set_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_iam_policy(
         self,
@@ -896,13 +913,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.SetIamPolicyReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -926,14 +936,9 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -954,6 +959,20 @@ class ReservationsRestTransport(ReservationsTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __test_iam_permissions_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _test_iam_permissions_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ReservationsRestTransport.__test_iam_permissions_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _test_iam_permissions(
         self,
@@ -990,13 +1009,6 @@ class ReservationsRestTransport(ReservationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.TestIamPermissionsReservationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1020,14 +1032,9 @@ class ReservationsRestTransport(ReservationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._test_iam_permissions_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

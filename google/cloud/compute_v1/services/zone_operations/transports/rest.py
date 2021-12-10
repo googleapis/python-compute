@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,20 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __delete_required_fields_default_values = {
+        "operation": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ZoneOperationsRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _delete(
         self,
         request: compute.DeleteZoneOperationRequest,
@@ -160,13 +173,6 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("operation", "operation"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.DeleteZoneOperationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -182,14 +188,7 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -211,6 +210,20 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
         return compute.DeleteZoneOperationResponse.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_required_fields_default_values = {
+        "operation": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ZoneOperationsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -261,13 +274,6 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("operation", "operation"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetZoneOperationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -283,14 +289,7 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -310,6 +309,19 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ZoneOperationsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -347,12 +359,6 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.ListZoneOperationsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -368,14 +374,7 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -397,6 +396,20 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
         return compute.OperationList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __wait_required_fields_default_values = {
+        "operation": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _wait_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ZoneOperationsRestTransport.__wait_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _wait(
         self,
@@ -447,13 +460,6 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("operation", "operation"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.WaitZoneOperationRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -469,14 +475,7 @@ class ZoneOperationsRestTransport(ZoneOperationsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._wait_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __add_rule_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _add_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__add_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _add_rule(
         self,
         request: compute.AddRuleSecurityPolicyRequest,
@@ -173,12 +185,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.AddRuleSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -202,14 +208,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._add_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -230,6 +229,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __delete_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -280,12 +292,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.DeleteSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -301,14 +307,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -328,6 +327,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -369,12 +381,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.GetSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -390,14 +396,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -419,6 +418,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         return compute.SecurityPolicy.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_rule_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _get_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__get_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_rule(
         self,
@@ -458,12 +470,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.GetRuleSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -481,14 +487,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -510,6 +509,18 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         return compute.SecurityPolicyRule.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -561,11 +572,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.InsertSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -587,14 +593,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -615,6 +614,18 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -650,11 +661,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListSecurityPoliciesRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -670,14 +676,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -699,6 +698,18 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         return compute.SecurityPolicyList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __list_preconfigured_expression_sets_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_preconfigured_expression_sets_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__list_preconfigured_expression_sets_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list_preconfigured_expression_sets(
         self,
@@ -735,11 +746,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListPreconfiguredExpressionSetsSecurityPoliciesRequest.to_dict(
             request
         )
@@ -759,14 +765,11 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._list_preconfigured_expression_sets_get_unset_required_fields(
+                query_params
+            )
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -788,6 +791,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
         return compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __patch_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _patch_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__patch_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch(
         self,
@@ -839,12 +855,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.PatchSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -866,14 +876,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -894,6 +897,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __patch_rule_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _patch_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__patch_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch_rule(
         self,
@@ -945,12 +961,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.PatchRuleSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -974,14 +984,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1002,6 +1005,19 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_rule_required_fields_default_values = {
+        "project": "",
+        "securityPolicy": "",
+    }
+
+    @staticmethod
+    def _remove_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in SecurityPoliciesRestTransport.__remove_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_rule(
         self,
@@ -1052,12 +1068,6 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("security_policy", "securityPolicy"),
-        ]
-
         request_kwargs = compute.RemoveRuleSecurityPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1075,14 +1085,7 @@ class SecurityPoliciesRestTransport(SecurityPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._remove_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

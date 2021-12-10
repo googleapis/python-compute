@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,19 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __delete_required_fields_default_values = {
+        "externalVpnGateway": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _delete(
         self,
         request: compute.DeleteExternalVpnGatewayRequest,
@@ -172,12 +184,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("external_vpn_gateway", "externalVpnGateway"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DeleteExternalVpnGatewayRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -195,14 +201,7 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -222,6 +221,19 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "externalVpnGateway": "",
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -271,12 +283,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("external_vpn_gateway", "externalVpnGateway"),
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetExternalVpnGatewayRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -294,14 +300,7 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -323,6 +322,18 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
         return compute.ExternalVpnGateway.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -374,11 +385,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.InsertExternalVpnGatewayRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -402,14 +408,7 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -430,6 +429,18 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -467,11 +478,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListExternalVpnGatewaysRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -489,14 +495,7 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -518,6 +517,19 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
         return compute.ExternalVpnGatewayList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __set_labels_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+    }
+
+    @staticmethod
+    def _set_labels_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__set_labels_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_labels(
         self,
@@ -569,12 +581,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-        ]
-
         request_kwargs = compute.SetLabelsExternalVpnGatewayRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -598,14 +604,7 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._set_labels_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -626,6 +625,19 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __test_iam_permissions_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+    }
+
+    @staticmethod
+    def _test_iam_permissions_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ExternalVpnGatewaysRestTransport.__test_iam_permissions_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _test_iam_permissions(
         self,
@@ -662,12 +674,6 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-        ]
-
         request_kwargs = compute.TestIamPermissionsExternalVpnGatewayRequest.to_dict(
             request
         )
@@ -693,14 +699,9 @@ class ExternalVpnGatewaysRestTransport(ExternalVpnGatewaysTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._test_iam_permissions_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

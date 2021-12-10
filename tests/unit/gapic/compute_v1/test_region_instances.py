@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
@@ -418,7 +419,7 @@ def test_region_instances_client_client_options_credentials_file(
         )
 
 
-def test_bulk_insert_rest(
+def test_bulk_insert_unary_rest(
     transport: str = "rest", request_type=compute.BulkInsertRegionInstanceRequest
 ):
     client = RegionInstancesClient(
@@ -466,7 +467,7 @@ def test_bulk_insert_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.bulk_insert(request)
+        response = client.bulk_insert_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -494,7 +495,87 @@ def test_bulk_insert_rest(
     assert response.zone == "zone_value"
 
 
-def test_bulk_insert_rest_bad_request(
+def test_bulk_insert_unary_rest_required_fields(
+    request_type=compute.BulkInsertRegionInstanceRequest,
+):
+    transport_class = transports.RegionInstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["region"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "region" not in jsonified_request
+
+    unset_fields = transport_class._bulk_insert_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == request_init["region"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["region"] = "region_value"
+
+    unset_fields = transport_class._bulk_insert_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == "region_value"
+
+    client = RegionInstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.bulk_insert_unary(request)
+
+            expected_params = [("project", "")("region", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_bulk_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.BulkInsertRegionInstanceRequest
 ):
     client = RegionInstancesClient(
@@ -517,14 +598,14 @@ def test_bulk_insert_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.bulk_insert(request)
+        client.bulk_insert_unary(request)
 
 
-def test_bulk_insert_rest_from_dict():
-    test_bulk_insert_rest(request_type=dict)
+def test_bulk_insert_unary_rest_from_dict():
+    test_bulk_insert_unary_rest(request_type=dict)
 
 
-def test_bulk_insert_rest_flattened(transport: str = "rest"):
+def test_bulk_insert_unary_rest_flattened(transport: str = "rest"):
     client = RegionInstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -554,7 +635,7 @@ def test_bulk_insert_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.bulk_insert(**mock_args)
+        client.bulk_insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -567,7 +648,7 @@ def test_bulk_insert_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_bulk_insert_rest_flattened_error(transport: str = "rest"):
+def test_bulk_insert_unary_rest_flattened_error(transport: str = "rest"):
     client = RegionInstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -575,7 +656,7 @@ def test_bulk_insert_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.bulk_insert(
+        client.bulk_insert_unary(
             compute.BulkInsertRegionInstanceRequest(),
             project="project_value",
             region="region_value",
