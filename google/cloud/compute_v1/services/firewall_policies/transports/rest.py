@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __add_association_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _add_association_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__add_association_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _add_association(
         self,
         request: compute.AddAssociationFirewallPolicyRequest,
@@ -173,11 +184,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.AddAssociationFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -201,14 +207,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._add_association_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -229,6 +230,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __add_rule_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _add_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__add_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _add_rule(
         self,
@@ -280,11 +293,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.AddRuleFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -308,14 +316,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._add_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -336,6 +337,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __clone_rules_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _clone_rules_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__clone_rules_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _clone_rules(
         self,
@@ -386,11 +399,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.CloneRulesFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -408,14 +416,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._clone_rules_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -435,6 +436,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __delete_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -485,11 +498,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.DeleteFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -505,14 +513,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -532,6 +533,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -569,11 +582,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.GetFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -589,14 +597,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -618,6 +619,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
         return compute.FirewallPolicy.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_association_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _get_association_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__get_association_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_association(
         self,
@@ -653,11 +666,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.GetAssociationFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -675,14 +683,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_association_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -704,6 +707,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
         return compute.FirewallPolicyAssociation.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __get_iam_policy_required_fields_default_values = {
+        "resource": "",
+    }
+
+    @staticmethod
+    def _get_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__get_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_iam_policy(
         self,
@@ -779,11 +794,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("resource", "resource"),
-        ]
-
         request_kwargs = compute.GetIamPolicyFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -801,14 +811,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -828,6 +833,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_rule_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _get_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__get_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_rule(
         self,
@@ -867,11 +884,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.GetRuleFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -889,14 +901,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -918,6 +923,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
         return compute.FirewallPolicyRule.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "parentId": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -969,11 +986,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("parent_id", "parentId"),
-        ]
-
         request_kwargs = compute.InsertFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -995,14 +1007,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1163,6 +1168,19 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             response.content, ignore_unknown_fields=True
         )
 
+    __move_required_fields_default_values = {
+        "firewallPolicy": "",
+        "parentId": "",
+    }
+
+    @staticmethod
+    def _move_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__move_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _move(
         self,
         request: compute.MoveFirewallPolicyRequest,
@@ -1212,12 +1230,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-            ("parent_id", "parentId"),
-        ]
-
         request_kwargs = compute.MoveFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1233,14 +1245,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._move_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1260,6 +1265,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __patch_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _patch_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__patch_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch(
         self,
@@ -1311,11 +1328,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.PatchFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1337,14 +1349,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1365,6 +1370,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __patch_rule_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _patch_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__patch_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch_rule(
         self,
@@ -1416,11 +1433,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.PatchRuleFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1444,14 +1456,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1472,6 +1477,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_association_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _remove_association_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__remove_association_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_association(
         self,
@@ -1522,11 +1539,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.RemoveAssociationFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1544,14 +1556,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._remove_association_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1571,6 +1578,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_rule_required_fields_default_values = {
+        "firewallPolicy": "",
+    }
+
+    @staticmethod
+    def _remove_rule_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__remove_rule_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_rule(
         self,
@@ -1621,11 +1640,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("firewall_policy", "firewallPolicy"),
-        ]
-
         request_kwargs = compute.RemoveRuleFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1643,14 +1657,7 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._remove_rule_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1670,6 +1677,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_iam_policy_required_fields_default_values = {
+        "resource": "",
+    }
+
+    @staticmethod
+    def _set_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__set_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_iam_policy(
         self,
@@ -1746,11 +1765,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("resource", "resource"),
-        ]
-
         request_kwargs = compute.SetIamPolicyFirewallPolicyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1774,14 +1788,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1802,6 +1811,18 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __test_iam_permissions_required_fields_default_values = {
+        "resource": "",
+    }
+
+    @staticmethod
+    def _test_iam_permissions_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in FirewallPoliciesRestTransport.__test_iam_permissions_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _test_iam_permissions(
         self,
@@ -1838,11 +1859,6 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("resource", "resource"),
-        ]
-
         request_kwargs = compute.TestIamPermissionsFirewallPolicyRequest.to_dict(
             request
         )
@@ -1868,14 +1884,9 @@ class FirewallPoliciesRestTransport(FirewallPoliciesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._test_iam_permissions_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

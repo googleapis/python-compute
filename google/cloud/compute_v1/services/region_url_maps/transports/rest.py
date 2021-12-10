@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,20 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __delete_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "urlMap": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _delete(
         self,
         request: compute.DeleteRegionUrlMapRequest,
@@ -172,13 +185,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("url_map", "urlMap"),
-        ]
-
         request_kwargs = compute.DeleteRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -194,14 +200,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -221,6 +220,20 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "urlMap": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -277,13 +290,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("url_map", "urlMap"),
-        ]
-
         request_kwargs = compute.GetRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -299,14 +305,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -326,6 +325,19 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
 
         # Return the response
         return compute.UrlMap.from_json(response.content, ignore_unknown_fields=True)
+
+    __insert_required_fields_default_values = {
+        "project": "",
+        "region": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -377,12 +389,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-        ]
-
         request_kwargs = compute.InsertRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -404,14 +410,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -432,6 +431,19 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+        "region": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -467,12 +479,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-        ]
-
         request_kwargs = compute.ListRegionUrlMapsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -488,14 +494,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -517,6 +516,20 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
         return compute.UrlMapList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __patch_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "urlMap": "",
+    }
+
+    @staticmethod
+    def _patch_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__patch_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _patch(
         self,
@@ -568,13 +581,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("url_map", "urlMap"),
-        ]
-
         request_kwargs = compute.PatchRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -596,14 +602,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._patch_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -624,6 +623,20 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __update_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "urlMap": "",
+    }
+
+    @staticmethod
+    def _update_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__update_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _update(
         self,
@@ -675,13 +688,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("url_map", "urlMap"),
-        ]
-
         request_kwargs = compute.UpdateRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -703,14 +709,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._update_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -731,6 +730,20 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __validate_required_fields_default_values = {
+        "project": "",
+        "region": "",
+        "urlMap": "",
+    }
+
+    @staticmethod
+    def _validate_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in RegionUrlMapsRestTransport.__validate_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _validate(
         self,
@@ -767,13 +780,6 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("region", "region"),
-            ("url_map", "urlMap"),
-        ]
-
         request_kwargs = compute.ValidateRegionUrlMapRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -795,14 +801,7 @@ class RegionUrlMapsRestTransport(RegionUrlMapsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._validate_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)

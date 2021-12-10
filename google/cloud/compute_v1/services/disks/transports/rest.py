@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import DisksTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,20 @@ class DisksRestTransport(DisksTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __add_resource_policies_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _add_resource_policies_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__add_resource_policies_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _add_resource_policies(
         self,
         request: compute.AddResourcePoliciesDiskRequest,
@@ -170,13 +183,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.AddResourcePoliciesDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -200,14 +206,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._add_resource_policies_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -228,6 +229,18 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __aggregated_list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _aggregated_list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__aggregated_list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _aggregated_list(
         self,
@@ -263,11 +276,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.AggregatedListDisksRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -283,14 +291,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._aggregated_list_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -312,6 +315,20 @@ class DisksRestTransport(DisksTransport):
         return compute.DiskAggregatedList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __create_snapshot_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _create_snapshot_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__create_snapshot_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _create_snapshot(
         self,
@@ -363,13 +380,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.CreateSnapshotDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -391,14 +401,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._create_snapshot_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -419,6 +424,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __delete_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _delete(
         self,
@@ -468,13 +487,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.DeleteDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -490,14 +502,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -517,6 +522,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -563,13 +582,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -585,14 +597,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -612,6 +617,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Disk.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_iam_policy_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _get_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__get_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_iam_policy(
         self,
@@ -687,13 +706,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.GetIamPolicyDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -709,14 +721,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -736,6 +743,19 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __insert_required_fields_default_values = {
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -786,12 +806,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.InsertDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -813,14 +827,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -841,6 +848,19 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -875,12 +895,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.ListDisksRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -896,14 +910,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -923,6 +930,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.DiskList.from_json(response.content, ignore_unknown_fields=True)
+
+    __remove_resource_policies_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _remove_resource_policies_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__remove_resource_policies_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _remove_resource_policies(
         self,
@@ -974,13 +995,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.RemoveResourcePoliciesDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1004,14 +1018,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._remove_resource_policies_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1032,6 +1041,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __resize_required_fields_default_values = {
+        "disk": "",
+        "project": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _resize_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__resize_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _resize(
         self,
@@ -1082,13 +1105,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("disk", "disk"),
-            ("project", "project"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.ResizeDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1110,14 +1126,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._resize_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1138,6 +1147,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_iam_policy_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _set_iam_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__set_iam_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_iam_policy(
         self,
@@ -1214,13 +1237,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.SetIamPolicyDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1242,14 +1258,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_iam_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1270,6 +1281,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Policy.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_labels_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _set_labels_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__set_labels_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_labels(
         self,
@@ -1321,13 +1346,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.SetLabelsDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1349,14 +1367,7 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._set_labels_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1377,6 +1388,20 @@ class DisksRestTransport(DisksTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __test_iam_permissions_required_fields_default_values = {
+        "project": "",
+        "resource": "",
+        "zone": "",
+    }
+
+    @staticmethod
+    def _test_iam_permissions_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in DisksRestTransport.__test_iam_permissions_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _test_iam_permissions(
         self,
@@ -1413,13 +1438,6 @@ class DisksRestTransport(DisksTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("resource", "resource"),
-            ("zone", "zone"),
-        ]
-
         request_kwargs = compute.TestIamPermissionsDiskRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1443,14 +1461,9 @@ class DisksRestTransport(DisksTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._test_iam_permissions_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

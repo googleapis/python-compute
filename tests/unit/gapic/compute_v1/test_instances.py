@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
@@ -397,7 +398,7 @@ def test_instances_client_client_options_credentials_file(
         )
 
 
-def test_add_access_config_rest(
+def test_add_access_config_unary_rest(
     transport: str = "rest", request_type=compute.AddAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -445,7 +446,7 @@ def test_add_access_config_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.add_access_config(request)
+        response = client.add_access_config_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -473,7 +474,103 @@ def test_add_access_config_rest(
     assert response.zone == "zone_value"
 
 
-def test_add_access_config_rest_bad_request(
+def test_add_access_config_unary_rest_required_fields(
+    request_type=compute.AddAccessConfigInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["network_interface"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "networkInterface" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._add_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == request_init["network_interface"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["networkInterface"] = "network_interface_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._add_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == "network_interface_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.add_access_config_unary(request)
+
+            expected_params = [
+                ("instance", "")("network_interface", "")("project", "")("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_add_access_config_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -496,14 +593,14 @@ def test_add_access_config_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.add_access_config(request)
+        client.add_access_config_unary(request)
 
 
-def test_add_access_config_rest_from_dict():
-    test_add_access_config_rest(request_type=dict)
+def test_add_access_config_unary_rest_from_dict():
+    test_add_access_config_unary_rest(request_type=dict)
 
 
-def test_add_access_config_rest_flattened(transport: str = "rest"):
+def test_add_access_config_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -539,7 +636,7 @@ def test_add_access_config_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.add_access_config(**mock_args)
+        client.add_access_config_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -552,7 +649,7 @@ def test_add_access_config_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_add_access_config_rest_flattened_error(transport: str = "rest"):
+def test_add_access_config_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -560,7 +657,7 @@ def test_add_access_config_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.add_access_config(
+        client.add_access_config_unary(
             compute.AddAccessConfigInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -572,7 +669,7 @@ def test_add_access_config_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_add_resource_policies_rest(
+def test_add_resource_policies_unary_rest(
     transport: str = "rest", request_type=compute.AddResourcePoliciesInstanceRequest
 ):
     client = InstancesClient(
@@ -622,7 +719,7 @@ def test_add_resource_policies_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.add_resource_policies(request)
+        response = client.add_resource_policies_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -650,7 +747,94 @@ def test_add_resource_policies_rest(
     assert response.zone == "zone_value"
 
 
-def test_add_resource_policies_rest_bad_request(
+def test_add_resource_policies_unary_rest_required_fields(
+    request_type=compute.AddResourcePoliciesInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._add_resource_policies_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._add_resource_policies_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.add_resource_policies_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_add_resource_policies_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddResourcePoliciesInstanceRequest
 ):
     client = InstancesClient(
@@ -675,14 +859,14 @@ def test_add_resource_policies_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.add_resource_policies(request)
+        client.add_resource_policies_unary(request)
 
 
-def test_add_resource_policies_rest_from_dict():
-    test_add_resource_policies_rest(request_type=dict)
+def test_add_resource_policies_unary_rest_from_dict():
+    test_add_resource_policies_unary_rest(request_type=dict)
 
 
-def test_add_resource_policies_rest_flattened(transport: str = "rest"):
+def test_add_resource_policies_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -717,7 +901,7 @@ def test_add_resource_policies_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.add_resource_policies(**mock_args)
+        client.add_resource_policies_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -730,7 +914,7 @@ def test_add_resource_policies_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_add_resource_policies_rest_flattened_error(transport: str = "rest"):
+def test_add_resource_policies_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -738,7 +922,7 @@ def test_add_resource_policies_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.add_resource_policies(
+        client.add_resource_policies_unary(
             compute.AddResourcePoliciesInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -786,6 +970,78 @@ def test_aggregated_list_rest(
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
     assert response.unreachables == ["unreachables_value"]
+
+
+def test_aggregated_list_rest_required_fields(
+    request_type=compute.AggregatedListInstancesRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._aggregated_list_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._aggregated_list_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.InstanceAggregatedList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.InstanceAggregatedList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.aggregated_list(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_aggregated_list_rest_bad_request(
@@ -865,8 +1121,10 @@ def test_aggregated_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_aggregated_list_rest_pager():
-    client = InstancesClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_aggregated_list_rest_pager(transport: str = "rest"):
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -926,7 +1184,7 @@ def test_aggregated_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_attach_disk_rest(
+def test_attach_disk_unary_rest(
     transport: str = "rest", request_type=compute.AttachDiskInstanceRequest
 ):
     client = InstancesClient(
@@ -972,7 +1230,7 @@ def test_attach_disk_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.attach_disk(request)
+        response = client.attach_disk_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1000,7 +1258,94 @@ def test_attach_disk_rest(
     assert response.zone == "zone_value"
 
 
-def test_attach_disk_rest_bad_request(
+def test_attach_disk_unary_rest_required_fields(
+    request_type=compute.AttachDiskInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._attach_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._attach_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.attach_disk_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_attach_disk_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AttachDiskInstanceRequest
 ):
     client = InstancesClient(
@@ -1021,14 +1366,14 @@ def test_attach_disk_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.attach_disk(request)
+        client.attach_disk_unary(request)
 
 
-def test_attach_disk_rest_from_dict():
-    test_attach_disk_rest(request_type=dict)
+def test_attach_disk_unary_rest_from_dict():
+    test_attach_disk_unary_rest(request_type=dict)
 
 
-def test_attach_disk_rest_flattened(transport: str = "rest"):
+def test_attach_disk_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1061,7 +1406,7 @@ def test_attach_disk_rest_flattened(transport: str = "rest"):
             attached_disk_resource=compute.AttachedDisk(auto_delete=True),
         )
         mock_args.update(sample_request)
-        client.attach_disk(**mock_args)
+        client.attach_disk_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1074,7 +1419,7 @@ def test_attach_disk_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_attach_disk_rest_flattened_error(transport: str = "rest"):
+def test_attach_disk_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1082,7 +1427,7 @@ def test_attach_disk_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.attach_disk(
+        client.attach_disk_unary(
             compute.AttachDiskInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -1091,7 +1436,7 @@ def test_attach_disk_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_bulk_insert_rest(
+def test_bulk_insert_unary_rest(
     transport: str = "rest", request_type=compute.BulkInsertInstanceRequest
 ):
     client = InstancesClient(
@@ -1139,7 +1484,7 @@ def test_bulk_insert_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.bulk_insert(request)
+        response = client.bulk_insert_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1167,7 +1512,87 @@ def test_bulk_insert_rest(
     assert response.zone == "zone_value"
 
 
-def test_bulk_insert_rest_bad_request(
+def test_bulk_insert_unary_rest_required_fields(
+    request_type=compute.BulkInsertInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._bulk_insert_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._bulk_insert_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.bulk_insert_unary(request)
+
+            expected_params = [("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_bulk_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.BulkInsertInstanceRequest
 ):
     client = InstancesClient(
@@ -1190,14 +1615,14 @@ def test_bulk_insert_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.bulk_insert(request)
+        client.bulk_insert_unary(request)
 
 
-def test_bulk_insert_rest_from_dict():
-    test_bulk_insert_rest(request_type=dict)
+def test_bulk_insert_unary_rest_from_dict():
+    test_bulk_insert_unary_rest(request_type=dict)
 
 
-def test_bulk_insert_rest_flattened(transport: str = "rest"):
+def test_bulk_insert_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1227,7 +1652,7 @@ def test_bulk_insert_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.bulk_insert(**mock_args)
+        client.bulk_insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1240,7 +1665,7 @@ def test_bulk_insert_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_bulk_insert_rest_flattened_error(transport: str = "rest"):
+def test_bulk_insert_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1248,7 +1673,7 @@ def test_bulk_insert_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.bulk_insert(
+        client.bulk_insert_unary(
             compute.BulkInsertInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -1258,7 +1683,7 @@ def test_bulk_insert_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_delete_rest(
+def test_delete_unary_rest(
     transport: str = "rest", request_type=compute.DeleteInstanceRequest
 ):
     client = InstancesClient(
@@ -1303,7 +1728,7 @@ def test_delete_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.delete(request)
+        response = client.delete_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1331,7 +1756,87 @@ def test_delete_rest(
     assert response.zone == "zone_value"
 
 
-def test_delete_rest_bad_request(
+def test_delete_unary_rest_required_fields(request_type=compute.DeleteInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._delete_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._delete_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteInstanceRequest
 ):
     client = InstancesClient(
@@ -1351,14 +1856,14 @@ def test_delete_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.delete(request)
+        client.delete_unary(request)
 
 
-def test_delete_rest_from_dict():
-    test_delete_rest(request_type=dict)
+def test_delete_unary_rest_from_dict():
+    test_delete_unary_rest(request_type=dict)
 
 
-def test_delete_rest_flattened(transport: str = "rest"):
+def test_delete_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1388,7 +1893,7 @@ def test_delete_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", instance="instance_value",
         )
         mock_args.update(sample_request)
-        client.delete(**mock_args)
+        client.delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1401,7 +1906,7 @@ def test_delete_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_delete_rest_flattened_error(transport: str = "rest"):
+def test_delete_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1409,7 +1914,7 @@ def test_delete_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.delete(
+        client.delete_unary(
             compute.DeleteInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -1417,7 +1922,7 @@ def test_delete_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_delete_access_config_rest(
+def test_delete_access_config_unary_rest(
     transport: str = "rest", request_type=compute.DeleteAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -1462,7 +1967,7 @@ def test_delete_access_config_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.delete_access_config(request)
+        response = client.delete_access_config_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1490,7 +1995,111 @@ def test_delete_access_config_rest(
     assert response.zone == "zone_value"
 
 
-def test_delete_access_config_rest_bad_request(
+def test_delete_access_config_unary_rest_required_fields(
+    request_type=compute.DeleteAccessConfigInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["access_config"] = ""
+    request_init["instance"] = ""
+    request_init["network_interface"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "accessConfig" not in jsonified_request
+    assert "instance" not in jsonified_request
+    assert "networkInterface" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._delete_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "accessConfig" in jsonified_request
+    assert jsonified_request["accessConfig"] == request_init["access_config"]
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == request_init["network_interface"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["accessConfig"] = "access_config_value"
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["networkInterface"] = "network_interface_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._delete_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "accessConfig" in jsonified_request
+    assert jsonified_request["accessConfig"] == "access_config_value"
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == "network_interface_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_access_config_unary(request)
+
+            expected_params = [
+                ("access_config", "")("instance", "")("network_interface", "")(
+                    "project", ""
+                )("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_delete_access_config_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -1510,14 +2119,14 @@ def test_delete_access_config_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.delete_access_config(request)
+        client.delete_access_config_unary(request)
 
 
-def test_delete_access_config_rest_from_dict():
-    test_delete_access_config_rest(request_type=dict)
+def test_delete_access_config_unary_rest_from_dict():
+    test_delete_access_config_unary_rest(request_type=dict)
 
 
-def test_delete_access_config_rest_flattened(transport: str = "rest"):
+def test_delete_access_config_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1551,7 +2160,7 @@ def test_delete_access_config_rest_flattened(transport: str = "rest"):
             network_interface="network_interface_value",
         )
         mock_args.update(sample_request)
-        client.delete_access_config(**mock_args)
+        client.delete_access_config_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1564,7 +2173,7 @@ def test_delete_access_config_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_delete_access_config_rest_flattened_error(transport: str = "rest"):
+def test_delete_access_config_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1572,7 +2181,7 @@ def test_delete_access_config_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.delete_access_config(
+        client.delete_access_config_unary(
             compute.DeleteAccessConfigInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -1582,7 +2191,7 @@ def test_delete_access_config_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_detach_disk_rest(
+def test_detach_disk_unary_rest(
     transport: str = "rest", request_type=compute.DetachDiskInstanceRequest
 ):
     client = InstancesClient(
@@ -1627,7 +2236,7 @@ def test_detach_disk_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.detach_disk(request)
+        response = client.detach_disk_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1655,7 +2264,102 @@ def test_detach_disk_rest(
     assert response.zone == "zone_value"
 
 
-def test_detach_disk_rest_bad_request(
+def test_detach_disk_unary_rest_required_fields(
+    request_type=compute.DetachDiskInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["device_name"] = ""
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "deviceName" not in jsonified_request
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._detach_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "deviceName" in jsonified_request
+    assert jsonified_request["deviceName"] == request_init["device_name"]
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["deviceName"] = "device_name_value"
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._detach_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "deviceName" in jsonified_request
+    assert jsonified_request["deviceName"] == "device_name_value"
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.detach_disk_unary(request)
+
+            expected_params = [
+                ("device_name", "")("instance", "")("project", "")("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_detach_disk_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DetachDiskInstanceRequest
 ):
     client = InstancesClient(
@@ -1675,14 +2379,14 @@ def test_detach_disk_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.detach_disk(request)
+        client.detach_disk_unary(request)
 
 
-def test_detach_disk_rest_from_dict():
-    test_detach_disk_rest(request_type=dict)
+def test_detach_disk_unary_rest_from_dict():
+    test_detach_disk_unary_rest(request_type=dict)
 
 
-def test_detach_disk_rest_flattened(transport: str = "rest"):
+def test_detach_disk_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1715,7 +2419,7 @@ def test_detach_disk_rest_flattened(transport: str = "rest"):
             device_name="device_name_value",
         )
         mock_args.update(sample_request)
-        client.detach_disk(**mock_args)
+        client.detach_disk_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1728,7 +2432,7 @@ def test_detach_disk_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_detach_disk_rest_flattened_error(transport: str = "rest"):
+def test_detach_disk_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1736,7 +2440,7 @@ def test_detach_disk_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.detach_disk(
+        client.detach_disk_unary(
             compute.DetachDiskInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -1818,6 +2522,86 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetInstanceReque
     assert response.status == "status_value"
     assert response.status_message == "status_message_value"
     assert response.zone == "zone_value"
+
+
+def test_get_rest_required_fields(request_type=compute.GetInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Instance()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Instance.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_rest_bad_request(
@@ -1934,6 +2718,103 @@ def test_get_effective_firewalls_rest(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.InstancesGetEffectiveFirewallsResponse)
+
+
+def test_get_effective_firewalls_rest_required_fields(
+    request_type=compute.GetEffectiveFirewallsInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["network_interface"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "networkInterface" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_effective_firewalls_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == request_init["network_interface"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["networkInterface"] = "network_interface_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_effective_firewalls_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == "network_interface_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.InstancesGetEffectiveFirewallsResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.InstancesGetEffectiveFirewallsResponse.to_json(
+                return_value
+            )
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_effective_firewalls(request)
+
+            expected_params = [
+                ("instance", "")("network_interface", "")("project", "")("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_effective_firewalls_rest_bad_request(
@@ -2067,6 +2948,92 @@ def test_get_guest_attributes_rest(
     assert response.variable_value == "variable_value_value"
 
 
+def test_get_guest_attributes_rest_required_fields(
+    request_type=compute.GetGuestAttributesInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_guest_attributes_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_guest_attributes_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.GuestAttributes()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.GuestAttributes.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_guest_attributes(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_guest_attributes_rest_bad_request(
     transport: str = "rest", request_type=compute.GetGuestAttributesInstanceRequest
 ):
@@ -2184,6 +3151,92 @@ def test_get_iam_policy_rest(
     assert response.version == 774
 
 
+def test_get_iam_policy_rest_required_fields(
+    request_type=compute.GetIamPolicyInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_iam_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_iam_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Policy()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Policy.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_iam_policy(request)
+
+            expected_params = [("project", "")("resource", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.GetIamPolicyInstanceRequest
 ):
@@ -2298,6 +3351,92 @@ def test_get_screenshot_rest(
     assert isinstance(response, compute.Screenshot)
     assert response.contents == "contents_value"
     assert response.kind == "kind_value"
+
+
+def test_get_screenshot_rest_required_fields(
+    request_type=compute.GetScreenshotInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_screenshot_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_screenshot_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Screenshot()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Screenshot.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_screenshot(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_screenshot_rest_bad_request(
@@ -2425,6 +3564,92 @@ def test_get_serial_port_output_rest(
     assert response.start == 558
 
 
+def test_get_serial_port_output_rest_required_fields(
+    request_type=compute.GetSerialPortOutputInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_serial_port_output_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_serial_port_output_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.SerialPortOutput()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.SerialPortOutput.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_serial_port_output(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_serial_port_output_rest_bad_request(
     transport: str = "rest", request_type=compute.GetSerialPortOutputInstanceRequest
 ):
@@ -2541,6 +3766,92 @@ def test_get_shielded_instance_identity_rest(
     assert response.kind == "kind_value"
 
 
+def test_get_shielded_instance_identity_rest_required_fields(
+    request_type=compute.GetShieldedInstanceIdentityInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._get_shielded_instance_identity_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._get_shielded_instance_identity_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ShieldedInstanceIdentity()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ShieldedInstanceIdentity.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_shielded_instance_identity(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_shielded_instance_identity_rest_bad_request(
     transport: str = "rest",
     request_type=compute.GetShieldedInstanceIdentityInstanceRequest,
@@ -2628,7 +3939,7 @@ def test_get_shielded_instance_identity_rest_flattened_error(transport: str = "r
         )
 
 
-def test_insert_rest(
+def test_insert_unary_rest(
     transport: str = "rest", request_type=compute.InsertInstanceRequest
 ):
     client = InstancesClient(
@@ -2678,7 +3989,7 @@ def test_insert_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.insert(request)
+        response = client.insert_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -2706,7 +4017,81 @@ def test_insert_rest(
     assert response.zone == "zone_value"
 
 
-def test_insert_rest_bad_request(
+def test_insert_unary_rest_required_fields(request_type=compute.InsertInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._insert_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._insert_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.insert_unary(request)
+
+            expected_params = [("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertInstanceRequest
 ):
     client = InstancesClient(
@@ -2731,14 +4116,14 @@ def test_insert_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.insert(request)
+        client.insert_unary(request)
 
 
-def test_insert_rest_from_dict():
-    test_insert_rest(request_type=dict)
+def test_insert_unary_rest_from_dict():
+    test_insert_unary_rest(request_type=dict)
 
 
-def test_insert_rest_flattened(transport: str = "rest"):
+def test_insert_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2770,7 +4155,7 @@ def test_insert_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.insert(**mock_args)
+        client.insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -2783,7 +4168,7 @@ def test_insert_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_insert_rest_flattened_error(transport: str = "rest"):
+def test_insert_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2791,7 +4176,7 @@ def test_insert_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.insert(
+        client.insert_unary(
             compute.InsertInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -2836,6 +4221,79 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListInstancesRe
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListInstancesRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._list_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._list_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.InstanceList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.InstanceList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -2915,8 +4373,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = InstancesClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -2991,6 +4451,92 @@ def test_list_referrers_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_referrers_rest_required_fields(
+    request_type=compute.ListReferrersInstancesRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._list_referrers_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._list_referrers_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.InstanceListReferrers()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.InstanceListReferrers.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_referrers(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_referrers_rest_bad_request(
@@ -3079,8 +4625,10 @@ def test_list_referrers_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_referrers_rest_pager():
-    client = InstancesClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_referrers_rest_pager(transport: str = "rest"):
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -3128,7 +4676,7 @@ def test_list_referrers_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_remove_resource_policies_rest(
+def test_remove_resource_policies_unary_rest(
     transport: str = "rest", request_type=compute.RemoveResourcePoliciesInstanceRequest
 ):
     client = InstancesClient(
@@ -3178,7 +4726,7 @@ def test_remove_resource_policies_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.remove_resource_policies(request)
+        response = client.remove_resource_policies_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -3206,7 +4754,94 @@ def test_remove_resource_policies_rest(
     assert response.zone == "zone_value"
 
 
-def test_remove_resource_policies_rest_bad_request(
+def test_remove_resource_policies_unary_rest_required_fields(
+    request_type=compute.RemoveResourcePoliciesInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._remove_resource_policies_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._remove_resource_policies_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.remove_resource_policies_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_remove_resource_policies_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemoveResourcePoliciesInstanceRequest
 ):
     client = InstancesClient(
@@ -3231,14 +4866,14 @@ def test_remove_resource_policies_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.remove_resource_policies(request)
+        client.remove_resource_policies_unary(request)
 
 
-def test_remove_resource_policies_rest_from_dict():
-    test_remove_resource_policies_rest(request_type=dict)
+def test_remove_resource_policies_unary_rest_from_dict():
+    test_remove_resource_policies_unary_rest(request_type=dict)
 
 
-def test_remove_resource_policies_rest_flattened(transport: str = "rest"):
+def test_remove_resource_policies_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3273,7 +4908,7 @@ def test_remove_resource_policies_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.remove_resource_policies(**mock_args)
+        client.remove_resource_policies_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -3286,7 +4921,7 @@ def test_remove_resource_policies_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_remove_resource_policies_rest_flattened_error(transport: str = "rest"):
+def test_remove_resource_policies_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3294,7 +4929,7 @@ def test_remove_resource_policies_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.remove_resource_policies(
+        client.remove_resource_policies_unary(
             compute.RemoveResourcePoliciesInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -3305,7 +4940,9 @@ def test_remove_resource_policies_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_reset_rest(transport: str = "rest", request_type=compute.ResetInstanceRequest):
+def test_reset_unary_rest(
+    transport: str = "rest", request_type=compute.ResetInstanceRequest
+):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3348,7 +4985,7 @@ def test_reset_rest(transport: str = "rest", request_type=compute.ResetInstanceR
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.reset(request)
+        response = client.reset_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -3376,7 +5013,87 @@ def test_reset_rest(transport: str = "rest", request_type=compute.ResetInstanceR
     assert response.zone == "zone_value"
 
 
-def test_reset_rest_bad_request(
+def test_reset_unary_rest_required_fields(request_type=compute.ResetInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._reset_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._reset_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.reset_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_reset_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.ResetInstanceRequest
 ):
     client = InstancesClient(
@@ -3396,14 +5113,14 @@ def test_reset_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.reset(request)
+        client.reset_unary(request)
 
 
-def test_reset_rest_from_dict():
-    test_reset_rest(request_type=dict)
+def test_reset_unary_rest_from_dict():
+    test_reset_unary_rest(request_type=dict)
 
 
-def test_reset_rest_flattened(transport: str = "rest"):
+def test_reset_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3433,7 +5150,7 @@ def test_reset_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", instance="instance_value",
         )
         mock_args.update(sample_request)
-        client.reset(**mock_args)
+        client.reset_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -3446,7 +5163,7 @@ def test_reset_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_reset_rest_flattened_error(transport: str = "rest"):
+def test_reset_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3454,7 +5171,7 @@ def test_reset_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.reset(
+        client.reset_unary(
             compute.ResetInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -3490,6 +5207,94 @@ def test_send_diagnostic_interrupt_rest(
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.SendDiagnosticInterruptInstanceResponse)
+
+
+def test_send_diagnostic_interrupt_rest_required_fields(
+    request_type=compute.SendDiagnosticInterruptInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._send_diagnostic_interrupt_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._send_diagnostic_interrupt_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.SendDiagnosticInterruptInstanceResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.SendDiagnosticInterruptInstanceResponse.to_json(
+                return_value
+            )
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.send_diagnostic_interrupt(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_send_diagnostic_interrupt_rest_bad_request(
@@ -3580,7 +5385,7 @@ def test_send_diagnostic_interrupt_rest_flattened_error(transport: str = "rest")
         )
 
 
-def test_set_deletion_protection_rest(
+def test_set_deletion_protection_unary_rest(
     transport: str = "rest", request_type=compute.SetDeletionProtectionInstanceRequest
 ):
     client = InstancesClient(
@@ -3625,7 +5430,7 @@ def test_set_deletion_protection_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_deletion_protection(request)
+        response = client.set_deletion_protection_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -3653,7 +5458,93 @@ def test_set_deletion_protection_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_deletion_protection_rest_bad_request(
+def test_set_deletion_protection_unary_rest_required_fields(
+    request_type=compute.SetDeletionProtectionInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_deletion_protection_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_deletion_protection_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_deletion_protection_unary(request)
+
+            expected_params = [("project", "")("resource", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_deletion_protection_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetDeletionProtectionInstanceRequest
 ):
     client = InstancesClient(
@@ -3673,14 +5564,14 @@ def test_set_deletion_protection_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_deletion_protection(request)
+        client.set_deletion_protection_unary(request)
 
 
-def test_set_deletion_protection_rest_from_dict():
-    test_set_deletion_protection_rest(request_type=dict)
+def test_set_deletion_protection_unary_rest_from_dict():
+    test_set_deletion_protection_unary_rest(request_type=dict)
 
 
-def test_set_deletion_protection_rest_flattened(transport: str = "rest"):
+def test_set_deletion_protection_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3710,7 +5601,7 @@ def test_set_deletion_protection_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", resource="resource_value",
         )
         mock_args.update(sample_request)
-        client.set_deletion_protection(**mock_args)
+        client.set_deletion_protection_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -3723,7 +5614,7 @@ def test_set_deletion_protection_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_deletion_protection_rest_flattened_error(transport: str = "rest"):
+def test_set_deletion_protection_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3731,7 +5622,7 @@ def test_set_deletion_protection_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_deletion_protection(
+        client.set_deletion_protection_unary(
             compute.SetDeletionProtectionInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -3739,7 +5630,7 @@ def test_set_deletion_protection_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_disk_auto_delete_rest(
+def test_set_disk_auto_delete_unary_rest(
     transport: str = "rest", request_type=compute.SetDiskAutoDeleteInstanceRequest
 ):
     client = InstancesClient(
@@ -3784,7 +5675,7 @@ def test_set_disk_auto_delete_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_disk_auto_delete(request)
+        response = client.set_disk_auto_delete_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -3812,7 +5703,111 @@ def test_set_disk_auto_delete_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_disk_auto_delete_rest_bad_request(
+def test_set_disk_auto_delete_unary_rest_required_fields(
+    request_type=compute.SetDiskAutoDeleteInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["auto_delete"] = ""
+    request_init["device_name"] = ""
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "autoDelete" not in jsonified_request
+    assert "deviceName" not in jsonified_request
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_disk_auto_delete_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "autoDelete" in jsonified_request
+    assert jsonified_request["autoDelete"] == request_init["auto_delete"]
+    assert "deviceName" in jsonified_request
+    assert jsonified_request["deviceName"] == request_init["device_name"]
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["autoDelete"] = True
+    jsonified_request["deviceName"] = "device_name_value"
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_disk_auto_delete_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "autoDelete" in jsonified_request
+    assert jsonified_request["autoDelete"] == True
+    assert "deviceName" in jsonified_request
+    assert jsonified_request["deviceName"] == "device_name_value"
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_disk_auto_delete_unary(request)
+
+            expected_params = [
+                ("auto_delete", "")("device_name", "")("instance", "")("project", "")(
+                    "zone", ""
+                )
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_disk_auto_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetDiskAutoDeleteInstanceRequest
 ):
     client = InstancesClient(
@@ -3832,14 +5827,14 @@ def test_set_disk_auto_delete_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_disk_auto_delete(request)
+        client.set_disk_auto_delete_unary(request)
 
 
-def test_set_disk_auto_delete_rest_from_dict():
-    test_set_disk_auto_delete_rest(request_type=dict)
+def test_set_disk_auto_delete_unary_rest_from_dict():
+    test_set_disk_auto_delete_unary_rest(request_type=dict)
 
 
-def test_set_disk_auto_delete_rest_flattened(transport: str = "rest"):
+def test_set_disk_auto_delete_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3873,7 +5868,7 @@ def test_set_disk_auto_delete_rest_flattened(transport: str = "rest"):
             device_name="device_name_value",
         )
         mock_args.update(sample_request)
-        client.set_disk_auto_delete(**mock_args)
+        client.set_disk_auto_delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -3886,7 +5881,7 @@ def test_set_disk_auto_delete_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_disk_auto_delete_rest_flattened_error(transport: str = "rest"):
+def test_set_disk_auto_delete_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -3894,7 +5889,7 @@ def test_set_disk_auto_delete_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_disk_auto_delete(
+        client.set_disk_auto_delete_unary(
             compute.SetDiskAutoDeleteInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -3936,6 +5931,93 @@ def test_set_iam_policy_rest(
     assert response.etag == "etag_value"
     assert response.iam_owned is True
     assert response.version == 774
+
+
+def test_set_iam_policy_rest_required_fields(
+    request_type=compute.SetIamPolicyInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_iam_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_iam_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Policy()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Policy.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_iam_policy(request)
+
+            expected_params = [("project", "")("resource", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_set_iam_policy_rest_bad_request(
@@ -4035,7 +6117,7 @@ def test_set_iam_policy_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_labels_rest(
+def test_set_labels_unary_rest(
     transport: str = "rest", request_type=compute.SetLabelsInstanceRequest
 ):
     client = InstancesClient(
@@ -4083,7 +6165,7 @@ def test_set_labels_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_labels(request)
+        response = client.set_labels_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4111,7 +6193,94 @@ def test_set_labels_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_labels_rest_bad_request(
+def test_set_labels_unary_rest_required_fields(
+    request_type=compute.SetLabelsInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_labels_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_labels_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_labels_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_labels_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetLabelsInstanceRequest
 ):
     client = InstancesClient(
@@ -4134,14 +6303,14 @@ def test_set_labels_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_labels(request)
+        client.set_labels_unary(request)
 
 
-def test_set_labels_rest_from_dict():
-    test_set_labels_rest(request_type=dict)
+def test_set_labels_unary_rest_from_dict():
+    test_set_labels_unary_rest(request_type=dict)
 
 
-def test_set_labels_rest_flattened(transport: str = "rest"):
+def test_set_labels_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4176,7 +6345,7 @@ def test_set_labels_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_labels(**mock_args)
+        client.set_labels_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -4189,7 +6358,7 @@ def test_set_labels_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_labels_rest_flattened_error(transport: str = "rest"):
+def test_set_labels_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4197,7 +6366,7 @@ def test_set_labels_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_labels(
+        client.set_labels_unary(
             compute.SetLabelsInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -4208,7 +6377,7 @@ def test_set_labels_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_machine_resources_rest(
+def test_set_machine_resources_unary_rest(
     transport: str = "rest", request_type=compute.SetMachineResourcesInstanceRequest
 ):
     client = InstancesClient(
@@ -4258,7 +6427,7 @@ def test_set_machine_resources_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_machine_resources(request)
+        response = client.set_machine_resources_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4286,7 +6455,94 @@ def test_set_machine_resources_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_machine_resources_rest_bad_request(
+def test_set_machine_resources_unary_rest_required_fields(
+    request_type=compute.SetMachineResourcesInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_machine_resources_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_machine_resources_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_machine_resources_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_machine_resources_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMachineResourcesInstanceRequest
 ):
     client = InstancesClient(
@@ -4311,14 +6567,14 @@ def test_set_machine_resources_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_machine_resources(request)
+        client.set_machine_resources_unary(request)
 
 
-def test_set_machine_resources_rest_from_dict():
-    test_set_machine_resources_rest(request_type=dict)
+def test_set_machine_resources_unary_rest_from_dict():
+    test_set_machine_resources_unary_rest(request_type=dict)
 
 
-def test_set_machine_resources_rest_flattened(transport: str = "rest"):
+def test_set_machine_resources_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4353,7 +6609,7 @@ def test_set_machine_resources_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_machine_resources(**mock_args)
+        client.set_machine_resources_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -4366,7 +6622,7 @@ def test_set_machine_resources_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_machine_resources_rest_flattened_error(transport: str = "rest"):
+def test_set_machine_resources_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4374,7 +6630,7 @@ def test_set_machine_resources_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_machine_resources(
+        client.set_machine_resources_unary(
             compute.SetMachineResourcesInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -4385,7 +6641,7 @@ def test_set_machine_resources_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_machine_type_rest(
+def test_set_machine_type_unary_rest(
     transport: str = "rest", request_type=compute.SetMachineTypeInstanceRequest
 ):
     client = InstancesClient(
@@ -4433,7 +6689,7 @@ def test_set_machine_type_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_machine_type(request)
+        response = client.set_machine_type_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4461,7 +6717,94 @@ def test_set_machine_type_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_machine_type_rest_bad_request(
+def test_set_machine_type_unary_rest_required_fields(
+    request_type=compute.SetMachineTypeInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_machine_type_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_machine_type_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_machine_type_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_machine_type_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMachineTypeInstanceRequest
 ):
     client = InstancesClient(
@@ -4484,14 +6827,14 @@ def test_set_machine_type_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_machine_type(request)
+        client.set_machine_type_unary(request)
 
 
-def test_set_machine_type_rest_from_dict():
-    test_set_machine_type_rest(request_type=dict)
+def test_set_machine_type_unary_rest_from_dict():
+    test_set_machine_type_unary_rest(request_type=dict)
 
 
-def test_set_machine_type_rest_flattened(transport: str = "rest"):
+def test_set_machine_type_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4526,7 +6869,7 @@ def test_set_machine_type_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_machine_type(**mock_args)
+        client.set_machine_type_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -4539,7 +6882,7 @@ def test_set_machine_type_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_machine_type_rest_flattened_error(transport: str = "rest"):
+def test_set_machine_type_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4547,7 +6890,7 @@ def test_set_machine_type_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_machine_type(
+        client.set_machine_type_unary(
             compute.SetMachineTypeInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -4558,7 +6901,7 @@ def test_set_machine_type_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_metadata_rest(
+def test_set_metadata_unary_rest(
     transport: str = "rest", request_type=compute.SetMetadataInstanceRequest
 ):
     client = InstancesClient(
@@ -4606,7 +6949,7 @@ def test_set_metadata_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_metadata(request)
+        response = client.set_metadata_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4634,7 +6977,94 @@ def test_set_metadata_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_metadata_rest_bad_request(
+def test_set_metadata_unary_rest_required_fields(
+    request_type=compute.SetMetadataInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_metadata_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_metadata_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_metadata_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_metadata_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMetadataInstanceRequest
 ):
     client = InstancesClient(
@@ -4657,14 +7087,14 @@ def test_set_metadata_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_metadata(request)
+        client.set_metadata_unary(request)
 
 
-def test_set_metadata_rest_from_dict():
-    test_set_metadata_rest(request_type=dict)
+def test_set_metadata_unary_rest_from_dict():
+    test_set_metadata_unary_rest(request_type=dict)
 
 
-def test_set_metadata_rest_flattened(transport: str = "rest"):
+def test_set_metadata_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4697,7 +7127,7 @@ def test_set_metadata_rest_flattened(transport: str = "rest"):
             metadata_resource=compute.Metadata(fingerprint="fingerprint_value"),
         )
         mock_args.update(sample_request)
-        client.set_metadata(**mock_args)
+        client.set_metadata_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -4710,7 +7140,7 @@ def test_set_metadata_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_metadata_rest_flattened_error(transport: str = "rest"):
+def test_set_metadata_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4718,7 +7148,7 @@ def test_set_metadata_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_metadata(
+        client.set_metadata_unary(
             compute.SetMetadataInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -4727,7 +7157,7 @@ def test_set_metadata_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_min_cpu_platform_rest(
+def test_set_min_cpu_platform_unary_rest(
     transport: str = "rest", request_type=compute.SetMinCpuPlatformInstanceRequest
 ):
     client = InstancesClient(
@@ -4777,7 +7207,7 @@ def test_set_min_cpu_platform_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_min_cpu_platform(request)
+        response = client.set_min_cpu_platform_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4805,7 +7235,94 @@ def test_set_min_cpu_platform_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_min_cpu_platform_rest_bad_request(
+def test_set_min_cpu_platform_unary_rest_required_fields(
+    request_type=compute.SetMinCpuPlatformInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_min_cpu_platform_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_min_cpu_platform_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_min_cpu_platform_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_min_cpu_platform_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMinCpuPlatformInstanceRequest
 ):
     client = InstancesClient(
@@ -4830,14 +7347,14 @@ def test_set_min_cpu_platform_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_min_cpu_platform(request)
+        client.set_min_cpu_platform_unary(request)
 
 
-def test_set_min_cpu_platform_rest_from_dict():
-    test_set_min_cpu_platform_rest(request_type=dict)
+def test_set_min_cpu_platform_unary_rest_from_dict():
+    test_set_min_cpu_platform_unary_rest(request_type=dict)
 
 
-def test_set_min_cpu_platform_rest_flattened(transport: str = "rest"):
+def test_set_min_cpu_platform_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4872,7 +7389,7 @@ def test_set_min_cpu_platform_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_min_cpu_platform(**mock_args)
+        client.set_min_cpu_platform_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -4885,7 +7402,7 @@ def test_set_min_cpu_platform_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_min_cpu_platform_rest_flattened_error(transport: str = "rest"):
+def test_set_min_cpu_platform_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -4893,7 +7410,7 @@ def test_set_min_cpu_platform_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_min_cpu_platform(
+        client.set_min_cpu_platform_unary(
             compute.SetMinCpuPlatformInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -4904,7 +7421,7 @@ def test_set_min_cpu_platform_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_scheduling_rest(
+def test_set_scheduling_unary_rest(
     transport: str = "rest", request_type=compute.SetSchedulingInstanceRequest
 ):
     client = InstancesClient(
@@ -4950,7 +7467,7 @@ def test_set_scheduling_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_scheduling(request)
+        response = client.set_scheduling_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -4978,7 +7495,94 @@ def test_set_scheduling_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_scheduling_rest_bad_request(
+def test_set_scheduling_unary_rest_required_fields(
+    request_type=compute.SetSchedulingInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_scheduling_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_scheduling_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_scheduling_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_scheduling_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetSchedulingInstanceRequest
 ):
     client = InstancesClient(
@@ -4999,14 +7603,14 @@ def test_set_scheduling_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_scheduling(request)
+        client.set_scheduling_unary(request)
 
 
-def test_set_scheduling_rest_from_dict():
-    test_set_scheduling_rest(request_type=dict)
+def test_set_scheduling_unary_rest_from_dict():
+    test_set_scheduling_unary_rest(request_type=dict)
 
 
-def test_set_scheduling_rest_flattened(transport: str = "rest"):
+def test_set_scheduling_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5039,7 +7643,7 @@ def test_set_scheduling_rest_flattened(transport: str = "rest"):
             scheduling_resource=compute.Scheduling(automatic_restart=True),
         )
         mock_args.update(sample_request)
-        client.set_scheduling(**mock_args)
+        client.set_scheduling_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5052,7 +7656,7 @@ def test_set_scheduling_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_scheduling_rest_flattened_error(transport: str = "rest"):
+def test_set_scheduling_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5060,7 +7664,7 @@ def test_set_scheduling_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_scheduling(
+        client.set_scheduling_unary(
             compute.SetSchedulingInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5069,7 +7673,7 @@ def test_set_scheduling_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_service_account_rest(
+def test_set_service_account_unary_rest(
     transport: str = "rest", request_type=compute.SetServiceAccountInstanceRequest
 ):
     client = InstancesClient(
@@ -5117,7 +7721,7 @@ def test_set_service_account_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_service_account(request)
+        response = client.set_service_account_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5145,7 +7749,94 @@ def test_set_service_account_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_service_account_rest_bad_request(
+def test_set_service_account_unary_rest_required_fields(
+    request_type=compute.SetServiceAccountInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_service_account_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_service_account_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_service_account_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_service_account_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetServiceAccountInstanceRequest
 ):
     client = InstancesClient(
@@ -5168,14 +7859,14 @@ def test_set_service_account_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_service_account(request)
+        client.set_service_account_unary(request)
 
 
-def test_set_service_account_rest_from_dict():
-    test_set_service_account_rest(request_type=dict)
+def test_set_service_account_unary_rest_from_dict():
+    test_set_service_account_unary_rest(request_type=dict)
 
 
-def test_set_service_account_rest_flattened(transport: str = "rest"):
+def test_set_service_account_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5210,7 +7901,7 @@ def test_set_service_account_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_service_account(**mock_args)
+        client.set_service_account_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5223,7 +7914,7 @@ def test_set_service_account_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_service_account_rest_flattened_error(transport: str = "rest"):
+def test_set_service_account_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5231,7 +7922,7 @@ def test_set_service_account_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_service_account(
+        client.set_service_account_unary(
             compute.SetServiceAccountInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5242,7 +7933,7 @@ def test_set_service_account_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_shielded_instance_integrity_policy_rest(
+def test_set_shielded_instance_integrity_policy_unary_rest(
     transport: str = "rest",
     request_type=compute.SetShieldedInstanceIntegrityPolicyInstanceRequest,
 ):
@@ -5291,7 +7982,7 @@ def test_set_shielded_instance_integrity_policy_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_shielded_instance_integrity_policy(request)
+        response = client.set_shielded_instance_integrity_policy_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5319,7 +8010,94 @@ def test_set_shielded_instance_integrity_policy_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_shielded_instance_integrity_policy_rest_bad_request(
+def test_set_shielded_instance_integrity_policy_unary_rest_required_fields(
+    request_type=compute.SetShieldedInstanceIntegrityPolicyInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_shielded_instance_integrity_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_shielded_instance_integrity_policy_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_shielded_instance_integrity_policy_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_shielded_instance_integrity_policy_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SetShieldedInstanceIntegrityPolicyInstanceRequest,
 ):
@@ -5343,14 +8121,16 @@ def test_set_shielded_instance_integrity_policy_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_shielded_instance_integrity_policy(request)
+        client.set_shielded_instance_integrity_policy_unary(request)
 
 
-def test_set_shielded_instance_integrity_policy_rest_from_dict():
-    test_set_shielded_instance_integrity_policy_rest(request_type=dict)
+def test_set_shielded_instance_integrity_policy_unary_rest_from_dict():
+    test_set_shielded_instance_integrity_policy_unary_rest(request_type=dict)
 
 
-def test_set_shielded_instance_integrity_policy_rest_flattened(transport: str = "rest"):
+def test_set_shielded_instance_integrity_policy_unary_rest_flattened(
+    transport: str = "rest",
+):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5385,7 +8165,7 @@ def test_set_shielded_instance_integrity_policy_rest_flattened(transport: str = 
             ),
         )
         mock_args.update(sample_request)
-        client.set_shielded_instance_integrity_policy(**mock_args)
+        client.set_shielded_instance_integrity_policy_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5398,7 +8178,7 @@ def test_set_shielded_instance_integrity_policy_rest_flattened(transport: str = 
         )
 
 
-def test_set_shielded_instance_integrity_policy_rest_flattened_error(
+def test_set_shielded_instance_integrity_policy_unary_rest_flattened_error(
     transport: str = "rest",
 ):
     client = InstancesClient(
@@ -5408,7 +8188,7 @@ def test_set_shielded_instance_integrity_policy_rest_flattened_error(
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_shielded_instance_integrity_policy(
+        client.set_shielded_instance_integrity_policy_unary(
             compute.SetShieldedInstanceIntegrityPolicyInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5419,7 +8199,7 @@ def test_set_shielded_instance_integrity_policy_rest_flattened_error(
         )
 
 
-def test_set_tags_rest(
+def test_set_tags_unary_rest(
     transport: str = "rest", request_type=compute.SetTagsInstanceRequest
 ):
     client = InstancesClient(
@@ -5465,7 +8245,7 @@ def test_set_tags_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_tags(request)
+        response = client.set_tags_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5493,7 +8273,94 @@ def test_set_tags_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_tags_rest_bad_request(
+def test_set_tags_unary_rest_required_fields(
+    request_type=compute.SetTagsInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._set_tags_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._set_tags_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_tags_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_tags_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetTagsInstanceRequest
 ):
     client = InstancesClient(
@@ -5514,14 +8381,14 @@ def test_set_tags_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_tags(request)
+        client.set_tags_unary(request)
 
 
-def test_set_tags_rest_from_dict():
-    test_set_tags_rest(request_type=dict)
+def test_set_tags_unary_rest_from_dict():
+    test_set_tags_unary_rest(request_type=dict)
 
 
-def test_set_tags_rest_flattened(transport: str = "rest"):
+def test_set_tags_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5554,7 +8421,7 @@ def test_set_tags_rest_flattened(transport: str = "rest"):
             tags_resource=compute.Tags(fingerprint="fingerprint_value"),
         )
         mock_args.update(sample_request)
-        client.set_tags(**mock_args)
+        client.set_tags_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5567,7 +8434,7 @@ def test_set_tags_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_tags_rest_flattened_error(transport: str = "rest"):
+def test_set_tags_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5575,7 +8442,7 @@ def test_set_tags_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_tags(
+        client.set_tags_unary(
             compute.SetTagsInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5584,7 +8451,7 @@ def test_set_tags_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_simulate_maintenance_event_rest(
+def test_simulate_maintenance_event_unary_rest(
     transport: str = "rest",
     request_type=compute.SimulateMaintenanceEventInstanceRequest,
 ):
@@ -5630,7 +8497,7 @@ def test_simulate_maintenance_event_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.simulate_maintenance_event(request)
+        response = client.simulate_maintenance_event_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5658,7 +8525,93 @@ def test_simulate_maintenance_event_rest(
     assert response.zone == "zone_value"
 
 
-def test_simulate_maintenance_event_rest_bad_request(
+def test_simulate_maintenance_event_unary_rest_required_fields(
+    request_type=compute.SimulateMaintenanceEventInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._simulate_maintenance_event_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._simulate_maintenance_event_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.simulate_maintenance_event_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_simulate_maintenance_event_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SimulateMaintenanceEventInstanceRequest,
 ):
@@ -5679,14 +8632,14 @@ def test_simulate_maintenance_event_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.simulate_maintenance_event(request)
+        client.simulate_maintenance_event_unary(request)
 
 
-def test_simulate_maintenance_event_rest_from_dict():
-    test_simulate_maintenance_event_rest(request_type=dict)
+def test_simulate_maintenance_event_unary_rest_from_dict():
+    test_simulate_maintenance_event_unary_rest(request_type=dict)
 
 
-def test_simulate_maintenance_event_rest_flattened(transport: str = "rest"):
+def test_simulate_maintenance_event_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5716,7 +8669,7 @@ def test_simulate_maintenance_event_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", instance="instance_value",
         )
         mock_args.update(sample_request)
-        client.simulate_maintenance_event(**mock_args)
+        client.simulate_maintenance_event_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5729,7 +8682,7 @@ def test_simulate_maintenance_event_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_simulate_maintenance_event_rest_flattened_error(transport: str = "rest"):
+def test_simulate_maintenance_event_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5737,7 +8690,7 @@ def test_simulate_maintenance_event_rest_flattened_error(transport: str = "rest"
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.simulate_maintenance_event(
+        client.simulate_maintenance_event_unary(
             compute.SimulateMaintenanceEventInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5745,7 +8698,9 @@ def test_simulate_maintenance_event_rest_flattened_error(transport: str = "rest"
         )
 
 
-def test_start_rest(transport: str = "rest", request_type=compute.StartInstanceRequest):
+def test_start_unary_rest(
+    transport: str = "rest", request_type=compute.StartInstanceRequest
+):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5788,7 +8743,7 @@ def test_start_rest(transport: str = "rest", request_type=compute.StartInstanceR
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.start(request)
+        response = client.start_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5816,7 +8771,87 @@ def test_start_rest(transport: str = "rest", request_type=compute.StartInstanceR
     assert response.zone == "zone_value"
 
 
-def test_start_rest_bad_request(
+def test_start_unary_rest_required_fields(request_type=compute.StartInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._start_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._start_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.start_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_start_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StartInstanceRequest
 ):
     client = InstancesClient(
@@ -5836,14 +8871,14 @@ def test_start_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.start(request)
+        client.start_unary(request)
 
 
-def test_start_rest_from_dict():
-    test_start_rest(request_type=dict)
+def test_start_unary_rest_from_dict():
+    test_start_unary_rest(request_type=dict)
 
 
-def test_start_rest_flattened(transport: str = "rest"):
+def test_start_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5873,7 +8908,7 @@ def test_start_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", instance="instance_value",
         )
         mock_args.update(sample_request)
-        client.start(**mock_args)
+        client.start_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -5886,7 +8921,7 @@ def test_start_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_start_rest_flattened_error(transport: str = "rest"):
+def test_start_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -5894,7 +8929,7 @@ def test_start_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.start(
+        client.start_unary(
             compute.StartInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -5902,7 +8937,7 @@ def test_start_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_start_with_encryption_key_rest(
+def test_start_with_encryption_key_unary_rest(
     transport: str = "rest", request_type=compute.StartWithEncryptionKeyInstanceRequest
 ):
     client = InstancesClient(
@@ -5958,7 +8993,7 @@ def test_start_with_encryption_key_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.start_with_encryption_key(request)
+        response = client.start_with_encryption_key_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -5986,7 +9021,94 @@ def test_start_with_encryption_key_rest(
     assert response.zone == "zone_value"
 
 
-def test_start_with_encryption_key_rest_bad_request(
+def test_start_with_encryption_key_unary_rest_required_fields(
+    request_type=compute.StartWithEncryptionKeyInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._start_with_encryption_key_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._start_with_encryption_key_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.start_with_encryption_key_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_start_with_encryption_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StartWithEncryptionKeyInstanceRequest
 ):
     client = InstancesClient(
@@ -6017,14 +9139,14 @@ def test_start_with_encryption_key_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.start_with_encryption_key(request)
+        client.start_with_encryption_key_unary(request)
 
 
-def test_start_with_encryption_key_rest_from_dict():
-    test_start_with_encryption_key_rest(request_type=dict)
+def test_start_with_encryption_key_unary_rest_from_dict():
+    test_start_with_encryption_key_unary_rest(request_type=dict)
 
 
-def test_start_with_encryption_key_rest_flattened(transport: str = "rest"):
+def test_start_with_encryption_key_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6065,7 +9187,7 @@ def test_start_with_encryption_key_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.start_with_encryption_key(**mock_args)
+        client.start_with_encryption_key_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -6078,7 +9200,7 @@ def test_start_with_encryption_key_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_start_with_encryption_key_rest_flattened_error(transport: str = "rest"):
+def test_start_with_encryption_key_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6086,7 +9208,7 @@ def test_start_with_encryption_key_rest_flattened_error(transport: str = "rest")
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.start_with_encryption_key(
+        client.start_with_encryption_key_unary(
             compute.StartWithEncryptionKeyInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -6103,7 +9225,9 @@ def test_start_with_encryption_key_rest_flattened_error(transport: str = "rest")
         )
 
 
-def test_stop_rest(transport: str = "rest", request_type=compute.StopInstanceRequest):
+def test_stop_unary_rest(
+    transport: str = "rest", request_type=compute.StopInstanceRequest
+):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6146,7 +9270,7 @@ def test_stop_rest(transport: str = "rest", request_type=compute.StopInstanceReq
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.stop(request)
+        response = client.stop_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -6174,7 +9298,87 @@ def test_stop_rest(transport: str = "rest", request_type=compute.StopInstanceReq
     assert response.zone == "zone_value"
 
 
-def test_stop_rest_bad_request(
+def test_stop_unary_rest_required_fields(request_type=compute.StopInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._stop_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._stop_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.stop_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_stop_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StopInstanceRequest
 ):
     client = InstancesClient(
@@ -6194,14 +9398,14 @@ def test_stop_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.stop(request)
+        client.stop_unary(request)
 
 
-def test_stop_rest_from_dict():
-    test_stop_rest(request_type=dict)
+def test_stop_unary_rest_from_dict():
+    test_stop_unary_rest(request_type=dict)
 
 
-def test_stop_rest_flattened(transport: str = "rest"):
+def test_stop_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6231,7 +9435,7 @@ def test_stop_rest_flattened(transport: str = "rest"):
             project="project_value", zone="zone_value", instance="instance_value",
         )
         mock_args.update(sample_request)
-        client.stop(**mock_args)
+        client.stop_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -6244,7 +9448,7 @@ def test_stop_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_stop_rest_flattened_error(transport: str = "rest"):
+def test_stop_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6252,7 +9456,7 @@ def test_stop_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.stop(
+        client.stop_unary(
             compute.StopInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -6292,6 +9496,93 @@ def test_test_iam_permissions_rest(
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.TestPermissionsResponse)
     assert response.permissions == ["permissions_value"]
+
+
+def test_test_iam_permissions_rest_required_fields(
+    request_type=compute.TestIamPermissionsInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._test_iam_permissions_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._test_iam_permissions_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.TestPermissionsResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.TestPermissionsResponse.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.test_iam_permissions(request)
+
+            expected_params = [("project", "")("resource", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_test_iam_permissions_rest_bad_request(
@@ -6391,7 +9682,7 @@ def test_test_iam_permissions_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_rest(
+def test_update_unary_rest(
     transport: str = "rest", request_type=compute.UpdateInstanceRequest
 ):
     client = InstancesClient(
@@ -6441,7 +9732,7 @@ def test_update_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update(request)
+        response = client.update_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -6469,7 +9760,88 @@ def test_update_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_rest_bad_request(
+def test_update_unary_rest_required_fields(request_type=compute.UpdateInstanceRequest):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._update_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._update_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "put",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateInstanceRequest
 ):
     client = InstancesClient(
@@ -6494,14 +9866,14 @@ def test_update_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update(request)
+        client.update_unary(request)
 
 
-def test_update_rest_from_dict():
-    test_update_rest(request_type=dict)
+def test_update_unary_rest_from_dict():
+    test_update_unary_rest(request_type=dict)
 
 
-def test_update_rest_flattened(transport: str = "rest"):
+def test_update_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6538,7 +9910,7 @@ def test_update_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.update(**mock_args)
+        client.update_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -6551,7 +9923,7 @@ def test_update_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_update_rest_flattened_error(transport: str = "rest"):
+def test_update_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6559,7 +9931,7 @@ def test_update_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update(
+        client.update_unary(
             compute.UpdateInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -6572,7 +9944,7 @@ def test_update_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_access_config_rest(
+def test_update_access_config_unary_rest(
     transport: str = "rest", request_type=compute.UpdateAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -6620,7 +9992,7 @@ def test_update_access_config_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update_access_config(request)
+        response = client.update_access_config_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -6648,7 +10020,103 @@ def test_update_access_config_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_access_config_rest_bad_request(
+def test_update_access_config_unary_rest_required_fields(
+    request_type=compute.UpdateAccessConfigInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["network_interface"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "networkInterface" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._update_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == request_init["network_interface"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["networkInterface"] = "network_interface_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._update_access_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == "network_interface_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_access_config_unary(request)
+
+            expected_params = [
+                ("instance", "")("network_interface", "")("project", "")("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_access_config_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateAccessConfigInstanceRequest
 ):
     client = InstancesClient(
@@ -6671,14 +10139,14 @@ def test_update_access_config_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update_access_config(request)
+        client.update_access_config_unary(request)
 
 
-def test_update_access_config_rest_from_dict():
-    test_update_access_config_rest(request_type=dict)
+def test_update_access_config_unary_rest_from_dict():
+    test_update_access_config_unary_rest(request_type=dict)
 
 
-def test_update_access_config_rest_flattened(transport: str = "rest"):
+def test_update_access_config_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6714,7 +10182,7 @@ def test_update_access_config_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.update_access_config(**mock_args)
+        client.update_access_config_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -6727,7 +10195,7 @@ def test_update_access_config_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_update_access_config_rest_flattened_error(transport: str = "rest"):
+def test_update_access_config_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6735,7 +10203,7 @@ def test_update_access_config_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update_access_config(
+        client.update_access_config_unary(
             compute.UpdateAccessConfigInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -6747,7 +10215,7 @@ def test_update_access_config_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_display_device_rest(
+def test_update_display_device_unary_rest(
     transport: str = "rest", request_type=compute.UpdateDisplayDeviceInstanceRequest
 ):
     client = InstancesClient(
@@ -6793,7 +10261,7 @@ def test_update_display_device_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update_display_device(request)
+        response = client.update_display_device_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -6821,7 +10289,94 @@ def test_update_display_device_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_display_device_rest_bad_request(
+def test_update_display_device_unary_rest_required_fields(
+    request_type=compute.UpdateDisplayDeviceInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._update_display_device_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._update_display_device_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_display_device_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_display_device_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateDisplayDeviceInstanceRequest
 ):
     client = InstancesClient(
@@ -6842,14 +10397,14 @@ def test_update_display_device_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update_display_device(request)
+        client.update_display_device_unary(request)
 
 
-def test_update_display_device_rest_from_dict():
-    test_update_display_device_rest(request_type=dict)
+def test_update_display_device_unary_rest_from_dict():
+    test_update_display_device_unary_rest(request_type=dict)
 
 
-def test_update_display_device_rest_flattened(transport: str = "rest"):
+def test_update_display_device_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6882,7 +10437,7 @@ def test_update_display_device_rest_flattened(transport: str = "rest"):
             display_device_resource=compute.DisplayDevice(enable_display=True),
         )
         mock_args.update(sample_request)
-        client.update_display_device(**mock_args)
+        client.update_display_device_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -6895,7 +10450,7 @@ def test_update_display_device_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_update_display_device_rest_flattened_error(transport: str = "rest"):
+def test_update_display_device_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -6903,7 +10458,7 @@ def test_update_display_device_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update_display_device(
+        client.update_display_device_unary(
             compute.UpdateDisplayDeviceInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -6912,7 +10467,7 @@ def test_update_display_device_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_network_interface_rest(
+def test_update_network_interface_unary_rest(
     transport: str = "rest", request_type=compute.UpdateNetworkInterfaceInstanceRequest
 ):
     client = InstancesClient(
@@ -6960,7 +10515,7 @@ def test_update_network_interface_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update_network_interface(request)
+        response = client.update_network_interface_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -6988,7 +10543,103 @@ def test_update_network_interface_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_network_interface_rest_bad_request(
+def test_update_network_interface_unary_rest_required_fields(
+    request_type=compute.UpdateNetworkInterfaceInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["network_interface"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "networkInterface" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._update_network_interface_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == request_init["network_interface"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["networkInterface"] = "network_interface_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._update_network_interface_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "networkInterface" in jsonified_request
+    assert jsonified_request["networkInterface"] == "network_interface_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_network_interface_unary(request)
+
+            expected_params = [
+                ("instance", "")("network_interface", "")("project", "")("zone", "")
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_network_interface_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateNetworkInterfaceInstanceRequest
 ):
     client = InstancesClient(
@@ -7011,14 +10662,14 @@ def test_update_network_interface_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update_network_interface(request)
+        client.update_network_interface_unary(request)
 
 
-def test_update_network_interface_rest_from_dict():
-    test_update_network_interface_rest(request_type=dict)
+def test_update_network_interface_unary_rest_from_dict():
+    test_update_network_interface_unary_rest(request_type=dict)
 
 
-def test_update_network_interface_rest_flattened(transport: str = "rest"):
+def test_update_network_interface_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -7056,7 +10707,7 @@ def test_update_network_interface_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.update_network_interface(**mock_args)
+        client.update_network_interface_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -7069,7 +10720,7 @@ def test_update_network_interface_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_update_network_interface_rest_flattened_error(transport: str = "rest"):
+def test_update_network_interface_unary_rest_flattened_error(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -7077,7 +10728,7 @@ def test_update_network_interface_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update_network_interface(
+        client.update_network_interface_unary(
             compute.UpdateNetworkInterfaceInstanceRequest(),
             project="project_value",
             zone="zone_value",
@@ -7091,7 +10742,7 @@ def test_update_network_interface_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_shielded_instance_config_rest(
+def test_update_shielded_instance_config_unary_rest(
     transport: str = "rest",
     request_type=compute.UpdateShieldedInstanceConfigInstanceRequest,
 ):
@@ -7140,7 +10791,7 @@ def test_update_shielded_instance_config_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.update_shielded_instance_config(request)
+        response = client.update_shielded_instance_config_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -7168,7 +10819,94 @@ def test_update_shielded_instance_config_rest(
     assert response.zone == "zone_value"
 
 
-def test_update_shielded_instance_config_rest_bad_request(
+def test_update_shielded_instance_config_unary_rest_required_fields(
+    request_type=compute.UpdateShieldedInstanceConfigInstanceRequest,
+):
+    transport_class = transports.InstancesRestTransport
+
+    request_init = {}
+    request_init["instance"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "instance" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class._update_shielded_instance_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == request_init["instance"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["instance"] = "instance_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class._update_shielded_instance_config_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "instance" in jsonified_request
+    assert jsonified_request["instance"] == "instance_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = InstancesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_shielded_instance_config_unary(request)
+
+            expected_params = [("instance", "")("project", "")("zone", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_update_shielded_instance_config_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.UpdateShieldedInstanceConfigInstanceRequest,
 ):
@@ -7192,14 +10930,14 @@ def test_update_shielded_instance_config_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.update_shielded_instance_config(request)
+        client.update_shielded_instance_config_unary(request)
 
 
-def test_update_shielded_instance_config_rest_from_dict():
-    test_update_shielded_instance_config_rest(request_type=dict)
+def test_update_shielded_instance_config_unary_rest_from_dict():
+    test_update_shielded_instance_config_unary_rest(request_type=dict)
 
 
-def test_update_shielded_instance_config_rest_flattened(transport: str = "rest"):
+def test_update_shielded_instance_config_unary_rest_flattened(transport: str = "rest"):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -7234,7 +10972,7 @@ def test_update_shielded_instance_config_rest_flattened(transport: str = "rest")
             ),
         )
         mock_args.update(sample_request)
-        client.update_shielded_instance_config(**mock_args)
+        client.update_shielded_instance_config_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -7247,7 +10985,9 @@ def test_update_shielded_instance_config_rest_flattened(transport: str = "rest")
         )
 
 
-def test_update_shielded_instance_config_rest_flattened_error(transport: str = "rest"):
+def test_update_shielded_instance_config_unary_rest_flattened_error(
+    transport: str = "rest",
+):
     client = InstancesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -7255,7 +10995,7 @@ def test_update_shielded_instance_config_rest_flattened_error(transport: str = "
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.update_shielded_instance_config(
+        client.update_shielded_instance_config_unary(
             compute.UpdateShieldedInstanceConfigInstanceRequest(),
             project="project_value",
             zone="zone_value",

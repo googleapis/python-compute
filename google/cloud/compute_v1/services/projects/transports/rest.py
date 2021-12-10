@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import ProjectsTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
@@ -120,6 +119,18 @@ class ProjectsRestTransport(ProjectsTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __disable_xpn_host_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _disable_xpn_host_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__disable_xpn_host_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _disable_xpn_host(
         self,
         request: compute.DisableXpnHostProjectRequest,
@@ -166,11 +177,6 @@ class ProjectsRestTransport(ProjectsTransport):
             {"method": "post", "uri": "/compute/v1/projects/{project}/disableXpnHost",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DisableXpnHostProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -188,14 +194,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._disable_xpn_host_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -215,6 +216,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __disable_xpn_resource_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _disable_xpn_resource_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__disable_xpn_resource_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _disable_xpn_resource(
         self,
@@ -266,11 +279,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.DisableXpnResourceProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -294,14 +302,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._disable_xpn_resource_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -322,6 +325,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __enable_xpn_host_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _enable_xpn_host_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__enable_xpn_host_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _enable_xpn_host(
         self,
@@ -369,11 +384,6 @@ class ProjectsRestTransport(ProjectsTransport):
             {"method": "post", "uri": "/compute/v1/projects/{project}/enableXpnHost",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.EnableXpnHostProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -389,14 +399,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._enable_xpn_host_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -416,6 +421,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __enable_xpn_resource_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _enable_xpn_resource_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__enable_xpn_resource_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _enable_xpn_resource(
         self,
@@ -467,11 +484,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.EnableXpnResourceProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -495,14 +507,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._enable_xpn_resource_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -523,6 +530,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -559,11 +578,6 @@ class ProjectsRestTransport(ProjectsTransport):
             {"method": "get", "uri": "/compute/v1/projects/{project}",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -579,14 +593,7 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -606,6 +613,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Project.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_xpn_host_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_xpn_host_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__get_xpn_host_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_xpn_host(
         self,
@@ -643,11 +662,6 @@ class ProjectsRestTransport(ProjectsTransport):
             {"method": "get", "uri": "/compute/v1/projects/{project}/getXpnHost",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetXpnHostProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -663,14 +677,7 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_xpn_host_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -690,6 +697,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Project.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_xpn_resources_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _get_xpn_resources_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__get_xpn_resources_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get_xpn_resources(
         self,
@@ -722,11 +741,6 @@ class ProjectsRestTransport(ProjectsTransport):
             {"method": "get", "uri": "/compute/v1/projects/{project}/getXpnResources",},
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.GetXpnResourcesProjectsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -744,14 +758,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._get_xpn_resources_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -773,6 +782,18 @@ class ProjectsRestTransport(ProjectsTransport):
         return compute.ProjectsGetXpnResources.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __list_xpn_hosts_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_xpn_hosts_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__list_xpn_hosts_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list_xpn_hosts(
         self,
@@ -809,11 +830,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListXpnHostsProjectsRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -835,14 +851,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._list_xpn_hosts_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -865,6 +876,18 @@ class ProjectsRestTransport(ProjectsTransport):
         return compute.XpnHostList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __move_disk_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _move_disk_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__move_disk_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _move_disk(
         self,
@@ -916,11 +939,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.MoveDiskProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -942,14 +960,7 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._move_disk_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -970,6 +981,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __move_instance_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _move_instance_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__move_instance_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _move_instance(
         self,
@@ -1021,11 +1044,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.MoveInstanceProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1047,14 +1065,7 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._move_instance_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -1075,6 +1086,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_common_instance_metadata_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _set_common_instance_metadata_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__set_common_instance_metadata_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_common_instance_metadata(
         self,
@@ -1127,11 +1150,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.SetCommonInstanceMetadataProjectRequest.to_dict(
             request
         )
@@ -1157,14 +1175,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_common_instance_metadata_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1185,6 +1198,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_default_network_tier_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _set_default_network_tier_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__set_default_network_tier_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_default_network_tier(
         self,
@@ -1236,11 +1261,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.SetDefaultNetworkTierProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1264,14 +1284,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_default_network_tier_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -1292,6 +1307,18 @@ class ProjectsRestTransport(ProjectsTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_usage_export_bucket_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _set_usage_export_bucket_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in ProjectsRestTransport.__set_usage_export_bucket_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_usage_export_bucket(
         self,
@@ -1343,11 +1370,6 @@ class ProjectsRestTransport(ProjectsTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.SetUsageExportBucketProjectRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -1371,14 +1393,9 @@ class ProjectsRestTransport(ProjectsTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_usage_export_bucket_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

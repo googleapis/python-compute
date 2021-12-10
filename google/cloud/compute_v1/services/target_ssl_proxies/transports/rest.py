@@ -33,7 +33,6 @@ except AttributeError:  # pragma: NO COVER
 # limitations under the License.
 #
 
-
 from google.cloud.compute_v1.types import compute
 
 from .base import (
@@ -123,6 +122,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._prep_wrapped_messages(client_info)
 
+    __delete_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _delete_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__delete_required_fields_default_values.items()
+            if k not in message_dict
+        }
+
     def _delete(
         self,
         request: compute.DeleteTargetSslProxyRequest,
@@ -172,12 +184,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.DeleteTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -193,14 +199,7 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._delete_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -220,6 +219,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __get_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _get_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__get_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _get(
         self,
@@ -263,12 +275,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.GetTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -284,14 +290,7 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._get_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -313,6 +312,18 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
         return compute.TargetSslProxy.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __insert_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _insert_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__insert_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _insert(
         self,
@@ -364,11 +375,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.InsertTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -390,14 +396,7 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._insert_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -418,6 +417,18 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __list_required_fields_default_values = {
+        "project": "",
+    }
+
+    @staticmethod
+    def _list_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__list_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _list(
         self,
@@ -455,11 +466,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-        ]
-
         request_kwargs = compute.ListTargetSslProxiesRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -475,14 +481,7 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(self._list_get_unset_required_fields(query_params))
 
         # Send the request
         headers = dict(metadata)
@@ -504,6 +503,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
         return compute.TargetSslProxyList.from_json(
             response.content, ignore_unknown_fields=True
         )
+
+    __set_backend_service_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _set_backend_service_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__set_backend_service_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_backend_service(
         self,
@@ -555,12 +567,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.SetBackendServiceTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -586,14 +592,9 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_backend_service_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -614,6 +615,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_proxy_header_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _set_proxy_header_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__set_proxy_header_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_proxy_header(
         self,
@@ -665,12 +679,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.SetProxyHeaderTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -694,14 +702,9 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_proxy_header_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -722,6 +725,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_ssl_certificates_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _set_ssl_certificates_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__set_ssl_certificates_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_ssl_certificates(
         self,
@@ -773,12 +789,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.SetSslCertificatesTargetSslProxyRequest.to_dict(
             request
         )
@@ -806,14 +816,9 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_ssl_certificates_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)
@@ -834,6 +839,19 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
 
         # Return the response
         return compute.Operation.from_json(response.content, ignore_unknown_fields=True)
+
+    __set_ssl_policy_required_fields_default_values = {
+        "project": "",
+        "targetSslProxy": "",
+    }
+
+    @staticmethod
+    def _set_ssl_policy_get_unset_required_fields(message_dict):
+        return {
+            k: v
+            for k, v in TargetSslProxiesRestTransport.__set_ssl_policy_required_fields_default_values.items()
+            if k not in message_dict
+        }
 
     def _set_ssl_policy(
         self,
@@ -885,12 +903,6 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             },
         ]
 
-        required_fields = [
-            # (snake_case_name, camel_case_name)
-            ("project", "project"),
-            ("target_ssl_proxy", "targetSslProxy"),
-        ]
-
         request_kwargs = compute.SetSslPolicyTargetSslProxyRequest.to_dict(request)
         transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
@@ -914,14 +926,9 @@ class TargetSslProxiesRestTransport(TargetSslProxiesTransport):
             )
         )
 
-        # Ensure required fields have values in query_params.
-        # If a required field has a default value, it can get lost
-        # by the to_json call above.
-        orig_query_params = transcoded_request["query_params"]
-        for snake_case_name, camel_case_name in required_fields:
-            if snake_case_name in orig_query_params:
-                if camel_case_name not in query_params:
-                    query_params[camel_case_name] = orig_query_params[snake_case_name]
+        query_params.update(
+            self._set_ssl_policy_get_unset_required_fields(query_params)
+        )
 
         # Send the request
         headers = dict(metadata)

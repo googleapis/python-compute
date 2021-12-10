@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
@@ -397,7 +398,7 @@ def test_projects_client_client_options_credentials_file(
         )
 
 
-def test_disable_xpn_host_rest(
+def test_disable_xpn_host_unary_rest(
     transport: str = "rest", request_type=compute.DisableXpnHostProjectRequest
 ):
     client = ProjectsClient(
@@ -442,7 +443,7 @@ def test_disable_xpn_host_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.disable_xpn_host(request)
+        response = client.disable_xpn_host_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -470,7 +471,79 @@ def test_disable_xpn_host_rest(
     assert response.zone == "zone_value"
 
 
-def test_disable_xpn_host_rest_bad_request(
+def test_disable_xpn_host_unary_rest_required_fields(
+    request_type=compute.DisableXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._disable_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._disable_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.disable_xpn_host_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_disable_xpn_host_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DisableXpnHostProjectRequest
 ):
     client = ProjectsClient(
@@ -490,14 +563,14 @@ def test_disable_xpn_host_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.disable_xpn_host(request)
+        client.disable_xpn_host_unary(request)
 
 
-def test_disable_xpn_host_rest_from_dict():
-    test_disable_xpn_host_rest(request_type=dict)
+def test_disable_xpn_host_unary_rest_from_dict():
+    test_disable_xpn_host_unary_rest(request_type=dict)
 
 
-def test_disable_xpn_host_rest_flattened(transport: str = "rest"):
+def test_disable_xpn_host_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -521,7 +594,7 @@ def test_disable_xpn_host_rest_flattened(transport: str = "rest"):
         # get truthy value for each flattened field
         mock_args = dict(project="project_value",)
         mock_args.update(sample_request)
-        client.disable_xpn_host(**mock_args)
+        client.disable_xpn_host_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -534,7 +607,7 @@ def test_disable_xpn_host_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_disable_xpn_host_rest_flattened_error(transport: str = "rest"):
+def test_disable_xpn_host_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -542,12 +615,12 @@ def test_disable_xpn_host_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.disable_xpn_host(
+        client.disable_xpn_host_unary(
             compute.DisableXpnHostProjectRequest(), project="project_value",
         )
 
 
-def test_disable_xpn_resource_rest(
+def test_disable_xpn_resource_unary_rest(
     transport: str = "rest", request_type=compute.DisableXpnResourceProjectRequest
 ):
     client = ProjectsClient(
@@ -597,7 +670,7 @@ def test_disable_xpn_resource_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.disable_xpn_resource(request)
+        response = client.disable_xpn_resource_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -625,7 +698,80 @@ def test_disable_xpn_resource_rest(
     assert response.zone == "zone_value"
 
 
-def test_disable_xpn_resource_rest_bad_request(
+def test_disable_xpn_resource_unary_rest_required_fields(
+    request_type=compute.DisableXpnResourceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._disable_xpn_resource_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._disable_xpn_resource_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.disable_xpn_resource_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_disable_xpn_resource_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DisableXpnResourceProjectRequest
 ):
     client = ProjectsClient(
@@ -650,14 +796,14 @@ def test_disable_xpn_resource_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.disable_xpn_resource(request)
+        client.disable_xpn_resource_unary(request)
 
 
-def test_disable_xpn_resource_rest_from_dict():
-    test_disable_xpn_resource_rest(request_type=dict)
+def test_disable_xpn_resource_unary_rest_from_dict():
+    test_disable_xpn_resource_unary_rest(request_type=dict)
 
 
-def test_disable_xpn_resource_rest_flattened(transport: str = "rest"):
+def test_disable_xpn_resource_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -686,7 +832,7 @@ def test_disable_xpn_resource_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.disable_xpn_resource(**mock_args)
+        client.disable_xpn_resource_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -699,7 +845,7 @@ def test_disable_xpn_resource_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_disable_xpn_resource_rest_flattened_error(transport: str = "rest"):
+def test_disable_xpn_resource_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -707,7 +853,7 @@ def test_disable_xpn_resource_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.disable_xpn_resource(
+        client.disable_xpn_resource_unary(
             compute.DisableXpnResourceProjectRequest(),
             project="project_value",
             projects_disable_xpn_resource_request_resource=compute.ProjectsDisableXpnResourceRequest(
@@ -716,7 +862,7 @@ def test_disable_xpn_resource_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_enable_xpn_host_rest(
+def test_enable_xpn_host_unary_rest(
     transport: str = "rest", request_type=compute.EnableXpnHostProjectRequest
 ):
     client = ProjectsClient(
@@ -761,7 +907,7 @@ def test_enable_xpn_host_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.enable_xpn_host(request)
+        response = client.enable_xpn_host_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -789,7 +935,79 @@ def test_enable_xpn_host_rest(
     assert response.zone == "zone_value"
 
 
-def test_enable_xpn_host_rest_bad_request(
+def test_enable_xpn_host_unary_rest_required_fields(
+    request_type=compute.EnableXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._enable_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._enable_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.enable_xpn_host_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_enable_xpn_host_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.EnableXpnHostProjectRequest
 ):
     client = ProjectsClient(
@@ -809,14 +1027,14 @@ def test_enable_xpn_host_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.enable_xpn_host(request)
+        client.enable_xpn_host_unary(request)
 
 
-def test_enable_xpn_host_rest_from_dict():
-    test_enable_xpn_host_rest(request_type=dict)
+def test_enable_xpn_host_unary_rest_from_dict():
+    test_enable_xpn_host_unary_rest(request_type=dict)
 
 
-def test_enable_xpn_host_rest_flattened(transport: str = "rest"):
+def test_enable_xpn_host_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -840,7 +1058,7 @@ def test_enable_xpn_host_rest_flattened(transport: str = "rest"):
         # get truthy value for each flattened field
         mock_args = dict(project="project_value",)
         mock_args.update(sample_request)
-        client.enable_xpn_host(**mock_args)
+        client.enable_xpn_host_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -853,7 +1071,7 @@ def test_enable_xpn_host_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_enable_xpn_host_rest_flattened_error(transport: str = "rest"):
+def test_enable_xpn_host_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -861,12 +1079,12 @@ def test_enable_xpn_host_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.enable_xpn_host(
+        client.enable_xpn_host_unary(
             compute.EnableXpnHostProjectRequest(), project="project_value",
         )
 
 
-def test_enable_xpn_resource_rest(
+def test_enable_xpn_resource_unary_rest(
     transport: str = "rest", request_type=compute.EnableXpnResourceProjectRequest
 ):
     client = ProjectsClient(
@@ -916,7 +1134,7 @@ def test_enable_xpn_resource_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.enable_xpn_resource(request)
+        response = client.enable_xpn_resource_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -944,7 +1162,80 @@ def test_enable_xpn_resource_rest(
     assert response.zone == "zone_value"
 
 
-def test_enable_xpn_resource_rest_bad_request(
+def test_enable_xpn_resource_unary_rest_required_fields(
+    request_type=compute.EnableXpnResourceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._enable_xpn_resource_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._enable_xpn_resource_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.enable_xpn_resource_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_enable_xpn_resource_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.EnableXpnResourceProjectRequest
 ):
     client = ProjectsClient(
@@ -969,14 +1260,14 @@ def test_enable_xpn_resource_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.enable_xpn_resource(request)
+        client.enable_xpn_resource_unary(request)
 
 
-def test_enable_xpn_resource_rest_from_dict():
-    test_enable_xpn_resource_rest(request_type=dict)
+def test_enable_xpn_resource_unary_rest_from_dict():
+    test_enable_xpn_resource_unary_rest(request_type=dict)
 
 
-def test_enable_xpn_resource_rest_flattened(transport: str = "rest"):
+def test_enable_xpn_resource_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1005,7 +1296,7 @@ def test_enable_xpn_resource_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.enable_xpn_resource(**mock_args)
+        client.enable_xpn_resource_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1018,7 +1309,7 @@ def test_enable_xpn_resource_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_enable_xpn_resource_rest_flattened_error(transport: str = "rest"):
+def test_enable_xpn_resource_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1026,7 +1317,7 @@ def test_enable_xpn_resource_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.enable_xpn_resource(
+        client.enable_xpn_resource_unary(
             compute.EnableXpnResourceProjectRequest(),
             project="project_value",
             projects_enable_xpn_resource_request_resource=compute.ProjectsEnableXpnResourceRequest(
@@ -1080,6 +1371,72 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetProjectReques
     assert response.name == "name_value"
     assert response.self_link == "self_link_value"
     assert response.xpn_project_status == "xpn_project_status_value"
+
+
+def test_get_rest_required_fields(request_type=compute.GetProjectRequest):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._get_get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Project()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Project.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_rest_bad_request(
@@ -1206,6 +1563,78 @@ def test_get_xpn_host_rest(
     assert response.xpn_project_status == "xpn_project_status_value"
 
 
+def test_get_xpn_host_rest_required_fields(
+    request_type=compute.GetXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._get_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._get_xpn_host_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Project()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Project.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_xpn_host(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_xpn_host_rest_bad_request(
     transport: str = "rest", request_type=compute.GetXpnHostProjectRequest
 ):
@@ -1315,6 +1744,78 @@ def test_get_xpn_resources_rest(
     assert response.next_page_token == "next_page_token_value"
 
 
+def test_get_xpn_resources_rest_required_fields(
+    request_type=compute.GetXpnResourcesProjectsRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._get_xpn_resources_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._get_xpn_resources_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ProjectsGetXpnResources()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ProjectsGetXpnResources.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_xpn_resources(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_xpn_resources_rest_bad_request(
     transport: str = "rest", request_type=compute.GetXpnResourcesProjectsRequest
 ):
@@ -1392,8 +1893,10 @@ def test_get_xpn_resources_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_xpn_resources_rest_pager():
-    client = ProjectsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_get_xpn_resources_rest_pager(transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1479,6 +1982,79 @@ def test_list_xpn_hosts_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_xpn_hosts_rest_required_fields(
+    request_type=compute.ListXpnHostsProjectsRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._list_xpn_hosts_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._list_xpn_hosts_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.XpnHostList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.XpnHostList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_xpn_hosts(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_xpn_hosts_rest_bad_request(
@@ -1570,8 +2146,10 @@ def test_list_xpn_hosts_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_xpn_hosts_rest_pager():
-    client = ProjectsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_xpn_hosts_rest_pager(transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1614,7 +2192,7 @@ def test_list_xpn_hosts_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_move_disk_rest(
+def test_move_disk_unary_rest(
     transport: str = "rest", request_type=compute.MoveDiskProjectRequest
 ):
     client = ProjectsClient(
@@ -1662,7 +2240,7 @@ def test_move_disk_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.move_disk(request)
+        response = client.move_disk_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1690,7 +2268,80 @@ def test_move_disk_rest(
     assert response.zone == "zone_value"
 
 
-def test_move_disk_rest_bad_request(
+def test_move_disk_unary_rest_required_fields(
+    request_type=compute.MoveDiskProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._move_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._move_disk_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.move_disk_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_move_disk_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.MoveDiskProjectRequest
 ):
     client = ProjectsClient(
@@ -1713,14 +2364,14 @@ def test_move_disk_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.move_disk(request)
+        client.move_disk_unary(request)
 
 
-def test_move_disk_rest_from_dict():
-    test_move_disk_rest(request_type=dict)
+def test_move_disk_unary_rest_from_dict():
+    test_move_disk_unary_rest(request_type=dict)
 
 
-def test_move_disk_rest_flattened(transport: str = "rest"):
+def test_move_disk_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1749,7 +2400,7 @@ def test_move_disk_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.move_disk(**mock_args)
+        client.move_disk_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1762,7 +2413,7 @@ def test_move_disk_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_move_disk_rest_flattened_error(transport: str = "rest"):
+def test_move_disk_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1770,7 +2421,7 @@ def test_move_disk_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.move_disk(
+        client.move_disk_unary(
             compute.MoveDiskProjectRequest(),
             project="project_value",
             disk_move_request_resource=compute.DiskMoveRequest(
@@ -1779,7 +2430,7 @@ def test_move_disk_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_move_instance_rest(
+def test_move_instance_unary_rest(
     transport: str = "rest", request_type=compute.MoveInstanceProjectRequest
 ):
     client = ProjectsClient(
@@ -1827,7 +2478,7 @@ def test_move_instance_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.move_instance(request)
+        response = client.move_instance_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -1855,7 +2506,80 @@ def test_move_instance_rest(
     assert response.zone == "zone_value"
 
 
-def test_move_instance_rest_bad_request(
+def test_move_instance_unary_rest_required_fields(
+    request_type=compute.MoveInstanceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._move_instance_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._move_instance_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.move_instance_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_move_instance_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.MoveInstanceProjectRequest
 ):
     client = ProjectsClient(
@@ -1878,14 +2602,14 @@ def test_move_instance_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.move_instance(request)
+        client.move_instance_unary(request)
 
 
-def test_move_instance_rest_from_dict():
-    test_move_instance_rest(request_type=dict)
+def test_move_instance_unary_rest_from_dict():
+    test_move_instance_unary_rest(request_type=dict)
 
 
-def test_move_instance_rest_flattened(transport: str = "rest"):
+def test_move_instance_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1914,7 +2638,7 @@ def test_move_instance_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.move_instance(**mock_args)
+        client.move_instance_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -1927,7 +2651,7 @@ def test_move_instance_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_move_instance_rest_flattened_error(transport: str = "rest"):
+def test_move_instance_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -1935,7 +2659,7 @@ def test_move_instance_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.move_instance(
+        client.move_instance_unary(
             compute.MoveInstanceProjectRequest(),
             project="project_value",
             instance_move_request_resource=compute.InstanceMoveRequest(
@@ -1944,7 +2668,7 @@ def test_move_instance_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_common_instance_metadata_rest(
+def test_set_common_instance_metadata_unary_rest(
     transport: str = "rest",
     request_type=compute.SetCommonInstanceMetadataProjectRequest,
 ):
@@ -1993,7 +2717,7 @@ def test_set_common_instance_metadata_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_common_instance_metadata(request)
+        response = client.set_common_instance_metadata_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -2021,7 +2745,80 @@ def test_set_common_instance_metadata_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_common_instance_metadata_rest_bad_request(
+def test_set_common_instance_metadata_unary_rest_required_fields(
+    request_type=compute.SetCommonInstanceMetadataProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._set_common_instance_metadata_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._set_common_instance_metadata_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_common_instance_metadata_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_common_instance_metadata_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SetCommonInstanceMetadataProjectRequest,
 ):
@@ -2045,14 +2842,14 @@ def test_set_common_instance_metadata_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_common_instance_metadata(request)
+        client.set_common_instance_metadata_unary(request)
 
 
-def test_set_common_instance_metadata_rest_from_dict():
-    test_set_common_instance_metadata_rest(request_type=dict)
+def test_set_common_instance_metadata_unary_rest_from_dict():
+    test_set_common_instance_metadata_unary_rest(request_type=dict)
 
 
-def test_set_common_instance_metadata_rest_flattened(transport: str = "rest"):
+def test_set_common_instance_metadata_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2079,7 +2876,7 @@ def test_set_common_instance_metadata_rest_flattened(transport: str = "rest"):
             metadata_resource=compute.Metadata(fingerprint="fingerprint_value"),
         )
         mock_args.update(sample_request)
-        client.set_common_instance_metadata(**mock_args)
+        client.set_common_instance_metadata_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -2092,7 +2889,9 @@ def test_set_common_instance_metadata_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_common_instance_metadata_rest_flattened_error(transport: str = "rest"):
+def test_set_common_instance_metadata_unary_rest_flattened_error(
+    transport: str = "rest",
+):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2100,14 +2899,14 @@ def test_set_common_instance_metadata_rest_flattened_error(transport: str = "res
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_common_instance_metadata(
+        client.set_common_instance_metadata_unary(
             compute.SetCommonInstanceMetadataProjectRequest(),
             project="project_value",
             metadata_resource=compute.Metadata(fingerprint="fingerprint_value"),
         )
 
 
-def test_set_default_network_tier_rest(
+def test_set_default_network_tier_unary_rest(
     transport: str = "rest", request_type=compute.SetDefaultNetworkTierProjectRequest
 ):
     client = ProjectsClient(
@@ -2155,7 +2954,7 @@ def test_set_default_network_tier_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_default_network_tier(request)
+        response = client.set_default_network_tier_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -2183,7 +2982,80 @@ def test_set_default_network_tier_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_default_network_tier_rest_bad_request(
+def test_set_default_network_tier_unary_rest_required_fields(
+    request_type=compute.SetDefaultNetworkTierProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._set_default_network_tier_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._set_default_network_tier_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_default_network_tier_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_default_network_tier_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetDefaultNetworkTierProjectRequest
 ):
     client = ProjectsClient(
@@ -2206,14 +3078,14 @@ def test_set_default_network_tier_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_default_network_tier(request)
+        client.set_default_network_tier_unary(request)
 
 
-def test_set_default_network_tier_rest_from_dict():
-    test_set_default_network_tier_rest(request_type=dict)
+def test_set_default_network_tier_unary_rest_from_dict():
+    test_set_default_network_tier_unary_rest(request_type=dict)
 
 
-def test_set_default_network_tier_rest_flattened(transport: str = "rest"):
+def test_set_default_network_tier_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2242,7 +3114,7 @@ def test_set_default_network_tier_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_default_network_tier(**mock_args)
+        client.set_default_network_tier_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -2255,7 +3127,7 @@ def test_set_default_network_tier_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_default_network_tier_rest_flattened_error(transport: str = "rest"):
+def test_set_default_network_tier_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2263,7 +3135,7 @@ def test_set_default_network_tier_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_default_network_tier(
+        client.set_default_network_tier_unary(
             compute.SetDefaultNetworkTierProjectRequest(),
             project="project_value",
             projects_set_default_network_tier_request_resource=compute.ProjectsSetDefaultNetworkTierRequest(
@@ -2272,7 +3144,7 @@ def test_set_default_network_tier_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_usage_export_bucket_rest(
+def test_set_usage_export_bucket_unary_rest(
     transport: str = "rest", request_type=compute.SetUsageExportBucketProjectRequest
 ):
     client = ProjectsClient(
@@ -2320,7 +3192,7 @@ def test_set_usage_export_bucket_rest(
         json_return_value = compute.Operation.to_json(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
-        response = client.set_usage_export_bucket(request)
+        response = client.set_usage_export_bucket_unary(request)
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.Operation)
@@ -2348,7 +3220,80 @@ def test_set_usage_export_bucket_rest(
     assert response.zone == "zone_value"
 
 
-def test_set_usage_export_bucket_rest_bad_request(
+def test_set_usage_export_bucket_unary_rest_required_fields(
+    request_type=compute.SetUsageExportBucketProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class._set_usage_export_bucket_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class._set_usage_export_bucket_get_unset_required_fields(
+        jsonified_request
+    )
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_usage_export_bucket_unary(request)
+
+            expected_params = [("project", "")]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_usage_export_bucket_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetUsageExportBucketProjectRequest
 ):
     client = ProjectsClient(
@@ -2371,14 +3316,14 @@ def test_set_usage_export_bucket_rest_bad_request(
         response_value.status_code = 400
         response_value.request = Request()
         req.return_value = response_value
-        client.set_usage_export_bucket(request)
+        client.set_usage_export_bucket_unary(request)
 
 
-def test_set_usage_export_bucket_rest_from_dict():
-    test_set_usage_export_bucket_rest(request_type=dict)
+def test_set_usage_export_bucket_unary_rest_from_dict():
+    test_set_usage_export_bucket_unary_rest(request_type=dict)
 
 
-def test_set_usage_export_bucket_rest_flattened(transport: str = "rest"):
+def test_set_usage_export_bucket_unary_rest_flattened(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2407,7 +3352,7 @@ def test_set_usage_export_bucket_rest_flattened(transport: str = "rest"):
             ),
         )
         mock_args.update(sample_request)
-        client.set_usage_export_bucket(**mock_args)
+        client.set_usage_export_bucket_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
         # request object values.
@@ -2420,7 +3365,7 @@ def test_set_usage_export_bucket_rest_flattened(transport: str = "rest"):
         )
 
 
-def test_set_usage_export_bucket_rest_flattened_error(transport: str = "rest"):
+def test_set_usage_export_bucket_unary_rest_flattened_error(transport: str = "rest"):
     client = ProjectsClient(
         credentials=ga_credentials.AnonymousCredentials(), transport=transport,
     )
@@ -2428,7 +3373,7 @@ def test_set_usage_export_bucket_rest_flattened_error(transport: str = "rest"):
     # Attempting to call a method with both a request object and flattened
     # fields is an error.
     with pytest.raises(ValueError):
-        client.set_usage_export_bucket(
+        client.set_usage_export_bucket_unary(
             compute.SetUsageExportBucketProjectRequest(),
             project="project_value",
             usage_export_location_resource=compute.UsageExportLocation(
