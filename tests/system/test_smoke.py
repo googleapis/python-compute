@@ -234,7 +234,9 @@ class TestComputeFirewalls(TestBase):
             source_ranges=["0.0.0.0/0"],
             allowed=[Allowed(I_p_protocol="tcp", ports=["80"])],
         )
-        op = client.insert_unary(project=self.DEFAULT_PROJECT, firewall_resource=firewall)
+        op = client.insert_unary(
+            project=self.DEFAULT_PROJECT, firewall_resource=firewall
+        )
         try:
             self.wait_for_global_operation(op.name)
 
