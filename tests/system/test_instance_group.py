@@ -80,7 +80,7 @@ class TestInstanceGroups(TestBase):
             project=self.DEFAULT_PROJECT,
             instance_resource=instance,
         )
-        operation = self.inst_client.insert(request=request)
+        operation = self.inst_client.insert_unary(request=request)
         self.wait_for_zonal_operation(operation.name)
         self.instances.append(self.name)
 
