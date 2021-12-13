@@ -95,7 +95,9 @@ def create_firewall_rule(
     # firewall_rule.priority = 0
 
     firewall_client = compute_v1.FirewallsClient()
-    op = firewall_client.insert_unary(project=project_id, firewall_resource=firewall_rule)
+    op = firewall_client.insert_unary(
+        project=project_id, firewall_resource=firewall_rule
+    )
 
     op_client = compute_v1.GlobalOperationsClient()
     op_client.wait(project=project_id, operation=op.name)
@@ -144,7 +146,9 @@ def delete_firewall_rule(project_id: str, firewall_rule_name: str):
         firewall_rule_name: name of the firewall rule you want to delete.
     """
     firewall_client = compute_v1.FirewallsClient()
-    operation = firewall_client.delete_unary(project=project_id, firewall=firewall_rule_name)
+    operation = firewall_client.delete_unary(
+        project=project_id, firewall=firewall_rule_name
+    )
 
     operation_client = compute_v1.GlobalOperationsClient()
     operation_client.wait(project=project_id, operation=operation.name)

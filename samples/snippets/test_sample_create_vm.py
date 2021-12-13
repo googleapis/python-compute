@@ -46,7 +46,9 @@ def src_disk(request):
     disk = compute_v1.Disk()
     disk.source_image = get_active_debian().self_link
     disk.name = "test-disk-" + uuid.uuid4().hex[:10]
-    op = disk_client.insert_unary(project=PROJECT, zone=INSTANCE_ZONE, disk_resource=disk)
+    op = disk_client.insert_unary(
+        project=PROJECT, zone=INSTANCE_ZONE, disk_resource=disk
+    )
 
     wait_for_operation(op, PROJECT)
     try:
@@ -54,7 +56,9 @@ def src_disk(request):
         request.cls.disk = disk
         yield disk
     finally:
-        op = disk_client.delete_unary(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
+        op = disk_client.delete_unary(
+            project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name
+        )
         wait_for_operation(op, PROJECT)
 
 

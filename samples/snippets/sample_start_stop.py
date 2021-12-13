@@ -113,7 +113,9 @@ def stop_instance(project_id: str, zone: str, instance_name: str):
     instance_client = compute_v1.InstancesClient()
     op_client = compute_v1.ZoneOperationsClient()
 
-    op = instance_client.stop_unary(project=project_id, zone=zone, instance=instance_name)
+    op = instance_client.stop_unary(
+        project=project_id, zone=zone, instance=instance_name
+    )
 
     while op.status != compute_v1.Operation.Status.DONE:
         op = op_client.wait(operation=op.name, zone=zone, project=project_id)
@@ -136,7 +138,9 @@ def reset_instance(project_id: str, zone: str, instance_name: str):
     instance_client = compute_v1.InstancesClient()
     op_client = compute_v1.ZoneOperationsClient()
 
-    op = instance_client.reset_unary(project=project_id, zone=zone, instance=instance_name)
+    op = instance_client.reset_unary(
+        project=project_id, zone=zone, instance=instance_name
+    )
 
     while op.status != compute_v1.Operation.Status.DONE:
         op = op_client.wait(operation=op.name, zone=zone, project=project_id)
