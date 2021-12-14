@@ -246,7 +246,7 @@ def create_instance(
     disk.initialize_params = initialize_params
     disk.auto_delete = True
     disk.boot = True
-    disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT
+    disk.type_ = compute_v1.AttachedDisk.Type.PERSISTENT.name
 
     # Use the network interface provided in the network_name argument.
     network_interface = compute_v1.NetworkInterface()
@@ -269,7 +269,7 @@ def create_instance(
     print(
         f"Creating the {instance_name} instance of type {instance.machine_type} in {zone}..."
     )
-    operation = instance_client.insert(request=request)
+    operation = instance_client.insert_unary(request=request)
     while operation.status != compute_v1.Operation.Status.DONE:
         operation = operation_client.wait(
             operation=operation.name, zone=zone, project=project_id
@@ -491,12 +491,12 @@ def add_extended_memory_to_instance(
     )
 
     # Make sure that the machine is turned off
-    if instance.status not in (instance.Status.TERMINATED, instance.Status.STOPPED):
-        op = instance_client.stop(project=project_id, zone=zone, instance=instance_name)
+    if instance.status not in (instance.Status.TERMINATED.name, instance.Status.STOPPED.name):
+        op = instance_client.stop_unary(project=project_id, zone=zone, instance=instance_name)
         operation_client.wait(project=project_id, zone=zone, operation=op.name)
         while instance.status not in (
-            instance.Status.TERMINATED,
-            instance.Status.STOPPED,
+            instance.Status.TERMINATED.name,
+            instance.Status.STOPPED.name,
         ):
             # Waiting for the instance to be turned off.
             instance = instance_client.get(
@@ -512,7 +512,7 @@ def add_extended_memory_to_instance(
     # cmt.memory_mb = new_memory
     # cmt.extra_memory_used = True
     # instance.machine_type = str(cmt)
-    op = instance_client.update(
+    op = instance_client.update_unary(
         project=project_id,
         zone=zone,
         instance=instance_name,
