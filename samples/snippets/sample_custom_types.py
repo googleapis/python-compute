@@ -491,8 +491,13 @@ def add_extended_memory_to_instance(
     )
 
     # Make sure that the machine is turned off
-    if instance.status not in (instance.Status.TERMINATED.name, instance.Status.STOPPED.name):
-        op = instance_client.stop_unary(project=project_id, zone=zone, instance=instance_name)
+    if instance.status not in (
+        instance.Status.TERMINATED.name,
+        instance.Status.STOPPED.name,
+    ):
+        op = instance_client.stop_unary(
+            project=project_id, zone=zone, instance=instance_name
+        )
         operation_client.wait(project=project_id, zone=zone, operation=op.name)
         while instance.status not in (
             instance.Status.TERMINATED.name,
