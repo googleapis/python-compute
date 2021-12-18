@@ -1010,6 +1010,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         *,
         project: str = None,
         security_policy: str = None,
+        priority: int = None,
         security_policy_rule_resource: compute.SecurityPolicyRule = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
@@ -1032,6 +1033,12 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 update.
 
                 This corresponds to the ``security_policy`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            priority (int):
+                Priority of rule to update.
+
+                This corresponds to the ``priority`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             security_policy_rule_resource (google.cloud.compute_v1.types.SecurityPolicyRule):
@@ -1068,7 +1075,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
-            [project, security_policy, security_policy_rule_resource]
+            [project, security_policy, priority, security_policy_rule_resource]
         )
         if request is not None and has_flattened_params:
             raise ValueError(
@@ -1090,6 +1097,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 request.security_policy = security_policy
             if security_policy_rule_resource is not None:
                 request.security_policy_rule_resource = security_policy_rule_resource
+            if priority is not None:
+                request.priority = priority
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -1107,6 +1116,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         *,
         project: str = None,
         security_policy: str = None,
+        priority: int = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1123,6 +1133,11 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 This corresponds to the ``project`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
+            priority (int):
+                Priority of rule to update.
+
+                This corresponds to the ``priority`` field
+                on the ``request`` instance; if ``request`` is provided, this
             security_policy (str):
                 Name of the security policy to
                 update.
@@ -1158,7 +1173,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([project, security_policy])
+        has_flattened_params = any([project, security_policy, priority])
         if request is not None and has_flattened_params:
             raise ValueError(
                 "If the `request` argument is set, then none of "
@@ -1177,6 +1192,8 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
                 request.project = project
             if security_policy is not None:
                 request.security_policy = security_policy
+            if priority is not None:
+                request.priority = priority
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
