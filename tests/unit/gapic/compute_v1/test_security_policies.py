@@ -954,7 +954,9 @@ def test_get_rule_rest_flattened(transport: str = "rest"):
 
         # get truthy value for each flattened field
         mock_args = dict(
-            project="project_value", security_policy="security_policy_value",
+            project="project_value",
+            security_policy="security_policy_value",
+            priority=898,
         )
         mock_args.update(sample_request)
         client.get_rule(**mock_args)
@@ -982,6 +984,7 @@ def test_get_rule_rest_flattened_error(transport: str = "rest"):
             compute.GetRuleSecurityPolicyRequest(),
             project="project_value",
             security_policy="security_policy_value",
+            priority=898,
         )
 
 
@@ -1758,6 +1761,7 @@ def test_patch_rule_unary_rest_flattened(transport: str = "rest"):
             security_policy_rule_resource=compute.SecurityPolicyRule(
                 action="action_value"
             ),
+            priority=898,
         )
         mock_args.update(sample_request)
         client.patch_rule_unary(**mock_args)
@@ -1788,6 +1792,7 @@ def test_patch_rule_unary_rest_flattened_error(transport: str = "rest"):
             security_policy_rule_resource=compute.SecurityPolicyRule(
                 action="action_value"
             ),
+            priority=898,
         )
 
 
@@ -1914,7 +1919,9 @@ def test_remove_rule_unary_rest_flattened(transport: str = "rest"):
 
         # get truthy value for each flattened field
         mock_args = dict(
-            project="project_value", security_policy="security_policy_value",
+            project="project_value",
+            security_policy="security_policy_value",
+            priority=898,
         )
         mock_args.update(sample_request)
         client.remove_rule_unary(**mock_args)
@@ -1942,6 +1949,7 @@ def test_remove_rule_unary_rest_flattened_error(transport: str = "rest"):
             compute.RemoveRuleSecurityPolicyRequest(),
             project="project_value",
             security_policy="security_policy_value",
+            priority=898,
         )
 
 
