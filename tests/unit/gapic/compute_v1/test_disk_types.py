@@ -18,12 +18,13 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from requests import Response
-from requests import Request
+from requests import Request, PreparedRequest
 from requests.sessions import Session
 
 from google.api_core import client_options
@@ -221,20 +222,20 @@ def test_disk_types_client_client_options(
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -274,7 +275,7 @@ def test_disk_types_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -362,7 +363,7 @@ def test_disk_types_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -386,7 +387,7 @@ def test_disk_types_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -399,11 +400,41 @@ def test_disk_types_client_client_options_credentials_file(
         )
 
 
-def test_aggregated_list_rest(
-    transport: str = "rest", request_type=compute.AggregatedListDiskTypesRequest
-):
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListDiskTypesRequest, dict,]
+)
+def test_aggregated_list_rest(request_type, transport: str = "rest"):
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.AggregatedListDiskTypesRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.DiskTypeAggregatedList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+            unreachables=["unreachables_value"],
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.DiskTypeAggregatedList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.aggregated_list(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListDiskTypesRequest, dict,]
+)
+def test_aggregated_list_rest(request_type):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -411,7 +442,7 @@ def test_aggregated_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskTypeAggregatedList(
             id="id_value",
@@ -438,6 +469,80 @@ def test_aggregated_list_rest(
     assert response.unreachables == ["unreachables_value"]
 
 
+def test_aggregated_list_rest_required_fields(
+    request_type=compute.AggregatedListDiskTypesRequest,
+):
+    transport_class = transports.DiskTypesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.DiskTypeAggregatedList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.DiskTypeAggregatedList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.aggregated_list(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_aggregated_list_rest_bad_request(
     transport: str = "rest", request_type=compute.AggregatedListDiskTypesRequest
 ):
@@ -461,17 +566,13 @@ def test_aggregated_list_rest_bad_request(
         client.aggregated_list(request)
 
 
-def test_aggregated_list_rest_from_dict():
-    test_aggregated_list_rest(request_type=dict)
-
-
-def test_aggregated_list_rest_flattened(transport: str = "rest"):
+def test_aggregated_list_rest_flattened():
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskTypeAggregatedList()
 
@@ -515,8 +616,10 @@ def test_aggregated_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_aggregated_list_rest_pager():
-    client = DiskTypesClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_aggregated_list_rest_pager(transport: str = "rest"):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -576,9 +679,44 @@ def test_aggregated_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_get_rest(transport: str = "rest", request_type=compute.GetDiskTypeRequest):
+@pytest.mark.parametrize("request_type", [compute.GetDiskTypeRequest, dict,])
+def test_get_rest(request_type, transport: str = "rest"):
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetDiskTypeRequest(
+        {"project": "sample1", "zone": "sample2", "disk_type": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.DiskType(
+            creation_timestamp="creation_timestamp_value",
+            default_disk_size_gb=2097,
+            description="description_value",
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            region="region_value",
+            self_link="self_link_value",
+            valid_disk_size="valid_disk_size_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.DiskType.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetDiskTypeRequest, dict,])
+def test_get_rest(request_type):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -586,7 +724,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetDiskTypeReque
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskType(
             creation_timestamp="creation_timestamp_value",
@@ -623,6 +761,94 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetDiskTypeReque
     assert response.zone == "zone_value"
 
 
+def test_get_rest_required_fields(request_type=compute.GetDiskTypeRequest):
+    transport_class = transports.DiskTypesRestTransport
+
+    request_init = {}
+    request_init["disk_type"] = ""
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "diskType" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "diskType" in jsonified_request
+    assert jsonified_request["diskType"] == request_init["disk_type"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["diskType"] = "disk_type_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "diskType" in jsonified_request
+    assert jsonified_request["diskType"] == "disk_type_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.DiskType()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.DiskType.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [
+                ("diskType", "",),
+                ("project", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetDiskTypeRequest
 ):
@@ -646,17 +872,13 @@ def test_get_rest_bad_request(
         client.get(request)
 
 
-def test_get_rest_from_dict():
-    test_get_rest(request_type=dict)
-
-
-def test_get_rest_flattened(transport: str = "rest"):
+def test_get_rest_flattened():
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskType()
 
@@ -709,9 +931,42 @@ def test_get_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest(transport: str = "rest", request_type=compute.ListDiskTypesRequest):
+def test_get_rest_error():
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.ListDiskTypesRequest, dict,])
+def test_list_rest(request_type, transport: str = "rest"):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ListDiskTypesRequest({"project": "sample1", "zone": "sample2"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.DiskTypeList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.DiskTypeList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.list(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ListDiskTypesRequest, dict,])
+def test_list_rest(request_type):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -719,7 +974,7 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListDiskTypesRe
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskTypeList(
             id="id_value",
@@ -742,6 +997,86 @@ def test_list_rest(transport: str = "rest", request_type=compute.ListDiskTypesRe
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListDiskTypesRequest):
+    transport_class = transports.DiskTypesRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.DiskTypeList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.DiskTypeList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [
+                ("project", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -767,17 +1102,13 @@ def test_list_rest_bad_request(
         client.list(request)
 
 
-def test_list_rest_from_dict():
-    test_list_rest(request_type=dict)
-
-
-def test_list_rest_flattened(transport: str = "rest"):
+def test_list_rest_flattened():
     client = DiskTypesClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.DiskTypeList()
 
@@ -821,8 +1152,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = DiskTypesClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = DiskTypesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1122,7 +1455,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(

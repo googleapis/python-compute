@@ -18,12 +18,13 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from requests import Response
-from requests import Request
+from requests import Request, PreparedRequest
 from requests.sessions import Session
 
 from google.api_core import client_options
@@ -230,20 +231,20 @@ def test_region_commitments_client_client_options(
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -295,7 +296,7 @@ def test_region_commitments_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -383,7 +384,7 @@ def test_region_commitments_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -407,7 +408,7 @@ def test_region_commitments_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -420,11 +421,41 @@ def test_region_commitments_client_client_options_credentials_file(
         )
 
 
-def test_aggregated_list_rest(
-    transport: str = "rest", request_type=compute.AggregatedListRegionCommitmentsRequest
-):
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListRegionCommitmentsRequest, dict,]
+)
+def test_aggregated_list_rest(request_type, transport: str = "rest"):
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.AggregatedListRegionCommitmentsRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.CommitmentAggregatedList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+            unreachables=["unreachables_value"],
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.CommitmentAggregatedList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.aggregated_list(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListRegionCommitmentsRequest, dict,]
+)
+def test_aggregated_list_rest(request_type):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -432,7 +463,7 @@ def test_aggregated_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.CommitmentAggregatedList(
             id="id_value",
@@ -459,6 +490,80 @@ def test_aggregated_list_rest(
     assert response.unreachables == ["unreachables_value"]
 
 
+def test_aggregated_list_rest_required_fields(
+    request_type=compute.AggregatedListRegionCommitmentsRequest,
+):
+    transport_class = transports.RegionCommitmentsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.CommitmentAggregatedList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.CommitmentAggregatedList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.aggregated_list(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_aggregated_list_rest_bad_request(
     transport: str = "rest", request_type=compute.AggregatedListRegionCommitmentsRequest
 ):
@@ -482,17 +587,13 @@ def test_aggregated_list_rest_bad_request(
         client.aggregated_list(request)
 
 
-def test_aggregated_list_rest_from_dict():
-    test_aggregated_list_rest(request_type=dict)
-
-
-def test_aggregated_list_rest_flattened(transport: str = "rest"):
+def test_aggregated_list_rest_flattened():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.CommitmentAggregatedList()
 
@@ -536,8 +637,10 @@ def test_aggregated_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_aggregated_list_rest_pager():
-    client = RegionCommitmentsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_aggregated_list_rest_pager(transport: str = "rest"):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -600,11 +703,48 @@ def test_aggregated_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_get_rest(
-    transport: str = "rest", request_type=compute.GetRegionCommitmentRequest
-):
+@pytest.mark.parametrize("request_type", [compute.GetRegionCommitmentRequest, dict,])
+def test_get_rest(request_type, transport: str = "rest"):
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetRegionCommitmentRequest(
+        {"project": "sample1", "region": "sample2", "commitment": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Commitment(
+            category="category_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_timestamp="end_timestamp_value",
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            plan="plan_value",
+            region="region_value",
+            self_link="self_link_value",
+            start_timestamp="start_timestamp_value",
+            status="status_value",
+            status_message="status_message_value",
+            type_="type__value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Commitment.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetRegionCommitmentRequest, dict,])
+def test_get_rest(request_type):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -612,7 +752,7 @@ def test_get_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Commitment(
             category="category_value",
@@ -657,6 +797,94 @@ def test_get_rest(
     assert response.type_ == "type__value"
 
 
+def test_get_rest_required_fields(request_type=compute.GetRegionCommitmentRequest):
+    transport_class = transports.RegionCommitmentsRestTransport
+
+    request_init = {}
+    request_init["commitment"] = ""
+    request_init["project"] = ""
+    request_init["region"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "commitment" not in jsonified_request
+    assert "project" not in jsonified_request
+    assert "region" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "commitment" in jsonified_request
+    assert jsonified_request["commitment"] == request_init["commitment"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == request_init["region"]
+
+    jsonified_request["commitment"] = "commitment_value"
+    jsonified_request["project"] = "project_value"
+    jsonified_request["region"] = "region_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "commitment" in jsonified_request
+    assert jsonified_request["commitment"] == "commitment_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == "region_value"
+
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Commitment()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Commitment.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [
+                ("commitment", "",),
+                ("project", "",),
+                ("region", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetRegionCommitmentRequest
 ):
@@ -680,17 +908,13 @@ def test_get_rest_bad_request(
         client.get(request)
 
 
-def test_get_rest_from_dict():
-    test_get_rest(request_type=dict)
-
-
-def test_get_rest_flattened(transport: str = "rest"):
+def test_get_rest_flattened():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Commitment()
 
@@ -745,20 +969,131 @@ def test_get_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_insert_unary_rest(
-    transport: str = "rest", request_type=compute.InsertRegionCommitmentRequest
-):
+def test_get_rest_error():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertRegionCommitmentRequest, dict,])
+def test_insert_unary_rest(request_type, transport: str = "rest"):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.InsertRegionCommitmentRequest(
+        {"project": "sample1", "region": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.insert_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertRegionCommitmentRequest, dict,])
+def test_insert_unary_rest(request_type):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "region": "sample2"}
-    request_init["commitment_resource"] = compute.Commitment(category="category_value")
+    request_init["commitment_resource"] = {
+        "category": "category_value",
+        "creation_timestamp": "creation_timestamp_value",
+        "description": "description_value",
+        "end_timestamp": "end_timestamp_value",
+        "id": 205,
+        "kind": "kind_value",
+        "license_resource": {
+            "amount": 660,
+            "cores_per_license": "cores_per_license_value",
+            "license_": "license__value",
+        },
+        "name": "name_value",
+        "plan": "plan_value",
+        "region": "region_value",
+        "reservations": [
+            {
+                "commitment": "commitment_value",
+                "creation_timestamp": "creation_timestamp_value",
+                "description": "description_value",
+                "id": 205,
+                "kind": "kind_value",
+                "name": "name_value",
+                "satisfies_pzs": True,
+                "self_link": "self_link_value",
+                "specific_reservation": {
+                    "count": 553,
+                    "in_use_count": 1291,
+                    "instance_properties": {
+                        "guest_accelerators": [
+                            {
+                                "accelerator_count": 1805,
+                                "accelerator_type": "accelerator_type_value",
+                            }
+                        ],
+                        "local_ssds": [
+                            {"disk_size_gb": 1261, "interface": "interface_value"}
+                        ],
+                        "location_hint": "location_hint_value",
+                        "machine_type": "machine_type_value",
+                        "min_cpu_platform": "min_cpu_platform_value",
+                    },
+                },
+                "specific_reservation_required": True,
+                "status": "status_value",
+                "zone": "zone_value",
+            }
+        ],
+        "resources": [
+            {
+                "accelerator_type": "accelerator_type_value",
+                "amount": 660,
+                "type_": "type__value",
+            }
+        ],
+        "self_link": "self_link_value",
+        "start_timestamp": "start_timestamp_value",
+        "status": "status_value",
+        "status_message": "status_message_value",
+        "type_": "type__value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -819,6 +1154,89 @@ def test_insert_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_insert_unary_rest_required_fields(
+    request_type=compute.InsertRegionCommitmentRequest,
+):
+    transport_class = transports.RegionCommitmentsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["region"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "region" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == request_init["region"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["region"] = "region_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == "region_value"
+
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.insert_unary(request)
+
+            expected_params = [
+                ("project", "",),
+                ("region", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertRegionCommitmentRequest
 ):
@@ -828,7 +1246,67 @@ def test_insert_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "region": "sample2"}
-    request_init["commitment_resource"] = compute.Commitment(category="category_value")
+    request_init["commitment_resource"] = {
+        "category": "category_value",
+        "creation_timestamp": "creation_timestamp_value",
+        "description": "description_value",
+        "end_timestamp": "end_timestamp_value",
+        "id": 205,
+        "kind": "kind_value",
+        "license_resource": {
+            "amount": 660,
+            "cores_per_license": "cores_per_license_value",
+            "license_": "license__value",
+        },
+        "name": "name_value",
+        "plan": "plan_value",
+        "region": "region_value",
+        "reservations": [
+            {
+                "commitment": "commitment_value",
+                "creation_timestamp": "creation_timestamp_value",
+                "description": "description_value",
+                "id": 205,
+                "kind": "kind_value",
+                "name": "name_value",
+                "satisfies_pzs": True,
+                "self_link": "self_link_value",
+                "specific_reservation": {
+                    "count": 553,
+                    "in_use_count": 1291,
+                    "instance_properties": {
+                        "guest_accelerators": [
+                            {
+                                "accelerator_count": 1805,
+                                "accelerator_type": "accelerator_type_value",
+                            }
+                        ],
+                        "local_ssds": [
+                            {"disk_size_gb": 1261, "interface": "interface_value"}
+                        ],
+                        "location_hint": "location_hint_value",
+                        "machine_type": "machine_type_value",
+                        "min_cpu_platform": "min_cpu_platform_value",
+                    },
+                },
+                "specific_reservation_required": True,
+                "status": "status_value",
+                "zone": "zone_value",
+            }
+        ],
+        "resources": [
+            {
+                "accelerator_type": "accelerator_type_value",
+                "amount": 660,
+                "type_": "type__value",
+            }
+        ],
+        "self_link": "self_link_value",
+        "start_timestamp": "start_timestamp_value",
+        "status": "status_value",
+        "status_message": "status_message_value",
+        "type_": "type__value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -843,17 +1321,13 @@ def test_insert_unary_rest_bad_request(
         client.insert_unary(request)
 
 
-def test_insert_unary_rest_from_dict():
-    test_insert_unary_rest(request_type=dict)
-
-
-def test_insert_unary_rest_flattened(transport: str = "rest"):
+def test_insert_unary_rest_flattened():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -904,11 +1378,44 @@ def test_insert_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest(
-    transport: str = "rest", request_type=compute.ListRegionCommitmentsRequest
-):
+def test_insert_unary_rest_error():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.ListRegionCommitmentsRequest, dict,])
+def test_list_rest(request_type, transport: str = "rest"):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ListRegionCommitmentsRequest(
+        {"project": "sample1", "region": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.CommitmentList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.CommitmentList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.list(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ListRegionCommitmentsRequest, dict,])
+def test_list_rest(request_type):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -916,7 +1423,7 @@ def test_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.CommitmentList(
             id="id_value",
@@ -939,6 +1446,86 @@ def test_list_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListRegionCommitmentsRequest):
+    transport_class = transports.RegionCommitmentsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["region"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "region" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == request_init["region"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["region"] = "region_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "region" in jsonified_request
+    assert jsonified_request["region"] == "region_value"
+
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.CommitmentList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.CommitmentList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [
+                ("project", "",),
+                ("region", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -964,17 +1551,13 @@ def test_list_rest_bad_request(
         client.list(request)
 
 
-def test_list_rest_from_dict():
-    test_list_rest(request_type=dict)
-
-
-def test_list_rest_flattened(transport: str = "rest"):
+def test_list_rest_flattened():
     client = RegionCommitmentsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.CommitmentList()
 
@@ -1020,8 +1603,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = RegionCommitmentsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = RegionCommitmentsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1330,7 +1915,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(
