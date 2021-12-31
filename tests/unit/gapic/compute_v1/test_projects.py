@@ -18,12 +18,13 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from requests import Response
-from requests import Request
+from requests import Request, PreparedRequest
 from requests.sessions import Session
 
 from google.api_core import client_options
@@ -219,20 +220,20 @@ def test_projects_client_client_options(client_class, transport_class, transport
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -272,7 +273,7 @@ def test_projects_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -360,7 +361,7 @@ def test_projects_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -384,7 +385,7 @@ def test_projects_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -397,11 +398,54 @@ def test_projects_client_client_options_credentials_file(
         )
 
 
-def test_disable_xpn_host_unary_rest(
-    transport: str = "rest", request_type=compute.DisableXpnHostProjectRequest
-):
+@pytest.mark.parametrize("request_type", [compute.DisableXpnHostProjectRequest, dict,])
+def test_disable_xpn_host_unary_rest(request_type, transport: str = "rest"):
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.DisableXpnHostProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.disable_xpn_host_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.DisableXpnHostProjectRequest, dict,])
+def test_disable_xpn_host_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -409,7 +453,7 @@ def test_disable_xpn_host_unary_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -470,6 +514,80 @@ def test_disable_xpn_host_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_disable_xpn_host_unary_rest_required_fields(
+    request_type=compute.DisableXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).disable_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).disable_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.disable_xpn_host_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_disable_xpn_host_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DisableXpnHostProjectRequest
 ):
@@ -493,17 +611,13 @@ def test_disable_xpn_host_unary_rest_bad_request(
         client.disable_xpn_host_unary(request)
 
 
-def test_disable_xpn_host_unary_rest_from_dict():
-    test_disable_xpn_host_unary_rest(request_type=dict)
-
-
-def test_disable_xpn_host_unary_rest_flattened(transport: str = "rest"):
+def test_disable_xpn_host_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -547,24 +661,75 @@ def test_disable_xpn_host_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_disable_xpn_resource_unary_rest(
-    transport: str = "rest", request_type=compute.DisableXpnResourceProjectRequest
-):
+def test_disable_xpn_host_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.DisableXpnResourceProjectRequest, dict,]
+)
+def test_disable_xpn_resource_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.DisableXpnResourceProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.disable_xpn_resource_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.DisableXpnResourceProjectRequest, dict,]
+)
+def test_disable_xpn_resource_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_disable_xpn_resource_request_resource"
-    ] = compute.ProjectsDisableXpnResourceRequest(
-        xpn_resource=compute.XpnResourceId(id="id_value")
-    )
+    request_init["projects_disable_xpn_resource_request_resource"] = {
+        "xpn_resource": {"id": "id_value", "type_": "type__value"}
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -625,6 +790,81 @@ def test_disable_xpn_resource_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_disable_xpn_resource_unary_rest_required_fields(
+    request_type=compute.DisableXpnResourceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).disable_xpn_resource._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).disable_xpn_resource._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.disable_xpn_resource_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_disable_xpn_resource_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DisableXpnResourceProjectRequest
 ):
@@ -634,11 +874,9 @@ def test_disable_xpn_resource_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_disable_xpn_resource_request_resource"
-    ] = compute.ProjectsDisableXpnResourceRequest(
-        xpn_resource=compute.XpnResourceId(id="id_value")
-    )
+    request_init["projects_disable_xpn_resource_request_resource"] = {
+        "xpn_resource": {"id": "id_value", "type_": "type__value"}
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -653,17 +891,13 @@ def test_disable_xpn_resource_unary_rest_bad_request(
         client.disable_xpn_resource_unary(request)
 
 
-def test_disable_xpn_resource_unary_rest_from_dict():
-    test_disable_xpn_resource_unary_rest(request_type=dict)
-
-
-def test_disable_xpn_resource_unary_rest_flattened(transport: str = "rest"):
+def test_disable_xpn_resource_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -716,11 +950,60 @@ def test_disable_xpn_resource_unary_rest_flattened_error(transport: str = "rest"
         )
 
 
-def test_enable_xpn_host_unary_rest(
-    transport: str = "rest", request_type=compute.EnableXpnHostProjectRequest
-):
+def test_disable_xpn_resource_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.EnableXpnHostProjectRequest, dict,])
+def test_enable_xpn_host_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.EnableXpnHostProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.enable_xpn_host_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.EnableXpnHostProjectRequest, dict,])
+def test_enable_xpn_host_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -728,7 +1011,7 @@ def test_enable_xpn_host_unary_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -789,6 +1072,80 @@ def test_enable_xpn_host_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_enable_xpn_host_unary_rest_required_fields(
+    request_type=compute.EnableXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).enable_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).enable_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.enable_xpn_host_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_enable_xpn_host_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.EnableXpnHostProjectRequest
 ):
@@ -812,17 +1169,13 @@ def test_enable_xpn_host_unary_rest_bad_request(
         client.enable_xpn_host_unary(request)
 
 
-def test_enable_xpn_host_unary_rest_from_dict():
-    test_enable_xpn_host_unary_rest(request_type=dict)
-
-
-def test_enable_xpn_host_unary_rest_flattened(transport: str = "rest"):
+def test_enable_xpn_host_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -866,24 +1219,75 @@ def test_enable_xpn_host_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_enable_xpn_resource_unary_rest(
-    transport: str = "rest", request_type=compute.EnableXpnResourceProjectRequest
-):
+def test_enable_xpn_host_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.EnableXpnResourceProjectRequest, dict,]
+)
+def test_enable_xpn_resource_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.EnableXpnResourceProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.enable_xpn_resource_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.EnableXpnResourceProjectRequest, dict,]
+)
+def test_enable_xpn_resource_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_enable_xpn_resource_request_resource"
-    ] = compute.ProjectsEnableXpnResourceRequest(
-        xpn_resource=compute.XpnResourceId(id="id_value")
-    )
+    request_init["projects_enable_xpn_resource_request_resource"] = {
+        "xpn_resource": {"id": "id_value", "type_": "type__value"}
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -944,6 +1348,81 @@ def test_enable_xpn_resource_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_enable_xpn_resource_unary_rest_required_fields(
+    request_type=compute.EnableXpnResourceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).enable_xpn_resource._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).enable_xpn_resource._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.enable_xpn_resource_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_enable_xpn_resource_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.EnableXpnResourceProjectRequest
 ):
@@ -953,11 +1432,9 @@ def test_enable_xpn_resource_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_enable_xpn_resource_request_resource"
-    ] = compute.ProjectsEnableXpnResourceRequest(
-        xpn_resource=compute.XpnResourceId(id="id_value")
-    )
+    request_init["projects_enable_xpn_resource_request_resource"] = {
+        "xpn_resource": {"id": "id_value", "type_": "type__value"}
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -972,17 +1449,13 @@ def test_enable_xpn_resource_unary_rest_bad_request(
         client.enable_xpn_resource_unary(request)
 
 
-def test_enable_xpn_resource_unary_rest_from_dict():
-    test_enable_xpn_resource_unary_rest(request_type=dict)
-
-
-def test_enable_xpn_resource_unary_rest_flattened(transport: str = "rest"):
+def test_enable_xpn_resource_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1035,9 +1508,48 @@ def test_enable_xpn_resource_unary_rest_flattened_error(transport: str = "rest")
         )
 
 
-def test_get_rest(transport: str = "rest", request_type=compute.GetProjectRequest):
+def test_enable_xpn_resource_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.GetProjectRequest, dict,])
+def test_get_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Project(
+            creation_timestamp="creation_timestamp_value",
+            default_network_tier="default_network_tier_value",
+            default_service_account="default_service_account_value",
+            description="description_value",
+            enabled_features=["enabled_features_value"],
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            self_link="self_link_value",
+            xpn_project_status="xpn_project_status_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Project.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetProjectRequest, dict,])
+def test_get_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -1045,7 +1557,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetProjectReques
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Project(
             creation_timestamp="creation_timestamp_value",
@@ -1082,6 +1594,78 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetProjectReques
     assert response.xpn_project_status == "xpn_project_status_value"
 
 
+def test_get_rest_required_fields(request_type=compute.GetProjectRequest):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Project()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Project.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetProjectRequest
 ):
@@ -1105,17 +1689,13 @@ def test_get_rest_bad_request(
         client.get(request)
 
 
-def test_get_rest_from_dict():
-    test_get_rest(request_type=dict)
-
-
-def test_get_rest_flattened(transport: str = "rest"):
+def test_get_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Project()
 
@@ -1157,11 +1737,48 @@ def test_get_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_xpn_host_rest(
-    transport: str = "rest", request_type=compute.GetXpnHostProjectRequest
-):
+def test_get_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.GetXpnHostProjectRequest, dict,])
+def test_get_xpn_host_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetXpnHostProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Project(
+            creation_timestamp="creation_timestamp_value",
+            default_network_tier="default_network_tier_value",
+            default_service_account="default_service_account_value",
+            description="description_value",
+            enabled_features=["enabled_features_value"],
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            self_link="self_link_value",
+            xpn_project_status="xpn_project_status_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Project.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get_xpn_host(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetXpnHostProjectRequest, dict,])
+def test_get_xpn_host_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -1169,7 +1786,7 @@ def test_get_xpn_host_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Project(
             creation_timestamp="creation_timestamp_value",
@@ -1206,6 +1823,80 @@ def test_get_xpn_host_rest(
     assert response.xpn_project_status == "xpn_project_status_value"
 
 
+def test_get_xpn_host_rest_required_fields(
+    request_type=compute.GetXpnHostProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_xpn_host._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Project()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Project.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_xpn_host(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_xpn_host_rest_bad_request(
     transport: str = "rest", request_type=compute.GetXpnHostProjectRequest
 ):
@@ -1229,17 +1920,13 @@ def test_get_xpn_host_rest_bad_request(
         client.get_xpn_host(request)
 
 
-def test_get_xpn_host_rest_from_dict():
-    test_get_xpn_host_rest(request_type=dict)
-
-
-def test_get_xpn_host_rest_flattened(transport: str = "rest"):
+def test_get_xpn_host_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Project()
 
@@ -1283,11 +1970,43 @@ def test_get_xpn_host_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_xpn_resources_rest(
-    transport: str = "rest", request_type=compute.GetXpnResourcesProjectsRequest
-):
+def test_get_xpn_host_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.GetXpnResourcesProjectsRequest, dict,]
+)
+def test_get_xpn_resources_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetXpnResourcesProjectsRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.ProjectsGetXpnResources(
+            kind="kind_value", next_page_token="next_page_token_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.ProjectsGetXpnResources.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get_xpn_resources(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.GetXpnResourcesProjectsRequest, dict,]
+)
+def test_get_xpn_resources_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -1295,7 +2014,7 @@ def test_get_xpn_resources_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ProjectsGetXpnResources(
             kind="kind_value", next_page_token="next_page_token_value",
@@ -1313,6 +2032,80 @@ def test_get_xpn_resources_rest(
     assert isinstance(response, pagers.GetXpnResourcesPager)
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
+
+
+def test_get_xpn_resources_rest_required_fields(
+    request_type=compute.GetXpnResourcesProjectsRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_xpn_resources._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_xpn_resources._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ProjectsGetXpnResources()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ProjectsGetXpnResources.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_xpn_resources(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_xpn_resources_rest_bad_request(
@@ -1338,17 +2131,13 @@ def test_get_xpn_resources_rest_bad_request(
         client.get_xpn_resources(request)
 
 
-def test_get_xpn_resources_rest_from_dict():
-    test_get_xpn_resources_rest(request_type=dict)
-
-
-def test_get_xpn_resources_rest_flattened(transport: str = "rest"):
+def test_get_xpn_resources_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ProjectsGetXpnResources()
 
@@ -1392,8 +2181,10 @@ def test_get_xpn_resources_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_xpn_resources_rest_pager():
-    client = ProjectsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_get_xpn_resources_rest_pager(transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1441,22 +2232,47 @@ def test_get_xpn_resources_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_list_xpn_hosts_rest(
-    transport: str = "rest", request_type=compute.ListXpnHostsProjectsRequest
-):
+@pytest.mark.parametrize("request_type", [compute.ListXpnHostsProjectsRequest, dict,])
+def test_list_xpn_hosts_rest(request_type, transport: str = "rest"):
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ListXpnHostsProjectsRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.XpnHostList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.XpnHostList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.list_xpn_hosts(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ListXpnHostsProjectsRequest, dict,])
+def test_list_xpn_hosts_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_list_xpn_hosts_request_resource"
-    ] = compute.ProjectsListXpnHostsRequest(organization="organization_value")
+    request_init["projects_list_xpn_hosts_request_resource"] = {
+        "organization": "organization_value"
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.XpnHostList(
             id="id_value",
@@ -1481,6 +2297,81 @@ def test_list_xpn_hosts_rest(
     assert response.self_link == "self_link_value"
 
 
+def test_list_xpn_hosts_rest_required_fields(
+    request_type=compute.ListXpnHostsProjectsRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_xpn_hosts._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list_xpn_hosts._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.XpnHostList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.XpnHostList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list_xpn_hosts(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_list_xpn_hosts_rest_bad_request(
     transport: str = "rest", request_type=compute.ListXpnHostsProjectsRequest
 ):
@@ -1490,9 +2381,9 @@ def test_list_xpn_hosts_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_list_xpn_hosts_request_resource"
-    ] = compute.ProjectsListXpnHostsRequest(organization="organization_value")
+    request_init["projects_list_xpn_hosts_request_resource"] = {
+        "organization": "organization_value"
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1507,17 +2398,13 @@ def test_list_xpn_hosts_rest_bad_request(
         client.list_xpn_hosts(request)
 
 
-def test_list_xpn_hosts_rest_from_dict():
-    test_list_xpn_hosts_rest(request_type=dict)
-
-
-def test_list_xpn_hosts_rest_flattened(transport: str = "rest"):
+def test_list_xpn_hosts_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.XpnHostList()
 
@@ -1570,8 +2457,10 @@ def test_list_xpn_hosts_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_xpn_hosts_rest_pager():
-    client = ProjectsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_xpn_hosts_rest_pager(transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1614,22 +2503,66 @@ def test_list_xpn_hosts_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_move_disk_unary_rest(
-    transport: str = "rest", request_type=compute.MoveDiskProjectRequest
-):
+@pytest.mark.parametrize("request_type", [compute.MoveDiskProjectRequest, dict,])
+def test_move_disk_unary_rest(request_type, transport: str = "rest"):
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.MoveDiskProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.move_disk_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.MoveDiskProjectRequest, dict,])
+def test_move_disk_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["disk_move_request_resource"] = compute.DiskMoveRequest(
-        destination_zone="destination_zone_value"
-    )
+    request_init["disk_move_request_resource"] = {
+        "destination_zone": "destination_zone_value",
+        "target_disk": "target_disk_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1690,6 +2623,81 @@ def test_move_disk_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_move_disk_unary_rest_required_fields(
+    request_type=compute.MoveDiskProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).move_disk._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).move_disk._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.move_disk_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_move_disk_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.MoveDiskProjectRequest
 ):
@@ -1699,9 +2707,10 @@ def test_move_disk_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["disk_move_request_resource"] = compute.DiskMoveRequest(
-        destination_zone="destination_zone_value"
-    )
+    request_init["disk_move_request_resource"] = {
+        "destination_zone": "destination_zone_value",
+        "target_disk": "target_disk_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1716,17 +2725,13 @@ def test_move_disk_unary_rest_bad_request(
         client.move_disk_unary(request)
 
 
-def test_move_disk_unary_rest_from_dict():
-    test_move_disk_unary_rest(request_type=dict)
-
-
-def test_move_disk_unary_rest_flattened(transport: str = "rest"):
+def test_move_disk_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1779,22 +2784,72 @@ def test_move_disk_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_move_instance_unary_rest(
-    transport: str = "rest", request_type=compute.MoveInstanceProjectRequest
-):
+def test_move_disk_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.MoveInstanceProjectRequest, dict,])
+def test_move_instance_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.MoveInstanceProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.move_instance_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.MoveInstanceProjectRequest, dict,])
+def test_move_instance_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["instance_move_request_resource"] = compute.InstanceMoveRequest(
-        destination_zone="destination_zone_value"
-    )
+    request_init["instance_move_request_resource"] = {
+        "destination_zone": "destination_zone_value",
+        "target_instance": "target_instance_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1855,6 +2910,81 @@ def test_move_instance_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_move_instance_unary_rest_required_fields(
+    request_type=compute.MoveInstanceProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).move_instance._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).move_instance._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.move_instance_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_move_instance_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.MoveInstanceProjectRequest
 ):
@@ -1864,9 +2994,10 @@ def test_move_instance_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["instance_move_request_resource"] = compute.InstanceMoveRequest(
-        destination_zone="destination_zone_value"
-    )
+    request_init["instance_move_request_resource"] = {
+        "destination_zone": "destination_zone_value",
+        "target_instance": "target_instance_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1881,17 +3012,13 @@ def test_move_instance_unary_rest_bad_request(
         client.move_instance_unary(request)
 
 
-def test_move_instance_unary_rest_from_dict():
-    test_move_instance_unary_rest(request_type=dict)
-
-
-def test_move_instance_unary_rest_flattened(transport: str = "rest"):
+def test_move_instance_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1944,23 +3071,77 @@ def test_move_instance_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_common_instance_metadata_unary_rest(
-    transport: str = "rest",
-    request_type=compute.SetCommonInstanceMetadataProjectRequest,
-):
+def test_move_instance_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetCommonInstanceMetadataProjectRequest, dict,]
+)
+def test_set_common_instance_metadata_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.SetCommonInstanceMetadataProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.set_common_instance_metadata_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetCommonInstanceMetadataProjectRequest, dict,]
+)
+def test_set_common_instance_metadata_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["metadata_resource"] = compute.Metadata(
-        fingerprint="fingerprint_value"
-    )
+    request_init["metadata_resource"] = {
+        "fingerprint": "fingerprint_value",
+        "items": [{"key": "key_value", "value": "value_value"}],
+        "kind": "kind_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -2021,6 +3202,81 @@ def test_set_common_instance_metadata_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_set_common_instance_metadata_unary_rest_required_fields(
+    request_type=compute.SetCommonInstanceMetadataProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_common_instance_metadata._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_common_instance_metadata._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_common_instance_metadata_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_set_common_instance_metadata_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SetCommonInstanceMetadataProjectRequest,
@@ -2031,9 +3287,11 @@ def test_set_common_instance_metadata_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["metadata_resource"] = compute.Metadata(
-        fingerprint="fingerprint_value"
-    )
+    request_init["metadata_resource"] = {
+        "fingerprint": "fingerprint_value",
+        "items": [{"key": "key_value", "value": "value_value"}],
+        "kind": "kind_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -2048,17 +3306,13 @@ def test_set_common_instance_metadata_unary_rest_bad_request(
         client.set_common_instance_metadata_unary(request)
 
 
-def test_set_common_instance_metadata_unary_rest_from_dict():
-    test_set_common_instance_metadata_unary_rest(request_type=dict)
-
-
-def test_set_common_instance_metadata_unary_rest_flattened(transport: str = "rest"):
+def test_set_common_instance_metadata_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -2109,22 +3363,75 @@ def test_set_common_instance_metadata_unary_rest_flattened_error(
         )
 
 
-def test_set_default_network_tier_unary_rest(
-    transport: str = "rest", request_type=compute.SetDefaultNetworkTierProjectRequest
-):
+def test_set_common_instance_metadata_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetDefaultNetworkTierProjectRequest, dict,]
+)
+def test_set_default_network_tier_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.SetDefaultNetworkTierProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.set_default_network_tier_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetDefaultNetworkTierProjectRequest, dict,]
+)
+def test_set_default_network_tier_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_set_default_network_tier_request_resource"
-    ] = compute.ProjectsSetDefaultNetworkTierRequest(network_tier="network_tier_value")
+    request_init["projects_set_default_network_tier_request_resource"] = {
+        "network_tier": "network_tier_value"
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -2185,6 +3492,81 @@ def test_set_default_network_tier_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_set_default_network_tier_unary_rest_required_fields(
+    request_type=compute.SetDefaultNetworkTierProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_default_network_tier._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_default_network_tier._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_default_network_tier_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_set_default_network_tier_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetDefaultNetworkTierProjectRequest
 ):
@@ -2194,9 +3576,9 @@ def test_set_default_network_tier_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init[
-        "projects_set_default_network_tier_request_resource"
-    ] = compute.ProjectsSetDefaultNetworkTierRequest(network_tier="network_tier_value")
+    request_init["projects_set_default_network_tier_request_resource"] = {
+        "network_tier": "network_tier_value"
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -2211,17 +3593,13 @@ def test_set_default_network_tier_unary_rest_bad_request(
         client.set_default_network_tier_unary(request)
 
 
-def test_set_default_network_tier_unary_rest_from_dict():
-    test_set_default_network_tier_unary_rest(request_type=dict)
-
-
-def test_set_default_network_tier_unary_rest_flattened(transport: str = "rest"):
+def test_set_default_network_tier_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -2274,22 +3652,76 @@ def test_set_default_network_tier_unary_rest_flattened_error(transport: str = "r
         )
 
 
-def test_set_usage_export_bucket_unary_rest(
-    transport: str = "rest", request_type=compute.SetUsageExportBucketProjectRequest
-):
+def test_set_default_network_tier_unary_rest_error():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetUsageExportBucketProjectRequest, dict,]
+)
+def test_set_usage_export_bucket_unary_rest(request_type, transport: str = "rest"):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.SetUsageExportBucketProjectRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.set_usage_export_bucket_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetUsageExportBucketProjectRequest, dict,]
+)
+def test_set_usage_export_bucket_unary_rest(request_type):
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["usage_export_location_resource"] = compute.UsageExportLocation(
-        bucket_name="bucket_name_value"
-    )
+    request_init["usage_export_location_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "report_name_prefix": "report_name_prefix_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -2350,6 +3782,81 @@ def test_set_usage_export_bucket_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_set_usage_export_bucket_unary_rest_required_fields(
+    request_type=compute.SetUsageExportBucketProjectRequest,
+):
+    transport_class = transports.ProjectsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_usage_export_bucket._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_usage_export_bucket._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_usage_export_bucket_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_set_usage_export_bucket_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetUsageExportBucketProjectRequest
 ):
@@ -2359,9 +3866,10 @@ def test_set_usage_export_bucket_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["usage_export_location_resource"] = compute.UsageExportLocation(
-        bucket_name="bucket_name_value"
-    )
+    request_init["usage_export_location_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "report_name_prefix": "report_name_prefix_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -2376,17 +3884,13 @@ def test_set_usage_export_bucket_unary_rest_bad_request(
         client.set_usage_export_bucket_unary(request)
 
 
-def test_set_usage_export_bucket_unary_rest_from_dict():
-    test_set_usage_export_bucket_unary_rest(request_type=dict)
-
-
-def test_set_usage_export_bucket_unary_rest_flattened(transport: str = "rest"):
+def test_set_usage_export_bucket_unary_rest_flattened():
     client = ProjectsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -2437,6 +3941,12 @@ def test_set_usage_export_bucket_unary_rest_flattened_error(transport: str = "re
                 bucket_name="bucket_name_value"
             ),
         )
+
+
+def test_set_usage_export_bucket_unary_rest_error():
+    client = ProjectsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
 
 
 def test_credentials_transport_error():
@@ -2707,7 +4217,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(

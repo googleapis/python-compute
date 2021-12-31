@@ -18,12 +18,13 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from requests import Response
-from requests import Request
+from requests import Request, PreparedRequest
 from requests.sessions import Session
 
 from google.api_core import client_options
@@ -223,20 +224,20 @@ def test_reservations_client_client_options(
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -276,7 +277,7 @@ def test_reservations_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -364,7 +365,7 @@ def test_reservations_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -388,7 +389,7 @@ def test_reservations_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -401,11 +402,41 @@ def test_reservations_client_client_options_credentials_file(
         )
 
 
-def test_aggregated_list_rest(
-    transport: str = "rest", request_type=compute.AggregatedListReservationsRequest
-):
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListReservationsRequest, dict,]
+)
+def test_aggregated_list_rest(request_type, transport: str = "rest"):
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.AggregatedListReservationsRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.ReservationAggregatedList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+            unreachables=["unreachables_value"],
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.ReservationAggregatedList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.aggregated_list(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.AggregatedListReservationsRequest, dict,]
+)
+def test_aggregated_list_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -413,7 +444,7 @@ def test_aggregated_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ReservationAggregatedList(
             id="id_value",
@@ -440,6 +471,80 @@ def test_aggregated_list_rest(
     assert response.unreachables == ["unreachables_value"]
 
 
+def test_aggregated_list_rest_required_fields(
+    request_type=compute.AggregatedListReservationsRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).aggregated_list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ReservationAggregatedList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ReservationAggregatedList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.aggregated_list(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_aggregated_list_rest_bad_request(
     transport: str = "rest", request_type=compute.AggregatedListReservationsRequest
 ):
@@ -463,17 +568,13 @@ def test_aggregated_list_rest_bad_request(
         client.aggregated_list(request)
 
 
-def test_aggregated_list_rest_from_dict():
-    test_aggregated_list_rest(request_type=dict)
-
-
-def test_aggregated_list_rest_flattened(transport: str = "rest"):
+def test_aggregated_list_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ReservationAggregatedList()
 
@@ -517,8 +618,10 @@ def test_aggregated_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_aggregated_list_rest_pager():
-    client = ReservationsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_aggregated_list_rest_pager(transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -581,11 +684,56 @@ def test_aggregated_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_delete_unary_rest(
-    transport: str = "rest", request_type=compute.DeleteReservationRequest
-):
+@pytest.mark.parametrize("request_type", [compute.DeleteReservationRequest, dict,])
+def test_delete_unary_rest(request_type, transport: str = "rest"):
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.DeleteReservationRequest(
+        {"project": "sample1", "zone": "sample2", "reservation": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.delete_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.DeleteReservationRequest, dict,])
+def test_delete_unary_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -593,7 +741,7 @@ def test_delete_unary_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -654,6 +802,96 @@ def test_delete_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_delete_unary_rest_required_fields(
+    request_type=compute.DeleteReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["reservation"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "reservation" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == request_init["reservation"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["reservation"] = "reservation_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == "reservation_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_unary(request)
+
+            expected_params = [
+                ("project", "",),
+                ("reservation", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteReservationRequest
 ):
@@ -677,17 +915,13 @@ def test_delete_unary_rest_bad_request(
         client.delete_unary(request)
 
 
-def test_delete_unary_rest_from_dict():
-    test_delete_unary_rest(request_type=dict)
-
-
-def test_delete_unary_rest_flattened(transport: str = "rest"):
+def test_delete_unary_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -740,9 +974,51 @@ def test_delete_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_rest(transport: str = "rest", request_type=compute.GetReservationRequest):
+def test_delete_unary_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.GetReservationRequest, dict,])
+def test_get_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetReservationRequest(
+        {"project": "sample1", "zone": "sample2", "reservation": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Reservation(
+            commitment="commitment_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            satisfies_pzs=True,
+            self_link="self_link_value",
+            specific_reservation_required=True,
+            status="status_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Reservation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetReservationRequest, dict,])
+def test_get_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -750,7 +1026,7 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetReservationRe
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Reservation(
             commitment="commitment_value",
@@ -789,6 +1065,94 @@ def test_get_rest(transport: str = "rest", request_type=compute.GetReservationRe
     assert response.zone == "zone_value"
 
 
+def test_get_rest_required_fields(request_type=compute.GetReservationRequest):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["reservation"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "reservation" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == request_init["reservation"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["reservation"] = "reservation_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == "reservation_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Reservation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Reservation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [
+                ("project", "",),
+                ("reservation", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetReservationRequest
 ):
@@ -812,17 +1176,13 @@ def test_get_rest_bad_request(
         client.get(request)
 
 
-def test_get_rest_from_dict():
-    test_get_rest(request_type=dict)
-
-
-def test_get_rest_flattened(transport: str = "rest"):
+def test_get_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Reservation()
 
@@ -875,11 +1235,43 @@ def test_get_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_get_iam_policy_rest(
-    transport: str = "rest", request_type=compute.GetIamPolicyReservationRequest
-):
+def test_get_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.GetIamPolicyReservationRequest, dict,]
+)
+def test_get_iam_policy_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetIamPolicyReservationRequest(
+        {"project": "sample1", "zone": "sample2", "resource": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Policy(etag="etag_value", iam_owned=True, version=774,)
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Policy.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get_iam_policy(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.GetIamPolicyReservationRequest, dict,]
+)
+def test_get_iam_policy_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -887,7 +1279,7 @@ def test_get_iam_policy_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Policy(etag="etag_value", iam_owned=True, version=774,)
 
@@ -904,6 +1296,96 @@ def test_get_iam_policy_rest(
     assert response.etag == "etag_value"
     assert response.iam_owned is True
     assert response.version == 774
+
+
+def test_get_iam_policy_rest_required_fields(
+    request_type=compute.GetIamPolicyReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_iam_policy._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get_iam_policy._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Policy()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Policy.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get_iam_policy(request)
+
+            expected_params = [
+                ("project", "",),
+                ("resource", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_get_iam_policy_rest_bad_request(
@@ -929,17 +1411,13 @@ def test_get_iam_policy_rest_bad_request(
         client.get_iam_policy(request)
 
 
-def test_get_iam_policy_rest_from_dict():
-    test_get_iam_policy_rest(request_type=dict)
-
-
-def test_get_iam_policy_rest_flattened(transport: str = "rest"):
+def test_get_iam_policy_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Policy()
 
@@ -992,22 +1470,99 @@ def test_get_iam_policy_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_insert_unary_rest(
-    transport: str = "rest", request_type=compute.InsertReservationRequest
-):
+def test_get_iam_policy_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertReservationRequest, dict,])
+def test_insert_unary_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.InsertReservationRequest(
+        {"project": "sample1", "zone": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.insert_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertReservationRequest, dict,])
+def test_insert_unary_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2"}
-    request_init["reservation_resource"] = compute.Reservation(
-        commitment="commitment_value"
-    )
+    request_init["reservation_resource"] = {
+        "commitment": "commitment_value",
+        "creation_timestamp": "creation_timestamp_value",
+        "description": "description_value",
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "satisfies_pzs": True,
+        "self_link": "self_link_value",
+        "specific_reservation": {
+            "count": 553,
+            "in_use_count": 1291,
+            "instance_properties": {
+                "guest_accelerators": [
+                    {
+                        "accelerator_count": 1805,
+                        "accelerator_type": "accelerator_type_value",
+                    }
+                ],
+                "local_ssds": [{"disk_size_gb": 1261, "interface": "interface_value"}],
+                "location_hint": "location_hint_value",
+                "machine_type": "machine_type_value",
+                "min_cpu_platform": "min_cpu_platform_value",
+            },
+        },
+        "specific_reservation_required": True,
+        "status": "status_value",
+        "zone": "zone_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1068,6 +1623,89 @@ def test_insert_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_insert_unary_rest_required_fields(
+    request_type=compute.InsertReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.insert_unary(request)
+
+            expected_params = [
+                ("project", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertReservationRequest
 ):
@@ -1077,9 +1715,35 @@ def test_insert_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2"}
-    request_init["reservation_resource"] = compute.Reservation(
-        commitment="commitment_value"
-    )
+    request_init["reservation_resource"] = {
+        "commitment": "commitment_value",
+        "creation_timestamp": "creation_timestamp_value",
+        "description": "description_value",
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "satisfies_pzs": True,
+        "self_link": "self_link_value",
+        "specific_reservation": {
+            "count": 553,
+            "in_use_count": 1291,
+            "instance_properties": {
+                "guest_accelerators": [
+                    {
+                        "accelerator_count": 1805,
+                        "accelerator_type": "accelerator_type_value",
+                    }
+                ],
+                "local_ssds": [{"disk_size_gb": 1261, "interface": "interface_value"}],
+                "location_hint": "location_hint_value",
+                "machine_type": "machine_type_value",
+                "min_cpu_platform": "min_cpu_platform_value",
+            },
+        },
+        "specific_reservation_required": True,
+        "status": "status_value",
+        "zone": "zone_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1094,17 +1758,13 @@ def test_insert_unary_rest_bad_request(
         client.insert_unary(request)
 
 
-def test_insert_unary_rest_from_dict():
-    test_insert_unary_rest(request_type=dict)
-
-
-def test_insert_unary_rest_flattened(transport: str = "rest"):
+def test_insert_unary_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1155,11 +1815,42 @@ def test_insert_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest(
-    transport: str = "rest", request_type=compute.ListReservationsRequest
-):
+def test_insert_unary_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.ListReservationsRequest, dict,])
+def test_list_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ListReservationsRequest({"project": "sample1", "zone": "sample2"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.ReservationList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.ReservationList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.list(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ListReservationsRequest, dict,])
+def test_list_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -1167,7 +1858,7 @@ def test_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ReservationList(
             id="id_value",
@@ -1190,6 +1881,86 @@ def test_list_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListReservationsRequest):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.ReservationList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.ReservationList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [
+                ("project", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -1215,17 +1986,13 @@ def test_list_rest_bad_request(
         client.list(request)
 
 
-def test_list_rest_from_dict():
-    test_list_rest(request_type=dict)
-
-
-def test_list_rest_flattened(transport: str = "rest"):
+def test_list_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.ReservationList()
 
@@ -1271,8 +2038,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = ReservationsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1320,22 +2089,65 @@ def test_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_resize_unary_rest(
-    transport: str = "rest", request_type=compute.ResizeReservationRequest
-):
+@pytest.mark.parametrize("request_type", [compute.ResizeReservationRequest, dict,])
+def test_resize_unary_rest(request_type, transport: str = "rest"):
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ResizeReservationRequest(
+        {"project": "sample1", "zone": "sample2", "reservation": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.resize_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ResizeReservationRequest, dict,])
+def test_resize_unary_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "reservation": "sample3"}
-    request_init[
-        "reservations_resize_request_resource"
-    ] = compute.ReservationsResizeRequest(specific_sku_count=1920)
+    request_init["reservations_resize_request_resource"] = {"specific_sku_count": 1920}
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1396,6 +2208,97 @@ def test_resize_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_resize_unary_rest_required_fields(
+    request_type=compute.ResizeReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["reservation"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "reservation" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).resize._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == request_init["reservation"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["reservation"] = "reservation_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).resize._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "reservation" in jsonified_request
+    assert jsonified_request["reservation"] == "reservation_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.resize_unary(request)
+
+            expected_params = [
+                ("project", "",),
+                ("reservation", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_resize_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.ResizeReservationRequest
 ):
@@ -1405,9 +2308,7 @@ def test_resize_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "reservation": "sample3"}
-    request_init[
-        "reservations_resize_request_resource"
-    ] = compute.ReservationsResizeRequest(specific_sku_count=1920)
+    request_init["reservations_resize_request_resource"] = {"specific_sku_count": 1920}
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1422,17 +2323,13 @@ def test_resize_unary_rest_bad_request(
         client.resize_unary(request)
 
 
-def test_resize_unary_rest_from_dict():
-    test_resize_unary_rest(request_type=dict)
-
-
-def test_resize_unary_rest_flattened(transport: str = "rest"):
+def test_resize_unary_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1493,22 +2390,140 @@ def test_resize_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_set_iam_policy_rest(
-    transport: str = "rest", request_type=compute.SetIamPolicyReservationRequest
-):
+def test_resize_unary_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetIamPolicyReservationRequest, dict,]
+)
+def test_set_iam_policy_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.SetIamPolicyReservationRequest(
+        {"project": "sample1", "zone": "sample2", "resource": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Policy(etag="etag_value", iam_owned=True, version=774,)
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Policy.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.set_iam_policy(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetIamPolicyReservationRequest, dict,]
+)
+def test_set_iam_policy_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "resource": "sample3"}
-    request_init["zone_set_policy_request_resource"] = compute.ZoneSetPolicyRequest(
-        bindings=[compute.Binding(binding_id="binding_id_value")]
-    )
+    request_init["zone_set_policy_request_resource"] = {
+        "bindings": [
+            {
+                "binding_id": "binding_id_value",
+                "condition": {
+                    "description": "description_value",
+                    "expression": "expression_value",
+                    "location": "location_value",
+                    "title": "title_value",
+                },
+                "members": ["members_value_1", "members_value_2"],
+                "role": "role_value",
+            }
+        ],
+        "etag": "etag_value",
+        "policy": {
+            "audit_configs": [
+                {
+                    "audit_log_configs": [
+                        {
+                            "exempted_members": [
+                                "exempted_members_value_1",
+                                "exempted_members_value_2",
+                            ],
+                            "ignore_child_exemptions": True,
+                            "log_type": "log_type_value",
+                        }
+                    ],
+                    "exempted_members": [
+                        "exempted_members_value_1",
+                        "exempted_members_value_2",
+                    ],
+                    "service": "service_value",
+                }
+            ],
+            "bindings": [
+                {
+                    "binding_id": "binding_id_value",
+                    "condition": {
+                        "description": "description_value",
+                        "expression": "expression_value",
+                        "location": "location_value",
+                        "title": "title_value",
+                    },
+                    "members": ["members_value_1", "members_value_2"],
+                    "role": "role_value",
+                }
+            ],
+            "etag": "etag_value",
+            "iam_owned": True,
+            "rules": [
+                {
+                    "action": "action_value",
+                    "conditions": [
+                        {
+                            "iam": "iam_value",
+                            "op": "op_value",
+                            "svc": "svc_value",
+                            "sys": "sys_value",
+                            "values": ["values_value_1", "values_value_2"],
+                        }
+                    ],
+                    "description": "description_value",
+                    "ins": ["ins_value_1", "ins_value_2"],
+                    "log_configs": [
+                        {
+                            "cloud_audit": {
+                                "authorization_logging_options": {
+                                    "permission_type": "permission_type_value"
+                                },
+                                "log_name": "log_name_value",
+                            },
+                            "counter": {
+                                "custom_fields": [
+                                    {"name": "name_value", "value": "value_value"}
+                                ],
+                                "field": "field_value",
+                                "metric": "metric_value",
+                            },
+                            "data_access": {"log_mode": "log_mode_value"},
+                        }
+                    ],
+                    "not_ins": ["not_ins_value_1", "not_ins_value_2"],
+                    "permissions": ["permissions_value_1", "permissions_value_2"],
+                }
+            ],
+            "version": 774,
+        },
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Policy(etag="etag_value", iam_owned=True, version=774,)
 
@@ -1527,6 +2542,97 @@ def test_set_iam_policy_rest(
     assert response.version == 774
 
 
+def test_set_iam_policy_rest_required_fields(
+    request_type=compute.SetIamPolicyReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_iam_policy._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_iam_policy._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Policy()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Policy.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_iam_policy(request)
+
+            expected_params = [
+                ("project", "",),
+                ("resource", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_set_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.SetIamPolicyReservationRequest
 ):
@@ -1536,9 +2642,95 @@ def test_set_iam_policy_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "resource": "sample3"}
-    request_init["zone_set_policy_request_resource"] = compute.ZoneSetPolicyRequest(
-        bindings=[compute.Binding(binding_id="binding_id_value")]
-    )
+    request_init["zone_set_policy_request_resource"] = {
+        "bindings": [
+            {
+                "binding_id": "binding_id_value",
+                "condition": {
+                    "description": "description_value",
+                    "expression": "expression_value",
+                    "location": "location_value",
+                    "title": "title_value",
+                },
+                "members": ["members_value_1", "members_value_2"],
+                "role": "role_value",
+            }
+        ],
+        "etag": "etag_value",
+        "policy": {
+            "audit_configs": [
+                {
+                    "audit_log_configs": [
+                        {
+                            "exempted_members": [
+                                "exempted_members_value_1",
+                                "exempted_members_value_2",
+                            ],
+                            "ignore_child_exemptions": True,
+                            "log_type": "log_type_value",
+                        }
+                    ],
+                    "exempted_members": [
+                        "exempted_members_value_1",
+                        "exempted_members_value_2",
+                    ],
+                    "service": "service_value",
+                }
+            ],
+            "bindings": [
+                {
+                    "binding_id": "binding_id_value",
+                    "condition": {
+                        "description": "description_value",
+                        "expression": "expression_value",
+                        "location": "location_value",
+                        "title": "title_value",
+                    },
+                    "members": ["members_value_1", "members_value_2"],
+                    "role": "role_value",
+                }
+            ],
+            "etag": "etag_value",
+            "iam_owned": True,
+            "rules": [
+                {
+                    "action": "action_value",
+                    "conditions": [
+                        {
+                            "iam": "iam_value",
+                            "op": "op_value",
+                            "svc": "svc_value",
+                            "sys": "sys_value",
+                            "values": ["values_value_1", "values_value_2"],
+                        }
+                    ],
+                    "description": "description_value",
+                    "ins": ["ins_value_1", "ins_value_2"],
+                    "log_configs": [
+                        {
+                            "cloud_audit": {
+                                "authorization_logging_options": {
+                                    "permission_type": "permission_type_value"
+                                },
+                                "log_name": "log_name_value",
+                            },
+                            "counter": {
+                                "custom_fields": [
+                                    {"name": "name_value", "value": "value_value"}
+                                ],
+                                "field": "field_value",
+                                "metric": "metric_value",
+                            },
+                            "data_access": {"log_mode": "log_mode_value"},
+                        }
+                    ],
+                    "not_ins": ["not_ins_value_1", "not_ins_value_2"],
+                    "permissions": ["permissions_value_1", "permissions_value_2"],
+                }
+            ],
+            "version": 774,
+        },
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1553,17 +2745,13 @@ def test_set_iam_policy_rest_bad_request(
         client.set_iam_policy(request)
 
 
-def test_set_iam_policy_rest_from_dict():
-    test_set_iam_policy_rest(request_type=dict)
-
-
-def test_set_iam_policy_rest_flattened(transport: str = "rest"):
+def test_set_iam_policy_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Policy()
 
@@ -1624,22 +2812,56 @@ def test_set_iam_policy_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_test_iam_permissions_rest(
-    transport: str = "rest", request_type=compute.TestIamPermissionsReservationRequest
-):
+def test_set_iam_policy_rest_error():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.TestIamPermissionsReservationRequest, dict,]
+)
+def test_test_iam_permissions_rest(request_type, transport: str = "rest"):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.TestIamPermissionsReservationRequest(
+        {"project": "sample1", "zone": "sample2", "resource": "sample3"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.TestPermissionsResponse(
+            permissions=["permissions_value"],
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.TestPermissionsResponse.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.test_iam_permissions(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.TestIamPermissionsReservationRequest, dict,]
+)
+def test_test_iam_permissions_rest(request_type):
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "resource": "sample3"}
-    request_init["test_permissions_request_resource"] = compute.TestPermissionsRequest(
-        permissions=["permissions_value"]
-    )
+    request_init["test_permissions_request_resource"] = {
+        "permissions": ["permissions_value_1", "permissions_value_2"]
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.TestPermissionsResponse(
             permissions=["permissions_value"],
@@ -1658,6 +2880,97 @@ def test_test_iam_permissions_rest(
     assert response.permissions == ["permissions_value"]
 
 
+def test_test_iam_permissions_rest_required_fields(
+    request_type=compute.TestIamPermissionsReservationRequest,
+):
+    transport_class = transports.ReservationsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request_init["resource"] = ""
+    request_init["zone"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+    assert "resource" not in jsonified_request
+    assert "zone" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).test_iam_permissions._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == request_init["resource"]
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == request_init["zone"]
+
+    jsonified_request["project"] = "project_value"
+    jsonified_request["resource"] = "resource_value"
+    jsonified_request["zone"] = "zone_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).test_iam_permissions._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+    assert "resource" in jsonified_request
+    assert jsonified_request["resource"] == "resource_value"
+    assert "zone" in jsonified_request
+    assert jsonified_request["zone"] == "zone_value"
+
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.TestPermissionsResponse()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.TestPermissionsResponse.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.test_iam_permissions(request)
+
+            expected_params = [
+                ("project", "",),
+                ("resource", "",),
+                ("zone", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_test_iam_permissions_rest_bad_request(
     transport: str = "rest", request_type=compute.TestIamPermissionsReservationRequest
 ):
@@ -1667,9 +2980,9 @@ def test_test_iam_permissions_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "zone": "sample2", "resource": "sample3"}
-    request_init["test_permissions_request_resource"] = compute.TestPermissionsRequest(
-        permissions=["permissions_value"]
-    )
+    request_init["test_permissions_request_resource"] = {
+        "permissions": ["permissions_value_1", "permissions_value_2"]
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1684,17 +2997,13 @@ def test_test_iam_permissions_rest_bad_request(
         client.test_iam_permissions(request)
 
 
-def test_test_iam_permissions_rest_from_dict():
-    test_test_iam_permissions_rest(request_type=dict)
-
-
-def test_test_iam_permissions_rest_flattened(transport: str = "rest"):
+def test_test_iam_permissions_rest_flattened():
     client = ReservationsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.TestPermissionsResponse()
 
@@ -1753,6 +3062,12 @@ def test_test_iam_permissions_rest_flattened_error(transport: str = "rest"):
                 permissions=["permissions_value"]
             ),
         )
+
+
+def test_test_iam_permissions_rest_error():
+    client = ReservationsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
 
 
 def test_credentials_transport_error():
@@ -2019,7 +3334,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(

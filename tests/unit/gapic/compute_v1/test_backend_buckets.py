@@ -18,12 +18,13 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
 
 from requests import Response
-from requests import Request
+from requests import Request, PreparedRequest
 from requests.sessions import Session
 
 from google.api_core import client_options
@@ -229,20 +230,20 @@ def test_backend_buckets_client_client_options(
     # unsupported value.
     with mock.patch.dict(os.environ, {"GOOGLE_API_USE_MTLS_ENDPOINT": "Unsupported"}):
         with pytest.raises(MutualTLSChannelError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case GOOGLE_API_USE_CLIENT_CERTIFICATE has unsupported value.
     with mock.patch.dict(
         os.environ, {"GOOGLE_API_USE_CLIENT_CERTIFICATE": "Unsupported"}
     ):
         with pytest.raises(ValueError):
-            client = client_class()
+            client = client_class(transport=transport_name)
 
     # Check the case quota_project_id is provided
     options = client_options.ClientOptions(quota_project_id="octopus")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -284,7 +285,7 @@ def test_backend_buckets_client_mtls_env_auto(
         )
         with mock.patch.object(transport_class, "__init__") as patched:
             patched.return_value = None
-            client = client_class(transport=transport_name, client_options=options)
+            client = client_class(client_options=options, transport=transport_name)
 
             if use_client_cert_env == "false":
                 expected_client_cert_source = None
@@ -372,7 +373,7 @@ def test_backend_buckets_client_client_options_scopes(
     options = client_options.ClientOptions(scopes=["1", "2"],)
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file=None,
@@ -396,7 +397,7 @@ def test_backend_buckets_client_client_options_credentials_file(
     options = client_options.ClientOptions(credentials_file="credentials.json")
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
-        client = client_class(transport=transport_name, client_options=options)
+        client = client_class(client_options=options, transport=transport_name)
         patched.assert_called_once_with(
             credentials=None,
             credentials_file="credentials.json",
@@ -409,22 +410,72 @@ def test_backend_buckets_client_client_options_credentials_file(
         )
 
 
-def test_add_signed_url_key_unary_rest(
-    transport: str = "rest", request_type=compute.AddSignedUrlKeyBackendBucketRequest
-):
+@pytest.mark.parametrize(
+    "request_type", [compute.AddSignedUrlKeyBackendBucketRequest, dict,]
+)
+def test_add_signed_url_key_unary_rest(request_type, transport: str = "rest"):
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.AddSignedUrlKeyBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.add_signed_url_key_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.AddSignedUrlKeyBackendBucketRequest, dict,]
+)
+def test_add_signed_url_key_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["signed_url_key_resource"] = compute.SignedUrlKey(
-        key_name="key_name_value"
-    )
+    request_init["signed_url_key_resource"] = {
+        "key_name": "key_name_value",
+        "key_value": "key_value_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -485,6 +536,89 @@ def test_add_signed_url_key_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_add_signed_url_key_unary_rest_required_fields(
+    request_type=compute.AddSignedUrlKeyBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).add_signed_url_key._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).add_signed_url_key._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.add_signed_url_key_unary(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_add_signed_url_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddSignedUrlKeyBackendBucketRequest
 ):
@@ -494,9 +628,10 @@ def test_add_signed_url_key_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["signed_url_key_resource"] = compute.SignedUrlKey(
-        key_name="key_name_value"
-    )
+    request_init["signed_url_key_resource"] = {
+        "key_name": "key_name_value",
+        "key_value": "key_value_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -511,17 +646,13 @@ def test_add_signed_url_key_unary_rest_bad_request(
         client.add_signed_url_key_unary(request)
 
 
-def test_add_signed_url_key_unary_rest_from_dict():
-    test_add_signed_url_key_unary_rest(request_type=dict)
-
-
-def test_add_signed_url_key_unary_rest_flattened(transport: str = "rest"):
+def test_add_signed_url_key_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -572,11 +703,62 @@ def test_add_signed_url_key_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_delete_unary_rest(
-    transport: str = "rest", request_type=compute.DeleteBackendBucketRequest
-):
+def test_add_signed_url_key_unary_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.DeleteBackendBucketRequest, dict,])
+def test_delete_unary_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.DeleteBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.delete_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.DeleteBackendBucketRequest, dict,])
+def test_delete_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -584,7 +766,7 @@ def test_delete_unary_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -645,6 +827,88 @@ def test_delete_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_delete_unary_rest_required_fields(
+    request_type=compute.DeleteBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "delete",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_unary(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteBackendBucketRequest
 ):
@@ -668,17 +932,13 @@ def test_delete_unary_rest_bad_request(
         client.delete_unary(request)
 
 
-def test_delete_unary_rest_from_dict():
-    test_delete_unary_rest(request_type=dict)
-
-
-def test_delete_unary_rest_flattened(transport: str = "rest"):
+def test_delete_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -726,11 +986,66 @@ def test_delete_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_delete_signed_url_key_unary_rest(
-    transport: str = "rest", request_type=compute.DeleteSignedUrlKeyBackendBucketRequest
-):
+def test_delete_unary_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.DeleteSignedUrlKeyBackendBucketRequest, dict,]
+)
+def test_delete_signed_url_key_unary_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.DeleteSignedUrlKeyBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.delete_signed_url_key_unary(request)
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.DeleteSignedUrlKeyBackendBucketRequest, dict,]
+)
+def test_delete_signed_url_key_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -738,7 +1053,7 @@ def test_delete_signed_url_key_unary_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -799,6 +1114,96 @@ def test_delete_signed_url_key_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_delete_signed_url_key_unary_rest_required_fields(
+    request_type=compute.DeleteSignedUrlKeyBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["key_name"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "keyName" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_signed_url_key._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "keyName" in jsonified_request
+    assert jsonified_request["keyName"] == request_init["key_name"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["keyName"] = "key_name_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).delete_signed_url_key._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "keyName" in jsonified_request
+    assert jsonified_request["keyName"] == "key_name_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.delete_signed_url_key_unary(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("keyName", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_delete_signed_url_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteSignedUrlKeyBackendBucketRequest
 ):
@@ -822,17 +1227,13 @@ def test_delete_signed_url_key_unary_rest_bad_request(
         client.delete_signed_url_key_unary(request)
 
 
-def test_delete_signed_url_key_unary_rest_from_dict():
-    test_delete_signed_url_key_unary_rest(request_type=dict)
-
-
-def test_delete_signed_url_key_unary_rest_flattened(transport: str = "rest"):
+def test_delete_signed_url_key_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -883,11 +1284,49 @@ def test_delete_signed_url_key_unary_rest_flattened_error(transport: str = "rest
         )
 
 
-def test_get_rest(
-    transport: str = "rest", request_type=compute.GetBackendBucketRequest
-):
+def test_delete_signed_url_key_unary_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.GetBackendBucketRequest, dict,])
+def test_get_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.GetBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.BackendBucket(
+            bucket_name="bucket_name_value",
+            creation_timestamp="creation_timestamp_value",
+            custom_response_headers=["custom_response_headers_value"],
+            description="description_value",
+            enable_cdn=True,
+            id=205,
+            kind="kind_value",
+            name="name_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.BackendBucket.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.get(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.GetBackendBucketRequest, dict,])
+def test_get_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -895,7 +1334,7 @@ def test_get_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendBucket(
             bucket_name="bucket_name_value",
@@ -930,6 +1369,86 @@ def test_get_rest(
     assert response.self_link == "self_link_value"
 
 
+def test_get_rest_required_fields(request_type=compute.GetBackendBucketRequest):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).get._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.BackendBucket()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.BackendBucket.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.get(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetBackendBucketRequest
 ):
@@ -953,17 +1472,13 @@ def test_get_rest_bad_request(
         client.get(request)
 
 
-def test_get_rest_from_dict():
-    test_get_rest(request_type=dict)
-
-
-def test_get_rest_flattened(transport: str = "rest"):
+def test_get_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendBucket()
 
@@ -1011,22 +1526,98 @@ def test_get_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_insert_unary_rest(
-    transport: str = "rest", request_type=compute.InsertBackendBucketRequest
-):
+def test_get_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertBackendBucketRequest, dict,])
+def test_insert_unary_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.InsertBackendBucketRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.insert_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.InsertBackendBucketRequest, dict,])
+def test_insert_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1087,6 +1678,81 @@ def test_insert_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_insert_unary_rest_required_fields(
+    request_type=compute.InsertBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).insert._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.insert_unary(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertBackendBucketRequest
 ):
@@ -1096,9 +1762,36 @@ def test_insert_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1113,17 +1806,13 @@ def test_insert_unary_rest_bad_request(
         client.insert_unary(request)
 
 
-def test_insert_unary_rest_from_dict():
-    test_insert_unary_rest(request_type=dict)
-
-
-def test_insert_unary_rest_flattened(transport: str = "rest"):
+def test_insert_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1176,11 +1865,42 @@ def test_insert_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest(
-    transport: str = "rest", request_type=compute.ListBackendBucketsRequest
-):
+def test_insert_unary_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.ListBackendBucketsRequest, dict,])
+def test_list_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.ListBackendBucketsRequest({"project": "sample1"})
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.BackendBucketList(
+            id="id_value",
+            kind="kind_value",
+            next_page_token="next_page_token_value",
+            self_link="self_link_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.BackendBucketList.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.list(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.ListBackendBucketsRequest, dict,])
+def test_list_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
@@ -1188,7 +1908,7 @@ def test_list_rest(
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendBucketList(
             id="id_value",
@@ -1211,6 +1931,78 @@ def test_list_rest(
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+def test_list_rest_required_fields(request_type=compute.ListBackendBucketsRequest):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).list._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.BackendBucketList()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "get",
+                "query_params": request_init,
+            }
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.BackendBucketList.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.list(request)
+
+            expected_params = [
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
 
 
 def test_list_rest_bad_request(
@@ -1236,17 +2028,13 @@ def test_list_rest_bad_request(
         client.list(request)
 
 
-def test_list_rest_from_dict():
-    test_list_rest(request_type=dict)
-
-
-def test_list_rest_flattened(transport: str = "rest"):
+def test_list_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendBucketList()
 
@@ -1290,8 +2078,10 @@ def test_list_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_list_rest_pager():
-    client = BackendBucketsClient(credentials=ga_credentials.AnonymousCredentials(),)
+def test_list_rest_pager(transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
 
     # Mock the http request call within the method and fake a response.
     with mock.patch.object(Session, "request") as req:
@@ -1339,22 +2129,94 @@ def test_list_rest_pager():
             assert page_.raw_page.next_page_token == token
 
 
-def test_patch_unary_rest(
-    transport: str = "rest", request_type=compute.PatchBackendBucketRequest
-):
+@pytest.mark.parametrize("request_type", [compute.PatchBackendBucketRequest, dict,])
+def test_patch_unary_rest(request_type, transport: str = "rest"):
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.PatchBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.patch_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.PatchBackendBucketRequest, dict,])
+def test_patch_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1415,6 +2277,89 @@ def test_patch_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_patch_unary_rest_required_fields(
+    request_type=compute.PatchBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).patch._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).patch._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "patch",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.patch_unary(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchBackendBucketRequest
 ):
@@ -1424,9 +2369,36 @@ def test_patch_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1441,17 +2413,13 @@ def test_patch_unary_rest_bad_request(
         client.patch_unary(request)
 
 
-def test_patch_unary_rest_from_dict():
-    test_patch_unary_rest(request_type=dict)
-
-
-def test_patch_unary_rest_flattened(transport: str = "rest"):
+def test_patch_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1506,22 +2474,100 @@ def test_patch_unary_rest_flattened_error(transport: str = "rest"):
         )
 
 
-def test_update_unary_rest(
-    transport: str = "rest", request_type=compute.UpdateBackendBucketRequest
-):
+def test_patch_unary_rest_error():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize("request_type", [compute.UpdateBackendBucketRequest, dict,])
+def test_update_unary_rest(request_type, transport: str = "rest"):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    # Send a request that will satisfy transcoding
+    request = compute.UpdateBackendBucketRequest(
+        {"project": "sample1", "backend_bucket": "sample2"}
+    )
+
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+        req.return_value = Response()
+        req.return_value.status_code = 500
+        req.return_value.request = PreparedRequest()
+        json_return_value = compute.Operation.to_json(return_value)
+        req.return_value._content = json_return_value.encode("UTF-8")
+        with pytest.raises(core_exceptions.GoogleAPIError):
+            # We only care that the correct exception is raised when putting
+            # the request over the wire, so an empty request is fine.
+            client.update_unary(request)
+
+
+@pytest.mark.parametrize("request_type", [compute.UpdateBackendBucketRequest, dict,])
+def test_update_unary_rest(request_type):
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation(
             client_operation_id="client_operation_id_value",
@@ -1582,6 +2628,89 @@ def test_update_unary_rest(
     assert response.zone == "zone_value"
 
 
+def test_update_unary_rest_required_fields(
+    request_type=compute.UpdateBackendBucketRequest,
+):
+    transport_class = transports.BackendBucketsRestTransport
+
+    request_init = {}
+    request_init["backend_bucket"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+    assert "backendBucket" not in jsonified_request
+    assert "project" not in jsonified_request
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).update._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == request_init["backend_bucket"]
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == request_init["project"]
+
+    jsonified_request["backendBucket"] = "backend_bucket_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).update._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendBucket" in jsonified_request
+    assert jsonified_request["backendBucket"] == "backend_bucket_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "put",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.update_unary(request)
+
+            expected_params = [
+                ("backendBucket", "",),
+                ("project", "",),
+            ]
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
 def test_update_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateBackendBucketRequest
 ):
@@ -1591,9 +2720,36 @@ def test_update_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "backend_bucket": "sample2"}
-    request_init["backend_bucket_resource"] = compute.BackendBucket(
-        bucket_name="bucket_name_value"
-    )
+    request_init["backend_bucket_resource"] = {
+        "bucket_name": "bucket_name_value",
+        "cdn_policy": {
+            "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
+            "cache_mode": "cache_mode_value",
+            "client_ttl": 1074,
+            "default_ttl": 1176,
+            "max_ttl": 761,
+            "negative_caching": True,
+            "negative_caching_policy": [{"code": 411, "ttl": 340}],
+            "request_coalescing": True,
+            "serve_while_stale": 1813,
+            "signed_url_cache_max_age_sec": 2890,
+            "signed_url_key_names": [
+                "signed_url_key_names_value_1",
+                "signed_url_key_names_value_2",
+            ],
+        },
+        "creation_timestamp": "creation_timestamp_value",
+        "custom_response_headers": [
+            "custom_response_headers_value_1",
+            "custom_response_headers_value_2",
+        ],
+        "description": "description_value",
+        "enable_cdn": True,
+        "id": 205,
+        "kind": "kind_value",
+        "name": "name_value",
+        "self_link": "self_link_value",
+    }
     request = request_type(request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1608,17 +2764,13 @@ def test_update_unary_rest_bad_request(
         client.update_unary(request)
 
 
-def test_update_unary_rest_from_dict():
-    test_update_unary_rest(request_type=dict)
-
-
-def test_update_unary_rest_flattened(transport: str = "rest"):
+def test_update_unary_rest_flattened():
     client = BackendBucketsClient(
-        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
     )
 
     # Mock the http request call within the method and fake a response.
-    with mock.patch.object(Session, "request") as req:
+    with mock.patch.object(type(client.transport._session), "request") as req:
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
@@ -1671,6 +2823,12 @@ def test_update_unary_rest_flattened_error(transport: str = "rest"):
                 bucket_name="bucket_name_value"
             ),
         )
+
+
+def test_update_unary_rest_error():
+    client = BackendBucketsClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
 
 
 def test_credentials_transport_error():
@@ -1936,7 +3094,7 @@ def test_parse_common_location_path():
     assert expected == actual
 
 
-def test_client_withDEFAULT_CLIENT_INFO():
+def test_client_with_default_client_info():
     client_info = gapic_v1.client_info.ClientInfo()
 
     with mock.patch.object(
