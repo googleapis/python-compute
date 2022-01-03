@@ -18,7 +18,7 @@ import uuid
 
 import google.auth
 
-from quickstart import main, list_instances, delete_instance
+from quickstart import main
 
 PROJECT = google.auth.default()[1]
 INSTANCE_NAME = "i" + uuid.uuid4().hex[:10]
@@ -34,15 +34,3 @@ def test_main(capsys: typing.Any) -> None:
     assert re.search(f"Instances found in {INSTANCE_ZONE}:.+{INSTANCE_NAME}", out)
     assert re.search(f"zones/{INSTANCE_ZONE}:.+{INSTANCE_NAME}", out)
     assert f"Instance {INSTANCE_NAME} deleted." in out
-
-
-def test_cleanup_europe():
-    """
-    This is not really a test, this is code to be executed to clean up leaked instances.
-    """
-    instances = list_instances(PROJECT, INSTANCE_ZONE)
-    for instance in instances:
-        if not instance.name.startswith("i"):
-            continue
-        if instance.creation_timestamp < '2022-01-03T00':
-            delete_instance(PROJECT, INSTANCE_ZONE, instance.name)
