@@ -44,5 +44,5 @@ def test_cleanup_europe():
     for instance in instances:
         if not instance.name.startswith("i"):
             continue
-        if instance.creation_timestamp < '2022-01-03T00':
+        if instance.creation_timestamp < "2022-01-03T00":
             delete_instance(PROJECT, INSTANCE_ZONE, instance.name)
