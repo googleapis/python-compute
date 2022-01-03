@@ -16,7 +16,7 @@ import uuid
 import google.auth
 import pytest
 
-from quickstart import create_instance, delete_instance
+from quickstart import create_instance, delete_instance, list_instances
 from sample_custom_types import (
     add_extended_memory_to_instance,
     create_custom_instance,
@@ -192,3 +192,15 @@ def test_from_str_creation():
     assert cmt.extra_memory_used is True
     assert cmt.cpu_series is CustomMachineType.CPUSeries.N2D
     assert cmt.core_count == 8
+
+
+def test_cleanup():
+    """
+    This is not really a test, this is code to be executed to clean up leaked instances.
+    """
+    instances = list_instances(PROJECT, INSTANCE_ZONE)
+    for instance in instances:
+        if not instance.name.startswith("test-instance"):
+            continue
+        if instance.creation_timestamp < '2022-01-03T00':
+            delete_instance(PROJECT, INSTANCE_ZONE, instance.name)
