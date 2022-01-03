@@ -70,8 +70,16 @@ def test_create_delete():
     rule = get_firewall_rule(PROJECT, rule_name)
     assert rule.name == rule_name
     assert "web" in rule.target_tags
-    delete_firewall_rule(PROJECT, rule_name)
-    assert all(rule.name != rule_name for rule in list_firewall_rules(PROJECT))
+    try:
+        delete_firewall_rule(PROJECT, rule_name)
+        assert all(rule.name != rule_name for rule in list_firewall_rules(PROJECT))
+    except google.api_core.exceptions.BadRequest as err:
+        if err.code == 400 and "is not ready" in err.message:
+            # We can ignore this, this is most likely GCE Enforcer removing the rule before us.
+            pass
+        else:
+            # Something else went wrong, let's escalate it.
+            raise err
 
 
 def test_patch_rule(firewall_rule):
