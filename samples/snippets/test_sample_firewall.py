@@ -64,15 +64,14 @@ def firewall_rule():
             raise err
 
 
-def test_create_delete():
+@pytest.fixture
+def autodelete_firewall_name():
+    """
+    Provide a name for a firewall rule and then delete the rule.
+    """
     rule_name = "firewall-sample-test-" + uuid.uuid4().hex[:10]
-    create_firewall_rule(PROJECT, rule_name)
-    rule = get_firewall_rule(PROJECT, rule_name)
-    assert rule.name == rule_name
-    assert "web" in rule.target_tags
     try:
         delete_firewall_rule(PROJECT, rule_name)
-        assert all(rule.name != rule_name for rule in list_firewall_rules(PROJECT))
     except google.api_core.exceptions.BadRequest as err:
         if err.code == 400 and "is not ready" in err.message:
             # We can ignore this, this is most likely GCE Enforcer removing the rule before us.
@@ -80,6 +79,13 @@ def test_create_delete():
         else:
             # Something else went wrong, let's escalate it.
             raise err
+
+
+def test_create(autodelete_firewall_name):
+    create_firewall_rule(PROJECT, autodelete_firewall_name)
+    rule = get_firewall_rule(PROJECT, autodelete_firewall_name)
+    assert rule.name == autodelete_firewall_name
+    assert "web" in rule.target_tags
 
 
 def test_patch_rule(firewall_rule):
