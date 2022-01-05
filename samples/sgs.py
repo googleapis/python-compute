@@ -17,13 +17,39 @@ directory, to be then used in Google Compute Engine public documentation.
 """
 import argparse
 from pathlib import Path
-import os
+import ast
 import re
 import warnings
+from dataclasses import dataclass, field
+from typing import List, Tuple
+
+INGREDIENTS_START = re.compile(r"\s*#\s*<TEMPLATE ([\w\d_-]+)>")
+INGREDIENTS_END = re.compile(r"\s*#\s*</TEMPLATE>")
 
 
-TEMPLATE_START = re.compile(r"#\s+<TEMPLATE (\w\d_-+)>")
-TEMPLATE_END = re.compile(r"#\s+</TEMPLATE>")
+@dataclass
+class ImportItem:
+    """
+    Represents a single import item in a script, created either by
+    `import something as something_else` or
+    `from module import something as something_else`.
+    """
+    name: str
+    asname: str
+
+
+@dataclass
+class Ingredient:
+    """
+    This class represents a piece of code that can be used as part of a code snippet.
+    Each ingredient has a name. It is made of a list of imports that it'll require and
+    text that will be pasted into the snippet.
+    """
+    simple_imports: List[ImportItem] = field(default_factory=list)
+    imports_from: List[Tuple[str, ImportItem]] = field(default_factory=list)
+    text: str = ""
+    name: str = ""
+
 
 
 IGNORED_OUTPUT_FILES = {
@@ -35,32 +61,57 @@ IGNORED_OUTPUT_FILES = {
 }
 
 
-def load_template(path: Path) -> (str, str):
+def parse_imports(script: str) -> Tuple[List[ImportItem], List[Tuple[str, ImportItem]]]:
+    """
+    Reads a Python script file and analyzes it to extract information
+    about the various things it imports. Returns a pair of lists containing
+    information about the "simple imports" (`import abc as xyz`) and "imports from"
+    (`from collections import deque as ...`).
+    """
+    parsed_script = ast.parse(script)
+    simple_imports = []
+    imports_from = []
+    for node in parsed_script.body:
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                simple_imports.append(ImportItem(name=alias.name, asname=alias.asname))
+        elif isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                imports_from.append((node.module, ImportItem(name=alias.name, asname=alias.asname)))
+    return simple_imports, imports_from
+
+
+def load_template(path: Path) -> Ingredient:
     template_lines = []
     in_template = False
     template_name = ""
     with path.open() as file:
-        for line in file.readlines():
-            if in_template and TEMPLATE_END.match(line):
-                return template_name, "".join(template_lines)
-            elif in_template:
-                template_lines.append(line)
-            elif match := TEMPLATE_START.match(line):
-                template_name = match.group(1)
-                in_template = True
-    warnings.warn(f"The template in {path} has no closing tag.", SyntaxWarning)
-    return template_name, "".join(template_lines)
+        file_content = file.read()
+    # Read imports
+    simple_imports, imports_from = parse_imports(file_content)
+    # Read the script
+    for line in file_content.splitlines():
+        if in_template and INGREDIENTS_END.match(line):
+            break
+        elif in_template:
+            template_lines.append(line)
+        elif match := INGREDIENTS_START.match(line):
+            template_name = match.group(1)
+            in_template = True
+    else:
+        warnings.warn(f"The template in {path} has no closing tag.", SyntaxWarning)
+    return Ingredient(name=template_name, text="".join(template_lines), simple_imports=simple_imports, imports_from=imports_from)
 
 
-def load_templates(path: Path) -> dict:
-    templates = {}
+def load_ingredients(path: Path) -> dict:
+    ingredients = {}
     for ipath in path.iterdir():
         if ipath.is_dir():
-            templates.update(load_templates(ipath))
+            ingredients.update(load_ingredients(ipath))
         elif ipath.is_file():
             name, template = load_template(ipath)
-            templates[name] = template
-    return templates
+            ingredients[name] = template
+    return ingredients
 
 
 def load_recipe(path: Path) -> str:
@@ -78,8 +129,17 @@ def load_recipes(path: Path) -> dict:
     return recipes
 
 
+def render_recipe(recipe: str, ingredients: dict) -> str:
+    """
+    Replace all `##IMPORTS` and `##INGREDIENT <name>` occurrences in
+    the provided recipe, producing a script ready to be saved to a file.
+    """
+    ingredients_used = []
+    # TODO continue here
+
+
 def generate():
-    print(load_templates(Path('templates')))
+    print(load_ingredients(Path('ingredients')))
 
 
 def verify():

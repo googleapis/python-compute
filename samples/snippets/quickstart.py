@@ -20,6 +20,7 @@ line to create, list and delete an instance in a given project in a given zone.
 """
 
 # [START compute_instances_create]
+import re
 # [START compute_instances_delete]
 import re
 import sys
