@@ -21,6 +21,7 @@ line to create, list and delete an instance in a given project in a given zone.
 
 # [START compute_instances_create]
 # [START compute_instances_delete]
+import re
 import sys
 
 # [START compute_instances_list]
@@ -149,8 +150,10 @@ def create_instance(
     instance = compute_v1.Instance()
     instance.name = instance_name
     instance.disks = [disk]
-    full_machine_type_name = f"zones/{zone}/machineTypes/{machine_type}"
-    instance.machine_type = full_machine_type_name
+    if re.match(r"^zones/[a-z\d\-]+/machineTypes/[a-z\d\-]+$", machine_type):
+        instance.machine_type = machine_type
+    else:
+        instance.machine_type = f"zones/{zone}/machineTypes/{machine_type}"
     instance.network_interfaces = [network_interface]
 
     # Prepare the request to insert an instance.
@@ -161,7 +164,7 @@ def create_instance(
 
     # Wait for the create operation to complete.
     print(f"Creating the {instance_name} instance in {zone}...")
-    operation = instance_client.insert(request=request)
+    operation = instance_client.insert_unary(request=request)
     while operation.status != compute_v1.Operation.Status.DONE:
         operation = operation_client.wait(
             operation=operation.name, zone=zone, project=project_id
@@ -191,7 +194,7 @@ def delete_instance(project_id: str, zone: str, machine_name: str) -> None:
     operation_client = compute_v1.ZoneOperationsClient()
 
     print(f"Deleting {machine_name} from {zone}...")
-    operation = instance_client.delete(
+    operation = instance_client.delete_unary(
         project=project_id, zone=zone, instance=machine_name
     )
     while operation.status != compute_v1.Operation.Status.DONE:
