@@ -16,6 +16,7 @@ This script is used to generate the full code samples inside the `snippets`
 directory, to be then used in Google Compute Engine public documentation.
 """
 import argparse
+from collections import defaultdict
 from pathlib import Path
 import ast
 import re
@@ -23,8 +24,11 @@ import warnings
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
-INGREDIENTS_START = re.compile(r"\s*#\s*<TEMPLATE ([\w\d_-]+)>")
-INGREDIENTS_END = re.compile(r"\s*#\s*</TEMPLATE>")
+INGREDIENTS_START = re.compile(r"\s*#\s*<INGREDIENT ([\w\d_-]+)>")
+INGREDIENTS_END = re.compile(r"\s*#\s*</INGREDIENT>")
+
+IMPORTS_FILL = re.compile(r"\s*##\s*IMPORTS")
+INGREDIENT_FILL = re.compile(r"\s*##\s*INGREDIENT ([\s\w_-]+)")
 
 
 @dataclass
@@ -81,7 +85,7 @@ def parse_imports(script: str) -> Tuple[List[ImportItem], List[Tuple[str, Import
     return simple_imports, imports_from
 
 
-def load_template(path: Path) -> Ingredient:
+def load_ingredient(path: Path) -> Ingredient:
     template_lines = []
     in_template = False
     template_name = ""
@@ -109,8 +113,8 @@ def load_ingredients(path: Path) -> dict:
         if ipath.is_dir():
             ingredients.update(load_ingredients(ipath))
         elif ipath.is_file():
-            name, template = load_template(ipath)
-            ingredients[name] = template
+            ingredient = load_ingredient(ipath)
+            ingredients[ingredient.name] = ingredient
     return ingredients
 
 
@@ -135,7 +139,43 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
     the provided recipe, producing a script ready to be saved to a file.
     """
     ingredients_used = []
-    # TODO continue here
+    file_lines = recipe.splitlines()
+
+    # Scan the file to used ingredients
+    for line in file_lines:
+        if match := INGREDIENT_FILL.match(line):
+            ingredients_used.append(ingredients[match.group(1)])
+
+    simple_imports_used = {ingredient.simple_imports for ingredient in ingredients_used}
+
+    from_imports_used = defaultdict(set)
+    for ingredient in ingredients_used:
+        for import_from in ingredient.imports_from:
+            from_imports_used[import_from[0]] = import_from[1]
+
+    import_lines = set()
+    for simple_import in simple_imports_used:
+        if simple_import.asname:
+            import_lines.add(f"import {simple_import.name} as {simple_import.asname}")
+        else:
+            import_lines.add(f"import {simple_import.name}")
+
+    for module, from_imports in from_imports_used.items():
+        names = set()
+        for from_import in from_imports:
+            if from_import.asname:
+                names.add(f"{from_import.name} as {from_import.asname}")
+            else:
+                names.add(from_import.name)
+        names = ", ".join(names)
+        import_lines.add(f"from {module} import ({names})")
+
+    output_file = []
+    for line in file_lines:
+        if match := IMPORTS_FILL.match(line):
+            output_file.extend(import_lines)
+        elif match := INGREDIENT_FILL.match(line):
+            output_file.append(ingredients[match.group(1).text])
 
 
 def generate():
