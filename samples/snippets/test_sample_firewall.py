@@ -24,7 +24,6 @@ from sample_firewall import (
     create_firewall_rule,
     delete_firewall_rule,
     get_firewall_rule,
-    list_firewall_rules,
     patch_firewall_priority,
 )
 
@@ -70,6 +69,7 @@ def autodelete_firewall_name():
     Provide a name for a firewall rule and then delete the rule.
     """
     rule_name = "firewall-sample-test-" + uuid.uuid4().hex[:10]
+    yield rule_name
     try:
         delete_firewall_rule(PROJECT, rule_name)
     except google.api_core.exceptions.BadRequest as err:
