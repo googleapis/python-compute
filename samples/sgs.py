@@ -16,6 +16,7 @@ This script is used to generate the full code samples inside the `snippets`
 directory, to be then used in Google Compute Engine public documentation.
 """
 import argparse
+import os
 from collections import defaultdict
 from pathlib import Path
 import ast
@@ -27,8 +28,11 @@ from typing import List, Tuple
 INGREDIENTS_START = re.compile(r"\s*#\s*<INGREDIENT ([\w\d_-]+)>")
 INGREDIENTS_END = re.compile(r"\s*#\s*</INGREDIENT>")
 
-IMPORTS_FILL = re.compile(r"\s*##\s*IMPORTS")
-INGREDIENT_FILL = re.compile(r"\s*##\s*INGREDIENT ([\s\w_-]+)")
+IMPORTS_FILL = re.compile(r"\s*#\s*<IMPORTS/>")
+INGREDIENT_FILL = re.compile(r"\s*#\s*<INGREDIENT ([\d\w_-]+)\s?/>")
+
+REGION_START = re.compile(r"#\s*<REGION_START ([\d\w_-]+)>")
+REGION_END = re.compile(r"#\s*<REGION_END ([\d\w_-]+)>")
 
 
 @dataclass
@@ -40,6 +44,9 @@ class ImportItem:
     """
     name: str
     asname: str
+
+    def __hash__(self):
+        return hash(f"{self.name} as {self.asname}")
 
 
 @dataclass
@@ -54,6 +61,8 @@ class Ingredient:
     text: str = ""
     name: str = ""
 
+    def __repr__(self):
+        return f"<Ingredient: {self.name}>"
 
 
 IGNORED_OUTPUT_FILES = {
@@ -94,7 +103,7 @@ def load_ingredient(path: Path) -> Ingredient:
     # Read imports
     simple_imports, imports_from = parse_imports(file_content)
     # Read the script
-    for line in file_content.splitlines():
+    for line in file_content.splitlines(keepends=True):
         if in_template and INGREDIENTS_END.match(line):
             break
         elif in_template:
@@ -146,7 +155,10 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
         if match := INGREDIENT_FILL.match(line):
             ingredients_used.append(ingredients[match.group(1)])
 
-    simple_imports_used = {ingredient.simple_imports for ingredient in ingredients_used}
+    simple_imports_used = set()
+    for ingredient in ingredients_used:
+        for simple_import in ingredient.simple_imports:
+            simple_imports_used.add(simple_import)
 
     from_imports_used = defaultdict(set)
     for ingredient in ingredients_used:
@@ -160,26 +172,50 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
         else:
             import_lines.add(f"import {simple_import.name}")
 
-    for module, from_imports in from_imports_used.items():
-        names = set()
-        for from_import in from_imports:
-            if from_import.asname:
-                names.add(f"{from_import.name} as {from_import.asname}")
-            else:
-                names.add(from_import.name)
-        names = ", ".join(names)
-        import_lines.add(f"from {module} import ({names})")
+    for module, from_import in from_imports_used.items():
+        if from_import.asname:
+            name = f"{from_import.name} as {from_import.asname}"
+        else:
+            name = from_import.name
+        import_lines.add(f"from {module} import {name}")
 
     output_file = []
     for line in file_lines:
-        if match := IMPORTS_FILL.match(line):
+        if IMPORTS_FILL.search(line):
             output_file.extend(import_lines)
-        elif match := INGREDIENT_FILL.match(line):
-            output_file.append(ingredients[match.group(1).text])
+        elif match := INGREDIENT_FILL.search(line):
+            print(f"Replacing {line} with ingredient {match.group(1)}:")
+            print(ingredients[match.group(1)].text)
+            output_file.append(ingredients[match.group(1)].text)
+        elif REGION_START.search(line):
+            output_file.append(REGION_START.sub("# [START \\1]", line))
+        elif REGION_END.search(line):
+            output_file.append(REGION_END.sub("# [START \\1]", line))
+        else:
+            output_file.append(line)
+
+    return os.linesep.join(output_file)
+
+
+def save_rendered_recipe(recipe_path: Path, rendered_recipe: str, output_dir: Path = Path('output')) -> Path:
+    output_dir.mkdir(exist_ok=True)
+
+    output_path = output_dir / Path(*recipe_path.parts[1:])
+    output_path.parent.mkdir(exist_ok=True)
+
+    with output_path.open(mode='w') as out_file:
+        out_file.write(rendered_recipe)
+    return output_path
 
 
 def generate():
-    print(load_ingredients(Path('ingredients')))
+    ingredients = load_ingredients(Path('ingredients'))
+    recipes = load_recipes(Path('recipes'))
+
+    for path, recipe in recipes.items():
+        rendered = render_recipe(recipe, ingredients)
+        out = save_rendered_recipe(path, rendered)
+        print(f"Rendered {out}")
 
 
 def verify():
