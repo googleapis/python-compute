@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.9.1](https://www.github.com/googleapis/python-compute/compare/v0.9.0...v0.9.1) (2022-01-10)
+
+
+### Documentation
+
+* **samples:** Samples for custom vm types ([#155](https://www.github.com/googleapis/python-compute/issues/155)) ([76a1d29](https://www.github.com/googleapis/python-compute/commit/76a1d29909ab1346a7de55c15198aa057a4a50e1))
+
 ## [0.9.0](https://www.github.com/googleapis/python-compute/compare/v0.8.0...v0.9.0) (2021-12-13)
 
 
