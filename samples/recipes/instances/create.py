@@ -12,11 +12,12 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+# <REGION_START compute_instances_create>
 # <IMPORTS/>
 
 
 # <INGREDIENT create_instance />
-
+# <REGION_END compute_instances_create>
 
 if __name__ == "__main__":
     import uuid
