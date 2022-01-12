@@ -101,25 +101,25 @@ def parse_imports(script: str) -> Tuple[List[ImportItem], List[Tuple[str, Import
 
 
 def load_ingredient(path: Path) -> Ingredient:
-    template_lines = []
-    in_template = False
-    template_name = ""
+    ingredient_lines = []
+    in_ingredient = False
+    ingredient_name = ""
     with path.open() as file:
         file_content = file.read()
     # Read imports
     simple_imports, imports_from = parse_imports(file_content)
     # Read the script
     for line in file_content.splitlines(keepends=True):
-        if in_template and INGREDIENTS_END.match(line):
+        if in_ingredient and INGREDIENTS_END.match(line):
             break
-        elif in_template:
-            template_lines.append(line)
+        elif in_ingredient:
+            ingredient_lines.append(line)
         elif match := INGREDIENTS_START.match(line):
-            template_name = match.group(1)
-            in_template = True
+            ingredient_name = match.group(1)
+            in_ingredient = True
     else:
-        warnings.warn(f"The template in {path} has no closing tag.", SyntaxWarning)
-    return Ingredient(name=template_name, text="".join(template_lines), simple_imports=simple_imports, imports_from=imports_from)
+        warnings.warn(f"The ingredient in {path} has no closing tag.", SyntaxWarning)
+    return Ingredient(name=ingredient_name, text="".join(ingredient_lines), simple_imports=simple_imports, imports_from=imports_from)
 
 
 def load_ingredients(path: Path) -> dict:

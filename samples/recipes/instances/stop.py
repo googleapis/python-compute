@@ -12,21 +12,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-
-# <REGION_START compute_instances_create_from_image_plus_snapshot_disk>
+# <REGION_START compute_stop_instance>
 # <IMPORTS/>
 
-# <INGREDIENT get_image_from_family />
 
+# <INGREDIENT stop_instance />
+# <REGION_END compute_stop_instance>
 
-# <INGREDIENT disk_from_image />
-
-
-# <INGREDIENT disk_from_snapshot />
-
-
-# <INGREDIENT create_instance />
-
-
-# <INGREDIENT create_with_snapshotted_data_disk />
-# <REGION_END compute_instances_create_from_image_plus_snapshot_disk>
