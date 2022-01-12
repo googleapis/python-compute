@@ -49,7 +49,7 @@ s.replace("google/cloud/**/types/compute.py", """\"NS_\"""", """`NS_`""")
 
 templated_files = gcp.CommonTemplates().py_library(
     microgenerator=True,
-    cov_level=98,
+    cov_level=96,
     versions=gcp.common.detect_versions(path="./google", default_first=True),
 )
 
