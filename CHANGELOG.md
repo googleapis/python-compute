@@ -1,5 +1,62 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/python-compute/compare/v1.0.0...v1.0.0) (2022-01-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* uint64/int64 fields accept ints instead of strings
+* uint64/int64 fields accept ints instead of strings (#92)
+
+### Features
+
+* add always_use_jwt_access ([4d673cf](https://github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* add support for python 3.10 ([#131](https://github.com/googleapis/python-compute/issues/131)) ([703ac17](https://github.com/googleapis/python-compute/commit/703ac1703bc159dcd81e96759606ad896f125996))
+* Adding code samples and tests for them ([#55](https://github.com/googleapis/python-compute/issues/55)) ([14cd352](https://github.com/googleapis/python-compute/commit/14cd352079281ddde3602597334e3c88c942ed30))
+* adding samples for default values ([#64](https://github.com/googleapis/python-compute/issues/64)) ([553e389](https://github.com/googleapis/python-compute/commit/553e3891179c2719a57d398ffc26c1459945bf4d))
+* adding samples to start/stop/reset operations ([#75](https://github.com/googleapis/python-compute/issues/75)) ([0df87a9](https://github.com/googleapis/python-compute/commit/0df87a9cc65c9a68c2ba6ae6bea2f6906626d488))
+* bump release level to production/stable ([#189](https://github.com/googleapis/python-compute/issues/189)) ([d5a5438](https://github.com/googleapis/python-compute/commit/d5a543867ab390d136eef153d0704a654aacb0db))
+* generate v1 ([53f9a3d](https://github.com/googleapis/python-compute/commit/53f9a3d6f14ef45b5bc3e38a48e3fa17059591eb))
+* Integrate latest compute API definitions ([#143](https://github.com/googleapis/python-compute/issues/143)) ([878f8fc](https://github.com/googleapis/python-compute/commit/878f8fc1508bca794e6b6e633111593aa4aaf265))
+* Raise GoogleAPICallError on REST response errors ([01db23b](https://github.com/googleapis/python-compute/commit/01db23bc0af3ab30bfb5ad8205446ae49417f0f1))
+* Re-generated to pick up changes from googleapis-discovery with latest fixes ([#60](https://github.com/googleapis/python-compute/issues/60)) ([01db23b](https://github.com/googleapis/python-compute/commit/01db23bc0af3ab30bfb5ad8205446ae49417f0f1))
+* Regenerate newest version of python-compute with field presence support ([#49](https://github.com/googleapis/python-compute/issues/49)) ([6181460](https://github.com/googleapis/python-compute/commit/61814609cdd8f9d26ba2b4f121e91dab4c565849))
+* remove support for google-api-core < 1.26.0 ([01db23b](https://github.com/googleapis/python-compute/commit/01db23bc0af3ab30bfb5ad8205446ae49417f0f1))
+* run synthtool to pick up mtls feature ([#6](https://github.com/googleapis/python-compute/issues/6)) ([3abec21](https://github.com/googleapis/python-compute/commit/3abec21a1d5b1384779c48b899f23ba18ca0ddb3))
+* support self-signed JWT flow for service accounts ([de739a1](https://github.com/googleapis/python-compute/commit/de739a1b2c94648135bf62bc2aff23c2896a9b2d))
+* Switch to string enums for compute ([#685](https://github.com/googleapis/python-compute/issues/685)) ([#158](https://github.com/googleapis/python-compute/issues/158)) ([6cfa01e](https://github.com/googleapis/python-compute/commit/6cfa01eb2b33986809854e9a33c6f6441a91bedf))
+* update to the latest version of the code generator ([#147](https://github.com/googleapis/python-compute/issues/147)) ([de739a1](https://github.com/googleapis/python-compute/commit/de739a1b2c94648135bf62bc2aff23c2896a9b2d))
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([de739a1](https://github.com/googleapis/python-compute/commit/de739a1b2c94648135bf62bc2aff23c2896a9b2d))
+* **compute:** Updated max_results to 100 to avoid too many API calls ([#108](https://github.com/googleapis/python-compute/issues/108)) ([691e38e](https://github.com/googleapis/python-compute/commit/691e38e19d2c5dc7223e35b681c17b1194302e1b))
+* correct region tag formatting ([#102](https://github.com/googleapis/python-compute/issues/102)) ([8339c00](https://github.com/googleapis/python-compute/commit/8339c00db7eb693813511de7e3d7f8b28b709395))
+* **deps:** pin 'google-{api,cloud}-core', 'google-auth' to allow 2.x versions ([#81](https://github.com/googleapis/python-compute/issues/81)) ([1163f2b](https://github.com/googleapis/python-compute/commit/1163f2bb15f0e042bdd9562a31ad2ac7f39e3536))
+* **deps:** require google-api-core >=2.2.0 ([de739a1](https://github.com/googleapis/python-compute/commit/de739a1b2c94648135bf62bc2aff23c2896a9b2d))
+* **deps:** require proto-plus >=1.19.7 ([de739a1](https://github.com/googleapis/python-compute/commit/de739a1b2c94648135bf62bc2aff23c2896a9b2d))
+* don't use integers for enums in json encoding ([a3685b5](https://github.com/googleapis/python-compute/commit/a3685b5a03a75256d2d00b89dcc8fda34596edde))
+* exclude docs and tests from package ([#65](https://github.com/googleapis/python-compute/issues/65)) ([c157bf5](https://github.com/googleapis/python-compute/commit/c157bf507227d7c1c815d5e236e4d710e12fbdec))
+* fix body encoding for rest transport  ([#17](https://github.com/googleapis/python-compute/issues/17)) ([a3685b5](https://github.com/googleapis/python-compute/commit/a3685b5a03a75256d2d00b89dcc8fda34596edde))
+* fix required query params handling (closes [#12](https://github.com/googleapis/python-compute/issues/12)) ([4d673cf](https://github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* handle GCP enum name start with uppercase IPProtocol ([#691](https://github.com/googleapis/python-compute/issues/691)) ([#166](https://github.com/googleapis/python-compute/issues/166)) ([3d0fe75](https://github.com/googleapis/python-compute/commit/3d0fe75400c782ad704f80e8be6032d3c52003c2))
+* ignore unknown fields in response ([#25](https://github.com/googleapis/python-compute/issues/25)) ([a8c37b4](https://github.com/googleapis/python-compute/commit/a8c37b4b9dacc54e00a7ad3850e7c9c12ef477cf))
+* Kokoro uses separate project for concurent tests. ([#83](https://github.com/googleapis/python-compute/issues/83)) ([40afb33](https://github.com/googleapis/python-compute/commit/40afb333a963717853f70410a7a08eda5492418c))
+* make parent_id fields required compute move and insert methods ([#686](https://github.com/googleapis/python-compute/issues/686)) ([#160](https://github.com/googleapis/python-compute/issues/160)) ([8b373af](https://github.com/googleapis/python-compute/commit/8b373af2458ad18c29fdf112daf512a7120ce528))
+* regenerate the client lib ([#9](https://github.com/googleapis/python-compute/issues/9)) ([b9def52](https://github.com/googleapis/python-compute/commit/b9def52a47067804d5b79e867fb3ff895f8f4c21))
+* set development status classifier to alpha ([#2](https://github.com/googleapis/python-compute/issues/2)) ([54814f8](https://github.com/googleapis/python-compute/commit/54814f8ad15b8f8dff051c7c7819bc4a7b8e099f))
+* stabilize order of query_params ([a3685b5](https://github.com/googleapis/python-compute/commit/a3685b5a03a75256d2d00b89dcc8fda34596edde))
+* uint64/int64 fields accept ints instead of strings ([4d673cf](https://github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* uint64/int64 fields accept ints instead of strings ([#92](https://github.com/googleapis/python-compute/issues/92)) ([4d673cf](https://github.com/googleapis/python-compute/commit/4d673cf06ea2aa3957a0514fed68885c86a338b0))
+* update paging implementation to handle unconventional pagination ([a3685b5](https://github.com/googleapis/python-compute/commit/a3685b5a03a75256d2d00b89dcc8fda34596edde))
+
+
+### Miscellaneous Chores
+
+* release as 0.4.2 ([#84](https://github.com/googleapis/python-compute/issues/84)) ([dc77c0c](https://github.com/googleapis/python-compute/commit/dc77c0c55eef9cc1c2e515137fe66b4d4afca77e))
+* release as 0.4.3 ([#89](https://github.com/googleapis/python-compute/issues/89)) ([fbc1a28](https://github.com/googleapis/python-compute/commit/fbc1a2869932883d0e7e8e498e16d2273fb25048))
+
 ## [1.0.0](https://github.com/googleapis/python-compute/compare/v0.9.0...v1.0.0) (2022-01-13)
 
 
