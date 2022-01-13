@@ -19,7 +19,7 @@ import io
 import os
 import setuptools  # type: ignore
 
-version = "0.9.0"
+version = "1.0.0"
 
 package_root = os.path.abspath(os.path.dirname(__file__))
 
@@ -49,7 +49,7 @@ setuptools.setup(
     ),
     python_requires=">=3.6",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
