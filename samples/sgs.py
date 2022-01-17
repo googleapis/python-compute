@@ -83,7 +83,8 @@ IGNORED_OUTPUT_FILES = (
     re.compile(r'.*README\.md$'),
     re.compile(r'.*requirements\.txt$'),
     re.compile(r'.*requirements-test\.txt$'),
-    re.compile(r'^tests/.*')
+    re.compile(r'.*?/tests/.*'),
+    re.compile(r'.*?/__pycache__/.*')
 )
 
 

@@ -26,6 +26,46 @@ from typing import List
 from google.cloud import compute_v1
 
 
+def get_image_from_family(project: str, family: str) -> compute_v1.Image:
+    image_client = compute_v1.ImagesClient()
+    # List of public operating system (OS) images: https://cloud.google.com/compute/docs/images/os-details
+    newest_image = image_client.get_from_family(project=project, family=family)
+    return newest_image
+
+
+def disk_from_image(
+    disk_type: str, disk_size_gb: int, boot: bool, source_image: str
+) -> compute_v1.AttachedDisk:
+    """
+    Create an AttachedDisk object to be used in VM instance creation. Uses an image as the
+    source for the new disk.
+
+    Args:
+         disk_type: the type of disk you want to create. This value uses the following format:
+            "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
+            For example: "zones/us-west3-b/diskTypes/pd-ssd"
+        disk_size_gb: size of the new disk in gigabytes
+        boot: boolean flag indicating whether this disk should be used as a boot disk of an instance
+        source_image: source image to use when creating this disk. You must have read access to this disk. This can be one
+            of the publicly available images or an image from one of your projects.
+            This value uses the following format: "projects/{project_name}/global/images/{image_name}"
+
+    Returns:
+        AttachedDisk object configured to be created using the specified image.
+    """
+    boot_disk = compute_v1.AttachedDisk()
+    initialize_params = compute_v1.AttachedDiskInitializeParams()
+    initialize_params.source_image = source_image
+    initialize_params.disk_size_gb = disk_size_gb
+    initialize_params.disk_type = disk_type
+    boot_disk.initialize_params = initialize_params
+    # Remember to set auto_delete to True if you want the disk to be deleted when you delete
+    # your VM instance.
+    boot_disk.auto_delete = True
+    boot_disk.boot = boot
+    return boot_disk
+
+
 def create_instance(
     project_id: str,
     zone: str,
@@ -122,4 +162,11 @@ if __name__ == "__main__":
     else:
         instance_name = "quickstart-" + uuid.uuid4().hex[:10]
         instance_zone = "europe-central2-b"
-        create_instance(default_project_id, instance_zone, instance_name)
+
+        newest_debian = get_image_from_family(
+            project="debian-cloud", family="debian-10"
+        )
+        disk_type = f"zones/{instance_zone}/diskTypes/pd-standard"
+        disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
+
+        create_instance(default_project_id, instance_zone, instance_name, disks)

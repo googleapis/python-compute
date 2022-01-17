@@ -15,6 +15,9 @@
 # <REGION_START compute_instances_create>
 # <IMPORTS/>
 
+# <INGREDIENT get_image_from_family />
+
+# <INGREDIENT disk_from_image />
 
 # <INGREDIENT create_instance />
 # <REGION_END compute_instances_create>
@@ -34,4 +37,9 @@ if __name__ == "__main__":
     else:
         instance_name = "quickstart-" + uuid.uuid4().hex[:10]
         instance_zone = "europe-central2-b"
-        create_instance(default_project_id, instance_zone, instance_name)
+
+        newest_debian = get_image_from_family(project="debian-cloud", family="debian-10")
+        disk_type = f"zones/{instance_zone}/diskTypes/pd-standard"
+        disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
+
+        create_instance(default_project_id, instance_zone, instance_name, disks)
