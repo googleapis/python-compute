@@ -19,10 +19,11 @@
 
 # <INGREDIENT delete_firewall_rule />
 
+# <INGREDIENT get_firewall_rule />
+
 # <INGREDIENT list_firewall_rules />
 
 # <INGREDIENT patch_firewall_priority />
-
 
 if __name__ == "__main__":
     import google.auth

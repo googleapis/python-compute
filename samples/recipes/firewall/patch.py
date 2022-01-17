@@ -16,5 +16,4 @@
 # <IMPORTS/>
 
 # <INGREDIENT patch_firewall_priority />
-
 # <REGION_END compute_firewall_patch>

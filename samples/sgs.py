@@ -16,6 +16,8 @@ This script is used to generate the full code samples inside the `snippets`
 directory, to be then used in Google Compute Engine public documentation.
 """
 import argparse
+import contextlib
+import glob
 import os
 import subprocess
 from collections import defaultdict
@@ -41,6 +43,8 @@ HEADER = """\
 # Find the relevant recipe file in the samples/recipes or samples/ingredients 
 # directory and apply your changes there.
 """
+
+DEFAULT_OUTPUT_DIR = "snippets"
 
 
 @dataclass
@@ -73,13 +77,14 @@ class Ingredient:
         return f"<Ingredient: {self.name}>"
 
 
-IGNORED_OUTPUT_FILES = {
-    Path('noxfile.py'),
-    Path('noxfile_config.py'),
-    Path('README.md'),
-    Path('requirements.txt'),
-    Path('requirements-test.txt'),
-}
+IGNORED_OUTPUT_FILES = (
+    re.compile(r'.*noxfile\.py$'),
+    re.compile(r'.*noxfile_config\.py$'),
+    re.compile(r'.*README\.md$'),
+    re.compile(r'.*requirements\.txt$'),
+    re.compile(r'.*requirements-test\.txt$'),
+    re.compile(r'^tests/.*')
+)
 
 
 def parse_imports(script: str) -> Tuple[List[ImportItem], List[Tuple[str, ImportItem]]]:
@@ -191,7 +196,7 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
         names = ", ".join(names)
         import_lines.add(f"from {module} import {names}")
 
-    import_lines = isort.code("\n".join(import_lines)).splitlines()
+    import_lines = isort.code("\n".join(import_lines), config=isort.Config(profile='google')).splitlines()
 
     output_file = []
     header_added = False
@@ -221,7 +226,7 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
     return os.linesep.join(output_file)
 
 
-def save_rendered_recipe(recipe_path: Path, rendered_recipe: str, output_dir: Path = Path('output')) -> Path:
+def save_rendered_recipe(recipe_path: Path, rendered_recipe: str, output_dir: Path = Path(DEFAULT_OUTPUT_DIR)) -> Path:
     output_dir.mkdir(exist_ok=True)
 
     output_path = output_dir / Path(*recipe_path.parts[1:])
@@ -234,17 +239,43 @@ def save_rendered_recipe(recipe_path: Path, rendered_recipe: str, output_dir: Pa
     return output_path
 
 
-def generate():
+def generate(args: argparse.Namespace):
     ingredients = load_ingredients(Path('ingredients'))
     recipes = load_recipes(Path('recipes'))
 
+    updated_paths = set()
+
     for path, recipe in recipes.items():
         rendered = render_recipe(recipe, ingredients)
-        out = save_rendered_recipe(path, rendered)
-        print(f"Rendered {out}")
+        out = save_rendered_recipe(path, rendered, output_dir=Path(args.output_dir))
+        updated_paths.add(str(out))
+
+    print("Generated files:")
+    for file in sorted(updated_paths):
+        print(f" - {repr(file)}")
+
+    all_files = glob.glob(f"{args.output_dir}/**", recursive=True)
+    unknown_files = set()
+    for file in all_files:
+        if file in updated_paths:
+            continue
+        if any(pattern.match(file) for pattern in IGNORED_OUTPUT_FILES):
+            continue
+        pfile = Path(file)
+        if pfile.is_dir() and pfile.iterdir():
+            # Don't report non-empty dirs.
+            continue
+        unknown_files.add(file)
+
+    if unknown_files:
+        print(f"Found following unknown files: ")
+        for file in sorted(unknown_files):
+            print(f" - {repr(file)}")
 
 
-def verify():
+
+def verify(args: argparse.Namespace):
+    # TODO: Needs to check if the files are up to date. Will be used to auto-check every commit.
     pass
 
 
@@ -254,6 +285,7 @@ def parse_arguments():
 
     gen_parser = subparsers.add_parser("generate", help="Generates the code samples.")
     gen_parser.set_defaults(func=generate)
+    gen_parser.add_argument("--output_dir", default=DEFAULT_OUTPUT_DIR)
 
     verify_parser = subparsers.add_parser("verify", help="Verify if the generated samples match the sources.")
     verify_parser.set_defaults(func=verify)
@@ -263,7 +295,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    args.func()
+    args.func(args)
 
 
 if __name__ == '__main__':

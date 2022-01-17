@@ -24,10 +24,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <INGREDIENT create_from_custom_image>
 from google.cloud import compute_v1
 
 
+# <INGREDIENT create_from_custom_image>
 def create_from_custom_image(
     project_id: str, zone: str, instance_name: str, custom_image_link: str
 ) -> compute_v1.Instance:
