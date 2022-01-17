@@ -13,6 +13,9 @@
 #  limitations under the License.
 
 
+from google.cloud import compute_v1
+
+
 # <INGREDIENT create_custom_shared_core_instance>
 def create_custom_shared_core_instance(
     project_id: str,
@@ -20,7 +23,7 @@ def create_custom_shared_core_instance(
     instance_name: str,
     cpu_series: CustomMachineType.CPUSeries,
     memory: int,
-):
+) -> compute_v1.Instance:
     """
     Create a new VM instance with a custom type using shared CPUs.
 
@@ -41,5 +44,12 @@ def create_custom_shared_core_instance(
         CustomMachineType.CPUSeries.E2_MEDIUM,
     )
     custom_type = CustomMachineType(zone, cpu_series, memory)
-    return create_instance(project_id, zone, instance_name, str(custom_type))
+
+    newest_debian = get_image_from_family(
+        project="debian-cloud", family="debian-10"
+    )
+    disk_type = f"zones/{zone}/diskTypes/pd-standard"
+    disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
+
+    return create_instance(project_id, zone, instance_name, disks, str(custom_type))
 # </INGREDIENT>

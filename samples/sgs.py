@@ -17,11 +17,13 @@ directory, to be then used in Google Compute Engine public documentation.
 """
 import argparse
 import os
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 import ast
 import re
 import warnings
+import isort
 from dataclasses import dataclass, field
 from typing import List, Tuple
 
@@ -189,6 +191,8 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
         names = ", ".join(names)
         import_lines.add(f"from {module} import {names}")
 
+    import_lines = isort.code("\n".join(import_lines)).splitlines()
+
     output_file = []
     header_added = False
     for line in file_lines:
@@ -225,6 +229,8 @@ def save_rendered_recipe(recipe_path: Path, rendered_recipe: str, output_dir: Pa
 
     with output_path.open(mode='w') as out_file:
         out_file.write(rendered_recipe)
+
+    subprocess.run(["black", str(output_path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return output_path
 
 
