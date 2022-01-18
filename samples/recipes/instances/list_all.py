@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_instances_list_all>
+# <REGION compute_instances_list_all>
 # <IMPORTS/>
 
 # <INGREDIENT list_all_instances />
-# <REGION_END compute_instances_list_all>
+# </REGION compute_instances_list_all>

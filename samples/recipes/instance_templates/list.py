@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_template_list>
+# <REGION compute_template_list>
 # <IMPORTS/>
 
 # <INGREDIENT list_instance_templates />
-# <REGION_END compute_template_list>
+# </REGION compute_template_list>

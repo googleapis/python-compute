@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_firewall_patch>
+# <REGION compute_firewall_patch>
 # <IMPORTS/>
 
 # <INGREDIENT patch_firewall_priority />
-# <REGION_END compute_firewall_patch>
+# </REGION compute_firewall_patch>

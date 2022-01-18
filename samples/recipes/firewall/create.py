@@ -12,9 +12,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_firewall_create>
+# <REGION compute_firewall_create>
 # <IMPORTS/>
 
 # <INGREDIENT create_firewall_rule />
 
-# <REGION_END compute_firewall_create>
+# </REGION compute_firewall_create>

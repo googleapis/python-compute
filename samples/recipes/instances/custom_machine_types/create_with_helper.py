@@ -12,7 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_custom_machine_type_create_with_helper>
+# <REGION compute_custom_machine_type_create_with_helper>
 # <IMPORTS/>
 
 
@@ -30,4 +30,4 @@
 
 # <INGREDIENT create_custom_instance />
 
-# <REGION_END compute_custom_machine_type_create_with_helper>
+# </REGION compute_custom_machine_type_create_with_helper>

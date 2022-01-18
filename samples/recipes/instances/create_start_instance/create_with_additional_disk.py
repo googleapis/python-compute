@@ -13,7 +13,7 @@
 #  limitations under the License.
 
 
-# <REGION_START compute_instances_create_from_image_plus_empty_disk>
+# <REGION compute_instances_create_from_image_plus_empty_disk>
 # <IMPORTS/>
 
 # <INGREDIENT get_image_from_family />
@@ -29,4 +29,4 @@
 
 
 # <INGREDIENT create_with_additional_disk />
-# <REGION_END compute_instances_create_from_image_plus_empty_disk>
+# </REGION compute_instances_create_from_image_plus_empty_disk>

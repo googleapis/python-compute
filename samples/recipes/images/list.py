@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_images_get_list>
+# <REGION compute_images_get_list>
 # <IMPORTS/>
 
 # <INGREDIENT list_images />
-# <REGION_END compute_images_get_list>
+# </REGION compute_images_get_list>

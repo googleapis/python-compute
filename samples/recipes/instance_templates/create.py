@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_template_create>
+# <REGION compute_template_create>
 # <IMPORTS/>
 
 # <INGREDIENT create_template />
-# <REGION_END compute_template_create>
+# </REGION compute_template_create>

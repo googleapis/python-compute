@@ -14,15 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# <REGION_START compute_images_list_page>
-# <REGION_START compute_images_list>
+# <REGION compute_images_list_page>
+# <REGION compute_images_list>
 import google.cloud.compute_v1 as compute_v1
 
-# <REGION_END compute_images_list>
-# <REGION_END compute_images_list_page>
+# </REGION compute_images_list>
+# </REGION compute_images_list_page>
 
 
-# <REGION_START compute_images_list>
+# <REGION compute_images_list>
 def print_images_list(project: str) -> None:
     """
     Prints a list of all non-deprecated image names available in given project.
@@ -46,10 +46,10 @@ def print_images_list(project: str) -> None:
         print(f" -  {img.name}")
 
 
-# <REGION_END compute_images_list>
+# </REGION compute_images_list>
 
 
-# <REGION_START compute_images_list_page>
+# <REGION compute_images_list_page>
 def print_images_list_by_page(project: str, page_size: int = 10) -> None:
     """
     Prints a list of all non-deprecated image names available in a given project,
@@ -79,7 +79,7 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
             print(f" - {img.name}")
 
 
-# <REGION_END compute_images_list_page>
+# </REGION compute_images_list_page>
 
 
 if __name__ == "__main__":

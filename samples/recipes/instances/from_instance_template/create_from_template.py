@@ -12,9 +12,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_instances_create_from_template>
+# <REGION compute_instances_create_from_template>
 # <IMPORTS/>
 
 # <INGREDIENT create_instance_from_template />
-# <REGION_END compute_instances_create_from_template>
+# </REGION compute_instances_create_from_template>
 

@@ -15,30 +15,30 @@
 A sample script showing how to handle default values when communicating
 with the Compute Engine API.
 """
-# <REGION_START compute_instances_verify_default_value>
-# <REGION_START compute_usage_report_set>
-# <REGION_START compute_usage_report_get>
-# <REGION_START compute_usage_report_disable>
+# <REGION compute_instances_verify_default_value>
+# <REGION compute_usage_report_set>
+# <REGION compute_usage_report_get>
+# <REGION compute_usage_report_disable>
 # <IMPORTS/>
 
-# <REGION_END compute_usage_report_disable>
-# <REGION_END compute_usage_report_get>
-# <REGION_END compute_usage_report_set>
+# </REGION compute_usage_report_disable>
+# </REGION compute_usage_report_get>
+# </REGION compute_usage_report_set>
 
 
-# <REGION_START compute_usage_report_set>
+# <REGION compute_usage_report_set>
 # <INGREDIENT set_usage_export_bucket />
 
-# <REGION_END compute_usage_report_set>
+# </REGION compute_usage_report_set>
 
-# <REGION_START compute_usage_report_get>
+# <REGION compute_usage_report_get>
 # <INGREDIENT get_usage_export_bucket />
 
-# <REGION_END compute_usage_report_get>
-# <REGION_END compute_instances_verify_default_value>
+# </REGION compute_usage_report_get>
+# </REGION compute_instances_verify_default_value>
 
 
-# <REGION_START compute_usage_report_disable>
+# <REGION compute_usage_report_disable>
 # <INGREDIENT disable_usage_export />
 
-# <REGION_END compute_usage_report_disable>
+# </REGION compute_usage_report_disable>

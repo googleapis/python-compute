@@ -12,16 +12,16 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_images_get_from_family>
-# <REGION_START compute_images_get>
+# <REGION compute_images_get_from_family>
+# <REGION compute_images_get>
 # <IMPORTS/>
-# <REGION_END compute_images_get>
+# </REGION compute_images_get>
 
 
 # <INGREDIENT get_image_from_family />
-# <REGION_END compute_images_get_from_family>
+# </REGION compute_images_get_from_family>
 
 
-# <REGION_START compute_images_get>
+# <REGION compute_images_get>
 # <INGREDIENT get_image />
-# <REGION_END compute_images_get>
+# </REGION compute_images_get>

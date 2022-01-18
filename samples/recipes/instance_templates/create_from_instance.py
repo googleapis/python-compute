@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_template_create_from_instance>
+# <REGION compute_template_create_from_instance>
 # <IMPORTS/>
 
 # <INGREDIENT create_template_from_instance />
-# <REGION_END compute_template_create_from_instance>
+# </REGION compute_template_create_from_instance>

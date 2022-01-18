@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_custom_machine_type_update_memory>
+# <REGION compute_custom_machine_type_update_memory>
 # <IMPORTS/>
 
 # <INGREDIENT add_extended_memory_to_instance />
-# <REGION_END compute_custom_machine_type_update_memory>
+# </REGION compute_custom_machine_type_update_memory>

@@ -12,9 +12,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_instances_delete>
+# <REGION compute_instances_delete>
 # <IMPORTS/>
 
 
 # <INGREDIENT delete_instance />
-# <REGION_END compute_instances_delete>
+# </REGION compute_instances_delete>

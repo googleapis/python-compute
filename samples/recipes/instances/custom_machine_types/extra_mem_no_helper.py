@@ -12,7 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_custom_machine_type_extra_mem_no_helper>
+# <REGION compute_custom_machine_type_extra_mem_no_helper>
 # <IMPORTS/>
 
 # <INGREDIENT get_image_from_family />
@@ -25,4 +25,4 @@
 
 
 # <INGREDIENT create_custom_instances_extra_mem_no_helper />
-# <REGION_END compute_custom_machine_type_extra_mem_no_helper>
+# </REGION compute_custom_machine_type_extra_mem_no_helper>

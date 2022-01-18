@@ -12,10 +12,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_start_enc_instance>
+# <REGION compute_start_enc_instance>
 # <IMPORTS/>
 
 
 # <INGREDIENT start_instance_with_encryption_key />
-# <REGION_END compute_start_enc_instance>
+# </REGION compute_start_enc_instance>
 

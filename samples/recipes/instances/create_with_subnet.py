@@ -12,7 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# <REGION_START compute_instances_create_with_subnet>
+# <REGION compute_instances_create_with_subnet>
 # <IMPORTS/>
 
 # <INGREDIENT get_image_from_family />
@@ -25,4 +25,4 @@
 
 
 # <INGREDIENT create_with_subnet />
-# <REGION_END compute_instances_create_with_subnet>
+# </REGION compute_instances_create_with_subnet>
