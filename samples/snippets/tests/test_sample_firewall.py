@@ -19,12 +19,10 @@ import google.auth
 from google.cloud import compute_v1
 import pytest
 
-
 from ..firewall.create import create_firewall_rule
 from ..firewall.delete import delete_firewall_rule
 from ..firewall.main import get_firewall_rule
 from ..firewall.patch import patch_firewall_priority
-
 
 PROJECT = google.auth.default()[1]
 

@@ -15,16 +15,14 @@ import time
 import typing
 import uuid
 
+from flaky import flaky
 import google.auth
 import google.cloud.storage as storage
 import pytest
-from flaky import flaky
 
-from ..usage_report.usage_reports import (
-    disable_usage_export,
-    get_usage_export_bucket,
-    set_usage_export_bucket
-)
+from ..usage_report.usage_reports import disable_usage_export
+from ..usage_report.usage_reports import get_usage_export_bucket
+from ..usage_report.usage_reports import set_usage_export_bucket
 
 PROJECT = google.auth.default()[1]
 BUCKET_NAME = "test" + uuid.uuid4().hex[:10]

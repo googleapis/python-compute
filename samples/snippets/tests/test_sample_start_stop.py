@@ -19,12 +19,11 @@ import uuid
 
 import google.auth
 from google.cloud import compute_v1
-
 import pytest
 
 from ..instances.start import start_instance
-from ..instances.stop import stop_instance
 from ..instances.start_encrypted import start_instance_with_encryption_key
+from ..instances.stop import stop_instance
 
 PROJECT = google.auth.default()[1]
 

@@ -13,7 +13,8 @@
 # limitations under the License.
 import typing
 
-from ..images.pagination import print_images_list, print_images_list_by_page
+from ..images.pagination import print_images_list
+from ..images.pagination import print_images_list_by_page
 
 PROJECT = "windows-sql-cloud"
 

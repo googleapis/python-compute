@@ -18,10 +18,10 @@ from google.cloud import compute_v1
 import pytest
 
 from ..instances.delete import delete_instance
-
-from ..instances.from_instance_template.create_from_template import create_instance_from_template
-from ..instances.from_instance_template.create_from_template_with_overrides import create_instance_from_template_with_overrides
-
+from ..instances.from_instance_template.create_from_template import \
+    create_instance_from_template
+from ..instances.from_instance_template.create_from_template_with_overrides import \
+    create_instance_from_template_with_overrides
 
 PROJECT = google.auth.default()[1]
 INSTANCE_ZONE = "us-central1-b"
