@@ -16,9 +16,6 @@ import uuid
 
 import google.auth
 import pytest
-# Turning off F401 check because flake8 doesn't recognize using
-# PyTest fixture as parameter as usage.
-from .test_sample_start_stop import compute_instance  # noqa: F401
 
 from ..instance_templates.create import create_template
 from ..instance_templates.create_from_instance import \
@@ -26,6 +23,9 @@ from ..instance_templates.create_from_instance import \
 from ..instance_templates.create_with_subnet import create_template_with_subnet
 from ..instance_templates.delete import delete_instance_template
 from ..instance_templates.list import list_instance_templates
+# Turning off F401 check because flake8 doesn't recognize using
+# PyTest fixture as parameter as usage.
+from .test_sample_start_stop import compute_instance  # noqa: F401
 
 PROJECT = google.auth.default()[1]
 
