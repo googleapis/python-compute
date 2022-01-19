@@ -242,8 +242,10 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
 
 
 def save_rendered_recipe(
-    recipe_path: Path, rendered_recipe: str, output_dir: Path = DEFAULT_OUTPUT_PATH,
-        recipes_path: Path = RECIPES_PATH
+    recipe_path: Path,
+    rendered_recipe: str,
+    output_dir: Path = DEFAULT_OUTPUT_PATH,
+    recipes_path: Path = RECIPES_PATH,
 ) -> Path:
     output_dir.mkdir(exist_ok=True)
 
