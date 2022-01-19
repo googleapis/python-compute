@@ -11,10 +11,10 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-import glob
-import tempfile
 from argparse import Namespace
+import glob
 from pathlib import Path
+import tempfile
 
 import sgs
 

@@ -12,19 +12,20 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import pprint
-from collections import defaultdict
+from collections import Counter
+from functools import cache
 from functools import reduce
 
 
-# <INGREDIENT test_ingredient1>
-def some_function(a: int, b: str) -> defaultdict:
+# <INGREDIENT test_ingredient2>
+@cache
+def other_function(word: str, number: int) -> Counter:
     """
-    Do something with a and b that will give a defaultdict.
+    Do something with the arguments. I don't care what.
     """
-    out = defaultdict(int)
-    for letter in b:
-        out[letter] += a * ord(letter) + reduce(lambda x, y: x+ord(y), b, 0)
-    pprint.pprint(out)
-    return out
-# </INGREDIENT>\
+    new_word = reduce(lambda s1, s2: s1 + s2 + s2, word, '')
+    letters = Counter(new_word)
+    for letter in word:
+        letters.update({letter: number*ord(letter)})
+    return letters
+# </INGREDIENT>
