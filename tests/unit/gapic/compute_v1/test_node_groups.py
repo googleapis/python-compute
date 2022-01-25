@@ -811,12 +811,12 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
-            "filter",
             "order_by",
-            "page_token",
+            "include_all_scopes",
             "return_partial_success",
+            "filter",
+            "page_token",
+            "max_results",
         )
     )
     jsonified_request.update(unset_fields)
@@ -869,12 +869,12 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
-                "filter",
                 "orderBy",
-                "pageToken",
+                "includeAllScopes",
                 "returnPartialSuccess",
+                "filter",
+                "pageToken",
+                "maxResults",
             )
         )
         & set(("project",))
@@ -2095,7 +2095,7 @@ def test_insert_unary_rest_required_fields(request_type=compute.InsertNodeGroupR
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("initial_node_count", "request_id",))
+    assert not set(unset_fields) - set(("request_id", "initial_node_count",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -2151,7 +2151,7 @@ def test_insert_unary_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("initialNodeCount", "requestId",))
+        set(("requestId", "initialNodeCount",))
         & set(("initialNodeCount", "nodeGroupResource", "project", "zone",))
     )
 
@@ -2338,7 +2338,7 @@ def test_list_rest_required_fields(request_type=compute.ListNodeGroupsRequest):
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "return_partial_success", "order_by", "page_token", "max_results",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2390,7 +2390,7 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "returnPartialSuccess", "orderBy", "pageToken", "maxResults",))
         & set(("project", "zone",))
     )
 
@@ -2581,7 +2581,7 @@ def test_list_nodes_rest_required_fields(
     ).list_nodes._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("order_by", "return_partial_success", "filter", "page_token", "max_results",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2635,7 +2635,7 @@ def test_list_nodes_rest_unset_required_fields():
 
     unset_fields = transport.list_nodes._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("orderBy", "returnPartialSuccess", "filter", "pageToken", "maxResults",))
         & set(("nodeGroup", "project", "zone",))
     )
 
