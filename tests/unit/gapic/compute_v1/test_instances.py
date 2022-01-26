@@ -593,7 +593,7 @@ def test_add_access_config_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -651,7 +651,7 @@ def test_add_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.add_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             ("accessConfigResource", "instance", "networkInterface", "project", "zone",)
         )
@@ -1113,12 +1113,12 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
             "filter",
+            "max_results",
+            "return_partial_success",
             "order_by",
             "page_token",
-            "return_partial_success",
+            "include_all_scopes",
         )
     )
     jsonified_request.update(unset_fields)
@@ -1171,12 +1171,12 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
                 "filter",
+                "maxResults",
+                "returnPartialSuccess",
                 "orderBy",
                 "pageToken",
-                "returnPartialSuccess",
+                "includeAllScopes",
             )
         )
         & set(("project",))
@@ -1480,7 +1480,7 @@ def test_attach_disk_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).attach_disk._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "force_attach",))
+    assert not set(unset_fields) - set(("force_attach", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1534,7 +1534,7 @@ def test_attach_disk_unary_rest_unset_required_fields():
 
     unset_fields = transport.attach_disk._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "forceAttach",))
+        set(("forceAttach", "requestId",))
         & set(("attachedDiskResource", "instance", "project", "zone",))
     )
 
@@ -2665,7 +2665,7 @@ def test_delete_access_config_unary_rest_required_fields(
     ).delete_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("access_config", "request_id", "network_interface",)
+        ("network_interface", "access_config", "request_id",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2726,7 +2726,7 @@ def test_delete_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.delete_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("accessConfig", "requestId", "networkInterface",))
+        set(("networkInterface", "accessConfig", "requestId",))
         & set(("accessConfig", "instance", "networkInterface", "project", "zone",))
     )
 
@@ -4266,7 +4266,7 @@ def test_get_serial_port_output_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).get_serial_port_output._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("port", "start",))
+    assert not set(unset_fields) - set(("start", "port",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -4319,7 +4319,7 @@ def test_get_serial_port_output_rest_unset_required_fields():
 
     unset_fields = transport.get_serial_port_output._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("port", "start",)) & set(("instance", "project", "zone",))
+        set(("start", "port",)) & set(("instance", "project", "zone",))
     )
 
 
@@ -4903,7 +4903,7 @@ def test_insert_unary_rest_required_fields(request_type=compute.InsertInstanceRe
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "source_instance_template",))
+    assert not set(unset_fields) - set(("source_instance_template", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -4955,7 +4955,7 @@ def test_insert_unary_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "sourceInstanceTemplate",))
+        set(("sourceInstanceTemplate", "requestId",))
         & set(("instanceResource", "project", "zone",))
     )
 
@@ -5304,7 +5304,7 @@ def test_list_rest_required_fields(request_type=compute.ListInstancesRequest):
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "return_partial_success", "order_by", "page_token", "max_results",)
     )
     jsonified_request.update(unset_fields)
 
@@ -5356,7 +5356,7 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "returnPartialSuccess", "orderBy", "pageToken", "maxResults",))
         & set(("project", "zone",))
     )
 
@@ -5547,7 +5547,7 @@ def test_list_referrers_rest_required_fields(
     ).list_referrers._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "return_partial_success", "order_by", "page_token", "max_results",)
     )
     jsonified_request.update(unset_fields)
 
@@ -5601,7 +5601,7 @@ def test_list_referrers_rest_unset_required_fields():
 
     unset_fields = transport.list_referrers._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "returnPartialSuccess", "orderBy", "pageToken", "maxResults",))
         & set(("instance", "project", "zone",))
     )
 
@@ -6841,7 +6841,7 @@ def test_set_disk_auto_delete_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).set_disk_auto_delete._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("device_name", "request_id", "auto_delete",))
+    assert not set(unset_fields) - set(("device_name", "auto_delete", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -6901,7 +6901,7 @@ def test_set_disk_auto_delete_unary_rest_unset_required_fields():
 
     unset_fields = transport.set_disk_auto_delete._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("deviceName", "requestId", "autoDelete",))
+        set(("deviceName", "autoDelete", "requestId",))
         & set(("autoDelete", "deviceName", "instance", "project", "zone",))
     )
 
@@ -11417,7 +11417,7 @@ def test_update_unary_rest_required_fields(request_type=compute.UpdateInstanceRe
     ).update._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("minimal_action", "request_id", "most_disruptive_allowed_action",)
+        ("minimal_action", "most_disruptive_allowed_action", "request_id",)
     )
     jsonified_request.update(unset_fields)
 
@@ -11472,7 +11472,7 @@ def test_update_unary_rest_unset_required_fields():
 
     unset_fields = transport.update._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("minimalAction", "requestId", "mostDisruptiveAllowedAction",))
+        set(("minimalAction", "mostDisruptiveAllowedAction", "requestId",))
         & set(("instance", "instanceResource", "project", "zone",))
     )
 
@@ -11884,7 +11884,7 @@ def test_update_access_config_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).update_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -11942,7 +11942,7 @@ def test_update_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.update_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             ("accessConfigResource", "instance", "networkInterface", "project", "zone",)
         )
@@ -12475,7 +12475,7 @@ def test_update_network_interface_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).update_network_interface._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -12533,7 +12533,7 @@ def test_update_network_interface_unary_rest_unset_required_fields():
 
     unset_fields = transport.update_network_interface._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             (
                 "instance",

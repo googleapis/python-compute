@@ -605,7 +605,7 @@ def test_add_association_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_association._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "replace_existing_association",))
+    assert not set(unset_fields) - set(("replace_existing_association", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -655,7 +655,7 @@ def test_add_association_unary_rest_unset_required_fields():
 
     unset_fields = transport.add_association._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "replaceExistingAssociation",))
+        set(("replaceExistingAssociation", "requestId",))
         & set(("firewallPolicy", "firewallPolicyAssociationResource",))
     )
 
@@ -1151,7 +1151,7 @@ def test_clone_rules_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).clone_rules._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "source_firewall_policy",))
+    assert not set(unset_fields) - set(("source_firewall_policy", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1200,7 +1200,7 @@ def test_clone_rules_unary_rest_unset_required_fields():
 
     unset_fields = transport.clone_rules._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "sourceFirewallPolicy",)) & set(("firewallPolicy",))
+        set(("sourceFirewallPolicy", "requestId",)) & set(("firewallPolicy",))
     )
 
 
@@ -2484,7 +2484,7 @@ def test_insert_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "parent_id",))
+    assert not set(unset_fields) - set(("parent_id", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -2536,7 +2536,7 @@ def test_insert_unary_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "parentId",)) & set(("firewallPolicyResource", "parentId",))
+        set(("parentId", "requestId",)) & set(("firewallPolicyResource", "parentId",))
     )
 
 
@@ -2967,7 +2967,7 @@ def test_move_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).move._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "parent_id",))
+    assert not set(unset_fields) - set(("parent_id", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3020,7 +3020,7 @@ def test_move_unary_rest_unset_required_fields():
 
     unset_fields = transport.move._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "parentId",)) & set(("firewallPolicy", "parentId",))
+        set(("parentId", "requestId",)) & set(("firewallPolicy", "parentId",))
     )
 
 
@@ -3598,7 +3598,7 @@ def test_patch_rule_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).patch_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "priority",))
+    assert not set(unset_fields) - set(("priority", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3648,7 +3648,7 @@ def test_patch_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.patch_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "priority",))
+        set(("priority", "requestId",))
         & set(("firewallPolicy", "firewallPolicyRuleResource",))
     )
 
@@ -3869,7 +3869,7 @@ def test_remove_association_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).remove_association._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "name",))
+    assert not set(unset_fields) - set(("name", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3917,7 +3917,7 @@ def test_remove_association_unary_rest_unset_required_fields():
     )
 
     unset_fields = transport.remove_association._get_unset_required_fields({})
-    assert set(unset_fields) == (set(("requestId", "name",)) & set(("firewallPolicy",)))
+    assert set(unset_fields) == (set(("name", "requestId",)) & set(("firewallPolicy",)))
 
 
 def test_remove_association_unary_rest_bad_request(
@@ -4103,7 +4103,7 @@ def test_remove_rule_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).remove_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "priority",))
+    assert not set(unset_fields) - set(("priority", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -4152,7 +4152,7 @@ def test_remove_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.remove_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "priority",)) & set(("firewallPolicy",))
+        set(("priority", "requestId",)) & set(("firewallPolicy",))
     )
 
 
