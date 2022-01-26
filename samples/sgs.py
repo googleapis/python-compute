@@ -221,9 +221,13 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
         elif match := INGREDIENT_FILL.search(line):
             output_file.append(ingredients[match.group(1)].text)
         elif REGION_START.search(line):
-            output_file.append(REGION_START.sub("# [START \\1]", line))
+            # The string has to be broken up, so that the snippet
+            # machine doesn't recognize it as a valid start of a region
+            output_file.append(REGION_START.sub("# [" + "START \\1]", line))
         elif REGION_END.search(line):
-            output_file.append(REGION_END.sub("# [END \\1]", line))
+            # The string has to be broken up, so that the snippet
+            # machine doesn't recognize it as a valid start of a region
+            output_file.append(REGION_END.sub("# [" + "END \\1]", line))
         else:
             output_file.append(line)
             continue
