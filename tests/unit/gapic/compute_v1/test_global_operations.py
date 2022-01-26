@@ -566,12 +566,12 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
             "filter",
+            "max_results",
+            "return_partial_success",
             "order_by",
             "page_token",
-            "return_partial_success",
+            "include_all_scopes",
         )
     )
     jsonified_request.update(unset_fields)
@@ -624,12 +624,12 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
                 "filter",
+                "maxResults",
+                "returnPartialSuccess",
                 "orderBy",
                 "pageToken",
-                "returnPartialSuccess",
+                "includeAllScopes",
             )
         )
         & set(("project",))
@@ -1259,7 +1259,7 @@ def test_list_rest_required_fields(request_type=compute.ListGlobalOperationsRequ
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "return_partial_success", "order_by", "page_token", "max_results",)
     )
     jsonified_request.update(unset_fields)
 
@@ -1309,7 +1309,7 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "returnPartialSuccess", "orderBy", "pageToken", "maxResults",))
         & set(("project",))
     )
 
