@@ -28,10 +28,7 @@ from google.cloud import compute_v1
 
 # [START compute_delete_protection_create]
 def create_instance(
-    project_id: str,
-    zone: str,
-    instance_name: str,
-    delete_protection: bool,
+    project_id: str, zone: str, instance_name: str, delete_protection: bool,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
