@@ -461,14 +461,15 @@ def test_backend_buckets_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(BackendBucketsClient, transports.BackendBucketsRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(BackendBucketsClient, transports.BackendBucketsRestTransport, "rest", None),],
 )
 def test_backend_buckets_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -649,6 +650,54 @@ def test_add_signed_url_key_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_signed_url_key_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_add_signed_url_key"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_add_signed_url_key"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddSignedUrlKeyBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_signed_url_key_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_signed_url_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddSignedUrlKeyBackendBucketRequest
 ):
@@ -711,7 +760,7 @@ def test_add_signed_url_key_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}/addSignedUrlKey"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}/addSignedUrlKey"
             % client.transport._host,
             args[1],
         )
@@ -897,6 +946,54 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteBackendBucketRequest
 ):
@@ -953,7 +1050,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
             % client.transport._host,
             args[1],
         )
@@ -1090,7 +1187,7 @@ def test_delete_signed_url_key_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).delete_signed_url_key._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "key_name",))
+    assert not set(unset_fields) - set(("key_name", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1145,8 +1242,56 @@ def test_delete_signed_url_key_unary_rest_unset_required_fields():
 
     unset_fields = transport.delete_signed_url_key._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "keyName",)) & set(("backendBucket", "keyName", "project",))
+        set(("keyName", "requestId",)) & set(("backendBucket", "keyName", "project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_signed_url_key_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_delete_signed_url_key"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_delete_signed_url_key"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteSignedUrlKeyBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_signed_url_key_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_delete_signed_url_key_unary_rest_bad_request(
@@ -1207,7 +1352,7 @@ def test_delete_signed_url_key_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}/deleteSignedUrlKey"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}/deleteSignedUrlKey"
             % client.transport._host,
             args[1],
         )
@@ -1361,6 +1506,54 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("backendBucket", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendBucket.to_json(
+            compute.BackendBucket()
+        )
+        request = compute.GetBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendBucket
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetBackendBucketRequest
 ):
@@ -1417,7 +1610,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
             % client.transport._host,
             args[1],
         )
@@ -1629,6 +1822,54 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.InsertBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertBackendBucketRequest
 ):
@@ -1718,7 +1959,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets"
+            "%s/compute/v1/projects/{project}/global/backendBuckets"
             % client.transport._host,
             args[1],
         )
@@ -1811,7 +2052,7 @@ def test_list_rest_required_fields(request_type=compute.ListBackendBucketsReques
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -1861,9 +2102,57 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendBucketList.to_json(
+            compute.BackendBucketList()
+        )
+        request = compute.ListBackendBucketsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendBucketList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -1920,7 +2209,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets"
+            "%s/compute/v1/projects/{project}/global/backendBuckets"
             % client.transport._host,
             args[1],
         )
@@ -2180,6 +2469,52 @@ def test_patch_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_patch_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_patch"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_patch"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.PatchBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.patch_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchBackendBucketRequest
 ):
@@ -2270,7 +2605,7 @@ def test_patch_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
             % client.transport._host,
             args[1],
         )
@@ -2490,6 +2825,54 @@ def test_update_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendBucketsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendBucketsRestInterceptor(),
+    )
+    client = BackendBucketsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "post_update"
+    ) as post, mock.patch.object(
+        transports.BackendBucketsRestInterceptor, "pre_update"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateBackendBucketRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_update_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateBackendBucketRequest
 ):
@@ -2580,7 +2963,7 @@ def test_update_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
+            "%s/compute/v1/projects/{project}/global/backendBuckets/{backend_bucket}"
             % client.transport._host,
             args[1],
         )

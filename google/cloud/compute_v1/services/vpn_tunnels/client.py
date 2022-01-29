@@ -414,7 +414,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -511,7 +511,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_tunnel])
         if request is not None and has_flattened_params:
@@ -594,7 +594,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_tunnel])
         if request is not None and has_flattened_params:
@@ -688,7 +688,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_tunnel_resource])
         if request is not None and has_flattened_params:
@@ -765,7 +765,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

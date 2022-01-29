@@ -442,7 +442,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, security_policy, security_policy_rule_resource]
@@ -533,7 +533,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy])
         if request is not None and has_flattened_params:
@@ -610,7 +610,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy])
         if request is not None and has_flattened_params:
@@ -686,7 +686,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy])
         if request is not None and has_flattened_params:
@@ -772,7 +772,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy_resource])
         if request is not None and has_flattened_params:
@@ -840,7 +840,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -911,7 +911,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -1011,7 +1011,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy, security_policy_resource])
         if request is not None and has_flattened_params:
@@ -1106,7 +1106,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, security_policy, security_policy_rule_resource]
@@ -1197,7 +1197,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, security_policy])
         if request is not None and has_flattened_params:

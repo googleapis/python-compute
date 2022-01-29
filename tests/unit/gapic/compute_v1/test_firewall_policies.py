@@ -472,14 +472,15 @@ def test_firewall_policies_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(FirewallPoliciesClient, transports.FirewallPoliciesRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(FirewallPoliciesClient, transports.FirewallPoliciesRestTransport, "rest", None),],
 )
 def test_firewall_policies_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -605,7 +606,7 @@ def test_add_association_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_association._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "replace_existing_association",))
+    assert not set(unset_fields) - set(("replace_existing_association", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -655,9 +656,57 @@ def test_add_association_unary_rest_unset_required_fields():
 
     unset_fields = transport.add_association._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "replaceExistingAssociation",))
+        set(("replaceExistingAssociation", "requestId",))
         & set(("firewallPolicy", "firewallPolicyAssociationResource",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_association_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_add_association"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_add_association"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddAssociationFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_association_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_add_association_unary_rest_bad_request(
@@ -726,7 +775,7 @@ def test_add_association_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addAssociation"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addAssociation"
             % client.transport._host,
             args[1],
         )
@@ -935,6 +984,54 @@ def test_add_rule_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_rule_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_add_rule"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_add_rule"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddRuleFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_rule_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_rule_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddRuleFirewallPolicyRequest
 ):
@@ -1019,7 +1116,7 @@ def test_add_rule_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addRule"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addRule"
             % client.transport._host,
             args[1],
         )
@@ -1204,6 +1301,54 @@ def test_clone_rules_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_clone_rules_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_clone_rules"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_clone_rules"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.CloneRulesFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.clone_rules_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_clone_rules_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.CloneRulesFirewallPolicyRequest
 ):
@@ -1258,7 +1403,7 @@ def test_clone_rules_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/cloneRules"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/cloneRules"
             % client.transport._host,
             args[1],
         )
@@ -1436,6 +1581,54 @@ def test_delete_unary_rest_unset_required_fields():
     assert set(unset_fields) == (set(("requestId",)) & set(("firewallPolicy",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteFirewallPolicyRequest
 ):
@@ -1490,7 +1683,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
             % client.transport._host,
             args[1],
         )
@@ -1644,6 +1837,54 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("firewallPolicy",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.FirewallPolicy.to_json(
+            compute.FirewallPolicy()
+        )
+        request = compute.GetFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.FirewallPolicy
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetFirewallPolicyRequest
 ):
@@ -1698,7 +1939,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
             % client.transport._host,
             args[1],
         )
@@ -1843,6 +2084,56 @@ def test_get_association_rest_unset_required_fields():
     assert set(unset_fields) == (set(("name",)) & set(("firewallPolicy",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_association_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_get_association"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_get_association"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.FirewallPolicyAssociation.to_json(
+            compute.FirewallPolicyAssociation()
+        )
+        request = compute.GetAssociationFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.FirewallPolicyAssociation
+
+        client.get_association(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_association_rest_bad_request(
     transport: str = "rest", request_type=compute.GetAssociationFirewallPolicyRequest
 ):
@@ -1897,7 +2188,7 @@ def test_get_association_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getAssociation"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getAssociation"
             % client.transport._host,
             args[1],
         )
@@ -2037,6 +2328,54 @@ def test_get_iam_policy_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_iam_policy_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_get_iam_policy"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_get_iam_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Policy.to_json(compute.Policy())
+        request = compute.GetIamPolicyFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Policy
+
+        client.get_iam_policy(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.GetIamPolicyFirewallPolicyRequest
 ):
@@ -2091,7 +2430,7 @@ def test_get_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{resource}/getIamPolicy"
+            "%s/compute/v1/locations/global/firewallPolicies/{resource}/getIamPolicy"
             % client.transport._host,
             args[1],
         )
@@ -2244,6 +2583,54 @@ def test_get_rule_rest_unset_required_fields():
     assert set(unset_fields) == (set(("priority",)) & set(("firewallPolicy",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rule_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_get_rule"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_get_rule"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.FirewallPolicyRule.to_json(
+            compute.FirewallPolicyRule()
+        )
+        request = compute.GetRuleFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.FirewallPolicyRule
+
+        client.get_rule(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rule_rest_bad_request(
     transport: str = "rest", request_type=compute.GetRuleFirewallPolicyRequest
 ):
@@ -2298,7 +2685,7 @@ def test_get_rule_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getRule"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getRule"
             % client.transport._host,
             args[1],
         )
@@ -2484,7 +2871,7 @@ def test_insert_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "parent_id",))
+    assert not set(unset_fields) - set(("parent_id", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -2536,8 +2923,56 @@ def test_insert_unary_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "parentId",)) & set(("firewallPolicyResource", "parentId",))
+        set(("parentId", "requestId",)) & set(("firewallPolicyResource", "parentId",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.InsertFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_insert_unary_rest_bad_request(
@@ -2659,8 +3094,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies"
-            % client.transport._host,
+            "%s/compute/v1/locations/global/firewallPolicies" % client.transport._host,
             args[1],
         )
 
@@ -2722,6 +3156,54 @@ def test_list_rest(request_type):
     assert response.id == "id_value"
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.FirewallPolicyList.to_json(
+            compute.FirewallPolicyList()
+        )
+        request = compute.ListFirewallPoliciesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.FirewallPolicyList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -2830,6 +3312,56 @@ def test_list_associations_rest(request_type):
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.FirewallPoliciesListAssociationsResponse)
     assert response.kind == "kind_value"
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_associations_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_list_associations"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_list_associations"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.FirewallPoliciesListAssociationsResponse.to_json(
+            compute.FirewallPoliciesListAssociationsResponse()
+        )
+        request = compute.ListAssociationsFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.FirewallPoliciesListAssociationsResponse
+
+        client.list_associations(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_associations_rest_bad_request(
@@ -2967,7 +3499,7 @@ def test_move_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).move._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "parent_id",))
+    assert not set(unset_fields) - set(("parent_id", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3020,8 +3552,54 @@ def test_move_unary_rest_unset_required_fields():
 
     unset_fields = transport.move._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "parentId",)) & set(("firewallPolicy", "parentId",))
+        set(("parentId", "requestId",)) & set(("firewallPolicy", "parentId",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_move_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_move"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_move"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.MoveFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.move_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_move_unary_rest_bad_request(
@@ -3080,7 +3658,7 @@ def test_move_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/move"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/move"
             % client.transport._host,
             args[1],
         )
@@ -3318,6 +3896,52 @@ def test_patch_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_patch_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_patch"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_patch"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.PatchFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.patch_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchFirewallPolicyRequest
 ):
@@ -3437,7 +4061,7 @@ def test_patch_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}"
             % client.transport._host,
             args[1],
         )
@@ -3598,7 +4222,7 @@ def test_patch_rule_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).patch_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "priority",))
+    assert not set(unset_fields) - set(("priority", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3648,9 +4272,57 @@ def test_patch_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.patch_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "priority",))
+        set(("priority", "requestId",))
         & set(("firewallPolicy", "firewallPolicyRuleResource",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_patch_rule_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_patch_rule"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_patch_rule"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.PatchRuleFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.patch_rule_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_patch_rule_unary_rest_bad_request(
@@ -3737,7 +4409,7 @@ def test_patch_rule_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/patchRule"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/patchRule"
             % client.transport._host,
             args[1],
         )
@@ -3869,7 +4541,7 @@ def test_remove_association_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).remove_association._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "name",))
+    assert not set(unset_fields) - set(("name", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3917,7 +4589,55 @@ def test_remove_association_unary_rest_unset_required_fields():
     )
 
     unset_fields = transport.remove_association._get_unset_required_fields({})
-    assert set(unset_fields) == (set(("requestId", "name",)) & set(("firewallPolicy",)))
+    assert set(unset_fields) == (set(("name", "requestId",)) & set(("firewallPolicy",)))
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_association_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_remove_association"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_remove_association"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.RemoveAssociationFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_association_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_remove_association_unary_rest_bad_request(
@@ -3974,7 +4694,7 @@ def test_remove_association_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeAssociation"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeAssociation"
             % client.transport._host,
             args[1],
         )
@@ -4103,7 +4823,7 @@ def test_remove_rule_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).remove_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "priority",))
+    assert not set(unset_fields) - set(("priority", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -4152,8 +4872,56 @@ def test_remove_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.remove_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "priority",)) & set(("firewallPolicy",))
+        set(("priority", "requestId",)) & set(("firewallPolicy",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_rule_unary_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_remove_rule"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_remove_rule"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.RemoveRuleFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_rule_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_remove_rule_unary_rest_bad_request(
@@ -4210,7 +4978,7 @@ def test_remove_rule_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeRule"
+            "%s/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeRule"
             % client.transport._host,
             args[1],
         )
@@ -4438,6 +5206,54 @@ def test_set_iam_policy_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_iam_policy_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_set_iam_policy"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_set_iam_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Policy.to_json(compute.Policy())
+        request = compute.SetIamPolicyFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Policy
+
+        client.set_iam_policy(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.SetIamPolicyFirewallPolicyRequest
 ):
@@ -4586,7 +5402,7 @@ def test_set_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{resource}/setIamPolicy"
+            "%s/compute/v1/locations/global/firewallPolicies/{resource}/setIamPolicy"
             % client.transport._host,
             args[1],
         )
@@ -4731,6 +5547,56 @@ def test_test_iam_permissions_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_test_iam_permissions_rest_interceptors(null_interceptor):
+    transport = transports.FirewallPoliciesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.FirewallPoliciesRestInterceptor(),
+    )
+    client = FirewallPoliciesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "post_test_iam_permissions"
+    ) as post, mock.patch.object(
+        transports.FirewallPoliciesRestInterceptor, "pre_test_iam_permissions"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TestPermissionsResponse.to_json(
+            compute.TestPermissionsResponse()
+        )
+        request = compute.TestIamPermissionsFirewallPolicyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TestPermissionsResponse
+
+        client.test_iam_permissions(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_test_iam_permissions_rest_bad_request(
     transport: str = "rest",
     request_type=compute.TestIamPermissionsFirewallPolicyRequest,
@@ -4794,7 +5660,7 @@ def test_test_iam_permissions_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/firewallPolicies/{resource}/testIamPermissions"
+            "%s/compute/v1/locations/global/firewallPolicies/{resource}/testIamPermissions"
             % client.transport._host,
             args[1],
         )

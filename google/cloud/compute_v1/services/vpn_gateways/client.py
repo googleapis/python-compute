@@ -414,7 +414,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -509,7 +509,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -596,7 +596,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -674,7 +674,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -768,7 +768,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway_resource])
         if request is not None and has_flattened_params:
@@ -846,7 +846,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -952,7 +952,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_labels_request_resource]
@@ -1047,7 +1047,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

@@ -447,7 +447,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service])
         if request is not None and has_flattened_params:
@@ -545,7 +545,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service])
         if request is not None and has_flattened_params:
@@ -634,7 +634,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, resource_group_reference_resource]
@@ -738,7 +738,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service_resource])
         if request is not None and has_flattened_params:
@@ -819,7 +819,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -930,7 +930,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, backend_service_resource]
@@ -1039,7 +1039,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, backend_service_resource]

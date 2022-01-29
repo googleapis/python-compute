@@ -442,7 +442,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map])
         if request is not None and has_flattened_params:
@@ -546,7 +546,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map])
         if request is not None and has_flattened_params:
@@ -642,7 +642,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map_resource])
         if request is not None and has_flattened_params:
@@ -721,7 +721,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -829,7 +829,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -935,7 +935,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -1027,7 +1027,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, url_map, region_url_maps_validate_request_resource]

@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import RegionCommitmentsTransport
 from .rest import RegionCommitmentsRestTransport
+from .rest import RegionCommitmentsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = RegionCommitmentsRestTransport
 __all__ = (
     "RegionCommitmentsTransport",
     "RegionCommitmentsRestTransport",
+    "RegionCommitmentsRestInterceptor",
 )

@@ -451,14 +451,15 @@ def test_target_pools_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(TargetPoolsClient, transports.TargetPoolsRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(TargetPoolsClient, transports.TargetPoolsRestTransport, "rest", None),],
 )
 def test_target_pools_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -650,6 +651,54 @@ def test_add_health_check_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_health_check_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_add_health_check"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_add_health_check"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddHealthCheckTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_health_check_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_health_check_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddHealthCheckTargetPoolRequest
 ):
@@ -720,7 +769,7 @@ def test_add_health_check_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/addHealthCheck"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/addHealthCheck"
             % client.transport._host,
             args[1],
         )
@@ -927,6 +976,54 @@ def test_add_instance_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_instance_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_add_instance"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_add_instance"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddInstanceTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_instance_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_instance_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddInstanceTargetPoolRequest
 ):
@@ -995,7 +1092,7 @@ def test_add_instance_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/addInstance"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/addInstance"
             % client.transport._host,
             args[1],
         )
@@ -1097,9 +1194,9 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
             "filter",
+            "include_all_scopes",
+            "max_results",
             "order_by",
             "page_token",
             "return_partial_success",
@@ -1155,9 +1252,9 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
                 "filter",
+                "includeAllScopes",
+                "maxResults",
                 "orderBy",
                 "pageToken",
                 "returnPartialSuccess",
@@ -1165,6 +1262,56 @@ def test_aggregated_list_rest_unset_required_fields():
         )
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_aggregated_list_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_aggregated_list"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_aggregated_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetPoolAggregatedList.to_json(
+            compute.TargetPoolAggregatedList()
+        )
+        request = compute.AggregatedListTargetPoolsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetPoolAggregatedList
+
+        client.aggregated_list(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_aggregated_list_rest_bad_request(
@@ -1221,7 +1368,7 @@ def test_aggregated_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/aggregated/targetPools"
+            "%s/compute/v1/projects/{project}/aggregated/targetPools"
             % client.transport._host,
             args[1],
         )
@@ -1468,6 +1615,54 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteTargetPoolRequest
 ):
@@ -1530,7 +1725,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}"
             % client.transport._host,
             args[1],
         )
@@ -1694,6 +1889,52 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("project", "region", "targetPool",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetPool.to_json(compute.TargetPool())
+        request = compute.GetTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetPool
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetTargetPoolRequest
 ):
@@ -1756,7 +1997,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}"
             % client.transport._host,
             args[1],
         )
@@ -1902,6 +2143,54 @@ def test_get_health_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_health_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_get_health"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_get_health"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetPoolInstanceHealth.to_json(
+            compute.TargetPoolInstanceHealth()
+        )
+        request = compute.GetHealthTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetPoolInstanceHealth
+
+        client.get_health(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_health_rest_bad_request(
     transport: str = "rest", request_type=compute.GetHealthTargetPoolRequest
 ):
@@ -1968,7 +2257,7 @@ def test_get_health_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/getHealth"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/getHealth"
             % client.transport._host,
             args[1],
         )
@@ -2172,6 +2461,54 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.InsertTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertTargetPoolRequest
 ):
@@ -2244,7 +2581,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools"
             % client.transport._host,
             args[1],
         )
@@ -2338,7 +2675,7 @@ def test_list_rest_required_fields(request_type=compute.ListTargetPoolsRequest):
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2390,9 +2727,57 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project", "region",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetPoolList.to_json(
+            compute.TargetPoolList()
+        )
+        request = compute.ListTargetPoolsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetPoolList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -2449,7 +2834,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools"
             % client.transport._host,
             args[1],
         )
@@ -2697,6 +3082,54 @@ def test_remove_health_check_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_health_check_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_remove_health_check"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_remove_health_check"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.RemoveHealthCheckTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_health_check_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_remove_health_check_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemoveHealthCheckTargetPoolRequest
 ):
@@ -2767,7 +3200,7 @@ def test_remove_health_check_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/removeHealthCheck"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/removeHealthCheck"
             % client.transport._host,
             args[1],
         )
@@ -2976,6 +3409,54 @@ def test_remove_instance_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_instance_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_remove_instance"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_remove_instance"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.RemoveInstanceTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_instance_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_remove_instance_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemoveInstanceTargetPoolRequest
 ):
@@ -3044,7 +3525,7 @@ def test_remove_instance_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/removeInstance"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/removeInstance"
             % client.transport._host,
             args[1],
         )
@@ -3181,7 +3662,7 @@ def test_set_backup_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).set_backup._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "failover_ratio",))
+    assert not set(unset_fields) - set(("failover_ratio", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3235,9 +3716,57 @@ def test_set_backup_unary_rest_unset_required_fields():
 
     unset_fields = transport.set_backup._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "failoverRatio",))
+        set(("failoverRatio", "requestId",))
         & set(("project", "region", "targetPool", "targetReferenceResource",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_backup_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetPoolsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetPoolsRestInterceptor(),
+    )
+    client = TargetPoolsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "post_set_backup"
+    ) as post, mock.patch.object(
+        transports.TargetPoolsRestInterceptor, "pre_set_backup"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetBackupTargetPoolRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_backup_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_set_backup_unary_rest_bad_request(
@@ -3304,7 +3833,7 @@ def test_set_backup_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/setBackup"
+            "%s/compute/v1/projects/{project}/regions/{region}/targetPools/{target_pool}/setBackup"
             % client.transport._host,
             args[1],
         )

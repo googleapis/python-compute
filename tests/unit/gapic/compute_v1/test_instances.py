@@ -447,14 +447,15 @@ def test_instances_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(InstancesClient, transports.InstancesRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(InstancesClient, transports.InstancesRestTransport, "rest", None),],
 )
 def test_instances_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -593,7 +594,7 @@ def test_add_access_config_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -651,11 +652,57 @@ def test_add_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.add_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             ("accessConfigResource", "instance", "networkInterface", "project", "zone",)
         )
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_access_config_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_add_access_config"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_add_access_config"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddAccessConfigInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_access_config_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_add_access_config_unary_rest_bad_request(
@@ -735,7 +782,7 @@ def test_add_access_config_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addAccessConfig"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addAccessConfig"
             % client.transport._host,
             args[1],
         )
@@ -943,6 +990,52 @@ def test_add_resource_policies_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_resource_policies_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_add_resource_policies"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_add_resource_policies"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AddResourcePoliciesInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_resource_policies_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_resource_policies_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddResourcePoliciesInstanceRequest
 ):
@@ -1011,7 +1104,7 @@ def test_add_resource_policies_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addResourcePolicies"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addResourcePolicies"
             % client.transport._host,
             args[1],
         )
@@ -1113,9 +1206,9 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
             "filter",
+            "include_all_scopes",
+            "max_results",
             "order_by",
             "page_token",
             "return_partial_success",
@@ -1171,9 +1264,9 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
                 "filter",
+                "includeAllScopes",
+                "maxResults",
                 "orderBy",
                 "pageToken",
                 "returnPartialSuccess",
@@ -1181,6 +1274,54 @@ def test_aggregated_list_rest_unset_required_fields():
         )
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_aggregated_list_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_aggregated_list"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_aggregated_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.InstanceAggregatedList.to_json(
+            compute.InstanceAggregatedList()
+        )
+        request = compute.AggregatedListInstancesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.InstanceAggregatedList
+
+        client.aggregated_list(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_aggregated_list_rest_bad_request(
@@ -1237,7 +1378,7 @@ def test_aggregated_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/aggregated/instances"
+            "%s/compute/v1/projects/{project}/aggregated/instances"
             % client.transport._host,
             args[1],
         )
@@ -1480,7 +1621,7 @@ def test_attach_disk_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).attach_disk._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "force_attach",))
+    assert not set(unset_fields) - set(("force_attach", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1534,9 +1675,55 @@ def test_attach_disk_unary_rest_unset_required_fields():
 
     unset_fields = transport.attach_disk._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "forceAttach",))
+        set(("forceAttach", "requestId",))
         & set(("attachedDiskResource", "instance", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_attach_disk_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_attach_disk"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_attach_disk"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.AttachDiskInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.attach_disk_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_attach_disk_unary_rest_bad_request(
@@ -1658,7 +1845,7 @@ def test_attach_disk_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/attachDisk"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/attachDisk"
             % client.transport._host,
             args[1],
         )
@@ -2028,6 +2215,52 @@ def test_bulk_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_bulk_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_bulk_insert"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_bulk_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.BulkInsertInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.bulk_insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_bulk_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.BulkInsertInstanceRequest
 ):
@@ -2269,7 +2502,7 @@ def test_bulk_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/bulkInsert"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/bulkInsert"
             % client.transport._host,
             args[1],
         )
@@ -2459,6 +2692,52 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteInstanceRequest
 ):
@@ -2519,7 +2798,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
             % client.transport._host,
             args[1],
         )
@@ -2665,7 +2944,7 @@ def test_delete_access_config_unary_rest_required_fields(
     ).delete_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("access_config", "request_id", "network_interface",)
+        ("access_config", "network_interface", "request_id",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2726,9 +3005,55 @@ def test_delete_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.delete_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("accessConfig", "requestId", "networkInterface",))
+        set(("accessConfig", "networkInterface", "requestId",))
         & set(("accessConfig", "instance", "networkInterface", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_access_config_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_delete_access_config"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_delete_access_config"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteAccessConfigInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_access_config_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_delete_access_config_unary_rest_bad_request(
@@ -2795,7 +3120,7 @@ def test_delete_access_config_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig"
             % client.transport._host,
             args[1],
         )
@@ -2997,6 +3322,52 @@ def test_detach_disk_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_detach_disk_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_detach_disk"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_detach_disk"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DetachDiskInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.detach_disk_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_detach_disk_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DetachDiskInstanceRequest
 ):
@@ -3060,7 +3431,7 @@ def test_detach_disk_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/detachDisk"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/detachDisk"
             % client.transport._host,
             args[1],
         )
@@ -3249,6 +3620,50 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("instance", "project", "zone",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Instance.to_json(compute.Instance())
+        request = compute.GetInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Instance
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetInstanceRequest
 ):
@@ -3309,7 +3724,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
             % client.transport._host,
             args[1],
         )
@@ -3470,6 +3885,54 @@ def test_get_effective_firewalls_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_effective_firewalls_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_effective_firewalls"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_effective_firewalls"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.InstancesGetEffectiveFirewallsResponse.to_json(
+            compute.InstancesGetEffectiveFirewallsResponse()
+        )
+        request = compute.GetEffectiveFirewallsInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.InstancesGetEffectiveFirewallsResponse
+
+        client.get_effective_firewalls(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_effective_firewalls_rest_bad_request(
     transport: str = "rest", request_type=compute.GetEffectiveFirewallsInstanceRequest
 ):
@@ -3535,7 +3998,7 @@ def test_get_effective_firewalls_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getEffectiveFirewalls"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getEffectiveFirewalls"
             % client.transport._host,
             args[1],
         )
@@ -3637,7 +4100,7 @@ def test_get_guest_attributes_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).get_guest_attributes._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("variable_key", "query_path",))
+    assert not set(unset_fields) - set(("query_path", "variable_key",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3690,8 +4153,56 @@ def test_get_guest_attributes_rest_unset_required_fields():
 
     unset_fields = transport.get_guest_attributes._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("variableKey", "queryPath",)) & set(("instance", "project", "zone",))
+        set(("queryPath", "variableKey",)) & set(("instance", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_guest_attributes_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_guest_attributes"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_guest_attributes"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.GuestAttributes.to_json(
+            compute.GuestAttributes()
+        )
+        request = compute.GetGuestAttributesInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.GuestAttributes
+
+        client.get_guest_attributes(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_get_guest_attributes_rest_bad_request(
@@ -3754,7 +4265,7 @@ def test_get_guest_attributes_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getGuestAttributes"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getGuestAttributes"
             % client.transport._host,
             args[1],
         )
@@ -3902,6 +4413,52 @@ def test_get_iam_policy_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_iam_policy_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_iam_policy"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_iam_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Policy.to_json(compute.Policy())
+        request = compute.GetIamPolicyInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Policy
+
+        client.get_iam_policy(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.GetIamPolicyInstanceRequest
 ):
@@ -3962,7 +4519,7 @@ def test_get_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/getIamPolicy"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/getIamPolicy"
             % client.transport._host,
             args[1],
         )
@@ -4105,6 +4662,52 @@ def test_get_screenshot_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("instance", "project", "zone",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_screenshot_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_screenshot"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_screenshot"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Screenshot.to_json(compute.Screenshot())
+        request = compute.GetScreenshotInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Screenshot
+
+        client.get_screenshot(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_screenshot_rest_bad_request(
     transport: str = "rest", request_type=compute.GetScreenshotInstanceRequest
 ):
@@ -4165,7 +4768,7 @@ def test_get_screenshot_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/screenshot"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/screenshot"
             % client.transport._host,
             args[1],
         )
@@ -4323,6 +4926,54 @@ def test_get_serial_port_output_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_serial_port_output_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_serial_port_output"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_serial_port_output"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.SerialPortOutput.to_json(
+            compute.SerialPortOutput()
+        )
+        request = compute.GetSerialPortOutputInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.SerialPortOutput
+
+        client.get_serial_port_output(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_serial_port_output_rest_bad_request(
     transport: str = "rest", request_type=compute.GetSerialPortOutputInstanceRequest
 ):
@@ -4383,7 +5034,7 @@ def test_get_serial_port_output_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/serialPort"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/serialPort"
             % client.transport._host,
             args[1],
         )
@@ -4529,6 +5180,54 @@ def test_get_shielded_instance_identity_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("instance", "project", "zone",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_shielded_instance_identity_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_get_shielded_instance_identity"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_get_shielded_instance_identity"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.ShieldedInstanceIdentity.to_json(
+            compute.ShieldedInstanceIdentity()
+        )
+        request = compute.GetShieldedInstanceIdentityInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.ShieldedInstanceIdentity
+
+        client.get_shielded_instance_identity(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_shielded_instance_identity_rest_bad_request(
     transport: str = "rest",
     request_type=compute.GetShieldedInstanceIdentityInstanceRequest,
@@ -4590,7 +5289,7 @@ def test_get_shielded_instance_identity_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity"
             % client.transport._host,
             args[1],
         )
@@ -4960,6 +5659,52 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.InsertInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertInstanceRequest
 ):
@@ -5206,7 +5951,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances"
             % client.transport._host,
             args[1],
         )
@@ -5304,7 +6049,7 @@ def test_list_rest_required_fields(request_type=compute.ListInstancesRequest):
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -5356,9 +6101,53 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.InstanceList.to_json(compute.InstanceList())
+        request = compute.ListInstancesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.InstanceList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -5415,7 +6204,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances"
             % client.transport._host,
             args[1],
         )
@@ -5547,7 +6336,7 @@ def test_list_referrers_rest_required_fields(
     ).list_referrers._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -5601,9 +6390,57 @@ def test_list_referrers_rest_unset_required_fields():
 
     unset_fields = transport.list_referrers._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("instance", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_referrers_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_list_referrers"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_list_referrers"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.InstanceListReferrers.to_json(
+            compute.InstanceListReferrers()
+        )
+        request = compute.ListReferrersInstancesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.InstanceListReferrers
+
+        client.list_referrers(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_referrers_rest_bad_request(
@@ -5666,7 +6503,7 @@ def test_list_referrers_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/referrers"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/referrers"
             % client.transport._host,
             args[1],
         )
@@ -5915,6 +6752,52 @@ def test_remove_resource_policies_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_resource_policies_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_remove_resource_policies"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_remove_resource_policies"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.RemoveResourcePoliciesInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_resource_policies_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_remove_resource_policies_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemoveResourcePoliciesInstanceRequest
 ):
@@ -5983,7 +6866,7 @@ def test_remove_resource_policies_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies"
             % client.transport._host,
             args[1],
         )
@@ -6174,6 +7057,50 @@ def test_reset_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_reset_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_reset"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_reset"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.ResetInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.reset_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_reset_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.ResetInstanceRequest
 ):
@@ -6234,7 +7161,7 @@ def test_reset_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/reset"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/reset"
             % client.transport._host,
             args[1],
         )
@@ -6381,6 +7308,54 @@ def test_send_diagnostic_interrupt_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("instance", "project", "zone",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_send_diagnostic_interrupt_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_send_diagnostic_interrupt"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_send_diagnostic_interrupt"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.SendDiagnosticInterruptInstanceResponse.to_json(
+            compute.SendDiagnosticInterruptInstanceResponse()
+        )
+        request = compute.SendDiagnosticInterruptInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.SendDiagnosticInterruptInstanceResponse
+
+        client.send_diagnostic_interrupt(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_send_diagnostic_interrupt_rest_bad_request(
     transport: str = "rest", request_type=compute.SendDiagnosticInterruptInstanceRequest
 ):
@@ -6443,7 +7418,7 @@ def test_send_diagnostic_interrupt_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/sendDiagnosticInterrupt"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/sendDiagnosticInterrupt"
             % client.transport._host,
             args[1],
         )
@@ -6636,6 +7611,52 @@ def test_set_deletion_protection_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_deletion_protection_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_deletion_protection"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_deletion_protection"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetDeletionProtectionInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_deletion_protection_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_deletion_protection_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetDeletionProtectionInstanceRequest
 ):
@@ -6696,7 +7717,7 @@ def test_set_deletion_protection_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setDeletionProtection"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setDeletionProtection"
             % client.transport._host,
             args[1],
         )
@@ -6841,7 +7862,7 @@ def test_set_disk_auto_delete_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).set_disk_auto_delete._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("device_name", "request_id", "auto_delete",))
+    assert not set(unset_fields) - set(("auto_delete", "device_name", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -6901,9 +7922,55 @@ def test_set_disk_auto_delete_unary_rest_unset_required_fields():
 
     unset_fields = transport.set_disk_auto_delete._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("deviceName", "requestId", "autoDelete",))
+        set(("autoDelete", "deviceName", "requestId",))
         & set(("autoDelete", "deviceName", "instance", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_disk_auto_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_disk_auto_delete"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_disk_auto_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetDiskAutoDeleteInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_disk_auto_delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_set_disk_auto_delete_unary_rest_bad_request(
@@ -6970,7 +8037,7 @@ def test_set_disk_auto_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete"
             % client.transport._host,
             args[1],
         )
@@ -7208,6 +8275,52 @@ def test_set_iam_policy_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_iam_policy_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_iam_policy"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_iam_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Policy.to_json(compute.Policy())
+        request = compute.SetIamPolicyInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Policy
+
+        client.set_iam_policy(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_iam_policy_rest_bad_request(
     transport: str = "rest", request_type=compute.SetIamPolicyInstanceRequest
 ):
@@ -7362,7 +8475,7 @@ def test_set_iam_policy_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setIamPolicy"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setIamPolicy"
             % client.transport._host,
             args[1],
         )
@@ -7561,6 +8674,52 @@ def test_set_labels_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_labels_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_labels"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_labels"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetLabelsInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_labels_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_labels_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetLabelsInstanceRequest
 ):
@@ -7630,7 +8789,7 @@ def test_set_labels_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setLabels"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setLabels"
             % client.transport._host,
             args[1],
         )
@@ -7839,6 +8998,52 @@ def test_set_machine_resources_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_machine_resources_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_machine_resources"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_machine_resources"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetMachineResourcesInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_machine_resources_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_machine_resources_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMachineResourcesInstanceRequest
 ):
@@ -7909,7 +9114,7 @@ def test_set_machine_resources_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineResources"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineResources"
             % client.transport._host,
             args[1],
         )
@@ -8109,6 +9314,52 @@ def test_set_machine_type_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_machine_type_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_machine_type"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_machine_type"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetMachineTypeInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_machine_type_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_machine_type_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMachineTypeInstanceRequest
 ):
@@ -8177,7 +9428,7 @@ def test_set_machine_type_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineType"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineType"
             % client.transport._host,
             args[1],
         )
@@ -8376,6 +9627,52 @@ def test_set_metadata_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_metadata_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_metadata"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_metadata"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetMetadataInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_metadata_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_metadata_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMetadataInstanceRequest
 ):
@@ -8444,7 +9741,7 @@ def test_set_metadata_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMetadata"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMetadata"
             % client.transport._host,
             args[1],
         )
@@ -8649,6 +9946,52 @@ def test_set_min_cpu_platform_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_min_cpu_platform_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_min_cpu_platform"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_min_cpu_platform"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetMinCpuPlatformInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_min_cpu_platform_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_min_cpu_platform_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetMinCpuPlatformInstanceRequest
 ):
@@ -8717,7 +10060,7 @@ def test_set_min_cpu_platform_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform"
             % client.transport._host,
             args[1],
         )
@@ -8926,6 +10269,52 @@ def test_set_scheduling_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_scheduling_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_scheduling"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_scheduling"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetSchedulingInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_scheduling_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_scheduling_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetSchedulingInstanceRequest
 ):
@@ -9003,7 +10392,7 @@ def test_set_scheduling_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setScheduling"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setScheduling"
             % client.transport._host,
             args[1],
         )
@@ -9209,6 +10598,52 @@ def test_set_service_account_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_service_account_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_service_account"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_service_account"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetServiceAccountInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_service_account_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_service_account_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetServiceAccountInstanceRequest
 ):
@@ -9278,7 +10713,7 @@ def test_set_service_account_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setServiceAccount"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setServiceAccount"
             % client.transport._host,
             args[1],
         )
@@ -9486,6 +10921,56 @@ def test_set_shielded_instance_integrity_policy_unary_rest_unset_required_fields
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_shielded_instance_integrity_policy_unary_rest_interceptors(
+    null_interceptor,
+):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor,
+        "post_set_shielded_instance_integrity_policy",
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor,
+        "pre_set_shielded_instance_integrity_policy",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetShieldedInstanceIntegrityPolicyInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_shielded_instance_integrity_policy_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_shielded_instance_integrity_policy_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SetShieldedInstanceIntegrityPolicyInstanceRequest,
@@ -9555,7 +11040,7 @@ def test_set_shielded_instance_integrity_policy_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy"
             % client.transport._host,
             args[1],
         )
@@ -9755,6 +11240,52 @@ def test_set_tags_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_tags_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_set_tags"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_set_tags"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetTagsInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_tags_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_tags_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetTagsInstanceRequest
 ):
@@ -9822,7 +11353,7 @@ def test_set_tags_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setTags"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setTags"
             % client.transport._host,
             args[1],
         )
@@ -10011,6 +11542,52 @@ def test_simulate_maintenance_event_unary_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("instance", "project", "zone",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_simulate_maintenance_event_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_simulate_maintenance_event"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_simulate_maintenance_event"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SimulateMaintenanceEventInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.simulate_maintenance_event_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_simulate_maintenance_event_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SimulateMaintenanceEventInstanceRequest,
@@ -10072,7 +11649,7 @@ def test_simulate_maintenance_event_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent"
             % client.transport._host,
             args[1],
         )
@@ -10260,6 +11837,50 @@ def test_start_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_start_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_start"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_start"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.StartInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.start_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_start_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StartInstanceRequest
 ):
@@ -10320,7 +11941,7 @@ def test_start_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/start"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/start"
             % client.transport._host,
             args[1],
         )
@@ -10535,6 +12156,52 @@ def test_start_with_encryption_key_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_start_with_encryption_key_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_start_with_encryption_key"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_start_with_encryption_key"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.StartWithEncryptionKeyInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.start_with_encryption_key_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_start_with_encryption_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StartWithEncryptionKeyInstanceRequest
 ):
@@ -10620,7 +12287,7 @@ def test_start_with_encryption_key_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/startWithEncryptionKey"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/startWithEncryptionKey"
             % client.transport._host,
             args[1],
         )
@@ -10817,6 +12484,50 @@ def test_stop_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_stop_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_stop"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_stop"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.StopInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.stop_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_stop_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.StopInstanceRequest
 ):
@@ -10877,7 +12588,7 @@ def test_stop_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/stop"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/stop"
             % client.transport._host,
             args[1],
         )
@@ -11030,6 +12741,54 @@ def test_test_iam_permissions_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_test_iam_permissions_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_test_iam_permissions"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_test_iam_permissions"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TestPermissionsResponse.to_json(
+            compute.TestPermissionsResponse()
+        )
+        request = compute.TestIamPermissionsInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TestPermissionsResponse
+
+        client.test_iam_permissions(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_test_iam_permissions_rest_bad_request(
     transport: str = "rest", request_type=compute.TestIamPermissionsInstanceRequest
 ):
@@ -11098,7 +12857,7 @@ def test_test_iam_permissions_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/testIamPermissions"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/testIamPermissions"
             % client.transport._host,
             args[1],
         )
@@ -11417,7 +13176,7 @@ def test_update_unary_rest_required_fields(request_type=compute.UpdateInstanceRe
     ).update._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("minimal_action", "request_id", "most_disruptive_allowed_action",)
+        ("minimal_action", "most_disruptive_allowed_action", "request_id",)
     )
     jsonified_request.update(unset_fields)
 
@@ -11472,9 +13231,55 @@ def test_update_unary_rest_unset_required_fields():
 
     unset_fields = transport.update._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("minimalAction", "requestId", "mostDisruptiveAllowedAction",))
+        set(("minimalAction", "mostDisruptiveAllowedAction", "requestId",))
         & set(("instance", "instanceResource", "project", "zone",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_update"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_update"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_update_unary_rest_bad_request(
@@ -11728,7 +13533,7 @@ def test_update_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}"
             % client.transport._host,
             args[1],
         )
@@ -11884,7 +13689,7 @@ def test_update_access_config_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).update_access_config._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -11942,11 +13747,57 @@ def test_update_access_config_unary_rest_unset_required_fields():
 
     unset_fields = transport.update_access_config._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             ("accessConfigResource", "instance", "networkInterface", "project", "zone",)
         )
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_access_config_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_update_access_config"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_update_access_config"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateAccessConfigInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_access_config_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_update_access_config_unary_rest_bad_request(
@@ -12026,7 +13877,7 @@ def test_update_access_config_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateAccessConfig"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateAccessConfig"
             % client.transport._host,
             args[1],
         )
@@ -12225,6 +14076,52 @@ def test_update_display_device_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_display_device_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_update_display_device"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_update_display_device"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateDisplayDeviceInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_display_device_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_update_display_device_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateDisplayDeviceInstanceRequest
 ):
@@ -12289,7 +14186,7 @@ def test_update_display_device_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice"
             % client.transport._host,
             args[1],
         )
@@ -12475,7 +14372,7 @@ def test_update_network_interface_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).update_network_interface._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "network_interface",))
+    assert not set(unset_fields) - set(("network_interface", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -12533,7 +14430,7 @@ def test_update_network_interface_unary_rest_unset_required_fields():
 
     unset_fields = transport.update_network_interface._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "networkInterface",))
+        set(("networkInterface", "requestId",))
         & set(
             (
                 "instance",
@@ -12544,6 +14441,52 @@ def test_update_network_interface_unary_rest_unset_required_fields():
             )
         )
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_network_interface_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_update_network_interface"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_update_network_interface"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateNetworkInterfaceInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_network_interface_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_update_network_interface_unary_rest_bad_request(
@@ -12659,7 +14602,7 @@ def test_update_network_interface_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface"
             % client.transport._host,
             args[1],
         )
@@ -12866,6 +14809,52 @@ def test_update_shielded_instance_config_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_shielded_instance_config_unary_rest_interceptors(null_interceptor):
+    transport = transports.InstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.InstancesRestInterceptor(),
+    )
+    client = InstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.InstancesRestInterceptor, "post_update_shielded_instance_config"
+    ) as post, mock.patch.object(
+        transports.InstancesRestInterceptor, "pre_update_shielded_instance_config"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.UpdateShieldedInstanceConfigInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_shielded_instance_config_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_update_shielded_instance_config_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.UpdateShieldedInstanceConfigInstanceRequest,
@@ -12937,7 +14926,7 @@ def test_update_shielded_instance_config_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig"
+            "%s/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig"
             % client.transport._host,
             args[1],
         )

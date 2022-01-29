@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import NodeTemplatesTransport
 from .rest import NodeTemplatesRestTransport
+from .rest import NodeTemplatesRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = NodeTemplatesRestTransport
 __all__ = (
     "NodeTemplatesTransport",
     "NodeTemplatesRestTransport",
+    "NodeTemplatesRestInterceptor",
 )
