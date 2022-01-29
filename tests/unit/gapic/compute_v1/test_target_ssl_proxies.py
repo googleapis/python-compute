@@ -472,14 +472,15 @@ def test_target_ssl_proxies_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(TargetSslProxiesClient, transports.TargetSslProxiesRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(TargetSslProxiesClient, transports.TargetSslProxiesRestTransport, "rest", None),],
 )
 def test_target_ssl_proxies_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -653,6 +654,54 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.DeleteTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteTargetSslProxyRequest
 ):
@@ -709,7 +758,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}"
             % client.transport._host,
             args[1],
         )
@@ -864,6 +913,54 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("project", "targetSslProxy",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetSslProxy.to_json(
+            compute.TargetSslProxy()
+        )
+        request = compute.GetTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetSslProxy
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetTargetSslProxyRequest
 ):
@@ -920,7 +1017,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}"
             % client.transport._host,
             args[1],
         )
@@ -1114,6 +1211,54 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.InsertTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertTargetSslProxyRequest
 ):
@@ -1185,7 +1330,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies"
             % client.transport._host,
             args[1],
         )
@@ -1278,7 +1423,7 @@ def test_list_rest_required_fields(request_type=compute.ListTargetSslProxiesRequ
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -1328,9 +1473,57 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.TargetSslProxyList.to_json(
+            compute.TargetSslProxyList()
+        )
+        request = compute.ListTargetSslProxiesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.TargetSslProxyList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -1387,7 +1580,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies"
             % client.transport._host,
             args[1],
         )
@@ -1628,6 +1821,54 @@ def test_set_backend_service_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_backend_service_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_set_backend_service"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_set_backend_service"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetBackendServiceTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_backend_service_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_backend_service_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetBackendServiceTargetSslProxyRequest
 ):
@@ -1691,7 +1932,7 @@ def test_set_backend_service_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setBackendService"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setBackendService"
             % client.transport._host,
             args[1],
         )
@@ -1892,6 +2133,54 @@ def test_set_proxy_header_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_proxy_header_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_set_proxy_header"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_set_proxy_header"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetProxyHeaderTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_proxy_header_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_proxy_header_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetProxyHeaderTargetSslProxyRequest
 ):
@@ -1955,7 +2244,7 @@ def test_set_proxy_header_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setProxyHeader"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setProxyHeader"
             % client.transport._host,
             args[1],
         )
@@ -2156,6 +2445,54 @@ def test_set_ssl_certificates_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_ssl_certificates_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_set_ssl_certificates"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_set_ssl_certificates"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetSslCertificatesTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_ssl_certificates_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_ssl_certificates_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.SetSslCertificatesTargetSslProxyRequest,
@@ -2220,7 +2557,7 @@ def test_set_ssl_certificates_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslCertificates"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslCertificates"
             % client.transport._host,
             args[1],
         )
@@ -2413,6 +2750,54 @@ def test_set_ssl_policy_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_ssl_policy_unary_rest_interceptors(null_interceptor):
+    transport = transports.TargetSslProxiesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.TargetSslProxiesRestInterceptor(),
+    )
+    client = TargetSslProxiesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "post_set_ssl_policy"
+    ) as post, mock.patch.object(
+        transports.TargetSslProxiesRestInterceptor, "pre_set_ssl_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.SetSslPolicyTargetSslProxyRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_ssl_policy_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_ssl_policy_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetSslPolicyTargetSslProxyRequest
 ):
@@ -2474,7 +2859,7 @@ def test_set_ssl_policy_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslPolicy"
+            "%s/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslPolicy"
             % client.transport._host,
             args[1],
         )

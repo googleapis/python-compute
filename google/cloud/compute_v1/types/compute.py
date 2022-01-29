@@ -1289,11 +1289,12 @@ class AcceleratorConfig(proto.Message):
         accelerator_type (str):
             Full or partial URL of the accelerator type
             resource to attach to this instance. For
-            example: projects/my-project/zones/us-
-            central1-c/acceleratorTypes/nvidia-tesla-p100 If
-            you are creating an instance template, specify
-            only the accelerator name. See GPUs on Compute
-            Engine for a full list of accelerator types.
+            example:
+            projects/my-project/zones/us-central1-c/acceleratorTypes/nvidia-tesla-p100
+            If you are creating an instance template,
+            specify only the accelerator name. See GPUs on
+            Compute Engine for a full list of accelerator
+            types.
 
             This field is a member of `oneof`_ ``_accelerator_type``.
     """
@@ -6032,9 +6033,10 @@ class AttachedDisk(proto.Message):
 
     Attributes:
         auto_delete (bool):
-            Specifies whether the disk will be auto-
-            eleted when the instance is deleted (but not
-            when the disk is detached from the instance).
+            Specifies whether the disk will be
+            auto-deleted when the instance is deleted (but
+            not when the disk is detached from the
+            instance).
 
             This field is a member of `oneof`_ ``_auto_delete``.
         boot (bool):
@@ -6056,19 +6058,19 @@ class AttachedDisk(proto.Message):
 
             This field is a member of `oneof`_ ``_device_name``.
         disk_encryption_key (google.cloud.compute_v1.types.CustomerEncryptionKey):
-            Encrypts or decrypts a disk using a customer-
-            upplied encryption key. If you are creating a
-            new disk, this field encrypts the new disk using
-            an encryption key that you provide. If you are
-            attaching an existing disk that is already
-            encrypted, this field decrypts the disk using
-            the customer-supplied encryption key. If you
-            encrypt a disk using a customer-supplied key,
-            you must provide the same key again when you
-            attempt to use this resource at a later time.
-            For example, you must provide the key when you
-            create a snapshot or an image from the disk or
-            when you attach the disk to a virtual machine
+            Encrypts or decrypts a disk using a
+            customer-supplied encryption key. If you are
+            creating a new disk, this field encrypts the new
+            disk using an encryption key that you provide.
+            If you are attaching an existing disk that is
+            already encrypted, this field decrypts the disk
+            using the customer-supplied encryption key. If
+            you encrypt a disk using a customer-supplied
+            key, you must provide the same key again when
+            you attempt to use this resource at a later
+            time. For example, you must provide the key when
+            you create a snapshot or an image from the disk
+            or when you attach the disk to a virtual machine
             instance. If you do not provide an encryption
             key, then the disk will be encrypted using an
             automatically generated key and you do not need
@@ -6245,8 +6247,8 @@ class AttachedDiskInitializeParams(proto.Message):
             This field is a member of `oneof`_ ``_disk_size_gb``.
         disk_type (str):
             Specifies the disk type to use to create the
-            instance. If not specified, the default is pd-
-            standard, specified using the full URL. For
+            instance. If not specified, the default is
+            pd-standard, specified using the full URL. For
             example:
             https://www.googleapis.com/compute/v1/projects/project/zones/zone
             /diskTypes/pd-standard For a full list of
@@ -6296,31 +6298,32 @@ class AttachedDiskInitializeParams(proto.Message):
             disk with one of the public operating system
             images, specify the image by its family name.
             For example, specify family/debian-9 to use the
-            latest Debian 9 image: projects/debian-
-            cloud/global/images/family/debian-9
+            latest Debian 9 image:
+            projects/debian-cloud/global/images/family/debian-9
             Alternatively, use a specific version of a
-            public operating system image: projects/debian-
-            cloud/global/images/debian-9-stretch-vYYYYMMDD
+            public operating system image:
+            projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD
             To create a disk with a custom image that you
             created, specify the image name in the following
             format: global/images/my-custom-image You can
             also specify a custom image by its image family,
             which returns the latest version of the image in
             that family. Replace the image name with
-            family/family-name: global/images/family/my-
-            image-family If the source image is deleted
-            later, this field will not be set.
+            family/family-name:
+            global/images/family/my-image-family If the
+            source image is deleted later, this field will
+            not be set.
 
             This field is a member of `oneof`_ ``_source_image``.
         source_image_encryption_key (google.cloud.compute_v1.types.CustomerEncryptionKey):
             The customer-supplied encryption key of the
             source image. Required if the source image is
             protected by a customer-supplied encryption key.
-            Instance templates do not store customer-
-            supplied encryption keys, so you cannot create
-            disks for instances in a managed instance group
-            if the source images are encrypted with your own
-            keys.
+            Instance templates do not store
+            customer-supplied encryption keys, so you cannot
+            create disks for instances in a managed instance
+            group if the source images are encrypted with
+            your own keys.
 
             This field is a member of `oneof`_ ``_source_image_encryption_key``.
         source_snapshot (str):
@@ -7834,12 +7837,13 @@ class BackendService(proto.Message):
             Fingerprint of this resource. A hash of the
             contents stored in this object. This field is
             used in optimistic locking. This field will be
-            ignored when inserting a BackendService. An up-
-            to-date fingerprint must be provided in order to
-            update the BackendService, otherwise the request
-            will fail with error 412 conditionNotMet. To see
-            the latest fingerprint, make a get() request to
-            retrieve a BackendService.
+            ignored when inserting a BackendService. An
+            up-to-date fingerprint must be provided in order
+            to update the BackendService, otherwise the
+            request will fail with error 412
+            conditionNotMet. To see the latest fingerprint,
+            make a get() request to retrieve a
+            BackendService.
 
             This field is a member of `oneof`_ ``_fingerprint``.
         health_checks (Sequence[str]):
@@ -9595,11 +9599,11 @@ class CorsPolicy(proto.Message):
 
             This field is a member of `oneof`_ ``_allow_credentials``.
         allow_headers (Sequence[str]):
-            Specifies the content for the Access-Control-
-            llow-Headers header.
+            Specifies the content for the
+            Access-Control-Allow-Headers header.
         allow_methods (Sequence[str]):
-            Specifies the content for the Access-Control-
-            llow-Methods header.
+            Specifies the content for the
+            Access-Control-Allow-Methods header.
         allow_origin_regexes (Sequence[str]):
             Specifies the regualar expression patterns
             that match allowed origins. For regular
@@ -9619,8 +9623,8 @@ class CorsPolicy(proto.Message):
 
             This field is a member of `oneof`_ ``_disabled``.
         expose_headers (Sequence[str]):
-            Specifies the content for the Access-Control-
-            xpose-Headers header.
+            Specifies the content for the
+            Access-Control-Expose-Headers header.
         max_age (int):
             Specifies how long results of a preflight
             request can be cached in seconds. This
@@ -9854,11 +9858,12 @@ class CustomerEncryptionKey(proto.Message):
 
             This field is a member of `oneof`_ ``_raw_key``.
         rsa_encrypted_key (str):
-            Specifies an RFC 4648 base64 encoded, RSA-
-            rapped 2048-bit customer-supplied encryption key
-            to either encrypt or decrypt this resource. You
-            can provide either the rawKey or the
-            rsaEncryptedKey. For example: "rsaEncryptedKey":
+            Specifies an RFC 4648 base64 encoded,
+            RSA-wrapped 2048-bit customer-supplied
+            encryption key to either encrypt or decrypt this
+            resource. You can provide either the rawKey or
+            the rsaEncryptedKey. For example:
+            "rsaEncryptedKey":
             "ieCx/NcW06PcT7Ep1X6LUTc/hLvUDYyzSZPPVCVPTVEohpeHASqC8uw5TzyO9U+Fka9JFH
             z0mBibXUInrC/jEk014kCK/NPjYgEMOyssZ4ZINPKxlUh2zn1bV+MCaTICrdmuSBTWlUUiFoD
             D6PYznLwh8ZNdaheCeZ8ewEXgFQ8V+sDroLaN3Xs3MDTXQEMMoNUXMCZEIpg9Vtp9x2oe=="
@@ -9869,9 +9874,7 @@ class CustomerEncryptionKey(proto.Message):
             wrapped, the key must be encoded in RFC 4648
             base64 encoding. Gets the RSA public key
             certificate provided by Google at:
-            https://cloud-
-            certs.storage.googleapis.com/google-cloud-csek-
-            ingress.pem
+            https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
 
             This field is a member of `oneof`_ ``_rsa_encrypted_key``.
         sha256 (str):
@@ -12970,10 +12973,10 @@ class Disk(proto.Message):
             labels set used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels, otherwise the request will fail
-            with error 412 conditionNotMet. To see the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels, otherwise the request will
+            fail with error 412 conditionNotMet. To see the
             latest fingerprint, make a get() request to
             retrieve a disk.
 
@@ -13100,19 +13103,19 @@ class Disk(proto.Message):
             operating system images, specify the image by
             its family name. For example, specify
             family/debian-9 to use the latest Debian 9
-            image: projects/debian-
-            cloud/global/images/family/debian-9
+            image:
+            projects/debian-cloud/global/images/family/debian-9
             Alternatively, use a specific version of a
-            public operating system image: projects/debian-
-            cloud/global/images/debian-9-stretch-vYYYYMMDD
+            public operating system image:
+            projects/debian-cloud/global/images/debian-9-stretch-vYYYYMMDD
             To create a disk with a custom image that you
             created, specify the image name in the following
             format: global/images/my-custom-image You can
             also specify a custom image by its image family,
             which returns the latest version of the image in
             that family. Replace the image name with
-            family/family-name: global/images/family/my-
-            image-family
+            family/family-name:
+            global/images/family/my-image-family
 
             This field is a member of `oneof`_ ``_source_image``.
         source_image_encryption_key (google.cloud.compute_v1.types.CustomerEncryptionKey):
@@ -13160,10 +13163,10 @@ class Disk(proto.Message):
             This field is a member of `oneof`_ ``_source_snapshot_id``.
         source_storage_object (str):
             The full Google Cloud Storage URI where the
-            disk image is stored. This file must be a gzip-
-            compressed tarball whose name ends in .tar.gz or
-            virtual machine disk whose name ends in vmdk.
-            Valid URIs may start with gs:// or
+            disk image is stored. This file must be a
+            gzip-compressed tarball whose name ends in
+            .tar.gz or virtual machine disk whose name ends
+            in vmdk. Valid URIs may start with gs:// or
             https://storage.googleapis.com/. This flag is
             not optimized for creating multiple disks from a
             source storage object. To create many disks from
@@ -13322,9 +13325,10 @@ class DiskInstantiationConfig(proto.Message):
 
     Attributes:
         auto_delete (bool):
-            Specifies whether the disk will be auto-
-            eleted when the instance is deleted (but not
-            when the disk is detached from the instance).
+            Specifies whether the disk will be
+            auto-deleted when the instance is deleted (but
+            not when the disk is detached from the
+            instance).
 
             This field is a member of `oneof`_ ``_auto_delete``.
         custom_image (str):
@@ -13344,20 +13348,20 @@ class DiskInstantiationConfig(proto.Message):
             source-image: to use the same image that was
             used to create the source instance's
             corresponding disk. Applicable to the boot disk
-            and additional read-write disks. - source-image-
-            family: to use the same image family that was
-            used to create the source instance's
-            corresponding disk. Applicable to the boot disk
-            and additional read-write disks. - custom-image:
-            to use a user-provided image url for disk
-            creation. Applicable to the boot disk and
-            additional read-write disks. - attach-read-only:
-            to attach a read-only disk. Applicable to read-
-            only disks. - do-not-include: to exclude a disk
-            from the template. Applicable to additional
-            read-write disks, local SSDs, and read-only
-            disks. Check the InstantiateFrom enum for the
-            list of possible values.
+            and additional read-write disks. -
+            source-image-family: to use the same image
+            family that was used to create the source
+            instance's corresponding disk. Applicable to the
+            boot disk and additional read-write disks. -
+            custom-image: to use a user-provided image url
+            for disk creation. Applicable to the boot disk
+            and additional read-write disks. -
+            attach-read-only: to attach a read-only disk.
+            Applicable to read-only disks. - do-not-include:
+            to exclude a disk from the template. Applicable
+            to additional read-write disks, local SSDs, and
+            read-only disks. Check the InstantiateFrom enum
+            for the list of possible values.
 
             This field is a member of `oneof`_ ``_instantiate_from``.
     """
@@ -13369,13 +13373,13 @@ class DiskInstantiationConfig(proto.Message):
         Applicable to the boot disk and additional read-write disks. -
         source-image-family: to use the same image family that was used
         to create the source instance's corresponding disk. Applicable
-        to the boot disk and additional read-write disks. - custom-
-        image: to use a user-provided image url for disk creation.
-        Applicable to the boot disk and additional read-write disks. -
-        attach-read-only: to attach a read-only disk. Applicable to
-        read-only disks. - do-not-include: to exclude a disk from the
-        template. Applicable to additional read-write disks, local SSDs,
-        and read-only disks.
+        to the boot disk and additional read-write disks. -
+        custom-image: to use a user-provided image url for disk
+        creation. Applicable to the boot disk and additional read-write
+        disks. - attach-read-only: to attach a read-only disk.
+        Applicable to read-only disks. - do-not-include: to exclude a
+        disk from the template. Applicable to additional read-write
+        disks, local SSDs, and read-only disks.
         """
         UNDEFINED_INSTANTIATE_FROM = 0
         ATTACH_READ_ONLY = 513775419
@@ -14154,8 +14158,8 @@ class ExternalVpnGateway(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         interfaces (Sequence[google.cloud.compute_v1.types.ExternalVpnGatewayInterface]):
             A list of interfaces for this external VPN
-            gateway. If your peer-side gateway is an on-
-            premises gateway and non-AWS cloud providers'
+            gateway. If your peer-side gateway is an
+            on-premises gateway and non-AWS cloud providers'
             gateway, at most two interfaces can be provided
             for an external VPN gateway. If your peer side
             is an AWS virtual private gateway, four
@@ -14427,9 +14431,9 @@ class Firewall(proto.Message):
             this field, you can specify the network as a
             full or partial URL. For example, the following
             are all valid URLs: -
-            https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-
-            network - projects/myproject/global/networks/my-
-            network - global/networks/default
+            https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network
+            - projects/myproject/global/networks/my-network
+            - global/networks/default
 
             This field is a member of `oneof`_ ``_network``.
         priority (int):
@@ -15169,10 +15173,10 @@ class ForwardingRule(proto.Message):
             the labels set used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels, otherwise the request will fail
-            with error 412 conditionNotMet. To see the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels, otherwise the request will
+            fail with error 412 conditionNotMet. To see the
             latest fingerprint, make a get() request to
             retrieve a ForwardingRule.
 
@@ -17937,8 +17941,8 @@ class GlobalSetLabelsRequest(proto.Message):
             for this resource, used to detect conflicts. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash when updating or
+            or update labels. You must always provide an
+            up-to-date fingerprint hash when updating or
             changing labels, otherwise the request will fail
             with error 412 conditionNotMet. Make a get()
             request to the resource to get the latest
@@ -18602,9 +18606,8 @@ class HealthCheckLogConfig(proto.Message):
 class HealthCheckReference(proto.Message):
     r"""A full or valid partial URL to a health check. For example,
     the following are valid URLs: -
-    https://www.googleapis.com/compute/beta/projects/project-
-    id/global/httpHealthChecks/health-check - projects/project-
-    id/global/httpHealthChecks/health-check -
+    https://www.googleapis.com/compute/beta/projects/project-id/global/httpHealthChecks/health-check
+    - projects/project-id/global/httpHealthChecks/health-check -
     global/httpHealthChecks/health-check
 
     Attributes:
@@ -18747,11 +18750,10 @@ class HealthCheckService(proto.Message):
 class HealthCheckServiceReference(proto.Message):
     r"""A full or valid partial URL to a health check service. For
     example, the following are valid URLs: -
-    https://www.googleapis.com/compute/beta/projects/project-
-    id/regions/us-west1/healthCheckServices/health-check-service -
-    projects/project-id/regions/us-west1/healthCheckServices/health-
-    check-service - regions/us-west1/healthCheckServices/health-
-    check-service
+    https://www.googleapis.com/compute/beta/projects/project-id/regions/us-west1/healthCheckServices/health-check-service
+    -
+    projects/project-id/regions/us-west1/healthCheckServices/health-check-service
+    - regions/us-west1/healthCheckServices/health-check-service
 
     Attributes:
         health_check_service (str):
@@ -19584,13 +19586,13 @@ class HttpRouteAction(proto.Message):
             flows to their corresponding backend service. If
             all traffic needs to go to a single backend
             service, there must be one
-            weightedBackendService with weight set to a non-
-            zero number. Once a backendService is identified
-            and before forwarding the request to the backend
-            service, advanced routing actions such as URL
-            rewrites and header transformations are applied
-            depending on additional settings specified in
-            this HttpRouteAction.
+            weightedBackendService with weight set to a
+            non-zero number. Once a backendService is
+            identified and before forwarding the request to
+            the backend service, advanced routing actions
+            such as URL rewrites and header transformations
+            are applied depending on additional settings
+            specified in this HttpRouteAction.
     """
 
     cors_policy = proto.Field(
@@ -19897,10 +19899,10 @@ class Image(proto.Message):
             labels used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels, otherwise the request will fail
-            with error 412 conditionNotMet. To see the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels, otherwise the request will
+            fail with error 412 conditionNotMet. To see the
             latest fingerprint, make a get() request to
             retrieve an image.
 
@@ -22662,10 +22664,10 @@ class Instance(proto.Message):
             MB and must be supplied in MB (e.g. 5 GB of
             memory is 5120 MB):
             zones/zone/machineTypes/custom-CPUS-MEMORY For
-            example: zones/us-
-            central1-f/machineTypes/custom-4-5120 For a full
-            list of restrictions, read the Specifications
-            for custom machine types.
+            example:
+            zones/us-central1-f/machineTypes/custom-4-5120
+            For a full list of restrictions, read the
+            Specifications for custom machine types.
 
             This field is a member of `oneof`_ ``_machine_type``.
         metadata (google.cloud.compute_v1.types.Metadata):
@@ -23284,11 +23286,11 @@ class InstanceGroupManager(proto.Message):
             managed instance group to create instances. Each
             version is defined by an instanceTemplate and a
             name. Every version can appear at most once per
-            instance group. This field overrides the top-
-            level instanceTemplate field. Read more about
-            the relationships between these fields. Exactly
-            one version must leave the targetSize field
-            unset. That version will be applied to all
+            instance group. This field overrides the
+            top-level instanceTemplate field. Read more
+            about the relationships between these fields.
+            Exactly one version must leave the targetSize
+            field unset. That version will be applied to all
             remaining instances. For more information, read
             about canary updates.
         zone (str):
@@ -23654,8 +23656,8 @@ class InstanceGroupManagerStatusStatefulPerInstanceConfigs(proto.Message):
 
     Attributes:
         all_effective (bool):
-            A bit indicating if all of the group's per-
-            nstance configs (listed in the output of a
+            A bit indicating if all of the group's
+            per-instance configs (listed in the output of a
             listPerInstanceConfigs API call) have status
             EFFECTIVE or there are no per-instance-configs.
 
@@ -23691,9 +23693,9 @@ class InstanceGroupManagerUpdatePolicy(proto.Message):
             regional managed instance groups. Valid values
             are: - PROACTIVE (default): The group attempts
             to maintain an even distribution of VM instances
-            across zones in the region. - NONE: For non-
-            autoscaled groups, proactive redistribution is
-            disabled.
+            across zones in the region. - NONE: For
+            non-autoscaled groups, proactive redistribution
+            is disabled.
 
             This field is a member of `oneof`_ ``_instance_redistribution_type``.
         max_surge (google.cloud.compute_v1.types.FixedOrPercent):
@@ -25027,8 +25029,8 @@ class InstancesSetMachineTypeRequest(proto.Message):
         machine_type (str):
             Full or partial URL of the machine type
             resource. See Machine Types for a full list of
-            machine types. For example: zones/us-
-            central1-f/machineTypes/n1-standard-1
+            machine types. For example:
+            zones/us-central1-f/machineTypes/n1-standard-1
 
             This field is a member of `oneof`_ ``_machine_type``.
     """
@@ -25109,8 +25111,8 @@ class Int64RangeMatch(proto.Message):
 
 class Interconnect(proto.Message):
     r"""Represents an Interconnect resource. An Interconnect resource
-    is a dedicated connection between the GCP network and your on-
-    premises network. For more information, read the Dedicated
+    is a dedicated connection between the GCP network and your
+    on-premises network. For more information, read the Dedicated
     Interconnect Overview.
 
     Attributes:
@@ -26659,8 +26661,8 @@ class Items(proto.Message):
 
             This field is a member of `oneof`_ ``_key``.
         value (str):
-            Value for the metadata entry. These are free-
-            orm strings, and only have meaning as
+            Value for the metadata entry. These are
+            free-form strings, and only have meaning as
             interpreted by the image running in the
             instance. The only restriction placed on values
             is that their size must be less than or equal to
@@ -35476,11 +35478,11 @@ class NetworkEndpointGroupCloudRun(proto.Message):
 
             This field is a member of `oneof`_ ``_service``.
         tag (str):
-            Optional Cloud Run tag represents the "named-
-            evision" to provide additional fine-grained
-            traffic routing information. The tag must be
-            1-63 characters long, and comply with RFC1035.
-            Example value: "revision-0010".
+            Optional Cloud Run tag represents the
+            "named-revision" to provide additional
+            fine-grained traffic routing information. The
+            tag must be 1-63 characters long, and comply
+            with RFC1035. Example value: "revision-0010".
 
             This field is a member of `oneof`_ ``_tag``.
         url_mask (str):
@@ -40225,9 +40227,9 @@ class Project(proto.Message):
 
             This field is a member of `oneof`_ ``_kind``.
         name (str):
-            The project ID. For example: my-example-
-            roject. Use the project ID to make requests to
-            Compute Engine.
+            The project ID. For example:
+            my-example-project. Use the project ID to make
+            requests to Compute Engine.
 
             This field is a member of `oneof`_ ``_name``.
         quotas (Sequence[google.cloud.compute_v1.types.Quota]):
@@ -41994,9 +41996,9 @@ class RegionSetLabelsRequest(proto.Message):
             for this resource, used to detect conflicts. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels. Make a get() request to the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels. Make a get() request to the
             resource to get the latest fingerprint.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
@@ -42613,9 +42615,9 @@ class ReservationAffinity(proto.Message):
             Corresponds to the label values of a
             reservation resource. This can be either a name
             to a reservation in the same project or
-            "projects/different-project/reservations/some-
-            reservation-name" to target a shared reservation
-            in the same zone but in a different project.
+            "projects/different-project/reservations/some-reservation-name"
+            to target a shared reservation in the same zone
+            but in a different project.
     """
 
     class ConsumeReservationType(proto.Enum):
@@ -43791,8 +43793,8 @@ class Route(proto.Message):
             The URL to a gateway that should handle
             matching packets. You can only specify the
             internet gateway using a full or partial valid
-            URL: projects/ project/global/gateways/default-
-            internet-gateway
+            URL: projects/
+            project/global/gateways/default-internet-gateway
 
             This field is a member of `oneof`_ ``_next_hop_gateway``.
         next_hop_ilb (str):
@@ -44331,8 +44333,8 @@ class RouterBgpPeer(proto.Message):
 
             This field is a member of `oneof`_ ``_peer_ip_address``.
         router_appliance_instance (str):
-            URI of the VM instance that is used as third-
-            arty router appliances such as Next Gen
+            URI of the VM instance that is used as
+            third-party router appliances such as Next Gen
             Firewalls, Virtual Routers, or Router
             Appliances. The VM instance must be located in
             zones contained in the same region as this Cloud
@@ -44476,10 +44478,11 @@ class RouterInterface(proto.Message):
         ip_range (str):
             IP address and range of the interface. The IP
             range must be in the RFC3927 link-local IP
-            address space. The value must be a CIDR-
-            formatted string, for example: 169.254.0.1/30.
-            NOTE: Do not truncate the address as it
-            represents the IP address of the interface.
+            address space. The value must be a
+            CIDR-formatted string, for example:
+            169.254.0.1/30. NOTE: Do not truncate the
+            address as it represents the IP address of the
+            interface.
 
             This field is a member of `oneof`_ ``_ip_range``.
         linked_interconnect_attachment (str):
@@ -45403,8 +45406,8 @@ class Scheduling(proto.Message):
             This field is a member of `oneof`_ ``_location_hint``.
         min_node_cpus (int):
             The minimum number of virtual CPUs this
-            instance will consume when running on a sole-
-            tenant node.
+            instance will consume when running on a
+            sole-tenant node.
 
             This field is a member of `oneof`_ ``_min_node_cpus``.
         node_affinities (Sequence[google.cloud.compute_v1.types.SchedulingNodeAffinity]):
@@ -48830,10 +48833,10 @@ class Snapshot(proto.Message):
             the labels set used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels, otherwise the request will fail
-            with error 412 conditionNotMet. To see the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels, otherwise the request will
+            fail with error 412 conditionNotMet. To see the
             latest fingerprint, make a get() request to
             retrieve a snapshot.
 
@@ -48876,20 +48879,20 @@ class Snapshot(proto.Message):
 
             This field is a member of `oneof`_ ``_self_link``.
         snapshot_encryption_key (google.cloud.compute_v1.types.CustomerEncryptionKey):
-            Encrypts the snapshot using a customer-
-            upplied encryption key. After you encrypt a
-            snapshot using a customer-supplied key, you must
-            provide the same key if you use the snapshot
-            later. For example, you must provide the
-            encryption key when you create a disk from the
-            encrypted snapshot in a future request.
-            Customer-supplied encryption keys do not protect
-            access to metadata of the snapshot. If you do
-            not provide an encryption key when creating the
-            snapshot, then the snapshot will be encrypted
-            using an automatically generated key and you do
-            not need to provide a key to use the snapshot
-            later.
+            Encrypts the snapshot using a
+            customer-supplied encryption key. After you
+            encrypt a snapshot using a customer-supplied
+            key, you must provide the same key if you use
+            the snapshot later. For example, you must
+            provide the encryption key when you create a
+            disk from the encrypted snapshot in a future
+            request. Customer-supplied encryption keys do
+            not protect access to metadata of the snapshot.
+            If you do not provide an encryption key when
+            creating the snapshot, then the snapshot will be
+            encrypted using an automatically generated key
+            and you do not need to provide a key to use the
+            snapshot later.
 
             This field is a member of `oneof`_ ``_snapshot_encryption_key``.
         source_disk (str):
@@ -49467,11 +49470,11 @@ class SslPolicy(proto.Message):
             Fingerprint of this resource. A hash of the
             contents stored in this object. This field is
             used in optimistic locking. This field will be
-            ignored when inserting a SslPolicy. An up-to-
-            date fingerprint must be provided in order to
-            update the SslPolicy, otherwise the request will
-            fail with error 412 conditionNotMet. To see the
-            latest fingerprint, make a get() request to
+            ignored when inserting a SslPolicy. An
+            up-to-date fingerprint must be provided in order
+            to update the SslPolicy, otherwise the request
+            will fail with error 412 conditionNotMet. To see
+            the latest fingerprint, make a get() request to
             retrieve an SslPolicy.
 
             This field is a member of `oneof`_ ``_fingerprint``.
@@ -49795,9 +49798,9 @@ class Subnetwork(proto.Message):
             Fingerprint of this resource. A hash of the
             contents stored in this object. This field is
             used in optimistic locking. This field will be
-            ignored when inserting a Subnetwork. An up-to-
-            date fingerprint must be provided in order to
-            update the Subnetwork, otherwise the request
+            ignored when inserting a Subnetwork. An
+            up-to-date fingerprint must be provided in order
+            to update the Subnetwork, otherwise the request
             will fail with error 412 conditionNotMet. To see
             the latest fingerprint, make a get() request to
             retrieve a Subnetwork.
@@ -50473,10 +50476,10 @@ class Tags(proto.Message):
             contents and used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update tags. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change tags. To see the latest fingerprint, make
-            get() request to the instance.
+            or update tags. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change tags. To see the latest fingerprint,
+            make get() request to the instance.
 
             This field is a member of `oneof`_ ``_fingerprint``.
         items (Sequence[str]):
@@ -50511,10 +50514,10 @@ class TargetGrpcProxy(proto.Message):
             Fingerprint of this resource. A hash of the
             contents stored in this object. This field is
             used in optimistic locking. This field will be
-            ignored when inserting a TargetGrpcProxy. An up-
-            to-date fingerprint must be provided in order to
-            patch/update the TargetGrpcProxy; otherwise, the
-            request will fail with error 412
+            ignored when inserting a TargetGrpcProxy. An
+            up-to-date fingerprint must be provided in order
+            to patch/update the TargetGrpcProxy; otherwise,
+            the request will fail with error 412
             conditionNotMet. To see the latest fingerprint,
             make a get() request to retrieve the
             TargetGrpcProxy.
@@ -50686,10 +50689,10 @@ class TargetHttpProxy(proto.Message):
             Fingerprint of this resource. A hash of the
             contents stored in this object. This field is
             used in optimistic locking. This field will be
-            ignored when inserting a TargetHttpProxy. An up-
-            to-date fingerprint must be provided in order to
-            patch/update the TargetHttpProxy; otherwise, the
-            request will fail with error 412
+            ignored when inserting a TargetHttpProxy. An
+            up-to-date fingerprint must be provided in order
+            to patch/update the TargetHttpProxy; otherwise,
+            the request will fail with error 412
             conditionNotMet. To see the latest fingerprint,
             make a get() request to retrieve the
             TargetHttpProxy.
@@ -51013,10 +51016,10 @@ class TargetHttpsProxy(proto.Message):
             used. - When quic-override is set to ENABLE, the
             load balancer uses QUIC when possible. - When
             quic-override is set to DISABLE, the load
-            balancer doesn't use QUIC. - If the quic-
-            override flag is not specified, NONE is implied.
-            Check the QuicOverride enum for the list of
-            possible values.
+            balancer doesn't use QUIC. - If the
+            quic-override flag is not specified, NONE is
+            implied. Check the QuicOverride enum for the
+            list of possible values.
 
             This field is a member of `oneof`_ ``_quic_override``.
         region (str):
@@ -51061,8 +51064,9 @@ class TargetHttpsProxy(proto.Message):
             following are all valid URLs for specifying a
             URL map: -
             https://www.googleapis.compute/v1/projects/project/global/urlMaps/
-            url-map - projects/project/global/urlMaps/url-
-            map - global/urlMaps/url-map
+            url-map -
+            projects/project/global/urlMaps/url-map -
+            global/urlMaps/url-map
 
             This field is a member of `oneof`_ ``_url_map``.
     """
@@ -51073,9 +51077,10 @@ class TargetHttpsProxy(proto.Message):
         attempts to negotiate QUIC with clients. You can specify NONE,
         ENABLE, or DISABLE. - When quic-override is set to NONE, Google
         manages whether QUIC is used. - When quic-override is set to
-        ENABLE, the load balancer uses QUIC when possible. - When quic-
-        override is set to DISABLE, the load balancer doesn't use QUIC.
-        - If the quic-override flag is not specified, NONE is implied.
+        ENABLE, the load balancer uses QUIC when possible. - When
+        quic-override is set to DISABLE, the load balancer doesn't use
+        QUIC. - If the quic-override flag is not specified, NONE is
+        implied.
         """
         UNDEFINED_QUIC_OVERRIDE = 0
         DISABLE = 241807048
@@ -51722,11 +51727,10 @@ class TargetPoolsAddInstanceRequest(proto.Message):
             to this target pool. This can be a full or
             partial URL. For example, the following are
             valid URLs: -
-            https://www.googleapis.com/compute/v1/projects/project-
-            id/zones/zone /instances/instance-name -
-            projects/project-
-            id/zones/zone/instances/instance-name -
-            zones/zone/instances/instance-name
+            https://www.googleapis.com/compute/v1/projects/project-id/zones/zone
+            /instances/instance-name -
+            projects/project-id/zones/zone/instances/instance-name
+            - zones/zone/instances/instance-name
     """
 
     instances = proto.RepeatedField(
@@ -51744,8 +51748,8 @@ class TargetPoolsRemoveHealthCheckRequest(proto.Message):
             following are valid URLs: -
             https://www.googleapis.com/compute/beta/projects/project
             /global/httpHealthChecks/health-check -
-            projects/project/global/httpHealthChecks/health-
-            check - global/httpHealthChecks/health-check
+            projects/project/global/httpHealthChecks/health-check
+            - global/httpHealthChecks/health-check
     """
 
     health_checks = proto.RepeatedField(
@@ -54513,8 +54517,8 @@ class VmEndpointNatMappingsList(proto.Message):
 
 class VpnGateway(proto.Message):
     r"""Represents a HA VPN gateway. HA VPN is a high-availability
-    (HA) Cloud VPN solution that lets you securely connect your on-
-    premises network to your Google Cloud Virtual Private Cloud
+    (HA) Cloud VPN solution that lets you securely connect your
+    on-premises network to your Google Cloud Virtual Private Cloud
     network through an IPsec VPN connection in a single region. For
     more information about Cloud HA VPN solutions, see Cloud VPN
     topologies .
@@ -54546,10 +54550,10 @@ class VpnGateway(proto.Message):
             the labels set used for optimistic locking. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels, otherwise the request will fail
-            with error 412 conditionNotMet. To see the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels, otherwise the request will
+            fail with error 412 conditionNotMet. To see the
             latest fingerprint, make a get() request to
             retrieve an VpnGateway.
 
@@ -54845,11 +54849,12 @@ class VpnGatewayVpnGatewayInterface(proto.Message):
             URL of the VLAN attachment
             (interconnectAttachment) resource for this VPN
             gateway interface. When the value of this field
-            is present, the VPN gateway is used for IPsec-
-            encrypted Cloud Interconnect; all egress or
-            ingress traffic for this VPN gateway interface
-            goes through the specified VLAN attachment
-            resource. Not currently available publicly.
+            is present, the VPN gateway is used for
+            IPsec-encrypted Cloud Interconnect; all egress
+            or ingress traffic for this VPN gateway
+            interface goes through the specified VLAN
+            attachment resource. Not currently available
+            publicly.
 
             This field is a member of `oneof`_ ``_interconnect_attachment``.
         ip_address (str):
@@ -55298,10 +55303,10 @@ class WafExpressionSetExpression(proto.Message):
     Attributes:
         id (str):
             Expression ID should uniquely identify the
-            origin of the expression. E.g. owasp-
-            crs-v020901-id973337 identifies Owasp core rule
-            set version 2.9.1 rule id 973337. The ID could
-            be used to determine the individual attack
+            origin of the expression. E.g.
+            owasp-crs-v020901-id973337 identifies Owasp core
+            rule set version 2.9.1 rule id 973337. The ID
+            could be used to determine the individual attack
             definition that has been detected. It could also
             be used to exclude it from the policy in case of
             false positive. required
@@ -55747,9 +55752,9 @@ class ZoneSetLabelsRequest(proto.Message):
             for this resource, used to detect conflicts. The
             fingerprint is initially generated by Compute
             Engine and changes after every request to modify
-            or update labels. You must always provide an up-
-            to-date fingerprint hash in order to update or
-            change labels. Make a get() request to the
+            or update labels. You must always provide an
+            up-to-date fingerprint hash in order to update
+            or change labels. Make a get() request to the
             resource to get the latest fingerprint.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.

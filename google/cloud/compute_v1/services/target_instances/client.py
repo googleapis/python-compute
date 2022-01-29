@@ -416,7 +416,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -515,7 +515,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, target_instance])
         if request is not None and has_flattened_params:
@@ -607,7 +607,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, target_instance])
         if request is not None and has_flattened_params:
@@ -703,7 +703,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, target_instance_resource])
         if request is not None and has_flattened_params:
@@ -783,7 +783,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:

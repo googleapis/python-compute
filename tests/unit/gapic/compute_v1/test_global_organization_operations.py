@@ -494,20 +494,22 @@ def test_global_organization_operations_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
+    "client_class,transport_class,transport_name,grpc_helpers",
     [
         (
             GlobalOrganizationOperationsClient,
             transports.GlobalOrganizationOperationsRestTransport,
             "rest",
+            None,
         ),
     ],
 )
 def test_global_organization_operations_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -636,6 +638,54 @@ def test_delete_rest_unset_required_fields():
     assert set(unset_fields) == (set(("parentId",)) & set(("operation",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_rest_interceptors(null_interceptor):
+    transport = transports.GlobalOrganizationOperationsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalOrganizationOperationsRestInterceptor(),
+    )
+    client = GlobalOrganizationOperationsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.DeleteGlobalOrganizationOperationResponse.to_json(
+            compute.DeleteGlobalOrganizationOperationResponse()
+        )
+        request = compute.DeleteGlobalOrganizationOperationRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.DeleteGlobalOrganizationOperationResponse
+
+        client.delete(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_rest_bad_request(
     transport: str = "rest",
     request_type=compute.DeleteGlobalOrganizationOperationRequest,
@@ -693,7 +743,7 @@ def test_delete_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/operations/{operation}"
+            "%s/compute/v1/locations/global/operations/{operation}"
             % client.transport._host,
             args[1],
         )
@@ -873,6 +923,52 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(("parentId",)) & set(("operation",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.GlobalOrganizationOperationsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalOrganizationOperationsRestInterceptor(),
+    )
+    client = GlobalOrganizationOperationsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+        request = compute.GetGlobalOrganizationOperationRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetGlobalOrganizationOperationRequest
 ):
@@ -927,7 +1023,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/locations/global/operations/{operation}"
+            "%s/compute/v1/locations/global/operations/{operation}"
             % client.transport._host,
             args[1],
         )
@@ -989,6 +1085,54 @@ def test_list_rest(request_type):
     assert response.kind == "kind_value"
     assert response.next_page_token == "next_page_token_value"
     assert response.self_link == "self_link_value"
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.GlobalOrganizationOperationsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalOrganizationOperationsRestInterceptor(),
+    )
+    client = GlobalOrganizationOperationsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.GlobalOrganizationOperationsRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.OperationList.to_json(
+            compute.OperationList()
+        )
+        request = compute.ListGlobalOrganizationOperationsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.OperationList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(

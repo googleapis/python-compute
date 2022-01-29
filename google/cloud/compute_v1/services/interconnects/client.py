@@ -432,7 +432,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -509,7 +509,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -584,7 +584,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -670,7 +670,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect_resource])
         if request is not None and has_flattened_params:
@@ -740,7 +740,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -838,7 +838,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect, interconnect_resource])
         if request is not None and has_flattened_params:
