@@ -31,6 +31,9 @@ def autodelete_instance_name():
 
     yield instance_name
 
+    if get_delete_protection(PROJECT, INSTANCE_ZONE, instance_name):
+        set_delete_protection(PROJECT, INSTANCE_ZONE, instance_name, False)
+
     delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
 
 
