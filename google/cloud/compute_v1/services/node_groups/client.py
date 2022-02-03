@@ -446,7 +446,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_add_nodes_request_resource]
@@ -523,7 +523,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -622,7 +622,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -725,7 +725,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_delete_nodes_request_resource]
@@ -824,7 +824,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -946,7 +946,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, resource])
         if request is not None and has_flattened_params:
@@ -1050,7 +1050,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, initial_node_count, node_group_resource]
@@ -1133,7 +1133,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -1222,7 +1222,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -1331,7 +1331,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group, node_group_resource])
         if request is not None and has_flattened_params:
@@ -1461,7 +1461,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, zone_set_policy_request_resource]
@@ -1570,7 +1570,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_set_node_template_request_resource]
@@ -1665,7 +1665,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, test_permissions_request_resource]

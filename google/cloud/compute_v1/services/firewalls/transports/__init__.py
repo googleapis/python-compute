@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import FirewallsTransport
 from .rest import FirewallsRestTransport
+from .rest import FirewallsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = FirewallsRestTransport
 __all__ = (
     "FirewallsTransport",
     "FirewallsRestTransport",
+    "FirewallsRestInterceptor",
 )

@@ -441,7 +441,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template])
         if request is not None and has_flattened_params:
@@ -518,7 +518,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template])
         if request is not None and has_flattened_params:
@@ -630,7 +630,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, resource])
         if request is not None and has_flattened_params:
@@ -720,7 +720,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template_resource])
         if request is not None and has_flattened_params:
@@ -789,7 +789,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -911,7 +911,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_policy_request_resource]
@@ -996,7 +996,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

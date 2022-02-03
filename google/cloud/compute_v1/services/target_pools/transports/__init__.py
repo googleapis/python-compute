@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import TargetPoolsTransport
 from .rest import TargetPoolsRestTransport
+from .rest import TargetPoolsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = TargetPoolsRestTransport
 __all__ = (
     "TargetPoolsTransport",
     "TargetPoolsRestTransport",
+    "TargetPoolsRestInterceptor",
 )

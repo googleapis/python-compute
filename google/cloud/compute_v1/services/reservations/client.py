@@ -415,7 +415,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -510,7 +510,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, reservation])
         if request is not None and has_flattened_params:
@@ -595,7 +595,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, reservation])
         if request is not None and has_flattened_params:
@@ -717,7 +717,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, resource])
         if request is not None and has_flattened_params:
@@ -811,7 +811,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, reservation_resource])
         if request is not None and has_flattened_params:
@@ -887,7 +887,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -992,7 +992,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, reservation, reservations_resize_request_resource]
@@ -1126,7 +1126,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, zone_set_policy_request_resource]
@@ -1221,7 +1221,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, test_permissions_request_resource]

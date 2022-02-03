@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import PublicAdvertisedPrefixesTransport
 from .rest import PublicAdvertisedPrefixesRestTransport
+from .rest import PublicAdvertisedPrefixesRestInterceptor
 
 
 # Compile a registry of transports.
@@ -29,4 +30,5 @@ _transport_registry["rest"] = PublicAdvertisedPrefixesRestTransport
 __all__ = (
     "PublicAdvertisedPrefixesTransport",
     "PublicAdvertisedPrefixesRestTransport",
+    "PublicAdvertisedPrefixesRestInterceptor",
 )
