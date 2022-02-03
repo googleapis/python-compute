@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import RegionUrlMapsTransport
 from .rest import RegionUrlMapsRestTransport
+from .rest import RegionUrlMapsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = RegionUrlMapsRestTransport
 __all__ = (
     "RegionUrlMapsTransport",
     "RegionUrlMapsRestTransport",
+    "RegionUrlMapsRestInterceptor",
 )

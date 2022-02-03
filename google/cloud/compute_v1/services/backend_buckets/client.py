@@ -445,7 +445,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, signed_url_key_resource])
         if request is not None and has_flattened_params:
@@ -534,7 +534,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket])
         if request is not None and has_flattened_params:
@@ -632,7 +632,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, key_name])
         if request is not None and has_flattened_params:
@@ -713,7 +713,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket])
         if request is not None and has_flattened_params:
@@ -799,7 +799,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket_resource])
         if request is not None and has_flattened_params:
@@ -869,7 +869,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -969,7 +969,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, backend_bucket_resource])
         if request is not None and has_flattened_params:
@@ -1065,7 +1065,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, backend_bucket_resource])
         if request is not None and has_flattened_params:

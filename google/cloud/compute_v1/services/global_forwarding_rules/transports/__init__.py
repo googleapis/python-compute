@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import GlobalForwardingRulesTransport
 from .rest import GlobalForwardingRulesRestTransport
+from .rest import GlobalForwardingRulesRestInterceptor
 
 
 # Compile a registry of transports.
@@ -29,4 +30,5 @@ _transport_registry["rest"] = GlobalForwardingRulesRestTransport
 __all__ = (
     "GlobalForwardingRulesTransport",
     "GlobalForwardingRulesRestTransport",
+    "GlobalForwardingRulesRestInterceptor",
 )
