@@ -11,16 +11,26 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+# [START compute_preemptible_create]
 import sys
 
+# [END compute_preemptible_create]
+
 # [START compute_preemptible_create]
+# [START compute_preemptible_check]
+# [START compute_preemptible_history]
 from google.cloud import compute_v1
+
+# [END compute_preemptible_history]
+# [END compute_preemptible_check]
 # [END compute_preemptible_create]
 
 
 # [START compute_preemptible_create]
 def create_preemptible_instance(
-    project_id: str, zone: str, instance_name: str,
+    project_id: str,
+    zone: str,
+    instance_name: str,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
@@ -80,7 +90,7 @@ def create_preemptible_instance(
     if operation.warnings:
         print("Warning during creation:", operation.warnings, file=sys.stderr)
     print(f"Instance {instance_name} created.")
-    return instance
+    return instance_client.get(project=project_id, zone=zone, instance=instance_name)
 
 
 # [END compute_preemptible_create]
@@ -99,29 +109,42 @@ def is_preemptible(project_id: str, zone: str, instance_name: str) -> bool:
         The preemptible status of the instance.
     """
     instance_client = compute_v1.InstancesClient()
-    instance = instance_client.get(project=project_id, zone=zone, instance=instance_name)
+    instance = instance_client.get(
+        project=project_id, zone=zone, instance=instance_name
+    )
     return instance.scheduling.preemptible
 
 
 # [END compute_preemptible_check]
 
 
+# [START compute_preemptible_history]
 def preemption_history(project_id: str, zone: str, instance_name: str = None):
     op_client = compute_v1.ZoneOperationsClient()
     req = compute_v1.ListZoneOperationsRequest()
     req.project = project_id
     req.zone = zone
+
     if instance_name:
-        req.filter = f'operationType="compute.instances.preempted" ' \
-                     f'AND targetLink:instances/{instance_name}'
+        req.filter = (
+            f'operationType="compute.instances.preempted" '
+            f"AND targetLink:instances/{instance_name}"
+        )
     else:
-        req.filter = 'operationType="compute.instances.preempted'
+        req.filter = 'operationType="compute.instances.preempted"'
 
     history = []
 
     for operation in op_client.list(req):
-        instance_name = operation.target_link.rsplit('/', maxsplit=1)[1]
+        this_instance_name = operation.target_link.rsplit("/", maxsplit=1)[1]
+        if instance_name and this_instance_name != instance_name:
+            # The filter used is not 100% accurate, it's `contains` not `equals`
+            # So we need to filter to make sure
+            continue
         moment = operation.insert_time
         history.append((instance_name, moment))
 
     return history
+
+
+# [END compute_preemptible_history]
