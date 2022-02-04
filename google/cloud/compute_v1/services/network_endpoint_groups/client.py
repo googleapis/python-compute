@@ -395,6 +395,26 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         r"""Retrieves the list of network endpoint groups and
         sorts them by zone.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListNetworkEndpointGroupsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListNetworkEndpointGroupsRequest, dict]):
                 The request object. A request message for
@@ -419,7 +439,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -471,6 +491,29 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
     ) -> compute.Operation:
         r"""Attach a list of network endpoints to the specified
         network endpoint group.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_attach_network_endpoints():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AttachNetworkEndpointsNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.attach_network_endpoints(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.AttachNetworkEndpointsNetworkEndpointGroupRequest, dict]):
@@ -530,7 +573,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -594,6 +637,29 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         Note that the NEG cannot be deleted if there are backend
         services referencing it.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -646,7 +712,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, network_endpoint_group])
         if request is not None and has_flattened_params:
@@ -696,6 +762,29 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
     ) -> compute.Operation:
         r"""Detach a list of network endpoints from the specified
         network endpoint group.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_detach_network_endpoints():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DetachNetworkEndpointsNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.detach_network_endpoints(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DetachNetworkEndpointsNetworkEndpointGroupRequest, dict]):
@@ -755,7 +844,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -817,6 +906,29 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         list of available network endpoint groups by making a
         list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -864,7 +976,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, network_endpoint_group])
         if request is not None and has_flattened_params:
@@ -912,6 +1024,28 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         r"""Creates a network endpoint group in the specified
         project using the parameters that are included in the
         request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertNetworkEndpointGroupRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertNetworkEndpointGroupRequest, dict]):
@@ -962,7 +1096,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, network_endpoint_group_resource])
         if request is not None and has_flattened_params:
@@ -1011,6 +1145,27 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         r"""Retrieves the list of network endpoint groups that
         are located in the specified project and zone.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNetworkEndpointGroupsRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNetworkEndpointGroupsRequest, dict]):
                 The request object. A request message for
@@ -1043,7 +1198,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -1098,6 +1253,28 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         r"""Lists the network endpoints in the specified network
         endpoint group.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_network_endpoints():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNetworkEndpointsNetworkEndpointGroupsRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list_network_endpoints(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNetworkEndpointsNetworkEndpointGroupsRequest, dict]):
                 The request object. A request message for
@@ -1144,7 +1321,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1214,6 +1391,29 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.NetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsNetworkEndpointGroupRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -1254,7 +1454,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, test_permissions_request_resource]

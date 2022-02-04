@@ -393,6 +393,27 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetSslProxy resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -436,7 +457,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_ssl_proxy])
         if request is not None and has_flattened_params:
@@ -482,6 +503,28 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         list of available target SSL proxies by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -518,7 +561,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_ssl_proxy])
         if request is not None and has_flattened_params:
@@ -563,6 +606,27 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         r"""Creates a TargetSslProxy resource in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertTargetSslProxyRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -604,7 +668,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_ssl_proxy_resource])
         if request is not None and has_flattened_params:
@@ -648,6 +712,26 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         r"""Retrieves the list of TargetSslProxy resources
         available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListTargetSslProxiesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetSslProxiesRequest, dict]):
                 The request object. A request message for
@@ -674,7 +758,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -722,6 +806,27 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetSslProxy.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_backend_service():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetBackendServiceTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.set_backend_service(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetBackendServiceTargetSslProxyRequest, dict]):
@@ -772,7 +877,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -827,6 +932,27 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetSslProxy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_proxy_header():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetProxyHeaderTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.set_proxy_header(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetProxyHeaderTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -875,7 +1001,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -930,6 +1056,27 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes SslCertificates for TargetSslProxy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_ssl_certificates():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetSslCertificatesTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.set_ssl_certificates(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetSslCertificatesTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -979,7 +1126,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1038,6 +1185,28 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         the SSL proxy load balancer. They do not affect the
         connection between the load balancer and the backends.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_ssl_policy():
+                # Create a client
+                client = compute_v1.TargetSslProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetSslPolicyTargetSslProxyRequest(
+                    project="project_value",
+                    target_ssl_proxy="target_ssl_proxy_value",
+                )
+
+                # Make the request
+                response = client.set_ssl_policy(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetSslPolicyTargetSslProxyRequest, dict]):
                 The request object. A request message for
@@ -1088,7 +1257,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, target_ssl_proxy, ssl_policy_reference_resource]

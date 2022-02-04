@@ -393,6 +393,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteLicenseRequest(
+                    license_="license__value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteLicenseRequest, dict]):
                 The request object. A request message for
@@ -435,7 +457,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_])
         if request is not None and has_flattened_params:
@@ -481,6 +503,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         is intended for use only by third-party partners who are
         creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetLicenseRequest(
+                    license_="license__value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetLicenseRequest, dict]):
                 The request object. A request message for Licenses.Get.
@@ -513,7 +557,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_])
         if request is not None and has_flattened_params:
@@ -559,6 +603,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         no such policy or resource exists. *Caution* This resource is
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyLicenseRequest, dict]):
@@ -627,7 +693,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, resource])
         if request is not None and has_flattened_params:
@@ -673,6 +739,27 @@ class LicensesClient(metaclass=LicensesClientMeta):
         This resource is intended for use only by third-party partners
         who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertLicenseRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertLicenseRequest, dict]):
                 The request object. A request message for
@@ -713,7 +800,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_resource])
         if request is not None and has_flattened_params:
@@ -764,6 +851,26 @@ class LicensesClient(metaclass=LicensesClientMeta):
         by third-party partners who are creating Cloud Marketplace
         images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListLicensesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListLicensesRequest, dict]):
                 The request object. A request message for Licenses.List.
@@ -787,7 +894,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -838,6 +945,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         Replaces any existing policy. *Caution* This resource is
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyLicenseRequest, dict]):
@@ -911,7 +1040,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_policy_request_resource]
@@ -964,6 +1093,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         *Caution* This resource is intended for use only by third-party
         partners who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsLicenseRequest, dict]):
                 The request object. A request message for
@@ -997,7 +1148,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

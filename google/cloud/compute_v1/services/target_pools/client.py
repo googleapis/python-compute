@@ -393,6 +393,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Adds health check URLs to a target pool.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_health_check():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddHealthCheckTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.add_health_check(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddHealthCheckTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -448,7 +470,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -507,6 +529,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Adds an instance to a target pool.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_instance():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddInstanceTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.add_instance(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddInstanceTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -562,7 +606,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, target_pool, target_pools_add_instance_request_resource]
@@ -613,6 +657,25 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target pools.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListTargetPoolsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListTargetPoolsRequest, dict]):
                 The request object. A request message for
@@ -637,7 +700,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -685,6 +748,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified target pool.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetPoolRequest, dict]):
@@ -736,7 +821,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, target_pool])
         if request is not None and has_flattened_params:
@@ -784,6 +869,29 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         r"""Returns the specified target pool. Gets a list of
         available target pools by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -826,7 +934,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, target_pool])
         if request is not None and has_flattened_params:
@@ -876,6 +984,29 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         for the instance that is referenced by the given target
         pool.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_health():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetHealthTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.get_health(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetHealthTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -916,7 +1047,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, target_pool, instance_reference_resource]
@@ -968,6 +1099,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         r"""Creates a target pool in the specified project and
         region using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -1016,7 +1169,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, target_pool_resource])
         if request is not None and has_flattened_params:
@@ -1063,6 +1216,27 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         r"""Retrieves a list of target pools available to the
         specified project and region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListTargetPoolsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetPoolsRequest, dict]):
                 The request object. A request message for
@@ -1096,7 +1270,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -1147,6 +1321,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes health check URL from a target pool.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_health_check():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveHealthCheckTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.remove_health_check(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveHealthCheckTargetPoolRequest, dict]):
@@ -1201,7 +1397,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1260,6 +1456,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Removes instance URL from a target pool.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_instance():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveInstanceTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.remove_instance(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveInstanceTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -1315,7 +1533,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1374,6 +1592,28 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Changes a backup target pool's configurations.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_backup():
+                # Create a client
+                client = compute_v1.TargetPoolsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetBackupTargetPoolRequest(
+                    project="project_value",
+                    region="region_value",
+                    target_pool="target_pool_value",
+                )
+
+                # Make the request
+                response = client.set_backup(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetBackupTargetPoolRequest, dict]):
                 The request object. A request message for
@@ -1429,7 +1669,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, target_pool, target_reference_resource]

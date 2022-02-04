@@ -390,6 +390,25 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node templates.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListNodeTemplatesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListNodeTemplatesRequest, dict]):
                 The request object. A request message for
@@ -414,7 +433,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -462,6 +481,28 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NodeTemplate resource.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteNodeTemplateRequest(
+                    node_template="node_template_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteNodeTemplateRequest, dict]):
@@ -513,7 +554,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, node_template])
         if request is not None and has_flattened_params:
@@ -561,6 +602,29 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         r"""Returns the specified node template. Gets a list of
         available node templates by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetNodeTemplateRequest(
+                    node_template="node_template_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetNodeTemplateRequest, dict]):
                 The request object. A request message for
@@ -599,7 +663,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, node_template])
         if request is not None and has_flattened_params:
@@ -646,6 +710,29 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyNodeTemplateRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyNodeTemplateRequest, dict]):
@@ -721,7 +808,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource])
         if request is not None and has_flattened_params:
@@ -768,6 +855,28 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> compute.Operation:
         r"""Creates a NodeTemplate resource in the specified
         project using the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertNodeTemplateRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertNodeTemplateRequest, dict]):
@@ -817,7 +926,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, node_template_resource])
         if request is not None and has_flattened_params:
@@ -864,6 +973,27 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         r"""Retrieves a list of node templates available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNodeTemplatesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNodeTemplatesRequest, dict]):
                 The request object. A request message for
@@ -896,7 +1026,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -948,6 +1078,29 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyNodeTemplateRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyNodeTemplateRequest, dict]):
@@ -1028,7 +1181,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_policy_request_resource]
@@ -1083,6 +1236,29 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.NodeTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsNodeTemplateRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsNodeTemplateRequest, dict]):
                 The request object. A request message for
@@ -1123,7 +1299,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

@@ -390,6 +390,25 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of VPN gateways.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListVpnGatewaysRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListVpnGatewaysRequest, dict]):
                 The request object. A request message for
@@ -414,7 +433,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -463,6 +482,28 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified VPN gateway.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                    vpn_gateway="vpn_gateway_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -509,7 +550,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -557,6 +598,29 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         r"""Returns the specified VPN gateway. Gets a list of
         available VPN gateways by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                    vpn_gateway="vpn_gateway_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -596,7 +660,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -643,6 +707,28 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> compute.VpnGatewaysGetStatusResponse:
         r"""Returns the status for the specified VPN gateway.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_status():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetStatusVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                    vpn_gateway="vpn_gateway_value",
+                )
+
+                # Make the request
+                response = client.get_status(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetStatusVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -674,7 +760,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway])
         if request is not None and has_flattened_params:
@@ -722,6 +808,28 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         r"""Creates a VPN gateway in the specified project and
         region using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -768,7 +876,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, vpn_gateway_resource])
         if request is not None and has_flattened_params:
@@ -815,6 +923,27 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         r"""Retrieves a list of VPN gateways available to the
         specified project and region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListVpnGatewaysRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListVpnGatewaysRequest, dict]):
                 The request object. A request message for
@@ -846,7 +975,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -898,6 +1027,29 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Sets the labels on a VpnGateway. To learn more about
         labels, read the Labeling Resources documentation.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_labels():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetLabelsVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_labels(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsVpnGatewayRequest, dict]):
@@ -952,7 +1104,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_labels_request_resource]
@@ -1007,6 +1159,29 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.VpnGatewaysClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsVpnGatewayRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -1047,7 +1222,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

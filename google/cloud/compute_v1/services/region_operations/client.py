@@ -395,6 +395,29 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         r"""Deletes the specified region-specific Operations
         resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionOperationRequest, dict]):
                 The request object. A request message for
@@ -431,7 +454,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, operation])
         if request is not None and has_flattened_params:
@@ -478,6 +501,29 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
     ) -> compute.Operation:
         r"""Retrieves the specified region-specific Operations
         resource.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionOperationRequest, dict]):
@@ -527,7 +573,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, operation])
         if request is not None and has_flattened_params:
@@ -574,6 +620,27 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         r"""Retrieves a list of Operation resources contained
         within the specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionOperationsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionOperationsRequest, dict]):
                 The request object. A request message for
@@ -605,7 +672,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -668,6 +735,29 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         method returns. Be prepared to retry if the operation is not
         ``DONE``.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_wait():
+                # Create a client
+                client = compute_v1.RegionOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.WaitRegionOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.wait(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.WaitRegionOperationRequest, dict]):
                 The request object. A request message for
@@ -716,7 +806,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, operation])
         if request is not None and has_flattened_params:

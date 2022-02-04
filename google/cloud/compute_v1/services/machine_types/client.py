@@ -390,6 +390,25 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of machine types.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.MachineTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListMachineTypesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListMachineTypesRequest, dict]):
                 The request object. A request message for
@@ -414,7 +433,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -464,6 +483,29 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         r"""Returns the specified machine type. Gets a list of
         available machine types by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.MachineTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetMachineTypeRequest(
+                    machine_type="machine_type_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetMachineTypeRequest, dict]):
                 The request object. A request message for
@@ -502,7 +544,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, machine_type])
         if request is not None and has_flattened_params:
@@ -549,6 +591,27 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         r"""Retrieves a list of machine types available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.MachineTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListMachineTypesRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListMachineTypesRequest, dict]):
                 The request object. A request message for
@@ -581,7 +644,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:

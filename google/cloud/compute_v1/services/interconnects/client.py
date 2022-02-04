@@ -391,6 +391,27 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified interconnect.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteInterconnectRequest(
+                    interconnect="interconnect_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteInterconnectRequest, dict]):
                 The request object. A request message for
@@ -432,7 +453,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -477,6 +498,28 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         r"""Returns the specified interconnect. Get a list of
         available interconnects by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetInterconnectRequest(
+                    interconnect="interconnect_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetInterconnectRequest, dict]):
                 The request object. A request message for
@@ -509,7 +552,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -554,6 +597,28 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         r"""Returns the interconnectDiagnostics for the specified
         interconnect.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_diagnostics():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetDiagnosticsInterconnectRequest(
+                    interconnect="interconnect_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get_diagnostics(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetDiagnosticsInterconnectRequest, dict]):
                 The request object. A request message for
@@ -584,7 +649,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect])
         if request is not None and has_flattened_params:
@@ -629,6 +694,27 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         r"""Creates a Interconnect in the specified project using
         the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertInterconnectRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertInterconnectRequest, dict]):
                 The request object. A request message for
@@ -670,7 +756,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect_resource])
         if request is not None and has_flattened_params:
@@ -714,6 +800,26 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         r"""Retrieves the list of interconnect available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListInterconnectsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListInterconnectsRequest, dict]):
                 The request object. A request message for
@@ -740,7 +846,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -792,6 +898,28 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.InterconnectsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchInterconnectRequest(
+                    interconnect="interconnect_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchInterconnectRequest, dict]):
                 The request object. A request message for
@@ -838,7 +966,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, interconnect, interconnect_resource])
         if request is not None and has_flattened_params:

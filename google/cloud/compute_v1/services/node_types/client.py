@@ -390,6 +390,25 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node types.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.NodeTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListNodeTypesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListNodeTypesRequest, dict]):
                 The request object. A request message for
@@ -414,7 +433,7 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -464,6 +483,29 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
         r"""Returns the specified node type. Gets a list of
         available node types by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.NodeTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetNodeTypeRequest(
+                    node_type="node_type_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetNodeTypeRequest, dict]):
                 The request object. A request message for NodeTypes.Get.
@@ -506,7 +548,7 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_type])
         if request is not None and has_flattened_params:
@@ -553,6 +595,27 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
         r"""Retrieves a list of node types available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.NodeTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNodeTypesRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNodeTypesRequest, dict]):
                 The request object. A request message for
@@ -584,7 +647,7 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:

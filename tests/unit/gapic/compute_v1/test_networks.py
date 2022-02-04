@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+from collections.abc import Iterable
 import json
 import math
 import pytest
@@ -447,14 +448,15 @@ def test_networks_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(NetworksClient, transports.NetworksRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(NetworksClient, transports.NetworksRestTransport, "rest", None),],
 )
 def test_networks_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -648,6 +650,53 @@ def test_add_peering_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_peering_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_add_peering"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_add_peering"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.AddPeeringNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_peering_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddPeeringNetworkRequest
 ):
@@ -699,14 +748,6 @@ def test_add_peering_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network": "sample2"}
 
@@ -719,6 +760,15 @@ def test_add_peering_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.add_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -726,7 +776,7 @@ def test_add_peering_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/addPeering"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/addPeering"
             % client.transport._host,
             args[1],
         )
@@ -910,6 +960,53 @@ def test_delete_unary_rest_unset_required_fields():
     assert set(unset_fields) == (set(("requestId",)) & set(("network", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.DeleteNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteNetworkRequest
 ):
@@ -943,6 +1040,13 @@ def test_delete_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value", network="network_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -951,12 +1055,6 @@ def test_delete_unary_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value", network="network_value",)
-        mock_args.update(sample_request)
         client.delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -964,7 +1062,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}"
+            "%s/compute/v1/projects/{project}/global/networks/{network}"
             % client.transport._host,
             args[1],
         )
@@ -1121,6 +1219,51 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("network", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Network.to_json(compute.Network())
+
+        request = compute.GetNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Network
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetNetworkRequest
 ):
@@ -1154,6 +1297,13 @@ def test_get_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Network()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value", network="network_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -1162,12 +1312,6 @@ def test_get_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value", network="network_value",)
-        mock_args.update(sample_request)
         client.get(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1175,7 +1319,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}"
+            "%s/compute/v1/projects/{project}/global/networks/{network}"
             % client.transport._host,
             args[1],
         )
@@ -1317,6 +1461,55 @@ def test_get_effective_firewalls_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("network", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_effective_firewalls_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_get_effective_firewalls"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_get_effective_firewalls"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.NetworksGetEffectiveFirewallsResponse.to_json(
+            compute.NetworksGetEffectiveFirewallsResponse()
+        )
+
+        request = compute.GetEffectiveFirewallsNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.NetworksGetEffectiveFirewallsResponse
+
+        client.get_effective_firewalls(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_effective_firewalls_rest_bad_request(
     transport: str = "rest", request_type=compute.GetEffectiveFirewallsNetworkRequest
 ):
@@ -1350,6 +1543,13 @@ def test_get_effective_firewalls_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworksGetEffectiveFirewallsResponse()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value", network="network_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -1360,12 +1560,6 @@ def test_get_effective_firewalls_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value", network="network_value",)
-        mock_args.update(sample_request)
         client.get_effective_firewalls(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1373,7 +1567,7 @@ def test_get_effective_firewalls_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/getEffectiveFirewalls"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/getEffectiveFirewalls"
             % client.transport._host,
             args[1],
         )
@@ -1582,6 +1776,53 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.InsertNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertNetworkRequest
 ):
@@ -1644,14 +1885,6 @@ def test_insert_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1"}
 
@@ -1661,6 +1894,15 @@ def test_insert_unary_rest_flattened():
             network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1668,8 +1910,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks"
-            % client.transport._host,
+            "%s/compute/v1/projects/{project}/global/networks" % client.transport._host,
             args[1],
         )
 
@@ -1759,7 +2000,7 @@ def test_list_rest_required_fields(request_type=compute.ListNetworksRequest):
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -1809,9 +2050,54 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.NetworkList.to_json(compute.NetworkList())
+
+        request = compute.ListNetworksRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.NetworkList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -1847,6 +2133,13 @@ def test_list_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworkList()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -1855,12 +2148,6 @@ def test_list_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value",)
-        mock_args.update(sample_request)
         client.list(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1868,8 +2155,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks"
-            % client.transport._host,
+            "%s/compute/v1/projects/{project}/global/networks" % client.transport._host,
             args[1],
         )
 
@@ -2001,13 +2287,13 @@ def test_list_peering_routes_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "filter",
-            "order_by",
-            "region",
-            "peering_name",
-            "page_token",
             "direction",
+            "filter",
+            "max_results",
+            "order_by",
+            "page_token",
+            "peering_name",
+            "region",
             "return_partial_success",
         )
     )
@@ -2063,18 +2349,67 @@ def test_list_peering_routes_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "filter",
-                "orderBy",
-                "region",
-                "peeringName",
-                "pageToken",
                 "direction",
+                "filter",
+                "maxResults",
+                "orderBy",
+                "pageToken",
+                "peeringName",
+                "region",
                 "returnPartialSuccess",
             )
         )
         & set(("network", "project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_peering_routes_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_list_peering_routes"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_list_peering_routes"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.ExchangedPeeringRoutesList.to_json(
+            compute.ExchangedPeeringRoutesList()
+        )
+
+        request = compute.ListPeeringRoutesNetworksRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.ExchangedPeeringRoutesList
+
+        client.list_peering_routes(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_peering_routes_rest_bad_request(
@@ -2110,6 +2445,13 @@ def test_list_peering_routes_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.ExchangedPeeringRoutesList()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value", network="network_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -2118,12 +2460,6 @@ def test_list_peering_routes_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value", network="network_value",)
-        mock_args.update(sample_request)
         client.list_peering_routes(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2131,7 +2467,7 @@ def test_list_peering_routes_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/listPeeringRoutes"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/listPeeringRoutes"
             % client.transport._host,
             args[1],
         )
@@ -2394,6 +2730,51 @@ def test_patch_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_patch_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_patch"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_patch"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.PatchNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.patch_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchNetworkRequest
 ):
@@ -2456,14 +2837,6 @@ def test_patch_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network": "sample2"}
 
@@ -2474,6 +2847,15 @@ def test_patch_unary_rest_flattened():
             network_resource=compute.Network(I_pv4_range="I_pv4_range_value"),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.patch_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2481,7 +2863,7 @@ def test_patch_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}"
+            "%s/compute/v1/projects/{project}/global/networks/{network}"
             % client.transport._host,
             args[1],
         )
@@ -2670,6 +3052,53 @@ def test_remove_peering_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_remove_peering_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_remove_peering"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_remove_peering"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.RemovePeeringNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.remove_peering_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_remove_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.RemovePeeringNetworkRequest
 ):
@@ -2704,14 +3133,6 @@ def test_remove_peering_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network": "sample2"}
 
@@ -2724,6 +3145,15 @@ def test_remove_peering_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.remove_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2731,7 +3161,7 @@ def test_remove_peering_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/removePeering"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/removePeering"
             % client.transport._host,
             args[1],
         )
@@ -2919,6 +3349,53 @@ def test_switch_to_custom_mode_unary_rest_unset_required_fields():
     assert set(unset_fields) == (set(("requestId",)) & set(("network", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_switch_to_custom_mode_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_switch_to_custom_mode"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_switch_to_custom_mode"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.SwitchToCustomModeNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.switch_to_custom_mode_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_switch_to_custom_mode_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SwitchToCustomModeNetworkRequest
 ):
@@ -2952,6 +3429,13 @@ def test_switch_to_custom_mode_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value", network="network_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -2960,12 +3444,6 @@ def test_switch_to_custom_mode_unary_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value", network="network_value",)
-        mock_args.update(sample_request)
         client.switch_to_custom_mode_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2973,7 +3451,7 @@ def test_switch_to_custom_mode_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/switchToCustomMode"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/switchToCustomMode"
             % client.transport._host,
             args[1],
         )
@@ -3175,6 +3653,53 @@ def test_update_peering_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_peering_unary_rest_interceptors(null_interceptor):
+    transport = transports.NetworksRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None if null_interceptor else transports.NetworksRestInterceptor(),
+    )
+    client = NetworksClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.NetworksRestInterceptor, "post_update_peering"
+    ) as post, mock.patch.object(
+        transports.NetworksRestInterceptor, "pre_update_peering"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.UpdatePeeringNetworkRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_peering_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_update_peering_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdatePeeringNetworkRequest
 ):
@@ -3223,14 +3748,6 @@ def test_update_peering_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network": "sample2"}
 
@@ -3243,6 +3760,15 @@ def test_update_peering_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.update_peering_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -3250,7 +3776,7 @@ def test_update_peering_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networks/{network}/updatePeering"
+            "%s/compute/v1/projects/{project}/global/networks/{network}/updatePeering"
             % client.transport._host,
             args[1],
         )

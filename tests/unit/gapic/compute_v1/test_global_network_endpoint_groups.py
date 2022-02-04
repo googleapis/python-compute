@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+from collections.abc import Iterable
 import json
 import math
 import pytest
@@ -494,20 +495,22 @@ def test_global_network_endpoint_groups_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
+    "client_class,transport_class,transport_name,grpc_helpers",
     [
         (
             GlobalNetworkEndpointGroupsClient,
             transports.GlobalNetworkEndpointGroupsRestTransport,
             "rest",
+            None,
         ),
     ],
 )
 def test_global_network_endpoint_groups_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -703,6 +706,57 @@ def test_attach_network_endpoints_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_attach_network_endpoints_unary_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "post_attach_network_endpoints",
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "pre_attach_network_endpoints",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.attach_network_endpoints_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_attach_network_endpoints_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest,
@@ -748,14 +802,6 @@ def test_attach_network_endpoints_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
 
@@ -770,6 +816,15 @@ def test_attach_network_endpoints_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.attach_network_endpoints_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -777,7 +832,7 @@ def test_attach_network_endpoints_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/attachNetworkEndpoints"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/attachNetworkEndpoints"
             % client.transport._host,
             args[1],
         )
@@ -969,6 +1024,55 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.DeleteGlobalNetworkEndpointGroupRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.DeleteGlobalNetworkEndpointGroupRequest,
@@ -1003,14 +1107,6 @@ def test_delete_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
 
@@ -1020,6 +1116,15 @@ def test_delete_unary_rest_flattened():
             network_endpoint_group="network_endpoint_group_value",
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1027,7 +1132,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}"
             % client.transport._host,
             args[1],
         )
@@ -1234,6 +1339,57 @@ def test_detach_network_endpoints_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_detach_network_endpoints_unary_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "post_detach_network_endpoints",
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "pre_detach_network_endpoints",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.detach_network_endpoints_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_detach_network_endpoints_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest,
@@ -1279,14 +1435,6 @@ def test_detach_network_endpoints_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
 
@@ -1301,6 +1449,15 @@ def test_detach_network_endpoints_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.detach_network_endpoints_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1308,7 +1465,7 @@ def test_detach_network_endpoints_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/detachNetworkEndpoints"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/detachNetworkEndpoints"
             % client.transport._host,
             args[1],
         )
@@ -1478,6 +1635,55 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("networkEndpointGroup", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.NetworkEndpointGroup.to_json(
+            compute.NetworkEndpointGroup()
+        )
+
+        request = compute.GetGlobalNetworkEndpointGroupRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.NetworkEndpointGroup
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetGlobalNetworkEndpointGroupRequest
 ):
@@ -1511,14 +1717,6 @@ def test_get_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworkEndpointGroup()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.NetworkEndpointGroup.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
 
@@ -1528,6 +1726,15 @@ def test_get_rest_flattened():
             network_endpoint_group="network_endpoint_group_value",
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.NetworkEndpointGroup.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.get(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1535,7 +1742,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}"
             % client.transport._host,
             args[1],
         )
@@ -1746,6 +1953,55 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.InsertGlobalNetworkEndpointGroupRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest",
     request_type=compute.InsertGlobalNetworkEndpointGroupRequest,
@@ -1807,14 +2063,6 @@ def test_insert_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1"}
 
@@ -1826,6 +2074,15 @@ def test_insert_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1833,7 +2090,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups"
             % client.transport._host,
             args[1],
         )
@@ -1930,7 +2187,7 @@ def test_list_rest_required_fields(
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -1980,9 +2237,58 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.NetworkEndpointGroupList.to_json(
+            compute.NetworkEndpointGroupList()
+        )
+
+        request = compute.ListGlobalNetworkEndpointGroupsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.NetworkEndpointGroupList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -2018,6 +2324,13 @@ def test_list_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworkEndpointGroupList()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -2026,12 +2339,6 @@ def test_list_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value",)
-        mock_args.update(sample_request)
         client.list(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2039,7 +2346,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups"
             % client.transport._host,
             args[1],
         )
@@ -2178,7 +2485,7 @@ def test_list_network_endpoints_rest_required_fields(
     ).list_network_endpoints._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2232,9 +2539,62 @@ def test_list_network_endpoints_rest_unset_required_fields():
 
     unset_fields = transport.list_network_endpoints._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("networkEndpointGroup", "project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_network_endpoints_rest_interceptors(null_interceptor):
+    transport = transports.GlobalNetworkEndpointGroupsRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.GlobalNetworkEndpointGroupsRestInterceptor(),
+    )
+    client = GlobalNetworkEndpointGroupsClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "post_list_network_endpoints",
+    ) as post, mock.patch.object(
+        transports.GlobalNetworkEndpointGroupsRestInterceptor,
+        "pre_list_network_endpoints",
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.NetworkEndpointGroupsListNetworkEndpoints.to_json(
+            compute.NetworkEndpointGroupsListNetworkEndpoints()
+        )
+
+        request = compute.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.NetworkEndpointGroupsListNetworkEndpoints
+
+        client.list_network_endpoints(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_network_endpoints_rest_bad_request(
@@ -2271,6 +2631,16 @@ def test_list_network_endpoints_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.NetworkEndpointGroupsListNetworkEndpoints()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            project="project_value",
+            network_endpoint_group="network_endpoint_group_value",
+        )
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -2281,15 +2651,6 @@ def test_list_network_endpoints_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1", "network_endpoint_group": "sample2"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(
-            project="project_value",
-            network_endpoint_group="network_endpoint_group_value",
-        )
-        mock_args.update(sample_request)
         client.list_network_endpoints(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2297,7 +2658,7 @@ def test_list_network_endpoints_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/listNetworkEndpoints"
+            "%s/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/listNetworkEndpoints"
             % client.transport._host,
             args[1],
         )
