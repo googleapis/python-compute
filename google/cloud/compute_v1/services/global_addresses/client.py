@@ -393,6 +393,27 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.GlobalAddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteGlobalAddressRequest(
+                    address="address_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalAddressRequest, dict]):
                 The request object. A request message for
@@ -436,7 +457,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, address])
         if request is not None and has_flattened_params:
@@ -481,6 +502,28 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         r"""Returns the specified address resource. Gets a list
         of available addresses by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.GlobalAddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetGlobalAddressRequest(
+                    address="address_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalAddressRequest, dict]):
                 The request object. A request message for
@@ -516,7 +559,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, address])
         if request is not None and has_flattened_params:
@@ -561,6 +604,27 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         r"""Creates an address resource in the specified project
         by using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.GlobalAddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertGlobalAddressRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertGlobalAddressRequest, dict]):
                 The request object. A request message for
@@ -602,7 +666,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, address_resource])
         if request is not None and has_flattened_params:
@@ -645,6 +709,25 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves a list of global addresses.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.GlobalAddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListGlobalAddressesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalAddressesRequest, dict]):
                 The request object. A request message for
@@ -670,7 +753,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

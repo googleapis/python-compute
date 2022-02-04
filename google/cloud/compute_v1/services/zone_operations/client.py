@@ -395,6 +395,29 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         r"""Deletes the specified zone-specific Operations
         resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.ZoneOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteZoneOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteZoneOperationRequest, dict]):
                 The request object. A request message for
@@ -431,7 +454,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, operation])
         if request is not None and has_flattened_params:
@@ -478,6 +501,29 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
     ) -> compute.Operation:
         r"""Retrieves the specified zone-specific Operations
         resource.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.ZoneOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetZoneOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetZoneOperationRequest, dict]):
@@ -527,7 +573,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, operation])
         if request is not None and has_flattened_params:
@@ -574,6 +620,27 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         r"""Retrieves a list of Operation resources contained
         within the specified zone.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.ZoneOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListZoneOperationsRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListZoneOperationsRequest, dict]):
                 The request object. A request message for
@@ -605,7 +672,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -667,6 +734,29 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         actually done when the method returns. Be prepared to retry if
         the operation is not ``DONE``.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_wait():
+                # Create a client
+                client = compute_v1.ZoneOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.WaitZoneOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.wait(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.WaitZoneOperationRequest, dict]):
                 The request object. A request message for
@@ -715,7 +805,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, operation])
         if request is not None and has_flattened_params:

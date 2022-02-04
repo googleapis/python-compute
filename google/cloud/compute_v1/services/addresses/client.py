@@ -390,6 +390,25 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of addresses.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.AddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListAddressesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListAddressesRequest, dict]):
                 The request object. A request message for
@@ -414,7 +433,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -462,6 +481,28 @@ class AddressesClient(metaclass=AddressesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.AddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteAddressRequest(
+                    address="address_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteAddressRequest, dict]):
@@ -511,7 +552,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, address])
         if request is not None and has_flattened_params:
@@ -558,6 +599,28 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> compute.Address:
         r"""Returns the specified address resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.AddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetAddressRequest(
+                    address="address_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetAddressRequest, dict]):
                 The request object. A request message for Addresses.Get.
@@ -597,7 +660,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, address])
         if request is not None and has_flattened_params:
@@ -645,6 +708,28 @@ class AddressesClient(metaclass=AddressesClientMeta):
         r"""Creates an address resource in the specified project
         by using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.AddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertAddressRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertAddressRequest, dict]):
                 The request object. A request message for
@@ -691,7 +776,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, address_resource])
         if request is not None and has_flattened_params:
@@ -738,6 +823,27 @@ class AddressesClient(metaclass=AddressesClientMeta):
         r"""Retrieves a list of addresses contained within the
         specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.AddressesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListAddressesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListAddressesRequest, dict]):
                 The request object. A request message for
@@ -767,7 +873,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

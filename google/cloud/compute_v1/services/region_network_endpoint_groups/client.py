@@ -400,6 +400,29 @@ class RegionNetworkEndpointGroupsClient(
         that the NEG cannot be deleted if it is configured as a
         backend of a backend service.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionNetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -452,7 +475,7 @@ class RegionNetworkEndpointGroupsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, network_endpoint_group])
         if request is not None and has_flattened_params:
@@ -501,6 +524,29 @@ class RegionNetworkEndpointGroupsClient(
         list of available network endpoint groups by making a
         list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionNetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionNetworkEndpointGroupRequest(
+                    network_endpoint_group="network_endpoint_group_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -548,7 +594,7 @@ class RegionNetworkEndpointGroupsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, network_endpoint_group])
         if request is not None and has_flattened_params:
@@ -596,6 +642,28 @@ class RegionNetworkEndpointGroupsClient(
         r"""Creates a network endpoint group in the specified
         project using the parameters that are included in the
         request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionNetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionNetworkEndpointGroupRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionNetworkEndpointGroupRequest, dict]):
@@ -646,7 +714,7 @@ class RegionNetworkEndpointGroupsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, network_endpoint_group_resource])
         if request is not None and has_flattened_params:
@@ -696,6 +764,27 @@ class RegionNetworkEndpointGroupsClient(
         groups available to the specified project in the given
         region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionNetworkEndpointGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionNetworkEndpointGroupsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionNetworkEndpointGroupsRequest, dict]):
                 The request object. A request message for
@@ -728,7 +817,7 @@ class RegionNetworkEndpointGroupsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

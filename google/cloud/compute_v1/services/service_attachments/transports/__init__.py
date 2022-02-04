@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import ServiceAttachmentsTransport
 from .rest import ServiceAttachmentsRestTransport
+from .rest import ServiceAttachmentsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -29,4 +30,5 @@ _transport_registry["rest"] = ServiceAttachmentsRestTransport
 __all__ = (
     "ServiceAttachmentsTransport",
     "ServiceAttachmentsRestTransport",
+    "ServiceAttachmentsRestInterceptor",
 )

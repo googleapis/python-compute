@@ -396,6 +396,28 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionAutoscalerRequest(
+                    autoscaler="autoscaler_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -444,7 +466,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, autoscaler])
         if request is not None and has_flattened_params:
@@ -491,6 +513,28 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Autoscaler:
         r"""Returns the specified autoscaler.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionAutoscalerRequest(
+                    autoscaler="autoscaler_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -535,7 +579,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, autoscaler])
         if request is not None and has_flattened_params:
@@ -582,6 +626,28 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Creates an autoscaler in the specified project using
         the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionAutoscalerRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionAutoscalerRequest, dict]):
@@ -631,7 +697,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, autoscaler_resource])
         if request is not None and has_flattened_params:
@@ -678,6 +744,27 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         r"""Retrieves a list of autoscalers contained within the
         specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionAutoscalersRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionAutoscalersRequest, dict]):
                 The request object. A request message for
@@ -710,7 +797,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -764,6 +851,28 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         PATCH semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchRegionAutoscalerRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRegionAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -812,7 +921,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, autoscaler_resource])
         if request is not None and has_flattened_params:
@@ -859,6 +968,28 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Updates an autoscaler in the specified project using
         the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.RegionAutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateRegionAutoscalerRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateRegionAutoscalerRequest, dict]):
@@ -908,7 +1039,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, autoscaler_resource])
         if request is not None and has_flattened_params:

@@ -391,6 +391,27 @@ class RoutesClient(metaclass=RoutesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified Route resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RoutesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRouteRequest(
+                    project="project_value",
+                    route="route_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRouteRequest, dict]):
                 The request object. A request message for Routes.Delete.
@@ -431,7 +452,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, route])
         if request is not None and has_flattened_params:
@@ -476,6 +497,28 @@ class RoutesClient(metaclass=RoutesClientMeta):
         r"""Returns the specified Route resource. Gets a list of
         available routes by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RoutesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRouteRequest(
+                    project="project_value",
+                    route="route_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRouteRequest, dict]):
                 The request object. A request message for Routes.Get.
@@ -507,7 +550,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, route])
         if request is not None and has_flattened_params:
@@ -552,6 +595,27 @@ class RoutesClient(metaclass=RoutesClientMeta):
         r"""Creates a Route resource in the specified project
         using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RoutesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRouteRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRouteRequest, dict]):
                 The request object. A request message for Routes.Insert.
@@ -592,7 +656,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, route_resource])
         if request is not None and has_flattened_params:
@@ -636,6 +700,26 @@ class RoutesClient(metaclass=RoutesClientMeta):
         r"""Retrieves the list of Route resources available to
         the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RoutesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRoutesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRoutesRequest, dict]):
                 The request object. A request message for Routes.List.
@@ -660,7 +744,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

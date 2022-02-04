@@ -393,6 +393,28 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         Code. *Caution* This resource is intended for use only by
         third-party partners who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.LicenseCodesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetLicenseCodeRequest(
+                    license_code="license_code_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetLicenseCodeRequest, dict]):
                 The request object. A request message for
@@ -426,7 +448,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_code])
         if request is not None and has_flattened_params:
@@ -473,6 +495,28 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         *Caution* This resource is intended for use only by third-party
         partners who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.LicenseCodesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsLicenseCodeRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsLicenseCodeRequest, dict]):
                 The request object. A request message for
@@ -506,7 +550,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

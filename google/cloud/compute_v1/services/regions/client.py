@@ -392,6 +392,28 @@ class RegionsClient(metaclass=RegionsClientMeta):
         r"""Returns the specified Region resource. Gets a list of
         available regions by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionRequest, dict]):
                 The request object. A request message for Regions.Get.
@@ -423,7 +445,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -467,6 +489,26 @@ class RegionsClient(metaclass=RegionsClientMeta):
         r"""Retrieves the list of region resources available to
         the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionsRequest, dict]):
                 The request object. A request message for Regions.List.
@@ -491,7 +533,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

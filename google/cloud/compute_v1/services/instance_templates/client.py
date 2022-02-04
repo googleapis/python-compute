@@ -398,6 +398,28 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         is not possible to delete templates that are already in
         use by a managed instance group.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteInstanceTemplateRequest(
+                    instance_template="instance_template_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteInstanceTemplateRequest, dict]):
                 The request object. A request message for
@@ -441,7 +463,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template])
         if request is not None and has_flattened_params:
@@ -487,6 +509,28 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         of available instance templates by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetInstanceTemplateRequest(
+                    instance_template="instance_template_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetInstanceTemplateRequest, dict]):
                 The request object. A request message for
@@ -518,7 +562,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template])
         if request is not None and has_flattened_params:
@@ -562,6 +606,28 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyInstanceTemplateRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyInstanceTemplateRequest, dict]):
@@ -630,7 +696,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, resource])
         if request is not None and has_flattened_params:
@@ -679,6 +745,27 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         same network or, if applicable, the same subnetwork as
         the original template.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertInstanceTemplateRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertInstanceTemplateRequest, dict]):
                 The request object. A request message for
@@ -720,7 +807,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, instance_template_resource])
         if request is not None and has_flattened_params:
@@ -764,6 +851,26 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         r"""Retrieves a list of instance templates that are
         contained within the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListInstanceTemplatesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListInstanceTemplatesRequest, dict]):
                 The request object. A request message for
@@ -789,7 +896,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -838,6 +945,28 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyInstanceTemplateRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyInstanceTemplateRequest, dict]):
@@ -911,7 +1040,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_policy_request_resource]
@@ -963,6 +1092,28 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.InstanceTemplatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsInstanceTemplateRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsInstanceTemplateRequest, dict]):
                 The request object. A request message for
@@ -996,7 +1147,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

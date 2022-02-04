@@ -394,6 +394,25 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of accelerator types.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.AcceleratorTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListAcceleratorTypesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListAcceleratorTypesRequest, dict]):
                 The request object. A request message for
@@ -418,7 +437,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -467,6 +486,28 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> compute.AcceleratorType:
         r"""Returns the specified accelerator type.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.AcceleratorTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetAcceleratorTypeRequest(
+                    accelerator_type="accelerator_type_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetAcceleratorTypeRequest, dict]):
                 The request object. A request message for
@@ -510,7 +551,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, accelerator_type])
         if request is not None and has_flattened_params:
@@ -557,6 +598,27 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         r"""Retrieves a list of accelerator types that are
         available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.AcceleratorTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListAcceleratorTypesRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListAcceleratorTypesRequest, dict]):
                 The request object. A request message for
@@ -589,7 +651,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:

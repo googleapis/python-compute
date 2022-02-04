@@ -395,6 +395,26 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         r"""Retrieves an aggregated list of commitments by
         region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.RegionCommitmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListRegionCommitmentsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListRegionCommitmentsRequest, dict]):
                 The request object. A request message for
@@ -419,7 +439,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -470,6 +490,29 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         list of available commitments by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionCommitmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionCommitmentRequest(
+                    commitment="commitment_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionCommitmentRequest, dict]):
                 The request object. A request message for
@@ -510,7 +553,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, commitment])
         if request is not None and has_flattened_params:
@@ -558,6 +601,28 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         r"""Creates a commitment in the specified project using
         the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionCommitmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionCommitmentRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionCommitmentRequest, dict]):
                 The request object. A request message for
@@ -604,7 +669,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, commitment_resource])
         if request is not None and has_flattened_params:
@@ -651,6 +716,27 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         r"""Retrieves a list of commitments contained within the
         specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionCommitmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionCommitmentsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionCommitmentsRequest, dict]):
                 The request object. A request message for
@@ -682,7 +768,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

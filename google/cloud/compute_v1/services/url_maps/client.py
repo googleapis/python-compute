@@ -391,6 +391,26 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         r"""Retrieves the list of all UrlMap resources, regional
         and global, available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListUrlMapsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListUrlMapsRequest, dict]):
                 The request object. A request message for
@@ -417,7 +437,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -465,6 +485,27 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteUrlMapRequest, dict]):
                 The request object. A request message for
@@ -507,7 +548,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map])
         if request is not None and has_flattened_params:
@@ -551,6 +592,28 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
     ) -> compute.UrlMap:
         r"""Returns the specified UrlMap resource. Gets a list of
         available URL maps by making a list() request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetUrlMapRequest, dict]):
@@ -600,7 +663,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map])
         if request is not None and has_flattened_params:
@@ -645,6 +708,27 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         r"""Creates a UrlMap resource in the specified project
         using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertUrlMapRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertUrlMapRequest, dict]):
                 The request object. A request message for
@@ -685,7 +769,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map_resource])
         if request is not None and has_flattened_params:
@@ -732,6 +816,28 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         specified path, scoped to the specified UrlMap. For more
         information, see `Invalidating cached
         content </cdn/docs/invalidating-cached-content>`__.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_invalidate_cache():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InvalidateCacheUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.invalidate_cache(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InvalidateCacheUrlMapRequest, dict]):
@@ -781,7 +887,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map, cache_invalidation_rule_resource])
         if request is not None and has_flattened_params:
@@ -829,6 +935,26 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         r"""Retrieves the list of UrlMap resources available to
         the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListUrlMapsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListUrlMapsRequest, dict]):
                 The request object. A request message for UrlMaps.List.
@@ -853,7 +979,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -905,6 +1031,28 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchUrlMapRequest, dict]):
                 The request object. A request message for UrlMaps.Patch.
@@ -950,7 +1098,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -997,6 +1145,28 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Updates the specified UrlMap resource with the data
         included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateUrlMapRequest, dict]):
@@ -1045,7 +1215,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -1094,6 +1264,28 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         the tests of the provided UrlMap will be run. Calling
         this method does NOT create the UrlMap.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_validate():
+                # Create a client
+                client = compute_v1.UrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ValidateUrlMapRequest(
+                    project="project_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.validate(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ValidateUrlMapRequest, dict]):
                 The request object. A request message for
@@ -1127,7 +1319,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, url_map, url_maps_validate_request_resource]

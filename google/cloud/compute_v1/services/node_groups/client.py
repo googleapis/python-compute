@@ -393,6 +393,28 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Adds specified number of nodes to the node group.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_nodes():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddNodesNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.add_nodes(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddNodesNodeGroupRequest, dict]):
                 The request object. A request message for
@@ -446,7 +468,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_add_nodes_request_resource]
@@ -499,6 +521,26 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         use nodeGroups.listNodes for more details about each
         group.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListNodeGroupsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListNodeGroupsRequest, dict]):
                 The request object. A request message for
@@ -523,7 +565,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -571,6 +613,28 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NodeGroup resource.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteNodeGroupRequest, dict]):
@@ -622,7 +686,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -669,6 +733,28 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes specified nodes from the node group.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete_nodes():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteNodesNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete_nodes(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteNodesNodeGroupRequest, dict]):
@@ -725,7 +811,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_delete_nodes_request_resource]
@@ -781,6 +867,29 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         the "nodes" field should not be used. Use
         nodeGroups.listNodes instead.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetNodeGroupRequest, dict]):
                 The request object. A request message for
@@ -824,7 +933,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -871,6 +980,29 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyNodeGroupRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyNodeGroupRequest, dict]):
@@ -946,7 +1078,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, resource])
         if request is not None and has_flattened_params:
@@ -994,6 +1126,29 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Creates a NodeGroup resource in the specified project
         using the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertNodeGroupRequest(
+                    initial_node_count=1911,
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertNodeGroupRequest, dict]):
@@ -1050,7 +1205,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, initial_node_count, node_group_resource]
@@ -1102,6 +1257,27 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         specified project. Note: use nodeGroups.listNodes for
         more details about each group.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNodeGroupsRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNodeGroupsRequest, dict]):
                 The request object. A request message for
@@ -1133,7 +1309,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -1184,6 +1360,27 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> pagers.ListNodesPager:
         r"""Lists nodes in the node group.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_nodes():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListNodesNodeGroupsRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list_nodes(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListNodesNodeGroupsRequest, dict]):
                 The request object. A request message for
@@ -1222,7 +1419,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group])
         if request is not None and has_flattened_params:
@@ -1275,6 +1472,28 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified node group.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchNodeGroupRequest, dict]):
@@ -1331,7 +1550,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, node_group, node_group_resource])
         if request is not None and has_flattened_params:
@@ -1381,6 +1600,29 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyNodeGroupRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyNodeGroupRequest, dict]):
@@ -1461,7 +1703,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, zone_set_policy_request_resource]
@@ -1514,6 +1756,28 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the node template of the node group.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_node_template():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetNodeTemplateNodeGroupRequest(
+                    node_group="node_group_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_node_template(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetNodeTemplateNodeGroupRequest, dict]):
@@ -1570,7 +1834,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, node_group, node_groups_set_node_template_request_resource]
@@ -1625,6 +1889,29 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.NodeGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsNodeGroupRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsNodeGroupRequest, dict]):
                 The request object. A request message for
@@ -1665,7 +1952,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, test_permissions_request_resource]

@@ -393,6 +393,26 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         r"""Retrieves the list of all SslCertificate resources,
         regional and global, available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.SslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListSslCertificatesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListSslCertificatesRequest, dict]):
                 The request object. A request message for
@@ -419,7 +439,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -467,6 +487,27 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.SslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteSslCertificateRequest(
+                    project="project_value",
+                    ssl_certificate="ssl_certificate_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSslCertificateRequest, dict]):
                 The request object. A request message for
@@ -510,7 +551,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, ssl_certificate])
         if request is not None and has_flattened_params:
@@ -556,6 +597,28 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         list of available SSL certificates by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.SslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetSslCertificateRequest(
+                    project="project_value",
+                    ssl_certificate="ssl_certificate_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetSslCertificateRequest, dict]):
                 The request object. A request message for
@@ -600,7 +663,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, ssl_certificate])
         if request is not None and has_flattened_params:
@@ -645,6 +708,27 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         r"""Creates a SslCertificate resource in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.SslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertSslCertificateRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertSslCertificateRequest, dict]):
                 The request object. A request message for
@@ -686,7 +770,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, ssl_certificate_resource])
         if request is not None and has_flattened_params:
@@ -730,6 +814,26 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         r"""Retrieves the list of SslCertificate resources
         available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.SslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListSslCertificatesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListSslCertificatesRequest, dict]):
                 The request object. A request message for
@@ -756,7 +860,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

@@ -395,6 +395,29 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         You can only add one policy which will be applied to
         this disk for scheduling snapshot creation.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_resource_policies():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddResourcePoliciesRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.add_resource_policies(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddResourcePoliciesRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -448,7 +471,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, disk, region_disks_add_resource_policies_request_resource]
@@ -501,6 +524,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a snapshot of this regional disk.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_create_snapshot():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.CreateSnapshotRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.create_snapshot(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.CreateSnapshotRegionDiskRequest, dict]):
@@ -555,7 +600,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, disk, snapshot_resource])
         if request is not None and has_flattened_params:
@@ -608,6 +653,29 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         a disk does not delete any snapshots previously made
         from the disk. You must separately delete snapshots.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -656,7 +724,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, disk])
         if request is not None and has_flattened_params:
@@ -703,6 +771,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Disk:
         r"""Returns a specified regional persistent disk.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -747,7 +837,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, disk])
         if request is not None and has_flattened_params:
@@ -794,6 +884,29 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyRegionDiskRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyRegionDiskRequest, dict]):
@@ -869,7 +982,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource])
         if request is not None and has_flattened_params:
@@ -917,6 +1030,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         r"""Creates a persistent regional disk in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionDiskRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -963,7 +1098,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, disk_resource])
         if request is not None and has_flattened_params:
@@ -1010,6 +1145,27 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         r"""Retrieves the list of persistent disks contained
         within the specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionDisksRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionDisksRequest, dict]):
                 The request object. A request message for
@@ -1040,7 +1196,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -1091,6 +1247,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes resource policies from a regional disk.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_resource_policies():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveResourcePoliciesRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.remove_resource_policies(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveResourcePoliciesRegionDiskRequest, dict]):
@@ -1145,7 +1323,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1204,6 +1382,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Operation:
         r"""Resizes the specified regional persistent disk.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_resize():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ResizeRegionDiskRequest(
+                    disk="disk_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.resize(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ResizeRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -1255,7 +1455,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, disk, region_disks_resize_request_resource]
@@ -1309,6 +1509,29 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyRegionDiskRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyRegionDiskRequest, dict]):
@@ -1389,7 +1612,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_policy_request_resource]
@@ -1442,6 +1665,28 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on the target regional disk.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_labels():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetLabelsRegionDiskRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_labels(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsRegionDiskRequest, dict]):
@@ -1496,7 +1741,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_labels_request_resource]
@@ -1551,6 +1796,29 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.RegionDisksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsRegionDiskRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsRegionDiskRequest, dict]):
                 The request object. A request message for
@@ -1591,7 +1859,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

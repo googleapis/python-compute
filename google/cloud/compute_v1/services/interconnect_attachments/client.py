@@ -397,6 +397,26 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         r"""Retrieves an aggregated list of interconnect
         attachments.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListInterconnectAttachmentsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListInterconnectAttachmentsRequest, dict]):
                 The request object. A request message for
@@ -421,7 +441,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -472,6 +492,28 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
     ) -> compute.Operation:
         r"""Deletes the specified interconnect attachment.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteInterconnectAttachmentRequest(
+                    interconnect_attachment="interconnect_attachment_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteInterconnectAttachmentRequest, dict]):
                 The request object. A request message for
@@ -520,7 +562,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, interconnect_attachment])
         if request is not None and has_flattened_params:
@@ -567,6 +609,28 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
     ) -> compute.InterconnectAttachment:
         r"""Returns the specified interconnect attachment.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetInterconnectAttachmentRequest(
+                    interconnect_attachment="interconnect_attachment_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetInterconnectAttachmentRequest, dict]):
                 The request object. A request message for
@@ -608,7 +672,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, interconnect_attachment])
         if request is not None and has_flattened_params:
@@ -656,6 +720,28 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         r"""Creates an InterconnectAttachment in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertInterconnectAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertInterconnectAttachmentRequest, dict]):
                 The request object. A request message for
@@ -702,7 +788,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, interconnect_attachment_resource])
         if request is not None and has_flattened_params:
@@ -751,6 +837,27 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         r"""Retrieves the list of interconnect attachments
         contained within the specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListInterconnectAttachmentsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListInterconnectAttachmentsRequest, dict]):
                 The request object. A request message for
@@ -782,7 +889,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -836,6 +943,29 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         the data included in the request. This method supports
         PATCH semantics and uses the JSON merge patch format and
         processing rules.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.InterconnectAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchInterconnectAttachmentRequest(
+                    interconnect_attachment="interconnect_attachment_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchInterconnectAttachmentRequest, dict]):
@@ -892,7 +1022,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, interconnect_attachment, interconnect_attachment_resource]

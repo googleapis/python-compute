@@ -395,6 +395,27 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified GlobalForwardingRule resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteGlobalForwardingRuleRequest(
+                    forwarding_rule="forwarding_rule_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -438,7 +459,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, forwarding_rule])
         if request is not None and has_flattened_params:
@@ -484,6 +505,28 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         Gets a list of available forwarding rules by making a
         list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetGlobalForwardingRuleRequest(
+                    forwarding_rule="forwarding_rule_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -524,7 +567,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, forwarding_rule])
         if request is not None and has_flattened_params:
@@ -570,6 +613,27 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         specified project using the data included in the
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertGlobalForwardingRuleRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -611,7 +675,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, forwarding_rule_resource])
         if request is not None and has_flattened_params:
@@ -655,6 +719,26 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         r"""Retrieves a list of GlobalForwardingRule resources
         available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListGlobalForwardingRulesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalForwardingRulesRequest, dict]):
                 The request object. A request message for
@@ -681,7 +765,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -733,6 +817,28 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         JSON merge patch format and processing rules. Currently, you can
         only patch the network_tier field.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchGlobalForwardingRuleRequest(
+                    forwarding_rule="forwarding_rule_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -781,7 +887,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, forwarding_rule, forwarding_rule_resource])
         if request is not None and has_flattened_params:
@@ -829,6 +935,28 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         r"""Sets the labels on the specified resource. To learn
         more about labels, read the Labeling resources
         documentation.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_labels():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetLabelsGlobalForwardingRuleRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_labels(request=request)
+
+                # Handle response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsGlobalForwardingRuleRequest, dict]):
@@ -878,7 +1006,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_labels_request_resource]
@@ -931,6 +1059,28 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         resource. The new target should be of the same type as
         the old target.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_target():
+                # Create a client
+                client = compute_v1.GlobalForwardingRulesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetTargetGlobalForwardingRuleRequest(
+                    forwarding_rule="forwarding_rule_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.set_target(request=request)
+
+                # Handle response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetTargetGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -979,7 +1129,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, forwarding_rule, target_reference_resource]
