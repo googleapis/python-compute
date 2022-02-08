@@ -35,7 +35,7 @@ def create_preemptible_instance(
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        zone: name of the zone you want to use. For example: "us-west3-b"
         instance_name: name of the new virtual machine.
     Returns:
         Instance object.
