@@ -37,9 +37,7 @@ from google.cloud import compute_v1
 
 # [START compute_preemptible_create]
 def create_preemptible_instance(
-    project_id: str,
-    zone: str,
-    instance_name: str,
+    project_id: str, zone: str, instance_name: str,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
