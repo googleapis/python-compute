@@ -129,8 +129,8 @@ def load_ingredient(path: Path) -> Ingredient:
             break
         elif in_ingredient:
             ingredient_lines.append(line)
-        elif match := INGREDIENTS_START.match(line):
-            ingredient_name = match.group(1)
+        elif INGREDIENTS_START.match(line):
+            ingredient_name = INGREDIENTS_START.match(line).group(1)
             in_ingredient = True
     else:
         warnings.warn(f"The ingredient in {path} has no closing tag.", SyntaxWarning)
