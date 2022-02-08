@@ -11,10 +11,19 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+# [START compute_preemptible_history]
+import datetime
+
+# [END compute_preemptible_history]
 # [START compute_preemptible_create]
 import sys
 
 # [END compute_preemptible_create]
+
+# [START compute_preemptible_history]
+from typing import List, Tuple
+
+# [END compute_preemptible_history]
 
 # [START compute_preemptible_create]
 # [START compute_preemptible_check]
@@ -28,7 +37,9 @@ from google.cloud import compute_v1
 
 # [START compute_preemptible_create]
 def create_preemptible_instance(
-    project_id: str, zone: str, instance_name: str,
+    project_id: str,
+    zone: str,
+    instance_name: str,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
@@ -117,7 +128,23 @@ def is_preemptible(project_id: str, zone: str, instance_name: str) -> bool:
 
 
 # [START compute_preemptible_history]
-def preemption_history(project_id: str, zone: str, instance_name: str = None):
+def preemption_history(
+    project_id: str, zone: str, instance_name: str = None
+) -> List[Tuple[str, datetime.datetime]]:
+    """
+    Returns a list of preemption operations for given project in given zone.
+    The preemption operation is triggered by the system and means that a
+    VM instance will be turned off.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you want to use.
+        zone: name of the zone you want to use. For example: "us-west3-b"
+        instance_name: (optional) name of the virtual machine you want to limit
+            the results to.
+
+    Returns:
+        List of tuples containing a pair: (instance_name: str, insert_time: datetime.datetime)
+    """
     op_client = compute_v1.ZoneOperationsClient()
     req = compute_v1.ListZoneOperationsRequest()
     req.project = project_id
@@ -135,12 +162,11 @@ def preemption_history(project_id: str, zone: str, instance_name: str = None):
 
     for operation in op_client.list(req):
         this_instance_name = operation.target_link.rsplit("/", maxsplit=1)[1]
-        if instance_name and this_instance_name != instance_name:
+        if instance_name and this_instance_name == instance_name:
             # The filter used is not 100% accurate, it's `contains` not `equals`
-            # So we need to filter to make sure
-            continue
-        moment = operation.insert_time
-        history.append((instance_name, moment))
+            # So we need to check the name to make sure it's the one we want.
+            moment = datetime.datetime.fromisoformat(operation.insert_time)
+            history.append((instance_name, moment))
 
     return history
 
