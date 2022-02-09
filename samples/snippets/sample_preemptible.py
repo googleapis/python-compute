@@ -36,6 +36,7 @@ from google.cloud import compute_v1
 
 # [START compute_preemptible_history]
 from google.cloud.compute_v1.services.zone_operations import pagers
+
 # [END compute_preemptible_history]
 
 
@@ -130,7 +131,9 @@ def is_preemptible(project_id: str, zone: str, instance_name: str) -> bool:
 
 
 # [START compute_preemptible_history]
-def list_zone_operations(project_id: str, zone: str, filter: str = "") -> pagers.ListPager:
+def list_zone_operations(
+    project_id: str, zone: str, filter: str = ""
+) -> pagers.ListPager:
     """
     List all recent operations the happened in given zone in a project. Optionally filter those
     operations by providing a filter. More about using the filter can be found here:
@@ -152,7 +155,9 @@ def list_zone_operations(project_id: str, zone: str, filter: str = "") -> pagers
     return operation_client.list(request)
 
 
-def preemption_history(project_id: str, zone: str, instance_name: str = None) -> List[Tuple[str, datetime.datetime]]:
+def preemption_history(
+    project_id: str, zone: str, instance_name: str = None
+) -> List[Tuple[str, datetime.datetime]]:
     """
     Get a list of preemption operations from given zone in a project. Optionally limit
     the results to instance name.
