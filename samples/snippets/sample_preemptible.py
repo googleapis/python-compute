@@ -12,6 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 # [START compute_preemptible_create]
+import datetime
 import sys
 
 # [END compute_preemptible_create]
@@ -19,11 +20,17 @@ import sys
 # [START compute_preemptible_create]
 # [START compute_preemptible_check]
 # [START compute_preemptible_history]
+from typing import List, Tuple
+
 from google.cloud import compute_v1
 
 # [END compute_preemptible_history]
 # [END compute_preemptible_check]
 # [END compute_preemptible_create]
+
+# [START compute_preemptible_history]
+from google.cloud.compute_v1.services.zone_operations import pagers
+# [END compute_preemptible_history]
 
 
 # [START compute_preemptible_create]
@@ -119,23 +126,51 @@ def is_preemptible(project_id: str, zone: str, instance_name: str) -> bool:
 
 
 # [START compute_preemptible_history]
-def preemption_history(project_id: str, zone: str, instance_name: str = None):
-    op_client = compute_v1.ZoneOperationsClient()
-    req = compute_v1.ListZoneOperationsRequest()
-    req.project = project_id
-    req.zone = zone
+def list_zone_operations(project_id: str, zone: str, filter: str = "") -> pagers.ListPager:
+    """
+    List all recent operations the happened in given zone in a project. Optionally filter those
+    operations by providing a filter. More about using the filter can be found here:
+    https://cloud.google.com/compute/docs/reference/rest/v1/zoneOperations/list
 
+    Args:
+        project_id: project ID or project number of the Cloud project you want to use.
+        zone: name of the zone you want to use. For example: “us-west3-b”
+        instance_name: name of the virtual machine to look for.
+    Returns:
+        List of preemption operations in given zone.
+    """
+    operation_client = compute_v1.ZoneOperationsClient()
+    request = compute_v1.ListZoneOperationsRequest()
+    request.project = project_id
+    request.zone = zone
+    request.filter = filter
+
+    return operation_client.list(request)
+
+
+def preemption_history(project_id: str, zone: str, instance_name: str = None) -> List[Tuple[str, datetime.datetime]]:
+    """
+    Get a list of preemption operations from given zone in a project. Optionally limit
+    the results to instance name.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you want to use.
+        zone: name of the zone you want to use. For example: “us-west3-b”
+        instance_name: name of the virtual machine to look for.
+    Returns:
+        List of preemption operations in given zone.
+    """
     if instance_name:
-        req.filter = (
+        filter = (
             f'operationType="compute.instances.preempted" '
             f"AND targetLink:instances/{instance_name}"
         )
     else:
-        req.filter = 'operationType="compute.instances.preempted"'
+        filter = 'operationType="compute.instances.preempted"'
 
     history = []
 
-    for operation in op_client.list(req):
+    for operation in list_zone_operations(project_id, zone, filter):
         this_instance_name = operation.target_link.rsplit("/", maxsplit=1)[1]
         if instance_name and this_instance_name != instance_name:
             # The filter used is not 100% accurate, it's `contains` not `equals`

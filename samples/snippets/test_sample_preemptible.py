@@ -19,6 +19,7 @@ import pytest
 from quickstart import delete_instance
 from sample_preemptible import create_preemptible_instance
 from sample_preemptible import is_preemptible
+from sample_preemptible import list_zone_operations
 
 PROJECT = google.auth.default()[1]
 INSTANCE_ZONE = "europe-central2-c"
@@ -40,3 +41,20 @@ def test_preemptible_creation(autodelete_instance_name):
 
     assert instance.name == autodelete_instance_name
     assert is_preemptible(PROJECT, INSTANCE_ZONE, instance.name)
+
+    operations = list_zone_operations(
+        PROJECT,
+        INSTANCE_ZONE,
+        f'targetLink="https://www.googleapis.com/compute/v1/projects/'
+        f'{PROJECT}/zones/{INSTANCE_ZONE}/instances/{instance.name}"',
+    )
+
+    # Since ListPagers don't support len(), we need to check it manually
+    try:
+        print(operations)
+        operation = next(iter(operations))
+    except StopIteration:
+        pytest.fail(
+            "There should be at least one operation for this instance at this point."
+        )
+    assert operation
