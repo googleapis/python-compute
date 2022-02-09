@@ -51,10 +51,8 @@ def test_preemptible_creation(autodelete_instance_name):
 
     # Since ListPagers don't support len(), we need to check it manually
     try:
-        print(operations)
-        operation = next(iter(operations))
+        next(iter(operations))
     except StopIteration:
         pytest.fail(
             "There should be at least one operation for this instance at this point."
         )
-    assert operation

@@ -11,17 +11,23 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# [START compute_preemptible_create]
+# [START compute_preemptible_history]
 import datetime
+
+# [END compute_preemptible_history]
+# [START compute_preemptible_create]
 import sys
 
 # [END compute_preemptible_create]
 
-# [START compute_preemptible_create]
-# [START compute_preemptible_check]
 # [START compute_preemptible_history]
 from typing import List, Tuple
 
+# [END compute_preemptible_history]
+
+# [START compute_preemptible_create]
+# [START compute_preemptible_check]
+# [START compute_preemptible_history]
 from google.cloud import compute_v1
 
 # [END compute_preemptible_history]
@@ -35,16 +41,14 @@ from google.cloud.compute_v1.services.zone_operations import pagers
 
 # [START compute_preemptible_create]
 def create_preemptible_instance(
-    project_id: str,
-    zone: str,
-    instance_name: str,
+    project_id: str, zone: str, instance_name: str,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        zone: name of the zone you want to use. For example: "us-west3-b"
         instance_name: name of the new virtual machine.
     Returns:
         Instance object.
@@ -110,7 +114,7 @@ def is_preemptible(project_id: str, zone: str, instance_name: str) -> bool:
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        zone: name of the zone you want to use. For example: "us-west3-b"
         instance_name: name of the virtual machine to check.
     Returns:
         The preemptible status of the instance.
@@ -134,7 +138,7 @@ def list_zone_operations(project_id: str, zone: str, filter: str = "") -> pagers
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        zone: name of the zone you want to use. For example: "us-west3-b"
         instance_name: name of the virtual machine to look for.
     Returns:
         List of preemption operations in given zone.
@@ -155,7 +159,7 @@ def preemption_history(project_id: str, zone: str, instance_name: str = None) ->
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone you want to use. For example: “us-west3-b”
+        zone: name of the zone you want to use. For example: "us-west3-b"
         instance_name: name of the virtual machine to look for.
     Returns:
         List of preemption operations in given zone.
@@ -172,12 +176,11 @@ def preemption_history(project_id: str, zone: str, instance_name: str = None) ->
 
     for operation in list_zone_operations(project_id, zone, filter):
         this_instance_name = operation.target_link.rsplit("/", maxsplit=1)[1]
-        if instance_name and this_instance_name != instance_name:
+        if instance_name and this_instance_name == instance_name:
             # The filter used is not 100% accurate, it's `contains` not `equals`
-            # So we need to filter to make sure
-            continue
-        moment = operation.insert_time
-        history.append((instance_name, moment))
+            # So we need to check the name to make sure it's the one we want.
+            moment = datetime.datetime.fromisoformat(operation.insert_time)
+            history.append((instance_name, moment))
 
     return history
 
