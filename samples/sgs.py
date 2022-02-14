@@ -178,7 +178,8 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
 
     # Scan the file to used ingredients
     for line in file_lines:
-        if match := INGREDIENT_FILL.match(line):
+        match = INGREDIENT_FILL.match(line)
+        if match:
             ingredients_used.append(ingredients[match.group(1)])
 
     simple_imports_used = set()
@@ -216,9 +217,11 @@ def render_recipe(recipe: str, ingredients: dict) -> str:
     output_file = []
     header_added = False
     for line in file_lines:
+
         if IMPORTS_FILL.search(line):
             output_file.append(import_lines)
-        elif match := INGREDIENT_FILL.search(line):
+        elif INGREDIENT_FILL.search(line):
+            match = INGREDIENT_FILL.search(line)
             output_file.append(ingredients[match.group(1)].text)
         elif REGION_START.search(line):
             # The string has to be broken up, so that the snippet
