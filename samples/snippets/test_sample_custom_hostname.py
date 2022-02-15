@@ -36,11 +36,16 @@ def autodelete_instance_name():
 
 @pytest.fixture
 def random_hostname():
-    yield "instance.{}.hostname".format(random.randint(0, 2**10))
+    yield "instance.{}.hostname".format(random.randint(0, 2 ** 10))
 
 
 def test_delete_protection(autodelete_instance_name, random_hostname):
-    instance = create_instance(PROJECT, INSTANCE_ZONE, autodelete_instance_name, random_hostname)
+    instance = create_instance(
+        PROJECT, INSTANCE_ZONE, autodelete_instance_name, random_hostname
+    )
     assert instance.name == autodelete_instance_name
     assert instance.hostname == random_hostname
-    assert get_instance_hostname(PROJECT, INSTANCE_ZONE, autodelete_instance_name) == random_hostname
+    assert (
+        get_instance_hostname(PROJECT, INSTANCE_ZONE, autodelete_instance_name)
+        == random_hostname
+    )
