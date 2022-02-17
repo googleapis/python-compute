@@ -150,6 +150,9 @@ class ReservationsTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.update: gapic_v1.method.wrap_method(
+                self.update, default_timeout=None, client_info=client_info,
+            ),
         }
 
     def close(self):
@@ -244,6 +247,15 @@ class ReservationsTransport(abc.ABC):
         Union[
             compute.TestPermissionsResponse, Awaitable[compute.TestPermissionsResponse]
         ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def update(
+        self,
+    ) -> Callable[
+        [compute.UpdateReservationRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()
 

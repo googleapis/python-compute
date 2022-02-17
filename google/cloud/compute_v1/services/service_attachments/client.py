@@ -396,6 +396,28 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         resources, regional and global, available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListServiceAttachmentsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListServiceAttachmentsRequest, dict]):
                 The request object. A request message for
@@ -424,7 +446,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -474,6 +496,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Deletes the specified ServiceAttachment in the given
         scope
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    service_attachment="service_attachment_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -522,7 +567,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, service_attachment])
         if request is not None and has_flattened_params:
@@ -570,6 +615,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Returns the specified ServiceAttachment resource in
         the given scope.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    service_attachment="service_attachment_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -612,7 +680,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, service_attachment])
         if request is not None and has_flattened_params:
@@ -660,6 +728,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -695,17 +786,18 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -734,7 +826,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource])
         if request is not None and has_flattened_params:
@@ -783,6 +875,28 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         in the given scope using the parameters that are
         included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -829,7 +943,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, service_attachment_resource])
         if request is not None and has_flattened_params:
@@ -876,6 +990,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Lists the ServiceAttachments for a project in the
         given scope.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListServiceAttachmentsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListServiceAttachmentsRequest, dict]):
                 The request object. A request message for
@@ -905,7 +1042,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -959,6 +1096,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         the data included in the request. This method supports
         PATCH semantics and uses JSON merge patch format and
         processing rules.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    service_attachment="service_attachment_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchServiceAttachmentRequest, dict]):
@@ -1017,7 +1177,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, service_attachment, service_attachment_resource]
@@ -1070,6 +1230,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -1110,17 +1293,18 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1149,7 +1333,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_policy_request_resource]
@@ -1204,6 +1388,29 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.ServiceAttachmentsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsServiceAttachmentRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsServiceAttachmentRequest, dict]):
                 The request object. A request message for
@@ -1244,7 +1451,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

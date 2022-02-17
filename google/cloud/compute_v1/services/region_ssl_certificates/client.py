@@ -397,6 +397,29 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         r"""Deletes the specified SslCertificate resource in the
         region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionSslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionSslCertificateRequest(
+                    project="project_value",
+                    region="region_value",
+                    ssl_certificate="ssl_certificate_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionSslCertificateRequest, dict]):
                 The request object. A request message for
@@ -447,7 +470,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, ssl_certificate])
         if request is not None and has_flattened_params:
@@ -495,6 +518,29 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         r"""Returns the specified SslCertificate resource in the
         specified region. Get a list of available SSL
         certificates by making a list() request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionSslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionSslCertificateRequest(
+                    project="project_value",
+                    region="region_value",
+                    ssl_certificate="ssl_certificate_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionSslCertificateRequest, dict]):
@@ -547,7 +593,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, ssl_certificate])
         if request is not None and has_flattened_params:
@@ -595,6 +641,28 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         r"""Creates a SslCertificate resource in the specified
         project and region using the data included in the
         request
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionSslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionSslCertificateRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionSslCertificateRequest, dict]):
@@ -644,7 +712,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, ssl_certificate_resource])
         if request is not None and has_flattened_params:
@@ -692,6 +760,29 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         available to the specified project in the specified
         region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionSslCertificatesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionSslCertificatesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionSslCertificatesRequest, dict]):
                 The request object. A request message for
@@ -725,7 +816,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

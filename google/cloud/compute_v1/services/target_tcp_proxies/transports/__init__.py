@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import TargetTcpProxiesTransport
 from .rest import TargetTcpProxiesRestTransport
+from .rest import TargetTcpProxiesRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = TargetTcpProxiesRestTransport
 __all__ = (
     "TargetTcpProxiesTransport",
     "TargetTcpProxiesRestTransport",
+    "TargetTcpProxiesRestInterceptor",
 )

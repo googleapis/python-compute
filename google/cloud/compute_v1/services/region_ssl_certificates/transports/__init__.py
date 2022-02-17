@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import RegionSslCertificatesTransport
 from .rest import RegionSslCertificatesRestTransport
+from .rest import RegionSslCertificatesRestInterceptor
 
 
 # Compile a registry of transports.
@@ -29,4 +30,5 @@ _transport_registry["rest"] = RegionSslCertificatesRestTransport
 __all__ = (
     "RegionSslCertificatesTransport",
     "RegionSslCertificatesRestTransport",
+    "RegionSslCertificatesRestInterceptor",
 )

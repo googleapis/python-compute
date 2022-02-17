@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import ImageFamilyViewsTransport
 from .rest import ImageFamilyViewsRestTransport
+from .rest import ImageFamilyViewsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = ImageFamilyViewsRestTransport
 __all__ = (
     "ImageFamilyViewsTransport",
     "ImageFamilyViewsRestTransport",
+    "ImageFamilyViewsRestInterceptor",
 )

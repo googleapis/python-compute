@@ -396,6 +396,28 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
     ) -> compute.InstanceGroup:
         r"""Returns the specified instance group resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionInstanceGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionInstanceGroupRequest(
+                    instance_group="instance_group_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionInstanceGroupRequest, dict]):
                 The request object. A request message for
@@ -445,7 +467,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, instance_group])
         if request is not None and has_flattened_params:
@@ -492,6 +514,29 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         r"""Retrieves the list of instance group resources
         contained within the specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionInstanceGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionInstanceGroupsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionInstanceGroupsRequest, dict]):
                 The request object. A request message for
@@ -525,7 +570,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -581,6 +626,30 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         all instances or only the instances that are running.
         The orderBy query parameter is not supported.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_instances():
+                # Create a client
+                client = compute_v1.RegionInstanceGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListInstancesRegionInstanceGroupsRequest(
+                    instance_group="instance_group_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list_instances(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListInstancesRegionInstanceGroupsRequest, dict]):
                 The request object. A request message for
@@ -624,7 +693,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -690,6 +759,29 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         r"""Sets the named ports for the specified regional
         instance group.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_named_ports():
+                # Create a client
+                client = compute_v1.RegionInstanceGroupsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetNamedPortsRegionInstanceGroupRequest(
+                    instance_group="instance_group_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.set_named_ports(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetNamedPortsRegionInstanceGroupRequest, dict]):
                 The request object. A request message for
@@ -745,7 +837,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [

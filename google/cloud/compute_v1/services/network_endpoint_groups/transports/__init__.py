@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import NetworkEndpointGroupsTransport
 from .rest import NetworkEndpointGroupsRestTransport
+from .rest import NetworkEndpointGroupsRestInterceptor
 
 
 # Compile a registry of transports.
@@ -29,4 +30,5 @@ _transport_registry["rest"] = NetworkEndpointGroupsRestTransport
 __all__ = (
     "NetworkEndpointGroupsTransport",
     "NetworkEndpointGroupsRestTransport",
+    "NetworkEndpointGroupsRestInterceptor",
 )

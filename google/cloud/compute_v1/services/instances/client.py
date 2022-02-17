@@ -395,6 +395,30 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Adds an access config to an instance's network
         interface.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_access_config():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddAccessConfigInstanceRequest(
+                    instance="instance_value",
+                    network_interface="network_interface_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.add_access_config(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddAccessConfigInstanceRequest, dict]):
                 The request object. A request message for
@@ -455,7 +479,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, network_interface, access_config_resource]
@@ -511,6 +535,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         can only add one policy right now which will be applied
         to this instance for scheduling live migrations.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_resource_policies():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddResourcePoliciesInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.add_resource_policies(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddResourcePoliciesInstanceRequest, dict]):
                 The request object. A request message for
@@ -564,7 +611,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_add_resource_policies_request_resource]
@@ -619,6 +666,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         specified on a project that has a very large number of
         instances.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListInstancesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListInstancesRequest, dict]):
                 The request object. A request message for
@@ -643,7 +712,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -696,6 +765,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         It is not possible to create and attach a disk at the
         same time. For more information, read Adding a
         persistent disk to your instance.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_attach_disk():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AttachDiskInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.attach_disk(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.AttachDiskInstanceRequest, dict]):
@@ -750,7 +842,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, attached_disk_resource])
         if request is not None and has_flattened_params:
@@ -800,6 +892,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Creates multiple instances. Count specifies the
         number of instances to create.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_bulk_insert():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.BulkInsertInstanceRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.bulk_insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.BulkInsertInstanceRequest, dict]):
                 The request object. A request message for
@@ -848,7 +962,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, bulk_insert_instance_resource_resource]
@@ -900,6 +1014,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Deletes the specified Instance resource. For more
         information, see Deleting an instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteInstanceRequest, dict]):
                 The request object. A request message for
@@ -950,7 +1087,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -999,6 +1136,31 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Deletes an access config from an instance's network
         interface.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete_access_config():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteAccessConfigInstanceRequest(
+                    access_config="access_config_value",
+                    instance="instance_value",
+                    network_interface="network_interface_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete_access_config(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteAccessConfigInstanceRequest, dict]):
@@ -1060,7 +1222,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, access_config, network_interface]
@@ -1113,6 +1275,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Detaches a disk from an instance.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_detach_disk():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DetachDiskInstanceRequest(
+                    device_name="device_name_value",
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.detach_disk(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DetachDiskInstanceRequest, dict]):
@@ -1171,7 +1356,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, device_name])
         if request is not None and has_flattened_params:
@@ -1221,6 +1406,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Returns the specified Instance resource. Gets a list
         of available instances by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetInstanceRequest, dict]):
                 The request object. A request message for Instances.Get.
@@ -1260,7 +1468,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -1309,6 +1517,30 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Returns effective firewalls applied to an interface
         of the instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_effective_firewalls():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetEffectiveFirewallsInstanceRequest(
+                    instance="instance_value",
+                    network_interface="network_interface_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_effective_firewalls(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetEffectiveFirewallsInstanceRequest, dict]):
                 The request object. A request message for
@@ -1351,7 +1583,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, network_interface])
         if request is not None and has_flattened_params:
@@ -1400,6 +1632,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.GuestAttributes:
         r"""Returns the specified guest attributes entry.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_guest_attributes():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetGuestAttributesInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_guest_attributes(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetGuestAttributesInstanceRequest, dict]):
                 The request object. A request message for
@@ -1435,7 +1689,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 A guest attributes entry.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -1483,6 +1737,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyInstanceRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyInstanceRequest, dict]):
                 The request object. A request message for
@@ -1518,17 +1795,18 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1557,7 +1835,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, resource])
         if request is not None and has_flattened_params:
@@ -1604,6 +1882,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Screenshot:
         r"""Returns the screenshot from the specified instance.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_screenshot():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetScreenshotInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_screenshot(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetScreenshotInstanceRequest, dict]):
                 The request object. A request message for
@@ -1639,7 +1939,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 An instance's screenshot.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -1687,6 +1987,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Returns the last 1 MB of serial port output from the
         specified instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_serial_port_output():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetSerialPortOutputInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_serial_port_output(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetSerialPortOutputInstanceRequest, dict]):
                 The request object. A request message for
@@ -1722,7 +2045,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 An instance serial console output.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -1769,6 +2092,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.ShieldedInstanceIdentity:
         r"""Returns the Shielded Instance Identity of an instance
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_shielded_instance_identity():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetShieldedInstanceIdentityInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get_shielded_instance_identity(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetShieldedInstanceIdentityInstanceRequest, dict]):
                 The request object. A request message for
@@ -1804,7 +2149,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 A Shielded Instance Identity.
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -1854,6 +2199,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Creates an instance resource in the specified project
         using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertInstanceRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertInstanceRequest, dict]):
                 The request object. A request message for
@@ -1902,7 +2269,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance_resource])
         if request is not None and has_flattened_params:
@@ -1949,6 +2316,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Retrieves the list of instances contained within the
         specified zone.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListInstancesRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListInstancesRequest, dict]):
                 The request object. A request message for
@@ -1980,7 +2370,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -2036,6 +2426,30 @@ class InstancesClient(metaclass=InstancesClientMeta):
         For more information, read Viewing referrers to VM
         instances.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_referrers():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListReferrersInstancesRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list_referrers(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListReferrersInstancesRequest, dict]):
                 The request object. A request message for
@@ -2078,7 +2492,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -2131,6 +2545,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes resource policies from an instance.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_resource_policies():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveResourcePoliciesInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.remove_resource_policies(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveResourcePoliciesInstanceRequest, dict]):
@@ -2185,7 +2621,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -2245,6 +2681,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         reset the VM does not do a graceful shutdown. For more
         information, see Resetting an instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_reset():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ResetInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.reset(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ResetInstanceRequest, dict]):
                 The request object. A request message for
@@ -2294,7 +2753,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -2328,6 +2787,127 @@ class InstancesClient(metaclass=InstancesClientMeta):
         # Done; return the response.
         return response
 
+    def resume_unary(
+        self,
+        request: Union[compute.ResumeInstanceRequest, dict] = None,
+        *,
+        project: str = None,
+        zone: str = None,
+        instance: str = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Resumes an instance that was suspended using the
+        instances().suspend method.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_resume():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ResumeInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.resume(request=request)
+
+                # Handle the response
+                print(response)
+
+        Args:
+            request (Union[google.cloud.compute_v1.types.ResumeInstanceRequest, dict]):
+                The request object. A request message for
+                Instances.Resume. See the method description for
+                details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            zone (str):
+                The name of the zone for this
+                request.
+
+                This corresponds to the ``zone`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            instance (str):
+                Name of the instance resource to
+                resume.
+
+                This corresponds to the ``instance`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.Operation:
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([project, zone, instance])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.ResumeInstanceRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.ResumeInstanceRequest):
+            request = compute.ResumeInstanceRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if zone is not None:
+                request.zone = zone
+            if instance is not None:
+                request.instance = instance
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.resume]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
     def send_diagnostic_interrupt(
         self,
         request: Union[compute.SendDiagnosticInterruptInstanceRequest, dict] = None,
@@ -2340,6 +2920,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SendDiagnosticInterruptInstanceResponse:
         r"""Sends diagnostic interrupt to the instance.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_send_diagnostic_interrupt():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SendDiagnosticInterruptInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.send_diagnostic_interrupt(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SendDiagnosticInterruptInstanceRequest, dict]):
@@ -2379,7 +2981,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -2427,6 +3029,28 @@ class InstancesClient(metaclass=InstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets deletion protection on the instance.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_deletion_protection():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetDeletionProtectionInstanceRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_deletion_protection(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetDeletionProtectionInstanceRequest, dict]):
@@ -2478,7 +3102,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, resource])
         if request is not None and has_flattened_params:
@@ -2527,6 +3151,31 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Sets the auto-delete flag for a disk attached to an
         instance.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_disk_auto_delete():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetDiskAutoDeleteInstanceRequest(
+                    auto_delete=True,
+                    device_name="device_name_value",
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_disk_auto_delete(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetDiskAutoDeleteInstanceRequest, dict]):
@@ -2592,7 +3241,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, auto_delete, device_name])
         if request is not None and has_flattened_params:
@@ -2645,6 +3294,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyInstanceRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyInstanceRequest, dict]):
                 The request object. A request message for
@@ -2685,17 +3357,18 @@ class InstancesClient(metaclass=InstancesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -2724,7 +3397,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, zone_set_policy_request_resource]
@@ -2778,6 +3451,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Sets labels on an instance. To learn more about
         labels, read the Labeling Resources documentation.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_labels():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetLabelsInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_labels(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsInstanceRequest, dict]):
@@ -2834,7 +3530,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_set_labels_request_resource]
@@ -2888,6 +3584,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Changes the number and/or type of accelerator for a
         stopped instance to the values specified in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_machine_resources():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetMachineResourcesInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_machine_resources(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetMachineResourcesInstanceRequest, dict]):
@@ -2944,7 +3663,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_set_machine_resources_request_resource]
@@ -2998,6 +3717,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Changes the machine type for a stopped instance to
         the machine type specified in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_machine_type():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetMachineTypeInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_machine_type(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetMachineTypeInstanceRequest, dict]):
@@ -3054,7 +3796,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_set_machine_type_request_resource]
@@ -3108,6 +3850,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Sets metadata for the specified instance to the data
         included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_metadata():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetMetadataInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_metadata(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetMetadataInstanceRequest, dict]):
@@ -3164,7 +3929,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, metadata_resource])
         if request is not None and has_flattened_params:
@@ -3216,6 +3981,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         should use. This method can only be called on a stopped
         instance. For more information, read Specifying a
         Minimum CPU Platform.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_min_cpu_platform():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetMinCpuPlatformInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_min_cpu_platform(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetMinCpuPlatformInstanceRequest, dict]):
@@ -3272,7 +4060,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_set_min_cpu_platform_request_resource]
@@ -3327,7 +4115,32 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Sets an instance's scheduling options. You can only call this
         method on a stopped instance, that is, a VM instance that is in
         a ``TERMINATED`` state. See Instance Life Cycle for more
-        information on the possible instance states.
+        information on the possible instance states. For more
+        information about setting scheduling options for a VM, see Set
+        VM availability policies.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_scheduling():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetSchedulingInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_scheduling(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetSchedulingInstanceRequest, dict]):
@@ -3382,7 +4195,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, scheduling_resource])
         if request is not None and has_flattened_params:
@@ -3433,6 +4246,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Sets the service account on the instance. For more
         information, read Changing the service account and
         access scopes for an instance.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_service_account():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetServiceAccountInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_service_account(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetServiceAccountInstanceRequest, dict]):
@@ -3489,7 +4325,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, instances_set_service_account_request_resource]
@@ -3548,6 +4384,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instance. This method supports PATCH semantics and uses
         the JSON merge patch format and processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_shielded_instance_integrity_policy():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetShieldedInstanceIntegrityPolicyInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_shielded_instance_integrity_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetShieldedInstanceIntegrityPolicyInstanceRequest, dict]):
                 The request object. A request message for
@@ -3603,7 +4462,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, shielded_instance_integrity_policy_resource]
@@ -3662,6 +4521,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Sets network tags for the specified instance to the
         data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_tags():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetTagsInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.set_tags(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetTagsInstanceRequest, dict]):
                 The request object. A request message for
@@ -3717,7 +4599,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, tags_resource])
         if request is not None and has_flattened_params:
@@ -3764,7 +4646,31 @@ class InstancesClient(metaclass=InstancesClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
-        r"""Simulates a maintenance event on the instance.
+        r"""Simulates a host maintenance event on a VM. For more
+        information, see Simulate a host maintenance event.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_simulate_maintenance_event():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SimulateMaintenanceEventInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.simulate_maintenance_event(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SimulateMaintenanceEventInstanceRequest, dict]):
@@ -3816,7 +4722,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -3867,6 +4773,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instances().stop method. For more information, see
         Restart an instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_start():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.StartInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.start(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.StartInstanceRequest, dict]):
                 The request object. A request message for
@@ -3916,7 +4845,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -3965,6 +4894,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         r"""Starts an instance that was stopped using the
         instances().stop method. For more information, see
         Restart an instance.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_start_with_encryption_key():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.StartWithEncryptionKeyInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.start_with_encryption_key(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.StartWithEncryptionKeyInstanceRequest, dict]):
@@ -4021,7 +4973,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -4087,6 +5039,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         will continue to be charged until they are deleted. For
         more information, see Stopping an instance.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_stop():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.StopInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.stop(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.StopInstanceRequest, dict]):
                 The request object. A request message for
@@ -4136,7 +5111,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance])
         if request is not None and has_flattened_params:
@@ -4170,6 +5145,134 @@ class InstancesClient(metaclass=InstancesClientMeta):
         # Done; return the response.
         return response
 
+    def suspend_unary(
+        self,
+        request: Union[compute.SuspendInstanceRequest, dict] = None,
+        *,
+        project: str = None,
+        zone: str = None,
+        instance: str = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""This method suspends a running instance, saving its
+        state to persistent storage, and allows you to resume
+        the instance at a later time. Suspended instances have
+        no compute costs (cores or RAM), and incur only storage
+        charges for the saved VM memory and localSSD data. Any
+        charged resources the virtual machine was using, such as
+        persistent disks and static IP addresses, will continue
+        to be charged while the instance is suspended. For more
+        information, see Suspending and resuming an instance.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_suspend():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SuspendInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.suspend(request=request)
+
+                # Handle the response
+                print(response)
+
+        Args:
+            request (Union[google.cloud.compute_v1.types.SuspendInstanceRequest, dict]):
+                The request object. A request message for
+                Instances.Suspend. See the method description for
+                details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            zone (str):
+                The name of the zone for this
+                request.
+
+                This corresponds to the ``zone`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            instance (str):
+                Name of the instance resource to
+                suspend.
+
+                This corresponds to the ``instance`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.Operation:
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([project, zone, instance])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.SuspendInstanceRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.SuspendInstanceRequest):
+            request = compute.SuspendInstanceRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if zone is not None:
+                request.zone = zone
+            if instance is not None:
+                request.instance = instance
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.suspend]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
     def test_iam_permissions(
         self,
         request: Union[compute.TestIamPermissionsInstanceRequest, dict] = None,
@@ -4184,6 +5287,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsInstanceRequest(
+                    project="project_value",
+                    resource="resource_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsInstanceRequest, dict]):
@@ -4225,7 +5351,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, resource, test_permissions_request_resource]
@@ -4282,6 +5408,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         set of instance properties. See Updating a running
         instance for a list of updatable instance properties.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateInstanceRequest, dict]):
                 The request object. A request message for
@@ -4337,7 +5486,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, instance_resource])
         if request is not None and has_flattened_params:
@@ -4390,6 +5539,30 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instance's network interface with the data included in
         the request. This method supports PATCH semantics and
         uses the JSON merge patch format and processing rules.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update_access_config():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateAccessConfigInstanceRequest(
+                    instance="instance_value",
+                    network_interface="network_interface_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update_access_config(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateAccessConfigInstanceRequest, dict]):
@@ -4451,7 +5624,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, network_interface, access_config_resource]
@@ -4508,6 +5681,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         method supports PATCH semantics and uses the JSON merge
         patch format and processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update_display_device():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateDisplayDeviceInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update_display_device(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateDisplayDeviceInstanceRequest, dict]):
                 The request object. A request message for
@@ -4563,7 +5759,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, instance, display_device_resource])
         if request is not None and has_flattened_params:
@@ -4619,6 +5815,30 @@ class InstancesClient(metaclass=InstancesClientMeta):
         ranges. See Migrating a VM between networks for
         instructions on migrating an interface. This method
         follows PATCH semantics.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update_network_interface():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateNetworkInterfaceInstanceRequest(
+                    instance="instance_value",
+                    network_interface="network_interface_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update_network_interface(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateNetworkInterfaceInstanceRequest, dict]):
@@ -4680,7 +5900,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, network_interface, network_interface_resource]
@@ -4739,6 +5959,29 @@ class InstancesClient(metaclass=InstancesClientMeta):
         method supports PATCH semantics and uses the JSON merge
         patch format and processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update_shielded_instance_config():
+                # Create a client
+                client = compute_v1.InstancesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateShieldedInstanceConfigInstanceRequest(
+                    instance="instance_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update_shielded_instance_config(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateShieldedInstanceConfigInstanceRequest, dict]):
                 The request object. A request message for
@@ -4794,7 +6037,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, zone, instance, shielded_instance_config_resource]

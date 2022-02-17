@@ -392,6 +392,28 @@ class ZonesClient(metaclass=ZonesClientMeta):
         r"""Returns the specified Zone resource. Gets a list of
         available zones by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.ZonesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetZoneRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetZoneRequest, dict]):
                 The request object. A request message for Zones.Get. See
@@ -423,7 +445,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -467,6 +489,28 @@ class ZonesClient(metaclass=ZonesClientMeta):
         r"""Retrieves the list of Zone resources available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.ZonesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListZonesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListZonesRequest, dict]):
                 The request object. A request message for Zones.List.
@@ -491,7 +535,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

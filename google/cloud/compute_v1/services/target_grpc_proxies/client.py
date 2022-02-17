@@ -396,6 +396,28 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Deletes the specified TargetGrpcProxy in the given
         scope
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.TargetGrpcProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteTargetGrpcProxyRequest(
+                    project="project_value",
+                    target_grpc_proxy="target_grpc_proxy_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -439,7 +461,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_grpc_proxy])
         if request is not None and has_flattened_params:
@@ -484,6 +506,28 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Returns the specified TargetGrpcProxy resource in the
         given scope.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.TargetGrpcProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetTargetGrpcProxyRequest(
+                    project="project_value",
+                    target_grpc_proxy="target_grpc_proxy_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -519,7 +563,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_grpc_proxy])
         if request is not None and has_flattened_params:
@@ -565,6 +609,27 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         the given scope using the parameters that are included
         in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.TargetGrpcProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertTargetGrpcProxyRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -606,7 +671,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, target_grpc_proxy_resource])
         if request is not None and has_flattened_params:
@@ -650,6 +715,28 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Lists the TargetGrpcProxies for a project in the
         given scope.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.TargetGrpcProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListTargetGrpcProxiesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetGrpcProxiesRequest, dict]):
                 The request object. A request message for
@@ -674,7 +761,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -726,6 +813,28 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         PATCH semantics and uses JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.TargetGrpcProxiesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchTargetGrpcProxyRequest(
+                    project="project_value",
+                    target_grpc_proxy="target_grpc_proxy_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -774,7 +883,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, target_grpc_proxy, target_grpc_proxy_resource]

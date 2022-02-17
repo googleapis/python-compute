@@ -389,8 +389,37 @@ class RegionsClient(metaclass=RegionsClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Region:
-        r"""Returns the specified Region resource. Gets a list of
-        available regions by making a list() request.
+        r"""Returns the specified Region resource. Gets a list of available
+        regions by making a list() request. To decrease latency for this
+        method, you can optionally omit any unneeded information from
+        the response by using a field mask. This practice is especially
+        recommended for unused quota information (the ``quotas`` field).
+        To exclude one or more fields, set your request's ``fields``
+        query parameter to only include the fields you need. For
+        example, to only include the ``id`` and ``selfLink`` fields, add
+        the query parameter ``?fields=id,selfLink`` to your request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionRequest, dict]):
@@ -423,7 +452,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -464,8 +493,37 @@ class RegionsClient(metaclass=RegionsClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
-        r"""Retrieves the list of region resources available to
-        the specified project.
+        r"""Retrieves the list of region resources available to the
+        specified project. To decrease latency for this method, you can
+        optionally omit any unneeded information from the response by
+        using a field mask. This practice is especially recommended for
+        unused quota information (the ``items.quotas`` field). To
+        exclude one or more fields, set your request's ``fields`` query
+        parameter to only include the fields you need. For example, to
+        only include the ``id`` and ``selfLink`` fields, add the query
+        parameter ``?fields=id,selfLink`` to your request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionsRequest, dict]):
@@ -491,7 +549,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:

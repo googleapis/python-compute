@@ -395,6 +395,27 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
     ) -> compute.Operation:
         r"""Deletes the specified PublicAdvertisedPrefix
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.PublicAdvertisedPrefixesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeletePublicAdvertisedPrefixeRequest(
+                    project="project_value",
+                    public_advertised_prefix="public_advertised_prefix_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeletePublicAdvertisedPrefixeRequest, dict]):
                 The request object. A request message for
@@ -438,7 +459,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, public_advertised_prefix])
         if request is not None and has_flattened_params:
@@ -483,6 +504,28 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         r"""Returns the specified PublicAdvertisedPrefix
         resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.PublicAdvertisedPrefixesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetPublicAdvertisedPrefixeRequest(
+                    project="project_value",
+                    public_advertised_prefix="public_advertised_prefix_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetPublicAdvertisedPrefixeRequest, dict]):
                 The request object. A request message for
@@ -517,7 +560,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, public_advertised_prefix])
         if request is not None and has_flattened_params:
@@ -563,6 +606,27 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         project using the parameters that are included in the
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.PublicAdvertisedPrefixesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertPublicAdvertisedPrefixeRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertPublicAdvertisedPrefixeRequest, dict]):
                 The request object. A request message for
@@ -604,7 +668,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, public_advertised_prefix_resource])
         if request is not None and has_flattened_params:
@@ -649,6 +713,27 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
     ) -> pagers.ListPager:
         r"""Lists the PublicAdvertisedPrefixes for a project.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.PublicAdvertisedPrefixesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListPublicAdvertisedPrefixesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListPublicAdvertisedPrefixesRequest, dict]):
                 The request object. A request message for
@@ -673,7 +758,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -725,6 +810,28 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         semantics and uses JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.PublicAdvertisedPrefixesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchPublicAdvertisedPrefixeRequest(
+                    project="project_value",
+                    public_advertised_prefix="public_advertised_prefix_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchPublicAdvertisedPrefixeRequest, dict]):
                 The request object. A request message for
@@ -773,7 +880,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, public_advertised_prefix, public_advertised_prefix_resource]

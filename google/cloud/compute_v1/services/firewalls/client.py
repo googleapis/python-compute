@@ -391,6 +391,27 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified firewall.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteFirewallRequest(
+                    firewall="firewall_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteFirewallRequest, dict]):
                 The request object. A request message for
@@ -432,7 +453,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, firewall])
         if request is not None and has_flattened_params:
@@ -476,6 +497,27 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
     ) -> compute.Firewall:
         r"""Returns the specified firewall.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetFirewallRequest(
+                    firewall="firewall_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetFirewallRequest, dict]):
                 The request object. A request message for Firewalls.Get.
@@ -506,7 +548,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, firewall])
         if request is not None and has_flattened_params:
@@ -551,6 +593,27 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         r"""Creates a firewall rule in the specified project
         using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertFirewallRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertFirewallRequest, dict]):
                 The request object. A request message for
@@ -592,7 +655,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, firewall_resource])
         if request is not None and has_flattened_params:
@@ -636,6 +699,28 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         r"""Retrieves the list of firewall rules available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListFirewallsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListFirewallsRequest, dict]):
                 The request object. A request message for
@@ -660,7 +745,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -712,6 +797,28 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchFirewallRequest(
+                    firewall="firewall_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchFirewallRequest, dict]):
                 The request object. A request message for
@@ -757,7 +864,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, firewall, firewall_resource])
         if request is not None and has_flattened_params:
@@ -808,6 +915,28 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         specified. To update individual fields, please use PATCH
         instead.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.FirewallsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateFirewallRequest(
+                    firewall="firewall_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateFirewallRequest, dict]):
                 The request object. A request message for
@@ -854,7 +983,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, firewall, firewall_resource])
         if request is not None and has_flattened_params:
