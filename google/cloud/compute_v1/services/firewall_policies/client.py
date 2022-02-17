@@ -394,6 +394,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Inserts an association for the specified firewall
         policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_association():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddAssociationFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.add_association(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddAssociationFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -437,7 +458,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [firewall_policy, firewall_policy_association_resource]
@@ -485,6 +506,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Inserts a rule into a firewall policy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_rule():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddRuleFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.add_rule(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddRuleFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -528,7 +569,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy, firewall_policy_rule_resource])
         if request is not None and has_flattened_params:
@@ -571,6 +612,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Copies rules to the specified firewall policy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_clone_rules():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.CloneRulesFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.clone_rules(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.CloneRulesFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -609,7 +670,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -650,6 +711,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified policy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -688,7 +769,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -729,6 +810,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicy:
         r"""Returns the specified firewall policy.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -752,7 +853,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -793,6 +894,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicyAssociation:
         r"""Gets an association with the specified name.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_association():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetAssociationFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.get_association(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetAssociationFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -816,7 +937,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -858,6 +979,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyFirewallPolicyRequest(
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -881,17 +1023,18 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -920,7 +1063,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([resource])
         if request is not None and has_flattened_params:
@@ -961,6 +1104,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicyRule:
         r"""Gets a rule of the specified priority.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_rule():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRuleFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.get_rule(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRuleFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -988,7 +1151,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -1030,6 +1193,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project using
         the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertFirewallPolicyRequest(
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertFirewallPolicyRequest, dict]):
@@ -1076,7 +1259,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([parent_id, firewall_policy_resource])
         if request is not None and has_flattened_params:
@@ -1118,6 +1301,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> pagers.ListPager:
         r"""Lists all the policies that have been configured for
         the specified folder or organization.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListFirewallPoliciesRequest(
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListFirewallPoliciesRequest, dict]):
@@ -1172,6 +1376,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Lists associations of a specified target, i.e.,
         organization or folder.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_associations():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListAssociationsFirewallPolicyRequest(
+                )
+
+                # Make the request
+                response = client.list_associations(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListAssociationsFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1216,6 +1440,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Moves the specified firewall policy.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_move():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.MoveFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.move(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.MoveFirewallPolicyRequest, dict]):
@@ -1262,7 +1506,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy, parent_id])
         if request is not None and has_flattened_params:
@@ -1307,6 +1551,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Patches the specified policy with the data included
         in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1350,7 +1615,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy, firewall_policy_resource])
         if request is not None and has_flattened_params:
@@ -1393,6 +1658,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches a rule of the specified priority.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch_rule():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchRuleFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.patch_rule(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRuleFirewallPolicyRequest, dict]):
@@ -1437,7 +1722,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy, firewall_policy_rule_resource])
         if request is not None and has_flattened_params:
@@ -1481,6 +1766,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Removes an association for the specified firewall
         policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_association():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveAssociationFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.remove_association(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveAssociationFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1519,7 +1825,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -1560,6 +1866,26 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes a rule of the specified priority.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_remove_rule():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.RemoveRuleFirewallPolicyRequest(
+                    firewall_policy="firewall_policy_value",
+                )
+
+                # Make the request
+                response = client.remove_rule(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveRuleFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1598,7 +1924,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([firewall_policy])
         if request is not None and has_flattened_params:
@@ -1641,6 +1967,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyFirewallPolicyRequest(
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1669,17 +2016,18 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1708,7 +2056,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [resource, global_organization_set_policy_request_resource]
@@ -1757,6 +2105,27 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.FirewallPoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsFirewallPolicyRequest(
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1785,7 +2154,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([resource, test_permissions_request_resource])
         if request is not None and has_flattened_params:

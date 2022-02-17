@@ -397,6 +397,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         r"""Deletes the specified regional BackendService
         resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionBackendServiceRequest(
+                    backend_service="backend_service_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionBackendServiceRequest, dict]):
                 The request object. A request message for
@@ -447,7 +470,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service])
         if request is not None and has_flattened_params:
@@ -494,6 +517,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
     ) -> compute.BackendService:
         r"""Returns the specified regional BackendService
         resource.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionBackendServiceRequest(
+                    backend_service="backend_service_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionBackendServiceRequest, dict]):
@@ -545,7 +591,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service])
         if request is not None and has_flattened_params:
@@ -594,6 +640,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         r"""Gets the most recent health check results for this
         regional BackendService.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_health():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetHealthRegionBackendServiceRequest(
+                    backend_service="backend_service_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get_health(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetHealthRegionBackendServiceRequest, dict]):
                 The request object. A request message for
@@ -634,7 +703,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, resource_group_reference_resource]
@@ -690,6 +759,28 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         request. For more information, see Backend services
         overview.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionBackendServiceRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionBackendServiceRequest, dict]):
                 The request object. A request message for
@@ -738,7 +829,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, backend_service_resource])
         if request is not None and has_flattened_params:
@@ -786,6 +877,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         resources available to the specified project in the
         given region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionBackendServicesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionBackendServicesRequest, dict]):
                 The request object. A request message for
@@ -819,7 +933,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -874,6 +988,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         information, see Understanding backend services This
         method supports PATCH semantics and uses the JSON merge
         patch format and processing rules.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchRegionBackendServiceRequest(
+                    backend_service="backend_service_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRegionBackendServiceRequest, dict]):
@@ -930,7 +1067,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, backend_service_resource]
@@ -983,6 +1120,29 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         r"""Updates the specified regional BackendService
         resource with the data included in the request. For more
         information, see Backend services overview .
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.RegionBackendServicesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateRegionBackendServiceRequest(
+                    backend_service="backend_service_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateRegionBackendServiceRequest, dict]):
@@ -1039,7 +1199,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, backend_service, backend_service_resource]

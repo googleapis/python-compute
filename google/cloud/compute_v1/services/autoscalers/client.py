@@ -390,6 +390,27 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of autoscalers.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListAutoscalersRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListAutoscalersRequest, dict]):
                 The request object. A request message for
@@ -414,7 +435,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -463,6 +484,28 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteAutoscalerRequest(
+                    autoscaler="autoscaler_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -509,7 +552,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, autoscaler])
         if request is not None and has_flattened_params:
@@ -558,6 +601,29 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         list of available autoscalers by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetAutoscalerRequest(
+                    autoscaler="autoscaler_value",
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -599,7 +665,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, autoscaler])
         if request is not None and has_flattened_params:
@@ -647,6 +713,28 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         r"""Creates an autoscaler in the specified project using
         the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertAutoscalerRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -693,7 +781,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, autoscaler_resource])
         if request is not None and has_flattened_params:
@@ -740,6 +828,29 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         r"""Retrieves a list of autoscalers contained within the
         specified zone.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListAutoscalersRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListAutoscalersRequest, dict]):
                 The request object. A request message for
@@ -771,7 +882,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone])
         if request is not None and has_flattened_params:
@@ -825,6 +936,28 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         PATCH semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchAutoscalerRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -871,7 +1004,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, autoscaler_resource])
         if request is not None and has_flattened_params:
@@ -919,6 +1052,28 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         r"""Updates an autoscaler in the specified project using
         the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.AutoscalersClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateAutoscalerRequest(
+                    project="project_value",
+                    zone="zone_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateAutoscalerRequest, dict]):
                 The request object. A request message for
@@ -965,7 +1120,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, zone, autoscaler_resource])
         if request is not None and has_flattened_params:

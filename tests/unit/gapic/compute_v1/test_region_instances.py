@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+from collections.abc import Iterable
 import json
 import math
 import pytest
@@ -470,14 +471,15 @@ def test_region_instances_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(RegionInstancesClient, transports.RegionInstancesRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(RegionInstancesClient, transports.RegionInstancesRestTransport, "rest", None),],
 )
 def test_region_instances_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -508,6 +510,7 @@ def test_bulk_insert_unary_rest(request_type):
         "instance_properties": {
             "advanced_machine_features": {
                 "enable_nested_virtualization": True,
+                "enable_uefi_networking": True,
                 "threads_per_core": 1689,
             },
             "can_ip_forward": True,
@@ -534,6 +537,7 @@ def test_bulk_insert_unary_rest(request_type):
                         "disk_size_gb": 1261,
                         "disk_type": "disk_type_value",
                         "labels": {},
+                        "licenses": ["licenses_value_1", "licenses_value_2"],
                         "on_update_action": "on_update_action_value",
                         "provisioned_iops": 1740,
                         "resource_policies": [
@@ -641,18 +645,23 @@ def test_bulk_insert_unary_rest(request_type):
                     "subnetwork": "subnetwork_value",
                 }
             ],
+            "network_performance_config": {
+                "total_egress_bandwidth_tier": "total_egress_bandwidth_tier_value"
+            },
             "private_ipv6_google_access": "private_ipv6_google_access_value",
             "reservation_affinity": {
                 "consume_reservation_type": "consume_reservation_type_value",
                 "key": "key_value",
                 "values": ["values_value_1", "values_value_2"],
             },
+            "resource_manager_tags": {},
             "resource_policies": [
                 "resource_policies_value_1",
                 "resource_policies_value_2",
             ],
             "scheduling": {
                 "automatic_restart": True,
+                "instance_termination_action": "instance_termination_action_value",
                 "location_hint": "location_hint_value",
                 "min_node_cpus": 1379,
                 "node_affinities": [
@@ -664,6 +673,7 @@ def test_bulk_insert_unary_rest(request_type):
                 ],
                 "on_host_maintenance": "on_host_maintenance_value",
                 "preemptible": True,
+                "provisioning_model": "provisioning_model_value",
             },
             "service_accounts": [
                 {"email": "email_value", "scopes": ["scopes_value_1", "scopes_value_2"]}
@@ -836,6 +846,55 @@ def test_bulk_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_bulk_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.RegionInstancesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.RegionInstancesRestInterceptor(),
+    )
+    client = RegionInstancesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.RegionInstancesRestInterceptor, "post_bulk_insert"
+    ) as post, mock.patch.object(
+        transports.RegionInstancesRestInterceptor, "pre_bulk_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.BulkInsertRegionInstanceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.bulk_insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_bulk_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.BulkInsertRegionInstanceRequest
 ):
@@ -850,6 +909,7 @@ def test_bulk_insert_unary_rest_bad_request(
         "instance_properties": {
             "advanced_machine_features": {
                 "enable_nested_virtualization": True,
+                "enable_uefi_networking": True,
                 "threads_per_core": 1689,
             },
             "can_ip_forward": True,
@@ -876,6 +936,7 @@ def test_bulk_insert_unary_rest_bad_request(
                         "disk_size_gb": 1261,
                         "disk_type": "disk_type_value",
                         "labels": {},
+                        "licenses": ["licenses_value_1", "licenses_value_2"],
                         "on_update_action": "on_update_action_value",
                         "provisioned_iops": 1740,
                         "resource_policies": [
@@ -983,18 +1044,23 @@ def test_bulk_insert_unary_rest_bad_request(
                     "subnetwork": "subnetwork_value",
                 }
             ],
+            "network_performance_config": {
+                "total_egress_bandwidth_tier": "total_egress_bandwidth_tier_value"
+            },
             "private_ipv6_google_access": "private_ipv6_google_access_value",
             "reservation_affinity": {
                 "consume_reservation_type": "consume_reservation_type_value",
                 "key": "key_value",
                 "values": ["values_value_1", "values_value_2"],
             },
+            "resource_manager_tags": {},
             "resource_policies": [
                 "resource_policies_value_1",
                 "resource_policies_value_2",
             ],
             "scheduling": {
                 "automatic_restart": True,
+                "instance_termination_action": "instance_termination_action_value",
                 "location_hint": "location_hint_value",
                 "min_node_cpus": 1379,
                 "node_affinities": [
@@ -1006,6 +1072,7 @@ def test_bulk_insert_unary_rest_bad_request(
                 ],
                 "on_host_maintenance": "on_host_maintenance_value",
                 "preemptible": True,
+                "provisioning_model": "provisioning_model_value",
             },
             "service_accounts": [
                 {"email": "email_value", "scopes": ["scopes_value_1", "scopes_value_2"]}
@@ -1050,14 +1117,6 @@ def test_bulk_insert_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "region": "sample2"}
 
@@ -1070,6 +1129,15 @@ def test_bulk_insert_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.bulk_insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1077,7 +1145,7 @@ def test_bulk_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/regions/{region}/instances/bulkInsert"
+            "%s/compute/v1/projects/{project}/regions/{region}/instances/bulkInsert"
             % client.transport._host,
             args[1],
         )

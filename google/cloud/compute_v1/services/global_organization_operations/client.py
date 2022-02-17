@@ -396,6 +396,26 @@ class GlobalOrganizationOperationsClient(
     ) -> compute.DeleteGlobalOrganizationOperationResponse:
         r"""Deletes the specified Operations resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.GlobalOrganizationOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteGlobalOrganizationOperationRequest(
+                    operation="operation_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalOrganizationOperationRequest, dict]):
                 The request object. A request message for
@@ -422,7 +442,7 @@ class GlobalOrganizationOperationsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([operation])
         if request is not None and has_flattened_params:
@@ -464,6 +484,27 @@ class GlobalOrganizationOperationsClient(
         r"""Retrieves the specified Operations resource. Gets a list of
         operations by making a ``list()`` request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.GlobalOrganizationOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetGlobalOrganizationOperationRequest(
+                    operation="operation_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalOrganizationOperationRequest, dict]):
                 The request object. A request message for
@@ -502,7 +543,7 @@ class GlobalOrganizationOperationsClient(
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([operation])
         if request is not None and has_flattened_params:
@@ -542,6 +583,27 @@ class GlobalOrganizationOperationsClient(
     ) -> pagers.ListPager:
         r"""Retrieves a list of Operation resources contained
         within the specified organization.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.GlobalOrganizationOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListGlobalOrganizationOperationsRequest(
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalOrganizationOperationsRequest, dict]):

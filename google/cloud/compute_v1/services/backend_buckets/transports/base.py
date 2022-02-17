@@ -144,6 +144,11 @@ class BackendBucketsTransport(abc.ABC):
             self.patch: gapic_v1.method.wrap_method(
                 self.patch, default_timeout=None, client_info=client_info,
             ),
+            self.set_edge_security_policy: gapic_v1.method.wrap_method(
+                self.set_edge_security_policy,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.update: gapic_v1.method.wrap_method(
                 self.update, default_timeout=None, client_info=client_info,
             ),
@@ -217,6 +222,15 @@ class BackendBucketsTransport(abc.ABC):
         self,
     ) -> Callable[
         [compute.PatchBackendBucketRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def set_edge_security_policy(
+        self,
+    ) -> Callable[
+        [compute.SetEdgeSecurityPolicyBackendBucketRequest],
         Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()
