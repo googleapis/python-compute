@@ -392,6 +392,27 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of all operations.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.GlobalOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListGlobalOperationsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListGlobalOperationsRequest, dict]):
                 The request object. A request message for
@@ -416,7 +437,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -464,6 +485,27 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> compute.DeleteGlobalOperationResponse:
         r"""Deletes the specified Operations resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.GlobalOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteGlobalOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalOperationRequest, dict]):
                 The request object. A request message for
@@ -495,7 +537,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, operation])
         if request is not None and has_flattened_params:
@@ -538,6 +580,27 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified Operations resource.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.GlobalOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetGlobalOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalOperationRequest, dict]):
@@ -582,7 +645,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, operation])
         if request is not None and has_flattened_params:
@@ -626,6 +689,28 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         r"""Retrieves a list of Operation resources contained
         within the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.GlobalOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListGlobalOperationsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalOperationsRequest, dict]):
                 The request object. A request message for
@@ -652,7 +737,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -712,6 +797,28 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         method returns. Be prepared to retry if the operation is not
         ``DONE``.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_wait():
+                # Create a client
+                client = compute_v1.GlobalOperationsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.WaitGlobalOperationRequest(
+                    operation="operation_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.wait(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.WaitGlobalOperationRequest, dict]):
                 The request object. A request message for
@@ -755,7 +862,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, operation])
         if request is not None and has_flattened_params:

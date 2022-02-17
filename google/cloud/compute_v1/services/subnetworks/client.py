@@ -390,6 +390,27 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of subnetworks.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListSubnetworksRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -414,7 +435,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -462,6 +483,28 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified subnetwork.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    subnetwork="subnetwork_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSubnetworkRequest, dict]):
@@ -513,7 +556,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, subnetwork])
         if request is not None and has_flattened_params:
@@ -561,6 +604,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Operation:
         r"""Expands the IP CIDR range of the subnetwork to a
         specified value.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_expand_ip_cidr_range():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ExpandIpCidrRangeSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    subnetwork="subnetwork_value",
+                )
+
+                # Make the request
+                response = client.expand_ip_cidr_range(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ExpandIpCidrRangeSubnetworkRequest, dict]):
@@ -617,7 +683,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -676,6 +742,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Returns the specified subnetwork. Gets a list of
         available subnetworks list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    subnetwork="subnetwork_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -717,7 +806,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, subnetwork])
         if request is not None and has_flattened_params:
@@ -765,6 +854,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicySubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicySubnetworkRequest, dict]):
                 The request object. A request message for
@@ -800,17 +912,18 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -839,7 +952,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource])
         if request is not None and has_flattened_params:
@@ -886,6 +999,28 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Operation:
         r"""Creates a subnetwork in the specified project using
         the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertSubnetworkRequest, dict]):
@@ -935,7 +1070,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, subnetwork_resource])
         if request is not None and has_flattened_params:
@@ -982,6 +1117,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Retrieves a list of subnetworks available to the
         specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListSubnetworksRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -1015,7 +1173,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -1065,6 +1223,28 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Retrieves an aggregated list of all usable
         subnetworks in the project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list_usable():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListUsableSubnetworksRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list_usable(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListUsableSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -1089,7 +1269,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -1142,6 +1322,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         updated with a patch request as indicated in the field
         descriptions. You must specify the current fingerprint
         of the subnetwork resource being patched.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    subnetwork="subnetwork_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchSubnetworkRequest, dict]):
@@ -1198,7 +1401,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, subnetwork, subnetwork_resource])
         if request is not None and has_flattened_params:
@@ -1249,6 +1452,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicySubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicySubnetworkRequest, dict]):
                 The request object. A request message for
@@ -1289,17 +1515,18 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1328,7 +1555,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_policy_request_resource]
@@ -1384,6 +1611,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         services without assigning external IP addresses through
         Private Google Access.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_private_ip_google_access():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetPrivateIpGoogleAccessSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    subnetwork="subnetwork_value",
+                )
+
+                # Make the request
+                response = client.set_private_ip_google_access(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetPrivateIpGoogleAccessSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -1437,7 +1687,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [
@@ -1499,6 +1749,29 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.SubnetworksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsSubnetworkRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -1539,7 +1812,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]

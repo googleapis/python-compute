@@ -393,6 +393,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteLicenseRequest(
+                    license_="license__value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteLicenseRequest, dict]):
                 The request object. A request message for
@@ -435,7 +457,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_])
         if request is not None and has_flattened_params:
@@ -481,6 +503,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         is intended for use only by third-party partners who are
         creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetLicenseRequest(
+                    license_="license__value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetLicenseRequest, dict]):
                 The request object. A request message for Licenses.Get.
@@ -513,7 +557,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_])
         if request is not None and has_flattened_params:
@@ -560,6 +604,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyLicenseRequest, dict]):
                 The request object. A request message for
@@ -588,17 +654,18 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -627,7 +694,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, resource])
         if request is not None and has_flattened_params:
@@ -673,6 +740,27 @@ class LicensesClient(metaclass=LicensesClientMeta):
         This resource is intended for use only by third-party partners
         who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertLicenseRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertLicenseRequest, dict]):
                 The request object. A request message for
@@ -713,7 +801,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, license_resource])
         if request is not None and has_flattened_params:
@@ -764,6 +852,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         by third-party partners who are creating Cloud Marketplace
         images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListLicensesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListLicensesRequest, dict]):
                 The request object. A request message for Licenses.List.
@@ -787,7 +897,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -839,6 +949,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         intended for use only by third-party partners who are creating
         Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyLicenseRequest, dict]):
                 The request object. A request message for
@@ -872,17 +1004,18 @@ class LicensesClient(metaclass=LicensesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -911,7 +1044,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_policy_request_resource]
@@ -964,6 +1097,28 @@ class LicensesClient(metaclass=LicensesClientMeta):
         *Caution* This resource is intended for use only by third-party
         partners who are creating Cloud Marketplace images.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.LicensesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsLicenseRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsLicenseRequest, dict]):
                 The request object. A request message for
@@ -997,7 +1152,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

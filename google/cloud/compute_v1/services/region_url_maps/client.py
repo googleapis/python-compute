@@ -392,6 +392,28 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -442,7 +464,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map])
         if request is not None and has_flattened_params:
@@ -490,6 +512,29 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         r"""Returns the specified UrlMap resource. Gets a list of
         available URL maps by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -522,23 +567,23 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         Returns:
             google.cloud.compute_v1.types.UrlMap:
-                Represents a URL Map resource. Google Compute Engine has
-                two URL Map resources: \*
+                Represents a URL Map resource. Compute Engine has two
+                URL Map resources: \*
                 [Global](/compute/docs/reference/rest/v1/urlMaps) \*
                 [Regional](/compute/docs/reference/rest/v1/regionUrlMaps)
                 A URL map resource is a component of certain types of
-                GCP load balancers and Traffic Director. \* urlMaps are
-                used by external HTTP(S) load balancers and Traffic
+                cloud load balancers and Traffic Director: \* urlMaps
+                are used by external HTTP(S) load balancers and Traffic
                 Director. \* regionUrlMaps are used by internal HTTP(S)
                 load balancers. For a list of supported URL map features
-                by load balancer type, see the Load balancing features:
-                Routing and traffic management table. For a list of
-                supported URL map features for Traffic Director, see the
-                Traffic Director features: Routing and traffic
+                by the load balancer type, see the Load balancing
+                features: Routing and traffic management table. For a
+                list of supported URL map features for Traffic Director,
+                see the Traffic Director features: Routing and traffic
                 management table. This resource defines mappings from
-                host names and URL paths to either a backend service or
-                a backend bucket. To use the global urlMaps resource,
-                the backend service must have a loadBalancingScheme of
+                hostnames and URL paths to either a backend service or a
+                backend bucket. To use the global urlMaps resource, the
+                backend service must have a loadBalancingScheme of
                 either EXTERNAL or INTERNAL_SELF_MANAGED. To use the
                 regionUrlMaps resource, the backend service must have a
                 loadBalancingScheme of INTERNAL_MANAGED. For more
@@ -546,7 +591,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map])
         if request is not None and has_flattened_params:
@@ -593,6 +638,28 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Creates a UrlMap resource in the specified project
         using the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionUrlMapRequest, dict]):
@@ -642,7 +709,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map_resource])
         if request is not None and has_flattened_params:
@@ -689,6 +756,29 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         r"""Retrieves the list of UrlMap resources available to
         the specified project in the specified region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionUrlMapsRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionUrlMapsRequest, dict]):
                 The request object. A request message for
@@ -721,7 +811,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -776,6 +866,29 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         semantics and uses JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -829,7 +942,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -879,6 +992,29 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Updates the specified UrlMap resource with the data
         included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateRegionUrlMapRequest, dict]):
@@ -935,7 +1071,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, url_map, url_map_resource])
         if request is not None and has_flattened_params:
@@ -987,6 +1123,29 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         the tests of the provided UrlMap will be run. Calling
         this method does NOT create the UrlMap.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_validate():
+                # Create a client
+                client = compute_v1.RegionUrlMapsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ValidateRegionUrlMapRequest(
+                    project="project_value",
+                    region="region_value",
+                    url_map="url_map_value",
+                )
+
+                # Make the request
+                response = client.validate(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ValidateRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -1027,7 +1186,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, url_map, region_url_maps_validate_request_resource]

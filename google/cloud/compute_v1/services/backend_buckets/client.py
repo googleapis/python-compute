@@ -395,6 +395,28 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         r"""Adds a key for validating requests with signed URLs
         for this backend bucket.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_add_signed_url_key():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AddSignedUrlKeyBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.add_signed_url_key(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AddSignedUrlKeyBackendBucketRequest, dict]):
                 The request object. A request message for
@@ -445,7 +467,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, signed_url_key_resource])
         if request is not None and has_flattened_params:
@@ -491,6 +513,27 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified BackendBucket resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteBackendBucketRequest, dict]):
                 The request object. A request message for
@@ -534,7 +577,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket])
         if request is not None and has_flattened_params:
@@ -579,6 +622,29 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
     ) -> compute.Operation:
         r"""Deletes a key for validating requests with signed
         URLs for this backend bucket.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete_signed_url_key():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteSignedUrlKeyBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    key_name="key_name_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete_signed_url_key(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSignedUrlKeyBackendBucketRequest, dict]):
@@ -632,7 +698,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, key_name])
         if request is not None and has_flattened_params:
@@ -680,6 +746,28 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         list of available backend buckets by making a list()
         request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetBackendBucketRequest, dict]):
                 The request object. A request message for
@@ -713,7 +801,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket])
         if request is not None and has_flattened_params:
@@ -758,6 +846,27 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         r"""Creates a BackendBucket resource in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertBackendBucketRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertBackendBucketRequest, dict]):
                 The request object. A request message for
@@ -799,7 +908,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket_resource])
         if request is not None and has_flattened_params:
@@ -843,6 +952,28 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         r"""Retrieves the list of BackendBucket resources
         available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListBackendBucketsRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListBackendBucketsRequest, dict]):
                 The request object. A request message for
@@ -869,7 +1000,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -921,6 +1052,28 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         semantics and uses the JSON merge patch format and
         processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchBackendBucketRequest, dict]):
                 The request object. A request message for
@@ -969,7 +1122,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, backend_bucket_resource])
         if request is not None and has_flattened_params:
@@ -1003,6 +1156,129 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         # Done; return the response.
         return response
 
+    def set_edge_security_policy_unary(
+        self,
+        request: Union[compute.SetEdgeSecurityPolicyBackendBucketRequest, dict] = None,
+        *,
+        project: str = None,
+        backend_bucket: str = None,
+        security_policy_reference_resource: compute.SecurityPolicyReference = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> compute.Operation:
+        r"""Sets the edge security policy for the specified
+        backend bucket.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_edge_security_policy():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetEdgeSecurityPolicyBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.set_edge_security_policy(request=request)
+
+                # Handle the response
+                print(response)
+
+        Args:
+            request (Union[google.cloud.compute_v1.types.SetEdgeSecurityPolicyBackendBucketRequest, dict]):
+                The request object. A request message for
+                BackendBuckets.SetEdgeSecurityPolicy. See the method
+                description for details.
+            project (str):
+                Project ID for this request.
+                This corresponds to the ``project`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            backend_bucket (str):
+                Name of the BackendService resource
+                to which the security policy should be
+                set. The name should conform to RFC1035.
+
+                This corresponds to the ``backend_bucket`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            security_policy_reference_resource (google.cloud.compute_v1.types.SecurityPolicyReference):
+                The body resource for this request
+                This corresponds to the ``security_policy_reference_resource`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.cloud.compute_v1.types.Operation:
+                Represents an Operation resource. Google Compute Engine
+                has three Operation resources: \*
+                [Global](/compute/docs/reference/rest/v1/globalOperations)
+                \*
+                [Regional](/compute/docs/reference/rest/v1/regionOperations)
+                \*
+                [Zonal](/compute/docs/reference/rest/v1/zoneOperations)
+                You can use an operation resource to manage asynchronous
+                API requests. For more information, read Handling API
+                responses. Operations can be global, regional or zonal.
+                - For global operations, use the globalOperations
+                resource. - For regional operations, use the
+                regionOperations resource. - For zonal operations, use
+                the zonalOperations resource. For more information, read
+                Global, Regional, and Zonal Resources.
+
+        """
+        # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any(
+            [project, backend_bucket, security_policy_reference_resource]
+        )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a compute.SetEdgeSecurityPolicyBackendBucketRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, compute.SetEdgeSecurityPolicyBackendBucketRequest):
+            request = compute.SetEdgeSecurityPolicyBackendBucketRequest(request)
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if project is not None:
+                request.project = project
+            if backend_bucket is not None:
+                request.backend_bucket = backend_bucket
+            if security_policy_reference_resource is not None:
+                request.security_policy_reference_resource = (
+                    security_policy_reference_resource
+                )
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.set_edge_security_policy]
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
     def update_unary(
         self,
         request: Union[compute.UpdateBackendBucketRequest, dict] = None,
@@ -1016,6 +1292,28 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
     ) -> compute.Operation:
         r"""Updates the specified BackendBucket resource with the
         data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.BackendBucketsClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateBackendBucketRequest(
+                    backend_bucket="backend_bucket_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateBackendBucketRequest, dict]):
@@ -1065,7 +1363,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, backend_bucket, backend_bucket_resource])
         if request is not None and has_flattened_params:

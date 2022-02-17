@@ -395,6 +395,29 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         r"""Returns the specified regional disk type. Gets a list
         of available disk types by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.RegionDiskTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetRegionDiskTypeRequest(
+                    disk_type="disk_type_value",
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionDiskTypeRequest, dict]):
                 The request object. A request message for
@@ -439,7 +462,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, disk_type])
         if request is not None and has_flattened_params:
@@ -486,6 +509,29 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         r"""Retrieves a list of regional disk types available to
         the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.RegionDiskTypesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListRegionDiskTypesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionDiskTypesRequest, dict]):
                 The request object. A request message for
@@ -517,7 +563,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:

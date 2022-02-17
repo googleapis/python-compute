@@ -391,6 +391,28 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         r"""Retrieves the list of all HealthCheck resources,
         regional and global, available to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListHealthChecksRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListHealthChecksRequest, dict]):
                 The request object. A request message for
@@ -417,7 +439,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -465,6 +487,27 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified HealthCheck resource.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteHealthCheckRequest(
+                    health_check="health_check_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteHealthCheckRequest, dict]):
                 The request object. A request message for
@@ -508,7 +551,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, health_check])
         if request is not None and has_flattened_params:
@@ -553,6 +596,28 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         r"""Returns the specified HealthCheck resource. Gets a
         list of available health checks by making a list()
         request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetHealthCheckRequest(
+                    health_check="health_check_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetHealthCheckRequest, dict]):
@@ -601,7 +666,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, health_check])
         if request is not None and has_flattened_params:
@@ -646,6 +711,27 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         r"""Creates a HealthCheck resource in the specified
         project using the data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertHealthCheckRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertHealthCheckRequest, dict]):
                 The request object. A request message for
@@ -687,7 +773,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, health_check_resource])
         if request is not None and has_flattened_params:
@@ -731,6 +817,28 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         r"""Retrieves the list of HealthCheck resources available
         to the specified project.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListHealthChecksRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListHealthChecksRequest, dict]):
                 The request object. A request message for
@@ -757,7 +865,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -809,6 +917,28 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         method supports PATCH semantics and uses the JSON merge
         patch format and processing rules.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchHealthCheckRequest(
+                    health_check="health_check_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchHealthCheckRequest, dict]):
                 The request object. A request message for
@@ -857,7 +987,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, health_check, health_check_resource])
         if request is not None and has_flattened_params:
@@ -904,6 +1034,28 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
     ) -> compute.Operation:
         r"""Updates a HealthCheck resource in the specified
         project using the data included in the request.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_update():
+                # Create a client
+                client = compute_v1.HealthChecksClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.UpdateHealthCheckRequest(
+                    health_check="health_check_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.update(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateHealthCheckRequest, dict]):
@@ -953,7 +1105,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, health_check, health_check_resource])
         if request is not None and has_flattened_params:

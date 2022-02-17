@@ -18,6 +18,7 @@ import mock
 
 import grpc
 from grpc.experimental import aio
+from collections.abc import Iterable
 import json
 import math
 import pytest
@@ -471,14 +472,15 @@ def test_backend_services_client_client_options_scopes(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_class,transport_name",
-    [(BackendServicesClient, transports.BackendServicesRestTransport, "rest"),],
+    "client_class,transport_class,transport_name,grpc_helpers",
+    [(BackendServicesClient, transports.BackendServicesRestTransport, "rest", None),],
 )
 def test_backend_services_client_client_options_credentials_file(
-    client_class, transport_class, transport_name
+    client_class, transport_class, transport_name, grpc_helpers
 ):
     # Check the case credentials file is provided.
     options = client_options.ClientOptions(credentials_file="credentials.json")
+
     with mock.patch.object(transport_class, "__init__") as patched:
         patched.return_value = None
         client = client_class(client_options=options, transport=transport_name)
@@ -660,6 +662,55 @@ def test_add_signed_url_key_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_add_signed_url_key_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_add_signed_url_key"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_add_signed_url_key"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.AddSignedUrlKeyBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.add_signed_url_key_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_add_signed_url_key_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.AddSignedUrlKeyBackendServiceRequest
 ):
@@ -697,14 +748,6 @@ def test_add_signed_url_key_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -715,6 +758,15 @@ def test_add_signed_url_key_unary_rest_flattened():
             signed_url_key_resource=compute.SignedUrlKey(key_name="key_name_value"),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.add_signed_url_key_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -722,7 +774,7 @@ def test_add_signed_url_key_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/addSignedUrlKey"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/addSignedUrlKey"
             % client.transport._host,
             args[1],
         )
@@ -821,9 +873,9 @@ def test_aggregated_list_rest_required_fields(
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
         (
-            "max_results",
-            "include_all_scopes",
             "filter",
+            "include_all_scopes",
+            "max_results",
             "order_by",
             "page_token",
             "return_partial_success",
@@ -881,9 +933,9 @@ def test_aggregated_list_rest_unset_required_fields():
     assert set(unset_fields) == (
         set(
             (
-                "maxResults",
-                "includeAllScopes",
                 "filter",
+                "includeAllScopes",
+                "maxResults",
                 "orderBy",
                 "pageToken",
                 "returnPartialSuccess",
@@ -891,6 +943,57 @@ def test_aggregated_list_rest_unset_required_fields():
         )
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_aggregated_list_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_aggregated_list"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_aggregated_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendServiceAggregatedList.to_json(
+            compute.BackendServiceAggregatedList()
+        )
+
+        request = compute.AggregatedListBackendServicesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendServiceAggregatedList
+
+        client.aggregated_list(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_aggregated_list_rest_bad_request(
@@ -926,6 +1029,13 @@ def test_aggregated_list_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendServiceAggregatedList()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -934,12 +1044,6 @@ def test_aggregated_list_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value",)
-        mock_args.update(sample_request)
         client.aggregated_list(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -947,7 +1051,7 @@ def test_aggregated_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/aggregated/backendServices"
+            "%s/compute/v1/projects/{project}/aggregated/backendServices"
             % client.transport._host,
             args[1],
         )
@@ -1193,6 +1297,55 @@ def test_delete_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_delete"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_delete"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.DeleteBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_delete_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.DeleteBackendServiceRequest
 ):
@@ -1226,14 +1379,6 @@ def test_delete_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -1242,6 +1387,15 @@ def test_delete_unary_rest_flattened():
             project="project_value", backend_service="backend_service_value",
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.delete_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1249,7 +1403,7 @@ def test_delete_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
             % client.transport._host,
             args[1],
         )
@@ -1386,7 +1540,7 @@ def test_delete_signed_url_key_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).delete_signed_url_key._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id", "key_name",))
+    assert not set(unset_fields) - set(("key_name", "request_id",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1441,8 +1595,57 @@ def test_delete_signed_url_key_unary_rest_unset_required_fields():
 
     unset_fields = transport.delete_signed_url_key._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId", "keyName",)) & set(("backendService", "keyName", "project",))
+        set(("keyName", "requestId",)) & set(("backendService", "keyName", "project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_delete_signed_url_key_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_delete_signed_url_key"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_delete_signed_url_key"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.DeleteSignedUrlKeyBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.delete_signed_url_key_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_delete_signed_url_key_unary_rest_bad_request(
@@ -1479,14 +1682,6 @@ def test_delete_signed_url_key_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -1497,6 +1692,15 @@ def test_delete_signed_url_key_unary_rest_flattened():
             key_name="key_name_value",
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.delete_signed_url_key_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1504,7 +1708,7 @@ def test_delete_signed_url_key_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/deleteSignedUrlKey"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/deleteSignedUrlKey"
             % client.transport._host,
             args[1],
         )
@@ -1551,6 +1755,7 @@ def test_get_rest(request_type):
             custom_request_headers=["custom_request_headers_value"],
             custom_response_headers=["custom_response_headers_value"],
             description="description_value",
+            edge_security_policy="edge_security_policy_value",
             enable_c_d_n=True,
             fingerprint="fingerprint_value",
             health_checks=["health_checks_value"],
@@ -1585,6 +1790,7 @@ def test_get_rest(request_type):
     assert response.custom_request_headers == ["custom_request_headers_value"]
     assert response.custom_response_headers == ["custom_response_headers_value"]
     assert response.description == "description_value"
+    assert response.edge_security_policy == "edge_security_policy_value"
     assert response.enable_c_d_n is True
     assert response.fingerprint == "fingerprint_value"
     assert response.health_checks == ["health_checks_value"]
@@ -1684,6 +1890,55 @@ def test_get_rest_unset_required_fields():
     assert set(unset_fields) == (set(()) & set(("backendService", "project",)))
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_get"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_get"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendService.to_json(
+            compute.BackendService()
+        )
+
+        request = compute.GetBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendService
+
+        client.get(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_rest_bad_request(
     transport: str = "rest", request_type=compute.GetBackendServiceRequest
 ):
@@ -1717,14 +1972,6 @@ def test_get_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendService()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.BackendService.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -1733,6 +1980,15 @@ def test_get_rest_flattened():
             project="project_value", backend_service="backend_service_value",
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.BackendService.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.get(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1740,7 +1996,7 @@ def test_get_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
             % client.transport._host,
             args[1],
         )
@@ -1883,6 +2139,55 @@ def test_get_health_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_get_health_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_get_health"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_get_health"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendServiceGroupHealth.to_json(
+            compute.BackendServiceGroupHealth()
+        )
+
+        request = compute.GetHealthBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendServiceGroupHealth
+
+        client.get_health(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_get_health_rest_bad_request(
     transport: str = "rest", request_type=compute.GetHealthBackendServiceRequest
 ):
@@ -1917,14 +2222,6 @@ def test_get_health_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendServiceGroupHealth()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.BackendServiceGroupHealth.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -1937,6 +2234,15 @@ def test_get_health_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.BackendServiceGroupHealth.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.get_health(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -1944,7 +2250,7 @@ def test_get_health_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/getHealth"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/getHealth"
             % client.transport._host,
             args[1],
         )
@@ -2004,6 +2310,14 @@ def test_insert_unary_rest(request_type):
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -2037,6 +2351,11 @@ def test_insert_unary_rest(request_type):
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -2056,6 +2375,7 @@ def test_insert_unary_rest(request_type):
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -2255,6 +2575,55 @@ def test_insert_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_insert_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_insert"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_insert"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.InsertBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.insert_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_insert_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.InsertBackendServiceRequest
 ):
@@ -2286,6 +2655,14 @@ def test_insert_unary_rest_bad_request(
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -2319,6 +2696,11 @@ def test_insert_unary_rest_bad_request(
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -2338,6 +2720,7 @@ def test_insert_unary_rest_bad_request(
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -2414,14 +2797,6 @@ def test_insert_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1"}
 
@@ -2433,6 +2808,15 @@ def test_insert_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.insert_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2440,7 +2824,7 @@ def test_insert_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices"
+            "%s/compute/v1/projects/{project}/global/backendServices"
             % client.transport._host,
             args[1],
         )
@@ -2533,7 +2917,7 @@ def test_list_rest_required_fields(request_type=compute.ListBackendServicesReque
     ).list._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
     assert not set(unset_fields) - set(
-        ("max_results", "filter", "order_by", "page_token", "return_partial_success",)
+        ("filter", "max_results", "order_by", "page_token", "return_partial_success",)
     )
     jsonified_request.update(unset_fields)
 
@@ -2583,9 +2967,58 @@ def test_list_rest_unset_required_fields():
 
     unset_fields = transport.list._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("maxResults", "filter", "orderBy", "pageToken", "returnPartialSuccess",))
+        set(("filter", "maxResults", "orderBy", "pageToken", "returnPartialSuccess",))
         & set(("project",))
     )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_list_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_list"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_list"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.BackendServiceList.to_json(
+            compute.BackendServiceList()
+        )
+
+        request = compute.ListBackendServicesRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.BackendServiceList
+
+        client.list(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
 
 
 def test_list_rest_bad_request(
@@ -2621,6 +3054,13 @@ def test_list_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.BackendServiceList()
 
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(project="project_value",)
+        mock_args.update(sample_request)
+
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
@@ -2629,12 +3069,6 @@ def test_list_rest_flattened():
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
-        # get arguments that satisfy an http rule for this method
-        sample_request = {"project": "sample1"}
-
-        # get truthy value for each flattened field
-        mock_args = dict(project="project_value",)
-        mock_args.update(sample_request)
         client.list(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -2642,7 +3076,7 @@ def test_list_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices"
+            "%s/compute/v1/projects/{project}/global/backendServices"
             % client.transport._host,
             args[1],
         )
@@ -2742,6 +3176,14 @@ def test_patch_unary_rest(request_type):
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -2775,6 +3217,11 @@ def test_patch_unary_rest(request_type):
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -2794,6 +3241,7 @@ def test_patch_unary_rest(request_type):
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -2998,6 +3446,53 @@ def test_patch_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_patch_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_patch"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_patch"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.PatchBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.patch_unary(request, metadata=[("key", "val"), ("cephalopod", "squid"),])
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_patch_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.PatchBackendServiceRequest
 ):
@@ -3029,6 +3524,14 @@ def test_patch_unary_rest_bad_request(
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -3062,6 +3565,11 @@ def test_patch_unary_rest_bad_request(
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -3081,6 +3589,7 @@ def test_patch_unary_rest_bad_request(
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -3157,14 +3666,6 @@ def test_patch_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -3177,6 +3678,15 @@ def test_patch_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.patch_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -3184,7 +3694,7 @@ def test_patch_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
             % client.transport._host,
             args[1],
         )
@@ -3209,6 +3719,315 @@ def test_patch_unary_rest_flattened_error(transport: str = "rest"):
 
 
 def test_patch_unary_rest_error():
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest"
+    )
+
+
+@pytest.mark.parametrize(
+    "request_type", [compute.SetEdgeSecurityPolicyBackendServiceRequest, dict,]
+)
+def test_set_edge_security_policy_unary_rest(request_type):
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"project": "sample1", "backend_service": "sample2"}
+    request_init["security_policy_reference_resource"] = {
+        "security_policy": "security_policy_value"
+    }
+    request = request_type(request_init)
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.Operation(
+            client_operation_id="client_operation_id_value",
+            creation_timestamp="creation_timestamp_value",
+            description="description_value",
+            end_time="end_time_value",
+            http_error_message="http_error_message_value",
+            http_error_status_code=2374,
+            id=205,
+            insert_time="insert_time_value",
+            kind="kind_value",
+            name="name_value",
+            operation_group_id="operation_group_id_value",
+            operation_type="operation_type_value",
+            progress=885,
+            region="region_value",
+            self_link="self_link_value",
+            start_time="start_time_value",
+            status=compute.Operation.Status.DONE,
+            status_message="status_message_value",
+            target_id=947,
+            target_link="target_link_value",
+            user="user_value",
+            zone="zone_value",
+        )
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+        response = client.set_edge_security_policy_unary(request)
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, compute.Operation)
+    assert response.client_operation_id == "client_operation_id_value"
+    assert response.creation_timestamp == "creation_timestamp_value"
+    assert response.description == "description_value"
+    assert response.end_time == "end_time_value"
+    assert response.http_error_message == "http_error_message_value"
+    assert response.http_error_status_code == 2374
+    assert response.id == 205
+    assert response.insert_time == "insert_time_value"
+    assert response.kind == "kind_value"
+    assert response.name == "name_value"
+    assert response.operation_group_id == "operation_group_id_value"
+    assert response.operation_type == "operation_type_value"
+    assert response.progress == 885
+    assert response.region == "region_value"
+    assert response.self_link == "self_link_value"
+    assert response.start_time == "start_time_value"
+    assert response.status == compute.Operation.Status.DONE
+    assert response.status_message == "status_message_value"
+    assert response.target_id == 947
+    assert response.target_link == "target_link_value"
+    assert response.user == "user_value"
+    assert response.zone == "zone_value"
+
+
+def test_set_edge_security_policy_unary_rest_required_fields(
+    request_type=compute.SetEdgeSecurityPolicyBackendServiceRequest,
+):
+    transport_class = transports.BackendServicesRestTransport
+
+    request_init = {}
+    request_init["backend_service"] = ""
+    request_init["project"] = ""
+    request = request_type(request_init)
+    jsonified_request = json.loads(
+        request_type.to_json(
+            request, including_default_value_fields=False, use_integers_for_enums=False
+        )
+    )
+
+    # verify fields with default values are dropped
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_edge_security_policy._get_unset_required_fields(jsonified_request)
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with default values are now present
+
+    jsonified_request["backendService"] = "backend_service_value"
+    jsonified_request["project"] = "project_value"
+
+    unset_fields = transport_class(
+        credentials=ga_credentials.AnonymousCredentials()
+    ).set_edge_security_policy._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("request_id",))
+    jsonified_request.update(unset_fields)
+
+    # verify required fields with non-default values are left alone
+    assert "backendService" in jsonified_request
+    assert jsonified_request["backendService"] == "backend_service_value"
+    assert "project" in jsonified_request
+    assert jsonified_request["project"] == "project_value"
+
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+    request = request_type(request_init)
+
+    # Designate an appropriate value for the returned response.
+    return_value = compute.Operation()
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(Session, "request") as req:
+        # We need to mock transcode() because providing default values
+        # for required fields will fail the real version if the http_options
+        # expect actual values for those fields.
+        with mock.patch.object(path_template, "transcode") as transcode:
+            # A uri without fields and an empty body will force all the
+            # request fields to show up in the query_params.
+            transcode_result = {
+                "uri": "v1/sample_method",
+                "method": "post",
+                "query_params": request_init,
+            }
+            transcode_result["body"] = {}
+            transcode.return_value = transcode_result
+
+            response_value = Response()
+            response_value.status_code = 200
+            json_return_value = compute.Operation.to_json(return_value)
+            response_value._content = json_return_value.encode("UTF-8")
+            req.return_value = response_value
+
+            response = client.set_edge_security_policy_unary(request)
+
+            expected_params = []
+            actual_params = req.call_args.kwargs["params"]
+            assert expected_params == actual_params
+
+
+def test_set_edge_security_policy_unary_rest_unset_required_fields():
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials
+    )
+
+    unset_fields = transport.set_edge_security_policy._get_unset_required_fields({})
+    assert set(unset_fields) == (
+        set(("requestId",))
+        & set(("backendService", "project", "securityPolicyReferenceResource",))
+    )
+
+
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_edge_security_policy_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_set_edge_security_policy"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_set_edge_security_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.SetEdgeSecurityPolicyBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_edge_security_policy_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
+def test_set_edge_security_policy_unary_rest_bad_request(
+    transport: str = "rest",
+    request_type=compute.SetEdgeSecurityPolicyBackendServiceRequest,
+):
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # send a request that will satisfy transcoding
+    request_init = {"project": "sample1", "backend_service": "sample2"}
+    request_init["security_policy_reference_resource"] = {
+        "security_policy": "security_policy_value"
+    }
+    request = request_type(request_init)
+
+    # Mock the http request call within the method and fake a BadRequest error.
+    with mock.patch.object(Session, "request") as req, pytest.raises(
+        core_exceptions.BadRequest
+    ):
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 400
+        response_value.request = Request()
+        req.return_value = response_value
+        client.set_edge_security_policy_unary(request)
+
+
+def test_set_edge_security_policy_unary_rest_flattened():
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport="rest",
+    )
+
+    # Mock the http request call within the method and fake a response.
+    with mock.patch.object(type(client.transport._session), "request") as req:
+        # Designate an appropriate value for the returned response.
+        return_value = compute.Operation()
+
+        # get arguments that satisfy an http rule for this method
+        sample_request = {"project": "sample1", "backend_service": "sample2"}
+
+        # get truthy value for each flattened field
+        mock_args = dict(
+            project="project_value",
+            backend_service="backend_service_value",
+            security_policy_reference_resource=compute.SecurityPolicyReference(
+                security_policy="security_policy_value"
+            ),
+        )
+        mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
+        client.set_edge_security_policy_unary(**mock_args)
+
+        # Establish that the underlying call was made with the expected
+        # request object values.
+        assert len(req.mock_calls) == 1
+        _, args, _ = req.mock_calls[0]
+        assert path_template.validate(
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/setEdgeSecurityPolicy"
+            % client.transport._host,
+            args[1],
+        )
+
+
+def test_set_edge_security_policy_unary_rest_flattened_error(transport: str = "rest"):
+    client = BackendServicesClient(
+        credentials=ga_credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Attempting to call a method with both a request object and flattened
+    # fields is an error.
+    with pytest.raises(ValueError):
+        client.set_edge_security_policy_unary(
+            compute.SetEdgeSecurityPolicyBackendServiceRequest(),
+            project="project_value",
+            backend_service="backend_service_value",
+            security_policy_reference_resource=compute.SecurityPolicyReference(
+                security_policy="security_policy_value"
+            ),
+        )
+
+
+def test_set_edge_security_policy_unary_rest_error():
     client = BackendServicesClient(
         credentials=ga_credentials.AnonymousCredentials(), transport="rest"
     )
@@ -3379,6 +4198,55 @@ def test_set_security_policy_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_set_security_policy_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_set_security_policy"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_set_security_policy"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.SetSecurityPolicyBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.set_security_policy_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_set_security_policy_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.SetSecurityPolicyBackendServiceRequest
 ):
@@ -3415,14 +4283,6 @@ def test_set_security_policy_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -3435,6 +4295,15 @@ def test_set_security_policy_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.set_security_policy_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -3442,7 +4311,7 @@ def test_set_security_policy_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/setSecurityPolicy"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}/setSecurityPolicy"
             % client.transport._host,
             args[1],
         )
@@ -3502,6 +4371,14 @@ def test_update_unary_rest(request_type):
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -3535,6 +4412,11 @@ def test_update_unary_rest(request_type):
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -3554,6 +4436,7 @@ def test_update_unary_rest(request_type):
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -3758,6 +4641,55 @@ def test_update_unary_rest_unset_required_fields():
     )
 
 
+@pytest.mark.parametrize("null_interceptor", [True, False])
+def test_update_unary_rest_interceptors(null_interceptor):
+    transport = transports.BackendServicesRestTransport(
+        credentials=ga_credentials.AnonymousCredentials(),
+        interceptor=None
+        if null_interceptor
+        else transports.BackendServicesRestInterceptor(),
+    )
+    client = BackendServicesClient(transport=transport)
+    with mock.patch.object(
+        type(client.transport._session), "request"
+    ) as req, mock.patch.object(
+        path_template, "transcode"
+    ) as transcode, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "post_update"
+    ) as post, mock.patch.object(
+        transports.BackendServicesRestInterceptor, "pre_update"
+    ) as pre:
+        pre.assert_not_called()
+        post.assert_not_called()
+
+        transcode.return_value = {
+            "method": "post",
+            "uri": "my_uri",
+            "body": None,
+            "query_params": {},
+        }
+
+        req.return_value = Response()
+        req.return_value.status_code = 200
+        req.return_value.request = PreparedRequest()
+        req.return_value._content = compute.Operation.to_json(compute.Operation())
+
+        request = compute.UpdateBackendServiceRequest()
+        metadata = [
+            ("key", "val"),
+            ("cephalopod", "squid"),
+        ]
+        pre.return_value = request, metadata
+        post.return_value = compute.Operation
+
+        client.update_unary(
+            request, metadata=[("key", "val"), ("cephalopod", "squid"),]
+        )
+
+        pre.assert_called_once()
+        post.assert_called_once()
+
+
 def test_update_unary_rest_bad_request(
     transport: str = "rest", request_type=compute.UpdateBackendServiceRequest
 ):
@@ -3789,6 +4721,14 @@ def test_update_unary_rest_bad_request(
             "bypass_cache_on_request_headers": [{"header_name": "header_name_value"}],
             "cache_key_policy": {
                 "include_host": True,
+                "include_http_headers": [
+                    "include_http_headers_value_1",
+                    "include_http_headers_value_2",
+                ],
+                "include_named_cookies": [
+                    "include_named_cookies_value_1",
+                    "include_named_cookies_value_2",
+                ],
                 "include_protocol": True,
                 "include_query_string": True,
                 "query_string_blacklist": [
@@ -3822,6 +4762,11 @@ def test_update_unary_rest_bad_request(
             "max_retries": 1187,
         },
         "connection_draining": {"draining_timeout_sec": 2124},
+        "connection_tracking_policy": {
+            "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "idle_timeout_sec": 1694,
+            "tracking_mode": "tracking_mode_value",
+        },
         "consistent_hash": {
             "http_cookie": {
                 "name": "name_value",
@@ -3841,6 +4786,7 @@ def test_update_unary_rest_bad_request(
             "custom_response_headers_value_2",
         ],
         "description": "description_value",
+        "edge_security_policy": "edge_security_policy_value",
         "enable_c_d_n": True,
         "failover_policy": {
             "disable_connection_drain_on_failover": True,
@@ -3917,14 +4863,6 @@ def test_update_unary_rest_flattened():
         # Designate an appropriate value for the returned response.
         return_value = compute.Operation()
 
-        # Wrap the value into a proper Response obj
-        response_value = Response()
-        response_value.status_code = 200
-        json_return_value = compute.Operation.to_json(return_value)
-
-        response_value._content = json_return_value.encode("UTF-8")
-        req.return_value = response_value
-
         # get arguments that satisfy an http rule for this method
         sample_request = {"project": "sample1", "backend_service": "sample2"}
 
@@ -3937,6 +4875,15 @@ def test_update_unary_rest_flattened():
             ),
         )
         mock_args.update(sample_request)
+
+        # Wrap the value into a proper Response obj
+        response_value = Response()
+        response_value.status_code = 200
+        json_return_value = compute.Operation.to_json(return_value)
+
+        response_value._content = json_return_value.encode("UTF-8")
+        req.return_value = response_value
+
         client.update_unary(**mock_args)
 
         # Establish that the underlying call was made with the expected
@@ -3944,7 +4891,7 @@ def test_update_unary_rest_flattened():
         assert len(req.mock_calls) == 1
         _, args, _ = req.mock_calls[0]
         assert path_template.validate(
-            "https://%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
+            "%s/compute/v1/projects/{project}/global/backendServices/{backend_service}"
             % client.transport._host,
             args[1],
         )
@@ -4070,6 +5017,7 @@ def test_backend_services_base_transport():
         "insert",
         "list",
         "patch",
+        "set_edge_security_policy",
         "set_security_policy",
         "update",
     )

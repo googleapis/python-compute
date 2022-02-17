@@ -391,6 +391,27 @@ class ImagesClient(metaclass=ImagesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified image.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteImageRequest(
+                    image="image_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteImageRequest, dict]):
                 The request object. A request message for Images.Delete.
@@ -431,7 +452,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, image])
         if request is not None and has_flattened_params:
@@ -477,6 +498,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Sets the deprecation status of an image. If an empty
         request body is given, clears the deprecation status
         instead.
+
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_deprecate():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeprecateImageRequest(
+                    image="image_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.deprecate(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeprecateImageRequest, dict]):
@@ -524,7 +567,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, image, deprecation_status_resource])
         if request is not None and has_flattened_params:
@@ -571,6 +614,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Returns the specified image. Gets a list of available
         images by making a list() request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetImageRequest(
+                    image="image_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetImageRequest, dict]):
                 The request object. A request message for Images.Get.
@@ -600,7 +665,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, image])
         if request is not None and has_flattened_params:
@@ -645,6 +710,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Returns the latest image that is part of an image
         family and is not deprecated.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_from_family():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetFromFamilyImageRequest(
+                    family="family_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.get_from_family(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetFromFamilyImageRequest, dict]):
                 The request object. A request message for
@@ -677,7 +764,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, family])
         if request is not None and has_flattened_params:
@@ -722,6 +809,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyImageRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyImageRequest, dict]):
                 The request object. A request message for
@@ -750,17 +859,18 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -789,7 +899,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, resource])
         if request is not None and has_flattened_params:
@@ -834,6 +944,27 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Creates an image in the specified project using the
         data included in the request.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertImageRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.InsertImageRequest, dict]):
                 The request object. A request message for Images.Insert.
@@ -874,7 +1005,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, image_resource])
         if request is not None and has_flattened_params:
@@ -924,6 +1055,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         to make a request to the respective image project, such
         as debian-cloud or windows-cloud.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListImagesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListImagesRequest, dict]):
                 The request object. A request message for Images.List.
@@ -948,7 +1101,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -999,6 +1152,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         the request. Only the following fields can be modified:
         family, description, deprecation status.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_patch():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.PatchImageRequest(
+                    image="image_value",
+                    project="project_value",
+                )
+
+                # Make the request
+                response = client.patch(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.PatchImageRequest, dict]):
                 The request object. A request message for Images.Patch.
@@ -1044,7 +1219,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, image, image_resource])
         if request is not None and has_flattened_params:
@@ -1092,6 +1267,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyImageRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyImageRequest, dict]):
                 The request object. A request message for
@@ -1125,17 +1322,18 @@ class ImagesClient(metaclass=ImagesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1164,7 +1362,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_policy_request_resource]
@@ -1216,6 +1414,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Sets the labels on an image. To learn more about
         labels, read the Labeling Resources documentation.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_labels():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetLabelsImageRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_labels(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsImageRequest, dict]):
                 The request object. A request message for
@@ -1264,7 +1484,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, global_set_labels_request_resource]
@@ -1316,6 +1536,28 @@ class ImagesClient(metaclass=ImagesClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.ImagesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsImageRequest(
+                    project="project_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsImageRequest, dict]):
                 The request object. A request message for
@@ -1349,7 +1591,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, resource, test_permissions_request_resource]

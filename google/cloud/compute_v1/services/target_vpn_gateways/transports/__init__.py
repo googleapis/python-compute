@@ -18,6 +18,7 @@ from typing import Dict, Type
 
 from .base import TargetVpnGatewaysTransport
 from .rest import TargetVpnGatewaysRestTransport
+from .rest import TargetVpnGatewaysRestInterceptor
 
 
 # Compile a registry of transports.
@@ -27,4 +28,5 @@ _transport_registry["rest"] = TargetVpnGatewaysRestTransport
 __all__ = (
     "TargetVpnGatewaysTransport",
     "TargetVpnGatewaysRestTransport",
+    "TargetVpnGatewaysRestInterceptor",
 )

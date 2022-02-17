@@ -392,6 +392,27 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of resource policies.
 
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_aggregated_list():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.AggregatedListResourcePoliciesRequest(
+                    project="project_value",
+                )
+
+                # Make the request
+                page_result = client.aggregated_list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListResourcePoliciesRequest, dict]):
                 The request object. A request message for
@@ -417,7 +438,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project])
         if request is not None and has_flattened_params:
@@ -465,6 +486,28 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified resource policy.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_delete():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.DeleteResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource_policy="resource_policy_value",
+                )
+
+                # Make the request
+                response = client.delete(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteResourcePolicyRequest, dict]):
@@ -514,7 +557,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource_policy])
         if request is not None and has_flattened_params:
@@ -562,6 +605,29 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         r"""Retrieves all information of the specified resource
         policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource_policy="resource_policy_value",
+                )
+
+                # Make the request
+                response = client.get(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetResourcePolicyRequest, dict]):
                 The request object. A request message for
@@ -601,7 +667,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource_policy])
         if request is not None and has_flattened_params:
@@ -649,6 +715,29 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_get_iam_policy():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.GetIamPolicyResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.get_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyResourcePolicyRequest, dict]):
                 The request object. A request message for
@@ -684,17 +773,18 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -723,7 +813,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource])
         if request is not None and has_flattened_params:
@@ -769,6 +859,27 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new resource policy.
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_insert():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.InsertResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                response = client.insert(request=request)
+
+                # Handle the response
+                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertResourcePolicyRequest, dict]):
@@ -816,7 +927,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region, resource_policy_resource])
         if request is not None and has_flattened_params:
@@ -864,6 +975,29 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         configured for the specified project in specified
         region.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_list():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.ListResourcePoliciesRequest(
+                    project="project_value",
+                    region="region_value",
+                )
+
+                # Make the request
+                page_result = client.list(request=request)
+
+                # Handle the response
+                for response in page_result:
+                    print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.ListResourcePoliciesRequest, dict]):
                 The request object. A request message for
@@ -893,7 +1027,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any([project, region])
         if request is not None and has_flattened_params:
@@ -946,6 +1080,29 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_set_iam_policy():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.SetIamPolicyResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.set_iam_policy(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyResourcePolicyRequest, dict]):
                 The request object. A request message for
@@ -986,17 +1143,18 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
                 An Identity and Access Management (IAM) policy, which
                 specifies access controls for Google Cloud resources. A
                 Policy is a collection of bindings. A binding binds one
-                or more members to a single role. Members can be user
-                accounts, service accounts, Google groups, and domains
-                (such as G Suite). A role is a named list of
-                permissions; each role can be an IAM predefined role or
-                a user-created custom role. For some types of Google
-                Cloud resources, a binding can also specify a condition,
-                which is a logical expression that allows access to a
-                resource only if the expression evaluates to true. A
-                condition can add constraints based on attributes of the
-                request, the resource, or both. To learn which resources
-                support conditions in their IAM policies, see the [IAM
+                or more members, or principals, to a single role.
+                Principals can be user accounts, service accounts,
+                Google groups, and domains (such as G Suite). A role is
+                a named list of permissions; each role can be an IAM
+                predefined role or a user-created custom role. For some
+                types of Google Cloud resources, a binding can also
+                specify a condition, which is a logical expression that
+                allows access to a resource only if the expression
+                evaluates to true. A condition can add constraints based
+                on attributes of the request, the resource, or both. To
+                learn which resources support conditions in their IAM
+                policies, see the [IAM
                 documentation](\ https://cloud.google.com/iam/help/conditions/resource-policies).
                 **JSON example:** { "bindings": [ { "role":
                 "roles/resourcemanager.organizationAdmin", "members": [
@@ -1025,7 +1183,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, region_set_policy_request_resource]
@@ -1080,6 +1238,29 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
+
+
+        .. code-block::
+
+            from google.cloud import compute_v1
+
+            def sample_test_iam_permissions():
+                # Create a client
+                client = compute_v1.ResourcePoliciesClient()
+
+                # Initialize request argument(s)
+                request = compute_v1.TestIamPermissionsResourcePolicyRequest(
+                    project="project_value",
+                    region="region_value",
+                    resource="resource_value",
+                )
+
+                # Make the request
+                response = client.test_iam_permissions(request=request)
+
+                # Handle the response
+                print(response)
+
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsResourcePolicyRequest, dict]):
                 The request object. A request message for
@@ -1120,7 +1301,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
 
         """
         # Create or coerce a protobuf request object.
-        # Sanity check: If we got a request object, we should *not* have
+        # Quick check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
         has_flattened_params = any(
             [project, region, resource, test_permissions_request_resource]
