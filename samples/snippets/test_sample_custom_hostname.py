@@ -22,12 +22,12 @@ from sample_custom_hostname import create_instance
 from sample_custom_hostname import get_instance_hostname
 
 PROJECT = google.auth.default()[1]
-INSTANCE_ZONE = "europe-central2-c"
+INSTANCE_ZONE = "europe-north1-c"
 
 
 @pytest.fixture
 def autodelete_instance_name():
-    instance_name = "test-instance-" + uuid.uuid4().hex[:10]
+    instance_name = "test-host-instance-" + uuid.uuid4().hex[:10]
 
     yield instance_name
 
