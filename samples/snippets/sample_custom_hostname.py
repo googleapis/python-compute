@@ -25,10 +25,7 @@ from google.cloud import compute_v1
 
 # [START compute_instances_create_custom_hostname]
 def create_instance(
-    project_id: str,
-    zone: str,
-    instance_name: str,
-    hostname: str,
+    project_id: str, zone: str, instance_name: str, hostname: str,
 ) -> compute_v1.Instance:
     """
     Send an instance creation request to the Compute Engine API and wait for it to complete.
