@@ -50,4 +50,4 @@ body.
 ### Regions
 You should use `# <REGION region_name>` and `# </REGION region_name>` lines to indicate where start and end
 of a region should be placed in the generated snippet. Those lines will be simply replaced with the proper 
-`[START region_name]` and `[END region_name]` lines.
+`START region_name` and `END region_name` lines.
