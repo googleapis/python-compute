@@ -45,9 +45,9 @@ HEADER = """\
 # directory and apply your changes there.
 """
 
-DEFAULT_OUTPUT_PATH = Path("sgs_test_fixtures/output")
-INGREDIENTS_PATH = Path("sgs_test_fixtures/ingredients")
-RECIPES_PATH = Path("sgs_test_fixtures/recipes")
+DEFAULT_OUTPUT_PATH = Path("snippets")
+INGREDIENTS_PATH = Path("ingredients")
+RECIPES_PATH = Path("recipes")
 
 
 @dataclass
@@ -254,10 +254,10 @@ def save_rendered_recipe(
     output_dir: Path = DEFAULT_OUTPUT_PATH,
     recipes_path: Path = RECIPES_PATH,
 ) -> Path:
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     output_path = output_dir / recipe_path.relative_to(recipes_path)
-    output_path.parent.mkdir(exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with output_path.open(mode="w") as out_file:
         out_file.write(rendered_recipe)
