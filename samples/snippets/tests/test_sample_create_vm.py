@@ -28,6 +28,7 @@ from ..instances.create_start_instance.create_with_additional_disk import \
 from ..instances.create_start_instance.create_with_snapshotted_data_disk import \
     create_with_snapshotted_data_disk
 from ..instances.create_with_subnet import create_with_subnet
+from ..instances.delete import delete_instance
 
 
 from ..operations.operation_check import wait_for_operation
