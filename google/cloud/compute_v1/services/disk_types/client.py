@@ -390,8 +390,7 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of disk types.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -486,8 +485,7 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         available disk types by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -599,8 +597,7 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

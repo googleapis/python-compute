@@ -396,8 +396,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpsProxy resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -518,8 +517,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
         HTTP proxies by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -637,8 +635,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -755,8 +752,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -864,8 +860,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
     ) -> compute.Operation:
         r"""Replaces SslCertificates for TargetHttpsProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1005,8 +1000,7 @@ class RegionTargetHttpsProxiesClient(metaclass=RegionTargetHttpsProxiesClientMet
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpsProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -398,8 +398,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         attachments.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -494,8 +493,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
     ) -> compute.Operation:
         r"""Deletes the specified interconnect attachment.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -611,8 +609,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
     ) -> compute.InterconnectAttachment:
         r"""Returns the specified interconnect attachment.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -723,8 +720,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -840,8 +836,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         contained within the specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -949,8 +944,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

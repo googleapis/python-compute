@@ -396,8 +396,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
     ) -> compute.Operation:
         r"""Deletes the specified regional HealthCheckService.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -518,8 +517,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -628,8 +626,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -746,8 +743,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -855,8 +851,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

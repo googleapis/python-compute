@@ -1351,21 +1351,9 @@ def test_insert_unary_rest(request_type):
                             "resource_policies_value_2",
                         ],
                         "source_image": "source_image_value",
-                        "source_image_encryption_key": {
-                            "kms_key_name": "kms_key_name_value",
-                            "kms_key_service_account": "kms_key_service_account_value",
-                            "raw_key": "raw_key_value",
-                            "rsa_encrypted_key": "rsa_encrypted_key_value",
-                            "sha256": "sha256_value",
-                        },
+                        "source_image_encryption_key": {},
                         "source_snapshot": "source_snapshot_value",
-                        "source_snapshot_encryption_key": {
-                            "kms_key_name": "kms_key_name_value",
-                            "kms_key_service_account": "kms_key_service_account_value",
-                            "raw_key": "raw_key_value",
-                            "rsa_encrypted_key": "rsa_encrypted_key_value",
-                            "sha256": "sha256_value",
-                        },
+                        "source_snapshot_encryption_key": {},
                     },
                     "interface": "interface_value",
                     "kind": "kind_value",
@@ -1375,16 +1363,9 @@ def test_insert_unary_rest(request_type):
                         "dbs": [
                             {"content": "content_value", "file_type": "file_type_value"}
                         ],
-                        "dbxs": [
-                            {"content": "content_value", "file_type": "file_type_value"}
-                        ],
-                        "keks": [
-                            {"content": "content_value", "file_type": "file_type_value"}
-                        ],
-                        "pk": {
-                            "content": "content_value",
-                            "file_type": "file_type_value",
-                        },
+                        "dbxs": {},
+                        "keks": {},
+                        "pk": {},
                     },
                     "source": "source_value",
                     "type_": "type__value",
@@ -1426,19 +1407,7 @@ def test_insert_unary_rest(request_type):
                         }
                     ],
                     "fingerprint": "fingerprint_value",
-                    "ipv6_access_configs": [
-                        {
-                            "external_ipv6": "external_ipv6_value",
-                            "external_ipv6_prefix_length": 2837,
-                            "kind": "kind_value",
-                            "name": "name_value",
-                            "nat_i_p": "nat_i_p_value",
-                            "network_tier": "network_tier_value",
-                            "public_ptr_domain_name": "public_ptr_domain_name_value",
-                            "set_public_ptr": True,
-                            "type_": "type__value",
-                        }
-                    ],
+                    "ipv6_access_configs": {},
                     "ipv6_access_type": "ipv6_access_type_value",
                     "ipv6_address": "ipv6_address_value",
                     "kind": "kind_value",
@@ -1756,21 +1725,9 @@ def test_insert_unary_rest_bad_request(
                             "resource_policies_value_2",
                         ],
                         "source_image": "source_image_value",
-                        "source_image_encryption_key": {
-                            "kms_key_name": "kms_key_name_value",
-                            "kms_key_service_account": "kms_key_service_account_value",
-                            "raw_key": "raw_key_value",
-                            "rsa_encrypted_key": "rsa_encrypted_key_value",
-                            "sha256": "sha256_value",
-                        },
+                        "source_image_encryption_key": {},
                         "source_snapshot": "source_snapshot_value",
-                        "source_snapshot_encryption_key": {
-                            "kms_key_name": "kms_key_name_value",
-                            "kms_key_service_account": "kms_key_service_account_value",
-                            "raw_key": "raw_key_value",
-                            "rsa_encrypted_key": "rsa_encrypted_key_value",
-                            "sha256": "sha256_value",
-                        },
+                        "source_snapshot_encryption_key": {},
                     },
                     "interface": "interface_value",
                     "kind": "kind_value",
@@ -1780,16 +1737,9 @@ def test_insert_unary_rest_bad_request(
                         "dbs": [
                             {"content": "content_value", "file_type": "file_type_value"}
                         ],
-                        "dbxs": [
-                            {"content": "content_value", "file_type": "file_type_value"}
-                        ],
-                        "keks": [
-                            {"content": "content_value", "file_type": "file_type_value"}
-                        ],
-                        "pk": {
-                            "content": "content_value",
-                            "file_type": "file_type_value",
-                        },
+                        "dbxs": {},
+                        "keks": {},
+                        "pk": {},
                     },
                     "source": "source_value",
                     "type_": "type__value",
@@ -1831,19 +1781,7 @@ def test_insert_unary_rest_bad_request(
                         }
                     ],
                     "fingerprint": "fingerprint_value",
-                    "ipv6_access_configs": [
-                        {
-                            "external_ipv6": "external_ipv6_value",
-                            "external_ipv6_prefix_length": 2837,
-                            "kind": "kind_value",
-                            "name": "name_value",
-                            "nat_i_p": "nat_i_p_value",
-                            "network_tier": "network_tier_value",
-                            "public_ptr_domain_name": "public_ptr_domain_name_value",
-                            "set_public_ptr": True,
-                            "type_": "type__value",
-                        }
-                    ],
+                    "ipv6_access_configs": {},
                     "ipv6_access_type": "ipv6_access_type_value",
                     "ipv6_address": "ipv6_address_value",
                     "kind": "kind_value",
@@ -2330,19 +2268,7 @@ def test_set_iam_policy_rest(request_type):
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [
@@ -2584,19 +2510,7 @@ def test_set_iam_policy_rest_bad_request(
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [

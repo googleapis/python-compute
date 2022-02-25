@@ -398,8 +398,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         Deleting snapshots.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -508,8 +507,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         of available snapshots by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -607,8 +605,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -746,8 +743,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         different from the source disk project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -852,8 +848,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         within the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -949,8 +944,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1096,8 +1090,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         labels, read the Labeling Resources documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1218,8 +1211,7 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

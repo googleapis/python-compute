@@ -63,7 +63,7 @@ class InstancesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the InstancesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomInstancesInterceptor(InstancesRestInterceptor):
             def pre_add_access_config(request, metadata):
                 logging.log(f"Received request: {request}")

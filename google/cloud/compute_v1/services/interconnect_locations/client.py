@@ -398,8 +398,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         locations by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -499,8 +498,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

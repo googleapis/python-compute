@@ -66,7 +66,7 @@ class RegionNetworkEndpointGroupsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the RegionNetworkEndpointGroupsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomRegionNetworkEndpointGroupsInterceptor(RegionNetworkEndpointGroupsRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

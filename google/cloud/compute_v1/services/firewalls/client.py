@@ -391,8 +391,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified firewall.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -497,8 +496,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
     ) -> compute.Firewall:
         r"""Returns the specified firewall.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -594,8 +592,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -700,8 +697,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -798,8 +794,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -916,8 +911,7 @@ class FirewallsClient(metaclass=FirewallsClientMeta):
         instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

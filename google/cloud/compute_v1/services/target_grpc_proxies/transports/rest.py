@@ -66,7 +66,7 @@ class TargetGrpcProxiesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the TargetGrpcProxiesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomTargetGrpcProxiesInterceptor(TargetGrpcProxiesRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

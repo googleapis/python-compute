@@ -394,8 +394,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         TargetHttpsProxy or TargetSslProxy resources.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -505,8 +504,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         specified policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -607,8 +605,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -713,8 +710,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         for the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -807,8 +803,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         policy when using custom profile.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -893,8 +888,7 @@ class SslPoliciesClient(metaclass=SslPoliciesClientMeta):
         included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

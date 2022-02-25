@@ -395,8 +395,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
     ) -> compute.Operation:
         r"""Deletes the specified PublicAdvertisedPrefix
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -505,8 +504,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -607,8 +605,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -713,8 +710,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
     ) -> pagers.ListPager:
         r"""Lists the PublicAdvertisedPrefixes for a project.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -811,8 +807,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

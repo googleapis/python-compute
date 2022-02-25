@@ -66,7 +66,7 @@ class RegionDiskTypesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the RegionDiskTypesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomRegionDiskTypesInterceptor(RegionDiskTypesRestInterceptor):
             def pre_get(request, metadata):
                 logging.log(f"Received request: {request}")

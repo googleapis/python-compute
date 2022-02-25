@@ -415,8 +415,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         with this method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -551,8 +550,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         groups them by zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -651,8 +649,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         overrides and/or new versions.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -802,8 +799,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         method.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -942,8 +938,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         Deleting an instance group for more information.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1077,8 +1072,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1217,8 +1211,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         instance group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1365,8 +1358,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         instance groups by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1489,8 +1481,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         increase in this limit.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1608,8 +1599,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         contained within the specified project and zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1716,8 +1706,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         query parameters are not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1843,8 +1832,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         query parameter is not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1964,8 +1952,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2100,8 +2087,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         in a MIG, see Updating instances in a MIG.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2237,8 +2223,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         patch.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2399,8 +2384,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2557,8 +2541,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         or deleted.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2698,8 +2681,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         the group's updatePolicy.type to PROACTIVE.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2847,8 +2829,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         group depending on the size of the group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2989,8 +2970,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         patch.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

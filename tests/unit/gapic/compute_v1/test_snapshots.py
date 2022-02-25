@@ -1310,13 +1310,7 @@ def test_insert_unary_rest(request_type):
             "sha256": "sha256_value",
         },
         "source_disk": "source_disk_value",
-        "source_disk_encryption_key": {
-            "kms_key_name": "kms_key_name_value",
-            "kms_key_service_account": "kms_key_service_account_value",
-            "raw_key": "raw_key_value",
-            "rsa_encrypted_key": "rsa_encrypted_key_value",
-            "sha256": "sha256_value",
-        },
+        "source_disk_encryption_key": {},
         "source_disk_id": "source_disk_id_value",
         "status": "status_value",
         "storage_bytes": 1403,
@@ -1549,13 +1543,7 @@ def test_insert_unary_rest_bad_request(
             "sha256": "sha256_value",
         },
         "source_disk": "source_disk_value",
-        "source_disk_encryption_key": {
-            "kms_key_name": "kms_key_name_value",
-            "kms_key_service_account": "kms_key_service_account_value",
-            "raw_key": "raw_key_value",
-            "rsa_encrypted_key": "rsa_encrypted_key_value",
-            "sha256": "sha256_value",
-        },
+        "source_disk_encryption_key": {},
         "source_disk_id": "source_disk_id_value",
         "status": "status_value",
         "storage_bytes": 1403,
@@ -1962,19 +1950,7 @@ def test_set_iam_policy_rest(request_type):
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [
@@ -2214,19 +2190,7 @@ def test_set_iam_policy_rest_bad_request(
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [

@@ -390,8 +390,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of addresses.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -601,8 +599,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> compute.Address:
         r"""Returns the specified address resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -711,8 +708,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
         by using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -826,8 +822,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
         specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

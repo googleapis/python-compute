@@ -66,7 +66,7 @@ class RegionInstanceGroupManagersRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the RegionInstanceGroupManagersRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomRegionInstanceGroupManagersInterceptor(RegionInstanceGroupManagersRestInterceptor):
             def pre_abandon_instances(request, metadata):
                 logging.log(f"Received request: {request}")

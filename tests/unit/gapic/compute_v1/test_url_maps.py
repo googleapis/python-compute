@@ -1363,17 +1363,17 @@ def test_insert_unary_rest(request_type):
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -1393,13 +1393,7 @@ def test_insert_unary_rest(request_type):
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -1420,30 +1414,7 @@ def test_insert_unary_rest(request_type):
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -1456,250 +1427,24 @@ def test_insert_unary_rest(request_type):
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -1743,99 +1488,9 @@ def test_insert_unary_rest(request_type):
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -2078,17 +1733,17 @@ def test_insert_unary_rest_bad_request(
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -2108,13 +1763,7 @@ def test_insert_unary_rest_bad_request(
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -2135,30 +1784,7 @@ def test_insert_unary_rest_bad_request(
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -2171,250 +1797,24 @@ def test_insert_unary_rest_bad_request(
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -2458,99 +1858,9 @@ def test_insert_unary_rest_bad_request(
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -3265,17 +2575,17 @@ def test_patch_unary_rest(request_type):
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -3295,13 +2605,7 @@ def test_patch_unary_rest(request_type):
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -3322,30 +2626,7 @@ def test_patch_unary_rest(request_type):
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -3358,250 +2639,24 @@ def test_patch_unary_rest(request_type):
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -3645,99 +2700,9 @@ def test_patch_unary_rest(request_type):
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -3982,17 +2947,17 @@ def test_patch_unary_rest_bad_request(
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -4012,13 +2977,7 @@ def test_patch_unary_rest_bad_request(
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -4039,30 +2998,7 @@ def test_patch_unary_rest_bad_request(
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -4075,250 +3011,24 @@ def test_patch_unary_rest_bad_request(
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -4362,99 +3072,9 @@ def test_patch_unary_rest_bad_request(
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -4586,17 +3206,17 @@ def test_update_unary_rest(request_type):
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -4616,13 +3236,7 @@ def test_update_unary_rest(request_type):
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -4643,30 +3257,7 @@ def test_update_unary_rest(request_type):
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -4679,250 +3270,24 @@ def test_update_unary_rest(request_type):
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -4966,99 +3331,9 @@ def test_update_unary_rest(request_type):
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -5305,17 +3580,17 @@ def test_update_unary_rest_bad_request(
                     "percentage": 0.10540000000000001,
                 },
             },
-            "max_stream_duration": {"nanos": 543, "seconds": 751},
+            "max_stream_duration": {},
             "request_mirror_policy": {"backend_service": "backend_service_value"},
             "retry_policy": {
                 "num_retries": 1197,
-                "per_try_timeout": {"nanos": 543, "seconds": 751},
+                "per_try_timeout": {},
                 "retry_conditions": [
                     "retry_conditions_value_1",
                     "retry_conditions_value_2",
                 ],
             },
-            "timeout": {"nanos": 543, "seconds": 751},
+            "timeout": {},
             "url_rewrite": {
                 "host_rewrite": "host_rewrite_value",
                 "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -5335,13 +3610,7 @@ def test_update_unary_rest_bad_request(
                             "request_headers_to_remove_value_1",
                             "request_headers_to_remove_value_2",
                         ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
+                        "response_headers_to_add": {},
                         "response_headers_to_remove": [
                             "response_headers_to_remove_value_1",
                             "response_headers_to_remove_value_2",
@@ -5362,30 +3631,7 @@ def test_update_unary_rest_bad_request(
         },
         "description": "description_value",
         "fingerprint": "fingerprint_value",
-        "header_action": {
-            "request_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "request_headers_to_remove": [
-                "request_headers_to_remove_value_1",
-                "request_headers_to_remove_value_2",
-            ],
-            "response_headers_to_add": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                    "replace": True,
-                }
-            ],
-            "response_headers_to_remove": [
-                "response_headers_to_remove_value_1",
-                "response_headers_to_remove_value_2",
-            ],
-        },
+        "header_action": {},
         "host_rules": [
             {
                 "description": "description_value",
@@ -5398,250 +3644,24 @@ def test_update_unary_rest_bad_request(
         "name": "name_value",
         "path_matchers": [
             {
-                "default_route_action": {
-                    "cors_policy": {
-                        "allow_credentials": True,
-                        "allow_headers": [
-                            "allow_headers_value_1",
-                            "allow_headers_value_2",
-                        ],
-                        "allow_methods": [
-                            "allow_methods_value_1",
-                            "allow_methods_value_2",
-                        ],
-                        "allow_origin_regexes": [
-                            "allow_origin_regexes_value_1",
-                            "allow_origin_regexes_value_2",
-                        ],
-                        "allow_origins": [
-                            "allow_origins_value_1",
-                            "allow_origins_value_2",
-                        ],
-                        "disabled": True,
-                        "expose_headers": [
-                            "expose_headers_value_1",
-                            "expose_headers_value_2",
-                        ],
-                        "max_age": 722,
-                    },
-                    "fault_injection_policy": {
-                        "abort": {
-                            "http_status": 1219,
-                            "percentage": 0.10540000000000001,
-                        },
-                        "delay": {
-                            "fixed_delay": {"nanos": 543, "seconds": 751},
-                            "percentage": 0.10540000000000001,
-                        },
-                    },
-                    "max_stream_duration": {"nanos": 543, "seconds": 751},
-                    "request_mirror_policy": {
-                        "backend_service": "backend_service_value"
-                    },
-                    "retry_policy": {
-                        "num_retries": 1197,
-                        "per_try_timeout": {"nanos": 543, "seconds": 751},
-                        "retry_conditions": [
-                            "retry_conditions_value_1",
-                            "retry_conditions_value_2",
-                        ],
-                    },
-                    "timeout": {"nanos": 543, "seconds": 751},
-                    "url_rewrite": {
-                        "host_rewrite": "host_rewrite_value",
-                        "path_prefix_rewrite": "path_prefix_rewrite_value",
-                    },
-                    "weighted_backend_services": [
-                        {
-                            "backend_service": "backend_service_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
-                            "weight": 648,
-                        }
-                    ],
-                },
+                "default_route_action": {},
                 "default_service": "default_service_value",
-                "default_url_redirect": {
-                    "host_redirect": "host_redirect_value",
-                    "https_redirect": True,
-                    "path_redirect": "path_redirect_value",
-                    "prefix_redirect": "prefix_redirect_value",
-                    "redirect_response_code": "redirect_response_code_value",
-                    "strip_query": True,
-                },
+                "default_url_redirect": {},
                 "description": "description_value",
-                "header_action": {
-                    "request_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "request_headers_to_remove": [
-                        "request_headers_to_remove_value_1",
-                        "request_headers_to_remove_value_2",
-                    ],
-                    "response_headers_to_add": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                            "replace": True,
-                        }
-                    ],
-                    "response_headers_to_remove": [
-                        "response_headers_to_remove_value_1",
-                        "response_headers_to_remove_value_2",
-                    ],
-                },
+                "header_action": {},
                 "name": "name_value",
                 "path_rules": [
                     {
                         "paths": ["paths_value_1", "paths_value_2"],
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
                 "route_rules": [
                     {
                         "description": "description_value",
-                        "header_action": {
-                            "request_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "request_headers_to_remove": [
-                                "request_headers_to_remove_value_1",
-                                "request_headers_to_remove_value_2",
-                            ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
-                            "response_headers_to_remove": [
-                                "response_headers_to_remove_value_1",
-                                "response_headers_to_remove_value_2",
-                            ],
-                        },
+                        "header_action": {},
                         "match_rules": [
                             {
                                 "full_path_match": "full_path_match_value",
@@ -5685,99 +3705,9 @@ def test_update_unary_rest_bad_request(
                             }
                         ],
                         "priority": 898,
-                        "route_action": {
-                            "cors_policy": {
-                                "allow_credentials": True,
-                                "allow_headers": [
-                                    "allow_headers_value_1",
-                                    "allow_headers_value_2",
-                                ],
-                                "allow_methods": [
-                                    "allow_methods_value_1",
-                                    "allow_methods_value_2",
-                                ],
-                                "allow_origin_regexes": [
-                                    "allow_origin_regexes_value_1",
-                                    "allow_origin_regexes_value_2",
-                                ],
-                                "allow_origins": [
-                                    "allow_origins_value_1",
-                                    "allow_origins_value_2",
-                                ],
-                                "disabled": True,
-                                "expose_headers": [
-                                    "expose_headers_value_1",
-                                    "expose_headers_value_2",
-                                ],
-                                "max_age": 722,
-                            },
-                            "fault_injection_policy": {
-                                "abort": {
-                                    "http_status": 1219,
-                                    "percentage": 0.10540000000000001,
-                                },
-                                "delay": {
-                                    "fixed_delay": {"nanos": 543, "seconds": 751},
-                                    "percentage": 0.10540000000000001,
-                                },
-                            },
-                            "max_stream_duration": {"nanos": 543, "seconds": 751},
-                            "request_mirror_policy": {
-                                "backend_service": "backend_service_value"
-                            },
-                            "retry_policy": {
-                                "num_retries": 1197,
-                                "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                "retry_conditions": [
-                                    "retry_conditions_value_1",
-                                    "retry_conditions_value_2",
-                                ],
-                            },
-                            "timeout": {"nanos": 543, "seconds": 751},
-                            "url_rewrite": {
-                                "host_rewrite": "host_rewrite_value",
-                                "path_prefix_rewrite": "path_prefix_rewrite_value",
-                            },
-                            "weighted_backend_services": [
-                                {
-                                    "backend_service": "backend_service_value",
-                                    "header_action": {
-                                        "request_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "request_headers_to_remove": [
-                                            "request_headers_to_remove_value_1",
-                                            "request_headers_to_remove_value_2",
-                                        ],
-                                        "response_headers_to_add": [
-                                            {
-                                                "header_name": "header_name_value",
-                                                "header_value": "header_value_value",
-                                                "replace": True,
-                                            }
-                                        ],
-                                        "response_headers_to_remove": [
-                                            "response_headers_to_remove_value_1",
-                                            "response_headers_to_remove_value_2",
-                                        ],
-                                    },
-                                    "weight": 648,
-                                }
-                            ],
-                        },
+                        "route_action": {},
                         "service": "service_value",
-                        "url_redirect": {
-                            "host_redirect": "host_redirect_value",
-                            "https_redirect": True,
-                            "path_redirect": "path_redirect_value",
-                            "prefix_redirect": "prefix_redirect_value",
-                            "redirect_response_code": "redirect_response_code_value",
-                            "strip_query": True,
-                        },
+                        "url_redirect": {},
                     }
                 ],
             }
@@ -5913,17 +3843,17 @@ def test_validate_rest(request_type):
                         "percentage": 0.10540000000000001,
                     },
                 },
-                "max_stream_duration": {"nanos": 543, "seconds": 751},
+                "max_stream_duration": {},
                 "request_mirror_policy": {"backend_service": "backend_service_value"},
                 "retry_policy": {
                     "num_retries": 1197,
-                    "per_try_timeout": {"nanos": 543, "seconds": 751},
+                    "per_try_timeout": {},
                     "retry_conditions": [
                         "retry_conditions_value_1",
                         "retry_conditions_value_2",
                     ],
                 },
-                "timeout": {"nanos": 543, "seconds": 751},
+                "timeout": {},
                 "url_rewrite": {
                     "host_rewrite": "host_rewrite_value",
                     "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -5943,13 +3873,7 @@ def test_validate_rest(request_type):
                                 "request_headers_to_remove_value_1",
                                 "request_headers_to_remove_value_2",
                             ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
+                            "response_headers_to_add": {},
                             "response_headers_to_remove": [
                                 "response_headers_to_remove_value_1",
                                 "response_headers_to_remove_value_2",
@@ -5970,30 +3894,7 @@ def test_validate_rest(request_type):
             },
             "description": "description_value",
             "fingerprint": "fingerprint_value",
-            "header_action": {
-                "request_headers_to_add": [
-                    {
-                        "header_name": "header_name_value",
-                        "header_value": "header_value_value",
-                        "replace": True,
-                    }
-                ],
-                "request_headers_to_remove": [
-                    "request_headers_to_remove_value_1",
-                    "request_headers_to_remove_value_2",
-                ],
-                "response_headers_to_add": [
-                    {
-                        "header_name": "header_name_value",
-                        "header_value": "header_value_value",
-                        "replace": True,
-                    }
-                ],
-                "response_headers_to_remove": [
-                    "response_headers_to_remove_value_1",
-                    "response_headers_to_remove_value_2",
-                ],
-            },
+            "header_action": {},
             "host_rules": [
                 {
                     "description": "description_value",
@@ -6006,250 +3907,24 @@ def test_validate_rest(request_type):
             "name": "name_value",
             "path_matchers": [
                 {
-                    "default_route_action": {
-                        "cors_policy": {
-                            "allow_credentials": True,
-                            "allow_headers": [
-                                "allow_headers_value_1",
-                                "allow_headers_value_2",
-                            ],
-                            "allow_methods": [
-                                "allow_methods_value_1",
-                                "allow_methods_value_2",
-                            ],
-                            "allow_origin_regexes": [
-                                "allow_origin_regexes_value_1",
-                                "allow_origin_regexes_value_2",
-                            ],
-                            "allow_origins": [
-                                "allow_origins_value_1",
-                                "allow_origins_value_2",
-                            ],
-                            "disabled": True,
-                            "expose_headers": [
-                                "expose_headers_value_1",
-                                "expose_headers_value_2",
-                            ],
-                            "max_age": 722,
-                        },
-                        "fault_injection_policy": {
-                            "abort": {
-                                "http_status": 1219,
-                                "percentage": 0.10540000000000001,
-                            },
-                            "delay": {
-                                "fixed_delay": {"nanos": 543, "seconds": 751},
-                                "percentage": 0.10540000000000001,
-                            },
-                        },
-                        "max_stream_duration": {"nanos": 543, "seconds": 751},
-                        "request_mirror_policy": {
-                            "backend_service": "backend_service_value"
-                        },
-                        "retry_policy": {
-                            "num_retries": 1197,
-                            "per_try_timeout": {"nanos": 543, "seconds": 751},
-                            "retry_conditions": [
-                                "retry_conditions_value_1",
-                                "retry_conditions_value_2",
-                            ],
-                        },
-                        "timeout": {"nanos": 543, "seconds": 751},
-                        "url_rewrite": {
-                            "host_rewrite": "host_rewrite_value",
-                            "path_prefix_rewrite": "path_prefix_rewrite_value",
-                        },
-                        "weighted_backend_services": [
-                            {
-                                "backend_service": "backend_service_value",
-                                "header_action": {
-                                    "request_headers_to_add": [
-                                        {
-                                            "header_name": "header_name_value",
-                                            "header_value": "header_value_value",
-                                            "replace": True,
-                                        }
-                                    ],
-                                    "request_headers_to_remove": [
-                                        "request_headers_to_remove_value_1",
-                                        "request_headers_to_remove_value_2",
-                                    ],
-                                    "response_headers_to_add": [
-                                        {
-                                            "header_name": "header_name_value",
-                                            "header_value": "header_value_value",
-                                            "replace": True,
-                                        }
-                                    ],
-                                    "response_headers_to_remove": [
-                                        "response_headers_to_remove_value_1",
-                                        "response_headers_to_remove_value_2",
-                                    ],
-                                },
-                                "weight": 648,
-                            }
-                        ],
-                    },
+                    "default_route_action": {},
                     "default_service": "default_service_value",
-                    "default_url_redirect": {
-                        "host_redirect": "host_redirect_value",
-                        "https_redirect": True,
-                        "path_redirect": "path_redirect_value",
-                        "prefix_redirect": "prefix_redirect_value",
-                        "redirect_response_code": "redirect_response_code_value",
-                        "strip_query": True,
-                    },
+                    "default_url_redirect": {},
                     "description": "description_value",
-                    "header_action": {
-                        "request_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
-                        "request_headers_to_remove": [
-                            "request_headers_to_remove_value_1",
-                            "request_headers_to_remove_value_2",
-                        ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
-                        "response_headers_to_remove": [
-                            "response_headers_to_remove_value_1",
-                            "response_headers_to_remove_value_2",
-                        ],
-                    },
+                    "header_action": {},
                     "name": "name_value",
                     "path_rules": [
                         {
                             "paths": ["paths_value_1", "paths_value_2"],
-                            "route_action": {
-                                "cors_policy": {
-                                    "allow_credentials": True,
-                                    "allow_headers": [
-                                        "allow_headers_value_1",
-                                        "allow_headers_value_2",
-                                    ],
-                                    "allow_methods": [
-                                        "allow_methods_value_1",
-                                        "allow_methods_value_2",
-                                    ],
-                                    "allow_origin_regexes": [
-                                        "allow_origin_regexes_value_1",
-                                        "allow_origin_regexes_value_2",
-                                    ],
-                                    "allow_origins": [
-                                        "allow_origins_value_1",
-                                        "allow_origins_value_2",
-                                    ],
-                                    "disabled": True,
-                                    "expose_headers": [
-                                        "expose_headers_value_1",
-                                        "expose_headers_value_2",
-                                    ],
-                                    "max_age": 722,
-                                },
-                                "fault_injection_policy": {
-                                    "abort": {
-                                        "http_status": 1219,
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                    "delay": {
-                                        "fixed_delay": {"nanos": 543, "seconds": 751},
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                },
-                                "max_stream_duration": {"nanos": 543, "seconds": 751},
-                                "request_mirror_policy": {
-                                    "backend_service": "backend_service_value"
-                                },
-                                "retry_policy": {
-                                    "num_retries": 1197,
-                                    "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                    "retry_conditions": [
-                                        "retry_conditions_value_1",
-                                        "retry_conditions_value_2",
-                                    ],
-                                },
-                                "timeout": {"nanos": 543, "seconds": 751},
-                                "url_rewrite": {
-                                    "host_rewrite": "host_rewrite_value",
-                                    "path_prefix_rewrite": "path_prefix_rewrite_value",
-                                },
-                                "weighted_backend_services": [
-                                    {
-                                        "backend_service": "backend_service_value",
-                                        "header_action": {
-                                            "request_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "request_headers_to_remove": [
-                                                "request_headers_to_remove_value_1",
-                                                "request_headers_to_remove_value_2",
-                                            ],
-                                            "response_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "response_headers_to_remove": [
-                                                "response_headers_to_remove_value_1",
-                                                "response_headers_to_remove_value_2",
-                                            ],
-                                        },
-                                        "weight": 648,
-                                    }
-                                ],
-                            },
+                            "route_action": {},
                             "service": "service_value",
-                            "url_redirect": {
-                                "host_redirect": "host_redirect_value",
-                                "https_redirect": True,
-                                "path_redirect": "path_redirect_value",
-                                "prefix_redirect": "prefix_redirect_value",
-                                "redirect_response_code": "redirect_response_code_value",
-                                "strip_query": True,
-                            },
+                            "url_redirect": {},
                         }
                     ],
                     "route_rules": [
                         {
                             "description": "description_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
+                            "header_action": {},
                             "match_rules": [
                                 {
                                     "full_path_match": "full_path_match_value",
@@ -6293,99 +3968,9 @@ def test_validate_rest(request_type):
                                 }
                             ],
                             "priority": 898,
-                            "route_action": {
-                                "cors_policy": {
-                                    "allow_credentials": True,
-                                    "allow_headers": [
-                                        "allow_headers_value_1",
-                                        "allow_headers_value_2",
-                                    ],
-                                    "allow_methods": [
-                                        "allow_methods_value_1",
-                                        "allow_methods_value_2",
-                                    ],
-                                    "allow_origin_regexes": [
-                                        "allow_origin_regexes_value_1",
-                                        "allow_origin_regexes_value_2",
-                                    ],
-                                    "allow_origins": [
-                                        "allow_origins_value_1",
-                                        "allow_origins_value_2",
-                                    ],
-                                    "disabled": True,
-                                    "expose_headers": [
-                                        "expose_headers_value_1",
-                                        "expose_headers_value_2",
-                                    ],
-                                    "max_age": 722,
-                                },
-                                "fault_injection_policy": {
-                                    "abort": {
-                                        "http_status": 1219,
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                    "delay": {
-                                        "fixed_delay": {"nanos": 543, "seconds": 751},
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                },
-                                "max_stream_duration": {"nanos": 543, "seconds": 751},
-                                "request_mirror_policy": {
-                                    "backend_service": "backend_service_value"
-                                },
-                                "retry_policy": {
-                                    "num_retries": 1197,
-                                    "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                    "retry_conditions": [
-                                        "retry_conditions_value_1",
-                                        "retry_conditions_value_2",
-                                    ],
-                                },
-                                "timeout": {"nanos": 543, "seconds": 751},
-                                "url_rewrite": {
-                                    "host_rewrite": "host_rewrite_value",
-                                    "path_prefix_rewrite": "path_prefix_rewrite_value",
-                                },
-                                "weighted_backend_services": [
-                                    {
-                                        "backend_service": "backend_service_value",
-                                        "header_action": {
-                                            "request_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "request_headers_to_remove": [
-                                                "request_headers_to_remove_value_1",
-                                                "request_headers_to_remove_value_2",
-                                            ],
-                                            "response_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "response_headers_to_remove": [
-                                                "response_headers_to_remove_value_1",
-                                                "response_headers_to_remove_value_2",
-                                            ],
-                                        },
-                                        "weight": 648,
-                                    }
-                                ],
-                            },
+                            "route_action": {},
                             "service": "service_value",
-                            "url_redirect": {
-                                "host_redirect": "host_redirect_value",
-                                "https_redirect": True,
-                                "path_redirect": "path_redirect_value",
-                                "prefix_redirect": "prefix_redirect_value",
-                                "redirect_response_code": "redirect_response_code_value",
-                                "strip_query": True,
-                            },
+                            "url_redirect": {},
                         }
                     ],
                 }
@@ -6590,17 +4175,17 @@ def test_validate_rest_bad_request(
                         "percentage": 0.10540000000000001,
                     },
                 },
-                "max_stream_duration": {"nanos": 543, "seconds": 751},
+                "max_stream_duration": {},
                 "request_mirror_policy": {"backend_service": "backend_service_value"},
                 "retry_policy": {
                     "num_retries": 1197,
-                    "per_try_timeout": {"nanos": 543, "seconds": 751},
+                    "per_try_timeout": {},
                     "retry_conditions": [
                         "retry_conditions_value_1",
                         "retry_conditions_value_2",
                     ],
                 },
-                "timeout": {"nanos": 543, "seconds": 751},
+                "timeout": {},
                 "url_rewrite": {
                     "host_rewrite": "host_rewrite_value",
                     "path_prefix_rewrite": "path_prefix_rewrite_value",
@@ -6620,13 +4205,7 @@ def test_validate_rest_bad_request(
                                 "request_headers_to_remove_value_1",
                                 "request_headers_to_remove_value_2",
                             ],
-                            "response_headers_to_add": [
-                                {
-                                    "header_name": "header_name_value",
-                                    "header_value": "header_value_value",
-                                    "replace": True,
-                                }
-                            ],
+                            "response_headers_to_add": {},
                             "response_headers_to_remove": [
                                 "response_headers_to_remove_value_1",
                                 "response_headers_to_remove_value_2",
@@ -6647,30 +4226,7 @@ def test_validate_rest_bad_request(
             },
             "description": "description_value",
             "fingerprint": "fingerprint_value",
-            "header_action": {
-                "request_headers_to_add": [
-                    {
-                        "header_name": "header_name_value",
-                        "header_value": "header_value_value",
-                        "replace": True,
-                    }
-                ],
-                "request_headers_to_remove": [
-                    "request_headers_to_remove_value_1",
-                    "request_headers_to_remove_value_2",
-                ],
-                "response_headers_to_add": [
-                    {
-                        "header_name": "header_name_value",
-                        "header_value": "header_value_value",
-                        "replace": True,
-                    }
-                ],
-                "response_headers_to_remove": [
-                    "response_headers_to_remove_value_1",
-                    "response_headers_to_remove_value_2",
-                ],
-            },
+            "header_action": {},
             "host_rules": [
                 {
                     "description": "description_value",
@@ -6683,250 +4239,24 @@ def test_validate_rest_bad_request(
             "name": "name_value",
             "path_matchers": [
                 {
-                    "default_route_action": {
-                        "cors_policy": {
-                            "allow_credentials": True,
-                            "allow_headers": [
-                                "allow_headers_value_1",
-                                "allow_headers_value_2",
-                            ],
-                            "allow_methods": [
-                                "allow_methods_value_1",
-                                "allow_methods_value_2",
-                            ],
-                            "allow_origin_regexes": [
-                                "allow_origin_regexes_value_1",
-                                "allow_origin_regexes_value_2",
-                            ],
-                            "allow_origins": [
-                                "allow_origins_value_1",
-                                "allow_origins_value_2",
-                            ],
-                            "disabled": True,
-                            "expose_headers": [
-                                "expose_headers_value_1",
-                                "expose_headers_value_2",
-                            ],
-                            "max_age": 722,
-                        },
-                        "fault_injection_policy": {
-                            "abort": {
-                                "http_status": 1219,
-                                "percentage": 0.10540000000000001,
-                            },
-                            "delay": {
-                                "fixed_delay": {"nanos": 543, "seconds": 751},
-                                "percentage": 0.10540000000000001,
-                            },
-                        },
-                        "max_stream_duration": {"nanos": 543, "seconds": 751},
-                        "request_mirror_policy": {
-                            "backend_service": "backend_service_value"
-                        },
-                        "retry_policy": {
-                            "num_retries": 1197,
-                            "per_try_timeout": {"nanos": 543, "seconds": 751},
-                            "retry_conditions": [
-                                "retry_conditions_value_1",
-                                "retry_conditions_value_2",
-                            ],
-                        },
-                        "timeout": {"nanos": 543, "seconds": 751},
-                        "url_rewrite": {
-                            "host_rewrite": "host_rewrite_value",
-                            "path_prefix_rewrite": "path_prefix_rewrite_value",
-                        },
-                        "weighted_backend_services": [
-                            {
-                                "backend_service": "backend_service_value",
-                                "header_action": {
-                                    "request_headers_to_add": [
-                                        {
-                                            "header_name": "header_name_value",
-                                            "header_value": "header_value_value",
-                                            "replace": True,
-                                        }
-                                    ],
-                                    "request_headers_to_remove": [
-                                        "request_headers_to_remove_value_1",
-                                        "request_headers_to_remove_value_2",
-                                    ],
-                                    "response_headers_to_add": [
-                                        {
-                                            "header_name": "header_name_value",
-                                            "header_value": "header_value_value",
-                                            "replace": True,
-                                        }
-                                    ],
-                                    "response_headers_to_remove": [
-                                        "response_headers_to_remove_value_1",
-                                        "response_headers_to_remove_value_2",
-                                    ],
-                                },
-                                "weight": 648,
-                            }
-                        ],
-                    },
+                    "default_route_action": {},
                     "default_service": "default_service_value",
-                    "default_url_redirect": {
-                        "host_redirect": "host_redirect_value",
-                        "https_redirect": True,
-                        "path_redirect": "path_redirect_value",
-                        "prefix_redirect": "prefix_redirect_value",
-                        "redirect_response_code": "redirect_response_code_value",
-                        "strip_query": True,
-                    },
+                    "default_url_redirect": {},
                     "description": "description_value",
-                    "header_action": {
-                        "request_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
-                        "request_headers_to_remove": [
-                            "request_headers_to_remove_value_1",
-                            "request_headers_to_remove_value_2",
-                        ],
-                        "response_headers_to_add": [
-                            {
-                                "header_name": "header_name_value",
-                                "header_value": "header_value_value",
-                                "replace": True,
-                            }
-                        ],
-                        "response_headers_to_remove": [
-                            "response_headers_to_remove_value_1",
-                            "response_headers_to_remove_value_2",
-                        ],
-                    },
+                    "header_action": {},
                     "name": "name_value",
                     "path_rules": [
                         {
                             "paths": ["paths_value_1", "paths_value_2"],
-                            "route_action": {
-                                "cors_policy": {
-                                    "allow_credentials": True,
-                                    "allow_headers": [
-                                        "allow_headers_value_1",
-                                        "allow_headers_value_2",
-                                    ],
-                                    "allow_methods": [
-                                        "allow_methods_value_1",
-                                        "allow_methods_value_2",
-                                    ],
-                                    "allow_origin_regexes": [
-                                        "allow_origin_regexes_value_1",
-                                        "allow_origin_regexes_value_2",
-                                    ],
-                                    "allow_origins": [
-                                        "allow_origins_value_1",
-                                        "allow_origins_value_2",
-                                    ],
-                                    "disabled": True,
-                                    "expose_headers": [
-                                        "expose_headers_value_1",
-                                        "expose_headers_value_2",
-                                    ],
-                                    "max_age": 722,
-                                },
-                                "fault_injection_policy": {
-                                    "abort": {
-                                        "http_status": 1219,
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                    "delay": {
-                                        "fixed_delay": {"nanos": 543, "seconds": 751},
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                },
-                                "max_stream_duration": {"nanos": 543, "seconds": 751},
-                                "request_mirror_policy": {
-                                    "backend_service": "backend_service_value"
-                                },
-                                "retry_policy": {
-                                    "num_retries": 1197,
-                                    "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                    "retry_conditions": [
-                                        "retry_conditions_value_1",
-                                        "retry_conditions_value_2",
-                                    ],
-                                },
-                                "timeout": {"nanos": 543, "seconds": 751},
-                                "url_rewrite": {
-                                    "host_rewrite": "host_rewrite_value",
-                                    "path_prefix_rewrite": "path_prefix_rewrite_value",
-                                },
-                                "weighted_backend_services": [
-                                    {
-                                        "backend_service": "backend_service_value",
-                                        "header_action": {
-                                            "request_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "request_headers_to_remove": [
-                                                "request_headers_to_remove_value_1",
-                                                "request_headers_to_remove_value_2",
-                                            ],
-                                            "response_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "response_headers_to_remove": [
-                                                "response_headers_to_remove_value_1",
-                                                "response_headers_to_remove_value_2",
-                                            ],
-                                        },
-                                        "weight": 648,
-                                    }
-                                ],
-                            },
+                            "route_action": {},
                             "service": "service_value",
-                            "url_redirect": {
-                                "host_redirect": "host_redirect_value",
-                                "https_redirect": True,
-                                "path_redirect": "path_redirect_value",
-                                "prefix_redirect": "prefix_redirect_value",
-                                "redirect_response_code": "redirect_response_code_value",
-                                "strip_query": True,
-                            },
+                            "url_redirect": {},
                         }
                     ],
                     "route_rules": [
                         {
                             "description": "description_value",
-                            "header_action": {
-                                "request_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "request_headers_to_remove": [
-                                    "request_headers_to_remove_value_1",
-                                    "request_headers_to_remove_value_2",
-                                ],
-                                "response_headers_to_add": [
-                                    {
-                                        "header_name": "header_name_value",
-                                        "header_value": "header_value_value",
-                                        "replace": True,
-                                    }
-                                ],
-                                "response_headers_to_remove": [
-                                    "response_headers_to_remove_value_1",
-                                    "response_headers_to_remove_value_2",
-                                ],
-                            },
+                            "header_action": {},
                             "match_rules": [
                                 {
                                     "full_path_match": "full_path_match_value",
@@ -6970,99 +4300,9 @@ def test_validate_rest_bad_request(
                                 }
                             ],
                             "priority": 898,
-                            "route_action": {
-                                "cors_policy": {
-                                    "allow_credentials": True,
-                                    "allow_headers": [
-                                        "allow_headers_value_1",
-                                        "allow_headers_value_2",
-                                    ],
-                                    "allow_methods": [
-                                        "allow_methods_value_1",
-                                        "allow_methods_value_2",
-                                    ],
-                                    "allow_origin_regexes": [
-                                        "allow_origin_regexes_value_1",
-                                        "allow_origin_regexes_value_2",
-                                    ],
-                                    "allow_origins": [
-                                        "allow_origins_value_1",
-                                        "allow_origins_value_2",
-                                    ],
-                                    "disabled": True,
-                                    "expose_headers": [
-                                        "expose_headers_value_1",
-                                        "expose_headers_value_2",
-                                    ],
-                                    "max_age": 722,
-                                },
-                                "fault_injection_policy": {
-                                    "abort": {
-                                        "http_status": 1219,
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                    "delay": {
-                                        "fixed_delay": {"nanos": 543, "seconds": 751},
-                                        "percentage": 0.10540000000000001,
-                                    },
-                                },
-                                "max_stream_duration": {"nanos": 543, "seconds": 751},
-                                "request_mirror_policy": {
-                                    "backend_service": "backend_service_value"
-                                },
-                                "retry_policy": {
-                                    "num_retries": 1197,
-                                    "per_try_timeout": {"nanos": 543, "seconds": 751},
-                                    "retry_conditions": [
-                                        "retry_conditions_value_1",
-                                        "retry_conditions_value_2",
-                                    ],
-                                },
-                                "timeout": {"nanos": 543, "seconds": 751},
-                                "url_rewrite": {
-                                    "host_rewrite": "host_rewrite_value",
-                                    "path_prefix_rewrite": "path_prefix_rewrite_value",
-                                },
-                                "weighted_backend_services": [
-                                    {
-                                        "backend_service": "backend_service_value",
-                                        "header_action": {
-                                            "request_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "request_headers_to_remove": [
-                                                "request_headers_to_remove_value_1",
-                                                "request_headers_to_remove_value_2",
-                                            ],
-                                            "response_headers_to_add": [
-                                                {
-                                                    "header_name": "header_name_value",
-                                                    "header_value": "header_value_value",
-                                                    "replace": True,
-                                                }
-                                            ],
-                                            "response_headers_to_remove": [
-                                                "response_headers_to_remove_value_1",
-                                                "response_headers_to_remove_value_2",
-                                            ],
-                                        },
-                                        "weight": 648,
-                                    }
-                                ],
-                            },
+                            "route_action": {},
                             "service": "service_value",
-                            "url_redirect": {
-                                "host_redirect": "host_redirect_value",
-                                "https_redirect": True,
-                                "path_redirect": "path_redirect_value",
-                                "prefix_redirect": "prefix_redirect_value",
-                                "redirect_response_code": "redirect_response_code_value",
-                                "strip_query": True,
-                            },
+                            "url_redirect": {},
                         }
                     ],
                 }

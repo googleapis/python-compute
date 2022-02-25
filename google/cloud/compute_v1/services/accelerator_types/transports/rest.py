@@ -66,7 +66,7 @@ class AcceleratorTypesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the AcceleratorTypesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomAcceleratorTypesInterceptor(AcceleratorTypesRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

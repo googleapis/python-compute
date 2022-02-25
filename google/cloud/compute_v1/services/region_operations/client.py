@@ -396,8 +396,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -503,8 +502,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -621,8 +619,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         within the specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -738,8 +735,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         ``DONE``.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

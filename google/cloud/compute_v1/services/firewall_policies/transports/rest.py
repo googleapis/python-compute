@@ -66,7 +66,7 @@ class FirewallPoliciesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the FirewallPoliciesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomFirewallPoliciesInterceptor(FirewallPoliciesRestInterceptor):
             def pre_add_association(request, metadata):
                 logging.log(f"Received request: {request}")

@@ -394,8 +394,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of accelerator types.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -488,8 +487,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> compute.AcceleratorType:
         r"""Returns the specified accelerator type.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -601,8 +599,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
