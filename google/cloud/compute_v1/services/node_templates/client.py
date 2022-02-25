@@ -390,8 +390,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node templates.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified NodeTemplate resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -605,8 +603,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         available node templates by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -714,8 +711,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -860,8 +856,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -977,8 +972,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1085,8 +1079,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1243,8 +1236,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

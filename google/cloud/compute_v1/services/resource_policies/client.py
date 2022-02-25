@@ -392,8 +392,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of resource policies.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -487,8 +486,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified resource policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -606,8 +604,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -716,8 +713,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -860,8 +856,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
     ) -> compute.Operation:
         r"""Creates a new resource policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -976,8 +971,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1081,8 +1075,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1239,8 +1232,7 @@ class ResourcePoliciesClient(metaclass=ResourcePoliciesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

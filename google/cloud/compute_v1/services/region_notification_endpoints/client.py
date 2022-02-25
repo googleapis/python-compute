@@ -400,8 +400,7 @@ class RegionNotificationEndpointsClient(
         given region
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -521,8 +520,7 @@ class RegionNotificationEndpointsClient(
         in the given region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -635,8 +633,7 @@ class RegionNotificationEndpointsClient(
         are included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -752,8 +749,7 @@ class RegionNotificationEndpointsClient(
         given region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

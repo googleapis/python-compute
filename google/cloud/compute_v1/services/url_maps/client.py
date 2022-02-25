@@ -392,8 +392,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -487,8 +486,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -596,8 +594,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         available URL maps by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -711,8 +708,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -820,8 +816,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         content </cdn/docs/invalidating-cached-content>`__.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -938,8 +933,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1036,8 +1030,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1151,8 +1144,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1269,8 +1261,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         this method does NOT create the UrlMap.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -1955,9 +1955,7 @@ def test_insert_unary_rest(request_type):
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -2274,9 +2272,7 @@ def test_insert_unary_rest_bad_request(
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -2765,9 +2761,7 @@ def test_patch_unary_rest(request_type):
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -3086,9 +3080,7 @@ def test_patch_unary_rest_bad_request(
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -3296,9 +3288,7 @@ def test_preview_rest(request_type):
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -3572,9 +3562,7 @@ def test_preview_rest_bad_request(
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -3782,9 +3770,7 @@ def test_update_unary_rest(request_type):
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,
@@ -4105,9 +4091,7 @@ def test_update_unary_rest_bad_request(
                     "advertised_groups_value_1",
                     "advertised_groups_value_2",
                 ],
-                "advertised_ip_ranges": [
-                    {"description": "description_value", "range_": "range__value"}
-                ],
+                "advertised_ip_ranges": {},
                 "advertised_route_priority": 2714,
                 "bfd": {
                     "min_receive_interval": 2122,

@@ -1707,7 +1707,7 @@ def test_insert_unary_rest(request_type):
             "start_time": "start_time_value",
             "time_zone": "time_zone_value",
             "vm_start_schedule": {"schedule": "schedule_value"},
-            "vm_stop_schedule": {"schedule": "schedule_value"},
+            "vm_stop_schedule": {},
         },
         "kind": "kind_value",
         "name": "name_value",
@@ -1980,7 +1980,7 @@ def test_insert_unary_rest_bad_request(
             "start_time": "start_time_value",
             "time_zone": "time_zone_value",
             "vm_start_schedule": {"schedule": "schedule_value"},
-            "vm_stop_schedule": {"schedule": "schedule_value"},
+            "vm_stop_schedule": {},
         },
         "kind": "kind_value",
         "name": "name_value",
@@ -2458,19 +2458,7 @@ def test_set_iam_policy_rest(request_type):
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [
@@ -2717,19 +2705,7 @@ def test_set_iam_policy_rest_bad_request(
                     "service": "service_value",
                 }
             ],
-            "bindings": [
-                {
-                    "binding_id": "binding_id_value",
-                    "condition": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "members": ["members_value_1", "members_value_2"],
-                    "role": "role_value",
-                }
-            ],
+            "bindings": {},
             "etag": "etag_value",
             "iam_owned": True,
             "rules": [

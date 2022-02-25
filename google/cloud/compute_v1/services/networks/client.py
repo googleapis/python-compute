@@ -392,8 +392,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Adds a peering to the specified network.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -511,8 +510,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified network.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -618,8 +616,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         available networks by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -713,8 +710,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.NetworksGetEffectiveFirewallsResponse:
         r"""Returns the effective firewalls on a given network.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -806,8 +802,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -911,8 +906,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1006,8 +1000,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         connection.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1111,8 +1104,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         modified: routingConfig.routingMode.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1224,8 +1216,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Removes a peering from the specified network.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1345,8 +1336,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         custom subnet mode.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1456,8 +1446,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         NetworkPeering.import_custom_routes field.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

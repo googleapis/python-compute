@@ -66,7 +66,7 @@ class GlobalNetworkEndpointGroupsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the GlobalNetworkEndpointGroupsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomGlobalNetworkEndpointGroupsInterceptor(GlobalNetworkEndpointGroupsRestInterceptor):
             def pre_attach_network_endpoints(request, metadata):
                 logging.log(f"Received request: {request}")

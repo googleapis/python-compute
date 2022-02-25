@@ -390,8 +390,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of subnetworks.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified subnetwork.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -606,8 +604,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified value.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -743,8 +740,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         available subnetworks list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -855,8 +851,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1001,8 +996,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1118,8 +1112,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1224,8 +1217,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         subnetworks in the project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1324,8 +1316,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         of the subnetwork resource being patched.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1453,8 +1444,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1612,8 +1602,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         Private Google Access.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1750,8 +1739,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

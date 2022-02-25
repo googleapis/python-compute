@@ -395,8 +395,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified externalVpnGateway.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -506,8 +505,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -615,8 +613,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -721,8 +718,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -820,8 +816,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -944,8 +939,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

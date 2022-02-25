@@ -398,8 +398,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -520,8 +519,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         certificates by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -643,8 +641,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         request
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -761,8 +758,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

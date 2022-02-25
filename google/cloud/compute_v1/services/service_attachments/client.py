@@ -397,8 +397,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -497,8 +496,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         scope
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -616,8 +614,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         the given scope.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -729,8 +726,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -876,8 +872,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -991,8 +986,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         given scope.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1098,8 +1092,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1231,8 +1224,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1389,8 +1381,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

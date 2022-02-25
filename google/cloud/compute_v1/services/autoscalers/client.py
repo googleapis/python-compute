@@ -390,8 +390,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of autoscalers.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -602,8 +600,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -714,8 +711,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -829,8 +825,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -937,8 +932,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1053,8 +1047,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

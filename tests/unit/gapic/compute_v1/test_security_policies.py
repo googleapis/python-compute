@@ -542,9 +542,9 @@ def test_add_rule_unary_rest(request_type):
                 "target": "target_value",
                 "type_": "type__value",
             },
-            "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+            "rate_limit_threshold": {},
         },
-        "redirect_options": {"target": "target_value", "type_": "type__value"},
+        "redirect_options": {},
     }
     request = request_type(request_init)
 
@@ -790,9 +790,9 @@ def test_add_rule_unary_rest_bad_request(
                 "target": "target_value",
                 "type_": "type__value",
             },
-            "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+            "rate_limit_threshold": {},
         },
-        "redirect_options": {"target": "target_value", "type_": "type__value"},
+        "redirect_options": {},
     }
     request = request_type(request_init)
 
@@ -1748,9 +1748,9 @@ def test_insert_unary_rest(request_type):
                         "target": "target_value",
                         "type_": "type__value",
                     },
-                    "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+                    "rate_limit_threshold": {},
                 },
-                "redirect_options": {"target": "target_value", "type_": "type__value"},
+                "redirect_options": {},
             }
         ],
         "self_link": "self_link_value",
@@ -2020,9 +2020,9 @@ def test_insert_unary_rest_bad_request(
                         "target": "target_value",
                         "type_": "type__value",
                     },
-                    "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+                    "rate_limit_threshold": {},
                 },
-                "redirect_options": {"target": "target_value", "type_": "type__value"},
+                "redirect_options": {},
             }
         ],
         "self_link": "self_link_value",
@@ -2736,9 +2736,9 @@ def test_patch_unary_rest(request_type):
                         "target": "target_value",
                         "type_": "type__value",
                     },
-                    "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+                    "rate_limit_threshold": {},
                 },
-                "redirect_options": {"target": "target_value", "type_": "type__value"},
+                "redirect_options": {},
             }
         ],
         "self_link": "self_link_value",
@@ -3011,9 +3011,9 @@ def test_patch_unary_rest_bad_request(
                         "target": "target_value",
                         "type_": "type__value",
                     },
-                    "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+                    "rate_limit_threshold": {},
                 },
-                "redirect_options": {"target": "target_value", "type_": "type__value"},
+                "redirect_options": {},
             }
         ],
         "self_link": "self_link_value",
@@ -3156,9 +3156,9 @@ def test_patch_rule_unary_rest(request_type):
                 "target": "target_value",
                 "type_": "type__value",
             },
-            "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+            "rate_limit_threshold": {},
         },
-        "redirect_options": {"target": "target_value", "type_": "type__value"},
+        "redirect_options": {},
     }
     request = request_type(request_init)
 
@@ -3407,9 +3407,9 @@ def test_patch_rule_unary_rest_bad_request(
                 "target": "target_value",
                 "type_": "type__value",
             },
-            "rate_limit_threshold": {"count": 553, "interval_sec": 1279},
+            "rate_limit_threshold": {},
         },
-        "redirect_options": {"target": "target_value", "type_": "type__value"},
+        "redirect_options": {},
     }
     request = request_type(request_init)
 

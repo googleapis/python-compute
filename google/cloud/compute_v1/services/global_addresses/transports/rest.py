@@ -66,7 +66,7 @@ class GlobalAddressesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the GlobalAddressesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomGlobalAddressesInterceptor(GlobalAddressesRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

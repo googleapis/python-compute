@@ -393,8 +393,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetTcpProxy resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -504,8 +503,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -607,8 +605,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -713,8 +710,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -809,8 +805,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetTcpProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -934,8 +929,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetTcpProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -397,8 +397,7 @@ class GlobalPublicDelegatedPrefixesClient(
     ) -> compute.Operation:
         r"""Deletes the specified global PublicDelegatedPrefix.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -507,8 +506,7 @@ class GlobalPublicDelegatedPrefixesClient(
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -612,8 +610,7 @@ class GlobalPublicDelegatedPrefixesClient(
         in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -720,8 +717,7 @@ class GlobalPublicDelegatedPrefixesClient(
         project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -818,8 +814,7 @@ class GlobalPublicDelegatedPrefixesClient(
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

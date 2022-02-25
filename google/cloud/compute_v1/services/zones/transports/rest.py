@@ -63,7 +63,7 @@ class ZonesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the ZonesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomZonesInterceptor(ZonesRestInterceptor):
             def pre_get(request, metadata):
                 logging.log(f"Received request: {request}")

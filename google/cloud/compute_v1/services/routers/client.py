@@ -390,8 +390,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of routers.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -485,8 +484,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified Router resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -603,8 +601,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         available routers by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -709,8 +706,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         endpoints.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -826,8 +822,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         router.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -928,8 +923,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         and region using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1042,8 +1036,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1149,8 +1142,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1274,8 +1266,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         create or update the router.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1387,8 +1378,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         payload.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

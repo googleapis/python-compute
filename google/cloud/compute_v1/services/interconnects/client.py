@@ -391,8 +391,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified interconnect.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -499,8 +498,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         available interconnects by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -598,8 +596,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         interconnect.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -695,8 +692,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -801,8 +797,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -901,8 +896,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

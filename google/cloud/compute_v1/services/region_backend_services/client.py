@@ -398,8 +398,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -519,8 +518,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -641,8 +639,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         regional BackendService.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -760,8 +757,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         overview.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -878,8 +874,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         given region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -990,8 +985,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1122,8 +1116,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         information, see Backend services overview .
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

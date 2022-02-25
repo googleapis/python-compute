@@ -63,7 +63,7 @@ class RoutesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the RoutesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomRoutesInterceptor(RoutesRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

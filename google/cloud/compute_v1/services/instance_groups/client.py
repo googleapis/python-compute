@@ -399,8 +399,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         for more information.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -534,8 +533,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         by zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -632,8 +630,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         instance group for more information.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -756,8 +753,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         methods instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -874,8 +870,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         using the parameters that are included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -993,8 +988,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         regionInstanceGroupManagers methods instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1101,8 +1095,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         The orderBy query parameter is not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1239,8 +1232,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         is removed or deleted.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1377,8 +1369,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

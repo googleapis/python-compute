@@ -396,8 +396,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         sorts them by zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -495,8 +494,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         network endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -640,8 +638,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         services referencing it.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -766,8 +763,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         network endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -909,8 +905,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1028,8 +1023,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1148,8 +1142,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         are located in the specified project and zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1258,8 +1251,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1398,8 +1390,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -392,8 +392,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of forwarding rules.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -486,8 +485,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified ForwardingRule resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -605,8 +603,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
     ) -> compute.ForwardingRule:
         r"""Returns the specified ForwardingRule resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -724,8 +721,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -841,8 +837,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         available to the specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -952,8 +947,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         only patch the network_tier field.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1084,8 +1078,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1215,8 +1208,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         target should be of the same type as the old target.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

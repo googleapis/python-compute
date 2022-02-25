@@ -392,8 +392,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -513,8 +512,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         available URL maps by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -640,8 +638,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -757,8 +754,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         the specified project in the specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -867,8 +863,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -994,8 +989,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1124,8 +1118,7 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         this method does NOT create the UrlMap.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

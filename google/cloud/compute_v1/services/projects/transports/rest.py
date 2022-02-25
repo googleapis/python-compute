@@ -63,7 +63,7 @@ class ProjectsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the ProjectsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomProjectsInterceptor(ProjectsRestInterceptor):
             def pre_disable_xpn_host(request, metadata):
                 logging.log(f"Received request: {request}")

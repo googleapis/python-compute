@@ -393,8 +393,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -503,8 +502,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         of available addresses by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -605,8 +603,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         by using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -709,8 +706,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves a list of global addresses.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

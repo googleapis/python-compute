@@ -395,8 +395,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified GlobalForwardingRule resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -506,8 +505,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -614,8 +612,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -720,8 +717,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -820,8 +816,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         only patch the network_tier field.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -939,8 +934,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1062,8 +1056,7 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         the old target.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

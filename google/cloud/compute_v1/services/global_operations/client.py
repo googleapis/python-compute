@@ -392,8 +392,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of all operations.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -485,8 +484,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> compute.DeleteGlobalOperationResponse:
         r"""Deletes the specified Operations resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -581,8 +579,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> compute.Operation:
         r"""Retrieves the specified Operations resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -690,8 +687,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         within the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -798,8 +794,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         ``DONE``.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -66,7 +66,7 @@ class PacketMirroringsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the PacketMirroringsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomPacketMirroringsInterceptor(PacketMirroringsRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")
