@@ -417,8 +417,7 @@ class RegionInstanceGroupManagersClient(
         maximum of 1000 instances with this method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -560,8 +559,7 @@ class RegionInstanceGroupManagersClient(
         instance group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -715,8 +713,7 @@ class RegionInstanceGroupManagersClient(
         listmanagedinstances method.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -858,8 +855,7 @@ class RegionInstanceGroupManagersClient(
         of the instances in that group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -995,8 +991,7 @@ class RegionInstanceGroupManagersClient(
         instances with this method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1138,8 +1133,7 @@ class RegionInstanceGroupManagersClient(
         instance group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1284,8 +1278,7 @@ class RegionInstanceGroupManagersClient(
         managed instance group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1407,8 +1400,7 @@ class RegionInstanceGroupManagersClient(
         instances.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1526,8 +1518,7 @@ class RegionInstanceGroupManagersClient(
         are contained within the specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1637,8 +1628,7 @@ class RegionInstanceGroupManagersClient(
         orderBy query parameters are not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1762,8 +1752,7 @@ class RegionInstanceGroupManagersClient(
         is not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1885,8 +1874,7 @@ class RegionInstanceGroupManagersClient(
         not supported.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2020,8 +2008,7 @@ class RegionInstanceGroupManagersClient(
         in a MIG, see Updating instances in a MIG.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2157,8 +2144,7 @@ class RegionInstanceGroupManagersClient(
         patch.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2318,8 +2304,7 @@ class RegionInstanceGroupManagersClient(
         method per request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2469,8 +2454,7 @@ class RegionInstanceGroupManagersClient(
         or deleted.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2602,8 +2586,7 @@ class RegionInstanceGroupManagersClient(
         Existing instances are not affected.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2747,8 +2730,7 @@ class RegionInstanceGroupManagersClient(
         group are not affected.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2892,8 +2874,7 @@ class RegionInstanceGroupManagersClient(
         patch.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

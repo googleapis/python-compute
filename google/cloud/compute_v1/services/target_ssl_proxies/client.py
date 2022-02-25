@@ -393,8 +393,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetSslProxy resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -504,8 +503,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -607,8 +605,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -713,8 +710,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -809,8 +805,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetSslProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -934,8 +929,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetSslProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1058,8 +1052,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes SslCertificates for TargetSslProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1188,8 +1181,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         connection between the load balancer and the backends.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

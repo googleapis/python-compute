@@ -66,7 +66,7 @@ class InstanceGroupManagersRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the InstanceGroupManagersRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomInstanceGroupManagersInterceptor(InstanceGroupManagersRestInterceptor):
             def pre_abandon_instances(request, metadata):
                 logging.log(f"Received request: {request}")

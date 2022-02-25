@@ -66,7 +66,7 @@ class SslCertificatesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the SslCertificatesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomSslCertificatesInterceptor(SslCertificatesRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

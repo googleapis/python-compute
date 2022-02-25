@@ -394,8 +394,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         regional and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -489,8 +488,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -600,8 +598,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -711,8 +708,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -817,8 +813,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -390,8 +390,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of VPN tunnels.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified VpnTunnel resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -603,8 +601,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         of available VPN tunnels by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -709,8 +706,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         and region using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -824,8 +820,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         the specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

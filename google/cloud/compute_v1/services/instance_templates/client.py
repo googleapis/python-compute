@@ -399,8 +399,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         use by a managed instance group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -510,8 +509,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -608,8 +606,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -747,8 +744,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         the original template.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -853,8 +849,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         contained within the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -950,8 +945,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1097,8 +1091,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

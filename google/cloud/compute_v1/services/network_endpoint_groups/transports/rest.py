@@ -66,7 +66,7 @@ class NetworkEndpointGroupsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the NetworkEndpointGroupsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomNetworkEndpointGroupsInterceptor(NetworkEndpointGroupsRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

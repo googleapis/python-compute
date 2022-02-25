@@ -400,8 +400,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
         the query parameter ``?fields=id,selfLink`` to your request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -504,8 +503,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
         parameter ``?fields=id,selfLink`` to your request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

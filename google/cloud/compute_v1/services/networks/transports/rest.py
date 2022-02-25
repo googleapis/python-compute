@@ -63,7 +63,7 @@ class NetworksRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the NetworksRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomNetworksInterceptor(NetworksRestInterceptor):
             def pre_add_peering(request, metadata):
                 logging.log(f"Received request: {request}")

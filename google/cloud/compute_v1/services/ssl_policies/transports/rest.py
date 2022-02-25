@@ -63,7 +63,7 @@ class SslPoliciesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the SslPoliciesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomSslPoliciesInterceptor(SslPoliciesRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

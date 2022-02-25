@@ -66,7 +66,7 @@ class SecurityPoliciesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the SecurityPoliciesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomSecurityPoliciesInterceptor(SecurityPoliciesRestInterceptor):
             def pre_add_rule(request, metadata):
                 logging.log(f"Received request: {request}")

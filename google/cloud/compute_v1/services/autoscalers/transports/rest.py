@@ -63,7 +63,7 @@ class AutoscalersRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the AutoscalersRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomAutoscalersInterceptor(AutoscalersRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

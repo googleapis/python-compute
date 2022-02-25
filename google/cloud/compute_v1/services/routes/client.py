@@ -391,8 +391,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified Route resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -498,8 +497,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         available routes by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -596,8 +594,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -701,8 +698,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

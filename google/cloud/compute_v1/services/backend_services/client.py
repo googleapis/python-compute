@@ -396,8 +396,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         for this backend service.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -514,8 +513,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         regional and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -611,8 +609,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified BackendService resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -722,8 +719,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         URLs for this backend service.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -844,8 +840,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         list of available backend services.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -956,8 +951,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         "/zones/us-east1-b/instanceGroups/lb-backend-example" }
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1063,8 +1057,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         information, see Backend services overview .
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1169,8 +1162,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1270,8 +1262,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1388,8 +1379,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         backend service.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1513,8 +1503,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         Google Cloud Armor Overview
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1637,8 +1626,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         see Backend services overview.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

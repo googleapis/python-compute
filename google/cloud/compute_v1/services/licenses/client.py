@@ -394,8 +394,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -504,8 +503,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         creating Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -605,8 +603,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -741,8 +738,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         who are creating Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -853,8 +849,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -950,8 +945,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1098,8 +1092,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         partners who are creating Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

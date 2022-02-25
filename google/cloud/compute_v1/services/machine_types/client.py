@@ -390,8 +390,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of machine types.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -486,8 +485,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         available machine types by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -594,8 +592,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

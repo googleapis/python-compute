@@ -396,8 +396,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         this disk for scheduling snapshot creation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -530,8 +529,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         different from the source disk project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -659,8 +657,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         from the disk. You must separately delete snapshots.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -776,8 +773,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Disk:
         r"""Returns a specified regional persistent disk.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -891,8 +887,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1037,8 +1032,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1152,8 +1146,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         within the specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1256,8 +1249,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Operation:
         r"""Removes resource policies from a regional disk.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1390,8 +1382,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Operation:
         r"""Resizes the specified regional persistent disk.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1519,8 +1510,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1675,8 +1665,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
     ) -> compute.Operation:
         r"""Sets the labels on the target regional disk.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1806,8 +1795,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

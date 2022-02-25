@@ -396,8 +396,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -503,8 +502,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -621,8 +619,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         within the specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -737,8 +734,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         the operation is not ``DONE``.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

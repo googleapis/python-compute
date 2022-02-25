@@ -394,8 +394,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         third-party partners who are creating Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -496,8 +495,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         partners who are creating Cloud Marketplace images.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

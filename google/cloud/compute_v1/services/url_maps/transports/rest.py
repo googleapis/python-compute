@@ -63,7 +63,7 @@ class UrlMapsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the UrlMapsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomUrlMapsInterceptor(UrlMapsRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

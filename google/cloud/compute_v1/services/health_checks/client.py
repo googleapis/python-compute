@@ -392,8 +392,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         regional and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -487,8 +486,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified HealthCheck resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -598,8 +596,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -712,8 +709,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -818,8 +814,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -918,8 +913,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1036,8 +1030,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

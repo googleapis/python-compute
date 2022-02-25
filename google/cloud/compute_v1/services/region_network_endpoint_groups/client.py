@@ -401,8 +401,7 @@ class RegionNetworkEndpointGroupsClient(
         backend of a backend service.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -525,8 +524,7 @@ class RegionNetworkEndpointGroupsClient(
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -644,8 +642,7 @@ class RegionNetworkEndpointGroupsClient(
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -765,8 +762,7 @@ class RegionNetworkEndpointGroupsClient(
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

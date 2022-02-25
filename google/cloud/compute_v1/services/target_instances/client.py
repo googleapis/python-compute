@@ -392,8 +392,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target instances.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -486,8 +485,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetInstance resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -608,8 +606,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -722,8 +719,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         project and zone using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -839,8 +835,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         available to the specified project and zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

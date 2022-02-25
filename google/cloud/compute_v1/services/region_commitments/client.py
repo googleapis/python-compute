@@ -396,8 +396,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -493,8 +492,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -604,8 +602,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -719,8 +716,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -828,8 +824,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         auto_renew.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

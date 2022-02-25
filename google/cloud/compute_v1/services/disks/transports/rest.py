@@ -63,7 +63,7 @@ class DisksRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the DisksRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomDisksInterceptor(DisksRestInterceptor):
             def pre_add_resource_policies(request, metadata):
                 logging.log(f"Received request: {request}")
