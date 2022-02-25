@@ -393,8 +393,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         machine image is permanent and cannot be undone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -503,8 +502,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         available machine images by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -604,8 +602,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -743,8 +740,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         original instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -849,8 +845,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         within the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -946,8 +941,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1093,8 +1087,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

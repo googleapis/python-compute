@@ -393,8 +393,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Adds specified number of nodes to the node group.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -522,8 +521,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -616,8 +614,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified NodeGroup resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -736,8 +733,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Deletes specified nodes from the node group.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -870,8 +866,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         nodeGroups.listNodes instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -984,8 +979,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1131,8 +1125,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1261,8 +1254,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         more details about each group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1365,8 +1357,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> pagers.ListNodesPager:
         r"""Lists nodes in the node group.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1480,8 +1471,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Updates the specified node group.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1609,8 +1599,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1765,8 +1754,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
     ) -> compute.Operation:
         r"""Updates the node template of the node group.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1898,8 +1886,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

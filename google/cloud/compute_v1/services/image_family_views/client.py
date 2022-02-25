@@ -396,8 +396,7 @@ class ImageFamilyViewsClient(metaclass=ImageFamilyViewsClientMeta):
         specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

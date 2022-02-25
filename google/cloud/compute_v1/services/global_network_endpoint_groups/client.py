@@ -402,8 +402,7 @@ class GlobalNetworkEndpointGroupsClient(
         endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -537,8 +536,7 @@ class GlobalNetworkEndpointGroupsClient(
         services referencing it.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -651,8 +649,7 @@ class GlobalNetworkEndpointGroupsClient(
         network endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -786,8 +783,7 @@ class GlobalNetworkEndpointGroupsClient(
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -893,8 +889,7 @@ class GlobalNetworkEndpointGroupsClient(
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1001,8 +996,7 @@ class GlobalNetworkEndpointGroupsClient(
         are located in the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1098,8 +1092,7 @@ class GlobalNetworkEndpointGroupsClient(
         endpoint group.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

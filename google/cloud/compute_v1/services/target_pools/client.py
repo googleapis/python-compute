@@ -393,8 +393,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Adds health check URLs to a target pool.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -529,8 +528,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Adds an instance to a target pool.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -657,8 +655,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target pools.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -751,8 +748,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified target pool.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -872,8 +868,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         available target pools by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -987,8 +982,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         pool.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1102,8 +1096,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1219,8 +1212,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1326,8 +1318,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Removes health check URL from a target pool.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1460,8 +1451,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Removes instance URL from a target pool.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1596,8 +1586,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
     ) -> compute.Operation:
         r"""Changes a backup target pool's configurations.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -390,8 +390,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Disable this project as a shared VPC host project.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -490,8 +489,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         project) associated with this host project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -598,8 +596,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Enable this project as a shared VPC host project.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -699,8 +696,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         used by instances in the service project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -816,8 +812,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         ``?fields=id,selfLink`` to your request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -904,8 +899,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         links to. May be empty if no link exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -993,8 +987,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         associated with this host project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1088,8 +1081,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         user in an organization.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1190,8 +1182,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Moves a persistent disk from one zone to another.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1300,8 +1291,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         issue </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior>`__.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1408,8 +1398,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1519,8 +1508,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         specifying the network tier field.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1632,8 +1620,7 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         export feature will be disabled.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

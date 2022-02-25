@@ -66,7 +66,7 @@ class InstanceGroupsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the InstanceGroupsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomInstanceGroupsInterceptor(InstanceGroupsRestInterceptor):
             def pre_add_instances(request, metadata):
                 logging.log(f"Received request: {request}")

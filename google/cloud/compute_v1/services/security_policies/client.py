@@ -394,8 +394,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Inserts a rule into a security policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -511,8 +510,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -621,8 +619,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         specified policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -718,8 +715,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.SecurityPolicyRule:
         r"""Gets a rule at the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -817,8 +813,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -923,8 +918,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1019,8 +1013,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         Application Firewall (WAF) expressions.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1113,8 +1106,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         like addRule, patchRule, and removeRule instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1229,8 +1221,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Patches a rule at the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1346,8 +1337,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes a rule at the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

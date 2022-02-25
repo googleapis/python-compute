@@ -396,8 +396,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         of available disk types by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -510,8 +509,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

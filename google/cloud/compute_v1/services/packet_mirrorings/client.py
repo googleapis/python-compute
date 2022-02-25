@@ -392,8 +392,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of packetMirrorings.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -487,8 +486,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified PacketMirroring resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -604,8 +602,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
     ) -> compute.PacketMirroring:
         r"""Returns the specified PacketMirroring resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -719,8 +716,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -834,8 +830,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         available to the specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -943,8 +938,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1072,8 +1066,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

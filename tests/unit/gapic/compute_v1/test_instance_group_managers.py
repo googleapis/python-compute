@@ -3221,7 +3221,7 @@ def test_insert_unary_rest(request_type):
         "update_policy": {
             "instance_redistribution_type": "instance_redistribution_type_value",
             "max_surge": {"calculated": 1042, "fixed": 528, "percent": 753},
-            "max_unavailable": {"calculated": 1042, "fixed": 528, "percent": 753},
+            "max_unavailable": {},
             "minimal_action": "minimal_action_value",
             "most_disruptive_allowed_action": "most_disruptive_allowed_action_value",
             "replacement_method": "replacement_method_value",
@@ -3231,7 +3231,7 @@ def test_insert_unary_rest(request_type):
             {
                 "instance_template": "instance_template_value",
                 "name": "name_value",
-                "target_size": {"calculated": 1042, "fixed": 528, "percent": 753},
+                "target_size": {},
             }
         ],
         "zone": "zone_value",
@@ -3495,7 +3495,7 @@ def test_insert_unary_rest_bad_request(
         "update_policy": {
             "instance_redistribution_type": "instance_redistribution_type_value",
             "max_surge": {"calculated": 1042, "fixed": 528, "percent": 753},
-            "max_unavailable": {"calculated": 1042, "fixed": 528, "percent": 753},
+            "max_unavailable": {},
             "minimal_action": "minimal_action_value",
             "most_disruptive_allowed_action": "most_disruptive_allowed_action_value",
             "replacement_method": "replacement_method_value",
@@ -3505,7 +3505,7 @@ def test_insert_unary_rest_bad_request(
             {
                 "instance_template": "instance_template_value",
                 "name": "name_value",
-                "target_size": {"calculated": 1042, "fixed": 528, "percent": 753},
+                "target_size": {},
             }
         ],
         "zone": "zone_value",
@@ -4978,7 +4978,7 @@ def test_patch_unary_rest(request_type):
         "update_policy": {
             "instance_redistribution_type": "instance_redistribution_type_value",
             "max_surge": {"calculated": 1042, "fixed": 528, "percent": 753},
-            "max_unavailable": {"calculated": 1042, "fixed": 528, "percent": 753},
+            "max_unavailable": {},
             "minimal_action": "minimal_action_value",
             "most_disruptive_allowed_action": "most_disruptive_allowed_action_value",
             "replacement_method": "replacement_method_value",
@@ -4988,7 +4988,7 @@ def test_patch_unary_rest(request_type):
             {
                 "instance_template": "instance_template_value",
                 "name": "name_value",
-                "target_size": {"calculated": 1042, "fixed": 528, "percent": 753},
+                "target_size": {},
             }
         ],
         "zone": "zone_value",
@@ -5261,7 +5261,7 @@ def test_patch_unary_rest_bad_request(
         "update_policy": {
             "instance_redistribution_type": "instance_redistribution_type_value",
             "max_surge": {"calculated": 1042, "fixed": 528, "percent": 753},
-            "max_unavailable": {"calculated": 1042, "fixed": 528, "percent": 753},
+            "max_unavailable": {},
             "minimal_action": "minimal_action_value",
             "most_disruptive_allowed_action": "most_disruptive_allowed_action_value",
             "replacement_method": "replacement_method_value",
@@ -5271,7 +5271,7 @@ def test_patch_unary_rest_bad_request(
             {
                 "instance_template": "instance_template_value",
                 "name": "name_value",
-                "target_size": {"calculated": 1042, "fixed": 528, "percent": 753},
+                "target_size": {},
             }
         ],
         "zone": "zone_value",

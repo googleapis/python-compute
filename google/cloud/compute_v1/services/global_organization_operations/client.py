@@ -396,8 +396,7 @@ class GlobalOrganizationOperationsClient(
     ) -> compute.DeleteGlobalOrganizationOperationResponse:
         r"""Deletes the specified Operations resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -485,8 +484,7 @@ class GlobalOrganizationOperationsClient(
         operations by making a ``list()`` request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -585,8 +583,7 @@ class GlobalOrganizationOperationsClient(
         within the specified organization.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

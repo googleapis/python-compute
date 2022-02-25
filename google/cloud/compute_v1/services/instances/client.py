@@ -396,8 +396,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         interface.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -536,8 +535,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         to this instance for scheduling live migrations.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -667,8 +665,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instances.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -767,8 +764,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         persistent disk to your instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -893,8 +889,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         number of instances to create.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1015,8 +1010,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         information, see Deleting an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1138,8 +1132,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         interface.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1276,8 +1269,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Detaches a disk from an instance.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1407,8 +1399,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         of available instances by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1518,8 +1509,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         of the instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1632,8 +1622,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.GuestAttributes:
         r"""Returns the specified guest attributes entry.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1738,8 +1727,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1882,8 +1870,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Screenshot:
         r"""Returns the screenshot from the specified instance.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1988,8 +1975,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         specified instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2092,8 +2078,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.ShieldedInstanceIdentity:
         r"""Returns the Shielded Instance Identity of an instance
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2200,8 +2185,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2317,8 +2301,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2427,8 +2410,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instances.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2546,8 +2528,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Removes resource policies from an instance.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2682,8 +2663,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         information, see Resetting an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2802,8 +2782,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instances().suspend method.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2921,8 +2900,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.SendDiagnosticInterruptInstanceResponse:
         r"""Sends diagnostic interrupt to the instance.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3030,8 +3008,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
     ) -> compute.Operation:
         r"""Sets deletion protection on the instance.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3153,8 +3130,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3295,8 +3271,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3453,8 +3428,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         labels, read the Labeling Resources documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3586,8 +3560,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         stopped instance to the values specified in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3719,8 +3692,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         the machine type specified in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3852,8 +3824,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -3983,8 +3954,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         Minimum CPU Platform.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4120,8 +4090,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         VM availability policies.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4248,8 +4217,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         access scopes for an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4385,8 +4353,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         the JSON merge patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4522,8 +4489,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4650,8 +4616,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         information, see Simulate a host maintenance event.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4774,8 +4739,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         Restart an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -4896,8 +4860,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         Restart an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5040,8 +5003,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         more information, see Stopping an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5167,8 +5129,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         information, see Suspending and resuming an instance.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5289,8 +5250,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5409,8 +5369,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         instance for a list of updatable instance properties.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5541,8 +5500,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         uses the JSON merge patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5682,8 +5640,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5817,8 +5774,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         follows PATCH semantics.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -5960,8 +5916,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         patch format and processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

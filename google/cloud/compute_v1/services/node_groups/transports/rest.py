@@ -63,7 +63,7 @@ class NodeGroupsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the NodeGroupsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomNodeGroupsInterceptor(NodeGroupsRestInterceptor):
             def pre_add_nodes(request, metadata):
                 logging.log(f"Received request: {request}")

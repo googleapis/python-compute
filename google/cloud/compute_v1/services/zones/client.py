@@ -393,8 +393,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
         available zones by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -490,8 +489,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
         specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

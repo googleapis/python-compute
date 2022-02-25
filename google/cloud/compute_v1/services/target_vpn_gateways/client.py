@@ -394,8 +394,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target VPN gateways.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -488,8 +487,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified target VPN gateway.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -608,8 +606,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -717,8 +714,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
         and region using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -832,8 +828,7 @@ class TargetVpnGatewaysClient(metaclass=TargetVpnGatewaysClientMeta):
         the specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

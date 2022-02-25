@@ -396,8 +396,7 @@ class DisksClient(metaclass=DisksClientMeta):
         for scheduling snapshot creation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -522,8 +521,7 @@ class DisksClient(metaclass=DisksClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of persistent disks.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -622,8 +620,7 @@ class DisksClient(metaclass=DisksClientMeta):
         different from the source disk project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -753,8 +750,7 @@ class DisksClient(metaclass=DisksClientMeta):
         delete snapshots.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -873,8 +869,7 @@ class DisksClient(metaclass=DisksClientMeta):
         available persistent disks by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -990,8 +985,7 @@ class DisksClient(metaclass=DisksClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1141,8 +1135,7 @@ class DisksClient(metaclass=DisksClientMeta):
         property.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1257,8 +1250,7 @@ class DisksClient(metaclass=DisksClientMeta):
         the specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1362,8 +1354,7 @@ class DisksClient(metaclass=DisksClientMeta):
     ) -> compute.Operation:
         r"""Removes resource policies from a disk.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1493,8 +1484,7 @@ class DisksClient(metaclass=DisksClientMeta):
         increase the size of the disk.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1619,8 +1609,7 @@ class DisksClient(metaclass=DisksClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1777,8 +1766,7 @@ class DisksClient(metaclass=DisksClientMeta):
         labels, read the Labeling Resources documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1909,8 +1897,7 @@ class DisksClient(metaclass=DisksClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

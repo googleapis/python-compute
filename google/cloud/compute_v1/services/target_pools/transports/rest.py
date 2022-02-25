@@ -63,7 +63,7 @@ class TargetPoolsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the TargetPoolsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomTargetPoolsInterceptor(TargetPoolsRestInterceptor):
             def pre_add_health_check(request, metadata):
                 logging.log(f"Received request: {request}")

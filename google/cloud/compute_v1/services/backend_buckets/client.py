@@ -396,8 +396,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         for this backend bucket.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -513,8 +512,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified BackendBucket resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -624,8 +622,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         URLs for this backend bucket.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -747,8 +744,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -847,8 +843,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -953,8 +948,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1053,8 +1047,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1171,8 +1164,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend bucket.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1294,8 +1286,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

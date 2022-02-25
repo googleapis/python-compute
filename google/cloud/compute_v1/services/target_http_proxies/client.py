@@ -396,8 +396,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         regional and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -491,8 +490,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpProxy resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -602,8 +600,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -710,8 +707,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -816,8 +812,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -915,8 +910,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1033,8 +1027,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -395,8 +395,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -506,8 +505,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Inserts a rule into a firewall policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -612,8 +610,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Copies rules to the specified firewall policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -711,8 +708,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -810,8 +806,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicy:
         r"""Returns the specified firewall policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -894,8 +889,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicyAssociation:
         r"""Gets an association with the specified name.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -980,8 +974,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1104,8 +1097,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicyRule:
         r"""Gets a rule of the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1195,8 +1187,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1303,8 +1294,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         the specified folder or organization.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1377,8 +1367,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         organization or folder.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1441,8 +1430,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Moves the specified firewall policy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1552,8 +1540,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1659,8 +1646,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Patches a rule of the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1767,8 +1753,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1866,8 +1851,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes a rule of the specified priority.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1968,8 +1952,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -2106,8 +2089,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

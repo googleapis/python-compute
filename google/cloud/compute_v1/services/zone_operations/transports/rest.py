@@ -66,7 +66,7 @@ class ZoneOperationsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the ZoneOperationsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomZoneOperationsInterceptor(ZoneOperationsRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

@@ -66,7 +66,7 @@ class ServiceAttachmentsRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the ServiceAttachmentsRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomServiceAttachmentsInterceptor(ServiceAttachmentsRestInterceptor):
             def pre_aggregated_list(request, metadata):
                 logging.log(f"Received request: {request}")

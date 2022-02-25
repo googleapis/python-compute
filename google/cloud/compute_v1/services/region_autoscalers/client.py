@@ -396,8 +396,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -513,8 +512,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
     ) -> compute.Autoscaler:
         r"""Returns the specified autoscaler.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -628,8 +626,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -745,8 +742,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         specified region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -854,8 +850,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -972,8 +967,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

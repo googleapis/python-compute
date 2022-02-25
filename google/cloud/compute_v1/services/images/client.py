@@ -391,8 +391,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified image.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -500,8 +499,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         instead.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -615,8 +613,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         images by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -711,8 +708,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         family and is not deprecated.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -810,8 +806,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -945,8 +940,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1056,8 +1050,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         as debian-cloud or windows-cloud.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1153,8 +1146,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         family, description, deprecation status.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1268,8 +1260,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1415,8 +1406,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         labels, read the Labeling Resources documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1537,8 +1527,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -390,8 +390,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of VPN gateways.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -484,8 +483,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified VPN gateway.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -601,8 +599,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         available VPN gateways by making a list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -709,8 +706,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
     ) -> compute.VpnGatewaysGetStatusResponse:
         r"""Returns the status for the specified VPN gateway.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -811,8 +807,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -926,8 +921,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         specified project and region.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1033,8 +1027,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         labels, read the Labeling Resources documentation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1164,8 +1157,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

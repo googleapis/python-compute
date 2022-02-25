@@ -63,7 +63,7 @@ class ImagesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the ImagesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomImagesInterceptor(ImagesRestInterceptor):
             def pre_delete(request, metadata):
                 logging.log(f"Received request: {request}")

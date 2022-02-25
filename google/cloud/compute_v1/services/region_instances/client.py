@@ -395,8 +395,7 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
         specifies the number of instances to create.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

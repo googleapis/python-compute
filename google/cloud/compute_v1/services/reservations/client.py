@@ -390,8 +390,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of reservations.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -485,8 +484,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified reservation.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -602,8 +600,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         reservation.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -710,8 +707,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         empty if no such policy or resource exists.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -856,8 +852,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         Reserving zonal resources.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -971,8 +966,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         configured for the specified project in specified zone.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1077,8 +1071,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         reservations.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1206,8 +1199,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         resource. Replaces any existing policy.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1364,8 +1356,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         specified resource.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1480,8 +1471,7 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> compute.Operation:
         r"""Update share settings of the reservation.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -396,8 +396,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         regional and global, available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -491,8 +490,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpsProxy resource.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -602,8 +600,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         list() request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -709,8 +706,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         project using the data included in the request.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -815,8 +811,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         available to the specified project.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -915,8 +910,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         processing rules.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1033,8 +1027,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     ) -> compute.Operation:
         r"""Sets the QUIC override policy for TargetHttpsProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1158,8 +1151,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     ) -> compute.Operation:
         r"""Replaces SslCertificates for TargetHttpsProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1287,8 +1279,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         connection between the load balancer and the backends.
 
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 
@@ -1407,8 +1398,7 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpsProxy.
 
-
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud import compute_v1
 

@@ -66,7 +66,7 @@ class BackendServicesRestInterceptor:
     These use cases and more can be enabled by injecting an
     instance of a custom subclass when constructing the BackendServicesRestTransport.
 
-    .. code-block:
+    .. code-block:: python
         class MyCustomBackendServicesInterceptor(BackendServicesRestInterceptor):
             def pre_add_signed_url_key(request, metadata):
                 logging.log(f"Received request: {request}")
