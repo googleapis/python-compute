@@ -281,7 +281,9 @@ def generate(
 
     for path, recipe in recipes.items():
         rendered = render_recipe(recipe, ingredients)
-        out = save_rendered_recipe(path, rendered, recipes_path=recipes_path, output_dir=Path(args.output_dir))
+        out = save_rendered_recipe(
+            path, rendered, recipes_path=recipes_path, output_dir=Path(args.output_dir)
+        )
         updated_paths.add(str(out))
 
     print("Generated files:")
