@@ -27,7 +27,6 @@ with the Compute Engine API.
 # [START compute_usage_report_disable]
 from google.cloud import compute_v1
 
-
 # [END compute_usage_report_disable]
 # [END compute_usage_report_get]
 # [END compute_usage_report_set]

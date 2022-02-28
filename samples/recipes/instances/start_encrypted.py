@@ -18,4 +18,3 @@
 
 # <INGREDIENT start_instance_with_encryption_key />
 # </REGION compute_start_enc_instance>
-

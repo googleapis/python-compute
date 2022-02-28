@@ -164,7 +164,7 @@ def load_recipes(path: Path) -> dict:
         if ipath.is_dir():
             recipes.update(load_recipes(ipath))
         elif ipath.is_file():
-            recipes[ipath] = load_recipe(ipath)
+            recipes[ipath.absolute()] = load_recipe(ipath)
     return recipes
 
 
@@ -255,7 +255,6 @@ def save_rendered_recipe(
     recipes_path: Path = RECIPES_PATH,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
-
     output_path = output_dir / recipe_path.relative_to(recipes_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -282,7 +281,7 @@ def generate(
 
     for path, recipe in recipes.items():
         rendered = render_recipe(recipe, ingredients)
-        out = save_rendered_recipe(path, rendered, output_dir=Path(args.output_dir))
+        out = save_rendered_recipe(path, rendered, recipes_path=recipes_path, output_dir=Path(args.output_dir))
         updated_paths.add(str(out))
 
     print("Generated files:")

@@ -17,20 +17,21 @@ import google.auth
 from google.cloud import compute_v1
 import pytest
 
-from ..instances.create_start_instance.create_from_custom_image import \
-    create_from_custom_image
-from ..instances.create_start_instance.create_from_public_image import \
-    create_from_public_image
-from ..instances.create_start_instance.create_from_snapshot import \
-    create_from_snapshot
-from ..instances.create_start_instance.create_with_additional_disk import \
-    create_with_additional_disk
-from ..instances.create_start_instance.create_with_snapshotted_data_disk import \
-    create_with_snapshotted_data_disk
+from ..instances.create_start_instance.create_from_custom_image import (
+    create_from_custom_image,
+)
+from ..instances.create_start_instance.create_from_public_image import (
+    create_from_public_image,
+)
+from ..instances.create_start_instance.create_from_snapshot import create_from_snapshot
+from ..instances.create_start_instance.create_with_additional_disk import (
+    create_with_additional_disk,
+)
+from ..instances.create_start_instance.create_with_snapshotted_data_disk import (
+    create_with_snapshotted_data_disk,
+)
 from ..instances.create_with_subnet import create_with_subnet
 from ..instances.delete import delete_instance
-
-
 from ..operations.operation_check import wait_for_operation
 
 PROJECT = google.auth.default()[1]
@@ -126,7 +127,11 @@ class TestCreation:
 
     def test_create_from_public_image(self):
         instance_name = "i" + uuid.uuid4().hex[:10]
-        instance = create_from_public_image(PROJECT, INSTANCE_ZONE, instance_name,)
+        instance = create_from_public_image(
+            PROJECT,
+            INSTANCE_ZONE,
+            instance_name,
+        )
         try:
             assert "debian-cloud" in instance.disks[0].initialize_params.source_image
             assert "debian-10" in instance.disks[0].initialize_params.source_image

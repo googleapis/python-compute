@@ -17,4 +17,3 @@
 
 # <INGREDIENT create_instance_from_template />
 # </REGION compute_instances_create_from_template>
-

@@ -38,7 +38,9 @@ if __name__ == "__main__":
         instance_name = "quickstart-" + uuid.uuid4().hex[:10]
         instance_zone = "europe-central2-b"
 
-        newest_debian = get_image_from_family(project="debian-cloud", family="debian-10")
+        newest_debian = get_image_from_family(
+            project="debian-cloud", family="debian-10"
+        )
         disk_type = f"zones/{instance_zone}/diskTypes/pd-standard"
         disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
 

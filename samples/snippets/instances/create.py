@@ -171,6 +171,7 @@ def create_instance(
 
 if __name__ == "__main__":
     import uuid
+
     import google.auth
     import google.auth.exceptions
 

@@ -18,4 +18,3 @@
 
 # <INGREDIENT reset_instance />
 # </REGION compute_reset_instance>
-

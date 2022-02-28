@@ -18,4 +18,3 @@
 
 # <INGREDIENT stop_instance />
 # </REGION compute_stop_instance>
-
