@@ -395,28 +395,6 @@ class ImageFamilyViewsClient(metaclass=ImageFamilyViewsClientMeta):
         family, is not deprecated and is rolled out in the
         specified zone.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ImageFamilyViewsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetImageFamilyViewRequest(
-                    family="family_value",
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetImageFamilyViewRequest, dict]):
                 The request object. A request message for

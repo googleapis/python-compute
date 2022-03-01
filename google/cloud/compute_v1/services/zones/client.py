@@ -392,27 +392,6 @@ class ZonesClient(metaclass=ZonesClientMeta):
         r"""Returns the specified Zone resource. Gets a list of
         available zones by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ZonesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetZoneRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetZoneRequest, dict]):
                 The request object. A request message for Zones.Get. See
@@ -487,27 +466,6 @@ class ZonesClient(metaclass=ZonesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves the list of Zone resources available to the
         specified project.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.ZonesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListZonesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListZonesRequest, dict]):

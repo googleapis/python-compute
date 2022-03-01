@@ -392,27 +392,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                    url_map="url_map_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -510,28 +489,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.UrlMap:
         r"""Returns the specified UrlMap resource. Gets a list of
         available URL maps by making a list() request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                    url_map="url_map_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionUrlMapRequest, dict]):
@@ -637,27 +594,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         r"""Creates a UrlMap resource in the specified project
         using the data included in the request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionUrlMapRequest, dict]):
                 The request object. A request message for
@@ -753,28 +689,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         r"""Retrieves the list of UrlMap resources available to
         the specified project in the specified region.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListRegionUrlMapsRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionUrlMapsRequest, dict]):
                 The request object. A request message for
@@ -861,28 +775,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         included in the request. This method supports PATCH
         semantics and uses JSON merge patch format and
         processing rules.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                    url_map="url_map_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRegionUrlMapRequest, dict]):
@@ -987,28 +879,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
     ) -> compute.Operation:
         r"""Updates the specified UrlMap resource with the data
         included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_update():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.UpdateRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                    url_map="url_map_value",
-                )
-
-                # Make the request
-                response = client.update(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateRegionUrlMapRequest, dict]):
@@ -1116,28 +986,6 @@ class RegionUrlMapsClient(metaclass=RegionUrlMapsClientMeta):
         r"""Runs static validation for the UrlMap. In particular,
         the tests of the provided UrlMap will be run. Calling
         this method does NOT create the UrlMap.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_validate():
-                # Create a client
-                client = compute_v1.RegionUrlMapsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ValidateRegionUrlMapRequest(
-                    project="project_value",
-                    region="region_value",
-                    url_map="url_map_value",
-                )
-
-                # Make the request
-                response = client.validate(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ValidateRegionUrlMapRequest, dict]):

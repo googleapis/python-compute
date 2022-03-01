@@ -390,26 +390,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of routers.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListRoutersRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListRoutersRequest, dict]):
                 The request object. A request message for
@@ -483,27 +463,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified Router resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRouterRequest, dict]):
@@ -600,28 +559,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         r"""Returns the specified Router resource. Gets a list of
         available routers by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetRouterRequest, dict]):
                 The request object. A request message for Routers.Get.
@@ -704,29 +641,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
     ) -> pagers.GetNatMappingInfoPager:
         r"""Retrieves runtime Nat mapping information of VM
         endpoints.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_nat_mapping_info():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetNatMappingInfoRoutersRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                page_result = client.get_nat_mapping_info(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetNatMappingInfoRoutersRequest, dict]):
@@ -821,28 +735,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         r"""Retrieves runtime information of the specified
         router.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_router_status():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRouterStatusRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.get_router_status(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetRouterStatusRouterRequest, dict]):
                 The request object. A request message for
@@ -921,27 +813,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
     ) -> compute.Operation:
         r"""Creates a Router resource in the specified project
         and region using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRouterRequest, dict]):
@@ -1035,28 +906,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         r"""Retrieves a list of Router resources available to the
         specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListRoutersRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListRoutersRequest, dict]):
                 The request object. A request message for Routers.List.
@@ -1140,28 +989,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         included in the request. This method supports PATCH
         semantics and uses JSON merge patch format and
         processing rules.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRouterRequest, dict]):
@@ -1265,28 +1092,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         and update operations. Calling this method does NOT
         create or update the router.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_preview():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PreviewRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.preview(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.PreviewRouterRequest, dict]):
                 The request object. A request message for
@@ -1376,28 +1181,6 @@ class RoutersClient(metaclass=RoutersClientMeta):
         resource be created or replaced with the state defined
         by the representation enclosed in the request message
         payload.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_update():
-                # Create a client
-                client = compute_v1.RoutersClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.UpdateRouterRequest(
-                    project="project_value",
-                    region="region_value",
-                    router="router_value",
-                )
-
-                # Make the request
-                response = client.update(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateRouterRequest, dict]):

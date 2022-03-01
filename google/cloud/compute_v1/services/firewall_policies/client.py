@@ -394,26 +394,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Inserts an association for the specified firewall
         policy.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_add_association():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AddAssociationFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.add_association(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AddAssociationFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -505,25 +485,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Inserts a rule into a firewall policy.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_add_rule():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AddRuleFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.add_rule(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AddRuleFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -610,25 +571,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Copies rules to the specified firewall policy.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_clone_rules():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.CloneRulesFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.clone_rules(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.CloneRulesFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -707,25 +649,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified policy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteFirewallPolicyRequest, dict]):
@@ -806,25 +729,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicy:
         r"""Returns the specified firewall policy.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -888,25 +792,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.FirewallPolicyAssociation:
         r"""Gets an association with the specified name.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_association():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetAssociationFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.get_association(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetAssociationFirewallPolicyRequest, dict]):
@@ -972,26 +857,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_iam_policy():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetIamPolicyFirewallPolicyRequest(
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.get_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyFirewallPolicyRequest, dict]):
@@ -1097,25 +962,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.FirewallPolicyRule:
         r"""Gets a rule of the specified priority.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_rule():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRuleFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.get_rule(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetRuleFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1185,25 +1031,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project using
         the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertFirewallPolicyRequest(
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertFirewallPolicyRequest, dict]):
@@ -1293,26 +1120,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Lists all the policies that have been configured for
         the specified folder or organization.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListFirewallPoliciesRequest(
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListFirewallPoliciesRequest, dict]):
                 The request object. A request message for
@@ -1366,25 +1173,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Lists associations of a specified target, i.e.,
         organization or folder.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_associations():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListAssociationsFirewallPolicyRequest(
-                )
-
-                # Make the request
-                response = client.list_associations(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListAssociationsFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1429,25 +1217,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Moves the specified firewall policy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_move():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.MoveFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.move(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.MoveFirewallPolicyRequest, dict]):
@@ -1539,26 +1308,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Patches the specified policy with the data included
         in the request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.PatchFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1645,25 +1394,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches a rule of the specified priority.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch_rule():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchRuleFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.patch_rule(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRuleFirewallPolicyRequest, dict]):
@@ -1752,26 +1482,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         r"""Removes an association for the specified firewall
         policy.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_remove_association():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.RemoveAssociationFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.remove_association(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveAssociationFirewallPolicyRequest, dict]):
                 The request object. A request message for
@@ -1850,25 +1560,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a rule of the specified priority.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_remove_rule():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.RemoveRuleFirewallPolicyRequest(
-                    firewall_policy="firewall_policy_value",
-                )
-
-                # Make the request
-                response = client.remove_rule(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveRuleFirewallPolicyRequest, dict]):
@@ -1950,26 +1641,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_iam_policy():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetIamPolicyFirewallPolicyRequest(
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyFirewallPolicyRequest, dict]):
@@ -2087,26 +1758,6 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.FirewallPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsFirewallPolicyRequest(
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsFirewallPolicyRequest, dict]):

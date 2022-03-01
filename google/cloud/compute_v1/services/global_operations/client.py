@@ -392,26 +392,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of all operations.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.GlobalOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListGlobalOperationsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListGlobalOperationsRequest, dict]):
                 The request object. A request message for
@@ -483,26 +463,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteGlobalOperationResponse:
         r"""Deletes the specified Operations resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.GlobalOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteGlobalOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalOperationRequest, dict]):
@@ -578,26 +538,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified Operations resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.GlobalOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetGlobalOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalOperationRequest, dict]):
@@ -686,27 +626,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         r"""Retrieves a list of Operation resources contained
         within the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.GlobalOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListGlobalOperationsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalOperationsRequest, dict]):
                 The request object. A request message for
@@ -792,27 +711,6 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         is no guarantee that the operation is actually done when the
         method returns. Be prepared to retry if the operation is not
         ``DONE``.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_wait():
-                # Create a client
-                client = compute_v1.GlobalOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.WaitGlobalOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.wait(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.WaitGlobalOperationRequest, dict]):

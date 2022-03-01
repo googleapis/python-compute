@@ -396,27 +396,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Deletes the specified TargetGrpcProxy in the given
         scope
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.TargetGrpcProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteTargetGrpcProxyRequest(
-                    project="project_value",
-                    target_grpc_proxy="target_grpc_proxy_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -505,27 +484,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Returns the specified TargetGrpcProxy resource in the
         given scope.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.TargetGrpcProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetTargetGrpcProxyRequest(
-                    project="project_value",
-                    target_grpc_proxy="target_grpc_proxy_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetGrpcProxyRequest, dict]):
                 The request object. A request message for
@@ -606,26 +564,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Creates a TargetGrpcProxy in the specified project in
         the given scope using the parameters that are included
         in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.TargetGrpcProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertTargetGrpcProxyRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetGrpcProxyRequest, dict]):
@@ -712,27 +650,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         r"""Lists the TargetGrpcProxies for a project in the
         given scope.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.TargetGrpcProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListTargetGrpcProxiesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetGrpcProxiesRequest, dict]):
                 The request object. A request message for
@@ -808,27 +725,6 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         the data included in the request. This method supports
         PATCH semantics and uses JSON merge patch format and
         processing rules.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.TargetGrpcProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchTargetGrpcProxyRequest(
-                    project="project_value",
-                    target_grpc_proxy="target_grpc_proxy_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchTargetGrpcProxyRequest, dict]):

@@ -394,27 +394,6 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
         r"""Creates multiple instances in a given region. Count
         specifies the number of instances to create.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_bulk_insert():
-                # Create a client
-                client = compute_v1.RegionInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.BulkInsertRegionInstanceRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.bulk_insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.BulkInsertRegionInstanceRequest, dict]):
                 The request object. A request message for

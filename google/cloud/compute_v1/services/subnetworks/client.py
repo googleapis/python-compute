@@ -390,26 +390,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of subnetworks.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListSubnetworksRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -482,27 +462,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified subnetwork.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    subnetwork="subnetwork_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSubnetworkRequest, dict]):
@@ -602,28 +561,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Operation:
         r"""Expands the IP CIDR range of the subnetwork to a
         specified value.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_expand_ip_cidr_range():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ExpandIpCidrRangeSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    subnetwork="subnetwork_value",
-                )
-
-                # Make the request
-                response = client.expand_ip_cidr_range(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ExpandIpCidrRangeSubnetworkRequest, dict]):
@@ -739,28 +676,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Returns the specified subnetwork. Gets a list of
         available subnetworks list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    subnetwork="subnetwork_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -849,28 +764,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_iam_policy():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetIamPolicySubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.get_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicySubnetworkRequest, dict]):
@@ -995,27 +888,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Creates a subnetwork in the specified project using
         the data included in the request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -1111,28 +983,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Retrieves a list of subnetworks available to the
         specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListSubnetworksRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -1216,27 +1066,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         r"""Retrieves an aggregated list of all usable
         subnetworks in the project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_usable():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListUsableSubnetworksRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list_usable(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListUsableSubnetworksRequest, dict]):
                 The request object. A request message for
@@ -1314,28 +1143,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         updated with a patch request as indicated in the field
         descriptions. You must specify the current fingerprint
         of the subnetwork resource being patched.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    subnetwork="subnetwork_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchSubnetworkRequest, dict]):
@@ -1442,28 +1249,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_iam_policy():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetIamPolicySubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicySubnetworkRequest, dict]):
@@ -1601,28 +1386,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         services without assigning external IP addresses through
         Private Google Access.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_private_ip_google_access():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetPrivateIpGoogleAccessSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    subnetwork="subnetwork_value",
-                )
-
-                # Make the request
-                response = client.set_private_ip_google_access(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.SetPrivateIpGoogleAccessSubnetworkRequest, dict]):
                 The request object. A request message for
@@ -1737,28 +1500,6 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.SubnetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsSubnetworkRequest(
-                    project="project_value",
-                    region="region_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsSubnetworkRequest, dict]):

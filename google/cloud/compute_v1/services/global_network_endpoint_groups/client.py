@@ -401,27 +401,6 @@ class GlobalNetworkEndpointGroupsClient(
         r"""Attach a network endpoint to the specified network
         endpoint group.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_attach_network_endpoints():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest(
-                    network_endpoint_group="network_endpoint_group_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.attach_network_endpoints(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -535,27 +514,6 @@ class GlobalNetworkEndpointGroupsClient(
         that the NEG cannot be deleted if there are backend
         services referencing it.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteGlobalNetworkEndpointGroupRequest(
-                    network_endpoint_group="network_endpoint_group_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -647,27 +605,6 @@ class GlobalNetworkEndpointGroupsClient(
     ) -> compute.Operation:
         r"""Detach the network endpoint from the specified
         network endpoint group.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_detach_network_endpoints():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest(
-                    network_endpoint_group="network_endpoint_group_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.detach_network_endpoints(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest, dict]):
@@ -782,27 +719,6 @@ class GlobalNetworkEndpointGroupsClient(
         list of available network endpoint groups by making a
         list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetGlobalNetworkEndpointGroupRequest(
-                    network_endpoint_group="network_endpoint_group_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalNetworkEndpointGroupRequest, dict]):
                 The request object. A request message for
@@ -887,26 +803,6 @@ class GlobalNetworkEndpointGroupsClient(
         r"""Creates a network endpoint group in the specified
         project using the parameters that are included in the
         request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertGlobalNetworkEndpointGroupRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertGlobalNetworkEndpointGroupRequest, dict]):
@@ -995,27 +891,6 @@ class GlobalNetworkEndpointGroupsClient(
         r"""Retrieves the list of network endpoint groups that
         are located in the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListGlobalNetworkEndpointGroupsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalNetworkEndpointGroupsRequest, dict]):
                 The request object. A request message for
@@ -1090,28 +965,6 @@ class GlobalNetworkEndpointGroupsClient(
     ) -> pagers.ListNetworkEndpointsPager:
         r"""Lists the network endpoints in the specified network
         endpoint group.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_network_endpoints():
-                # Create a client
-                client = compute_v1.GlobalNetworkEndpointGroupsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest(
-                    network_endpoint_group="network_endpoint_group_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list_network_endpoints(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest, dict]):
