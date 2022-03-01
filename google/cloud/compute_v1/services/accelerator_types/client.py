@@ -394,26 +394,6 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of accelerator types.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.AcceleratorTypesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListAcceleratorTypesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListAcceleratorTypesRequest, dict]):
                 The request object. A request message for
@@ -486,27 +466,6 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.AcceleratorType:
         r"""Returns the specified accelerator type.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.AcceleratorTypesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetAcceleratorTypeRequest(
-                    accelerator_type="accelerator_type_value",
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetAcceleratorTypeRequest, dict]):
@@ -597,28 +556,6 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves a list of accelerator types that are
         available to the specified project.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.AcceleratorTypesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListAcceleratorTypesRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListAcceleratorTypesRequest, dict]):

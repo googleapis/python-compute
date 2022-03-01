@@ -395,26 +395,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified GlobalForwardingRule resource.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteGlobalForwardingRuleRequest(
-                    forwarding_rule="forwarding_rule_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -504,27 +484,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         Gets a list of available forwarding rules by making a
         list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetGlobalForwardingRuleRequest(
-                    forwarding_rule="forwarding_rule_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -611,26 +570,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         specified project using the data included in the
         request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertGlobalForwardingRuleRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertGlobalForwardingRuleRequest, dict]):
                 The request object. A request message for
@@ -716,27 +655,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         r"""Retrieves a list of GlobalForwardingRule resources
         available to the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListGlobalForwardingRulesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalForwardingRulesRequest, dict]):
                 The request object. A request message for
@@ -814,27 +732,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         the request. This method supports PATCH semantics and uses the
         JSON merge patch format and processing rules. Currently, you can
         only patch the network_tier field.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchGlobalForwardingRuleRequest(
-                    forwarding_rule="forwarding_rule_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchGlobalForwardingRuleRequest, dict]):
@@ -932,27 +829,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         r"""Sets the labels on the specified resource. To learn
         more about labels, read the Labeling resources
         documentation.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_labels():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetLabelsGlobalForwardingRuleRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_labels(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsGlobalForwardingRuleRequest, dict]):
@@ -1054,27 +930,6 @@ class GlobalForwardingRulesClient(metaclass=GlobalForwardingRulesClientMeta):
         r"""Changes target URL for the GlobalForwardingRule
         resource. The new target should be of the same type as
         the old target.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_target():
-                # Create a client
-                client = compute_v1.GlobalForwardingRulesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetTargetGlobalForwardingRuleRequest(
-                    forwarding_rule="forwarding_rule_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.set_target(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetTargetGlobalForwardingRuleRequest, dict]):

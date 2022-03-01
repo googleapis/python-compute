@@ -390,25 +390,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Disable this project as a shared VPC host project.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_disable_xpn_host():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DisableXpnHostProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.disable_xpn_host(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DisableXpnHostProjectRequest, dict]):
                 The request object. A request message for
@@ -487,26 +468,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Disable a service resource (also known as service
         project) associated with this host project.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_disable_xpn_resource():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DisableXpnResourceProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.disable_xpn_resource(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DisableXpnResourceProjectRequest, dict]):
@@ -596,25 +557,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Operation:
         r"""Enable this project as a shared VPC host project.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_enable_xpn_host():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.EnableXpnHostProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.enable_xpn_host(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.EnableXpnHostProjectRequest, dict]):
                 The request object. A request message for
@@ -694,26 +636,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         r"""Enable service resource (a.k.a service project) for a
         host project, so that subnets in the host project can be
         used by instances in the service project.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_enable_xpn_resource():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.EnableXpnResourceProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.enable_xpn_resource(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.EnableXpnResourceProjectRequest, dict]):
@@ -811,26 +733,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         ``selfLink`` fields, add the query parameter
         ``?fields=id,selfLink`` to your request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetProjectRequest, dict]):
                 The request object. A request message for Projects.Get.
@@ -897,26 +799,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> compute.Project:
         r"""Gets the shared VPC host project that this project
         links to. May be empty if no link exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_xpn_host():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetXpnHostProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get_xpn_host(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetXpnHostProjectRequest, dict]):
@@ -985,27 +867,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> pagers.GetXpnResourcesPager:
         r"""Gets service resources (a.k.a service project)
         associated with this host project.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_xpn_resources():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetXpnResourcesProjectsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.get_xpn_resources(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetXpnResourcesProjectsRequest, dict]):
@@ -1079,27 +940,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
     ) -> pagers.ListXpnHostsPager:
         r"""Lists all shared VPC host projects visible to the
         user in an organization.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_xpn_hosts():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListXpnHostsProjectsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list_xpn_hosts(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListXpnHostsProjectsRequest, dict]):
@@ -1181,25 +1021,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Moves a persistent disk from one zone to another.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_move_disk():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.MoveDiskProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.move_disk(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.MoveDiskProjectRequest, dict]):
@@ -1290,26 +1111,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         see the `known
         issue </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior>`__.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_move_instance():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.MoveInstanceProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.move_instance(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.MoveInstanceProjectRequest, dict]):
                 The request object. A request message for
@@ -1396,26 +1197,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         r"""Sets metadata common to all instances within the
         specified project using the data included in the
         request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_common_instance_metadata():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetCommonInstanceMetadataProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.set_common_instance_metadata(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetCommonInstanceMetadataProjectRequest, dict]):
@@ -1506,26 +1287,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         default network tier is used when an
         address/forwardingRule/instance is created without
         specifying the network tier field.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_default_network_tier():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetDefaultNetworkTierProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.set_default_network_tier(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetDefaultNetworkTierProjectRequest, dict]):
@@ -1618,26 +1379,6 @@ class ProjectsClient(metaclass=ProjectsClientMeta):
         export bucket where reports are stored. If you provide
         an empty request body using this method, the usage
         export feature will be disabled.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_usage_export_bucket():
-                # Create a client
-                client = compute_v1.ProjectsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetUsageExportBucketProjectRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.set_usage_export_bucket(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetUsageExportBucketProjectRequest, dict]):

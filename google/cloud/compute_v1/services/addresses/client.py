@@ -390,26 +390,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of addresses.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.AddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListAddressesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListAddressesRequest, dict]):
                 The request object. A request message for
@@ -482,27 +462,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.AddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteAddressRequest(
-                    address="address_value",
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteAddressRequest, dict]):
@@ -599,27 +558,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> compute.Address:
         r"""Returns the specified address resource.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.AddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetAddressRequest(
-                    address="address_value",
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetAddressRequest, dict]):
                 The request object. A request message for Addresses.Get.
@@ -706,27 +644,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> compute.Operation:
         r"""Creates an address resource in the specified project
         by using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.AddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertAddressRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertAddressRequest, dict]):
@@ -820,28 +737,6 @@ class AddressesClient(metaclass=AddressesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves a list of addresses contained within the
         specified region.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.AddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListAddressesRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListAddressesRequest, dict]):

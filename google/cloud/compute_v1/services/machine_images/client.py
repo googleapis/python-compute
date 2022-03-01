@@ -392,27 +392,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         r"""Deletes the specified machine image. Deleting a
         machine image is permanent and cannot be undone.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteMachineImageRequest(
-                    machine_image="machine_image_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteMachineImageRequest, dict]):
                 The request object. A request message for
@@ -501,27 +480,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         r"""Returns the specified machine image. Gets a list of
         available machine images by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetMachineImageRequest(
-                    machine_image="machine_image_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetMachineImageRequest, dict]):
                 The request object. A request message for
@@ -600,27 +558,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_iam_policy():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetIamPolicyMachineImageRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.get_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyMachineImageRequest, dict]):
@@ -739,26 +676,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         network or, if applicable, the same subnetwork as the
         original instance.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertMachineImageRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertMachineImageRequest, dict]):
                 The request object. A request message for
@@ -844,27 +761,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         r"""Retrieves a list of machine images that are contained
         within the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListMachineImagesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListMachineImagesRequest, dict]):
                 The request object. A request message for
@@ -939,27 +835,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_iam_policy():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetIamPolicyMachineImageRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyMachineImageRequest, dict]):
@@ -1085,27 +960,6 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.MachineImagesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsMachineImageRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsMachineImageRequest, dict]):

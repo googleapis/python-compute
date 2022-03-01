@@ -395,28 +395,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         r"""Deletes the specified zone-specific Operations
         resource.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.ZoneOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteZoneOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteZoneOperationRequest, dict]):
                 The request object. A request message for
@@ -500,28 +478,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
     ) -> compute.Operation:
         r"""Retrieves the specified zone-specific Operations
         resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ZoneOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetZoneOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetZoneOperationRequest, dict]):
@@ -618,28 +574,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         r"""Retrieves a list of Operation resources contained
         within the specified zone.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.ZoneOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListZoneOperationsRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListZoneOperationsRequest, dict]):
                 The request object. A request message for
@@ -732,28 +666,6 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         deadline is reached, there is no guarantee that the operation is
         actually done when the method returns. Be prepared to retry if
         the operation is not ``DONE``.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_wait():
-                # Create a client
-                client = compute_v1.ZoneOperationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.WaitZoneOperationRequest(
-                    operation="operation_value",
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.wait(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.WaitZoneOperationRequest, dict]):

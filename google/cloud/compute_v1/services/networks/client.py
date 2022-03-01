@@ -392,26 +392,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Adds a peering to the specified network.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_add_peering():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AddPeeringNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.add_peering(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AddPeeringNetworkRequest, dict]):
                 The request object. A request message for
@@ -510,26 +490,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified network.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteNetworkRequest, dict]):
                 The request object. A request message for
@@ -615,27 +575,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         r"""Returns the specified network. Gets a list of
         available networks by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetNetworkRequest, dict]):
                 The request object. A request message for Networks.Get.
@@ -710,26 +649,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.NetworksGetEffectiveFirewallsResponse:
         r"""Returns the effective firewalls on a given network.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_effective_firewalls():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetEffectiveFirewallsNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get_effective_firewalls(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetEffectiveFirewallsNetworkRequest, dict]):
                 The request object. A request message for
@@ -800,26 +719,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> compute.Operation:
         r"""Creates a network in the specified project using the
         data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertNetworkRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertNetworkRequest, dict]):
@@ -905,27 +804,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         r"""Retrieves the list of networks available to the
         specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListNetworksRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListNetworksRequest, dict]):
                 The request object. A request message for Networks.List.
@@ -998,28 +876,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
     ) -> pagers.ListPeeringRoutesPager:
         r"""Lists the peering routes exchanged over peering
         connection.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_peering_routes():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListPeeringRoutesNetworksRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list_peering_routes(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListPeeringRoutesNetworksRequest, dict]):
@@ -1102,27 +958,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         r"""Patches the specified network with the data included
         in the request. Only the following fields can be
         modified: routingConfig.routingMode.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchNetworkRequest, dict]):
@@ -1215,26 +1050,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes a peering from the specified network.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_remove_peering():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.RemovePeeringNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.remove_peering(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemovePeeringNetworkRequest, dict]):
@@ -1335,27 +1150,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         r"""Switches the network mode from auto subnet mode to
         custom subnet mode.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_switch_to_custom_mode():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SwitchToCustomModeNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.switch_to_custom_mode(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.SwitchToCustomModeNetworkRequest, dict]):
                 The request object. A request message for
@@ -1444,27 +1238,6 @@ class NetworksClient(metaclass=NetworksClientMeta):
         the request. You can only modify the
         NetworkPeering.export_custom_routes field and the
         NetworkPeering.import_custom_routes field.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_update_peering():
-                # Create a client
-                client = compute_v1.NetworksClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.UpdatePeeringNetworkRequest(
-                    network="network_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.update_peering(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdatePeeringNetworkRequest, dict]):
