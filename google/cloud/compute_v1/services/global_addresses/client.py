@@ -393,26 +393,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.GlobalAddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteGlobalAddressRequest(
-                    address="address_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteGlobalAddressRequest, dict]):
                 The request object. A request message for
@@ -501,27 +481,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         r"""Returns the specified address resource. Gets a list
         of available addresses by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.GlobalAddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetGlobalAddressRequest(
-                    address="address_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetGlobalAddressRequest, dict]):
                 The request object. A request message for
@@ -601,26 +560,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
     ) -> compute.Operation:
         r"""Creates an address resource in the specified project
         by using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.GlobalAddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertGlobalAddressRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertGlobalAddressRequest, dict]):
@@ -705,26 +644,6 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of global addresses.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.GlobalAddressesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListGlobalAddressesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListGlobalAddressesRequest, dict]):

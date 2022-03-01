@@ -395,26 +395,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified externalVpnGateway.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteExternalVpnGatewayRequest(
-                    external_vpn_gateway="external_vpn_gateway_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteExternalVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -504,27 +484,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         of available externalVpnGateways by making a list()
         request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetExternalVpnGatewayRequest(
-                    external_vpn_gateway="external_vpn_gateway_value",
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetExternalVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -612,26 +571,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         r"""Creates a ExternalVpnGateway in the specified project
         using the data included in the request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertExternalVpnGatewayRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertExternalVpnGatewayRequest, dict]):
                 The request object. A request message for
@@ -717,27 +656,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         r"""Retrieves the list of ExternalVpnGateway available to
         the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListExternalVpnGatewaysRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListExternalVpnGatewaysRequest, dict]):
                 The request object. A request message for
@@ -814,27 +732,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         r"""Sets the labels on an ExternalVpnGateway. To learn
         more about labels, read the Labeling Resources
         documentation.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_labels():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetLabelsExternalVpnGatewayRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_labels(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsExternalVpnGatewayRequest, dict]):
@@ -937,27 +834,6 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.ExternalVpnGatewaysClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsExternalVpnGatewayRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsExternalVpnGatewayRequest, dict]):

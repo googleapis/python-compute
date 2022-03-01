@@ -394,26 +394,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Inserts a rule into a security policy.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_add_rule():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AddRuleSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.add_rule(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AddRuleSecurityPolicyRequest, dict]):
                 The request object. A request message for
@@ -510,26 +490,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified policy.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSecurityPolicyRequest, dict]):
                 The request object. A request message for
@@ -618,27 +578,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         r"""List all of the ordered rules present in a single
         specified policy.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetSecurityPolicyRequest, dict]):
                 The request object. A request message for
@@ -714,26 +653,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SecurityPolicyRule:
         r"""Gets a rule at the specified priority.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_rule():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRuleSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.get_rule(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetRuleSecurityPolicyRequest, dict]):
@@ -811,26 +730,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project using
         the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertSecurityPolicyRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertSecurityPolicyRequest, dict]):
@@ -917,27 +816,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         r"""List all the policies that have been configured for
         the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListSecurityPoliciesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListSecurityPoliciesRequest, dict]):
                 The request object. A request message for
@@ -1012,26 +890,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         r"""Gets the current list of preconfigured Web
         Application Firewall (WAF) expressions.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list_preconfigured_expression_sets():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.list_preconfigured_expression_sets(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListPreconfiguredExpressionSetsSecurityPoliciesRequest, dict]):
                 The request object. A request message for
@@ -1104,27 +962,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         in the request. This cannot be used to be update the
         rules in the policy. Please use the per rule methods
         like addRule, patchRule, and removeRule instead.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchSecurityPolicyRequest, dict]):
@@ -1221,26 +1058,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
     ) -> compute.Operation:
         r"""Patches a rule at the specified priority.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch_rule():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchRuleSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.patch_rule(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.PatchRuleSecurityPolicyRequest, dict]):
                 The request object. A request message for
@@ -1336,26 +1153,6 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a rule at the specified priority.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_remove_rule():
-                # Create a client
-                client = compute_v1.SecurityPoliciesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.RemoveRuleSecurityPolicyRequest(
-                    project="project_value",
-                    security_policy="security_policy_value",
-                )
-
-                # Make the request
-                response = client.remove_rule(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.RemoveRuleSecurityPolicyRequest, dict]):

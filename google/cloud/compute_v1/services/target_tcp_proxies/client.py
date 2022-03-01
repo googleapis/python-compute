@@ -393,26 +393,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Deletes the specified TargetTcpProxy resource.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteTargetTcpProxyRequest(
-                    project="project_value",
-                    target_tcp_proxy="target_tcp_proxy_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetTcpProxyRequest, dict]):
                 The request object. A request message for
@@ -502,27 +482,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         list of available target TCP proxies by making a list()
         request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetTargetTcpProxyRequest(
-                    project="project_value",
-                    target_tcp_proxy="target_tcp_proxy_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetTcpProxyRequest, dict]):
                 The request object. A request message for
@@ -603,26 +562,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
     ) -> compute.Operation:
         r"""Creates a TargetTcpProxy resource in the specified
         project using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertTargetTcpProxyRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetTcpProxyRequest, dict]):
@@ -709,27 +648,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         r"""Retrieves the list of TargetTcpProxy resources
         available to the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListTargetTcpProxiesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetTcpProxiesRequest, dict]):
                 The request object. A request message for
@@ -804,26 +722,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetTcpProxy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_backend_service():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetBackendServiceTargetTcpProxyRequest(
-                    project="project_value",
-                    target_tcp_proxy="target_tcp_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_backend_service(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetBackendServiceTargetTcpProxyRequest, dict]):
@@ -928,26 +826,6 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetTcpProxy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_proxy_header():
-                # Create a client
-                client = compute_v1.TargetTcpProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetProxyHeaderTargetTcpProxyRequest(
-                    project="project_value",
-                    target_tcp_proxy="target_tcp_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_proxy_header(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetProxyHeaderTargetTcpProxyRequest, dict]):

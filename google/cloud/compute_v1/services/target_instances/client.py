@@ -392,26 +392,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target instances.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.TargetInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListTargetInstancesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListTargetInstancesRequest, dict]):
                 The request object. A request message for
@@ -484,27 +464,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetInstance resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.TargetInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteTargetInstanceRequest(
-                    project="project_value",
-                    target_instance="target_instance_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetInstanceRequest, dict]):
@@ -605,28 +564,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         list of available target instances by making a list()
         request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.TargetInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetTargetInstanceRequest(
-                    project="project_value",
-                    target_instance="target_instance_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetInstanceRequest, dict]):
                 The request object. A request message for
@@ -717,27 +654,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     ) -> compute.Operation:
         r"""Creates a TargetInstance resource in the specified
         project and zone using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.TargetInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertTargetInstanceRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetInstanceRequest, dict]):
@@ -833,28 +749,6 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
     ) -> pagers.ListPager:
         r"""Retrieves a list of TargetInstance resources
         available to the specified project and zone.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.TargetInstancesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListTargetInstancesRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetInstancesRequest, dict]):

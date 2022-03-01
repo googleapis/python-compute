@@ -395,27 +395,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         r"""Retrieves the list of all TargetHttpsProxy resources,
         regional and global, available to the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListTargetHttpsProxiesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListTargetHttpsProxiesRequest, dict]):
                 The request object. A request message for
@@ -489,26 +468,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpsProxy resource.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteTargetHttpsProxyRequest, dict]):
@@ -599,27 +558,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         a list of available target HTTPS proxies by making a
         list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetTargetHttpsProxyRequest, dict]):
                 The request object. A request message for
@@ -704,26 +642,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
     ) -> compute.Operation:
         r"""Creates a TargetHttpsProxy resource in the specified
         project using the data included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertTargetHttpsProxyRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertTargetHttpsProxyRequest, dict]):
@@ -810,27 +728,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         r"""Retrieves the list of TargetHttpsProxy resources
         available to the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListTargetHttpsProxiesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListTargetHttpsProxiesRequest, dict]):
                 The request object. A request message for
@@ -908,27 +805,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         the data included in the request. This method supports
         PATCH semantics and uses JSON merge patch format and
         processing rules.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchTargetHttpsProxyRequest, dict]):
@@ -1026,26 +902,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the QUIC override policy for TargetHttpsProxy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_quic_override():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetQuicOverrideTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_quic_override(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetQuicOverrideTargetHttpsProxyRequest, dict]):
@@ -1150,26 +1006,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Replaces SslCertificates for TargetHttpsProxy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_ssl_certificates():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetSslCertificatesTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_ssl_certificates(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetSslCertificatesTargetHttpsProxyRequest, dict]):
@@ -1278,27 +1114,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         the HTTPS proxy load balancer. They do not affect the
         connection between the load balancer and the backends.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_ssl_policy():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetSslPolicyTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_ssl_policy(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.SetSslPolicyTargetHttpsProxyRequest, dict]):
                 The request object. A request message for
@@ -1397,26 +1212,6 @@ class TargetHttpsProxiesClient(metaclass=TargetHttpsProxiesClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpsProxy.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_url_map():
-                # Create a client
-                client = compute_v1.TargetHttpsProxiesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetUrlMapTargetHttpsProxyRequest(
-                    project="project_value",
-                    target_https_proxy="target_https_proxy_value",
-                )
-
-                # Make the request
-                response = client.set_url_map(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetUrlMapTargetHttpsProxyRequest, dict]):

@@ -397,27 +397,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         corresponding snapshot. For more information, see
         Deleting snapshots.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteSnapshotRequest(
-                    project="project_value",
-                    snapshot="snapshot_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteSnapshotRequest, dict]):
                 The request object. A request message for
@@ -506,27 +485,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         r"""Returns the specified Snapshot resource. Gets a list
         of available snapshots by making a list() request.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetSnapshotRequest(
-                    project="project_value",
-                    snapshot="snapshot_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetSnapshotRequest, dict]):
                 The request object. A request message for Snapshots.Get.
@@ -603,27 +561,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_iam_policy():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetIamPolicySnapshotRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.get_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicySnapshotRequest, dict]):
@@ -742,26 +679,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         features, such as creating snapshots in a project
         different from the source disk project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertSnapshotRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertSnapshotRequest, dict]):
                 The request object. A request message for
@@ -847,27 +764,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         r"""Retrieves the list of Snapshot resources contained
         within the specified project.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListSnapshotsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListSnapshotsRequest, dict]):
                 The request object. A request message for
@@ -942,27 +838,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_iam_policy():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetIamPolicySnapshotRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicySnapshotRequest, dict]):
@@ -1089,27 +964,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
         r"""Sets the labels on a snapshot. To learn more about
         labels, read the Labeling Resources documentation.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_labels():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetLabelsSnapshotRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.set_labels(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.SetLabelsSnapshotRequest, dict]):
                 The request object. A request message for
@@ -1209,27 +1063,6 @@ class SnapshotsClient(metaclass=SnapshotsClientMeta):
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the
         specified resource.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.SnapshotsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsSnapshotRequest(
-                    project="project_value",
-                    resource="resource_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsSnapshotRequest, dict]):
