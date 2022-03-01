@@ -399,28 +399,6 @@ class RegionNotificationEndpointsClient(
         r"""Deletes the specified NotificationEndpoint in the
         given region
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.RegionNotificationEndpointsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteRegionNotificationEndpointRequest(
-                    notification_endpoint="notification_endpoint_value",
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteRegionNotificationEndpointRequest, dict]):
                 The request object. A request message for
@@ -519,28 +497,6 @@ class RegionNotificationEndpointsClient(
         r"""Returns the specified NotificationEndpoint resource
         in the given region.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.RegionNotificationEndpointsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetRegionNotificationEndpointRequest(
-                    notification_endpoint="notification_endpoint_value",
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetRegionNotificationEndpointRequest, dict]):
                 The request object. A request message for
@@ -631,27 +587,6 @@ class RegionNotificationEndpointsClient(
         r"""Create a NotificationEndpoint in the specified
         project in the given region using the parameters that
         are included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.RegionNotificationEndpointsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertRegionNotificationEndpointRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertRegionNotificationEndpointRequest, dict]):
@@ -747,28 +682,6 @@ class RegionNotificationEndpointsClient(
     ) -> pagers.ListPager:
         r"""Lists the NotificationEndpoints for a project in the
         given region.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.RegionNotificationEndpointsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListRegionNotificationEndpointsRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListRegionNotificationEndpointsRequest, dict]):

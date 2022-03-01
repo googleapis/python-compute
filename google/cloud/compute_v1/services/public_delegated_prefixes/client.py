@@ -397,27 +397,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         r"""Lists all PublicDelegatedPrefix resources owned by
         the specific project across all scopes.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListPublicDelegatedPrefixesRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListPublicDelegatedPrefixesRequest, dict]):
                 The request object. A request message for
@@ -495,28 +474,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
     ) -> compute.Operation:
         r"""Deletes the specified PublicDelegatedPrefix in the
         given region.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeletePublicDelegatedPrefixeRequest(
-                    project="project_value",
-                    public_delegated_prefix="public_delegated_prefix_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeletePublicDelegatedPrefixeRequest, dict]):
@@ -614,28 +571,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         r"""Returns the specified PublicDelegatedPrefix resource
         in the given region.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetPublicDelegatedPrefixeRequest(
-                    project="project_value",
-                    public_delegated_prefix="public_delegated_prefix_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetPublicDelegatedPrefixeRequest, dict]):
                 The request object. A request message for
@@ -726,27 +661,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         r"""Creates a PublicDelegatedPrefix in the specified
         project in the given region using the parameters that
         are included in the request.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertPublicDelegatedPrefixeRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.InsertPublicDelegatedPrefixeRequest, dict]):
@@ -843,28 +757,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         r"""Lists the PublicDelegatedPrefixes for a project in
         the given region.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListPublicDelegatedPrefixesRequest(
-                    project="project_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListPublicDelegatedPrefixesRequest, dict]):
                 The request object. A request message for
@@ -948,28 +840,6 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         with the data included in the request. This method
         supports PATCH semantics and uses JSON merge patch
         format and processing rules.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_patch():
-                # Create a client
-                client = compute_v1.PublicDelegatedPrefixesClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.PatchPublicDelegatedPrefixeRequest(
-                    project="project_value",
-                    public_delegated_prefix="public_delegated_prefix_value",
-                    region="region_value",
-                )
-
-                # Make the request
-                response = client.patch(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.PatchPublicDelegatedPrefixeRequest, dict]):

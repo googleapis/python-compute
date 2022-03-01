@@ -390,26 +390,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of reservations.
 
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_aggregated_list():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.AggregatedListReservationsRequest(
-                    project="project_value",
-                )
-
-                # Make the request
-                page_result = client.aggregated_list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.AggregatedListReservationsRequest, dict]):
                 The request object. A request message for
@@ -483,27 +463,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified reservation.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_delete():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.DeleteReservationRequest(
-                    project="project_value",
-                    reservation="reservation_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.delete(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.DeleteReservationRequest, dict]):
@@ -599,28 +558,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         r"""Retrieves information about the specified
         reservation.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetReservationRequest(
-                    project="project_value",
-                    reservation="reservation_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.GetReservationRequest, dict]):
                 The request object. A request message for
@@ -705,28 +642,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
         empty if no such policy or resource exists.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_get_iam_policy():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.GetIamPolicyReservationRequest(
-                    project="project_value",
-                    resource="resource_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.get_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.GetIamPolicyReservationRequest, dict]):
@@ -851,27 +766,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         r"""Creates a new reservation. For more information, read
         Reserving zonal resources.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_insert():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.InsertReservationRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.insert(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.InsertReservationRequest, dict]):
                 The request object. A request message for
@@ -965,28 +859,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         r"""A list of all the reservations that have been
         configured for the specified project in specified zone.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_list():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ListReservationsRequest(
-                    project="project_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                page_result = client.list(request=request)
-
-                # Handle the response
-                for response in page_result:
-                    print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.ListReservationsRequest, dict]):
                 The request object. A request message for
@@ -1069,28 +941,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         r"""Resizes the reservation (applicable to standalone
         reservations only). For more information, read Modifying
         reservations.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_resize():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.ResizeReservationRequest(
-                    project="project_value",
-                    reservation="reservation_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.resize(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.ResizeReservationRequest, dict]):
@@ -1197,28 +1047,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
         resource. Replaces any existing policy.
-
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_set_iam_policy():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.SetIamPolicyReservationRequest(
-                    project="project_value",
-                    resource="resource_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.set_iam_policy(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetIamPolicyReservationRequest, dict]):
@@ -1355,28 +1183,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         r"""Returns permissions that a caller has on the
         specified resource.
 
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_test_iam_permissions():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.TestIamPermissionsReservationRequest(
-                    project="project_value",
-                    resource="resource_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.test_iam_permissions(request=request)
-
-                # Handle the response
-                print(response)
-
         Args:
             request (Union[google.cloud.compute_v1.types.TestIamPermissionsReservationRequest, dict]):
                 The request object. A request message for
@@ -1470,27 +1276,6 @@ class ReservationsClient(metaclass=ReservationsClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Update share settings of the reservation.
-
-        .. code-block:: python
-
-            from google.cloud import compute_v1
-
-            def sample_update():
-                # Create a client
-                client = compute_v1.ReservationsClient()
-
-                # Initialize request argument(s)
-                request = compute_v1.UpdateReservationRequest(
-                    project="project_value",
-                    reservation="reservation_value",
-                    zone="zone_value",
-                )
-
-                # Make the request
-                response = client.update(request=request)
-
-                # Handle the response
-                print(response)
 
         Args:
             request (Union[google.cloud.compute_v1.types.UpdateReservationRequest, dict]):
