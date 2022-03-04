@@ -18,10 +18,12 @@ from google.cloud import compute_v1
 import pytest
 
 from ..instances.delete import delete_instance
-from ..instances.from_instance_template.create_from_template import \
-    create_instance_from_template
-from ..instances.from_instance_template.create_from_template_with_overrides import \
-    create_instance_from_template_with_overrides
+from ..instances.from_instance_template.create_from_template import (
+    create_instance_from_template,
+)
+from ..instances.from_instance_template.create_from_template_with_overrides import (
+    create_instance_from_template_with_overrides,
+)
 
 PROJECT = google.auth.default()[1]
 INSTANCE_ZONE = "europe-north1-c"
@@ -84,7 +86,9 @@ def test_create_instance_from_template_override(
 ):
     image_client = compute_v1.ImagesClient()
 
-    image = image_client.get_from_family(project="ubuntu-os-cloud", family="ubuntu-2004-lts")
+    image = image_client.get_from_family(
+        project="ubuntu-os-cloud", family="ubuntu-2004-lts"
+    )
     instance = create_instance_from_template_with_overrides(
         PROJECT,
         INSTANCE_ZONE,

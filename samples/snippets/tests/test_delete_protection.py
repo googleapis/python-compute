@@ -38,7 +38,9 @@ def autodelete_instance_name():
 
 
 def test_delete_protection(autodelete_instance_name):
-    instance = create_protected_instance(PROJECT, INSTANCE_ZONE, autodelete_instance_name)
+    instance = create_protected_instance(
+        PROJECT, INSTANCE_ZONE, autodelete_instance_name
+    )
     assert instance.name == autodelete_instance_name
 
     assert (

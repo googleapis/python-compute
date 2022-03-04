@@ -18,15 +18,15 @@ import pytest
 
 from ..images.get import get_image_from_family
 from ..instances.create import create_instance
-from ..instances.create_start_instance.create_from_public_image import \
-    disk_from_image
-from ..instances.custom_machine_types.create_shared_with_helper import \
-    create_custom_shared_core_instance
-from ..instances.custom_machine_types.create_with_helper import \
-    create_custom_instance
+from ..instances.create_start_instance.create_from_public_image import disk_from_image
+from ..instances.custom_machine_types.create_shared_with_helper import (
+    create_custom_shared_core_instance,
+)
+from ..instances.custom_machine_types.create_with_helper import create_custom_instance
 from ..instances.custom_machine_types.helper_class import CustomMachineType
-from ..instances.custom_machine_types.update_memory import \
-    add_extended_memory_to_instance
+from ..instances.custom_machine_types.update_memory import (
+    add_extended_memory_to_instance,
+)
 from ..instances.delete import delete_instance
 
 PROJECT = google.auth.default()[1]
@@ -45,9 +45,7 @@ def auto_delete_instance_name():
 def instance():
     instance_name = "test-instance-" + uuid.uuid4().hex[:10]
 
-    newest_debian = get_image_from_family(
-        project="debian-cloud", family="debian-10"
-    )
+    newest_debian = get_image_from_family(project="debian-cloud", family="debian-10")
     disk_type = f"zones/{INSTANCE_ZONE}/diskTypes/pd-standard"
     disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
 
@@ -60,8 +58,8 @@ def instance():
 
 def test_custom_instance_creation(auto_delete_instance_name):
     # Need to import CustomMachineType from this module, or the assertion will fail
-    from ..instances.custom_machine_types.create_with_helper import \
-        CustomMachineType
+    from ..instances.custom_machine_types.create_with_helper import CustomMachineType
+
     instance = create_custom_instance(
         PROJECT,
         INSTANCE_ZONE,
@@ -79,8 +77,10 @@ def test_custom_instance_creation(auto_delete_instance_name):
 
 def test_custom_shared_instance_creation(auto_delete_instance_name):
     # Need to import CustomMachineType from this module, or the assertion will fail
-    from ..instances.custom_machine_types.create_shared_with_helper import \
-        CustomMachineType
+    from ..instances.custom_machine_types.create_shared_with_helper import (
+        CustomMachineType,
+    )
+
     instance = create_custom_shared_core_instance(
         PROJECT,
         INSTANCE_ZONE,

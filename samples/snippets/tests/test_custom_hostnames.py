@@ -17,9 +17,9 @@ import uuid
 import google.auth
 import pytest
 
-from ..instances.delete import delete_instance
 from ..instances.custom_hostname.create import create_instance_custom_hostname
 from ..instances.custom_hostname.get import get_hostname
+from ..instances.delete import delete_instance
 
 PROJECT = google.auth.default()[1]
 INSTANCE_ZONE = "europe-north1-c"
@@ -39,7 +39,7 @@ def random_hostname():
     yield "instance.{}.hostname".format(random.randint(0, 2 ** 10))
 
 
-def test_delete_protection(autodelete_instance_name, random_hostname):
+def test_custom_hostname(autodelete_instance_name, random_hostname):
     instance = create_instance_custom_hostname(
         PROJECT, INSTANCE_ZONE, autodelete_instance_name, random_hostname
     )
