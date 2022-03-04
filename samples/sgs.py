@@ -134,7 +134,9 @@ def load_ingredient(path: Path) -> Ingredient:
             in_ingredient = True
     else:
         if in_ingredient:
-            warnings.warn(f"The ingredient in {path} has no closing tag.", SyntaxWarning)
+            warnings.warn(
+                f"The ingredient in {path} has no closing tag.", SyntaxWarning
+            )
     return Ingredient(
         name=ingredient_name,
         text="".join(ingredient_lines),
@@ -283,8 +285,10 @@ def generate(
     for path, recipe in recipes.items():
         rendered = render_recipe(recipe, ingredients)
         out = save_rendered_recipe(
-            path.absolute(), rendered, recipes_path=recipes_path.absolute(),
-            output_dir=Path(args.output_dir)
+            path.absolute(),
+            rendered,
+            recipes_path=recipes_path.absolute(),
+            output_dir=Path(args.output_dir),
         )
         updated_paths.add(str(out))
 
