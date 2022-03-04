@@ -29,7 +29,7 @@ import google.cloud.compute_v1 as compute_v1
 
 
 # [START compute_images_list]
-def print_images_list(project: str) -> None:
+def print_images_list(project: str) -> str:
     """
     Prints a list of all non-deprecated image names available in given project.
 
@@ -37,26 +37,29 @@ def print_images_list(project: str) -> None:
         project: project ID or project number of the Cloud project you want to list images from.
 
     Returns:
-        None.
+        The output as a string.
     """
     images_client = compute_v1.ImagesClient()
     # Listing only non-deprecated images to reduce the size of the reply.
     images_list_request = compute_v1.ListImagesRequest(
         project=project, max_results=100, filter="deprecated.state != DEPRECATED"
     )
+    output = []
 
     # Although the `max_results` parameter is specified in the request, the iterable returned
     # by the `list()` method hides the pagination mechanic. The library makes multiple
     # requests to the API for you, so you can simply iterate over all the images.
     for img in images_client.list(request=images_list_request):
         print(f" -  {img.name}")
+        output.append(f" -  {img.name}")
+    return "\n".join(output)
 
 
 # [END compute_images_list]
 
 
 # [START compute_images_list_page]
-def print_images_list_by_page(project: str, page_size: int = 10) -> None:
+def print_images_list_by_page(project: str, page_size: int = 10) -> str:
     """
     Prints a list of all non-deprecated image names available in a given project,
     divided into pages as returned by the Compute Engine API.
@@ -66,13 +69,14 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
         page_size: size of the pages you want the API to return on each call.
 
     Returns:
-        None.
+        Output as a string.
     """
     images_client = compute_v1.ImagesClient()
     # Listing only non-deprecated images to reduce the size of the reply.
     images_list_request = compute_v1.ListImagesRequest(
         project=project, max_results=page_size, filter="deprecated.state != DEPRECATED"
     )
+    output = []
 
     # Use the `pages` attribute of returned iterable to have more granular control of
     # iteration over paginated results from the API. Each time you want to access the
@@ -81,8 +85,11 @@ def print_images_list_by_page(project: str, page_size: int = 10) -> None:
         images_client.list(request=images_list_request).pages, start=1
     ):
         print(f"Page {page_num}: ")
+        output.append(f"Page {page_num}: ")
         for img in page.items:
             print(f" - {img.name}")
+            output.append(f" - {img.name}")
+    return "\n".join(output)
 
 
 # [END compute_images_list_page]

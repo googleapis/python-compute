@@ -45,8 +45,8 @@ def get_active_debian():
     return image_client.get_from_family(project="debian-cloud", family="debian-11")
 
 
-@pytest.fixture(scope="class")
-def src_disk(request):
+@pytest.fixture()
+def src_disk():
     disk_client = compute_v1.DisksClient()
 
     disk = compute_v1.Disk()
@@ -59,7 +59,6 @@ def src_disk(request):
     wait_for_operation(op, PROJECT)
     try:
         disk = disk_client.get(project=PROJECT, zone=INSTANCE_ZONE, disk=disk.name)
-        request.cls.disk = disk
         yield disk
     finally:
         op = disk_client.delete_unary(
@@ -68,8 +67,8 @@ def src_disk(request):
         wait_for_operation(op, PROJECT)
 
 
-@pytest.fixture(scope="class")
-def snapshot(request, src_disk):
+@pytest.fixture()
+def snapshot(src_disk):
     snapshot_client = compute_v1.SnapshotsClient()
     snapshot = compute_v1.Snapshot()
     snapshot.name = "test-snap-" + uuid.uuid4().hex[:10]
@@ -82,19 +81,17 @@ def snapshot(request, src_disk):
     )
     wait_for_operation(op, PROJECT)
     try:
-        request.cls.snapshot = snapshot_client.get(
+        snapshot = snapshot_client.get(
             project=PROJECT, snapshot=snapshot.name
         )
-        snapshot = request.cls.snapshot
 
         yield snapshot
     finally:
         op = snapshot_client.delete_unary(project=PROJECT, snapshot=snapshot.name)
         wait_for_operation(op, PROJECT)
 
-
-@pytest.fixture(scope="class")
-def image(request, src_disk):
+@pytest.fixture()
+def image(src_disk):
     image_client = compute_v1.ImagesClient()
     image = compute_v1.Image()
     image.source_disk = src_disk.self_link
@@ -104,23 +101,21 @@ def image(request, src_disk):
     wait_for_operation(op, PROJECT)
     try:
         image = image_client.get(project=PROJECT, image=image.name)
-        request.cls.image = image
         yield image
     finally:
         op = image_client.delete_unary(project=PROJECT, image=image.name)
         wait_for_operation(op, PROJECT)
 
 
-@pytest.mark.usefixtures("image", "snapshot")
 class TestCreation:
-    def test_create_from_custom_image(self):
+    def test_create_from_custom_image(self, image):
         instance_name = "i" + uuid.uuid4().hex[:10]
         instance = create_from_custom_image(
-            PROJECT, INSTANCE_ZONE, instance_name, self.image.self_link
+            PROJECT, INSTANCE_ZONE, instance_name, image.self_link
         )
         try:
             assert (
-                instance.disks[0].initialize_params.source_image == self.image.self_link
+                instance.disks[0].initialize_params.source_image == image.self_link
             )
         finally:
             delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
@@ -138,15 +133,15 @@ class TestCreation:
         finally:
             delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
 
-    def test_create_from_snapshot(self):
+    def test_create_from_snapshot(self, snapshot):
         instance_name = "i" + uuid.uuid4().hex[:10]
         instance = create_from_snapshot(
-            PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
+            PROJECT, INSTANCE_ZONE, instance_name, snapshot.self_link
         )
         try:
             assert (
                 instance.disks[0].initialize_params.source_snapshot
-                == self.snapshot.self_link
+                == snapshot.self_link
             )
         finally:
             delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
@@ -165,10 +160,10 @@ class TestCreation:
         finally:
             delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
 
-    def test_create_with_snapshotted_data_disk(self):
+    def test_create_with_snapshotted_data_disk(self, snapshot):
         instance_name = "i" + uuid.uuid4().hex[:10]
         instance = create_with_snapshotted_data_disk(
-            PROJECT, INSTANCE_ZONE, instance_name, self.snapshot.self_link
+            PROJECT, INSTANCE_ZONE, instance_name, snapshot.self_link
         )
         try:
             assert any(

@@ -11,6 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+# flake8: noqa
 """
 A sample script showing how to handle default values when communicating
 with the Compute Engine API.
@@ -26,6 +27,7 @@ with the Compute Engine API.
 # [START compute_usage_report_get]
 # [START compute_usage_report_disable]
 from google.cloud import compute_v1
+
 
 # [END compute_usage_report_disable]
 # [END compute_usage_report_get]

@@ -19,13 +19,11 @@ from ..images.pagination import print_images_list_by_page
 PROJECT = "windows-sql-cloud"
 
 
-def test_pagination(capsys: typing.Any) -> None:
-    print_images_list(PROJECT)
-    out, _ = capsys.readouterr()
+def test_pagination() -> None:
+    out = print_images_list(PROJECT)
     assert len(out.splitlines()) > 2
 
 
-def test_pagination_page(capsys: typing.Any) -> None:
-    print_images_list_by_page(PROJECT, 2)
-    out, _ = capsys.readouterr()
+def test_pagination_page() -> None:
+    out = print_images_list_by_page(PROJECT, 2)
     assert "Page 2" in out
