@@ -22,7 +22,7 @@ from google.cloud import compute_v1
 
 
 # <INGREDIENT reset_instance>
-def reset_instance(project_id: str, zone: str, instance_name: str):
+def reset_instance(project_id: str, zone: str, instance_name: str) -> None:
     """
     Resets a stopped Google Compute Engine instance (with unencrypted disks).
     Args:

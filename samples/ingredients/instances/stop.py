@@ -22,9 +22,9 @@ from google.cloud import compute_v1
 
 
 # <INGREDIENT stop_instance>
-def stop_instance(project_id: str, zone: str, instance_name: str):
+def stop_instance(project_id: str, zone: str, instance_name: str) -> None:
     """
-    Stops a stopped Google Compute Engine instance.
+    Stops a running Google Compute Engine instance.
     Args:
         project_id: project ID or project number of the Cloud project your instance belongs to.
         zone: name of the zone your instance belongs to.

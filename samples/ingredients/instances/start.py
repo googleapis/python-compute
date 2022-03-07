@@ -22,7 +22,7 @@ from google.cloud import compute_v1
 
 
 # <INGREDIENT start_instance>
-def start_instance(project_id: str, zone: str, instance_name: str):
+def start_instance(project_id: str, zone: str, instance_name: str) -> None:
     """
     Starts a stopped Google Compute Engine instance (with unencrypted disks).
     Args:
