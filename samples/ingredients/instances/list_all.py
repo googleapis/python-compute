@@ -22,7 +22,7 @@ def list_all_instances(
     project_id: str,
 ) -> Dict[str, Iterable[compute_v1.Instance]]:
     """
-    Return a dictionary of all instances present in a project, grouped by their zone.
+    Returns a dictionary of all instances present in a project, grouped by their zone.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
