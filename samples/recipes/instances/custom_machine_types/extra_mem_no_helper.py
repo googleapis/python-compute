@@ -25,5 +25,5 @@
 # <INGREDIENT create_instance />
 
 
-# <INGREDIENT create_custom_instances_extra_mem_no_helper />
+# <INGREDIENT create_custom_instances_extra_mem />
 # </REGION compute_custom_machine_type_extra_mem_no_helper>

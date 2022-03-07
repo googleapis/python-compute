@@ -11,7 +11,13 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets 
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
+import time
+
 from google.cloud import compute_v1
 
 
@@ -31,7 +37,10 @@ def stop_instance(project_id: str, zone: str, instance_name: str):
         project=project_id, zone=zone, instance=instance_name
     )
 
+    start = time.time()
     while op.status != compute_v1.Operation.Status.DONE:
         op = op_client.wait(operation=op.name, zone=zone, project=project_id)
+        if time.time() - start >= 300:  # 5 minutes
+            raise TimeoutError()
     return
 # </INGREDIENT>

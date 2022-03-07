@@ -11,13 +11,17 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# flake8: noqa# flake8: noqa
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets 
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
+# flake8: noqa
 from google.cloud import compute_v1
 
 
 # <INGREDIENT disk_from_snapshot>
 def disk_from_snapshot(
-    disk_type: str, disk_size_gb: int, boot: bool, disk_snapshot: str
+    disk_type: str, disk_size_gb: int, boot: bool, source_snapshot: str, auto_delete: bool = False
 ) -> compute_v1.AttachedDisk():
     """
     Create an AttachedDisk object to be used in VM instance creation. Uses a disk snapshot as the
@@ -29,21 +33,22 @@ def disk_from_snapshot(
             For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
         boot: boolean flag indicating whether this disk should be used as a boot disk of an instance
-        disk_snapshot: disk snapshot to use when creating this disk. You must have read access to this disk.
+        source_snapshot: disk snapshot to use when creating this disk. You must have read access to this disk.
             This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
+        auto_delete: boolean flag indicating whether this disk should be deleted with the VM that uses it
 
     Returns:
         AttachedDisk object configured to be created using the specified snapshot.
     """
     disk = compute_v1.AttachedDisk()
     initialize_params = compute_v1.AttachedDiskInitializeParams()
-    initialize_params.source_snapshot = disk_snapshot
+    initialize_params.source_snapshot = source_snapshot
     initialize_params.disk_type = disk_type
     initialize_params.disk_size_gb = disk_size_gb
     disk.initialize_params = initialize_params
     # Remember to set auto_delete to True if you want the disk to be deleted when you delete
     # your VM instance.
-    disk.auto_delete = True
+    disk.auto_delete = auto_delete
     disk.boot = boot
     return disk
 # </INGREDIENT>

@@ -11,6 +11,10 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets 
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 from google.cloud import compute_v1
 
@@ -29,6 +33,9 @@ def create_firewall_rule(
             * https://www.googleapis.com/compute/v1/projects/{project_id}/global/networks/{network}
             * projects/{project_id}/global/networks/{network}
             * global/networks/{network}
+
+    Returns:
+        A Firewall object.
     """
     firewall_rule = compute_v1.Firewall()
     firewall_rule.name = firewall_rule_name
@@ -50,7 +57,7 @@ def create_firewall_rule(
     # will be equal to 0, however it is not treated as "set" by the library and thus
     # the default will be applied to the new rule. If you want to create a rule that
     # has priority == 0, you need to explicitly set it so:
-
+    # TODO: Uncomment to set the priority to 0
     # firewall_rule.priority = 0
 
     firewall_client = compute_v1.FirewallsClient()

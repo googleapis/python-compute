@@ -90,6 +90,7 @@ def snapshot(src_disk):
         op = snapshot_client.delete_unary(project=PROJECT, snapshot=snapshot.name)
         wait_for_operation(op, PROJECT)
 
+
 @pytest.fixture()
 def image(src_disk):
     image_client = compute_v1.ImagesClient()

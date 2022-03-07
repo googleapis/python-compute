@@ -11,6 +11,10 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets 
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 from typing import Dict, Iterable
 
@@ -31,9 +35,9 @@ def list_all_instances(
         iterable collections of Instance objects as values.
     """
     instance_client = compute_v1.InstancesClient()
-    # Use the `max_results` parameter to limit the number of results that the API returns per response page.
     request = compute_v1.AggregatedListInstancesRequest()
     request.project = project_id
+    # Use the `max_results` parameter to limit the number of results that the API returns per response page.
     request.max_results = 50
 
     agg_list = instance_client.aggregated_list(request=request)

@@ -11,11 +11,16 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 
 import re
 import sys
 from google.cloud import compute_v1
+import time
 from typing import List
 
 
@@ -39,11 +44,11 @@ def create_instance(
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone to create the instance in. For example: "us-west3-b"
         instance_name: name of the new virtual machine (VM) instance.
+        disks: a list of compute_v1.AttachedDisk objects describing the disks
+            you want to attach to your new instance.
         machine_type: machine type of the VM being created. This value uses the
             following format: "zones/{zone}/machineTypes/{type_name}".
             For example: "zones/europe-west3-c/machineTypes/f1-micro"
-        disks: a list of compute_v1.AttachedDisk objects describing the disks
-            you want to attach to your new instance.
         network_link: name of the network you want the new instance to use.
             For example: "global/networks/default" represents the network
             named "default", which is created automatically for each project.
@@ -92,13 +97,6 @@ def create_instance(
         # Set the delete protection bit
         instance.deletion_protection = True
 
-    # Shielded Instance settings
-    # Values presented here are the defaults.
-    # instance.shielded_instance_config = compute_v1.ShieldedInstanceConfig()
-    # instance.shielded_instance_config.enable_secure_boot = False
-    # instance.shielded_instance_config.enable_vtpm = True
-    # instance.shielded_instance_config.enable_integrity_monitoring = True
-
     # Prepare the request to insert an instance.
     request = compute_v1.InsertInstanceRequest()
     request.zone = zone
@@ -109,12 +107,16 @@ def create_instance(
     print(f"Creating the {instance_name} instance in {zone}...")
 
     operation = instance_client.insert_unary(request=request)
+    start = time.time()
     while operation.status != compute_v1.Operation.Status.DONE:
         operation = operation_client.wait(
             operation=operation.name, zone=zone, project=project_id
         )
+        if time.time() - start >= 300:  # 5 minutes
+            raise TimeoutError()
     if operation.error:
         print("Error during creation:", operation.error, file=sys.stderr)
+        raise RuntimeError(operation.error)
     if operation.warnings:
         print("Warning during creation:", operation.warnings, file=sys.stderr)
     print(f"Instance {instance_name} created.")

@@ -11,6 +11,10 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets 
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 
 
@@ -24,7 +28,7 @@ def create_custom_instances_no_helper(
     project_id: str, zone: str, instance_name: str, core_count: int, memory: int
 ) -> List[compute_v1.Instance]:
     """
-    Create new VM instances without using a CustomMachineType helper function.
+    Create 7 new VM instances without using a CustomMachineType helper function.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -41,57 +45,16 @@ def create_custom_instances_no_helper(
     )
     disk_type = f"zones/{zone}/diskTypes/pd-standard"
     disks = [disk_from_image(disk_type, 10, True, newest_debian.self_link)]
-    # The core_count and memory values are not validated anywhere and can be rejected by the API.
-    instances = [
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_n1",
-            disks,
-            f"zones/{zone}/machineTypes/custom-{core_count}-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_n2",
-            disks,
-            f"zones/{zone}/machineTypes/n2-custom-{core_count}-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_n2d",
-            disks,
-            f"zones/{zone}/machineTypes/n2d-custom-{core_count}-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_e2",
-            disks,
-            f"zones/{zone}/machineTypes/e2-custom-{core_count}-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_e2_micro",
-            disks,
-            f"zones/{zone}/machineTypes/e2-custom-micro-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_e2_small",
-            disks,
-            f"zones/{zone}/machineTypes/e2-custom-small-{memory}",
-        ),
-        create_instance(
-            project_id,
-            zone,
-            f"{instance_name}_e2_medium",
-            disks,
-            f"zones/{zone}/machineTypes/e2-custom-medium-{memory}",
-        ),
+    params = [
+        (f"{instance_name}_n1", f"zones/{zone}/machineTypes/custom-{core_count}-{memory}"),
+        (f"{instance_name}_n2", f"zones/{zone}/machineTypes/n2-custom-{core_count}-{memory}"),
+        (f"{instance_name}_n2d", f"zones/{zone}/machineTypes/n2d-custom-{core_count}-{memory}"),
+        (f"{instance_name}_e2", f"zones/{zone}/machineTypes/e2-custom-{core_count}-{memory}"),
+        (f"{instance_name}_e2_micro", f"zones/{zone}/machineTypes/e2-custom-micro-{memory}"),
+        (f"{instance_name}_e2_small", f"zones/{zone}/machineTypes/e2-custom-small-{memory}"),
+        (f"{instance_name}_e2_medium", f"zones/{zone}/machineTypes/e2-custom-medium-{memory}"),
     ]
+    # The core_count and memory values are not validated anywhere and can be rejected by the API.
+    instances = [create_instance(project_id, zone, name, disks, type) for name, type in params]
     return instances
 # </INGREDIENT>

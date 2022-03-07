@@ -14,7 +14,7 @@
 # flake8: noqa
 """
 A sample script showing how to handle default values when communicating
-with the Compute Engine API.
+with the Compute Engine API and how to configure usage reports using the API.
 """
 # <REGION compute_instances_verify_default_value>
 # <REGION compute_usage_report_set>
