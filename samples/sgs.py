@@ -120,6 +120,7 @@ def load_ingredient(path: Path) -> Ingredient:
     in_ingredient = False
     ingredient_name = ""
     with path.open() as file:
+        print(f"reading {path}")
         file_content = file.read()
     # Read imports
     simple_imports, imports_from = parse_imports(file_content)
@@ -151,6 +152,8 @@ def load_ingredients(path: Path) -> dict:
         if ipath.is_dir():
             ingredients.update(load_ingredients(ipath))
         elif ipath.is_file():
+            if '__pycache__' in str(ipath.absolute()):
+                continue
             ingredient = load_ingredient(ipath)
             ingredients[ingredient.name] = ingredient
     return ingredients
