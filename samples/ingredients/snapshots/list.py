@@ -16,33 +16,30 @@
 # folder for complete code samples that are ready to be used.
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
-import sys
-from typing import NoReturn
+from typing import Iterable
 
 from google.cloud import compute_v1
 
 
-# <INGREDIENT delete_disk>
-def delete_disk(project_id: str, zone: str, disk_name: str) -> NoReturn:
+# <INGREDIENT list_snapshots>
+def list_snapshots(project_id: str, filter_: str = "") -> Iterable[compute_v1.Snapshot]:
     """
-    Deletes a disk from a project.
+    List snapshots from a project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone in which is the disk you want to delete.
-        disk_name: name of the disk you want to delete.
-    """
-    disk_client = compute_v1.DisksClient()
-    operation = disk_client.delete_unary(project=project_id, zone=zone, disk=disk_name)
-    operation_client = compute_v1.ZoneOperationsClient()
-    operation = operation_client.wait(project=project_id, zone=zone, operation=operation.name)
+        filter_: filter to be applied when listing snapshots. Learn more about filters here:
+            https://cloud.google.com/python/docs/reference/compute/latest/google.cloud.compute_v1.types.ListSnapshotsRequest
 
-    if operation.error:
-        print("Error during disk delete operation:", operation.error, file=sys.stderr)
-        raise RuntimeError(operation.error)
-    if operation.warnings:
-        print("Warnings during disk delete operation:\n", file=sys.stderr)
-        for warning in operation.warnings:
-            print(f" - {warning.code}: {warning.message}", file=sys.stderr)
-    return
+    Returns:
+        An iterable containing all Snapshots that match the provided filter.
+    """
+
+    snapshot_client = compute_v1.SnapshotsClient()
+    request = compute_v1.ListSnapshotsRequest()
+    request.project = project_id
+    request.filter = filter_
+
+    return snapshot_client.list(request)
 # </INGREDIENT>
+

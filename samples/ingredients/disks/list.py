@@ -17,32 +17,27 @@
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 import sys
-from typing import NoReturn
+from typing import NoReturn, Iterable
 
 from google.cloud import compute_v1
 
 
-# <INGREDIENT delete_disk>
-def delete_disk(project_id: str, zone: str, disk_name: str) -> NoReturn:
+# <INGREDIENT list_disks>
+def list_disks(project_id: str, zone: str, filter_: str = "") -> Iterable[compute_v1.Disk]:
     """
     Deletes a disk from a project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone in which is the disk you want to delete.
-        disk_name: name of the disk you want to delete.
+        filter_: filter to be applied when listing disks. Learn more about filters here:
+            https://cloud.google.com/python/docs/reference/compute/latest/google.cloud.compute_v1.types.ListDisksRequest
     """
     disk_client = compute_v1.DisksClient()
-    operation = disk_client.delete_unary(project=project_id, zone=zone, disk=disk_name)
-    operation_client = compute_v1.ZoneOperationsClient()
-    operation = operation_client.wait(project=project_id, zone=zone, operation=operation.name)
-
-    if operation.error:
-        print("Error during disk delete operation:", operation.error, file=sys.stderr)
-        raise RuntimeError(operation.error)
-    if operation.warnings:
-        print("Warnings during disk delete operation:\n", file=sys.stderr)
-        for warning in operation.warnings:
-            print(f" - {warning.code}: {warning.message}", file=sys.stderr)
-    return
+    request = compute_v1.ListDisksRequest()
+    request.project = project_id
+    request.zone = zone
+    request.filter = filter_
+    return disk_client.list(request)
 # </INGREDIENT>
+

@@ -17,44 +17,36 @@
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 import sys
-
+from typing import NoReturn
 
 from google.cloud import compute_v1
 
 
-# <INGREDIENT create_snapshot>
-def create_snapshot(project_id: str, zone: str, disk_name: str, snapshot_name: str) -> compute_v1.Snapshot:
+# <INGREDIENT delete_snapshot>
+def delete_snapshot(project_id: str, snapshot_name: str) -> NoReturn:
     """
     Create a snapshot of a disk.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        zone: name of the zone in which is the disk you want to snapshot.
-        disk_name: name of the disk you want to snapshot.
-        snapshot_name: name of the snapshot to be created.
+        snapshot_name: name of the snapshot to delete.
 
     Returns:
         The new snapshot instance.
     """
-    disk_client = compute_v1.DisksClient()
-    disk = disk_client.get(project=project_id, zone=zone, disk=disk_name)
-    snapshot = compute_v1.Snapshot()
-    snapshot.source_disk = disk.self_link
-    snapshot.name = snapshot_name
 
     snapshot_client = compute_v1.SnapshotsClient()
-    operation = snapshot_client.insert_unary(project=project_id, snapshot_resource=snapshot)
+    operation = snapshot_client.delete_unary(project=project_id, snapshot=snapshot_name)
     op_client = compute_v1.GlobalOperationsClient()
     operation = op_client.wait(project=project_id, operation=operation.name)
 
     if operation.error:
-        print("Error during snapshot creation:", operation.error, file=sys.stderr)
+        print("Error during snapshot deletion:", operation.error, file=sys.stderr)
         raise RuntimeError(operation.error)
     if operation.warnings:
-        print("Warnings during snapshot creation:\n", file=sys.stderr)
+        print("Warnings during snapshot deletion:\n", file=sys.stderr)
         for warning in operation.warnings:
             print(f" - {warning.code}: {warning.message}", file=sys.stderr)
 
-    return snapshot_client.get(project=project_id, snapshot=snapshot_name)
-
+    return
 # </INGREDIENT>

@@ -35,8 +35,8 @@ def set_disk_autodelete(project_id: str, zone: str, instance_name: str, disk_nam
         disk_name: the name of the disk which flag you want to modify.
         autodelete: the new value of the autodelete flag.
     """
-    instance_clinet = compute_v1.InstancesClient()
-    instance = instance_clinet.get(project=project_id, zone=zone, instance=instance_name)
+    instance_client = compute_v1.InstancesClient()
+    instance = instance_client.get(project=project_id, zone=zone, instance=instance_name)
 
     for disk in instance.disks:
         if disk.device_name == disk_name:
@@ -46,7 +46,7 @@ def set_disk_autodelete(project_id: str, zone: str, instance_name: str, disk_nam
 
     disk.auto_delete = autodelete
 
-    operation = instance_clinet.update_unary(project=project_id, zone=zone, instance=instance_name, instance_resource=instance)
+    operation = instance_client.update_unary(project=project_id, zone=zone, instance=instance_name, instance_resource=instance)
     operation_client = compute_v1.ZoneOperationsClient()
     operation = operation_client.wait(project=project_id, zone=zone, operation=operation.name)
 
@@ -54,6 +54,8 @@ def set_disk_autodelete(project_id: str, zone: str, instance_name: str, disk_nam
         print("Error during instance update:", operation.error, file=sys.stderr)
         raise RuntimeError(operation.error)
     if operation.warnings:
-        print("Warnings during instance update:\n", "\n".join(operation.warnings), file=sys.stderr)
+        print("Warnings during instance update:\n", file=sys.stderr)
+        for warning in operation.warnings:
+            print(f" - {warning.code}: {warning.message}", file=sys.stderr)
     return
 # </INGREDIENT>

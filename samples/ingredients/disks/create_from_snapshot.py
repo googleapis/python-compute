@@ -23,7 +23,7 @@ from google.cloud import compute_v1
 
 
 # <INGREDIENT create_disk_from_snapshot>
-def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, snapshot_link: str) -> compute_v1.Disk:
+def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, disk_type: str, disk_size_gb: int, snapshot_link: str) -> compute_v1.Disk:
     """
     Creates a new disk in a project in given zone.
 
@@ -31,6 +31,10 @@ def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, snapsh
         project_id: project ID or project number of the Cloud project you want to use.
         zone: name of the zone in which you want to create the disk.
         disk_name: name of the disk you want to create.
+        disk_type: the type of disk you want to create. This value uses the following format:
+            "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
+            For example: "zones/us-west3-b/diskTypes/pd-ssd"
+        disk_size_gb: size of the new disk in gigabytes
         snapshot_link: a link to the snapshot you want to use as a source for the new disk.
             This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
@@ -40,7 +44,9 @@ def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, snapsh
     disk_client = compute_v1.DisksClient()
     disk = compute_v1.Disk()
     disk.zone = zone
+    disk.size_gb = disk_size_gb
     disk.source_snapshot = snapshot_link
+    disk.type_ = disk_type
     disk.name = disk_name
     operation = disk_client.insert_unary(project=project_id, zone=zone, disk_resource=disk)
     operation_client = compute_v1.ZoneOperationsClient()
@@ -49,8 +55,11 @@ def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, snapsh
     if operation.error:
         print("Error during disk creation:", operation.error, file=sys.stderr)
         raise RuntimeError(operation.error)
+
     if operation.warnings:
-        print("Warnings during disk creation:\n", "\n".join(operation.warnings), file=sys.stderr)
+        print("Warnings during disk creation:\n", file=sys.stderr)
+        for warning in operation.warnings:
+            print(f" - {warning.code}: {warning.message}", file=sys.stderr)
 
     return disk_client.get(project=project_id, zone=zone, disk=disk_name)
 # </INGREDIENT>
