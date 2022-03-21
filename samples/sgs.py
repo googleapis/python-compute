@@ -120,7 +120,6 @@ def load_ingredient(path: Path) -> Ingredient:
     in_ingredient = False
     ingredient_name = ""
     with path.open() as file:
-        print(f"reading {path}")
         file_content = file.read()
     # Read imports
     simple_imports, imports_from = parse_imports(file_content)

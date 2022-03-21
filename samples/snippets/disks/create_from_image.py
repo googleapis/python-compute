@@ -21,7 +21,6 @@
 
 # [START compute_disk_create_from_image]
 import sys
-from typing import Literal
 
 from google.cloud import compute_v1
 

@@ -17,7 +17,6 @@
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 import sys
-from typing import Literal
 
 from google.cloud import compute_v1
 
