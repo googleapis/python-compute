@@ -25,14 +25,11 @@ from google.cloud import compute_v1
 # <INGREDIENT delete_snapshot>
 def delete_snapshot(project_id: str, snapshot_name: str) -> NoReturn:
     """
-    Create a snapshot of a disk.
+    Delete a snapshot of a disk.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         snapshot_name: name of the snapshot to delete.
-
-    Returns:
-        The new snapshot instance.
     """
 
     snapshot_client = compute_v1.SnapshotsClient()
