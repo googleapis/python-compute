@@ -43,13 +43,15 @@ def test_snippets_freshness():
     """
     with tempfile.TemporaryDirectory() as tmp_dir:
         args = Namespace(output_dir=tmp_dir)
-        sgs.generate(args, Path('ingredients/').absolute(), Path('recipes/').absolute())
+        sgs.generate(args, Path("ingredients/").absolute(), Path("recipes/").absolute())
         print(list(map(Path, glob.glob(f"{tmp_dir}/**"))))
         for test_file in map(Path, glob.glob(f"{tmp_dir}/**", recursive=True)):
-            match_file = Path('snippets/') / test_file.relative_to(tmp_dir)
+            match_file = Path("snippets/") / test_file.relative_to(tmp_dir)
             if test_file.is_file():
                 if test_file.read_bytes() != match_file.read_bytes():
-                    pytest.fail(f"This test fails because file {match_file} seems to be outdated. Please run "
-                                f"`python sgs.py generate` to update your snippets.")
+                    pytest.fail(
+                        f"This test fails because file {match_file} seems to be outdated. Please run "
+                        f"`python sgs.py generate` to update your snippets."
+                    )
             elif test_file.is_dir():
                 assert match_file.is_dir()
