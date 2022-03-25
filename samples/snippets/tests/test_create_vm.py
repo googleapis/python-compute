@@ -17,8 +17,8 @@ import google.auth
 from google.cloud import compute_v1
 import pytest
 
-from ..disks.create_from_image import create_disk_from_image
 from ..disks.create_empty_disk import create_empty_disk
+from ..disks.create_from_image import create_disk_from_image
 from ..disks.delete import delete_disk
 
 from ..instances.create_start_instance.create_from_custom_image import (
@@ -31,11 +31,11 @@ from ..instances.create_start_instance.create_from_snapshot import create_from_s
 from ..instances.create_start_instance.create_with_additional_disk import (
     create_with_additional_disk,
 )
+from ..instances.create_start_instance.create_with_existing_disks import create_with_existing_disks
 from ..instances.create_start_instance.create_with_snapshotted_data_disk import (
     create_with_snapshotted_data_disk,
 )
 from ..instances.create_with_subnet import create_with_subnet
-from ..instances.create_start_instance.create_with_existing_disks import create_with_existing_disks
 from ..instances.delete import delete_instance
 from ..operations.operation_check import wait_for_operation
 
@@ -242,4 +242,3 @@ def test_create_with_existing_disks(boot_disk, empty_disk):
         assert len(instance.disks) == 2
     finally:
         delete_instance(PROJECT, INSTANCE_ZONE, instance_name)
-
