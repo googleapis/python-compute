@@ -89,29 +89,23 @@ def test__get_default_mtls_endpoint():
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_name",
+    "client_class",
     [
-        (BackendServicesClient, "rest"),
+        BackendServicesClient,
     ],
 )
-def test_backend_services_client_from_service_account_info(
-    client_class, transport_name
-):
+def test_backend_services_client_from_service_account_info(client_class):
     creds = ga_credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_info"
     ) as factory:
         factory.return_value = creds
         info = {"valid": True}
-        client = client_class.from_service_account_info(info, transport=transport_name)
+        client = client_class.from_service_account_info(info)
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == (
-            "compute.googleapis.com{}".format(":443")
-            if transport_name in ["grpc", "grpc_asyncio"]
-            else "https://{}".format("compute.googleapis.com")
-        )
+        assert client.transport._host == "compute.googleapis.com:443"
 
 
 @pytest.mark.parametrize(
@@ -139,36 +133,26 @@ def test_backend_services_client_service_account_always_use_jwt(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_name",
+    "client_class",
     [
-        (BackendServicesClient, "rest"),
+        BackendServicesClient,
     ],
 )
-def test_backend_services_client_from_service_account_file(
-    client_class, transport_name
-):
+def test_backend_services_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_file"
     ) as factory:
         factory.return_value = creds
-        client = client_class.from_service_account_file(
-            "dummy/file/path.json", transport=transport_name
-        )
+        client = client_class.from_service_account_file("dummy/file/path.json")
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        client = client_class.from_service_account_json(
-            "dummy/file/path.json", transport=transport_name
-        )
+        client = client_class.from_service_account_json("dummy/file/path.json")
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == (
-            "compute.googleapis.com{}".format(":443")
-            if transport_name in ["grpc", "grpc_asyncio"]
-            else "https://{}".format("compute.googleapis.com")
-        )
+        assert client.transport._host == "compute.googleapis.com:443"
 
 
 def test_backend_services_client_get_transport_class():
@@ -2542,6 +2526,7 @@ def test_insert_unary_rest(request_type):
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -2582,6 +2567,12 @@ def test_insert_unary_rest(request_type):
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -2899,6 +2890,7 @@ def test_insert_unary_rest_bad_request(
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -2939,6 +2931,12 @@ def test_insert_unary_rest_bad_request(
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -3473,6 +3471,7 @@ def test_patch_unary_rest(request_type):
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -3513,6 +3512,12 @@ def test_patch_unary_rest(request_type):
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -3835,6 +3840,7 @@ def test_patch_unary_rest_bad_request(
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -3875,6 +3881,12 @@ def test_patch_unary_rest_bad_request(
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -4729,6 +4741,7 @@ def test_update_unary_rest(request_type):
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -4769,6 +4782,12 @@ def test_update_unary_rest(request_type):
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -5091,6 +5110,7 @@ def test_update_unary_rest_bad_request(
         "connection_draining": {"draining_timeout_sec": 2124},
         "connection_tracking_policy": {
             "connection_persistence_on_unhealthy_backends": "connection_persistence_on_unhealthy_backends_value",
+            "enable_strong_affinity": True,
             "idle_timeout_sec": 1694,
             "tracking_mode": "tracking_mode_value",
         },
@@ -5131,6 +5151,12 @@ def test_update_unary_rest_bad_request(
         "id": 205,
         "kind": "kind_value",
         "load_balancing_scheme": "load_balancing_scheme_value",
+        "locality_lb_policies": [
+            {
+                "custom_policy": {"data": "data_value", "name": "name_value"},
+                "policy": {"name": "name_value"},
+            }
+        ],
         "locality_lb_policy": "locality_lb_policy_value",
         "log_config": {"enable": True, "sample_rate": 0.1165},
         "max_stream_duration": {},
@@ -5429,46 +5455,24 @@ def test_backend_services_http_transport_client_cert_source_for_mtls():
         mock_configure_mtls_channel.assert_called_once_with(client_cert_source_callback)
 
 
-@pytest.mark.parametrize(
-    "transport_name",
-    [
-        "rest",
-    ],
-)
-def test_backend_services_host_no_port(transport_name):
+def test_backend_services_host_no_port():
     client = BackendServicesClient(
         credentials=ga_credentials.AnonymousCredentials(),
         client_options=client_options.ClientOptions(
             api_endpoint="compute.googleapis.com"
         ),
-        transport=transport_name,
     )
-    assert client.transport._host == (
-        "compute.googleapis.com:443"
-        if transport_name in ["grpc", "grpc_asyncio"]
-        else "https://compute.googleapis.com"
-    )
+    assert client.transport._host == "compute.googleapis.com:443"
 
 
-@pytest.mark.parametrize(
-    "transport_name",
-    [
-        "rest",
-    ],
-)
-def test_backend_services_host_with_port(transport_name):
+def test_backend_services_host_with_port():
     client = BackendServicesClient(
         credentials=ga_credentials.AnonymousCredentials(),
         client_options=client_options.ClientOptions(
             api_endpoint="compute.googleapis.com:8000"
         ),
-        transport=transport_name,
     )
-    assert client.transport._host == (
-        "compute.googleapis.com:8000"
-        if transport_name in ["grpc", "grpc_asyncio"]
-        else "https://compute.googleapis.com:8000"
-    )
+    assert client.transport._host == "compute.googleapis.com:8000"
 
 
 def test_common_billing_account_path():
