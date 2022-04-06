@@ -84,27 +84,23 @@ def test__get_default_mtls_endpoint():
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_name",
+    "client_class",
     [
-        (NetworksClient, "rest"),
+        NetworksClient,
     ],
 )
-def test_networks_client_from_service_account_info(client_class, transport_name):
+def test_networks_client_from_service_account_info(client_class):
     creds = ga_credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_info"
     ) as factory:
         factory.return_value = creds
         info = {"valid": True}
-        client = client_class.from_service_account_info(info, transport=transport_name)
+        client = client_class.from_service_account_info(info)
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == (
-            "compute.googleapis.com{}".format(":443")
-            if transport_name in ["grpc", "grpc_asyncio"]
-            else "https://{}".format("compute.googleapis.com")
-        )
+        assert client.transport._host == "compute.googleapis.com:443"
 
 
 @pytest.mark.parametrize(
@@ -132,34 +128,26 @@ def test_networks_client_service_account_always_use_jwt(
 
 
 @pytest.mark.parametrize(
-    "client_class,transport_name",
+    "client_class",
     [
-        (NetworksClient, "rest"),
+        NetworksClient,
     ],
 )
-def test_networks_client_from_service_account_file(client_class, transport_name):
+def test_networks_client_from_service_account_file(client_class):
     creds = ga_credentials.AnonymousCredentials()
     with mock.patch.object(
         service_account.Credentials, "from_service_account_file"
     ) as factory:
         factory.return_value = creds
-        client = client_class.from_service_account_file(
-            "dummy/file/path.json", transport=transport_name
-        )
+        client = client_class.from_service_account_file("dummy/file/path.json")
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        client = client_class.from_service_account_json(
-            "dummy/file/path.json", transport=transport_name
-        )
+        client = client_class.from_service_account_json("dummy/file/path.json")
         assert client.transport._credentials == creds
         assert isinstance(client, client_class)
 
-        assert client.transport._host == (
-            "compute.googleapis.com{}".format(":443")
-            if transport_name in ["grpc", "grpc_asyncio"]
-            else "https://{}".format("compute.googleapis.com")
-        )
+        assert client.transport._host == "compute.googleapis.com:443"
 
 
 def test_networks_client_get_transport_class():
@@ -1194,12 +1182,16 @@ def test_get_rest(request_type):
             auto_create_subnetworks=True,
             creation_timestamp="creation_timestamp_value",
             description="description_value",
+            enable_ula_internal_ipv6=True,
             gateway_i_pv4="gateway_i_pv4_value",
             id=205,
+            internal_ipv6_range="internal_ipv6_range_value",
             kind="kind_value",
             mtu=342,
             name="name_value",
+            network_firewall_policy_enforcement_order="network_firewall_policy_enforcement_order_value",
             self_link="self_link_value",
+            self_link_with_id="self_link_with_id_value",
             subnetworks=["subnetworks_value"],
         )
 
@@ -1217,12 +1209,19 @@ def test_get_rest(request_type):
     assert response.auto_create_subnetworks is True
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
+    assert response.enable_ula_internal_ipv6 is True
     assert response.gateway_i_pv4 == "gateway_i_pv4_value"
     assert response.id == 205
+    assert response.internal_ipv6_range == "internal_ipv6_range_value"
     assert response.kind == "kind_value"
     assert response.mtu == 342
     assert response.name == "name_value"
+    assert (
+        response.network_firewall_policy_enforcement_order
+        == "network_firewall_policy_enforcement_order_value"
+    )
     assert response.self_link == "self_link_value"
+    assert response.self_link_with_id == "self_link_with_id_value"
     assert response.subnetworks == ["subnetworks_value"]
 
 
@@ -1748,11 +1747,14 @@ def test_insert_unary_rest(request_type):
         "auto_create_subnetworks": True,
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
+        "enable_ula_internal_ipv6": True,
         "gateway_i_pv4": "gateway_i_pv4_value",
         "id": 205,
+        "internal_ipv6_range": "internal_ipv6_range_value",
         "kind": "kind_value",
         "mtu": 342,
         "name": "name_value",
+        "network_firewall_policy_enforcement_order": "network_firewall_policy_enforcement_order_value",
         "peerings": [
             {
                 "auto_create_routes": True,
@@ -1770,6 +1772,7 @@ def test_insert_unary_rest(request_type):
         ],
         "routing_config": {"routing_mode": "routing_mode_value"},
         "self_link": "self_link_value",
+        "self_link_with_id": "self_link_with_id_value",
         "subnetworks": ["subnetworks_value_1", "subnetworks_value_2"],
     }
     request = request_type(request_init)
@@ -1990,11 +1993,14 @@ def test_insert_unary_rest_bad_request(
         "auto_create_subnetworks": True,
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
+        "enable_ula_internal_ipv6": True,
         "gateway_i_pv4": "gateway_i_pv4_value",
         "id": 205,
+        "internal_ipv6_range": "internal_ipv6_range_value",
         "kind": "kind_value",
         "mtu": 342,
         "name": "name_value",
+        "network_firewall_policy_enforcement_order": "network_firewall_policy_enforcement_order_value",
         "peerings": [
             {
                 "auto_create_routes": True,
@@ -2012,6 +2018,7 @@ def test_insert_unary_rest_bad_request(
         ],
         "routing_config": {"routing_mode": "routing_mode_value"},
         "self_link": "self_link_value",
+        "self_link_with_id": "self_link_with_id_value",
         "subnetworks": ["subnetworks_value_1", "subnetworks_value_2"],
     }
     request = request_type(request_init)
@@ -2799,11 +2806,14 @@ def test_patch_unary_rest(request_type):
         "auto_create_subnetworks": True,
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
+        "enable_ula_internal_ipv6": True,
         "gateway_i_pv4": "gateway_i_pv4_value",
         "id": 205,
+        "internal_ipv6_range": "internal_ipv6_range_value",
         "kind": "kind_value",
         "mtu": 342,
         "name": "name_value",
+        "network_firewall_policy_enforcement_order": "network_firewall_policy_enforcement_order_value",
         "peerings": [
             {
                 "auto_create_routes": True,
@@ -2821,6 +2831,7 @@ def test_patch_unary_rest(request_type):
         ],
         "routing_config": {"routing_mode": "routing_mode_value"},
         "self_link": "self_link_value",
+        "self_link_with_id": "self_link_with_id_value",
         "subnetworks": ["subnetworks_value_1", "subnetworks_value_2"],
     }
     request = request_type(request_init)
@@ -3046,11 +3057,14 @@ def test_patch_unary_rest_bad_request(
         "auto_create_subnetworks": True,
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
+        "enable_ula_internal_ipv6": True,
         "gateway_i_pv4": "gateway_i_pv4_value",
         "id": 205,
+        "internal_ipv6_range": "internal_ipv6_range_value",
         "kind": "kind_value",
         "mtu": 342,
         "name": "name_value",
+        "network_firewall_policy_enforcement_order": "network_firewall_policy_enforcement_order_value",
         "peerings": [
             {
                 "auto_create_routes": True,
@@ -3068,6 +3082,7 @@ def test_patch_unary_rest_bad_request(
         ],
         "routing_config": {"routing_mode": "routing_mode_value"},
         "self_link": "self_link_value",
+        "self_link_with_id": "self_link_with_id_value",
         "subnetworks": ["subnetworks_value_1", "subnetworks_value_2"],
     }
     request = request_type(request_init)
@@ -4309,46 +4324,24 @@ def test_networks_http_transport_client_cert_source_for_mtls():
         mock_configure_mtls_channel.assert_called_once_with(client_cert_source_callback)
 
 
-@pytest.mark.parametrize(
-    "transport_name",
-    [
-        "rest",
-    ],
-)
-def test_networks_host_no_port(transport_name):
+def test_networks_host_no_port():
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(),
         client_options=client_options.ClientOptions(
             api_endpoint="compute.googleapis.com"
         ),
-        transport=transport_name,
     )
-    assert client.transport._host == (
-        "compute.googleapis.com:443"
-        if transport_name in ["grpc", "grpc_asyncio"]
-        else "https://compute.googleapis.com"
-    )
+    assert client.transport._host == "compute.googleapis.com:443"
 
 
-@pytest.mark.parametrize(
-    "transport_name",
-    [
-        "rest",
-    ],
-)
-def test_networks_host_with_port(transport_name):
+def test_networks_host_with_port():
     client = NetworksClient(
         credentials=ga_credentials.AnonymousCredentials(),
         client_options=client_options.ClientOptions(
             api_endpoint="compute.googleapis.com:8000"
         ),
-        transport=transport_name,
     )
-    assert client.transport._host == (
-        "compute.googleapis.com:8000"
-        if transport_name in ["grpc", "grpc_asyncio"]
-        else "https://compute.googleapis.com:8000"
-    )
+    assert client.transport._host == "compute.googleapis.com:8000"
 
 
 def test_common_billing_account_path():
