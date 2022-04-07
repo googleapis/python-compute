@@ -1542,7 +1542,7 @@ class AcceleratorTypeAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.AcceleratorTypeAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.AcceleratorTypesScopedList]):
             A list of AcceleratorTypesScopedList
             resources.
         kind (str):
@@ -3246,7 +3246,7 @@ class AddressAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.AddressAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.AddressesScopedList]):
             A list of AddressesScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -8666,7 +8666,7 @@ class AttachedDiskInitializeParams(proto.Message):
             type, not URL.
 
             This field is a member of `oneof`_ ``_disk_type``.
-        labels (Sequence[google.cloud.compute_v1.types.AttachedDiskInitializeParams.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to this disk. These can be
             later modified by the disks.setLabels method.
             This field is only applicable for persistent
@@ -9024,7 +9024,7 @@ class Autoscaler(proto.Message):
             resides (for autoscalers living in regional scope).
 
             This field is a member of `oneof`_ ``_region``.
-        scaling_schedule_status (Sequence[google.cloud.compute_v1.types.Autoscaler.ScalingScheduleStatusEntry]):
+        scaling_schedule_status (Mapping[str, google.cloud.compute_v1.types.ScalingScheduleStatus]):
             [Output Only] Status information of existing scaling
             schedules.
         self_link (str):
@@ -9160,7 +9160,7 @@ class AutoscalerAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.AutoscalerAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.AutoscalersScopedList]):
             A list of AutoscalersScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -9519,7 +9519,7 @@ class AutoscalingPolicy(proto.Message):
         scale_in_control (google.cloud.compute_v1.types.AutoscalingPolicyScaleInControl):
 
             This field is a member of `oneof`_ ``_scale_in_control``.
-        scaling_schedules (Sequence[google.cloud.compute_v1.types.AutoscalingPolicy.ScalingSchedulesEntry]):
+        scaling_schedules (Mapping[str, google.cloud.compute_v1.types.AutoscalingPolicyScalingSchedule]):
             Scaling schedules defined for an autoscaler. Multiple
             schedules can be set on an autoscaler, and they can overlap.
             During overlapping periods the greatest
@@ -11223,7 +11223,7 @@ class BackendServiceAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.BackendServiceAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.BackendServicesScopedList]):
             A list of BackendServicesScopedList
             resources.
         kind (str):
@@ -11775,7 +11775,7 @@ class BackendServiceGroupHealth(proto.Message):
     r"""
 
     Attributes:
-        annotations (Sequence[google.cloud.compute_v1.types.BackendServiceGroupHealth.AnnotationsEntry]):
+        annotations (Mapping[str, str]):
             Metadata defined as annotations on the
             network endpoint group.
         health_status (Sequence[google.cloud.compute_v1.types.HealthStatus]):
@@ -12727,7 +12727,7 @@ class BulkInsertInstanceResource(proto.Message):
             placeholder #...# can contain up to 18 characters.
 
             This field is a member of `oneof`_ ``_name_pattern``.
-        per_instance_properties (Sequence[google.cloud.compute_v1.types.BulkInsertInstanceResource.PerInstancePropertiesEntry]):
+        per_instance_properties (Mapping[str, google.cloud.compute_v1.types.BulkInsertInstanceResourcePerInstanceProperties]):
             Per-instance properties to be set on individual instances.
             Keys of this map specify requested instance names. Can be
             empty if name_pattern is used.
@@ -13480,7 +13480,7 @@ class CommitmentAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.CommitmentAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.CommitmentsScopedList]):
             A list of CommitmentsScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -18595,7 +18595,7 @@ class Disk(proto.Message):
             retrieve a disk.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.Disk.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to this disk. These can be
             later modified by the setLabels method.
         last_attach_timestamp (str):
@@ -19019,7 +19019,7 @@ class DiskAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.DiskAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.DisksScopedList]):
             A list of DisksScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -19427,7 +19427,7 @@ class DiskTypeAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.DiskTypeAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.DiskTypesScopedList]):
             A list of DiskTypesScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -20242,7 +20242,7 @@ class ExternalVpnGateway(proto.Message):
             ExternalVpnGateway.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.ExternalVpnGateway.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels for this resource. These can only be
             added or modified by the setLabels method. Each
             label key/value pair must comply with RFC1035.
@@ -21665,7 +21665,7 @@ class ForwardingRule(proto.Message):
             retrieve a ForwardingRule.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.ForwardingRule.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels for this resource. These can only be
             added or modified by the setLabels method. Each
             label key/value pair must comply with RFC1035.
@@ -22049,7 +22049,7 @@ class ForwardingRuleAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.ForwardingRuleAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.ForwardingRulesScopedList]):
             A list of ForwardingRulesScopedList
             resources.
         kind (str):
@@ -25991,7 +25991,7 @@ class GlobalSetLabelsRequest(proto.Message):
             fingerprint.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.GlobalSetLabelsRequest.LabelsEntry]):
+        labels (Mapping[str, str]):
             A list of labels to apply for this resource.
             Each label must comply with the requirements for
             labels. For example, "webserver-frontend":
@@ -27179,7 +27179,7 @@ class HealthChecksAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.HealthChecksAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.HealthChecksScopedList]):
             A list of HealthChecksScopedList resources.
         kind (str):
             Type of resource.
@@ -27279,7 +27279,7 @@ class HealthStatus(proto.Message):
     r"""
 
     Attributes:
-        annotations (Sequence[google.cloud.compute_v1.types.HealthStatus.AnnotationsEntry]):
+        annotations (Mapping[str, str]):
             Metadata defined as annotations for network
             endpoint.
         forwarding_rule (str):
@@ -28538,7 +28538,7 @@ class Image(proto.Message):
             retrieve an image.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.Image.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to this image. These can be
             later modified by the setLabels method.
         license_codes (Sequence[int]):
@@ -32477,7 +32477,7 @@ class Instance(proto.Message):
             get() request to the instance.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.Instance.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to this instance. These can
             be later modified by the setLabels method.
         last_start_timestamp (str):
@@ -32901,7 +32901,7 @@ class InstanceAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.InstanceAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.InstancesScopedList]):
             An object that contains a list of instances
             scoped by zone.
         kind (str):
@@ -33140,7 +33140,7 @@ class InstanceGroupAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.InstanceGroupAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.InstanceGroupsScopedList]):
             A list of InstanceGroupsScopedList resources.
         kind (str):
             [Output Only] The resource type, which is always
@@ -33717,7 +33717,7 @@ class InstanceGroupManagerAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.InstanceGroupManagerAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.InstanceGroupManagersScopedList]):
             A list of InstanceGroupManagersScopedList
             resources.
         kind (str):
@@ -35229,7 +35229,7 @@ class InstanceParams(proto.Message):
     r"""Additional instance params.
 
     Attributes:
-        resource_manager_tags (Sequence[google.cloud.compute_v1.types.InstanceParams.ResourceManagerTagsEntry]):
+        resource_manager_tags (Mapping[str, str]):
             Resource manager tags to be bound to the instance. Tag keys
             and values have the same definition as resource manager
             tags. Keys must be in the format ``tagKeys/{tag_key_id}``,
@@ -35286,7 +35286,7 @@ class InstanceProperties(proto.Message):
             A list of guest accelerator cards' type and
             count to use for instances created from these
             properties.
-        labels (Sequence[google.cloud.compute_v1.types.InstanceProperties.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to instances that are created
             from these properties.
         machine_type (str):
@@ -35335,7 +35335,7 @@ class InstanceProperties(proto.Message):
             is not supported yet.
 
             This field is a member of `oneof`_ ``_reservation_affinity``.
-        resource_manager_tags (Sequence[google.cloud.compute_v1.types.InstanceProperties.ResourceManagerTagsEntry]):
+        resource_manager_tags (Mapping[str, str]):
             Resource manager tags to be bound to the instance. Tag keys
             and values have the same definition as resource manager
             tags. Keys must be in the format ``tagKeys/{tag_key_id}``,
@@ -35900,7 +35900,7 @@ class InstancesSetLabelsRequest(proto.Message):
             a request to add or change labels.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.InstancesSetLabelsRequest.LabelsEntry]):
+        labels (Mapping[str, str]):
 
     """
 
@@ -36976,7 +36976,7 @@ class InterconnectAttachmentAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.InterconnectAttachmentAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.InterconnectAttachmentsScopedList]):
             A list of InterconnectAttachmentsScopedList
             resources.
         kind (str):
@@ -49019,7 +49019,7 @@ class LocationPolicy(proto.Message):
     single region).
 
     Attributes:
-        locations (Sequence[google.cloud.compute_v1.types.LocationPolicy.LocationsEntry]):
+        locations (Mapping[str, google.cloud.compute_v1.types.LocationPolicyLocation]):
             Location configurations mapped by location
             name. Currently only zone names are supported
             and must be represented as valid internal URLs,
@@ -49691,7 +49691,7 @@ class MachineTypeAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.MachineTypeAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.MachineTypesScopedList]):
             A list of MachineTypesScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -50779,7 +50779,7 @@ class NetworkEdgeSecurityServiceAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.NetworkEdgeSecurityServiceAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.NetworkEdgeSecurityServicesScopedList]):
             A list of
             NetworkEdgeSecurityServicesScopedList resources.
         kind (str):
@@ -50887,7 +50887,7 @@ class NetworkEndpoint(proto.Message):
     r"""The network endpoint.
 
     Attributes:
-        annotations (Sequence[google.cloud.compute_v1.types.NetworkEndpoint.AnnotationsEntry]):
+        annotations (Mapping[str, str]):
             Metadata defined as annotations on the
             network endpoint.
         fqdn (str):
@@ -50960,7 +50960,7 @@ class NetworkEndpointGroup(proto.Message):
     serverless NEGs.
 
     Attributes:
-        annotations (Sequence[google.cloud.compute_v1.types.NetworkEndpointGroup.AnnotationsEntry]):
+        annotations (Mapping[str, str]):
             Metadata defined as annotations on the
             network endpoint group.
         app_engine (google.cloud.compute_v1.types.NetworkEndpointGroupAppEngine):
@@ -51184,7 +51184,7 @@ class NetworkEndpointGroupAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.NetworkEndpointGroupAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.NetworkEndpointGroupsScopedList]):
             A list of NetworkEndpointGroupsScopedList
             resources.
         kind (str):
@@ -52562,7 +52562,7 @@ class NodeGroupAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.NodeGroupAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.NodeGroupsScopedList]):
             A list of NodeGroupsScopedList resources.
         kind (str):
             [Output Only] Type of resource.Always
@@ -53095,7 +53095,7 @@ class NodeTemplate(proto.Message):
             digit, except the last character, which cannot be a dash.
 
             This field is a member of `oneof`_ ``_name``.
-        node_affinity_labels (Sequence[google.cloud.compute_v1.types.NodeTemplate.NodeAffinityLabelsEntry]):
+        node_affinity_labels (Mapping[str, str]):
             Labels to use for node affinity, which will
             be used in instance scheduling.
         node_type (str):
@@ -53252,7 +53252,7 @@ class NodeTemplateAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.NodeTemplateAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.NodeTemplatesScopedList]):
             A list of NodeTemplatesScopedList resources.
         kind (str):
             [Output Only] Type of resource.Always
@@ -53593,7 +53593,7 @@ class NodeTypeAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.NodeTypeAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.NodeTypesScopedList]):
             A list of NodeTypesScopedList resources.
         kind (str):
             [Output Only] Type of resource.Always
@@ -54289,7 +54289,7 @@ class OperationAggregatedList(proto.Message):
             identifier is defined by the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.OperationAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.OperationsScopedList]):
             [Output Only] A map of scoped operation lists.
         kind (str):
             [Output Only] Type of resource. Always
@@ -54888,7 +54888,7 @@ class PacketMirroringAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.PacketMirroringAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.PacketMirroringsScopedList]):
             A list of PacketMirroring resources.
         kind (str):
             Type of resource.
@@ -58150,11 +58150,11 @@ class PreservedState(proto.Message):
     r"""Preserved state for a given instance.
 
     Attributes:
-        disks (Sequence[google.cloud.compute_v1.types.PreservedState.DisksEntry]):
+        disks (Mapping[str, google.cloud.compute_v1.types.PreservedStatePreservedDisk]):
             Preserved disks defined for this instance.
             This map is keyed with the device names of the
             disks.
-        metadata (Sequence[google.cloud.compute_v1.types.PreservedState.MetadataEntry]):
+        metadata (Mapping[str, str]):
             Preserved metadata defined for this instance.
     """
 
@@ -59058,7 +59058,7 @@ class PublicDelegatedPrefixAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.PublicDelegatedPrefixAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.PublicDelegatedPrefixesScopedList]):
             A list of PublicDelegatedPrefixesScopedList
             resources.
         kind (str):
@@ -60862,7 +60862,7 @@ class RegionSetLabelsRequest(proto.Message):
             resource to get the latest fingerprint.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.RegionSetLabelsRequest.LabelsEntry]):
+        labels (Mapping[str, str]):
             The labels to set for this resource.
     """
 
@@ -61957,7 +61957,7 @@ class ReservationAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.ReservationAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.ReservationsScopedList]):
             A list of Allocation resources.
         kind (str):
             Type of resource.
@@ -62740,7 +62740,7 @@ class ResourcePolicyAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.ResourcePolicyAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.ResourcePoliciesScopedList]):
             A list of ResourcePolicy resources.
         kind (str):
             Type of resource.
@@ -63291,7 +63291,7 @@ class ResourcePolicySnapshotSchedulePolicySnapshotProperties(proto.Message):
             snapshot.
 
             This field is a member of `oneof`_ ``_guest_flush``.
-        labels (Sequence[google.cloud.compute_v1.types.ResourcePolicySnapshotSchedulePolicySnapshotProperties.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to scheduled snapshots. These
             can be later modified by the setLabels method.
             Label values may be empty.
@@ -64009,7 +64009,7 @@ class RouterAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.RouterAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.RoutersScopedList]):
             A list of Router resources.
         kind (str):
             Type of resource.
@@ -66258,7 +66258,7 @@ class SecurityPoliciesAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.SecurityPoliciesAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.SecurityPoliciesScopedList]):
             A list of SecurityPoliciesScopedList
             resources.
         kind (str):
@@ -67684,7 +67684,7 @@ class ServiceAttachmentAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.ServiceAttachmentAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.ServiceAttachmentsScopedList]):
             A list of ServiceAttachmentsScopedList
             resources.
         kind (str):
@@ -71130,7 +71130,7 @@ class ShareSettings(proto.Message):
     groups.
 
     Attributes:
-        project_map (Sequence[google.cloud.compute_v1.types.ShareSettings.ProjectMapEntry]):
+        project_map (Mapping[str, google.cloud.compute_v1.types.ShareSettingsProjectConfig]):
             A map of project id and project config. This is only valid
             when share_type's value is SPECIFIC_PROJECTS.
         share_type (str):
@@ -71435,7 +71435,7 @@ class Snapshot(proto.Message):
             retrieve a snapshot.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.Snapshot.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to this snapshot. These can
             be later modified by the setLabels method. Label
             values may be empty.
@@ -71841,7 +71841,7 @@ class SourceInstanceProperties(proto.Message):
             A list of guest accelerator cards' type and
             count to use for instances created from this
             machine image.
-        labels (Sequence[google.cloud.compute_v1.types.SourceInstanceProperties.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels to apply to instances that are created
             from this machine image.
         machine_type (str):
@@ -72155,7 +72155,7 @@ class SslCertificateAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.SslCertificateAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.SslCertificatesScopedList]):
             A list of SslCertificatesScopedList
             resources.
         kind (str):
@@ -72302,7 +72302,7 @@ class SslCertificateManagedSslCertificate(proto.Message):
     r"""Configuration and status of a managed SSL certificate.
 
     Attributes:
-        domain_status (Sequence[google.cloud.compute_v1.types.SslCertificateManagedSslCertificate.DomainStatusEntry]):
+        domain_status (Mapping[str, str]):
             [Output only] Detailed statuses of the domains specified for
             managed certificate resource.
         domains (Sequence[str]):
@@ -72802,7 +72802,7 @@ class StatefulPolicyPreservedState(proto.Message):
     r"""Configuration of preserved resources.
 
     Attributes:
-        disks (Sequence[google.cloud.compute_v1.types.StatefulPolicyPreservedState.DisksEntry]):
+        disks (Mapping[str, google.cloud.compute_v1.types.StatefulPolicyPreservedStateDiskDevice]):
             Disks created on the instances that will be
             preserved on instance delete, update, etc. This
             map is keyed with the device names of the disks.
@@ -73298,7 +73298,7 @@ class SubnetworkAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.SubnetworkAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.SubnetworksScopedList]):
             A list of SubnetworksScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -74300,7 +74300,7 @@ class TargetHttpProxyAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.TargetHttpProxyAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.TargetHttpProxiesScopedList]):
             A list of TargetHttpProxiesScopedList
             resources.
         kind (str):
@@ -74754,7 +74754,7 @@ class TargetHttpsProxyAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.TargetHttpsProxyAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.TargetHttpsProxiesScopedList]):
             A list of TargetHttpsProxiesScopedList
             resources.
         kind (str):
@@ -75045,7 +75045,7 @@ class TargetInstanceAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.TargetInstanceAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.TargetInstancesScopedList]):
             A list of TargetInstance resources.
         kind (str):
             Type of resource.
@@ -75407,7 +75407,7 @@ class TargetPoolAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.TargetPoolAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.TargetPoolsScopedList]):
             A list of TargetPool resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -76341,7 +76341,7 @@ class TargetVpnGatewayAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.TargetVpnGatewayAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.TargetVpnGatewaysScopedList]):
             A list of TargetVpnGateway resources.
         kind (str):
             [Output Only] Type of resource. Always
@@ -79108,7 +79108,7 @@ class UrlMapsAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.UrlMapsAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.UrlMapsScopedList]):
             A list of UrlMapsScopedList resources.
         kind (str):
             Type of resource.
@@ -79764,7 +79764,7 @@ class VpnGateway(proto.Message):
             retrieve an VpnGateway.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.VpnGateway.LabelsEntry]):
+        labels (Mapping[str, str]):
             Labels for this resource. These can only be
             added or modified by the setLabels method. Each
             label key/value pair must comply with RFC1035.
@@ -79886,7 +79886,7 @@ class VpnGatewayAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.VpnGatewayAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.VpnGatewaysScopedList]):
             A list of VpnGateway resources.
         kind (str):
             [Output Only] Type of resource. Always compute#vpnGateway
@@ -80602,7 +80602,7 @@ class VpnTunnelAggregatedList(proto.Message):
             the server.
 
             This field is a member of `oneof`_ ``_id``.
-        items (Sequence[google.cloud.compute_v1.types.VpnTunnelAggregatedList.ItemsEntry]):
+        items (Mapping[str, google.cloud.compute_v1.types.VpnTunnelsScopedList]):
             A list of VpnTunnelsScopedList resources.
         kind (str):
             [Output Only] Type of resource. Always compute#vpnTunnel for
@@ -81426,7 +81426,7 @@ class ZoneSetLabelsRequest(proto.Message):
             resource to get the latest fingerprint.
 
             This field is a member of `oneof`_ ``_label_fingerprint``.
-        labels (Sequence[google.cloud.compute_v1.types.ZoneSetLabelsRequest.LabelsEntry]):
+        labels (Mapping[str, str]):
             The labels to set for this resource.
     """
 
