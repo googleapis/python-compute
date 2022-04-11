@@ -15,11 +15,12 @@ import time
 import uuid
 
 import google.auth
+from google.cloud import compute_v1
 import pytest
 
-from google.cloud import compute_v1
+
 from ..images.get import get_image_from_family
-from ..instances.create import disk_from_image, create_instance
+from ..instances.create import create_instance, disk_from_image
 from ..instances.delete import delete_instance
 from ..instances.resume import resume_instance
 from ..instances.suspend import suspend_instance
@@ -66,6 +67,3 @@ def test_instance_suspend_resume(compute_instance):
 
     resume_instance(PROJECT, INSTANCE_ZONE, compute_instance.name)
     assert _get_status(compute_instance) == compute_v1.Instance.Status.RUNNING.name
-
-
-
