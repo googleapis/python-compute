@@ -4319,6 +4319,7 @@ def test_insert_rest_required_fields(request_type=compute.InsertFirewallPolicyRe
     transport_class = transports.FirewallPoliciesRestTransport
 
     request_init = {}
+    request_init["parent_id"] = ""
     request = request_type(request_init)
     jsonified_request = json.loads(
         request_type.to_json(
@@ -4327,6 +4328,7 @@ def test_insert_rest_required_fields(request_type=compute.InsertFirewallPolicyRe
     )
 
     # verify fields with default values are dropped
+    assert "parentId" not in jsonified_request
 
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
@@ -4334,6 +4336,10 @@ def test_insert_rest_required_fields(request_type=compute.InsertFirewallPolicyRe
     jsonified_request.update(unset_fields)
 
     # verify required fields with default values are now present
+    assert "parentId" in jsonified_request
+    assert jsonified_request["parentId"] == request_init["parent_id"]
+
+    jsonified_request["parentId"] = "parent_id_value"
 
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
@@ -4348,6 +4354,8 @@ def test_insert_rest_required_fields(request_type=compute.InsertFirewallPolicyRe
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
+    assert "parentId" in jsonified_request
+    assert jsonified_request["parentId"] == "parent_id_value"
 
     client = FirewallPoliciesClient(
         credentials=ga_credentials.AnonymousCredentials(),
@@ -4381,7 +4389,12 @@ def test_insert_rest_required_fields(request_type=compute.InsertFirewallPolicyRe
 
             response = client.insert(request)
 
-            expected_params = []
+            expected_params = [
+                (
+                    "parentId",
+                    "",
+                ),
+            ]
             actual_params = req.call_args.kwargs["params"]
             assert expected_params == actual_params
 
@@ -4399,7 +4412,12 @@ def test_insert_rest_unset_required_fields():
                 "requestId",
             )
         )
-        & set(("firewallPolicyResource",))
+        & set(
+            (
+                "firewallPolicyResource",
+                "parentId",
+            )
+        )
     )
 
 
@@ -4738,6 +4756,7 @@ def test_insert_unary_rest_required_fields(
     transport_class = transports.FirewallPoliciesRestTransport
 
     request_init = {}
+    request_init["parent_id"] = ""
     request = request_type(request_init)
     jsonified_request = json.loads(
         request_type.to_json(
@@ -4746,6 +4765,7 @@ def test_insert_unary_rest_required_fields(
     )
 
     # verify fields with default values are dropped
+    assert "parentId" not in jsonified_request
 
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
@@ -4753,6 +4773,10 @@ def test_insert_unary_rest_required_fields(
     jsonified_request.update(unset_fields)
 
     # verify required fields with default values are now present
+    assert "parentId" in jsonified_request
+    assert jsonified_request["parentId"] == request_init["parent_id"]
+
+    jsonified_request["parentId"] = "parent_id_value"
 
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
@@ -4767,6 +4791,8 @@ def test_insert_unary_rest_required_fields(
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
+    assert "parentId" in jsonified_request
+    assert jsonified_request["parentId"] == "parent_id_value"
 
     client = FirewallPoliciesClient(
         credentials=ga_credentials.AnonymousCredentials(),
@@ -4800,7 +4826,12 @@ def test_insert_unary_rest_required_fields(
 
             response = client.insert_unary(request)
 
-            expected_params = []
+            expected_params = [
+                (
+                    "parentId",
+                    "",
+                ),
+            ]
             actual_params = req.call_args.kwargs["params"]
             assert expected_params == actual_params
 
@@ -4818,7 +4849,12 @@ def test_insert_unary_rest_unset_required_fields():
                 "requestId",
             )
         )
-        & set(("firewallPolicyResource",))
+        & set(
+            (
+                "firewallPolicyResource",
+                "parentId",
+            )
+        )
     )
 
 
