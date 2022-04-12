@@ -54279,6 +54279,11 @@ class Operation(proto.Message):
         optional=True,
     )
 
+    @property
+    def done(self) -> bool:
+        """Return True if the backing extended operation is completed, False otherwise."""
+        return self.status == type(self.status).DONE
+
 
 class OperationAggregatedList(proto.Message):
     r"""
