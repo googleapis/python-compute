@@ -29293,8 +29293,6 @@ class InsertFirewallPolicyRequest(proto.Message):
             "folders/[FOLDER_ID]" if the parent is a folder or
             "organizations/[ORGANIZATION_ID]" if the parent is an
             organization.
-
-            This field is a member of `oneof`_ ``_parent_id``.
         request_id (str):
             An optional request ID to identify requests.
             Specify a unique request ID so that if you must
@@ -29323,7 +29321,6 @@ class InsertFirewallPolicyRequest(proto.Message):
     parent_id = proto.Field(
         proto.STRING,
         number=459714768,
-        optional=True,
     )
     request_id = proto.Field(
         proto.STRING,
