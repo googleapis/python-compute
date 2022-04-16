@@ -11,11 +11,18 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
+
+# This is an ingredient file. It is not meant to be run directly. Check the samples/snippets
+# folder for complete code samples that are ready to be used.
+# Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
+# flake8: noqa
 import time
 
 from google.cloud import compute_v1
 import warnings
 
+# <INGREDIENT create_image>
 STOPPED_MACHINE_STATUS = (
     compute_v1.Instance.Status.TERMINATED.name,
     compute_v1.Instance.Status.STOPPED.name
@@ -24,7 +31,18 @@ STOPPED_MACHINE_STATUS = (
 
 def create_image(project_id: str, zone: str, source_disk_name: str, image_name: str, storage_location: str, force_create: bool=False) -> compute_v1.Image:
     """
+    Creates a new disk image.
 
+    Args:
+        project_id: project ID or project number of the Cloud project you use.
+        zone: zone of the disk you copy from.
+        source_disk_name: name of the source disk you copy from.
+        image_name: name of the image you want to create.
+        storage_location: storage location for the image. If the value is undefined,
+            function will store the image in the multi-region closest to your image's
+            source location.
+        force_create: create the image even if the source disk is attached to a
+            running instance.
     """
     image_client = compute_v1.ImagesClient()
     disk_client = compute_v1.DisksClient()
@@ -60,3 +78,4 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
         )
         if time.time() - start >= 300:  # 5 minutes
             raise TimeoutError()
+# </INGREDIENT>
