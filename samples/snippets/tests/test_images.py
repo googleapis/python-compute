@@ -19,6 +19,7 @@ from google.cloud import compute_v1
 from ..images.get import get_image
 from ..images.list import list_images
 from ..images.create import create_image
+from ..images.delete import delete_image
 from ..disks.create_from_image import create_disk_from_image
 from ..disks.delete import delete_disk
 from ..images.get import get_image_from_family
@@ -27,6 +28,7 @@ import pytest
 
 PROJECT = google.auth.default()[1]
 ZONE = 'europe-central2-c'
+
 
 @pytest.fixture
 def test_disk():
@@ -40,6 +42,7 @@ def test_disk():
                                    20, new_debian.self_link)
     yield disk
     delete_disk(PROJECT, ZONE, test_disk_name)
+
 
 def test_list_images():
     images = list_images("debian-cloud")
@@ -61,9 +64,16 @@ def test_get_image():
 
 def test_create_delete_image(test_disk):
     test_image_name = "test-image-" + uuid.uuid4().hex[:10]
-    new_image = create_image(PROJECT, ZONE, test_disk.self_link, test_image_name)
-    assert new_image.name == test_image_name
-    assert isinstance(new_image, compute_v1.Image)
-    delete_disk(PROJECT, ZONE, test_image_name)
+    new_image = create_image(PROJECT, ZONE, test_disk.name, test_image_name)
+    try:
+        assert new_image.name == test_image_name
+        assert new_image.disk_size_gb == 20
+        assert isinstance(new_image, compute_v1.Image)
+    finally:
+        delete_image(PROJECT, test_image_name)
+
+        for image in list_images(PROJECT):
+            if image.name == test_image_name:
+                pytest.fail(f"Image {test_image_name} should have been deleted.")
 
 

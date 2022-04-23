@@ -68,7 +68,8 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
     image = compute_v1.Image()
     image.source_disk = disk.self_link
     image.name = image_name
-    image.storage_locations = [storage_location]
+    if storage_location:
+        image.storage_locations = [storage_location]
 
     operation = image_client.insert(project=project_id, image_resource=image)
 
