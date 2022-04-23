@@ -11,10 +11,35 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import uuid
+
+import google.auth
+from google.cloud import compute_v1
 
 from ..images.get import get_image
 from ..images.list import list_images
+from ..images.create import create_image
+from ..disks.create_from_image import create_disk_from_image
+from ..disks.delete import delete_disk
+from ..images.get import get_image_from_family
 
+import pytest
+
+PROJECT = google.auth.default()[1]
+ZONE = 'europe-central2-c'
+
+@pytest.fixture
+def test_disk():
+    """
+    Get the newest version of debian 11 and make a disk from it.
+    """
+    new_debian = get_image_from_family('debian-cloud', 'debian-11')
+    test_disk_name = "test-disk-" + uuid.uuid4().hex[:10]
+    disk = create_disk_from_image(PROJECT, ZONE, test_disk_name,
+                                   f"zones/{ZONE}/diskTypes/pd-standard",
+                                   20, new_debian.self_link)
+    yield disk
+    delete_disk(PROJECT, ZONE, test_disk_name)
 
 def test_list_images():
     images = list_images("debian-cloud")
@@ -32,3 +57,13 @@ def test_get_image():
     image2 = get_image("debian-cloud", image.name)
 
     assert image == image2
+
+
+def test_create_delete_image(test_disk):
+    test_image_name = "test-image-" + uuid.uuid4().hex[:10]
+    new_image = create_image(PROJECT, ZONE, test_disk.self_link, test_image_name)
+    assert new_image.name == test_image_name
+    assert isinstance(new_image, compute_v1.Image)
+    delete_disk(PROJECT, ZONE, test_image_name)
+
+

@@ -29,7 +29,8 @@ STOPPED_MACHINE_STATUS = (
 )
 
 
-def create_image(project_id: str, zone: str, source_disk_name: str, image_name: str, storage_location: str, force_create: bool=False) -> compute_v1.Image:
+def create_image(project_id: str, zone: str, source_disk_name: str, image_name: str,
+                 storage_location: str=None, force_create: bool=False) -> compute_v1.Image:
     """
     Creates a new disk image.
 
@@ -47,7 +48,6 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
     image_client = compute_v1.ImagesClient()
     disk_client = compute_v1.DisksClient()
     instance_client = compute_v1.InstancesClient()
-    operation_client = compute_v1.GlobalOperationsClient()
 
     # Get source disk
     disk = disk_client.get(project=project_id, zone=zone, disk=source_disk_name)
@@ -70,12 +70,9 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
     image.name = image_name
     image.storage_locations = [storage_location]
 
-    operation = image_client.insert_unary(project=project_id, image_resource=image)
-    start = time.time()
-    while operation.status != compute_v1.Operation.Status.DONE:
-        operation = operation_client.wait(
-            operation=operation.name, project=project_id
-        )
-        if time.time() - start >= 300:  # 5 minutes
-            raise TimeoutError()
+    operation = image_client.insert(project=project_id, image_resource=image)
+
+    wait_for_extended_operation(operation, "image creation")
+
+    return image_client.get(project=project_id, image=image_name)
 # </INGREDIENT>
