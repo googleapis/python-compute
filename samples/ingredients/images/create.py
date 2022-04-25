@@ -61,7 +61,7 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
                                f"GCESysprep command or set forceCreate parameter to true (not recommended). "
                                f"More information here: https://cloud.google.com/compute/docs/instances/windows/creating-windows-os-image#api.")
         else:
-            warnings.warn(f"Warning: force_create option compromise the integrity of your image. "
+            warnings.warn(f"Warning: The `force_create` option may compromise the integrity of your image. "
                           f"Stop the {disk_user} instance before you create the image if possible.")
 
     # Create image
