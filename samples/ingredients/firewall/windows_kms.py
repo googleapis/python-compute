@@ -20,7 +20,7 @@
 from google.cloud import compute_v1
 
 
-# <INGREDIENT create_firewall_rule>
+# <INGREDIENT create_firewall_rule_for_windows_activation_host>
 def create_firewall_rule_for_windows_activation_host(
     project_id: str, firewall_rule_name: str, network: str = "global/networks/default"
 ) -> compute_v1.Firewall:
