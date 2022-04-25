@@ -30,7 +30,7 @@ STOPPED_MACHINE_STATUS = (
 
 
 def create_image(project_id: str, zone: str, source_disk_name: str, image_name: str,
-                 storage_location: str=None, force_create: bool=False) -> compute_v1.Image:
+                 storage_location: str = None, force_create: bool = False) -> compute_v1.Image:
     """
     Creates a new disk image.
 
@@ -57,9 +57,13 @@ def create_image(project_id: str, zone: str, source_disk_name: str, image_name: 
         if instance.status in STOPPED_MACHINE_STATUS:
             continue
         if not force_create:
-            raise RuntimeError(f"Instance {disk_user} should be stopped. Please stop the instance using "
-                               f"GCESysprep command or set forceCreate parameter to true (not recommended). "
-                               f"More information here: https://cloud.google.com/compute/docs/instances/windows/creating-windows-os-image#api.")
+            raise RuntimeError(f"Instance {disk_user} should be stopped. For Windows instances please "
+                               f"stop the instance using `GCESysprep` command. For Linux instances just "
+                               f"shut it down normally. You can supress this error and create an image of"
+                               f"the disk by setting `force_create` parameter to true (not recommended). \n"
+                               f"More information here: \n"
+                               f" * https://cloud.google.com/compute/docs/instances/windows/creating-windows-os-image#api \n"
+                               f" * https://cloud.google.com/compute/docs/images/create-delete-deprecate-private-images#prepare_instance_for_image")
         else:
             warnings.warn(f"Warning: The `force_create` option may compromise the integrity of your image. "
                           f"Stop the {disk_user} instance before you create the image if possible.")
