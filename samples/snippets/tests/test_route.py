@@ -12,8 +12,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 import uuid
-import google.auth
 
+import google.auth
 import pytest
 
 from ..routes.create_kms_route import create_route_to_windows_activation_host
