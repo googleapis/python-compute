@@ -11,6 +11,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
 # flake8: noqa
 
 
@@ -19,9 +20,9 @@
 # directory and apply your changes there.
 
 
-# [START compute_snapshot_create]
+# [START compute_snapshot_delete_by_filter]
 import sys
-from typing import Any, Optional
+from typing import Any, Iterable, NoReturn
 
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
@@ -73,72 +74,54 @@ def wait_for_extended_operation(
     return result
 
 
-def create_snapshot(
-    project_id: str,
-    disk_name: str,
-    snapshot_name: str,
-    *,
-    zone: Optional[str] = None,
-    region: Optional[str] = None,
-    location: Optional[str] = None,
-    disk_project_id: Optional[str] = None,
-) -> compute_v1.Snapshot:
+def delete_snapshot(project_id: str, snapshot_name: str) -> NoReturn:
     """
-    Create a snapshot of a disk.
-
-    You need to pass `zone` or `region` parameter relevant to the disk you want to
-    snapshot, but not both. Pass `zone` parameter for zonal disks and `region` for
-    regional disks.
+    Delete a snapshot of a disk.
 
     Args:
-        project_id: project ID or project number of the Cloud project you want
-            to use to store the snapshot.
-        disk_name: name of the disk you want to snapshot.
-        snapshot_name: name of the snapshot to be created.
-        zone: name of the zone in which is the disk you want to snapshot (for zonal disks).
-        region: name of the region in which is the disk you want to snapshot (for regional disks).
-        location: The Cloud Storage multi-region or the Cloud Storage region where you
-            want to store your snapshot.
-            You can specify only one storage location. Available locations:
-            https://cloud.google.com/storage/docs/locations#available-locations
-        disk_project_id: project ID or project number of the Cloud project that
-            hosts the disk you want to snapshot. If not provided, will look for
-            the disk in the `project_id` project.
-
-    Returns:
-        The new snapshot instance.
+        project_id: project ID or project number of the Cloud project you want to use.
+        snapshot_name: name of the snapshot to delete.
     """
-    if zone is None and region is None:
-        raise RuntimeError(
-            "You need to specify `zone` or `region` for this function to work."
-        )
-    if zone is not None and region is not None:
-        raise RuntimeError("You can't set both `zone` and `region` parameters.")
-
-    if disk_project_id is None:
-        disk_project_id = project_id
-
-    if zone is not None:
-        disk_client = compute_v1.DisksClient()
-        disk = disk_client.get(project=disk_project_id, zone=zone, disk=disk_name)
-    else:
-        regio_disk_client = compute_v1.RegionDisksClient()
-        disk = regio_disk_client.get(
-            project=disk_project_id, region=region, disk=disk_name
-        )
-
-    snapshot = compute_v1.Snapshot()
-    snapshot.source_disk = disk.self_link
-    snapshot.name = snapshot_name
-    if location:
-        snapshot.storage_locations = [location]
 
     snapshot_client = compute_v1.SnapshotsClient()
-    operation = snapshot_client.insert(project=project_id, snapshot_resource=snapshot)
+    operation = snapshot_client.delete(project=project_id, snapshot=snapshot_name)
 
-    wait_for_extended_operation(operation, "snapshot creation")
+    wait_for_extended_operation(operation, "snapshot deletion")
 
-    return snapshot_client.get(project=project_id, snapshot=snapshot_name)
+    return
 
 
-# [END compute_snapshot_create]
+def list_snapshots(project_id: str, filter: str = "") -> Iterable[compute_v1.Snapshot]:
+    """
+    List snapshots from a project.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you want to use.
+        filter: filter to be applied when listing snapshots. Learn more about filters here:
+            https://cloud.google.com/python/docs/reference/compute/latest/google.cloud.compute_v1.types.ListSnapshotsRequest
+
+    Returns:
+        An iterable containing all Snapshots that match the provided filter.
+    """
+
+    snapshot_client = compute_v1.SnapshotsClient()
+    request = compute_v1.ListSnapshotsRequest()
+    request.project = project_id
+    request.filter = filter
+
+    return snapshot_client.list(request)
+
+
+def delete_snapshots_by_filter(project_id: str, filter: str):
+    """
+    Deletes all snapshots in project that meet the filter criteria.
+
+    Args:
+        project_id: project ID or project number of the Cloud project you want to use.
+        filter: filter to be applied when looking for snapshots for deletion.
+    """
+    for snapshot in list_snapshots(project_id, filter):
+        delete_snapshot(project_id, snapshot.name)
+
+
+# [END compute_snapshot_delete_by_filter]
