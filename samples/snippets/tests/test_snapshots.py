@@ -21,6 +21,7 @@ from ..disks.delete import delete_disk
 from ..images.get import get_image_from_family
 from ..snapshots.create import create_snapshot
 from ..snapshots.delete import delete_snapshot
+from ..snapshots.get import get_snapshot
 from ..snapshots.list import list_snapshots
 
 PROJECT = google.auth.default()[1]
@@ -51,6 +52,11 @@ def test_snapshot_create_delete(test_disk):
             break
     else:
         pytest.fail("Couldn't find the created snapshot on snapshot list.")
+
+    snapshot_get = get_snapshot(PROJECT, snapshot_name)
+    assert snapshot_get.name == snapshot_name
+    assert snapshot_get.disk_size_gb == snapshot.disk_size_gb
+    assert snapshot_get.self_link == snapshot.self_link
 
     delete_snapshot(PROJECT, snapshot_name)
     for i_snapshot in list_snapshots(PROJECT):
