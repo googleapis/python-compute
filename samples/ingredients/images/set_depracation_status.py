@@ -21,11 +21,13 @@ from typing import NoReturn
 
 from google.cloud import compute_v1
 
-# <INGREDIENT set_deprecation_status>
 
+# <INGREDIENT set_deprecation_status>
 def set_deprecation_status(project_id: str, image_name: str, status: compute_v1.DeprecationStatus.State) -> NoReturn:
     """
     Modify the deprecation status of an image.
+
+    Note: Image objects by default don't have the `deprecated` attribute at all, until it's set.
 
     Args:
         project_id: project ID or project number of the Cloud project that hosts the image.
@@ -36,7 +38,7 @@ def set_deprecation_status(project_id: str, image_name: str, status: compute_v1.
     """
     image_client = compute_v1.ImagesClient()
     deprecation_status = compute_v1.DeprecationStatus()
-    deprecation_status.state = status
+    deprecation_status.state = status.name
     operation = image_client.deprecate(project=project_id, image=image_name,
                                        deprecation_status_resource=deprecation_status)
 

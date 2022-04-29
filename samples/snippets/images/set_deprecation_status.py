@@ -88,7 +88,7 @@ def set_deprecation_status(
     """
     image_client = compute_v1.ImagesClient()
     deprecation_status = compute_v1.DeprecationStatus()
-    deprecation_status.state = status
+    deprecation_status.state = status.name
     operation = image_client.deprecate(
         project=project_id,
         image=image_name,

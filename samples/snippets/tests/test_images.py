@@ -26,6 +26,9 @@ from ..images.delete import delete_image
 from ..images.get import get_image
 from ..images.get import get_image_from_family
 from ..images.list import list_images
+from ..images.set_deprecation_status import set_deprecation_status
+from ..snapshots.create import create_snapshot
+from ..snapshots.delete import delete_snapshot
 
 PROJECT = google.auth.default()[1]
 ZONE = 'europe-central2-c'
@@ -46,6 +49,17 @@ def test_disk():
 
 
 @pytest.fixture
+def test_snapshot(test_disk):
+    """
+    Make a snapshot that will be deleted when tests are done.
+    """
+    test_snap_name = "test-snap-" + uuid.uuid4().hex[:10]
+    snap = create_snapshot(PROJECT, test_disk.zone.rsplit('/')[-1], test_disk.name, test_snap_name)
+    yield snap
+    delete_snapshot(PROJECT, snap.name)
+
+
+@pytest.fixture
 def autodelete_image_name():
     """
     Provide a name for an image that will be deleted after the test is done.
@@ -54,6 +68,17 @@ def autodelete_image_name():
     yield test_img_name
 
     delete_image(PROJECT, test_img_name)
+
+
+@pytest.fixture()
+def autodelete_image(autodelete_image_name):
+    """
+    An image that will be deleted after the test is done.
+    """
+    src_img = get_image_from_family('debian-cloud', 'debian-11')
+    new_image = create_image_from_image(PROJECT, src_img.name, autodelete_image_name, 'debian-cloud',
+                                        storage_location='eu')
+    yield new_image
 
 
 def test_list_images():
@@ -92,9 +117,27 @@ def test_create_delete_image(test_disk):
 def test_image_from_image(autodelete_image_name):
     src_img = get_image_from_family('debian-cloud', 'debian-11')
     new_image = create_image_from_image(PROJECT, src_img.name, autodelete_image_name, 'debian-cloud',
-                                        guest_os_features=['SUSPEND_RESUME_COMPATIBLE'],
+                                        guest_os_features=[compute_v1.GuestOsFeature.Type.MULTI_IP_SUBNET.name],
                                         storage_location='eu')
 
     assert new_image.storage_locations == ['eu']
     assert new_image.disk_size_gb == src_img.disk_size_gb
     assert new_image.name == autodelete_image_name
+    assert any(feature.type_ == compute_v1.GuestOsFeature.Type.MULTI_IP_SUBNET.name for feature in new_image.guest_os_features)
+
+
+def test_image_from_snapshot(test_snapshot, autodelete_image_name):
+    img = create_image_from_snapshot(PROJECT, test_snapshot.name, autodelete_image_name,
+                                     guest_os_features=[compute_v1.GuestOsFeature.Type.MULTI_IP_SUBNET.name],
+                                     storage_location='us-central1')
+    assert img.storage_locations == ['us-central1']
+    assert img.name == autodelete_image_name
+    assert any(
+        feature.type_ == compute_v1.GuestOsFeature.Type.MULTI_IP_SUBNET.name for feature in img.guest_os_features)
+
+
+def test_status_change(autodelete_image):
+    set_deprecation_status(PROJECT, autodelete_image.name, compute_v1.DeprecationStatus.State.DEPRECATED)
+    img = get_image(PROJECT, autodelete_image.name)
+    assert img.name == autodelete_image.name
+    assert img.deprecated.state == compute_v1.DeprecationStatus.State.DEPRECATED.name
