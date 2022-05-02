@@ -27,7 +27,7 @@ def set_deprecation_status(project_id: str, image_name: str, status: compute_v1.
     """
     Modify the deprecation status of an image.
 
-    Note: Image objects by default don't have the `deprecated` attribute at all, until it's set.
+    Note: Image objects by default don't have the `deprecated` attribute at all unless it's set.
 
     Args:
         project_id: project ID or project number of the Cloud project that hosts the image.
