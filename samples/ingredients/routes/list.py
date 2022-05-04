@@ -16,7 +16,7 @@
 # folder for complete code samples that are ready to be used.
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
-from typing import NoReturn, Iterable
+from typing import Iterable
 
 from google.cloud import compute_v1
 
@@ -24,7 +24,7 @@ from google.cloud import compute_v1
 # <INGREDIENT list_routes>
 def list_routes(project_id: str, ) -> Iterable[compute_v1.Route]:
     """
-    Delete a route in project.
+    Lists routes in project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
