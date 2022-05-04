@@ -115,8 +115,8 @@ def test_create_delete_image(test_disk):
 
 
 def test_image_from_image(autodelete_image_name):
-    src_img = get_image_from_family('debian-cloud', 'debian-11')
-    new_image = create_image_from_image(PROJECT, src_img.name, autodelete_image_name, 'debian-cloud',
+    src_img = get_image_from_family('ubuntu-os-cloud', 'ubuntu-2204-lts')
+    new_image = create_image_from_image(PROJECT, src_img.name, autodelete_image_name, 'ubuntu-os-cloud',
                                         guest_os_features=[compute_v1.GuestOsFeature.Type.MULTI_IP_SUBNET.name],
                                         storage_location='eu')
 
