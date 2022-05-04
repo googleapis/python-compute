@@ -54,7 +54,7 @@ def test_snapshot(test_disk):
     Make a snapshot that will be deleted when tests are done.
     """
     test_snap_name = "test-snap-" + uuid.uuid4().hex[:10]
-    snap = create_snapshot(PROJECT, test_disk.zone.rsplit('/')[-1], test_disk.name, test_snap_name)
+    snap = create_snapshot(PROJECT, test_disk.name, test_snap_name, zone=test_disk.zone.rsplit('/')[-1])
     yield snap
     delete_snapshot(PROJECT, snap.name)
 
