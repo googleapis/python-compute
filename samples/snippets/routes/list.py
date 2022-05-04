@@ -20,7 +20,7 @@
 
 
 # [START compute_route_list]
-from typing import Iterable, NoReturn
+from typing import Iterable
 
 from google.cloud import compute_v1
 
@@ -29,7 +29,7 @@ def list_routes(
     project_id: str,
 ) -> Iterable[compute_v1.Route]:
     """
-    Delete a route in project.
+    Lists routes in project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.

@@ -79,13 +79,13 @@ def delete_route(project_id: str, route_name: str) -> NoReturn:
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        reoute_name: name of the route to delete.
+        route_name: name of the route to delete.
     """
 
     route_client = compute_v1.RoutesClient()
     operation = route_client.delete(project=project_id, route=route_name)
 
-    wait_for_extended_operation(operation, "snapshot deletion")
+    wait_for_extended_operation(operation, "route deletion")
 
     return
 
