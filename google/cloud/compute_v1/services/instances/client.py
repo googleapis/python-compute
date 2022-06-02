@@ -6169,7 +6169,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         a ``TERMINATED`` state. See Instance Life Cycle for more
         information on the possible instance states. For more
         information about setting scheduling options for a VM, see Set
-        VM availability policies.
+        VM host maintenance policy.
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetSchedulingInstanceRequest, dict]):
@@ -6281,7 +6281,7 @@ class InstancesClient(metaclass=InstancesClientMeta):
         a ``TERMINATED`` state. See Instance Life Cycle for more
         information on the possible instance states. For more
         information about setting scheduling options for a VM, see Set
-        VM availability policies.
+        VM host maintenance policy.
 
         Args:
             request (Union[google.cloud.compute_v1.types.SetSchedulingInstanceRequest, dict]):

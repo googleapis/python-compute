@@ -1244,6 +1244,7 @@ def test_get_rest(request_type):
             region="region_value",
             security_policy="security_policy_value",
             self_link="self_link_value",
+            service_bindings=["service_bindings_value"],
             session_affinity="session_affinity_value",
             timeout_sec=1185,
         )
@@ -1279,6 +1280,7 @@ def test_get_rest(request_type):
     assert response.region == "region_value"
     assert response.security_policy == "security_policy_value"
     assert response.self_link == "self_link_value"
+    assert response.service_bindings == ["service_bindings_value"]
     assert response.session_affinity == "session_affinity_value"
     assert response.timeout_sec == 1185
 
@@ -1988,6 +1990,7 @@ def test_insert_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -2357,6 +2360,7 @@ def test_insert_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -2603,6 +2607,7 @@ def test_insert_unary_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -2950,6 +2955,7 @@ def test_insert_unary_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -3550,6 +3556,7 @@ def test_patch_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -3928,6 +3935,7 @@ def test_patch_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -4184,6 +4192,7 @@ def test_patch_unary_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -4540,6 +4549,7 @@ def test_patch_unary_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -4796,6 +4806,7 @@ def test_update_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -5174,6 +5185,7 @@ def test_update_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -5430,6 +5442,7 @@ def test_update_unary_rest(request_type):
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,
@@ -5786,6 +5799,7 @@ def test_update_unary_rest_bad_request(
             ],
         },
         "self_link": "self_link_value",
+        "service_bindings": ["service_bindings_value_1", "service_bindings_value_2"],
         "session_affinity": "session_affinity_value",
         "subsetting": {"policy": "policy_value"},
         "timeout_sec": 1185,

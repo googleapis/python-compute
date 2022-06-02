@@ -1198,6 +1198,7 @@ def test_get_rest(request_type):
             name="name_value",
             network="network_value",
             network_tier="network_tier_value",
+            no_automate_dns_zone=True,
             port_range="port_range_value",
             ports=["ports_value"],
             psc_connection_id=1793,
@@ -1237,6 +1238,7 @@ def test_get_rest(request_type):
     assert response.name == "name_value"
     assert response.network == "network_value"
     assert response.network_tier == "network_tier_value"
+    assert response.no_automate_dns_zone is True
     assert response.port_range == "port_range_value"
     assert response.ports == ["ports_value"]
     assert response.psc_connection_id == 1793
@@ -1521,6 +1523,7 @@ def test_insert_rest(request_type):
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -1781,6 +1784,7 @@ def test_insert_rest_bad_request(
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -1921,6 +1925,7 @@ def test_insert_unary_rest(request_type):
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -2159,6 +2164,7 @@ def test_insert_unary_rest_bad_request(
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -2638,6 +2644,7 @@ def test_patch_rest(request_type):
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -2903,6 +2910,7 @@ def test_patch_rest_bad_request(
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -3045,6 +3053,7 @@ def test_patch_unary_rest(request_type):
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,
@@ -3288,6 +3297,7 @@ def test_patch_unary_rest_bad_request(
         "name": "name_value",
         "network": "network_value",
         "network_tier": "network_tier_value",
+        "no_automate_dns_zone": True,
         "port_range": "port_range_value",
         "ports": ["ports_value_1", "ports_value_2"],
         "psc_connection_id": 1793,

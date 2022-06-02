@@ -1445,8 +1445,10 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListInstancesPager:
-        r"""Lists the instances in the specified instance group.
-        The orderBy query parameter is not supported.
+        r"""Lists the instances in the specified instance group. The orderBy
+        query parameter is not supported. The filter query parameter is
+        supported, but only for expressions that use ``eq`` (equal) or
+        ``ne`` (not equal) operators.
 
         Args:
             request (Union[google.cloud.compute_v1.types.ListInstancesInstanceGroupsRequest, dict]):

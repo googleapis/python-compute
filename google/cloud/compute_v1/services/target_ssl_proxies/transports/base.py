@@ -151,6 +151,11 @@ class TargetSslProxiesTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.set_certificate_map: gapic_v1.method.wrap_method(
+                self.set_certificate_map,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.set_proxy_header: gapic_v1.method.wrap_method(
                 self.set_proxy_header,
                 default_timeout=None,
@@ -218,6 +223,15 @@ class TargetSslProxiesTransport(abc.ABC):
         self,
     ) -> Callable[
         [compute.SetBackendServiceTargetSslProxyRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def set_certificate_map(
+        self,
+    ) -> Callable[
+        [compute.SetCertificateMapTargetSslProxyRequest],
         Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()

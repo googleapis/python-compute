@@ -156,6 +156,11 @@ class TargetHttpsProxiesTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.set_certificate_map: gapic_v1.method.wrap_method(
+                self.set_certificate_map,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.set_quic_override: gapic_v1.method.wrap_method(
                 self.set_quic_override,
                 default_timeout=None,
@@ -240,6 +245,15 @@ class TargetHttpsProxiesTransport(abc.ABC):
         self,
     ) -> Callable[
         [compute.PatchTargetHttpsProxyRequest],
+        Union[compute.Operation, Awaitable[compute.Operation]],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def set_certificate_map(
+        self,
+    ) -> Callable[
+        [compute.SetCertificateMapTargetHttpsProxyRequest],
         Union[compute.Operation, Awaitable[compute.Operation]],
     ]:
         raise NotImplementedError()

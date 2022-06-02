@@ -541,6 +541,7 @@ def test_add_peering_rest(request_type):
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         },
@@ -779,6 +780,7 @@ def test_add_peering_rest_bad_request(
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         },
@@ -896,6 +898,7 @@ def test_add_peering_unary_rest(request_type):
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         },
@@ -1112,6 +1115,7 @@ def test_add_peering_unary_rest_bad_request(
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         },
@@ -2406,6 +2410,7 @@ def test_insert_rest(request_type):
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -2652,6 +2657,7 @@ def test_insert_rest_bad_request(
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -2777,6 +2783,7 @@ def test_insert_unary_rest(request_type):
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -3001,6 +3008,7 @@ def test_insert_unary_rest_bad_request(
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -3814,6 +3822,7 @@ def test_patch_rest(request_type):
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -4065,6 +4074,7 @@ def test_patch_rest_bad_request(
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -4193,6 +4203,7 @@ def test_patch_unary_rest(request_type):
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -4422,6 +4433,7 @@ def test_patch_unary_rest_bad_request(
                 "name": "name_value",
                 "network": "network_value",
                 "peer_mtu": 865,
+                "stack_type": "stack_type_value",
                 "state": "state_value",
                 "state_details": "state_details_value",
             }
@@ -5757,6 +5769,7 @@ def test_update_peering_rest(request_type):
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         }
@@ -5992,6 +6005,7 @@ def test_update_peering_rest_bad_request(
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         }
@@ -6106,6 +6120,7 @@ def test_update_peering_unary_rest(request_type):
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         }
@@ -6319,6 +6334,7 @@ def test_update_peering_unary_rest_bad_request(
             "name": "name_value",
             "network": "network_value",
             "peer_mtu": 865,
+            "stack_type": "stack_type_value",
             "state": "state_value",
             "state_details": "state_details_value",
         }

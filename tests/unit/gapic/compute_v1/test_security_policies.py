@@ -696,6 +696,8 @@ def test_add_rule_rest_required_fields(
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_rule._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("validate_only",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -748,7 +750,7 @@ def test_add_rule_rest_unset_required_fields():
 
     unset_fields = transport.add_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(())
+        set(("validateOnly",))
         & set(
             (
                 "project",
@@ -1075,6 +1077,8 @@ def test_add_rule_unary_rest_required_fields(
     unset_fields = transport_class(
         credentials=ga_credentials.AnonymousCredentials()
     ).add_rule._get_unset_required_fields(jsonified_request)
+    # Check that path parameters and body parameters are not mixing in.
+    assert not set(unset_fields) - set(("validate_only",))
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -1127,7 +1131,7 @@ def test_add_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.add_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(())
+        set(("validateOnly",))
         & set(
             (
                 "project",
@@ -3030,7 +3034,12 @@ def test_insert_rest_required_fields(request_type=compute.InsertSecurityPolicyRe
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id",))
+    assert not set(unset_fields) - set(
+        (
+            "request_id",
+            "validate_only",
+        )
+    )
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3081,7 +3090,12 @@ def test_insert_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId",))
+        set(
+            (
+                "requestId",
+                "validateOnly",
+            )
+        )
         & set(
             (
                 "project",
@@ -3468,7 +3482,12 @@ def test_insert_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).insert._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("request_id",))
+    assert not set(unset_fields) - set(
+        (
+            "request_id",
+            "validate_only",
+        )
+    )
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -3519,7 +3538,12 @@ def test_insert_unary_rest_unset_required_fields():
 
     unset_fields = transport.insert._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("requestId",))
+        set(
+            (
+                "requestId",
+                "validateOnly",
+            )
+        )
         & set(
             (
                 "project",
@@ -5447,7 +5471,12 @@ def test_patch_rule_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).patch_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("priority",))
+    assert not set(unset_fields) - set(
+        (
+            "priority",
+            "validate_only",
+        )
+    )
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -5500,7 +5529,12 @@ def test_patch_rule_rest_unset_required_fields():
 
     unset_fields = transport.patch_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("priority",))
+        set(
+            (
+                "priority",
+                "validateOnly",
+            )
+        )
         & set(
             (
                 "project",
@@ -5828,7 +5862,12 @@ def test_patch_rule_unary_rest_required_fields(
         credentials=ga_credentials.AnonymousCredentials()
     ).patch_rule._get_unset_required_fields(jsonified_request)
     # Check that path parameters and body parameters are not mixing in.
-    assert not set(unset_fields) - set(("priority",))
+    assert not set(unset_fields) - set(
+        (
+            "priority",
+            "validate_only",
+        )
+    )
     jsonified_request.update(unset_fields)
 
     # verify required fields with non-default values are left alone
@@ -5881,7 +5920,12 @@ def test_patch_rule_unary_rest_unset_required_fields():
 
     unset_fields = transport.patch_rule._get_unset_required_fields({})
     assert set(unset_fields) == (
-        set(("priority",))
+        set(
+            (
+                "priority",
+                "validateOnly",
+            )
+        )
         & set(
             (
                 "project",

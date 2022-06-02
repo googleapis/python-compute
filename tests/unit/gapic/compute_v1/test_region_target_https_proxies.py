@@ -1230,6 +1230,7 @@ def test_get_rest(request_type):
         # Designate an appropriate value for the returned response.
         return_value = compute.TargetHttpsProxy(
             authorization_policy="authorization_policy_value",
+            certificate_map="certificate_map_value",
             creation_timestamp="creation_timestamp_value",
             description="description_value",
             fingerprint="fingerprint_value",
@@ -1257,6 +1258,7 @@ def test_get_rest(request_type):
     # Establish that the response is the type that we expect.
     assert isinstance(response, compute.TargetHttpsProxy)
     assert response.authorization_policy == "authorization_policy_value"
+    assert response.certificate_map == "certificate_map_value"
     assert response.creation_timestamp == "creation_timestamp_value"
     assert response.description == "description_value"
     assert response.fingerprint == "fingerprint_value"
@@ -1539,6 +1541,7 @@ def test_insert_rest(request_type):
     request_init = {"project": "sample1", "region": "sample2"}
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -1778,6 +1781,7 @@ def test_insert_rest_bad_request(
     request_init = {"project": "sample1", "region": "sample2"}
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -1894,6 +1898,7 @@ def test_insert_unary_rest(request_type):
     request_init = {"project": "sample1", "region": "sample2"}
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -2111,6 +2116,7 @@ def test_insert_unary_rest_bad_request(
     request_init = {"project": "sample1", "region": "sample2"}
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -2581,6 +2587,7 @@ def test_patch_rest(request_type):
     }
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -2829,6 +2836,7 @@ def test_patch_rest_bad_request(
     }
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -2955,6 +2963,7 @@ def test_patch_unary_rest(request_type):
     }
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
@@ -3181,6 +3190,7 @@ def test_patch_unary_rest_bad_request(
     }
     request_init["target_https_proxy_resource"] = {
         "authorization_policy": "authorization_policy_value",
+        "certificate_map": "certificate_map_value",
         "creation_timestamp": "creation_timestamp_value",
         "description": "description_value",
         "fingerprint": "fingerprint_value",
