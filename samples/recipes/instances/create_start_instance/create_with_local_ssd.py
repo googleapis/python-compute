@@ -13,7 +13,7 @@
 #  limitations under the License.
 # flake8: noqa
 
-# <REGION compute_instances_create_from_image>
+# <REGION compute_instances_create_with_local_ssd>
 # <IMPORTS/>
 
 # <INGREDIENT get_image_from_family />
@@ -29,4 +29,4 @@
 
 
 # <INGREDIENT create_with_ssd />
-# </REGION compute_instances_create_from_image>
+# </REGION compute_instances_create_with_local_ssd>
