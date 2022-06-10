@@ -19,7 +19,7 @@
 # directory and apply your changes there.
 
 
-# [START compute_instances_create_from_image]
+# [START compute_instances_create_with_local_ssd]
 import re
 import sys
 from typing import Any, List
@@ -291,4 +291,4 @@ def create_with_ssd(
     return instance
 
 
-# [END compute_instances_create_from_image]
+# [END compute_instances_create_with_local_ssd]
