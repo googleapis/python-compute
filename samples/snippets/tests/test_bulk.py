@@ -21,7 +21,7 @@ from ..instances.bulk_insert import create_five_instances
 from ..instances.delete import delete_instance
 
 PROJECT = google.auth.default()[1]
-INSTANCE_ZONE = "europe-north1-a"
+INSTANCE_ZONE = "australia-southeast1-a"
 
 
 @pytest.fixture
