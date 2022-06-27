@@ -11,15 +11,18 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-import pytest
-import google.auth
 import uuid
+
+import google.auth
 from google.cloud import compute_v1
-from ..instances.delete import delete_instance
+import pytest
+
 from ..instances.bulk_insert import create_five_instances
+from ..instances.delete import delete_instance
 
 PROJECT = google.auth.default()[1]
 INSTANCE_ZONE = "europe-north1-a"
+
 
 @pytest.fixture
 def instance_template():

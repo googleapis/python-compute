@@ -11,9 +11,11 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-from google.cloud import compute_v1
-from typing import Optional, Iterable
+# flake8: noqa
+from typing import Iterable, Optional
 import uuid
+
+from google.cloud import compute_v1
 
 
 # <INGREDIENT bulk_insert_instance>
