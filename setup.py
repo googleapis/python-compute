@@ -19,7 +19,7 @@ import io
 import os
 import setuptools  # type: ignore
 
-version = "1.3.1"
+version = "1.3.2"
 
 package_root = os.path.abspath(os.path.dirname(__file__))
 
@@ -45,7 +45,8 @@ setuptools.setup(
     include_package_data=True,
     install_requires=(
         "google-api-core[grpc] >= 2.7.0, <3.0.0dev",
-        "proto-plus >= 1.19.7",
+        "proto-plus >= 1.19.7, <2.0.0dev",
+        "protobuf >= 3.19.0, <4.0.0dev",
         "dataclasses >= 0.6; python_version < '3.7'",
     ),
     python_requires=">=3.6",
