@@ -28,7 +28,7 @@ def bulk_insert_instance(project_id: str, zone: str, template: compute_v1.Instan
     value.
 
     If the bulk insert operation fails and can't create the requested number of instances,
-    but more than min_count instances are created, then those instances can be found using
+    and more than min_count instances are created, then those instances can be found using
     the `bulk_batch` label with value attached to the raised exception in bulk_batch_id
     attribute. So, you can use following filter: f"label.bulk_batch={err.bulk_batch_id}"
     when listing instances in a zone to get the instances that were successfully created.
