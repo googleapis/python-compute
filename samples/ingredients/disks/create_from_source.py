@@ -17,12 +17,12 @@
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
 
-
 from google.cloud import compute_v1
 
 
-# <INGREDIENT create_disk_from_snapshot>
-def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, disk_type: str, disk_size_gb: int, snapshot_link: str) -> compute_v1.Disk:
+# <INGREDIENT create_disk_from_disk>
+def create_disk_from_disk(project_id: str, zone: str, disk_name: str, disk_type: str,
+                          disk_size_gb: int, disk_link: str) -> compute_v1.Disk:
     """
     Creates a new disk in a project in given zone.
 
@@ -34,8 +34,8 @@ def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, disk_t
             "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
             For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
-        snapshot_link: a link to the snapshot you want to use as a source for the new disk.
-            This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
+        disk_link: a link to the disk you want to use as a source for the new disk.
+            This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
 
     Returns:
         An unattached Disk instance.
@@ -44,7 +44,7 @@ def create_disk_from_snapshot(project_id: str, zone: str, disk_name: str, disk_t
     disk = compute_v1.Disk()
     disk.zone = zone
     disk.size_gb = disk_size_gb
-    disk.source_snapshot = snapshot_link
+    disk.source_disk = disk_link
     disk.type_ = disk_type
     disk.name = disk_name
     operation = disk_client.insert(project=project_id, zone=zone, disk_resource=disk)
