@@ -107,10 +107,10 @@ def bulk_insert_instance(
     be returned as a list and will share a label with key `bulk_batch` and a random
     value.
 
-    If the bulk insert operation fails and can't create the requested number of instances,
-    but more than min_count instances are created, then those instances can be found using
+    If the bulk insert operation fails and the requested number of instances can't be created,
+    and more than min_count instances are created, then those instances can be found using
     the `bulk_batch` label with value attached to the raised exception in bulk_batch_id
-    attribute. So, you can use following filter: f"label.bulk_batch={err.bulk_batch_id}"
+    attribute. So, you can use the following filter: f"label.bulk_batch={err.bulk_batch_id}"
     when listing instances in a zone to get the instances that were successfully created.
 
     Args:
