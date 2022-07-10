@@ -1,15 +1,15 @@
-Python Client for Compute Engine API
-====================================
+Python Client for Compute Engine
+=================================================
 
 |stable| |pypi| |versions|
 
-`Compute Engine API`_: delivers virtual machines running in Google's innovative data centers and worldwide fiber network. Compute Engine's tooling and workflow support enable scaling from single instances to global, load-balanced cloud computing. Compute Engine's VMs boot quickly, come with persistent disk storage, deliver consistent performance and are available in many configurations.
+`Compute Engine API`_: Create and runs virtual machines on Google Cloud Platform.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
 
 .. |stable| image:: https://img.shields.io/badge/support-stable-gold.svg
-   :target: https://github.com/googleapis/google-cloud-python/blob/main/README.rst#stability-levels
+   :target: https://github.com/googleapis/google-cloud-python/blob/main/README.rst#general-availability
 .. |pypi| image:: https://img.shields.io/pypi/v/google-cloud-compute.svg
    :target: https://pypi.org/project/google-cloud-compute/
 .. |versions| image:: https://img.shields.io/pypi/pyversions/google-cloud-compute.svg
@@ -47,27 +47,6 @@ dependencies.
 .. _`virtualenv`: https://virtualenv.pypa.io/en/latest/
 
 
-Code samples and snippets
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Code samples and snippets live in the `samples/` folder.
-
-
-Supported Python Versions
-^^^^^^^^^^^^^^^^^^^^^^^^^
-Our client libraries are compatible with all current [active](https://devguide.python.org/devcycle/#in-development-main-branch) and [maintenance](https://devguide.python.org/devcycle/#maintenance-branches) versions of
-Python.
-
-Python >= 3.7
-
-Unsupported Python Versions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Python <= 3.6
-
-If you are using an [end-of-life](https://devguide.python.org/devcycle/#end-of-life-branches)
-version of Python, we recommend that you update as soon as possible to an actively supported version.
-
-
 Mac/Linux
 ^^^^^^^^^
 
@@ -89,11 +68,20 @@ Windows
     <your-env>\Scripts\activate
     <your-env>\Scripts\pip.exe install google-cloud-compute
 
+
+PyCharm/JetBrains IDEs
+~~~~~~~~~~~~~~~~~~~~~~
+Since the library has grown in size, the files it consists of have outgrown the [default size limit of ~2.5Mb](https://www.jetbrains.com/help/pycharm/file-idea-properties.html).
+As a result, the code completion in JetBrains products can fail to work with the classes from our library. To
+fix this, you need to update the `idea.max.intellisense.filesize` setting in custom properties
+(Help -> Edit custom properties...). Just add a line like `idea.max.intellisense.filesize = 10000` to change this
+limit to ~10Mb.
+
 Next Steps
 ~~~~~~~~~~
 
 -  Read the `Client Library Documentation`_ for Compute Engine API
-   to see other available methods on the client.
+   API to see other available methods on the client.
 -  Read the `Compute Engine API Product documentation`_ to learn
    more about the product and see How-to Guides.
 -  View this `README`_ to see the full list of Cloud
