@@ -29,7 +29,7 @@ s.remove_staging_dirs()
 
 # Work around gapic generator bug https://github.com/googleapis/gapic-generator-python/issues/1083
 s.replace(
-    "google/cloud/**/types/compute.py",
+    "google/cloud/**/*.py",
     """A request message for InstanceGroupManagers.AbandonInstances.
     See the method description for details.\n
     Attributes""",
@@ -40,8 +40,8 @@ s.replace(
 )
 
 # Work around formatting issues with docstrings
-s.replace("google/cloud/**/types/compute.py", """\"IT_\"""", """`IT_`""")
-s.replace("google/cloud/**/types/compute.py", """\"NS_\"""", """`NS_`""")
+s.replace("google/cloud/**/*.py", """\"IT_\"""", """`IT_`""")
+s.replace("google/cloud/**/*.py", """\"NS_\"""", """`NS_`""")
 
 # ----------------------------------------------------------------------------
 # Add templated files

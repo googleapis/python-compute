@@ -20355,7 +20355,7 @@ class InterconnectOutageNotification(proto.Message):
             window. - PARTIAL_OUTAGE: Some circuits comprising the
             Interconnect as a whole should remain up, but with reduced
             bandwidth. Note that the versions of this enum prefixed with
-            "IT_" have been deprecated in favor of the unprefixed
+            `IT_` have been deprecated in favor of the unprefixed
             values. Check the IssueType enum for the list of possible
             values.
 
@@ -20386,7 +20386,7 @@ class InterconnectOutageNotification(proto.Message):
             outage associated with this notification was cancelled
             before the outage was due to start. - COMPLETED: The outage
             associated with this notification is complete. Note that the
-            versions of this enum prefixed with "NS_" have been
+            versions of this enum prefixed with `NS_` have been
             deprecated in favor of the unprefixed values. Check the
             State enum for the list of possible values.
 
@@ -20399,7 +20399,7 @@ class InterconnectOutageNotification(proto.Message):
         of service for some or all of the specified window. -
         PARTIAL_OUTAGE: Some circuits comprising the Interconnect as a whole
         should remain up, but with reduced bandwidth. Note that the versions
-        of this enum prefixed with "IT_" have been deprecated in favor of
+        of this enum prefixed with `IT_` have been deprecated in favor of
         the unprefixed values.
         """
         UNDEFINED_ISSUE_TYPE = 0
@@ -20425,7 +20425,7 @@ class InterconnectOutageNotification(proto.Message):
         end_time for scheduling. - CANCELLED: The outage associated with
         this notification was cancelled before the outage was due to start.
         - COMPLETED: The outage associated with this notification is
-        complete. Note that the versions of this enum prefixed with "NS_"
+        complete. Note that the versions of this enum prefixed with `NS_`
         have been deprecated in favor of the unprefixed values.
         """
         UNDEFINED_STATE = 0
