@@ -24,7 +24,7 @@ from google.cloud import compute_v1
 def create_disk_from_customer_encrypted_disk(
         project_id: str, zone: str, disk_name: str, disk_type: str,
         disk_size_gb: int, disk_link: str,
-        encryption_key: str) -> compute_v1.Disk:
+        encryption_key: byte) -> compute_v1.Disk:
     """
     Creates a new disk in a project in given zone with a copy of data from another disk.
 
@@ -55,7 +55,7 @@ def create_disk_from_customer_encrypted_disk(
     disk.type_ = disk_type
     disk.name = disk_name
     disk.disk_encryption_key = compute_v1.CustomerEncryptionKey()
-    disk.disk_encryption_key.rsa_encrypted_key = encryption_key
+    disk.disk_encryption_key.raw_key = encryption_key
     operation = disk_client.insert(project=project_id, zone=zone, disk_resource=disk)
 
     wait_for_extended_operation(operation, "disk creation")
