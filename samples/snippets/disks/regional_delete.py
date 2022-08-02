@@ -19,9 +19,9 @@
 # directory and apply your changes there.
 
 
-# [START compute_regional_disk_create_from_disk]
+# [START compute_regional_disk_delete]
 import sys
-from typing import Any, Iterable, Optional
+from typing import Any, NoReturn
 
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
@@ -74,57 +74,19 @@ def wait_for_extended_operation(
     return result
 
 
-def create_regional_disk(
-    project_id: str,
-    region: str,
-    replica_zones: Iterable[str],
-    disk_name: str,
-    disk_type: str,
-    disk_size_gb: int,
-    disk_link: Optional[str] = None,
-    snapshot_link: Optional[str] = None,
-) -> compute_v1.Disk:
+def delete_regional_disk(project_id: str, region: str, disk_name: str) -> NoReturn:
     """
-    Creates a new regional disk in a project in given zone with a zonal disk as a
-    source of content.
+    Deletes a disk from a project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        region: name of the region in which you want to create the disk.
-        replica_zones: an iterable collection of zone names in which you want to keep
-            the new disks' replicas. One of the replica zones of the clone must match
-            the zone of the source disk.
-        disk_name: name of the disk you want to create.
-        disk_type: the type of disk you want to create. This value uses the following format:
-            "regions/{region}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
-            For example: "regions/us-west3/diskTypes/pd-ssd"
-        disk_size_gb: size of the new disk in gigabytes
-        disk_link: a link to the disk you want to use as a source for the new disk.
-            This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
-        snapshot_link: a link to the snapshot you want to use as a source for the new disk.
-            This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
-
-    Returns:
-        An unattached Disk instance.
+        zone: name of the region in which is the disk you want to delete.
+        disk_name: name of the disk you want to delete.
     """
     disk_client = compute_v1.RegionDisksClient()
-    disk = compute_v1.Disk()
-    disk.replica_zones = replica_zones
-    disk.size_gb = disk_size_gb
-    if disk_link:
-        disk.source_disk = disk_link
-    if snapshot_link:
-        disk.source_snapshot = snapshot_link
-    disk.type_ = disk_type
-    disk.region = region
-    disk.name = disk_name
-    operation = disk_client.insert(
-        project=project_id, region=region, disk_resource=disk
-    )
-
-    wait_for_extended_operation(operation, "disk creation")
-
-    return disk_client.get(project=project_id, region=region, disk=disk_name)
+    operation = disk_client.delete(project=project_id, region=region, disk=disk_name)
+    wait_for_extended_operation(operation, "regional disk deletion")
+    return
 
 
-# [END compute_regional_disk_create_from_disk]
+# [END compute_regional_disk_delete]

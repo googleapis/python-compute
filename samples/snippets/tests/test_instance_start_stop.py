@@ -187,6 +187,3 @@ def test_clone_encrypted_disk(autodelete_disk_name, compute_encrypted_instance):
         encryption_key=KEY_B64)
 
     assert new_disk.name == autodelete_disk_name
-
-
-

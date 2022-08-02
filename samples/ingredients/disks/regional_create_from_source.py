@@ -16,15 +16,17 @@
 # folder for complete code samples that are ready to be used.
 # Disabling flake8 for the ingredients file, as it would fail F821 - undefined name check.
 # flake8: noqa
-from typing import Iterable
+from typing import Iterable, Optional
 
 from google.cloud import compute_v1
 
 
 # <INGREDIENT create_regional_disk_from_disk>
-def create_regional_disk_from_disk(project_id: str, region: str, replica_zones: Iterable[str],
-                                   disk_name: str, disk_type: str,
-                                   disk_size_gb: int, disk_link: str) -> compute_v1.Disk:
+def create_regional_disk(project_id: str, region: str, replica_zones: Iterable[str],
+                         disk_name: str, disk_type: str,
+                         disk_size_gb: int,
+                         disk_link: Optional[str] = None,
+                         snapshot_link: Optional[str] = None) -> compute_v1.Disk:
     """
     Creates a new regional disk in a project in given zone with a zonal disk as a
     source of content.
@@ -42,6 +44,8 @@ def create_regional_disk_from_disk(project_id: str, region: str, replica_zones: 
         disk_size_gb: size of the new disk in gigabytes
         disk_link: a link to the disk you want to use as a source for the new disk.
             This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
+        snapshot_link: a link to the snapshot you want to use as a source for the new disk.
+            This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
     Returns:
         An unattached Disk instance.
@@ -50,10 +54,14 @@ def create_regional_disk_from_disk(project_id: str, region: str, replica_zones: 
     disk = compute_v1.Disk()
     disk.replica_zones = replica_zones
     disk.size_gb = disk_size_gb
-    disk.source_disk = disk_link
+    if disk_link:
+        disk.source_disk = disk_link
+    if snapshot_link:
+        disk.source_snapshot = snapshot_link
     disk.type_ = disk_type
+    disk.region = region
     disk.name = disk_name
-    operation = disk_client.insert(project=project_id, disk_resource=disk)
+    operation = disk_client.insert(project=project_id, region=region, disk_resource=disk)
 
     wait_for_extended_operation(operation, "disk creation")
 

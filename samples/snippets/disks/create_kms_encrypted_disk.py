@@ -19,9 +19,9 @@
 # directory and apply your changes there.
 
 
-# [START compute_regional_disk_create_from_disk]
+# [START compute_create_kms_encrypted_disk]
 import sys
-from typing import Any, Iterable, Optional
+from typing import Any, Optional
 
 from google.api_core.extended_operation import ExtendedOperation
 from google.cloud import compute_v1
@@ -74,57 +74,57 @@ def wait_for_extended_operation(
     return result
 
 
-def create_regional_disk(
+def create_kms_encrypted_disk(
     project_id: str,
-    region: str,
-    replica_zones: Iterable[str],
+    zone: str,
     disk_name: str,
     disk_type: str,
     disk_size_gb: int,
+    kms_key_name: str,
     disk_link: Optional[str] = None,
-    snapshot_link: Optional[str] = None,
+    image_link: Optional[str] = None,
 ) -> compute_v1.Disk:
     """
-    Creates a new regional disk in a project in given zone with a zonal disk as a
-    source of content.
+    Creates a new disk in a project in given zone. If disk_link and image_link are not provided, the disk will be
+    created empty.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        region: name of the region in which you want to create the disk.
-        replica_zones: an iterable collection of zone names in which you want to keep
-            the new disks' replicas. One of the replica zones of the clone must match
-            the zone of the source disk.
+        zone: name of the zone in which you want to create the disk.
         disk_name: name of the disk you want to create.
         disk_type: the type of disk you want to create. This value uses the following format:
-            "regions/{region}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
-            For example: "regions/us-west3/diskTypes/pd-ssd"
+            "zones/{zone}/diskTypes/(pd-standard|pd-ssd|pd-balanced|pd-extreme)".
+            For example: "zones/us-west3-b/diskTypes/pd-ssd"
         disk_size_gb: size of the new disk in gigabytes
+        kms_key_name: URL of the key from KMS. The key might be from another project, as
+            long as you have access to it. The data will be encrypted with the same key
+            in the new disk. This value uses following format:
+            "projects/{kms_project_id}/locations/{region}/keyRings/{key_ring}/cryptoKeys/{key}"
         disk_link: a link to the disk you want to use as a source for the new disk.
             This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
-        snapshot_link: a link to the snapshot you want to use as a source for the new disk.
-            This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
+        image_link: a link to the image you want to use as a source for the new disk.
+            This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
 
     Returns:
         An unattached Disk instance.
     """
-    disk_client = compute_v1.RegionDisksClient()
+    disk_client = compute_v1.DisksClient()
     disk = compute_v1.Disk()
-    disk.replica_zones = replica_zones
+    disk.zone = zone
     disk.size_gb = disk_size_gb
     if disk_link:
         disk.source_disk = disk_link
-    if snapshot_link:
-        disk.source_snapshot = snapshot_link
+    if image_link:
+        disk.source_image = image_link
     disk.type_ = disk_type
-    disk.region = region
     disk.name = disk_name
-    operation = disk_client.insert(
-        project=project_id, region=region, disk_resource=disk
-    )
+    disk.disk_encryption_key = compute_v1.CustomerEncryptionKey()
+    disk.disk_encryption_key.kms_key_name = kms_key_name
+    operation = disk_client.insert(project=project_id, zone=zone, disk_resource=disk)
 
     wait_for_extended_operation(operation, "disk creation")
 
-    return disk_client.get(project=project_id, region=region, disk=disk_name)
+    return disk_client.get(project=project_id, zone=zone, disk=disk_name)
 
 
-# [END compute_regional_disk_create_from_disk]
+# [END compute_create_kms_encrypted_disk]

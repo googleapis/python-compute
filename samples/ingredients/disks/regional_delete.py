@@ -23,7 +23,7 @@ from google.cloud import compute_v1
 
 
 # <INGREDIENT delete_regional_disk>
-def delete_disk(project_id: str, region: str, disk_name: str) -> NoReturn:
+def delete_regional_disk(project_id: str, region: str, disk_name: str) -> NoReturn:
     """
     Deletes a disk from a project.
 
