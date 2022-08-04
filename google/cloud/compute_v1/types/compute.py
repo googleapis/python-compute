@@ -20629,7 +20629,7 @@ class ErrorInfo(proto.Message):
             This field is a member of `oneof`_ ``_domain``.
         metadatas (Mapping[str, str]):
             Additional structured details about this error. Keys should
-            match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
+            match `[a-zA-Z0-9-_]` and be limited to 64 characters in
             length. When identifying the current value of an exceeded
             limit, the units should be contained in the key, not the
             value. For example, rather than {"instanceLimit":
@@ -20641,7 +20641,7 @@ class ErrorInfo(proto.Message):
             The reason of the error. This is a constant value that
             identifies the proximate cause of the error. Error reasons
             are unique within a particular domain of errors. This should
-            be at most 63 characters and match /[A-Z0-9_]+/.
+            be at most 63 characters and match `[A-Z0-9_]+`.
 
             This field is a member of `oneof`_ ``_reason``.
     """
