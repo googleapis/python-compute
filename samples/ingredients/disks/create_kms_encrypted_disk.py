@@ -44,7 +44,7 @@ def create_kms_encrypted_disk(project_id: str, zone: str, disk_name: str, disk_t
         disk_link: a link to the disk you want to use as a source for the new disk.
             This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
         image_link: a link to the image you want to use as a source for the new disk.
-            This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
+            This value uses the following format: "projects/{project_name}/global/images/{image_name}"
 
     Returns:
         An unattached Disk instance.
