@@ -24,7 +24,7 @@ from google.cloud import compute_v1
 def create_disk_from_disk(project_id: str, zone: str, disk_name: str, disk_type: str,
                           disk_size_gb: int, disk_link: str) -> compute_v1.Disk:
     """
-    Creates a new disk in a project in given zone.
+    Creates a disk in a project in a given zone.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -38,7 +38,7 @@ def create_disk_from_disk(project_id: str, zone: str, disk_name: str, disk_type:
             This value uses the following format: "projects/{project_name}/zones/{zone}/disks/{disk_name}"
 
     Returns:
-        An unattached Disk instance.
+        An attachable disk.
     """
     disk_client = compute_v1.DisksClient()
     disk = compute_v1.Disk()

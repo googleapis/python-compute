@@ -28,8 +28,7 @@ def create_regional_disk(project_id: str, region: str, replica_zones: Iterable[s
                          disk_link: Optional[str] = None,
                          snapshot_link: Optional[str] = None) -> compute_v1.Disk:
     """
-    Creates a new regional disk in a project in given zone with a zonal disk as a
-    source of content.
+    Creates a regional disk from an existing zonal disk in a given project.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -48,7 +47,7 @@ def create_regional_disk(project_id: str, region: str, replica_zones: Iterable[s
             This value uses the following format: "projects/{project_name}/global/snapshots/{snapshot_name}"
 
     Returns:
-        An unattached Disk instance.
+        An attachable regional disk.
     """
     disk_client = compute_v1.RegionDisksClient()
     disk = compute_v1.Disk()

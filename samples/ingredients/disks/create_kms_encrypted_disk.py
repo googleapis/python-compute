@@ -26,8 +26,8 @@ def create_kms_encrypted_disk(project_id: str, zone: str, disk_name: str, disk_t
                               disk_size_gb: int, kms_key_name: str,
                               disk_link: Optional[str] = None, image_link: Optional[str] = None) -> compute_v1.Disk:
     """
-    Creates a new disk in a project in given zone. If disk_link and image_link are not provided, the disk will be
-    created empty.
+    Creates a zonal disk in a project. If you do not provide values for disk_link or image_link,
+    an empty disk will be created.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -47,7 +47,7 @@ def create_kms_encrypted_disk(project_id: str, zone: str, disk_name: str, disk_t
             This value uses the following format: "projects/{project_name}/global/images/{image_name}"
 
     Returns:
-        An unattached Disk instance.
+        An attachable disk.
     """
     disk_client = compute_v1.DisksClient()
     disk = compute_v1.Disk()

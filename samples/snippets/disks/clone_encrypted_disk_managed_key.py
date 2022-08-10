@@ -84,9 +84,9 @@ def create_disk_from_kms_encrypted_disk(
     kms_key_name: str,
 ) -> compute_v1.Disk:
     """
-    Creates a new disk in a project in given zone with a copy of data from another disk.
+    Creates a zonal non-boot disk in a project with the copy of data from an existing disk.
 
-    The encryption key needs to be the same for both of the disks.
+    The encryption key must be the same for the source disk and the new disk.
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
@@ -104,7 +104,7 @@ def create_disk_from_kms_encrypted_disk(
             "projects/{kms_project_id}/locations/{region}/keyRings/{key_ring}/cryptoKeys/{key}"
 
     Returns:
-        An unattached Disk instance.
+        An attachable copy of an existing disk.
     """
     disk_client = compute_v1.DisksClient()
     disk = compute_v1.Disk()

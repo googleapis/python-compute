@@ -80,8 +80,8 @@ def delete_regional_disk(project_id: str, region: str, disk_name: str) -> NoRetu
 
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
-        region: name of the region in which is the disk you want to delete.
-        disk_name: name of the disk you want to delete.
+        region:name of the region where the disk is located.
+        disk_name: name of the disk that you want to delete.
     """
     disk_client = compute_v1.RegionDisksClient()
     operation = disk_client.delete(project=project_id, region=region, disk=disk_name)
