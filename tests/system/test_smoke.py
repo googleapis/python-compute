@@ -80,7 +80,7 @@ class TestComputeSmoke(TestBase):
         self.assertIn(
             (
                 "0 has type int, but expected one of: bytes, unicode"
-                if PROTOBUF_VERSION[0] == '3'
+                if PROTOBUF_VERSION[0] == "3"
                 else "('bad argument type for built-in operation',)"
             ),
             str(ex.exception.args),
