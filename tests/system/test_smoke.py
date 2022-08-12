@@ -75,7 +75,7 @@ class TestComputeSmoke(TestBase):
         with self.assertRaises(expected_exception=TypeError) as ex:
             self.client.get(instance=self.name, zone=0)
         self.assertIn(
-            "0 has type int, but expected one of: bytes, unicode",
+            "('bad argument type for built-in operation',)",
             str(ex.exception.args),
         )
 
