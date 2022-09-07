@@ -18,8 +18,8 @@ import os
 # try/except added for compatibility with python < 3.8
 try:
     from unittest import mock
-    from unittest.mock import AsyncMock
-except ImportError:
+    from unittest.mock import AsyncMock  # pragma: NO COVER
+except ImportError:  # pragma: NO COVER
     import mock
 
 import grpc
@@ -827,7 +827,7 @@ def test_add_association_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_association(
             request,
@@ -1162,7 +1162,7 @@ def test_add_association_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_association_unary(
             request,
@@ -1542,7 +1542,7 @@ def test_add_rule_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_rule(
             request,
@@ -1920,7 +1920,7 @@ def test_add_rule_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_rule_unary(
             request,
@@ -2288,7 +2288,7 @@ def test_clone_rules_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.clone_rules(
             request,
@@ -2600,7 +2600,7 @@ def test_clone_rules_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.clone_rules_unary(
             request,
@@ -2924,7 +2924,7 @@ def test_delete_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.delete(
             request,
@@ -3226,7 +3226,7 @@ def test_delete_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.delete_unary(
             request,
@@ -3530,7 +3530,7 @@ def test_get_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.FirewallPolicy
+        post.return_value = compute.FirewallPolicy()
 
         client.get(
             request,
@@ -3822,7 +3822,7 @@ def test_get_association_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.FirewallPolicyAssociation
+        post.return_value = compute.FirewallPolicyAssociation()
 
         client.get_association(
             request,
@@ -4109,7 +4109,7 @@ def test_get_iam_policy_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Policy
+        post.return_value = compute.Policy()
 
         client.get_iam_policy(
             request,
@@ -4414,7 +4414,7 @@ def test_get_rule_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.FirewallPolicyRule
+        post.return_value = compute.FirewallPolicyRule()
 
         client.get_rule(
             request,
@@ -4795,7 +4795,7 @@ def test_insert_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.insert(
             request,
@@ -5226,7 +5226,7 @@ def test_insert_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.insert_unary(
             request,
@@ -5593,7 +5593,7 @@ def test_list_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.FirewallPolicyList
+        post.return_value = compute.FirewallPolicyList()
 
         client.list(
             request,
@@ -6032,7 +6032,7 @@ def test_patch_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch(
             request,
@@ -6470,7 +6470,7 @@ def test_patch_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch_unary(
             request,
@@ -6908,7 +6908,7 @@ def test_patch_rule_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch_rule(
             request,
@@ -7284,7 +7284,7 @@ def test_patch_rule_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch_rule_unary(
             request,
@@ -7652,7 +7652,7 @@ def test_remove_association_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_association(
             request,
@@ -7965,7 +7965,7 @@ def test_remove_association_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_association_unary(
             request,
@@ -8300,7 +8300,7 @@ def test_remove_rule_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_rule(
             request,
@@ -8612,7 +8612,7 @@ def test_remove_rule_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_rule_unary(
             request,
@@ -8975,7 +8975,7 @@ def test_set_iam_policy_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Policy
+        post.return_value = compute.Policy()
 
         client.set_iam_policy(
             request,
@@ -9346,7 +9346,7 @@ def test_test_iam_permissions_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.TestPermissionsResponse
+        post.return_value = compute.TestPermissionsResponse()
 
         client.test_iam_permissions(
             request,

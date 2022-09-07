@@ -18,8 +18,8 @@ import os
 # try/except added for compatibility with python < 3.8
 try:
     from unittest import mock
-    from unittest.mock import AsyncMock
-except ImportError:
+    from unittest.mock import AsyncMock  # pragma: NO COVER
+except ImportError:  # pragma: NO COVER
     import mock
 
 import grpc
@@ -730,7 +730,7 @@ def test_get_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.LicenseCode
+        post.return_value = compute.LicenseCode()
 
         client.get(
             request,
@@ -1017,7 +1017,7 @@ def test_test_iam_permissions_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.TestPermissionsResponse
+        post.return_value = compute.TestPermissionsResponse()
 
         client.test_iam_permissions(
             request,

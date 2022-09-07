@@ -18,8 +18,8 @@ import os
 # try/except added for compatibility with python < 3.8
 try:
     from unittest import mock
-    from unittest.mock import AsyncMock
-except ImportError:
+    from unittest.mock import AsyncMock  # pragma: NO COVER
+except ImportError:  # pragma: NO COVER
     import mock
 
 import grpc
@@ -782,7 +782,7 @@ def test_add_peering_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_peering(
             request,
@@ -1128,7 +1128,7 @@ def test_add_peering_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.add_peering_unary(
             request,
@@ -1471,7 +1471,7 @@ def test_delete_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.delete(
             request,
@@ -1767,7 +1767,7 @@ def test_delete_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.delete_unary(
             request,
@@ -2074,7 +2074,7 @@ def test_get_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Network
+        post.return_value = compute.Network()
 
         client.get(
             request,
@@ -2355,7 +2355,7 @@ def test_get_effective_firewalls_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.NetworksGetEffectiveFirewallsResponse
+        post.return_value = compute.NetworksGetEffectiveFirewallsResponse()
 
         client.get_effective_firewalls(
             request,
@@ -2705,7 +2705,7 @@ def test_insert_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.insert(
             request,
@@ -3067,7 +3067,7 @@ def test_insert_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.insert_unary(
             request,
@@ -3390,7 +3390,7 @@ def test_list_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.NetworkList
+        post.return_value = compute.NetworkList()
 
         client.list(
             request,
@@ -3752,7 +3752,7 @@ def test_list_peering_routes_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.ExchangedPeeringRoutesList
+        post.return_value = compute.ExchangedPeeringRoutesList()
 
         client.list_peering_routes(
             request,
@@ -4164,7 +4164,7 @@ def test_patch_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch(
             request,
@@ -4534,7 +4534,7 @@ def test_patch_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.patch_unary(
             request,
@@ -4896,7 +4896,7 @@ def test_remove_peering_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_peering(
             request,
@@ -5206,7 +5206,7 @@ def test_remove_peering_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.remove_peering_unary(
             request,
@@ -5535,7 +5535,7 @@ def test_switch_to_custom_mode_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.switch_to_custom_mode(
             request,
@@ -5835,7 +5835,7 @@ def test_switch_to_custom_mode_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.switch_to_custom_mode_unary(
             request,
@@ -6175,7 +6175,7 @@ def test_update_peering_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.update_peering(
             request,
@@ -6515,7 +6515,7 @@ def test_update_peering_unary_rest_interceptors(null_interceptor):
             ("cephalopod", "squid"),
         ]
         pre.return_value = request, metadata
-        post.return_value = compute.Operation
+        post.return_value = compute.Operation()
 
         client.update_peering_unary(
             request,
