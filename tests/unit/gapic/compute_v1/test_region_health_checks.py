@@ -34,6 +34,7 @@ from proto.marshal.rules.dates import DurationRule, TimestampRule
 from requests import Response
 from requests import Request, PreparedRequest
 from requests.sessions import Session
+from google.protobuf import json_format
 
 from google.api_core import client_options
 from google.api_core import exceptions as core_exceptions
