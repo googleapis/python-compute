@@ -30,7 +30,7 @@ import json
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
-
+from proto.marshal.rules import wrappers
 from requests import Response
 from requests import Request, PreparedRequest
 from requests.sessions import Session
@@ -13848,7 +13848,7 @@ def test_set_disk_auto_delete_rest_required_fields(
             expected_params = [
                 (
                     "autoDelete",
-                    False,
+                    str(False).lower(),
                 ),
                 (
                     "deviceName",
@@ -14200,7 +14200,7 @@ def test_set_disk_auto_delete_unary_rest_required_fields(
             expected_params = [
                 (
                     "autoDelete",
-                    False,
+                    str(False).lower(),
                 ),
                 (
                     "deviceName",
