@@ -21,7 +21,7 @@
 
 # [START compute_preemptible_history]
 import datetime
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from google.cloud import compute_v1
 from google.cloud.compute_v1.services.zone_operations import pagers
@@ -51,7 +51,7 @@ def list_zone_operations(
 
 
 def preemption_history(
-    project_id: str, zone: str, instance_name: str = None
+    project_id: str, zone: str, instance_name: Optional[str] = None
 ) -> List[Tuple[str, datetime.datetime]]:
     """
     Get a list of preemption operations from given zone in a project. Optionally limit
@@ -66,7 +66,8 @@ def preemption_history(
     if instance_name:
         filter = (
             f'operationType="compute.instances.preempted" '
-            f"AND targetLink:instances/{instance_name}"
+            f'AND targetLink="https://www.googleapis.com/compute/v1/projects/'
+            f'{project_id}/zones/{zone}/instances/{instance_name}"'
         )
     else:
         filter = 'operationType="compute.instances.preempted"'
@@ -74,12 +75,8 @@ def preemption_history(
     history = []
 
     for operation in list_zone_operations(project_id, zone, filter):
-        this_instance_name = operation.target_link.rsplit("/", maxsplit=1)[1]
-        if instance_name and this_instance_name == instance_name:
-            # The filter used is not 100% accurate, it's `contains` not `equals`
-            # So we need to check the name to make sure it's the one we want.
-            moment = datetime.datetime.fromisoformat(operation.insert_time)
-            history.append((instance_name, moment))
+        moment = datetime.datetime.fromisoformat(operation.insert_time)
+        history.append((instance_name, moment))
 
     return history
 
