@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class RegionTargetHttpProxiesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionTargetHttpProxiesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionTargetHttpProxiesTransport, None] = None,
+        transport: Optional[Union[str, RegionTargetHttpProxiesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,13 +423,15 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpProxy resource.
@@ -513,13 +526,15 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetHttpProxy resource.
@@ -639,13 +654,13 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def get(
         self,
-        request: Union[compute.GetRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionTargetHttpProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetHttpProxy:
         r"""Returns the specified TargetHttpProxy resource in the
@@ -753,13 +768,15 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy_resource: compute.TargetHttpProxy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetHttpProxy resource in the specified
@@ -853,13 +870,15 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def insert(
         self,
-        request: Union[compute.InsertRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy_resource: compute.TargetHttpProxy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetHttpProxy resource in the specified
@@ -978,12 +997,14 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def list(
         self,
-        request: Union[compute.ListRegionTargetHttpProxiesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListRegionTargetHttpProxiesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of TargetHttpProxy resources
@@ -1081,14 +1102,16 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def set_url_map_unary(
         self,
-        request: Union[compute.SetUrlMapRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetUrlMapRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy: str = None,
-        url_map_reference_resource: compute.UrlMapReference = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy: Optional[str] = None,
+        url_map_reference_resource: Optional[compute.UrlMapReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpProxy.
@@ -1192,14 +1215,16 @@ class RegionTargetHttpProxiesClient(metaclass=RegionTargetHttpProxiesClientMeta)
 
     def set_url_map(
         self,
-        request: Union[compute.SetUrlMapRegionTargetHttpProxyRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetUrlMapRegionTargetHttpProxyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        target_http_proxy: str = None,
-        url_map_reference_resource: compute.UrlMapReference = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        target_http_proxy: Optional[str] = None,
+        url_map_reference_resource: Optional[compute.UrlMapReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the URL map for TargetHttpProxy.

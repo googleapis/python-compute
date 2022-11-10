@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -56,7 +67,7 @@ class UrlMapsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[UrlMapsTransport]:
         """Returns an appropriate transport class.
 
@@ -309,7 +320,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, UrlMapsTransport, None] = None,
+        transport: Optional[Union[str, UrlMapsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -410,11 +421,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListUrlMapsRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListUrlMapsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all UrlMap resources, regional
@@ -498,12 +509,12 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.DeleteUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified UrlMap resource.
@@ -587,12 +598,12 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.DeleteUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified UrlMap resource.
@@ -700,12 +711,12 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.GetUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.UrlMap:
         r"""Returns the specified UrlMap resource. Gets a list of
@@ -809,12 +820,12 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InsertUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a UrlMap resource in the specified project
@@ -892,12 +903,12 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InsertUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a UrlMap resource in the specified project
@@ -999,13 +1010,15 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def invalidate_cache_unary(
         self,
-        request: Union[compute.InvalidateCacheUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InvalidateCacheUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        cache_invalidation_rule_resource: compute.CacheInvalidationRule = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        cache_invalidation_rule_resource: Optional[
+            compute.CacheInvalidationRule
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Initiates a cache invalidation operation, invalidating the
@@ -1102,13 +1115,15 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def invalidate_cache(
         self,
-        request: Union[compute.InvalidateCacheUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InvalidateCacheUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        cache_invalidation_rule_resource: compute.CacheInvalidationRule = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        cache_invalidation_rule_resource: Optional[
+            compute.CacheInvalidationRule
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Initiates a cache invalidation operation, invalidating the
@@ -1229,11 +1244,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListUrlMapsRequest, dict] = None,
+        request: Optional[Union[compute.ListUrlMapsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of UrlMap resources available to
@@ -1315,13 +1330,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.PatchUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified UrlMap resource with the data
@@ -1413,13 +1428,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.PatchUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified UrlMap resource with the data
@@ -1535,13 +1550,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.UpdateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified UrlMap resource with the data
@@ -1633,13 +1648,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.UpdateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified UrlMap resource with the data
@@ -1755,13 +1770,15 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def validate(
         self,
-        request: Union[compute.ValidateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.ValidateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_maps_validate_request_resource: compute.UrlMapsValidateRequest = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_maps_validate_request_resource: Optional[
+            compute.UrlMapsValidateRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.UrlMapsValidateResponse:
         r"""Runs static validation for the UrlMap. In particular,

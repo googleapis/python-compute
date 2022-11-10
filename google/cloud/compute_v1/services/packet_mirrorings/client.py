@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class PacketMirroringsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[PacketMirroringsTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, PacketMirroringsTransport, None] = None,
+        transport: Optional[Union[str, PacketMirroringsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,11 +423,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListPacketMirroringsRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListPacketMirroringsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of packetMirrorings.
@@ -498,13 +511,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeletePacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.DeletePacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified PacketMirroring resource.
@@ -597,13 +610,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeletePacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.DeletePacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified PacketMirroring resource.
@@ -721,13 +734,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetPacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.GetPacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PacketMirroring:
         r"""Returns the specified PacketMirroring resource.
@@ -828,13 +841,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertPacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.InsertPacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring_resource: compute.PacketMirroring = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring_resource: Optional[compute.PacketMirroring] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a PacketMirroring resource in the specified
@@ -926,13 +939,13 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertPacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.InsertPacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring_resource: compute.PacketMirroring = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring_resource: Optional[compute.PacketMirroring] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a PacketMirroring resource in the specified
@@ -1049,12 +1062,12 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListPacketMirroringsRequest, dict] = None,
+        request: Optional[Union[compute.ListPacketMirroringsRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of PacketMirroring resources
@@ -1150,14 +1163,14 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchPacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.PatchPacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring: str = None,
-        packet_mirroring_resource: compute.PacketMirroring = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring: Optional[str] = None,
+        packet_mirroring_resource: Optional[compute.PacketMirroring] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified PacketMirroring resource with
@@ -1262,14 +1275,14 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchPacketMirroringRequest, dict] = None,
+        request: Optional[Union[compute.PatchPacketMirroringRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        packet_mirroring: str = None,
-        packet_mirroring_resource: compute.PacketMirroring = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        packet_mirroring: Optional[str] = None,
+        packet_mirroring_resource: Optional[compute.PacketMirroring] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified PacketMirroring resource with
@@ -1399,14 +1412,18 @@ class PacketMirroringsClient(metaclass=PacketMirroringsClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsPacketMirroringRequest, dict] = None,
+        request: Optional[
+            Union[compute.TestIamPermissionsPacketMirroringRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

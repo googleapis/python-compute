@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class RegionNotificationEndpointsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionNotificationEndpointsTransport]:
         """Returns an appropriate transport class.
 
@@ -313,7 +324,7 @@ class RegionNotificationEndpointsClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionNotificationEndpointsTransport, None] = None,
+        transport: Optional[Union[str, RegionNotificationEndpointsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -414,13 +425,15 @@ class RegionNotificationEndpointsClient(
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionNotificationEndpointRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionNotificationEndpointRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        notification_endpoint: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NotificationEndpoint in the
@@ -516,13 +529,15 @@ class RegionNotificationEndpointsClient(
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionNotificationEndpointRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionNotificationEndpointRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        notification_endpoint: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified NotificationEndpoint in the
@@ -643,13 +658,15 @@ class RegionNotificationEndpointsClient(
 
     def get(
         self,
-        request: Union[compute.GetRegionNotificationEndpointRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetRegionNotificationEndpointRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        notification_endpoint: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NotificationEndpoint:
         r"""Returns the specified NotificationEndpoint resource
@@ -750,13 +767,15 @@ class RegionNotificationEndpointsClient(
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionNotificationEndpointRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionNotificationEndpointRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        notification_endpoint_resource: compute.NotificationEndpoint = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        notification_endpoint_resource: Optional[compute.NotificationEndpoint] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Create a NotificationEndpoint in the specified
@@ -850,13 +869,15 @@ class RegionNotificationEndpointsClient(
 
     def insert(
         self,
-        request: Union[compute.InsertRegionNotificationEndpointRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionNotificationEndpointRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        notification_endpoint_resource: compute.NotificationEndpoint = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        notification_endpoint_resource: Optional[compute.NotificationEndpoint] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Create a NotificationEndpoint in the specified
@@ -975,12 +996,14 @@ class RegionNotificationEndpointsClient(
 
     def list(
         self,
-        request: Union[compute.ListRegionNotificationEndpointsRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListRegionNotificationEndpointsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the NotificationEndpoints for a project in the

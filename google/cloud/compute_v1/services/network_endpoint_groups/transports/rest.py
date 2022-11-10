@@ -382,10 +382,10 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: ga_credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -477,7 +477,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.AggregatedListNetworkEndpointGroupsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworkEndpointGroupAggregatedList:
             r"""Call the aggregated list method over HTTP.
@@ -564,7 +564,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.AttachNetworkEndpointsNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the attach network endpoints method over HTTP.
@@ -679,7 +679,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.DeleteNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -781,7 +781,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.DetachNetworkEndpointsNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the detach network endpoints method over HTTP.
@@ -896,7 +896,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.GetNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworkEndpointGroup:
             r"""Call the get method over HTTP.
@@ -994,7 +994,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.InsertNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -1105,7 +1105,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.ListNetworkEndpointGroupsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworkEndpointGroupList:
             r"""Call the list method over HTTP.
@@ -1192,7 +1192,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.ListNetworkEndpointsNetworkEndpointGroupsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworkEndpointGroupsListNetworkEndpoints:
             r"""Call the list network endpoints method over HTTP.
@@ -1292,7 +1292,7 @@ class NetworkEndpointGroupsRestTransport(NetworkEndpointGroupsTransport):
             request: compute.TestIamPermissionsNetworkEndpointGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TestPermissionsResponse:
             r"""Call the test iam permissions method over HTTP.

@@ -337,10 +337,10 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: ga_credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -432,7 +432,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.AggregatedListResourcePoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ResourcePolicyAggregatedList:
             r"""Call the aggregated list method over HTTP.
@@ -519,7 +519,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.DeleteResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -621,7 +621,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.GetResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ResourcePolicy:
             r"""Call the get method over HTTP.
@@ -714,7 +714,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.GetIamPolicyResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Policy:
             r"""Call the get iam policy method over HTTP.
@@ -842,7 +842,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.InsertResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -953,7 +953,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.ListResourcePoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ResourcePolicyList:
             r"""Call the list method over HTTP.
@@ -1040,7 +1040,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.SetIamPolicyResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Policy:
             r"""Call the set iam policy method over HTTP.
@@ -1177,7 +1177,7 @@ class ResourcePoliciesRestTransport(ResourcePoliciesTransport):
             request: compute.TestIamPermissionsResourcePolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TestPermissionsResponse:
             r"""Call the test iam permissions method over HTTP.

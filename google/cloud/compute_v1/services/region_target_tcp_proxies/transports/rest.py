@@ -217,10 +217,10 @@ class RegionTargetTcpProxiesRestTransport(RegionTargetTcpProxiesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: ga_credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -312,7 +312,7 @@ class RegionTargetTcpProxiesRestTransport(RegionTargetTcpProxiesTransport):
             request: compute.DeleteRegionTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -414,7 +414,7 @@ class RegionTargetTcpProxiesRestTransport(RegionTargetTcpProxiesTransport):
             request: compute.GetRegionTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetTcpProxy:
             r"""Call the get method over HTTP.
@@ -509,7 +509,7 @@ class RegionTargetTcpProxiesRestTransport(RegionTargetTcpProxiesTransport):
             request: compute.InsertRegionTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -620,7 +620,7 @@ class RegionTargetTcpProxiesRestTransport(RegionTargetTcpProxiesTransport):
             request: compute.ListRegionTargetTcpProxiesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetTcpProxyList:
             r"""Call the list method over HTTP.

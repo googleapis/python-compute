@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -55,7 +66,7 @@ class GlobalOperationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GlobalOperationsTransport]:
         """Returns an appropriate transport class.
 
@@ -308,7 +319,7 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GlobalOperationsTransport, None] = None,
+        transport: Optional[Union[str, GlobalOperationsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -409,11 +420,13 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListGlobalOperationsRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListGlobalOperationsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of all operations.
@@ -494,12 +507,12 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteGlobalOperationRequest, dict] = None,
+        request: Optional[Union[compute.DeleteGlobalOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteGlobalOperationResponse:
         r"""Deletes the specified Operations resource.
@@ -585,12 +598,12 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetGlobalOperationRequest, dict] = None,
+        request: Optional[Union[compute.GetGlobalOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified Operations resource.
@@ -688,11 +701,11 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListGlobalOperationsRequest, dict] = None,
+        request: Optional[Union[compute.ListGlobalOperationsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of Operation resources contained
@@ -776,12 +789,12 @@ class GlobalOperationsClient(metaclass=GlobalOperationsClientMeta):
 
     def wait(
         self,
-        request: Union[compute.WaitGlobalOperationRequest, dict] = None,
+        request: Optional[Union[compute.WaitGlobalOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Waits for the specified Operation resource to return as ``DONE``

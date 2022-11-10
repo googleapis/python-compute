@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class RegionCommitmentsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionCommitmentsTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionCommitmentsTransport, None] = None,
+        transport: Optional[Union[str, RegionCommitmentsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,11 +423,13 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListRegionCommitmentsRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListRegionCommitmentsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of commitments by
@@ -498,13 +511,13 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionCommitmentRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionCommitmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        commitment: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        commitment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Commitment:
         r"""Returns the specified commitment resource. Gets a
@@ -604,13 +617,13 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionCommitmentRequest, dict] = None,
+        request: Optional[Union[compute.InsertRegionCommitmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        commitment_resource: compute.Commitment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a commitment in the specified project using
@@ -701,13 +714,13 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRegionCommitmentRequest, dict] = None,
+        request: Optional[Union[compute.InsertRegionCommitmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        commitment_resource: compute.Commitment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a commitment in the specified project using
@@ -823,12 +836,12 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionCommitmentsRequest, dict] = None,
+        request: Optional[Union[compute.ListRegionCommitmentsRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of commitments contained within the
@@ -924,14 +937,14 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateRegionCommitmentRequest, dict] = None,
+        request: Optional[Union[compute.UpdateRegionCommitmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        commitment: str = None,
-        commitment_resource: compute.Commitment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        commitment: Optional[str] = None,
+        commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified commitment with the data included in the
@@ -1034,14 +1047,14 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateRegionCommitmentRequest, dict] = None,
+        request: Optional[Union[compute.UpdateRegionCommitmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        commitment: str = None,
-        commitment_resource: compute.Commitment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        commitment: Optional[str] = None,
+        commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified commitment with the data included in the

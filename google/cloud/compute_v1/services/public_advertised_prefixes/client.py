@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class PublicAdvertisedPrefixesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[PublicAdvertisedPrefixesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, PublicAdvertisedPrefixesTransport, None] = None,
+        transport: Optional[Union[str, PublicAdvertisedPrefixesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,12 +423,14 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def delete_unary(
         self,
-        request: Union[compute.DeletePublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeletePublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix: str = None,
+        project: Optional[str] = None,
+        public_advertised_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified PublicAdvertisedPrefix
@@ -502,12 +515,14 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def delete(
         self,
-        request: Union[compute.DeletePublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeletePublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix: str = None,
+        project: Optional[str] = None,
+        public_advertised_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified PublicAdvertisedPrefix
@@ -616,12 +631,14 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def get(
         self,
-        request: Union[compute.GetPublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetPublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix: str = None,
+        project: Optional[str] = None,
+        public_advertised_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PublicAdvertisedPrefix:
         r"""Returns the specified PublicAdvertisedPrefix
@@ -711,12 +728,16 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def insert_unary(
         self,
-        request: Union[compute.InsertPublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertPublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
+        project: Optional[str] = None,
+        public_advertised_prefix_resource: Optional[
+            compute.PublicAdvertisedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a PublicAdvertisedPrefix in the specified
@@ -798,12 +819,16 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def insert(
         self,
-        request: Union[compute.InsertPublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertPublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
+        project: Optional[str] = None,
+        public_advertised_prefix_resource: Optional[
+            compute.PublicAdvertisedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a PublicAdvertisedPrefix in the specified
@@ -909,11 +934,13 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def list(
         self,
-        request: Union[compute.ListPublicAdvertisedPrefixesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListPublicAdvertisedPrefixesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the PublicAdvertisedPrefixes for a project.
@@ -994,13 +1021,17 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def patch_unary(
         self,
-        request: Union[compute.PatchPublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchPublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix: str = None,
-        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
+        project: Optional[str] = None,
+        public_advertised_prefix: Optional[str] = None,
+        public_advertised_prefix_resource: Optional[
+            compute.PublicAdvertisedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified Router resource with the data
@@ -1099,13 +1130,17 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def patch(
         self,
-        request: Union[compute.PatchPublicAdvertisedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchPublicAdvertisedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        public_advertised_prefix: str = None,
-        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
+        project: Optional[str] = None,
+        public_advertised_prefix: Optional[str] = None,
+        public_advertised_prefix_resource: Optional[
+            compute.PublicAdvertisedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified Router resource with the data

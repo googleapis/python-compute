@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class RegionNetworkEndpointGroupsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionNetworkEndpointGroupsTransport]:
         """Returns an appropriate transport class.
 
@@ -313,7 +324,7 @@ class RegionNetworkEndpointGroupsClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionNetworkEndpointGroupsTransport, None] = None,
+        transport: Optional[Union[str, RegionNetworkEndpointGroupsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -414,13 +425,15 @@ class RegionNetworkEndpointGroupsClient(
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionNetworkEndpointGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionNetworkEndpointGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_endpoint_group: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified network endpoint group. Note
@@ -519,13 +532,15 @@ class RegionNetworkEndpointGroupsClient(
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionNetworkEndpointGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionNetworkEndpointGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_endpoint_group: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified network endpoint group. Note
@@ -649,13 +664,15 @@ class RegionNetworkEndpointGroupsClient(
 
     def get(
         self,
-        request: Union[compute.GetRegionNetworkEndpointGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetRegionNetworkEndpointGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_endpoint_group: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NetworkEndpointGroup:
         r"""Returns the specified network endpoint group. Gets a
@@ -762,13 +779,15 @@ class RegionNetworkEndpointGroupsClient(
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionNetworkEndpointGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionNetworkEndpointGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_endpoint_group_resource: compute.NetworkEndpointGroup = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a network endpoint group in the specified
@@ -865,13 +884,15 @@ class RegionNetworkEndpointGroupsClient(
 
     def insert(
         self,
-        request: Union[compute.InsertRegionNetworkEndpointGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionNetworkEndpointGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_endpoint_group_resource: compute.NetworkEndpointGroup = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a network endpoint group in the specified
@@ -993,12 +1014,14 @@ class RegionNetworkEndpointGroupsClient(
 
     def list(
         self,
-        request: Union[compute.ListRegionNetworkEndpointGroupsRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListRegionNetworkEndpointGroupsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of regional network endpoint

@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -55,7 +66,7 @@ class InterconnectLocationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[InterconnectLocationsTransport]:
         """Returns an appropriate transport class.
 
@@ -308,7 +319,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, InterconnectLocationsTransport, None] = None,
+        transport: Optional[Union[str, InterconnectLocationsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -409,12 +420,12 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetInterconnectLocationRequest, dict] = None,
+        request: Optional[Union[compute.GetInterconnectLocationRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect_location: str = None,
+        project: Optional[str] = None,
+        interconnect_location: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectLocation:
         r"""Returns the details for the specified interconnect
@@ -506,11 +517,11 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListInterconnectLocationsRequest, dict] = None,
+        request: Optional[Union[compute.ListInterconnectLocationsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of interconnect locations

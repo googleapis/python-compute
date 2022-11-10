@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -56,7 +67,7 @@ class RoutesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RoutesTransport]:
         """Returns an appropriate transport class.
 
@@ -309,7 +320,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RoutesTransport, None] = None,
+        transport: Optional[Union[str, RoutesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -410,12 +421,12 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRouteRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRouteRequest, dict]] = None,
         *,
-        project: str = None,
-        route: str = None,
+        project: Optional[str] = None,
+        route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified Route resource.
@@ -497,12 +508,12 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRouteRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRouteRequest, dict]] = None,
         *,
-        project: str = None,
-        route: str = None,
+        project: Optional[str] = None,
+        route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified Route resource.
@@ -608,12 +619,12 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRouteRequest, dict] = None,
+        request: Optional[Union[compute.GetRouteRequest, dict]] = None,
         *,
-        project: str = None,
-        route: str = None,
+        project: Optional[str] = None,
+        route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Route:
         r"""Returns the specified Route resource. Gets a list of
@@ -700,12 +711,12 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRouteRequest, dict] = None,
+        request: Optional[Union[compute.InsertRouteRequest, dict]] = None,
         *,
-        project: str = None,
-        route_resource: compute.Route = None,
+        project: Optional[str] = None,
+        route_resource: Optional[compute.Route] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a Route resource in the specified project
@@ -783,12 +794,12 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRouteRequest, dict] = None,
+        request: Optional[Union[compute.InsertRouteRequest, dict]] = None,
         *,
-        project: str = None,
-        route_resource: compute.Route = None,
+        project: Optional[str] = None,
+        route_resource: Optional[compute.Route] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a Route resource in the specified project
@@ -890,11 +901,11 @@ class RoutesClient(metaclass=RoutesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRoutesRequest, dict] = None,
+        request: Optional[Union[compute.ListRoutesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of Route resources available to

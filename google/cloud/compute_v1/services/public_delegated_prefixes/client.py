@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class PublicDelegatedPrefixesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[PublicDelegatedPrefixesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, PublicDelegatedPrefixesTransport, None] = None,
+        transport: Optional[Union[str, PublicDelegatedPrefixesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,13 +423,13 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def aggregated_list(
         self,
-        request: Union[
-            compute.AggregatedListPublicDelegatedPrefixesRequest, dict
+        request: Optional[
+            Union[compute.AggregatedListPublicDelegatedPrefixesRequest, dict]
         ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Lists all PublicDelegatedPrefix resources owned by
@@ -504,13 +515,15 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def delete_unary(
         self,
-        request: Union[compute.DeletePublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeletePublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified PublicDelegatedPrefix in the
@@ -604,13 +617,15 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def delete(
         self,
-        request: Union[compute.DeletePublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeletePublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified PublicDelegatedPrefix in the
@@ -729,13 +744,13 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def get(
         self,
-        request: Union[compute.GetPublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[Union[compute.GetPublicDelegatedPrefixeRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PublicDelegatedPrefix:
         r"""Returns the specified PublicDelegatedPrefix resource
@@ -836,13 +851,17 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def insert_unary(
         self,
-        request: Union[compute.InsertPublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertPublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix_resource: Optional[
+            compute.PublicDelegatedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a PublicDelegatedPrefix in the specified
@@ -936,13 +955,17 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def insert(
         self,
-        request: Union[compute.InsertPublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertPublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix_resource: Optional[
+            compute.PublicDelegatedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a PublicDelegatedPrefix in the specified
@@ -1061,12 +1084,14 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def list(
         self,
-        request: Union[compute.ListPublicDelegatedPrefixesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListPublicDelegatedPrefixesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the PublicDelegatedPrefixes for a project in
@@ -1160,14 +1185,18 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def patch_unary(
         self,
-        request: Union[compute.PatchPublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchPublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix: str = None,
-        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix: Optional[str] = None,
+        public_delegated_prefix_resource: Optional[
+            compute.PublicDelegatedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified PublicDelegatedPrefix resource
@@ -1274,14 +1303,18 @@ class PublicDelegatedPrefixesClient(metaclass=PublicDelegatedPrefixesClientMeta)
 
     def patch(
         self,
-        request: Union[compute.PatchPublicDelegatedPrefixeRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchPublicDelegatedPrefixeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        public_delegated_prefix: str = None,
-        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        public_delegated_prefix: Optional[str] = None,
+        public_delegated_prefix_resource: Optional[
+            compute.PublicDelegatedPrefix
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified PublicDelegatedPrefix resource

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class TargetGrpcProxiesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[TargetGrpcProxiesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, TargetGrpcProxiesTransport, None] = None,
+        transport: Optional[Union[str, TargetGrpcProxiesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,12 +423,12 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.DeleteTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy: str = None,
+        project: Optional[str] = None,
+        target_grpc_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetGrpcProxy in the given
@@ -503,12 +514,12 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.DeleteTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy: str = None,
+        project: Optional[str] = None,
+        target_grpc_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetGrpcProxy in the given
@@ -618,12 +629,12 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.GetTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy: str = None,
+        project: Optional[str] = None,
+        target_grpc_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetGrpcProxy:
         r"""Returns the specified TargetGrpcProxy resource in the
@@ -714,12 +725,12 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.InsertTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy_resource: compute.TargetGrpcProxy = None,
+        project: Optional[str] = None,
+        target_grpc_proxy_resource: Optional[compute.TargetGrpcProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetGrpcProxy in the specified project in
@@ -799,12 +810,12 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.InsertTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy_resource: compute.TargetGrpcProxy = None,
+        project: Optional[str] = None,
+        target_grpc_proxy_resource: Optional[compute.TargetGrpcProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetGrpcProxy in the specified project in
@@ -908,11 +919,11 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListTargetGrpcProxiesRequest, dict] = None,
+        request: Optional[Union[compute.ListTargetGrpcProxiesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the TargetGrpcProxies for a project in the
@@ -994,13 +1005,13 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.PatchTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy: str = None,
-        target_grpc_proxy_resource: compute.TargetGrpcProxy = None,
+        project: Optional[str] = None,
+        target_grpc_proxy: Optional[str] = None,
+        target_grpc_proxy_resource: Optional[compute.TargetGrpcProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified TargetGrpcProxy resource with
@@ -1097,13 +1108,13 @@ class TargetGrpcProxiesClient(metaclass=TargetGrpcProxiesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchTargetGrpcProxyRequest, dict] = None,
+        request: Optional[Union[compute.PatchTargetGrpcProxyRequest, dict]] = None,
         *,
-        project: str = None,
-        target_grpc_proxy: str = None,
-        target_grpc_proxy_resource: compute.TargetGrpcProxy = None,
+        project: Optional[str] = None,
+        target_grpc_proxy: Optional[str] = None,
+        target_grpc_proxy_resource: Optional[compute.TargetGrpcProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified TargetGrpcProxy resource with

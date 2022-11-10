@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -53,7 +64,7 @@ class NodeTypesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[NodeTypesTransport]:
         """Returns an appropriate transport class.
 
@@ -306,7 +317,7 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, NodeTypesTransport, None] = None,
+        transport: Optional[Union[str, NodeTypesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -407,11 +418,11 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListNodeTypesRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListNodeTypesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node types.
@@ -492,13 +503,13 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetNodeTypeRequest, dict] = None,
+        request: Optional[Union[compute.GetNodeTypeRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        node_type: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        node_type: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NodeType:
         r"""Returns the specified node type. Gets a list of
@@ -599,12 +610,12 @@ class NodeTypesClient(metaclass=NodeTypesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListNodeTypesRequest, dict] = None,
+        request: Optional[Union[compute.ListNodeTypesRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of node types available to the

@@ -301,10 +301,10 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: ga_credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -396,7 +396,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.DeleteGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -498,7 +498,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.GetGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ForwardingRule:
             r"""Call the get method over HTTP.
@@ -597,7 +597,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.InsertGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -708,7 +708,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.ListGlobalForwardingRulesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ForwardingRuleList:
             r"""Call the list method over HTTP.
@@ -797,7 +797,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.PatchGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -908,7 +908,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.SetLabelsGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set labels method over HTTP.
@@ -1019,7 +1019,7 @@ class GlobalForwardingRulesRestTransport(GlobalForwardingRulesTransport):
             request: compute.SetTargetGlobalForwardingRuleRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set target method over HTTP.

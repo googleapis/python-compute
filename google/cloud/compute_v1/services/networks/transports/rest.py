@@ -404,10 +404,10 @@ class NetworksRestTransport(NetworksTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: ga_credentials.Credentials = None,
-        credentials_file: str = None,
-        scopes: Sequence[str] = None,
-        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -499,7 +499,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.AddPeeringNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the add peering method over HTTP.
@@ -610,7 +610,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.DeleteNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -712,7 +712,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.GetNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Network:
             r"""Call the get method over HTTP.
@@ -803,7 +803,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.GetEffectiveFirewallsNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworksGetEffectiveFirewallsResponse:
             r"""Call the get effective firewalls method over HTTP.
@@ -892,7 +892,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.InsertNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -1003,7 +1003,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.ListNetworksRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.NetworkList:
             r"""Call the list method over HTTP.
@@ -1089,7 +1089,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.ListPeeringRoutesNetworksRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ExchangedPeeringRoutesList:
             r"""Call the list peering routes method over HTTP.
@@ -1178,7 +1178,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.PatchNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -1288,7 +1288,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.RemovePeeringNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the remove peering method over HTTP.
@@ -1399,7 +1399,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.SwitchToCustomModeNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the switch to custom mode method over HTTP.
@@ -1503,7 +1503,7 @@ class NetworksRestTransport(NetworksTransport):
             request: compute.UpdatePeeringNetworkRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: float = None,
+            timeout: Optional[float] = None,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the update peering method over HTTP.

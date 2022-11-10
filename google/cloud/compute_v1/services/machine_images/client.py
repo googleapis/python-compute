@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -56,7 +67,7 @@ class MachineImagesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[MachineImagesTransport]:
         """Returns an appropriate transport class.
 
@@ -309,7 +320,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, MachineImagesTransport, None] = None,
+        transport: Optional[Union[str, MachineImagesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -410,12 +421,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.DeleteMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        machine_image: str = None,
+        project: Optional[str] = None,
+        machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified machine image. Deleting a
@@ -501,12 +512,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.DeleteMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        machine_image: str = None,
+        project: Optional[str] = None,
+        machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified machine image. Deleting a
@@ -616,12 +627,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.GetMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        machine_image: str = None,
+        project: Optional[str] = None,
+        machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.MachineImage:
         r"""Returns the specified machine image. Gets a list of
@@ -711,12 +722,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.GetIamPolicyMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -840,12 +851,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.InsertMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        machine_image_resource: compute.MachineImage = None,
+        project: Optional[str] = None,
+        machine_image_resource: Optional[compute.MachineImage] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a machine image in the specified project
@@ -928,12 +939,12 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.InsertMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        machine_image_resource: compute.MachineImage = None,
+        project: Optional[str] = None,
+        machine_image_resource: Optional[compute.MachineImage] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a machine image in the specified project
@@ -1040,11 +1051,11 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListMachineImagesRequest, dict] = None,
+        request: Optional[Union[compute.ListMachineImagesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of machine images that are contained
@@ -1127,13 +1138,15 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyMachineImageRequest, dict] = None,
+        request: Optional[Union[compute.SetIamPolicyMachineImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_policy_request_resource: Optional[
+            compute.GlobalSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1268,13 +1281,17 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsMachineImageRequest, dict] = None,
+        request: Optional[
+            Union[compute.TestIamPermissionsMachineImageRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

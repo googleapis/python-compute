@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -54,7 +65,7 @@ class ImageFamilyViewsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ImageFamilyViewsTransport]:
         """Returns an appropriate transport class.
 
@@ -307,7 +318,7 @@ class ImageFamilyViewsClient(metaclass=ImageFamilyViewsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ImageFamilyViewsTransport, None] = None,
+        transport: Optional[Union[str, ImageFamilyViewsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -408,13 +419,13 @@ class ImageFamilyViewsClient(metaclass=ImageFamilyViewsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetImageFamilyViewRequest, dict] = None,
+        request: Optional[Union[compute.GetImageFamilyViewRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        family: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        family: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ImageFamilyView:
         r"""Returns the latest image that is part of an image

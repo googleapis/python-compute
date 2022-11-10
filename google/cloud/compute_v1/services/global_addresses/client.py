@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -58,7 +69,7 @@ class GlobalAddressesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GlobalAddressesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GlobalAddressesTransport, None] = None,
+        transport: Optional[Union[str, GlobalAddressesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,12 +423,12 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.DeleteGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
@@ -502,12 +513,12 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.DeleteGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified address resource.
@@ -616,12 +627,12 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.GetGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Address:
         r"""Returns the specified address resource. Gets a list
@@ -712,12 +723,12 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.InsertGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        address_resource: compute.Address = None,
+        project: Optional[str] = None,
+        address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an address resource in the specified project
@@ -796,12 +807,12 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.InsertGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        address_resource: compute.Address = None,
+        project: Optional[str] = None,
+        address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an address resource in the specified project
@@ -904,11 +915,11 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListGlobalAddressesRequest, dict] = None,
+        request: Optional[Union[compute.ListGlobalAddressesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of global addresses.
@@ -990,13 +1001,15 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on a GlobalAddress. To learn more
@@ -1093,13 +1106,15 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsGlobalAddressRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsGlobalAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on a GlobalAddress. To learn more
