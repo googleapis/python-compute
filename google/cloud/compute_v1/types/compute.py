@@ -17,7 +17,6 @@ from typing import MutableMapping, MutableSequence
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.cloud.compute.v1",
     manifest={
