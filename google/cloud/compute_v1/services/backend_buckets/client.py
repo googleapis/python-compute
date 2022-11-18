@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class BackendBucketsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[BackendBucketsTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, BackendBucketsTransport, None] = None,
+        transport: Optional[Union[str, BackendBucketsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,13 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def add_signed_url_key_unary(
         self,
-        request: Union[compute.AddSignedUrlKeyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddSignedUrlKeyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        signed_url_key_resource: compute.SignedUrlKey = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -514,11 +527,13 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def add_signed_url_key(
         self,
-        request: Union[compute.AddSignedUrlKeyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddSignedUrlKeyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        signed_url_key_resource: compute.SignedUrlKey = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -639,10 +654,10 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.DeleteBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -729,10 +744,10 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.DeleteBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -843,11 +858,13 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def delete_signed_url_key_unary(
         self,
-        request: Union[compute.DeleteSignedUrlKeyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteSignedUrlKeyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        key_name: str = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        key_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -946,11 +963,13 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def delete_signed_url_key(
         self,
-        request: Union[compute.DeleteSignedUrlKeyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteSignedUrlKeyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        key_name: str = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        key_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1073,10 +1092,10 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.GetBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1168,10 +1187,10 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.InsertBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1252,10 +1271,10 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.InsertBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1360,9 +1379,9 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListBackendBucketsRequest, dict] = None,
+        request: Optional[Union[compute.ListBackendBucketsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1448,11 +1467,11 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.PatchBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1549,11 +1568,11 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.PatchBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1674,11 +1693,15 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def set_edge_security_policy_unary(
         self,
-        request: Union[compute.SetEdgeSecurityPolicyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetEdgeSecurityPolicyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        security_policy_reference_resource: compute.SecurityPolicyReference = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        security_policy_reference_resource: Optional[
+            compute.SecurityPolicyReference
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1778,11 +1801,15 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def set_edge_security_policy(
         self,
-        request: Union[compute.SetEdgeSecurityPolicyBackendBucketRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetEdgeSecurityPolicyBackendBucketRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        security_policy_reference_resource: compute.SecurityPolicyReference = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        security_policy_reference_resource: Optional[
+            compute.SecurityPolicyReference
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1906,11 +1933,11 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.UpdateBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2005,11 +2032,11 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateBackendBucketRequest, dict] = None,
+        request: Optional[Union[compute.UpdateBackendBucketRequest, dict]] = None,
         *,
-        project: str = None,
-        backend_bucket: str = None,
-        backend_bucket_resource: compute.BackendBucket = None,
+        project: Optional[str] = None,
+        backend_bucket: Optional[str] = None,
+        backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

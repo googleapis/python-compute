@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -56,7 +67,7 @@ class AcceleratorTypesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[AcceleratorTypesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, AcceleratorTypesTransport, None] = None,
+        transport: Optional[Union[str, AcceleratorTypesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,9 +423,11 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListAcceleratorTypesRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListAcceleratorTypesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -497,11 +510,11 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetAcceleratorTypeRequest, dict] = None,
+        request: Optional[Union[compute.GetAcceleratorTypeRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        accelerator_type: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        accelerator_type: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -604,10 +617,10 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListAcceleratorTypesRequest, dict] = None,
+        request: Optional[Union[compute.ListAcceleratorTypesRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class AddressesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[AddressesTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class AddressesClient(metaclass=AddressesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, AddressesTransport, None] = None,
+        transport: Optional[Union[str, AddressesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,9 +422,9 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListAddressesRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListAddressesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -496,11 +507,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteAddressRequest, dict] = None,
+        request: Optional[Union[compute.DeleteAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -595,11 +606,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteAddressRequest, dict] = None,
+        request: Optional[Union[compute.DeleteAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -719,11 +730,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetAddressRequest, dict] = None,
+        request: Optional[Union[compute.GetAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        address: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -822,11 +833,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertAddressRequest, dict] = None,
+        request: Optional[Union[compute.InsertAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        address_resource: compute.Address = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -919,11 +930,11 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertAddressRequest, dict] = None,
+        request: Optional[Union[compute.InsertAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        address_resource: compute.Address = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1041,10 +1052,10 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListAddressesRequest, dict] = None,
+        request: Optional[Union[compute.ListAddressesRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1140,12 +1151,14 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsAddressRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_labels_request_resource: Optional[
+            compute.RegionSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1252,12 +1265,14 @@ class AddressesClient(metaclass=AddressesClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsAddressRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsAddressRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_labels_request_resource: Optional[
+            compute.RegionSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

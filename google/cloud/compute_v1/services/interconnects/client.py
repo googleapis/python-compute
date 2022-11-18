@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class InterconnectsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[InterconnectsTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, InterconnectsTransport, None] = None,
+        transport: Optional[Union[str, InterconnectsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,10 +422,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -499,10 +510,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -611,10 +622,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.GetInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -704,10 +715,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get_diagnostics(
         self,
-        request: Union[compute.GetDiagnosticsInterconnectRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetDiagnosticsInterconnectRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -795,10 +808,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.InsertInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect_resource: compute.Interconnect = None,
+        project: Optional[str] = None,
+        interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -879,10 +892,10 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.InsertInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect_resource: compute.Interconnect = None,
+        project: Optional[str] = None,
+        interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -987,9 +1000,9 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListInterconnectsRequest, dict] = None,
+        request: Optional[Union[compute.ListInterconnectsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1075,11 +1088,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.PatchInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
-        interconnect_resource: compute.Interconnect = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
+        interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1174,11 +1187,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.PatchInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect: str = None,
-        interconnect_resource: compute.Interconnect = None,
+        project: Optional[str] = None,
+        interconnect: Optional[str] = None,
+        interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1297,11 +1310,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1400,11 +1415,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsInterconnectRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsInterconnectRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

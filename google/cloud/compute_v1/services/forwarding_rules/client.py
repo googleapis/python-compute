@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class ForwardingRulesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ForwardingRulesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ForwardingRulesTransport, None] = None,
+        transport: Optional[Union[str, ForwardingRulesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,9 +424,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListForwardingRulesRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListForwardingRulesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -498,11 +511,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.DeleteForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -599,11 +612,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.DeleteForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -725,11 +738,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.GetForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -836,11 +849,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.InsertForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule_resource: compute.ForwardingRule = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule_resource: Optional[compute.ForwardingRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -936,11 +949,11 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.InsertForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule_resource: compute.ForwardingRule = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule_resource: Optional[compute.ForwardingRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1061,10 +1074,10 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListForwardingRulesRequest, dict] = None,
+        request: Optional[Union[compute.ListForwardingRulesRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1164,12 +1177,12 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.PatchForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
-        forwarding_rule_resource: compute.ForwardingRule = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
+        forwarding_rule_resource: Optional[compute.ForwardingRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1278,12 +1291,12 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.PatchForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
-        forwarding_rule_resource: compute.ForwardingRule = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
+        forwarding_rule_resource: Optional[compute.ForwardingRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1417,12 +1430,14 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_labels_request_resource: Optional[
+            compute.RegionSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1530,12 +1545,14 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_labels_request_resource: Optional[
+            compute.RegionSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1668,12 +1685,12 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def set_target_unary(
         self,
-        request: Union[compute.SetTargetForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.SetTargetForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
-        target_reference_resource: compute.TargetReference = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
+        target_reference_resource: Optional[compute.TargetReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1780,12 +1797,12 @@ class ForwardingRulesClient(metaclass=ForwardingRulesClientMeta):
 
     def set_target(
         self,
-        request: Union[compute.SetTargetForwardingRuleRequest, dict] = None,
+        request: Optional[Union[compute.SetTargetForwardingRuleRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        forwarding_rule: str = None,
-        target_reference_resource: compute.TargetReference = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        forwarding_rule: Optional[str] = None,
+        target_reference_resource: Optional[compute.TargetReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

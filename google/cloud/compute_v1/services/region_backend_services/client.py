@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class RegionBackendServicesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionBackendServicesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionBackendServicesTransport, None] = None,
+        transport: Optional[Union[str, RegionBackendServicesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,13 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -515,11 +528,13 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -642,11 +657,11 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionBackendServiceRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionBackendServiceRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -757,12 +772,16 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def get_health(
         self,
-        request: Union[compute.GetHealthRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetHealthRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
-        resource_group_reference_resource: compute.ResourceGroupReference = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
+        resource_group_reference_resource: Optional[
+            compute.ResourceGroupReference
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -869,11 +888,13 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetIamPolicyRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1009,11 +1030,13 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1110,11 +1133,13 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1236,10 +1261,10 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionBackendServicesRequest, dict] = None,
+        request: Optional[Union[compute.ListRegionBackendServicesRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1340,12 +1365,12 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchRegionBackendServiceRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionBackendServiceRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1455,12 +1480,12 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchRegionBackendServiceRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionBackendServiceRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1595,12 +1620,16 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetIamPolicyRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_policy_request_resource: Optional[
+            compute.RegionSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1747,12 +1776,14 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.UpdateRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1860,12 +1891,14 @@ class RegionBackendServicesClient(metaclass=RegionBackendServicesClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateRegionBackendServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.UpdateRegionBackendServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        backend_service: str = None,
-        backend_service_resource: compute.BackendService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        backend_service: Optional[str] = None,
+        backend_service_resource: Optional[compute.BackendService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

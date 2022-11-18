@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class UrlMapsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[UrlMapsTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, UrlMapsTransport, None] = None,
+        transport: Optional[Union[str, UrlMapsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,9 +422,9 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListUrlMapsRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListUrlMapsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -499,10 +510,10 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.DeleteUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -588,10 +599,10 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.DeleteUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -701,10 +712,10 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.GetUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -810,10 +821,10 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InsertUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -893,10 +904,10 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InsertUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1000,11 +1011,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def invalidate_cache_unary(
         self,
-        request: Union[compute.InvalidateCacheUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InvalidateCacheUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        cache_invalidation_rule_resource: compute.CacheInvalidationRule = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        cache_invalidation_rule_resource: Optional[
+            compute.CacheInvalidationRule
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1103,11 +1116,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def invalidate_cache(
         self,
-        request: Union[compute.InvalidateCacheUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.InvalidateCacheUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        cache_invalidation_rule_resource: compute.CacheInvalidationRule = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        cache_invalidation_rule_resource: Optional[
+            compute.CacheInvalidationRule
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1230,9 +1245,9 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListUrlMapsRequest, dict] = None,
+        request: Optional[Union[compute.ListUrlMapsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1316,11 +1331,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.PatchUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1414,11 +1429,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.PatchUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1536,11 +1551,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.UpdateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1634,11 +1649,11 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.UpdateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_map_resource: compute.UrlMap = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_map_resource: Optional[compute.UrlMap] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1756,11 +1771,13 @@ class UrlMapsClient(metaclass=UrlMapsClientMeta):
 
     def validate(
         self,
-        request: Union[compute.ValidateUrlMapRequest, dict] = None,
+        request: Optional[Union[compute.ValidateUrlMapRequest, dict]] = None,
         *,
-        project: str = None,
-        url_map: str = None,
-        url_maps_validate_request_resource: compute.UrlMapsValidateRequest = None,
+        project: Optional[str] = None,
+        url_map: Optional[str] = None,
+        url_maps_validate_request_resource: Optional[
+            compute.UrlMapsValidateRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

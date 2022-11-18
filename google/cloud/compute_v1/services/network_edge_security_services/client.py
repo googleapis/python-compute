@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class NetworkEdgeSecurityServicesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[NetworkEdgeSecurityServicesTransport]:
         """Returns an appropriate transport class.
 
@@ -314,7 +325,7 @@ class NetworkEdgeSecurityServicesClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, NetworkEdgeSecurityServicesTransport, None] = None,
+        transport: Optional[Union[str, NetworkEdgeSecurityServicesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -415,11 +426,11 @@ class NetworkEdgeSecurityServicesClient(
 
     def aggregated_list(
         self,
-        request: Union[
-            compute.AggregatedListNetworkEdgeSecurityServicesRequest, dict
+        request: Optional[
+            Union[compute.AggregatedListNetworkEdgeSecurityServicesRequest, dict]
         ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -507,11 +518,13 @@ class NetworkEdgeSecurityServicesClient(
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -611,11 +624,13 @@ class NetworkEdgeSecurityServicesClient(
 
     def delete(
         self,
-        request: Union[compute.DeleteNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -740,11 +755,13 @@ class NetworkEdgeSecurityServicesClient(
 
     def get(
         self,
-        request: Union[compute.GetNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -844,11 +861,15 @@ class NetworkEdgeSecurityServicesClient(
 
     def insert_unary(
         self,
-        request: Union[compute.InsertNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service_resource: compute.NetworkEdgeSecurityService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service_resource: Optional[
+            compute.NetworkEdgeSecurityService
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -947,11 +968,15 @@ class NetworkEdgeSecurityServicesClient(
 
     def insert(
         self,
-        request: Union[compute.InsertNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service_resource: compute.NetworkEdgeSecurityService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service_resource: Optional[
+            compute.NetworkEdgeSecurityService
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1075,12 +1100,16 @@ class NetworkEdgeSecurityServicesClient(
 
     def patch_unary(
         self,
-        request: Union[compute.PatchNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service: str = None,
-        network_edge_security_service_resource: compute.NetworkEdgeSecurityService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service: Optional[str] = None,
+        network_edge_security_service_resource: Optional[
+            compute.NetworkEdgeSecurityService
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1197,12 +1226,16 @@ class NetworkEdgeSecurityServicesClient(
 
     def patch(
         self,
-        request: Union[compute.PatchNetworkEdgeSecurityServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchNetworkEdgeSecurityServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        network_edge_security_service: str = None,
-        network_edge_security_service_resource: compute.NetworkEdgeSecurityService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        network_edge_security_service: Optional[str] = None,
+        network_edge_security_service_resource: Optional[
+            compute.NetworkEdgeSecurityService
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

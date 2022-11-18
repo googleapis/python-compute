@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class RegionHealthCheckServicesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionHealthCheckServicesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionHealthCheckServicesTransport, None] = None,
+        transport: Optional[Union[str, RegionHealthCheckServicesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,13 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -515,11 +528,13 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -642,11 +657,13 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def get(
         self,
-        request: Union[compute.GetRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -745,11 +762,13 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service_resource: compute.HealthCheckService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -845,11 +864,13 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def insert(
         self,
-        request: Union[compute.InsertRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service_resource: compute.HealthCheckService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -970,10 +991,12 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def list(
         self,
-        request: Union[compute.ListRegionHealthCheckServicesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListRegionHealthCheckServicesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1072,12 +1095,14 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def patch_unary(
         self,
-        request: Union[compute.PatchRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service: str = None,
-        health_check_service_resource: compute.HealthCheckService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service: Optional[str] = None,
+        health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1187,12 +1212,14 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
 
     def patch(
         self,
-        request: Union[compute.PatchRegionHealthCheckServiceRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchRegionHealthCheckServiceRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        health_check_service: str = None,
-        health_check_service_resource: compute.HealthCheckService = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        health_check_service: Optional[str] = None,
+        health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

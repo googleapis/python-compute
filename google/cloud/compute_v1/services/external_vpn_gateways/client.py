@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class ExternalVpnGatewaysClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ExternalVpnGatewaysTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ExternalVpnGatewaysTransport, None] = None,
+        transport: Optional[Union[str, ExternalVpnGatewaysTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,10 +424,10 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteExternalVpnGatewayRequest, dict] = None,
+        request: Optional[Union[compute.DeleteExternalVpnGatewayRequest, dict]] = None,
         *,
-        project: str = None,
-        external_vpn_gateway: str = None,
+        project: Optional[str] = None,
+        external_vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -503,10 +514,10 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteExternalVpnGatewayRequest, dict] = None,
+        request: Optional[Union[compute.DeleteExternalVpnGatewayRequest, dict]] = None,
         *,
-        project: str = None,
-        external_vpn_gateway: str = None,
+        project: Optional[str] = None,
+        external_vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -617,10 +628,10 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetExternalVpnGatewayRequest, dict] = None,
+        request: Optional[Union[compute.GetExternalVpnGatewayRequest, dict]] = None,
         *,
-        project: str = None,
-        external_vpn_gateway: str = None,
+        project: Optional[str] = None,
+        external_vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -721,10 +732,10 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertExternalVpnGatewayRequest, dict] = None,
+        request: Optional[Union[compute.InsertExternalVpnGatewayRequest, dict]] = None,
         *,
-        project: str = None,
-        external_vpn_gateway_resource: compute.ExternalVpnGateway = None,
+        project: Optional[str] = None,
+        external_vpn_gateway_resource: Optional[compute.ExternalVpnGateway] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -805,10 +816,10 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertExternalVpnGatewayRequest, dict] = None,
+        request: Optional[Union[compute.InsertExternalVpnGatewayRequest, dict]] = None,
         *,
-        project: str = None,
-        external_vpn_gateway_resource: compute.ExternalVpnGateway = None,
+        project: Optional[str] = None,
+        external_vpn_gateway_resource: Optional[compute.ExternalVpnGateway] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -913,9 +924,9 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListExternalVpnGatewaysRequest, dict] = None,
+        request: Optional[Union[compute.ListExternalVpnGatewaysRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1001,11 +1012,15 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsExternalVpnGatewayRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetLabelsExternalVpnGatewayRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1105,11 +1120,15 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsExternalVpnGatewayRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetLabelsExternalVpnGatewayRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1233,13 +1252,15 @@ class ExternalVpnGatewaysClient(metaclass=ExternalVpnGatewaysClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[
-            compute.TestIamPermissionsExternalVpnGatewayRequest, dict
+        request: Optional[
+            Union[compute.TestIamPermissionsExternalVpnGatewayRequest, dict]
         ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class ServiceAttachmentsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ServiceAttachmentsTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ServiceAttachmentsTransport, None] = None,
+        transport: Optional[Union[str, ServiceAttachmentsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,9 +424,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListServiceAttachmentsRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListServiceAttachmentsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -504,11 +517,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.DeleteServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -604,11 +617,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.DeleteServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -729,11 +742,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.GetServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -836,11 +849,13 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyServiceAttachmentRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetIamPolicyServiceAttachmentRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -976,11 +991,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.InsertServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment_resource: compute.ServiceAttachment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1074,11 +1089,11 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.InsertServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment_resource: compute.ServiceAttachment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1197,10 +1212,10 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListServiceAttachmentsRequest, dict] = None,
+        request: Optional[Union[compute.ListServiceAttachmentsRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1296,12 +1311,12 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.PatchServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment: str = None,
-        service_attachment_resource: compute.ServiceAttachment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment: Optional[str] = None,
+        service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1412,12 +1427,12 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchServiceAttachmentRequest, dict] = None,
+        request: Optional[Union[compute.PatchServiceAttachmentRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        service_attachment: str = None,
-        service_attachment_resource: compute.ServiceAttachment = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        service_attachment: Optional[str] = None,
+        service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1553,12 +1568,16 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyServiceAttachmentRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetIamPolicyServiceAttachmentRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        region_set_policy_request_resource: Optional[
+            compute.RegionSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1705,12 +1724,16 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsServiceAttachmentRequest, dict] = None,
+        request: Optional[
+            Union[compute.TestIamPermissionsServiceAttachmentRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

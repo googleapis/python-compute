@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class LicensesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[LicensesTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class LicensesClient(metaclass=LicensesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, LicensesTransport, None] = None,
+        transport: Optional[Union[str, LicensesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,10 +422,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteLicenseRequest, dict] = None,
+        request: Optional[Union[compute.DeleteLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        license_: str = None,
+        project: Optional[str] = None,
+        license_: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -502,10 +513,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteLicenseRequest, dict] = None,
+        request: Optional[Union[compute.DeleteLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        license_: str = None,
+        project: Optional[str] = None,
+        license_: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -617,10 +628,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetLicenseRequest, dict] = None,
+        request: Optional[Union[compute.GetLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        license_: str = None,
+        project: Optional[str] = None,
+        license_: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -711,10 +722,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyLicenseRequest, dict] = None,
+        request: Optional[Union[compute.GetIamPolicyLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -842,10 +853,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertLicenseRequest, dict] = None,
+        request: Optional[Union[compute.InsertLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        license_resource: compute.License = None,
+        project: Optional[str] = None,
+        license_resource: Optional[compute.License] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -926,10 +937,10 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertLicenseRequest, dict] = None,
+        request: Optional[Union[compute.InsertLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        license_resource: compute.License = None,
+        project: Optional[str] = None,
+        license_resource: Optional[compute.License] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1034,9 +1045,9 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListLicensesRequest, dict] = None,
+        request: Optional[Union[compute.ListLicensesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1126,11 +1137,13 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyLicenseRequest, dict] = None,
+        request: Optional[Union[compute.SetIamPolicyLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_policy_request_resource: Optional[
+            compute.GlobalSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1269,11 +1282,13 @@ class LicensesClient(metaclass=LicensesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsLicenseRequest, dict] = None,
+        request: Optional[Union[compute.TestIamPermissionsLicenseRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class AutoscalersClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[AutoscalersTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, AutoscalersTransport, None] = None,
+        transport: Optional[Union[str, AutoscalersTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,9 +422,9 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListAutoscalersRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListAutoscalersRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -496,11 +507,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.DeleteAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -593,11 +604,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.DeleteAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -715,11 +726,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.GetAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -822,11 +833,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.InsertAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -919,11 +930,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.InsertAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1041,10 +1052,10 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListAutoscalersRequest, dict] = None,
+        request: Optional[Union[compute.ListAutoscalersRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1142,11 +1153,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.PatchAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1241,11 +1252,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.PatchAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1365,11 +1376,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.UpdateAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1462,11 +1473,11 @@ class AutoscalersClient(metaclass=AutoscalersClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateAutoscalerRequest, dict] = None,
+        request: Optional[Union[compute.UpdateAutoscalerRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        autoscaler_resource: compute.Autoscaler = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

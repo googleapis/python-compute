@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class RegionSslPoliciesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionSslPoliciesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionSslPoliciesTransport, None] = None,
+        transport: Optional[Union[str, RegionSslPoliciesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,11 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -517,11 +528,11 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -646,11 +657,11 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -753,11 +764,11 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.InsertRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy_resource: compute.SslPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -852,11 +863,11 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.InsertRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy_resource: compute.SslPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -976,10 +987,10 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionSslPoliciesRequest, dict] = None,
+        request: Optional[Union[compute.ListRegionSslPoliciesRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1077,12 +1088,12 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def list_available_features(
         self,
-        request: Union[
-            compute.ListAvailableFeaturesRegionSslPoliciesRequest, dict
+        request: Optional[
+            Union[compute.ListAvailableFeaturesRegionSslPoliciesRequest, dict]
         ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1170,12 +1181,12 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy: str = None,
-        ssl_policy_resource: compute.SslPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy: Optional[str] = None,
+        ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1281,12 +1292,12 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchRegionSslPolicyRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionSslPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        ssl_policy: str = None,
-        ssl_policy_resource: compute.SslPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        ssl_policy: Optional[str] = None,
+        ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

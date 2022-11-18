@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -56,7 +67,7 @@ class GlobalOrganizationOperationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[GlobalOrganizationOperationsTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class GlobalOrganizationOperationsClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, GlobalOrganizationOperationsTransport, None] = None,
+        transport: Optional[Union[str, GlobalOrganizationOperationsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,9 +423,11 @@ class GlobalOrganizationOperationsClient(
 
     def delete(
         self,
-        request: Union[compute.DeleteGlobalOrganizationOperationRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteGlobalOrganizationOperationRequest, dict]
+        ] = None,
         *,
-        operation: str = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -492,9 +505,11 @@ class GlobalOrganizationOperationsClient(
 
     def get(
         self,
-        request: Union[compute.GetGlobalOrganizationOperationRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetGlobalOrganizationOperationRequest, dict]
+        ] = None,
         *,
-        operation: str = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -585,7 +600,9 @@ class GlobalOrganizationOperationsClient(
 
     def list(
         self,
-        request: Union[compute.ListGlobalOrganizationOperationsRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListGlobalOrganizationOperationsRequest, dict]
+        ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,

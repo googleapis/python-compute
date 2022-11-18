@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class InstanceTemplatesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[InstanceTemplatesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, InstanceTemplatesTransport, None] = None,
+        transport: Optional[Union[str, InstanceTemplatesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,10 +424,10 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteInstanceTemplateRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInstanceTemplateRequest, dict]] = None,
         *,
-        project: str = None,
-        instance_template: str = None,
+        project: Optional[str] = None,
+        instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -506,10 +517,10 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteInstanceTemplateRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInstanceTemplateRequest, dict]] = None,
         *,
-        project: str = None,
-        instance_template: str = None,
+        project: Optional[str] = None,
+        instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -623,10 +634,10 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetInstanceTemplateRequest, dict] = None,
+        request: Optional[Union[compute.GetInstanceTemplateRequest, dict]] = None,
         *,
-        project: str = None,
-        instance_template: str = None,
+        project: Optional[str] = None,
+        instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -716,10 +727,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyInstanceTemplateRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetIamPolicyInstanceTemplateRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -845,10 +858,10 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertInstanceTemplateRequest, dict] = None,
+        request: Optional[Union[compute.InsertInstanceTemplateRequest, dict]] = None,
         *,
-        project: str = None,
-        instance_template_resource: compute.InstanceTemplate = None,
+        project: Optional[str] = None,
+        instance_template_resource: Optional[compute.InstanceTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -933,10 +946,10 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertInstanceTemplateRequest, dict] = None,
+        request: Optional[Union[compute.InsertInstanceTemplateRequest, dict]] = None,
         *,
-        project: str = None,
-        instance_template_resource: compute.InstanceTemplate = None,
+        project: Optional[str] = None,
+        instance_template_resource: Optional[compute.InstanceTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1045,9 +1058,9 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListInstanceTemplatesRequest, dict] = None,
+        request: Optional[Union[compute.ListInstanceTemplatesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1132,11 +1145,15 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyInstanceTemplateRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetIamPolicyInstanceTemplateRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_policy_request_resource: Optional[
+            compute.GlobalSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1273,11 +1290,15 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsInstanceTemplateRequest, dict] = None,
+        request: Optional[
+            Union[compute.TestIamPermissionsInstanceTemplateRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

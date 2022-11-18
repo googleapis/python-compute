@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -56,7 +67,7 @@ class InterconnectLocationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[InterconnectLocationsTransport]:
         """Returns an appropriate transport class.
 
@@ -309,7 +320,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, InterconnectLocationsTransport, None] = None,
+        transport: Optional[Union[str, InterconnectLocationsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -410,10 +421,10 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetInterconnectLocationRequest, dict] = None,
+        request: Optional[Union[compute.GetInterconnectLocationRequest, dict]] = None,
         *,
-        project: str = None,
-        interconnect_location: str = None,
+        project: Optional[str] = None,
+        interconnect_location: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -507,9 +518,9 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListInterconnectLocationsRequest, dict] = None,
+        request: Optional[Union[compute.ListInterconnectLocationsRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

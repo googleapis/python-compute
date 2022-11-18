@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -53,7 +64,7 @@ class LicenseCodesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[LicenseCodesTransport]:
         """Returns an appropriate transport class.
 
@@ -306,7 +317,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, LicenseCodesTransport, None] = None,
+        transport: Optional[Union[str, LicenseCodesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -407,10 +418,10 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetLicenseCodeRequest, dict] = None,
+        request: Optional[Union[compute.GetLicenseCodeRequest, dict]] = None,
         *,
-        project: str = None,
-        license_code: str = None,
+        project: Optional[str] = None,
+        license_code: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -503,11 +514,15 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsLicenseCodeRequest, dict] = None,
+        request: Optional[
+            Union[compute.TestIamPermissionsLicenseCodeRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

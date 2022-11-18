@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class ImagesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[ImagesTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class ImagesClient(metaclass=ImagesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, ImagesTransport, None] = None,
+        transport: Optional[Union[str, ImagesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,10 +422,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteImageRequest, dict] = None,
+        request: Optional[Union[compute.DeleteImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -498,10 +509,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteImageRequest, dict] = None,
+        request: Optional[Union[compute.DeleteImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -609,11 +620,11 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def deprecate_unary(
         self,
-        request: Union[compute.DeprecateImageRequest, dict] = None,
+        request: Optional[Union[compute.DeprecateImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
-        deprecation_status_resource: compute.DeprecationStatus = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
+        deprecation_status_resource: Optional[compute.DeprecationStatus] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -707,11 +718,11 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def deprecate(
         self,
-        request: Union[compute.DeprecateImageRequest, dict] = None,
+        request: Optional[Union[compute.DeprecateImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
-        deprecation_status_resource: compute.DeprecationStatus = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
+        deprecation_status_resource: Optional[compute.DeprecationStatus] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -829,10 +840,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetImageRequest, dict] = None,
+        request: Optional[Union[compute.GetImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -919,10 +930,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def get_from_family(
         self,
-        request: Union[compute.GetFromFamilyImageRequest, dict] = None,
+        request: Optional[Union[compute.GetFromFamilyImageRequest, dict]] = None,
         *,
-        project: str = None,
-        family: str = None,
+        project: Optional[str] = None,
+        family: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1012,10 +1023,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyImageRequest, dict] = None,
+        request: Optional[Union[compute.GetIamPolicyImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1141,10 +1152,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertImageRequest, dict] = None,
+        request: Optional[Union[compute.InsertImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image_resource: compute.Image = None,
+        project: Optional[str] = None,
+        image_resource: Optional[compute.Image] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1224,10 +1235,10 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertImageRequest, dict] = None,
+        request: Optional[Union[compute.InsertImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image_resource: compute.Image = None,
+        project: Optional[str] = None,
+        image_resource: Optional[compute.Image] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1331,9 +1342,9 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListImagesRequest, dict] = None,
+        request: Optional[Union[compute.ListImagesRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1423,11 +1434,11 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchImageRequest, dict] = None,
+        request: Optional[Union[compute.PatchImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
-        image_resource: compute.Image = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
+        image_resource: Optional[compute.Image] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1520,11 +1531,11 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchImageRequest, dict] = None,
+        request: Optional[Union[compute.PatchImageRequest, dict]] = None,
         *,
-        project: str = None,
-        image: str = None,
-        image_resource: compute.Image = None,
+        project: Optional[str] = None,
+        image: Optional[str] = None,
+        image_resource: Optional[compute.Image] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1641,11 +1652,13 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyImageRequest, dict] = None,
+        request: Optional[Union[compute.SetIamPolicyImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_policy_request_resource: Optional[
+            compute.GlobalSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1782,11 +1795,13 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def set_labels_unary(
         self,
-        request: Union[compute.SetLabelsImageRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1885,11 +1900,13 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def set_labels(
         self,
-        request: Union[compute.SetLabelsImageRequest, dict] = None,
+        request: Optional[Union[compute.SetLabelsImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_labels_request_resource: Optional[
+            compute.GlobalSetLabelsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2012,11 +2029,13 @@ class ImagesClient(metaclass=ImagesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Union[compute.TestIamPermissionsImageRequest, dict] = None,
+        request: Optional[Union[compute.TestIamPermissionsImageRequest, dict]] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

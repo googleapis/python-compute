@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class RegionInstanceGroupsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionInstanceGroupsTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionInstanceGroupsTransport, None] = None,
+        transport: Optional[Union[str, RegionInstanceGroupsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,11 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        instance_group: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -526,10 +537,10 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionInstanceGroupsRequest, dict] = None,
+        request: Optional[Union[compute.ListRegionInstanceGroupsRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -629,12 +640,16 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def list_instances(
         self,
-        request: Union[compute.ListInstancesRegionInstanceGroupsRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListInstancesRegionInstanceGroupsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        instance_group: str = None,
-        region_instance_groups_list_instances_request_resource: compute.RegionInstanceGroupsListInstancesRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        region_instance_groups_list_instances_request_resource: Optional[
+            compute.RegionInstanceGroupsListInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -761,12 +776,16 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def set_named_ports_unary(
         self,
-        request: Union[compute.SetNamedPortsRegionInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetNamedPortsRegionInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        instance_group: str = None,
-        region_instance_groups_set_named_ports_request_resource: compute.RegionInstanceGroupsSetNamedPortsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        region_instance_groups_set_named_ports_request_resource: Optional[
+            compute.RegionInstanceGroupsSetNamedPortsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -880,12 +899,16 @@ class RegionInstanceGroupsClient(metaclass=RegionInstanceGroupsClientMeta):
 
     def set_named_ports(
         self,
-        request: Union[compute.SetNamedPortsRegionInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetNamedPortsRegionInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        instance_group: str = None,
-        region_instance_groups_set_named_ports_request_resource: compute.RegionInstanceGroupsSetNamedPortsRequest = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        region_instance_groups_set_named_ports_request_resource: Optional[
+            compute.RegionInstanceGroupsSetNamedPortsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

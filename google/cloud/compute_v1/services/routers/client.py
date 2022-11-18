@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -57,7 +68,7 @@ class RoutersClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RoutersTransport]:
         """Returns an appropriate transport class.
 
@@ -310,7 +321,7 @@ class RoutersClient(metaclass=RoutersClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RoutersTransport, None] = None,
+        transport: Optional[Union[str, RoutersTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -411,9 +422,9 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListRoutersRequest, dict] = None,
+        request: Optional[Union[compute.AggregatedListRoutersRequest, dict]] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -497,11 +508,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRouterRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -595,11 +606,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRouterRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -718,11 +729,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRouterRequest, dict] = None,
+        request: Optional[Union[compute.GetRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -818,11 +829,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def get_nat_mapping_info(
         self,
-        request: Union[compute.GetNatMappingInfoRoutersRequest, dict] = None,
+        request: Optional[Union[compute.GetNatMappingInfoRoutersRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -931,11 +942,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def get_router_status(
         self,
-        request: Union[compute.GetRouterStatusRouterRequest, dict] = None,
+        request: Optional[Union[compute.GetRouterStatusRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1027,11 +1038,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRouterRequest, dict] = None,
+        request: Optional[Union[compute.InsertRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1123,11 +1134,11 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRouterRequest, dict] = None,
+        request: Optional[Union[compute.InsertRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1244,10 +1255,10 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRoutersRequest, dict] = None,
+        request: Optional[Union[compute.ListRoutersRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1343,12 +1354,12 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchRouterRequest, dict] = None,
+        request: Optional[Union[compute.PatchRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1450,12 +1461,12 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchRouterRequest, dict] = None,
+        request: Optional[Union[compute.PatchRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1582,12 +1593,12 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def preview(
         self,
-        request: Union[compute.PreviewRouterRequest, dict] = None,
+        request: Optional[Union[compute.PreviewRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1686,12 +1697,12 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def update_unary(
         self,
-        request: Union[compute.UpdateRouterRequest, dict] = None,
+        request: Optional[Union[compute.UpdateRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1797,12 +1808,12 @@ class RoutersClient(metaclass=RoutersClientMeta):
 
     def update(
         self,
-        request: Union[compute.UpdateRouterRequest, dict] = None,
+        request: Optional[Union[compute.UpdateRouterRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        router: str = None,
-        router_resource: compute.Router = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        router: Optional[str] = None,
+        router_resource: Optional[compute.Router] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

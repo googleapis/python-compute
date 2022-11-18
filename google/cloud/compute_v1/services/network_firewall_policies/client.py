@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class NetworkFirewallPoliciesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[NetworkFirewallPoliciesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, NetworkFirewallPoliciesTransport, None] = None,
+        transport: Optional[Union[str, NetworkFirewallPoliciesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,15 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def add_association_unary(
         self,
-        request: Union[compute.AddAssociationNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddAssociationNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_association_resource: compute.FirewallPolicyAssociation = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_association_resource: Optional[
+            compute.FirewallPolicyAssociation
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -516,11 +531,15 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def add_association(
         self,
-        request: Union[compute.AddAssociationNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddAssociationNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_association_resource: compute.FirewallPolicyAssociation = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_association_resource: Optional[
+            compute.FirewallPolicyAssociation
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -643,11 +662,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def add_rule_unary(
         self,
-        request: Union[compute.AddRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_rule_resource: compute.FirewallPolicyRule = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -743,11 +764,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def add_rule(
         self,
-        request: Union[compute.AddRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.AddRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_rule_resource: compute.FirewallPolicyRule = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -867,10 +890,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def clone_rules_unary(
         self,
-        request: Union[compute.CloneRulesNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.CloneRulesNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -957,10 +982,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def clone_rules(
         self,
-        request: Union[compute.CloneRulesNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.CloneRulesNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1071,10 +1098,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1161,10 +1190,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def delete(
         self,
-        request: Union[compute.DeleteNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1275,10 +1306,10 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def get(
         self,
-        request: Union[compute.GetNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[Union[compute.GetNetworkFirewallPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1363,10 +1394,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def get_association(
         self,
-        request: Union[compute.GetAssociationNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetAssociationNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1451,10 +1484,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def get_iam_policy(
         self,
-        request: Union[compute.GetIamPolicyNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetIamPolicyNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1580,10 +1615,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def get_rule(
         self,
-        request: Union[compute.GetRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.GetRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1672,10 +1709,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def insert_unary(
         self,
-        request: Union[compute.InsertNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy_resource: compute.FirewallPolicy = None,
+        project: Optional[str] = None,
+        firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1756,10 +1795,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def insert(
         self,
-        request: Union[compute.InsertNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy_resource: compute.FirewallPolicy = None,
+        project: Optional[str] = None,
+        firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1864,9 +1905,11 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def list(
         self,
-        request: Union[compute.ListNetworkFirewallPoliciesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListNetworkFirewallPoliciesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1950,11 +1993,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def patch_unary(
         self,
-        request: Union[compute.PatchNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_resource: compute.FirewallPolicy = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2049,11 +2094,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def patch(
         self,
-        request: Union[compute.PatchNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_resource: compute.FirewallPolicy = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2172,11 +2219,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def patch_rule_unary(
         self,
-        request: Union[compute.PatchRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_rule_resource: compute.FirewallPolicyRule = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2272,11 +2321,13 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def patch_rule(
         self,
-        request: Union[compute.PatchRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.PatchRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
-        firewall_policy_rule_resource: compute.FirewallPolicyRule = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
+        firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2396,12 +2447,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def remove_association_unary(
         self,
-        request: Union[
-            compute.RemoveAssociationNetworkFirewallPolicyRequest, dict
+        request: Optional[
+            Union[compute.RemoveAssociationNetworkFirewallPolicyRequest, dict]
         ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2491,12 +2542,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def remove_association(
         self,
-        request: Union[
-            compute.RemoveAssociationNetworkFirewallPolicyRequest, dict
+        request: Optional[
+            Union[compute.RemoveAssociationNetworkFirewallPolicyRequest, dict]
         ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2610,10 +2661,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def remove_rule_unary(
         self,
-        request: Union[compute.RemoveRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.RemoveRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2700,10 +2753,12 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def remove_rule(
         self,
-        request: Union[compute.RemoveRuleNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.RemoveRuleNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        firewall_policy: str = None,
+        project: Optional[str] = None,
+        firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2814,11 +2869,15 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def set_iam_policy(
         self,
-        request: Union[compute.SetIamPolicyNetworkFirewallPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetIamPolicyNetworkFirewallPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        global_set_policy_request_resource: Optional[
+            compute.GlobalSetPolicyRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -2955,13 +3014,15 @@ class NetworkFirewallPoliciesClient(metaclass=NetworkFirewallPoliciesClientMeta)
 
     def test_iam_permissions(
         self,
-        request: Union[
-            compute.TestIamPermissionsNetworkFirewallPolicyRequest, dict
+        request: Optional[
+            Union[compute.TestIamPermissionsNetworkFirewallPolicyRequest, dict]
         ] = None,
         *,
-        project: str = None,
-        resource: str = None,
-        test_permissions_request_resource: compute.TestPermissionsRequest = None,
+        project: Optional[str] = None,
+        resource: Optional[str] = None,
+        test_permissions_request_resource: Optional[
+            compute.TestPermissionsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

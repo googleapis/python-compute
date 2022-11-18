@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -56,7 +67,7 @@ class RegionOperationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionOperationsTransport]:
         """Returns an appropriate transport class.
 
@@ -309,7 +320,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionOperationsTransport, None] = None,
+        transport: Optional[Union[str, RegionOperationsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -410,11 +421,11 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionOperationRequest, dict] = None,
+        request: Optional[Union[compute.DeleteRegionOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -511,11 +522,11 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionOperationRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -624,10 +635,10 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionOperationsRequest, dict] = None,
+        request: Optional[Union[compute.ListRegionOperationsRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -725,11 +736,11 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
 
     def wait(
         self,
-        request: Union[compute.WaitRegionOperationRequest, dict] = None,
+        request: Optional[Union[compute.WaitRegionOperationRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        operation: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -58,7 +69,7 @@ class RegionInstancesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionInstancesTransport]:
         """Returns an appropriate transport class.
 
@@ -311,7 +322,7 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionInstancesTransport, None] = None,
+        transport: Optional[Union[str, RegionInstancesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -412,11 +423,13 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
 
     def bulk_insert_unary(
         self,
-        request: Union[compute.BulkInsertRegionInstanceRequest, dict] = None,
+        request: Optional[Union[compute.BulkInsertRegionInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        bulk_insert_instance_resource_resource: compute.BulkInsertInstanceResource = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        bulk_insert_instance_resource_resource: Optional[
+            compute.BulkInsertInstanceResource
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -515,11 +528,13 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
 
     def bulk_insert(
         self,
-        request: Union[compute.BulkInsertRegionInstanceRequest, dict] = None,
+        request: Optional[Union[compute.BulkInsertRegionInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        bulk_insert_instance_resource_resource: compute.BulkInsertInstanceResource = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        bulk_insert_instance_resource_resource: Optional[
+            compute.BulkInsertInstanceResource
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

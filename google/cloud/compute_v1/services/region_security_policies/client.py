@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class RegionSecurityPoliciesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[RegionSecurityPoliciesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, RegionSecurityPoliciesTransport, None] = None,
+        transport: Optional[Union[str, RegionSecurityPoliciesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,11 +424,13 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionSecurityPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -514,11 +527,13 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.DeleteRegionSecurityPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -640,11 +655,11 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[Union[compute.GetRegionSecurityPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -744,11 +759,13 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionSecurityPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy_resource: compute.SecurityPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -843,11 +860,13 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[
+            Union[compute.InsertRegionSecurityPolicyRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy_resource: compute.SecurityPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -967,10 +986,12 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListRegionSecurityPoliciesRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListRegionSecurityPoliciesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        region: str = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1068,12 +1089,12 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def patch_unary(
         self,
-        request: Union[compute.PatchRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionSecurityPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy: str = None,
-        security_policy_resource: compute.SecurityPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy: Optional[str] = None,
+        security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1184,12 +1205,12 @@ class RegionSecurityPoliciesClient(metaclass=RegionSecurityPoliciesClientMeta):
 
     def patch(
         self,
-        request: Union[compute.PatchRegionSecurityPolicyRequest, dict] = None,
+        request: Optional[Union[compute.PatchRegionSecurityPolicyRequest, dict]] = None,
         *,
-        project: str = None,
-        region: str = None,
-        security_policy: str = None,
-        security_policy_resource: compute.SecurityPolicy = None,
+        project: Optional[str] = None,
+        region: Optional[str] = None,
+        security_policy: Optional[str] = None,
+        security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

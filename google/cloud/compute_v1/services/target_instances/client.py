@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class TargetInstancesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[TargetInstancesTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, TargetInstancesTransport, None] = None,
+        transport: Optional[Union[str, TargetInstancesTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,9 +424,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListTargetInstancesRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListTargetInstancesRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -498,11 +511,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteTargetInstanceRequest, dict] = None,
+        request: Optional[Union[compute.DeleteTargetInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        target_instance: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -599,11 +612,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteTargetInstanceRequest, dict] = None,
+        request: Optional[Union[compute.DeleteTargetInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        target_instance: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -725,11 +738,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetTargetInstanceRequest, dict] = None,
+        request: Optional[Union[compute.GetTargetInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        target_instance: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -834,11 +847,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertTargetInstanceRequest, dict] = None,
+        request: Optional[Union[compute.InsertTargetInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        target_instance_resource: compute.TargetInstance = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        target_instance_resource: Optional[compute.TargetInstance] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -933,11 +946,11 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertTargetInstanceRequest, dict] = None,
+        request: Optional[Union[compute.InsertTargetInstanceRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        target_instance_resource: compute.TargetInstance = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        target_instance_resource: Optional[compute.TargetInstance] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1057,10 +1070,10 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListTargetInstancesRequest, dict] = None,
+        request: Optional[Union[compute.ListTargetInstancesRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),

@@ -17,7 +17,18 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -59,7 +70,7 @@ class InstanceGroupsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[InstanceGroupsTransport]:
         """Returns an appropriate transport class.
 
@@ -312,7 +323,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, InstanceGroupsTransport, None] = None,
+        transport: Optional[Union[str, InstanceGroupsTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -413,12 +424,14 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def add_instances_unary(
         self,
-        request: Union[compute.AddInstancesInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.AddInstancesInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_add_instances_request_resource: compute.InstanceGroupsAddInstancesRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_add_instances_request_resource: Optional[
+            compute.InstanceGroupsAddInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -534,12 +547,14 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def add_instances(
         self,
-        request: Union[compute.AddInstancesInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.AddInstancesInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_add_instances_request_resource: compute.InstanceGroupsAddInstancesRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_add_instances_request_resource: Optional[
+            compute.InstanceGroupsAddInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -680,9 +695,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def aggregated_list(
         self,
-        request: Union[compute.AggregatedListInstanceGroupsRequest, dict] = None,
+        request: Optional[
+            Union[compute.AggregatedListInstanceGroupsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
+        project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -766,11 +783,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def delete_unary(
         self,
-        request: Union[compute.DeleteInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -870,11 +887,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def delete(
         self,
-        request: Union[compute.DeleteInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.DeleteInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -999,11 +1016,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def get(
         self,
-        request: Union[compute.GetInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.GetInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1114,11 +1131,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def insert_unary(
         self,
-        request: Union[compute.InsertInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.InsertInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group_resource: compute.InstanceGroup = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group_resource: Optional[compute.InstanceGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1213,11 +1230,11 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def insert(
         self,
-        request: Union[compute.InsertInstanceGroupRequest, dict] = None,
+        request: Optional[Union[compute.InsertInstanceGroupRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group_resource: compute.InstanceGroup = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group_resource: Optional[compute.InstanceGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1337,10 +1354,10 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def list(
         self,
-        request: Union[compute.ListInstanceGroupsRequest, dict] = None,
+        request: Optional[Union[compute.ListInstanceGroupsRequest, dict]] = None,
         *,
-        project: str = None,
-        zone: str = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1441,12 +1458,16 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def list_instances(
         self,
-        request: Union[compute.ListInstancesInstanceGroupsRequest, dict] = None,
+        request: Optional[
+            Union[compute.ListInstancesInstanceGroupsRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_list_instances_request_resource: compute.InstanceGroupsListInstancesRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_list_instances_request_resource: Optional[
+            compute.InstanceGroupsListInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1573,12 +1594,16 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def remove_instances_unary(
         self,
-        request: Union[compute.RemoveInstancesInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.RemoveInstancesInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_remove_instances_request_resource: compute.InstanceGroupsRemoveInstancesRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_remove_instances_request_resource: Optional[
+            compute.InstanceGroupsRemoveInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1696,12 +1721,16 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def remove_instances(
         self,
-        request: Union[compute.RemoveInstancesInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.RemoveInstancesInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_remove_instances_request_resource: compute.InstanceGroupsRemoveInstancesRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_remove_instances_request_resource: Optional[
+            compute.InstanceGroupsRemoveInstancesRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1844,12 +1873,16 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def set_named_ports_unary(
         self,
-        request: Union[compute.SetNamedPortsInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetNamedPortsInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_set_named_ports_request_resource: compute.InstanceGroupsSetNamedPortsRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_set_named_ports_request_resource: Optional[
+            compute.InstanceGroupsSetNamedPortsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -1963,12 +1996,16 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
 
     def set_named_ports(
         self,
-        request: Union[compute.SetNamedPortsInstanceGroupRequest, dict] = None,
+        request: Optional[
+            Union[compute.SetNamedPortsInstanceGroupRequest, dict]
+        ] = None,
         *,
-        project: str = None,
-        zone: str = None,
-        instance_group: str = None,
-        instance_groups_set_named_ports_request_resource: compute.InstanceGroupsSetNamedPortsRequest = None,
+        project: Optional[str] = None,
+        zone: Optional[str] = None,
+        instance_group: Optional[str] = None,
+        instance_groups_set_named_ports_request_resource: Optional[
+            compute.InstanceGroupsSetNamedPortsRequest
+        ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
