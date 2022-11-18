@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class PublicAdvertisedPrefixesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[PublicAdvertisedPrefixesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, PublicAdvertisedPrefixesTransport]] = None,
+        transport: Union[str, PublicAdvertisedPrefixesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,14 +413,12 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeletePublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.DeletePublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix: Optional[str] = None,
+        project: str = None,
+        public_advertised_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified PublicAdvertisedPrefix
@@ -516,14 +503,12 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeletePublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.DeletePublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix: Optional[str] = None,
+        project: str = None,
+        public_advertised_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified PublicAdvertisedPrefix
@@ -632,14 +617,12 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def get(
         self,
-        request: Optional[
-            Union[compute.GetPublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.GetPublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix: Optional[str] = None,
+        project: str = None,
+        public_advertised_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PublicAdvertisedPrefix:
         r"""Returns the specified PublicAdvertisedPrefix
@@ -729,16 +712,12 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertPublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.InsertPublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix_resource: Optional[
-            compute.PublicAdvertisedPrefix
-        ] = None,
+        project: str = None,
+        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a PublicAdvertisedPrefix in the specified
@@ -820,16 +799,12 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertPublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.InsertPublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix_resource: Optional[
-            compute.PublicAdvertisedPrefix
-        ] = None,
+        project: str = None,
+        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a PublicAdvertisedPrefix in the specified
@@ -935,13 +910,11 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def list(
         self,
-        request: Optional[
-            Union[compute.ListPublicAdvertisedPrefixesRequest, dict]
-        ] = None,
+        request: Union[compute.ListPublicAdvertisedPrefixesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the PublicAdvertisedPrefixes for a project.
@@ -1022,17 +995,13 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def patch_unary(
         self,
-        request: Optional[
-            Union[compute.PatchPublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.PatchPublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix: Optional[str] = None,
-        public_advertised_prefix_resource: Optional[
-            compute.PublicAdvertisedPrefix
-        ] = None,
+        project: str = None,
+        public_advertised_prefix: str = None,
+        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified Router resource with the data
@@ -1131,17 +1100,13 @@ class PublicAdvertisedPrefixesClient(metaclass=PublicAdvertisedPrefixesClientMet
 
     def patch(
         self,
-        request: Optional[
-            Union[compute.PatchPublicAdvertisedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.PatchPublicAdvertisedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_advertised_prefix: Optional[str] = None,
-        public_advertised_prefix_resource: Optional[
-            compute.PublicAdvertisedPrefix
-        ] = None,
+        project: str = None,
+        public_advertised_prefix: str = None,
+        public_advertised_prefix_resource: compute.PublicAdvertisedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified Router resource with the data

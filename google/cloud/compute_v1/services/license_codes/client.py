@@ -16,18 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -64,7 +53,7 @@ class LicenseCodesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[LicenseCodesTransport]:
         """Returns an appropriate transport class.
 
@@ -317,7 +306,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, LicenseCodesTransport]] = None,
+        transport: Union[str, LicenseCodesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -418,12 +407,12 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetLicenseCodeRequest, dict]] = None,
+        request: Union[compute.GetLicenseCodeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        license_code: Optional[str] = None,
+        project: str = None,
+        license_code: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.LicenseCode:
         r"""Return a specified license code. License codes are mirrored
@@ -514,17 +503,13 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsLicenseCodeRequest, dict]
-        ] = None,
+        request: Union[compute.TestIamPermissionsLicenseCodeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the specified resource.

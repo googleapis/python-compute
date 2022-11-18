@@ -371,10 +371,10 @@ class RoutersRestTransport(RoutersTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -466,7 +466,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.AggregatedListRoutersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RouterAggregatedList:
             r"""Call the aggregated list method over HTTP.
@@ -553,7 +553,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.DeleteRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -654,7 +654,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.GetRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Router:
             r"""Call the get method over HTTP.
@@ -743,7 +743,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.GetNatMappingInfoRoutersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.VmEndpointNatMappingsList:
             r"""Call the get nat mapping info method over HTTP.
@@ -834,7 +834,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.GetRouterStatusRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RouterStatusResponse:
             r"""Call the get router status method over HTTP.
@@ -923,7 +923,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.InsertRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -1033,7 +1033,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.ListRoutersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RouterList:
             r"""Call the list method over HTTP.
@@ -1119,7 +1119,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.PatchRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -1229,7 +1229,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.PreviewRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RoutersPreviewResponse:
             r"""Call the preview method over HTTP.
@@ -1325,7 +1325,7 @@ class RoutersRestTransport(RoutersTransport):
             request: compute.UpdateRouterRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the update method over HTTP.

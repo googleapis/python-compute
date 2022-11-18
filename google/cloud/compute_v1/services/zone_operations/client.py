@@ -16,18 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -67,7 +56,7 @@ class ZoneOperationsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[ZoneOperationsTransport]:
         """Returns an appropriate transport class.
 
@@ -320,7 +309,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, ZoneOperationsTransport]] = None,
+        transport: Union[str, ZoneOperationsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -421,13 +410,13 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteZoneOperationRequest, dict]] = None,
+        request: Union[compute.DeleteZoneOperationRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        operation: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        operation: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteZoneOperationResponse:
         r"""Deletes the specified zone-specific Operations
@@ -522,13 +511,13 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetZoneOperationRequest, dict]] = None,
+        request: Union[compute.GetZoneOperationRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        operation: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        operation: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified zone-specific Operations
@@ -635,12 +624,12 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListZoneOperationsRequest, dict]] = None,
+        request: Union[compute.ListZoneOperationsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of Operation resources contained
@@ -736,13 +725,13 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
 
     def wait(
         self,
-        request: Optional[Union[compute.WaitZoneOperationRequest, dict]] = None,
+        request: Union[compute.WaitZoneOperationRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        operation: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        operation: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Waits for the specified Operation resource to return as ``DONE``

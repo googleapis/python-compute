@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class GlobalPublicDelegatedPrefixesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[GlobalPublicDelegatedPrefixesTransport]:
         """Returns an appropriate transport class.
 
@@ -325,7 +314,7 @@ class GlobalPublicDelegatedPrefixesClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, GlobalPublicDelegatedPrefixesTransport]] = None,
+        transport: Union[str, GlobalPublicDelegatedPrefixesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -426,14 +415,12 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix: Optional[str] = None,
+        project: str = None,
+        public_delegated_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified global PublicDelegatedPrefix.
@@ -518,14 +505,12 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix: Optional[str] = None,
+        project: str = None,
+        public_delegated_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified global PublicDelegatedPrefix.
@@ -634,14 +619,12 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def get(
         self,
-        request: Optional[
-            Union[compute.GetGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.GetGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix: Optional[str] = None,
+        project: str = None,
+        public_delegated_prefix: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PublicDelegatedPrefix:
         r"""Returns the specified global PublicDelegatedPrefix
@@ -734,16 +717,12 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.InsertGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix_resource: Optional[
-            compute.PublicDelegatedPrefix
-        ] = None,
+        project: str = None,
+        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a global PublicDelegatedPrefix in the
@@ -825,16 +804,12 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.InsertGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix_resource: Optional[
-            compute.PublicDelegatedPrefix
-        ] = None,
+        project: str = None,
+        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a global PublicDelegatedPrefix in the
@@ -940,13 +915,11 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def list(
         self,
-        request: Optional[
-            Union[compute.ListGlobalPublicDelegatedPrefixesRequest, dict]
-        ] = None,
+        request: Union[compute.ListGlobalPublicDelegatedPrefixesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the global PublicDelegatedPrefixes for a
@@ -1028,17 +1001,13 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def patch_unary(
         self,
-        request: Optional[
-            Union[compute.PatchGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.PatchGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix: Optional[str] = None,
-        public_delegated_prefix_resource: Optional[
-            compute.PublicDelegatedPrefix
-        ] = None,
+        project: str = None,
+        public_delegated_prefix: str = None,
+        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified global PublicDelegatedPrefix
@@ -1137,17 +1106,13 @@ class GlobalPublicDelegatedPrefixesClient(
 
     def patch(
         self,
-        request: Optional[
-            Union[compute.PatchGlobalPublicDelegatedPrefixeRequest, dict]
-        ] = None,
+        request: Union[compute.PatchGlobalPublicDelegatedPrefixeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        public_delegated_prefix: Optional[str] = None,
-        public_delegated_prefix_resource: Optional[
-            compute.PublicDelegatedPrefix
-        ] = None,
+        project: str = None,
+        public_delegated_prefix: str = None,
+        public_delegated_prefix_resource: compute.PublicDelegatedPrefix = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified global PublicDelegatedPrefix

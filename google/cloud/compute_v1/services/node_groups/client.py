@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -68,7 +57,7 @@ class NodeGroupsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[NodeGroupsTransport]:
         """Returns an appropriate transport class.
 
@@ -321,7 +310,7 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, NodeGroupsTransport]] = None,
+        transport: Union[str, NodeGroupsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -422,16 +411,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def add_nodes_unary(
         self,
-        request: Optional[Union[compute.AddNodesNodeGroupRequest, dict]] = None,
+        request: Union[compute.AddNodesNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_add_nodes_request_resource: Optional[
-            compute.NodeGroupsAddNodesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_add_nodes_request_resource: compute.NodeGroupsAddNodesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds specified number of nodes to the node group.
@@ -535,16 +522,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def add_nodes(
         self,
-        request: Optional[Union[compute.AddNodesNodeGroupRequest, dict]] = None,
+        request: Union[compute.AddNodesNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_add_nodes_request_resource: Optional[
-            compute.NodeGroupsAddNodesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_add_nodes_request_resource: compute.NodeGroupsAddNodesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds specified number of nodes to the node group.
@@ -673,11 +658,11 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[Union[compute.AggregatedListNodeGroupsRequest, dict]] = None,
+        request: Union[compute.AggregatedListNodeGroupsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node groups. Note:
@@ -760,13 +745,13 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteNodeGroupRequest, dict]] = None,
+        request: Union[compute.DeleteNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NodeGroup resource.
@@ -861,13 +846,13 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteNodeGroupRequest, dict]] = None,
+        request: Union[compute.DeleteNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified NodeGroup resource.
@@ -987,16 +972,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def delete_nodes_unary(
         self,
-        request: Optional[Union[compute.DeleteNodesNodeGroupRequest, dict]] = None,
+        request: Union[compute.DeleteNodesNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_delete_nodes_request_resource: Optional[
-            compute.NodeGroupsDeleteNodesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_delete_nodes_request_resource: compute.NodeGroupsDeleteNodesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes specified nodes from the node group.
@@ -1102,16 +1085,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def delete_nodes(
         self,
-        request: Optional[Union[compute.DeleteNodesNodeGroupRequest, dict]] = None,
+        request: Union[compute.DeleteNodesNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_delete_nodes_request_resource: Optional[
-            compute.NodeGroupsDeleteNodesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_delete_nodes_request_resource: compute.NodeGroupsDeleteNodesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes specified nodes from the node group.
@@ -1242,13 +1223,13 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetNodeGroupRequest, dict]] = None,
+        request: Union[compute.GetNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NodeGroup:
         r"""Returns the specified NodeGroup. Get a list of
@@ -1352,13 +1333,13 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def get_iam_policy(
         self,
-        request: Optional[Union[compute.GetIamPolicyNodeGroupRequest, dict]] = None,
+        request: Union[compute.GetIamPolicyNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        resource: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        resource: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -1492,14 +1473,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertNodeGroupRequest, dict]] = None,
+        request: Union[compute.InsertNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        initial_node_count: Optional[int] = None,
-        node_group_resource: Optional[compute.NodeGroup] = None,
+        project: str = None,
+        zone: str = None,
+        initial_node_count: int = None,
+        node_group_resource: compute.NodeGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a NodeGroup resource in the specified project
@@ -1603,14 +1584,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertNodeGroupRequest, dict]] = None,
+        request: Union[compute.InsertNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        initial_node_count: Optional[int] = None,
-        node_group_resource: Optional[compute.NodeGroup] = None,
+        project: str = None,
+        zone: str = None,
+        initial_node_count: int = None,
+        node_group_resource: compute.NodeGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a NodeGroup resource in the specified project
@@ -1739,12 +1720,12 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListNodeGroupsRequest, dict]] = None,
+        request: Union[compute.ListNodeGroupsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of node groups available to the
@@ -1841,13 +1822,13 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def list_nodes(
         self,
-        request: Optional[Union[compute.ListNodesNodeGroupsRequest, dict]] = None,
+        request: Union[compute.ListNodesNodeGroupsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListNodesPager:
         r"""Lists nodes in the node group.
@@ -1952,14 +1933,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def patch_unary(
         self,
-        request: Optional[Union[compute.PatchNodeGroupRequest, dict]] = None,
+        request: Union[compute.PatchNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_group_resource: Optional[compute.NodeGroup] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_group_resource: compute.NodeGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified node group.
@@ -2061,14 +2042,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def patch(
         self,
-        request: Optional[Union[compute.PatchNodeGroupRequest, dict]] = None,
+        request: Union[compute.PatchNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_group_resource: Optional[compute.NodeGroup] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_group_resource: compute.NodeGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified node group.
@@ -2195,14 +2176,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def set_iam_policy(
         self,
-        request: Optional[Union[compute.SetIamPolicyNodeGroupRequest, dict]] = None,
+        request: Union[compute.SetIamPolicyNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        resource: Optional[str] = None,
-        zone_set_policy_request_resource: Optional[compute.ZoneSetPolicyRequest] = None,
+        project: str = None,
+        zone: str = None,
+        resource: str = None,
+        zone_set_policy_request_resource: compute.ZoneSetPolicyRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -2347,16 +2328,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def set_node_template_unary(
         self,
-        request: Optional[Union[compute.SetNodeTemplateNodeGroupRequest, dict]] = None,
+        request: Union[compute.SetNodeTemplateNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_set_node_template_request_resource: Optional[
-            compute.NodeGroupsSetNodeTemplateRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_set_node_template_request_resource: compute.NodeGroupsSetNodeTemplateRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the node template of the node group.
@@ -2462,16 +2441,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def set_node_template(
         self,
-        request: Optional[Union[compute.SetNodeTemplateNodeGroupRequest, dict]] = None,
+        request: Union[compute.SetNodeTemplateNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        node_group: Optional[str] = None,
-        node_groups_set_node_template_request_resource: Optional[
-            compute.NodeGroupsSetNodeTemplateRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        node_group: str = None,
+        node_groups_set_node_template_request_resource: compute.NodeGroupsSetNodeTemplateRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the node template of the node group.
@@ -2602,18 +2579,14 @@ class NodeGroupsClient(metaclass=NodeGroupsClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsNodeGroupRequest, dict]
-        ] = None,
+        request: Union[compute.TestIamPermissionsNodeGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

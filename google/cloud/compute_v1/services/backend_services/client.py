@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class BackendServicesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[BackendServicesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, BackendServicesTransport]] = None,
+        transport: Union[str, BackendServicesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,15 +413,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def add_signed_url_key_unary(
         self,
-        request: Optional[
-            Union[compute.AddSignedUrlKeyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.AddSignedUrlKeyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
+        project: str = None,
+        backend_service: str = None,
+        signed_url_key_resource: compute.SignedUrlKey = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds a key for validating requests with signed URLs
@@ -527,15 +514,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def add_signed_url_key(
         self,
-        request: Optional[
-            Union[compute.AddSignedUrlKeyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.AddSignedUrlKeyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
+        project: str = None,
+        backend_service: str = None,
+        signed_url_key_resource: compute.SignedUrlKey = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds a key for validating requests with signed URLs
@@ -654,13 +639,11 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[
-            Union[compute.AggregatedListBackendServicesRequest, dict]
-        ] = None,
+        request: Union[compute.AggregatedListBackendServicesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all BackendService resources,
@@ -746,12 +729,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteBackendServiceRequest, dict]] = None,
+        request: Union[compute.DeleteBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
+        project: str = None,
+        backend_service: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified BackendService resource.
@@ -836,12 +819,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteBackendServiceRequest, dict]] = None,
+        request: Union[compute.DeleteBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
+        project: str = None,
+        backend_service: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified BackendService resource.
@@ -950,15 +933,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def delete_signed_url_key_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteSignedUrlKeyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteSignedUrlKeyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        key_name: Optional[str] = None,
+        project: str = None,
+        backend_service: str = None,
+        key_name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a key for validating requests with signed
@@ -1055,15 +1036,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def delete_signed_url_key(
         self,
-        request: Optional[
-            Union[compute.DeleteSignedUrlKeyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteSignedUrlKeyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        key_name: Optional[str] = None,
+        project: str = None,
+        backend_service: str = None,
+        key_name: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes a key for validating requests with signed
@@ -1184,12 +1163,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetBackendServiceRequest, dict]] = None,
+        request: Union[compute.GetBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
+        project: str = None,
+        backend_service: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.BackendService:
         r"""Returns the specified BackendService resource. Gets a
@@ -1288,15 +1267,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def get_health(
         self,
-        request: Optional[Union[compute.GetHealthBackendServiceRequest, dict]] = None,
+        request: Union[compute.GetHealthBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        resource_group_reference_resource: Optional[
-            compute.ResourceGroupReference
-        ] = None,
+        project: str = None,
+        backend_service: str = None,
+        resource_group_reference_resource: compute.ResourceGroupReference = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.BackendServiceGroupHealth:
         r"""Gets the most recent health check results for this
@@ -1392,14 +1369,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Optional[
-            Union[compute.GetIamPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.GetIamPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
+        project: str = None,
+        resource: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -1523,12 +1498,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertBackendServiceRequest, dict]] = None,
+        request: Union[compute.InsertBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a BackendService resource in the specified
@@ -1608,12 +1583,12 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertBackendServiceRequest, dict]] = None,
+        request: Union[compute.InsertBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a BackendService resource in the specified
@@ -1717,11 +1692,11 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListBackendServicesRequest, dict]] = None,
+        request: Union[compute.ListBackendServicesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of BackendService resources
@@ -1805,13 +1780,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def patch_unary(
         self,
-        request: Optional[Union[compute.PatchBackendServiceRequest, dict]] = None,
+        request: Union[compute.PatchBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified BackendService resource with
@@ -1907,13 +1882,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def patch(
         self,
-        request: Optional[Union[compute.PatchBackendServiceRequest, dict]] = None,
+        request: Union[compute.PatchBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified BackendService resource with
@@ -2033,17 +2008,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def set_edge_security_policy_unary(
         self,
-        request: Optional[
-            Union[compute.SetEdgeSecurityPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.SetEdgeSecurityPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        security_policy_reference_resource: Optional[
-            compute.SecurityPolicyReference
-        ] = None,
+        project: str = None,
+        backend_service: str = None,
+        security_policy_reference_resource: compute.SecurityPolicyReference = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the edge security policy for the specified
@@ -2142,17 +2113,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def set_edge_security_policy(
         self,
-        request: Optional[
-            Union[compute.SetEdgeSecurityPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.SetEdgeSecurityPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        security_policy_reference_resource: Optional[
-            compute.SecurityPolicyReference
-        ] = None,
+        project: str = None,
+        backend_service: str = None,
+        security_policy_reference_resource: compute.SecurityPolicyReference = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the edge security policy for the specified
@@ -2275,17 +2242,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Optional[
-            Union[compute.SetIamPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.SetIamPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        global_set_policy_request_resource: Optional[
-            compute.GlobalSetPolicyRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -2420,17 +2383,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def set_security_policy_unary(
         self,
-        request: Optional[
-            Union[compute.SetSecurityPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.SetSecurityPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        security_policy_reference_resource: Optional[
-            compute.SecurityPolicyReference
-        ] = None,
+        project: str = None,
+        backend_service: str = None,
+        security_policy_reference_resource: compute.SecurityPolicyReference = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the Google Cloud Armor security policy for the
@@ -2529,17 +2488,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def set_security_policy(
         self,
-        request: Optional[
-            Union[compute.SetSecurityPolicyBackendServiceRequest, dict]
-        ] = None,
+        request: Union[compute.SetSecurityPolicyBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        security_policy_reference_resource: Optional[
-            compute.SecurityPolicyReference
-        ] = None,
+        project: str = None,
+        backend_service: str = None,
+        security_policy_reference_resource: compute.SecurityPolicyReference = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the Google Cloud Armor security policy for the
@@ -2662,13 +2617,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def update_unary(
         self,
-        request: Optional[Union[compute.UpdateBackendServiceRequest, dict]] = None,
+        request: Union[compute.UpdateBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified BackendService resource with
@@ -2762,13 +2717,13 @@ class BackendServicesClient(metaclass=BackendServicesClientMeta):
 
     def update(
         self,
-        request: Optional[Union[compute.UpdateBackendServiceRequest, dict]] = None,
+        request: Union[compute.UpdateBackendServiceRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        backend_service: Optional[str] = None,
-        backend_service_resource: Optional[compute.BackendService] = None,
+        project: str = None,
+        backend_service: str = None,
+        backend_service_resource: compute.BackendService = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified BackendService resource with

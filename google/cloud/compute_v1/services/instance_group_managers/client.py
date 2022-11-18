@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class InstanceGroupManagersClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[InstanceGroupManagersTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, InstanceGroupManagersTransport]] = None,
+        transport: Union[str, InstanceGroupManagersTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,18 +413,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def abandon_instances_unary(
         self,
-        request: Optional[
-            Union[compute.AbandonInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.AbandonInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_abandon_instances_request_resource: Optional[
-            compute.InstanceGroupManagersAbandonInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_abandon_instances_request_resource: compute.InstanceGroupManagersAbandonInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified instances to be removed from the
@@ -562,18 +549,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def abandon_instances(
         self,
-        request: Optional[
-            Union[compute.AbandonInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.AbandonInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_abandon_instances_request_resource: Optional[
-            compute.InstanceGroupManagersAbandonInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_abandon_instances_request_resource: compute.InstanceGroupManagersAbandonInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified instances to be removed from the
@@ -725,13 +710,11 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[
-            Union[compute.AggregatedListInstanceGroupManagersRequest, dict]
-        ] = None,
+        request: Union[compute.AggregatedListInstanceGroupManagersRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of managed instance groups and
@@ -813,18 +796,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def apply_updates_to_instances_unary(
         self,
-        request: Optional[
-            Union[compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_apply_updates_request_resource: Optional[
-            compute.InstanceGroupManagersApplyUpdatesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_apply_updates_request_resource: compute.InstanceGroupManagersApplyUpdatesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Applies changes to selected instances on the managed
@@ -944,18 +925,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def apply_updates_to_instances(
         self,
-        request: Optional[
-            Union[compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_apply_updates_request_resource: Optional[
-            compute.InstanceGroupManagersApplyUpdatesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_apply_updates_request_resource: compute.InstanceGroupManagersApplyUpdatesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Applies changes to selected instances on the managed
@@ -1100,18 +1079,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def create_instances_unary(
         self,
-        request: Optional[
-            Union[compute.CreateInstancesInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.CreateInstancesInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_create_instances_request_resource: Optional[
-            compute.InstanceGroupManagersCreateInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_create_instances_request_resource: compute.InstanceGroupManagersCreateInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates instances with per-instance configurations in
@@ -1230,18 +1205,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def create_instances(
         self,
-        request: Optional[
-            Union[compute.CreateInstancesInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.CreateInstancesInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_create_instances_request_resource: Optional[
-            compute.InstanceGroupManagersCreateInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_create_instances_request_resource: compute.InstanceGroupManagersCreateInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates instances with per-instance configurations in
@@ -1385,15 +1356,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified managed instance group and all
@@ -1491,15 +1460,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified managed instance group and all
@@ -1622,18 +1589,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete_instances_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteInstancesInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInstancesInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_delete_instances_request_resource: Optional[
-            compute.InstanceGroupManagersDeleteInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_delete_instances_request_resource: compute.InstanceGroupManagersDeleteInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified instances in the managed instance
@@ -1758,18 +1721,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete_instances(
         self,
-        request: Optional[
-            Union[compute.DeleteInstancesInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInstancesInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_delete_instances_request_resource: Optional[
-            compute.InstanceGroupManagersDeleteInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_delete_instances_request_resource: compute.InstanceGroupManagersDeleteInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified instances in the managed instance
@@ -1919,18 +1878,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete_per_instance_configs_unary(
         self,
-        request: Optional[
-            Union[compute.DeletePerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.DeletePerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_delete_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersDeletePerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_delete_per_instance_configs_req_resource: compute.InstanceGroupManagersDeletePerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes selected per-instance configurations for the
@@ -2052,18 +2009,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def delete_per_instance_configs(
         self,
-        request: Optional[
-            Union[compute.DeletePerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.DeletePerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_delete_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersDeletePerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_delete_per_instance_configs_req_resource: compute.InstanceGroupManagersDeletePerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes selected per-instance configurations for the
@@ -2210,13 +2165,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetInstanceGroupManagerRequest, dict]] = None,
+        request: Union[compute.GetInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceGroupManager:
         r"""Returns all of the details about the specified
@@ -2320,15 +2275,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.InsertInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager_resource: compute.InstanceGroupManager = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a managed instance group using the
@@ -2432,15 +2385,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.InsertInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager_resource: compute.InstanceGroupManager = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a managed instance group using the
@@ -2569,12 +2520,12 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListInstanceGroupManagersRequest, dict]] = None,
+        request: Union[compute.ListInstanceGroupManagersRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of managed instance groups that are
@@ -2671,15 +2622,13 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def list_errors(
         self,
-        request: Optional[
-            Union[compute.ListErrorsInstanceGroupManagersRequest, dict]
-        ] = None,
+        request: Union[compute.ListErrorsInstanceGroupManagersRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListErrorsPager:
         r"""Lists all errors thrown by actions on instances for a
@@ -2789,15 +2738,15 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def list_managed_instances(
         self,
-        request: Optional[
-            Union[compute.ListManagedInstancesInstanceGroupManagersRequest, dict]
+        request: Union[
+            compute.ListManagedInstancesInstanceGroupManagersRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListManagedInstancesPager:
         r"""Lists all of the instances in the managed instance group. Each
@@ -2913,15 +2862,15 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def list_per_instance_configs(
         self,
-        request: Optional[
-            Union[compute.ListPerInstanceConfigsInstanceGroupManagersRequest, dict]
+        request: Union[
+            compute.ListPerInstanceConfigsInstanceGroupManagersRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPerInstanceConfigsPager:
         r"""Lists all of the per-instance configurations defined
@@ -3035,14 +2984,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def patch_unary(
         self,
-        request: Optional[Union[compute.PatchInstanceGroupManagerRequest, dict]] = None,
+        request: Union[compute.PatchInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_manager_resource: compute.InstanceGroupManager = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates a managed instance group using the
@@ -3161,14 +3110,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def patch(
         self,
-        request: Optional[Union[compute.PatchInstanceGroupManagerRequest, dict]] = None,
+        request: Union[compute.PatchInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_manager_resource: compute.InstanceGroupManager = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates a managed instance group using the
@@ -3312,18 +3261,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def patch_per_instance_configs_unary(
         self,
-        request: Optional[
-            Union[compute.PatchPerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.PatchPerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_patch_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersPatchPerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_patch_per_instance_configs_req_resource: compute.InstanceGroupManagersPatchPerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts or patches per-instance configurations for
@@ -3447,18 +3394,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def patch_per_instance_configs(
         self,
-        request: Optional[
-            Union[compute.PatchPerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.PatchPerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_patch_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersPatchPerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_patch_per_instance_configs_req_resource: compute.InstanceGroupManagersPatchPerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts or patches per-instance configurations for
@@ -3607,18 +3552,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def recreate_instances_unary(
         self,
-        request: Optional[
-            Union[compute.RecreateInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.RecreateInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_recreate_instances_request_resource: Optional[
-            compute.InstanceGroupManagersRecreateInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_recreate_instances_request_resource: compute.InstanceGroupManagersRecreateInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified VM instances in the managed
@@ -3744,18 +3687,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def recreate_instances(
         self,
-        request: Optional[
-            Union[compute.RecreateInstancesInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.RecreateInstancesInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_recreate_instances_request_resource: Optional[
-            compute.InstanceGroupManagersRecreateInstancesRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_recreate_instances_request_resource: compute.InstanceGroupManagersRecreateInstancesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified VM instances in the managed
@@ -3906,16 +3847,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def resize_unary(
         self,
-        request: Optional[
-            Union[compute.ResizeInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.ResizeInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        size: Optional[int] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        size: int = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Resizes the managed instance group. If you increase
@@ -4042,16 +3981,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def resize(
         self,
-        request: Optional[
-            Union[compute.ResizeInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.ResizeInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        size: Optional[int] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        size: int = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Resizes the managed instance group. If you increase
@@ -4203,18 +4140,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def set_instance_template_unary(
         self,
-        request: Optional[
-            Union[compute.SetInstanceTemplateInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.SetInstanceTemplateInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_set_instance_template_request_resource: Optional[
-            compute.InstanceGroupManagersSetInstanceTemplateRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_set_instance_template_request_resource: compute.InstanceGroupManagersSetInstanceTemplateRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Specifies the instance template to use when creating
@@ -4334,18 +4269,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def set_instance_template(
         self,
-        request: Optional[
-            Union[compute.SetInstanceTemplateInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.SetInstanceTemplateInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_set_instance_template_request_resource: Optional[
-            compute.InstanceGroupManagersSetInstanceTemplateRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_set_instance_template_request_resource: compute.InstanceGroupManagersSetInstanceTemplateRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Specifies the instance template to use when creating
@@ -4490,18 +4423,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def set_target_pools_unary(
         self,
-        request: Optional[
-            Union[compute.SetTargetPoolsInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.SetTargetPoolsInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_set_target_pools_request_resource: Optional[
-            compute.InstanceGroupManagersSetTargetPoolsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_set_target_pools_request_resource: compute.InstanceGroupManagersSetTargetPoolsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Modifies the target pools to which all instances in
@@ -4619,18 +4548,14 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def set_target_pools(
         self,
-        request: Optional[
-            Union[compute.SetTargetPoolsInstanceGroupManagerRequest, dict]
-        ] = None,
+        request: Union[compute.SetTargetPoolsInstanceGroupManagerRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_set_target_pools_request_resource: Optional[
-            compute.InstanceGroupManagersSetTargetPoolsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_set_target_pools_request_resource: compute.InstanceGroupManagersSetTargetPoolsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Modifies the target pools to which all instances in
@@ -4773,18 +4698,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def update_per_instance_configs_unary(
         self,
-        request: Optional[
-            Union[compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_update_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersUpdatePerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_update_per_instance_configs_req_resource: compute.InstanceGroupManagersUpdatePerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts or updates per-instance configurations for
@@ -4908,18 +4831,16 @@ class InstanceGroupManagersClient(metaclass=InstanceGroupManagersClientMeta):
 
     def update_per_instance_configs(
         self,
-        request: Optional[
-            Union[compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest, dict]
+        request: Union[
+            compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        instance_group_manager: Optional[str] = None,
-        instance_group_managers_update_per_instance_configs_req_resource: Optional[
-            compute.InstanceGroupManagersUpdatePerInstanceConfigsReq
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        instance_group_manager: str = None,
+        instance_group_managers_update_per_instance_configs_req_resource: compute.InstanceGroupManagersUpdatePerInstanceConfigsReq = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts or updates per-instance configurations for

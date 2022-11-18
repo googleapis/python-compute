@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -68,7 +57,7 @@ class SubnetworksClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[SubnetworksTransport]:
         """Returns an appropriate transport class.
 
@@ -321,7 +310,7 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, SubnetworksTransport]] = None,
+        transport: Union[str, SubnetworksTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -422,11 +411,11 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[Union[compute.AggregatedListSubnetworksRequest, dict]] = None,
+        request: Union[compute.AggregatedListSubnetworksRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of subnetworks.
@@ -507,13 +496,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteSubnetworkRequest, dict]] = None,
+        request: Union[compute.DeleteSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified subnetwork.
@@ -608,13 +597,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteSubnetworkRequest, dict]] = None,
+        request: Union[compute.DeleteSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified subnetwork.
@@ -734,18 +723,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def expand_ip_cidr_range_unary(
         self,
-        request: Optional[
-            Union[compute.ExpandIpCidrRangeSubnetworkRequest, dict]
-        ] = None,
+        request: Union[compute.ExpandIpCidrRangeSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetworks_expand_ip_cidr_range_request_resource: Optional[
-            compute.SubnetworksExpandIpCidrRangeRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetworks_expand_ip_cidr_range_request_resource: compute.SubnetworksExpandIpCidrRangeRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Expands the IP CIDR range of the subnetwork to a
@@ -857,18 +842,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def expand_ip_cidr_range(
         self,
-        request: Optional[
-            Union[compute.ExpandIpCidrRangeSubnetworkRequest, dict]
-        ] = None,
+        request: Union[compute.ExpandIpCidrRangeSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetworks_expand_ip_cidr_range_request_resource: Optional[
-            compute.SubnetworksExpandIpCidrRangeRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetworks_expand_ip_cidr_range_request_resource: compute.SubnetworksExpandIpCidrRangeRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Expands the IP CIDR range of the subnetwork to a
@@ -1005,13 +986,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetSubnetworkRequest, dict]] = None,
+        request: Union[compute.GetSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Subnetwork:
         r"""Returns the specified subnetwork. Gets a list of
@@ -1111,13 +1092,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def get_iam_policy(
         self,
-        request: Optional[Union[compute.GetIamPolicySubnetworkRequest, dict]] = None,
+        request: Union[compute.GetIamPolicySubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -1251,13 +1232,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertSubnetworkRequest, dict]] = None,
+        request: Union[compute.InsertSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork_resource: Optional[compute.Subnetwork] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork_resource: compute.Subnetwork = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a subnetwork in the specified project using
@@ -1350,13 +1331,13 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertSubnetworkRequest, dict]] = None,
+        request: Union[compute.InsertSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork_resource: Optional[compute.Subnetwork] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork_resource: compute.Subnetwork = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a subnetwork in the specified project using
@@ -1474,12 +1455,12 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListSubnetworksRequest, dict]] = None,
+        request: Union[compute.ListSubnetworksRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of subnetworks available to the
@@ -1577,11 +1558,11 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def list_usable(
         self,
-        request: Optional[Union[compute.ListUsableSubnetworksRequest, dict]] = None,
+        request: Union[compute.ListUsableSubnetworksRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListUsablePager:
         r"""Retrieves an aggregated list of all usable
@@ -1663,14 +1644,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def patch_unary(
         self,
-        request: Optional[Union[compute.PatchSubnetworkRequest, dict]] = None,
+        request: Union[compute.PatchSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetwork_resource: Optional[compute.Subnetwork] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetwork_resource: compute.Subnetwork = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified subnetwork with the data
@@ -1776,14 +1757,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def patch(
         self,
-        request: Optional[Union[compute.PatchSubnetworkRequest, dict]] = None,
+        request: Union[compute.PatchSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetwork_resource: Optional[compute.Subnetwork] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetwork_resource: compute.Subnetwork = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified subnetwork with the data
@@ -1914,16 +1895,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def set_iam_policy(
         self,
-        request: Optional[Union[compute.SetIamPolicySubnetworkRequest, dict]] = None,
+        request: Union[compute.SetIamPolicySubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_policy_request_resource: Optional[
-            compute.RegionSetPolicyRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -2068,18 +2047,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def set_private_ip_google_access_unary(
         self,
-        request: Optional[
-            Union[compute.SetPrivateIpGoogleAccessSubnetworkRequest, dict]
-        ] = None,
+        request: Union[compute.SetPrivateIpGoogleAccessSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetworks_set_private_ip_google_access_request_resource: Optional[
-            compute.SubnetworksSetPrivateIpGoogleAccessRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetworks_set_private_ip_google_access_request_resource: compute.SubnetworksSetPrivateIpGoogleAccessRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Set whether VMs in this subnet can access Google
@@ -2192,18 +2167,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def set_private_ip_google_access(
         self,
-        request: Optional[
-            Union[compute.SetPrivateIpGoogleAccessSubnetworkRequest, dict]
-        ] = None,
+        request: Union[compute.SetPrivateIpGoogleAccessSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        subnetwork: Optional[str] = None,
-        subnetworks_set_private_ip_google_access_request_resource: Optional[
-            compute.SubnetworksSetPrivateIpGoogleAccessRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        subnetwork: str = None,
+        subnetworks_set_private_ip_google_access_request_resource: compute.SubnetworksSetPrivateIpGoogleAccessRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Set whether VMs in this subnet can access Google
@@ -2341,18 +2312,14 @@ class SubnetworksClient(metaclass=SubnetworksClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsSubnetworkRequest, dict]
-        ] = None,
+        request: Union[compute.TestIamPermissionsSubnetworkRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

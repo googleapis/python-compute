@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class InterconnectAttachmentsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[InterconnectAttachmentsTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, InterconnectAttachmentsTransport]] = None,
+        transport: Union[str, InterconnectAttachmentsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,13 +413,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def aggregated_list(
         self,
-        request: Optional[
-            Union[compute.AggregatedListInterconnectAttachmentsRequest, dict]
+        request: Union[
+            compute.AggregatedListInterconnectAttachmentsRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of interconnect
@@ -514,15 +503,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified interconnect attachment.
@@ -615,15 +602,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified interconnect attachment.
@@ -741,13 +726,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def get(
         self,
-        request: Optional[Union[compute.GetInterconnectAttachmentRequest, dict]] = None,
+        request: Union[compute.GetInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectAttachment:
         r"""Returns the specified interconnect attachment.
@@ -846,17 +831,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.InsertInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment_resource: Optional[
-            compute.InterconnectAttachment
-        ] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment_resource: compute.InterconnectAttachment = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an InterconnectAttachment in the specified
@@ -949,17 +930,13 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.InsertInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment_resource: Optional[
-            compute.InterconnectAttachment
-        ] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment_resource: compute.InterconnectAttachment = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an InterconnectAttachment in the specified
@@ -1077,14 +1054,12 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def list(
         self,
-        request: Optional[
-            Union[compute.ListInterconnectAttachmentsRequest, dict]
-        ] = None,
+        request: Union[compute.ListInterconnectAttachmentsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of interconnect attachments
@@ -1180,18 +1155,14 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def patch_unary(
         self,
-        request: Optional[
-            Union[compute.PatchInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.PatchInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment: Optional[str] = None,
-        interconnect_attachment_resource: Optional[
-            compute.InterconnectAttachment
-        ] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment: str = None,
+        interconnect_attachment_resource: compute.InterconnectAttachment = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified interconnect attachment with
@@ -1300,18 +1271,14 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def patch(
         self,
-        request: Optional[
-            Union[compute.PatchInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.PatchInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        interconnect_attachment: Optional[str] = None,
-        interconnect_attachment_resource: Optional[
-            compute.InterconnectAttachment
-        ] = None,
+        project: str = None,
+        region: str = None,
+        interconnect_attachment: str = None,
+        interconnect_attachment_resource: compute.InterconnectAttachment = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified interconnect attachment with
@@ -1445,18 +1412,14 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def set_labels_unary(
         self,
-        request: Optional[
-            Union[compute.SetLabelsInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.SetLabelsInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_labels_request_resource: Optional[
-            compute.RegionSetLabelsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on an InterconnectAttachment. To
@@ -1562,18 +1525,14 @@ class InterconnectAttachmentsClient(metaclass=InterconnectAttachmentsClientMeta)
 
     def set_labels(
         self,
-        request: Optional[
-            Union[compute.SetLabelsInterconnectAttachmentRequest, dict]
-        ] = None,
+        request: Union[compute.SetLabelsInterconnectAttachmentRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_labels_request_resource: Optional[
-            compute.RegionSetLabelsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on an InterconnectAttachment. To

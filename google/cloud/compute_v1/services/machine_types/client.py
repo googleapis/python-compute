@@ -16,18 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -65,7 +54,7 @@ class MachineTypesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[MachineTypesTransport]:
         """Returns an appropriate transport class.
 
@@ -318,7 +307,7 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, MachineTypesTransport]] = None,
+        transport: Union[str, MachineTypesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -419,13 +408,11 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[
-            Union[compute.AggregatedListMachineTypesRequest, dict]
-        ] = None,
+        request: Union[compute.AggregatedListMachineTypesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of machine types.
@@ -506,13 +493,13 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetMachineTypeRequest, dict]] = None,
+        request: Union[compute.GetMachineTypeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        machine_type: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        machine_type: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.MachineType:
         r"""Returns the specified machine type. Gets a list of
@@ -609,12 +596,12 @@ class MachineTypesClient(metaclass=MachineTypesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListMachineTypesRequest, dict]] = None,
+        request: Union[compute.ListMachineTypesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of machine types available to the

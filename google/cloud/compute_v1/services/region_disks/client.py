@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -68,7 +57,7 @@ class RegionDisksClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[RegionDisksTransport]:
         """Returns an appropriate transport class.
 
@@ -321,7 +310,7 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, RegionDisksTransport]] = None,
+        transport: Union[str, RegionDisksTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -422,18 +411,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def add_resource_policies_unary(
         self,
-        request: Optional[
-            Union[compute.AddResourcePoliciesRegionDiskRequest, dict]
-        ] = None,
+        request: Union[compute.AddResourcePoliciesRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_add_resource_policies_request_resource: Optional[
-            compute.RegionDisksAddResourcePoliciesRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_add_resource_policies_request_resource: compute.RegionDisksAddResourcePoliciesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds existing resource policies to a regional disk.
@@ -539,18 +524,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def add_resource_policies(
         self,
-        request: Optional[
-            Union[compute.AddResourcePoliciesRegionDiskRequest, dict]
-        ] = None,
+        request: Union[compute.AddResourcePoliciesRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_add_resource_policies_request_resource: Optional[
-            compute.RegionDisksAddResourcePoliciesRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_add_resource_policies_request_resource: compute.RegionDisksAddResourcePoliciesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds existing resource policies to a regional disk.
@@ -681,14 +662,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def create_snapshot_unary(
         self,
-        request: Optional[Union[compute.CreateSnapshotRegionDiskRequest, dict]] = None,
+        request: Union[compute.CreateSnapshotRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        snapshot_resource: Optional[compute.Snapshot] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        snapshot_resource: compute.Snapshot = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a snapshot of a specified persistent disk.
@@ -792,14 +773,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def create_snapshot(
         self,
-        request: Optional[Union[compute.CreateSnapshotRegionDiskRequest, dict]] = None,
+        request: Union[compute.CreateSnapshotRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        snapshot_resource: Optional[compute.Snapshot] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        snapshot_resource: compute.Snapshot = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a snapshot of a specified persistent disk.
@@ -928,13 +909,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteRegionDiskRequest, dict]] = None,
+        request: Union[compute.DeleteRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified regional persistent disk.
@@ -1031,13 +1012,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteRegionDiskRequest, dict]] = None,
+        request: Union[compute.DeleteRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified regional persistent disk.
@@ -1159,13 +1140,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetRegionDiskRequest, dict]] = None,
+        request: Union[compute.GetRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Disk:
         r"""Returns a specified regional persistent disk.
@@ -1267,13 +1248,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def get_iam_policy(
         self,
-        request: Optional[Union[compute.GetIamPolicyRegionDiskRequest, dict]] = None,
+        request: Union[compute.GetIamPolicyRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -1407,13 +1388,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertRegionDiskRequest, dict]] = None,
+        request: Union[compute.InsertRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk_resource: Optional[compute.Disk] = None,
+        project: str = None,
+        region: str = None,
+        disk_resource: compute.Disk = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a persistent regional disk in the specified
@@ -1504,13 +1485,13 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertRegionDiskRequest, dict]] = None,
+        request: Union[compute.InsertRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk_resource: Optional[compute.Disk] = None,
+        project: str = None,
+        region: str = None,
+        disk_resource: compute.Disk = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a persistent regional disk in the specified
@@ -1626,12 +1607,12 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListRegionDisksRequest, dict]] = None,
+        request: Union[compute.ListRegionDisksRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of persistent disks contained
@@ -1726,18 +1707,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def remove_resource_policies_unary(
         self,
-        request: Optional[
-            Union[compute.RemoveResourcePoliciesRegionDiskRequest, dict]
-        ] = None,
+        request: Union[compute.RemoveResourcePoliciesRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_remove_resource_policies_request_resource: Optional[
-            compute.RegionDisksRemoveResourcePoliciesRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_remove_resource_policies_request_resource: compute.RegionDisksRemoveResourcePoliciesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes resource policies from a regional disk.
@@ -1846,18 +1823,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def remove_resource_policies(
         self,
-        request: Optional[
-            Union[compute.RemoveResourcePoliciesRegionDiskRequest, dict]
-        ] = None,
+        request: Union[compute.RemoveResourcePoliciesRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_remove_resource_policies_request_resource: Optional[
-            compute.RegionDisksRemoveResourcePoliciesRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_remove_resource_policies_request_resource: compute.RegionDisksRemoveResourcePoliciesRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes resource policies from a regional disk.
@@ -1991,16 +1964,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def resize_unary(
         self,
-        request: Optional[Union[compute.ResizeRegionDiskRequest, dict]] = None,
+        request: Union[compute.ResizeRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_resize_request_resource: Optional[
-            compute.RegionDisksResizeRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_resize_request_resource: compute.RegionDisksResizeRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Resizes the specified regional persistent disk.
@@ -2102,16 +2073,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def resize(
         self,
-        request: Optional[Union[compute.ResizeRegionDiskRequest, dict]] = None,
+        request: Union[compute.ResizeRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        disk: Optional[str] = None,
-        region_disks_resize_request_resource: Optional[
-            compute.RegionDisksResizeRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        disk: str = None,
+        region_disks_resize_request_resource: compute.RegionDisksResizeRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Resizes the specified regional persistent disk.
@@ -2238,16 +2207,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def set_iam_policy(
         self,
-        request: Optional[Union[compute.SetIamPolicyRegionDiskRequest, dict]] = None,
+        request: Union[compute.SetIamPolicyRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_policy_request_resource: Optional[
-            compute.RegionSetPolicyRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_policy_request_resource: compute.RegionSetPolicyRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -2392,16 +2359,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def set_labels_unary(
         self,
-        request: Optional[Union[compute.SetLabelsRegionDiskRequest, dict]] = None,
+        request: Union[compute.SetLabelsRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_labels_request_resource: Optional[
-            compute.RegionSetLabelsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on the target regional disk.
@@ -2505,16 +2470,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def set_labels(
         self,
-        request: Optional[Union[compute.SetLabelsRegionDiskRequest, dict]] = None,
+        request: Union[compute.SetLabelsRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        region_set_labels_request_resource: Optional[
-            compute.RegionSetLabelsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        region_set_labels_request_resource: compute.RegionSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on the target regional disk.
@@ -2643,18 +2606,14 @@ class RegionDisksClient(metaclass=RegionDisksClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsRegionDiskRequest, dict]
-        ] = None,
+        request: Union[compute.TestIamPermissionsRegionDiskRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        region: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

@@ -572,10 +572,10 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -667,7 +667,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.AddAssociationNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the add association method over HTTP.
@@ -778,7 +778,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.AddRuleNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the add rule method over HTTP.
@@ -889,7 +889,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.CloneRulesNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the clone rules method over HTTP.
@@ -991,7 +991,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.DeleteNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -1093,7 +1093,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.GetNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.FirewallPolicy:
             r"""Call the get method over HTTP.
@@ -1182,7 +1182,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.GetAssociationNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.FirewallPolicyAssociation:
             r"""Call the get association method over HTTP.
@@ -1269,7 +1269,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.GetIamPolicyNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Policy:
             r"""Call the get iam policy method over HTTP.
@@ -1397,7 +1397,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.GetRuleNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.FirewallPolicyRule:
             r"""Call the get rule method over HTTP.
@@ -1488,7 +1488,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.InsertNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -1599,7 +1599,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.ListNetworkFirewallPoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.FirewallPolicyList:
             r"""Call the list method over HTTP.
@@ -1686,7 +1686,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.PatchNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -1797,7 +1797,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.PatchRuleNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch rule method over HTTP.
@@ -1908,7 +1908,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.RemoveAssociationNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the remove association method over HTTP.
@@ -2014,7 +2014,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.RemoveRuleNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the remove rule method over HTTP.
@@ -2116,7 +2116,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.SetIamPolicyNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Policy:
             r"""Call the set iam policy method over HTTP.
@@ -2253,7 +2253,7 @@ class NetworkFirewallPoliciesRestTransport(NetworkFirewallPoliciesTransport):
             request: compute.TestIamPermissionsNetworkFirewallPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TestPermissionsResponse:
             r"""Call the test iam permissions method over HTTP.

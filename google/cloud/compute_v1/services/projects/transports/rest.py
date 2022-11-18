@@ -473,10 +473,10 @@ class ProjectsRestTransport(ProjectsTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -568,7 +568,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.DisableXpnHostProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the disable xpn host method over HTTP.
@@ -672,7 +672,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.DisableXpnResourceProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the disable xpn resource method over HTTP.
@@ -785,7 +785,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.EnableXpnHostProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the enable xpn host method over HTTP.
@@ -887,7 +887,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.EnableXpnResourceProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the enable xpn resource method over HTTP.
@@ -1000,7 +1000,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.GetProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Project:
             r"""Call the get method over HTTP.
@@ -1091,7 +1091,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.GetXpnHostProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Project:
             r"""Call the get xpn host method over HTTP.
@@ -1183,7 +1183,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.GetXpnResourcesProjectsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.ProjectsGetXpnResources:
             r"""Call the get xpn resources method over HTTP.
@@ -1272,7 +1272,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.ListXpnHostsProjectsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.XpnHostList:
             r"""Call the list xpn hosts method over HTTP.
@@ -1368,7 +1368,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.MoveDiskProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the move disk method over HTTP.
@@ -1479,7 +1479,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.MoveInstanceProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the move instance method over HTTP.
@@ -1590,7 +1590,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.SetCommonInstanceMetadataProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set common instance
@@ -1704,7 +1704,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.SetDefaultNetworkTierProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set default network tier method over HTTP.
@@ -1817,7 +1817,7 @@ class ProjectsRestTransport(ProjectsTransport):
             request: compute.SetUsageExportBucketProjectRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set usage export bucket method over HTTP.

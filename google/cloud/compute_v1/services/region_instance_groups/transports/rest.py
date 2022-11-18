@@ -217,10 +217,10 @@ class RegionInstanceGroupsRestTransport(RegionInstanceGroupsTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -312,7 +312,7 @@ class RegionInstanceGroupsRestTransport(RegionInstanceGroupsTransport):
             request: compute.GetRegionInstanceGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroup:
             r"""Call the get method over HTTP.
@@ -413,7 +413,7 @@ class RegionInstanceGroupsRestTransport(RegionInstanceGroupsTransport):
             request: compute.ListRegionInstanceGroupsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RegionInstanceGroupList:
             r"""Call the list method over HTTP.
@@ -502,7 +502,7 @@ class RegionInstanceGroupsRestTransport(RegionInstanceGroupsTransport):
             request: compute.ListInstancesRegionInstanceGroupsRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.RegionInstanceGroupsListInstances:
             r"""Call the list instances method over HTTP.
@@ -598,7 +598,7 @@ class RegionInstanceGroupsRestTransport(RegionInstanceGroupsTransport):
             request: compute.SetNamedPortsRegionInstanceGroupRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set named ports method over HTTP.

@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -68,7 +57,7 @@ class InterconnectsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[InterconnectsTransport]:
         """Returns an appropriate transport class.
 
@@ -321,7 +310,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, InterconnectsTransport]] = None,
+        transport: Union[str, InterconnectsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -422,12 +411,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteInterconnectRequest, dict]] = None,
+        request: Union[compute.DeleteInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
+        project: str = None,
+        interconnect: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified interconnect.
@@ -510,12 +499,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteInterconnectRequest, dict]] = None,
+        request: Union[compute.DeleteInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
+        project: str = None,
+        interconnect: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified interconnect.
@@ -622,12 +611,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetInterconnectRequest, dict]] = None,
+        request: Union[compute.GetInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
+        project: str = None,
+        interconnect: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Interconnect:
         r"""Returns the specified interconnect. Get a list of
@@ -715,14 +704,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def get_diagnostics(
         self,
-        request: Optional[
-            Union[compute.GetDiagnosticsInterconnectRequest, dict]
-        ] = None,
+        request: Union[compute.GetDiagnosticsInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
+        project: str = None,
+        interconnect: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectsGetDiagnosticsResponse:
         r"""Returns the interconnectDiagnostics for the specified
@@ -808,12 +795,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertInterconnectRequest, dict]] = None,
+        request: Union[compute.InsertInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect_resource: Optional[compute.Interconnect] = None,
+        project: str = None,
+        interconnect_resource: compute.Interconnect = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a Interconnect in the specified project using
@@ -892,12 +879,12 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertInterconnectRequest, dict]] = None,
+        request: Union[compute.InsertInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect_resource: Optional[compute.Interconnect] = None,
+        project: str = None,
+        interconnect_resource: compute.Interconnect = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a Interconnect in the specified project using
@@ -1000,11 +987,11 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListInterconnectsRequest, dict]] = None,
+        request: Union[compute.ListInterconnectsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of interconnect available to the
@@ -1088,13 +1075,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def patch_unary(
         self,
-        request: Optional[Union[compute.PatchInterconnectRequest, dict]] = None,
+        request: Union[compute.PatchInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
-        interconnect_resource: Optional[compute.Interconnect] = None,
+        project: str = None,
+        interconnect: str = None,
+        interconnect_resource: compute.Interconnect = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified interconnect with the data
@@ -1187,13 +1174,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def patch(
         self,
-        request: Optional[Union[compute.PatchInterconnectRequest, dict]] = None,
+        request: Union[compute.PatchInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        interconnect: Optional[str] = None,
-        interconnect_resource: Optional[compute.Interconnect] = None,
+        project: str = None,
+        interconnect: str = None,
+        interconnect_resource: compute.Interconnect = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified interconnect with the data
@@ -1310,15 +1297,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def set_labels_unary(
         self,
-        request: Optional[Union[compute.SetLabelsInterconnectRequest, dict]] = None,
+        request: Union[compute.SetLabelsInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        global_set_labels_request_resource: Optional[
-            compute.GlobalSetLabelsRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on an Interconnect. To learn more
@@ -1415,15 +1400,13 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
 
     def set_labels(
         self,
-        request: Optional[Union[compute.SetLabelsInterconnectRequest, dict]] = None,
+        request: Union[compute.SetLabelsInterconnectRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        global_set_labels_request_resource: Optional[
-            compute.GlobalSetLabelsRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        global_set_labels_request_resource: compute.GlobalSetLabelsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on an Interconnect. To learn more

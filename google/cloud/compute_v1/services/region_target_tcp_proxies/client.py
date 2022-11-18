@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class RegionTargetTcpProxiesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[RegionTargetTcpProxiesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, RegionTargetTcpProxiesTransport]] = None,
+        transport: Union[str, RegionTargetTcpProxiesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,15 +413,13 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteRegionTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteRegionTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -527,15 +514,13 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteRegionTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteRegionTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -655,13 +640,13 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetRegionTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.GetRegionTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetTcpProxy:
         r"""Returns the specified TargetTcpProxy resource.
@@ -762,15 +747,13 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertRegionTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.InsertRegionTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
+        project: str = None,
+        region: str = None,
+        target_tcp_proxy_resource: compute.TargetTcpProxy = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -864,15 +847,13 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertRegionTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.InsertRegionTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
+        project: str = None,
+        region: str = None,
+        target_tcp_proxy_resource: compute.TargetTcpProxy = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -991,14 +972,12 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
 
     def list(
         self,
-        request: Optional[
-            Union[compute.ListRegionTargetTcpProxiesRequest, dict]
-        ] = None,
+        request: Union[compute.ListRegionTargetTcpProxiesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of TargetTcpProxy resources

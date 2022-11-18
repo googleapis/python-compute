@@ -271,10 +271,10 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -366,7 +366,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.DeleteTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -468,7 +468,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.GetTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetTcpProxy:
             r"""Call the get method over HTTP.
@@ -563,7 +563,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.InsertTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -674,7 +674,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.ListTargetTcpProxiesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetTcpProxyList:
             r"""Call the list method over HTTP.
@@ -763,7 +763,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.SetBackendServiceTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set backend service method over HTTP.
@@ -876,7 +876,7 @@ class TargetTcpProxiesRestTransport(TargetTcpProxiesTransport):
             request: compute.SetProxyHeaderTargetTcpProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set proxy header method over HTTP.

@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class InstanceTemplatesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[InstanceTemplatesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, InstanceTemplatesTransport]] = None,
+        transport: Union[str, InstanceTemplatesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,12 +413,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteInstanceTemplateRequest, dict]] = None,
+        request: Union[compute.DeleteInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        instance_template: Optional[str] = None,
+        project: str = None,
+        instance_template: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified instance template. Deleting an
@@ -517,12 +506,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteInstanceTemplateRequest, dict]] = None,
+        request: Union[compute.DeleteInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        instance_template: Optional[str] = None,
+        project: str = None,
+        instance_template: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified instance template. Deleting an
@@ -634,12 +623,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetInstanceTemplateRequest, dict]] = None,
+        request: Union[compute.GetInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        instance_template: Optional[str] = None,
+        project: str = None,
+        instance_template: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceTemplate:
         r"""Returns the specified instance template. Gets a list
@@ -727,14 +716,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def get_iam_policy(
         self,
-        request: Optional[
-            Union[compute.GetIamPolicyInstanceTemplateRequest, dict]
-        ] = None,
+        request: Union[compute.GetIamPolicyInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
+        project: str = None,
+        resource: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -858,12 +845,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertInstanceTemplateRequest, dict]] = None,
+        request: Union[compute.InsertInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        instance_template_resource: Optional[compute.InstanceTemplate] = None,
+        project: str = None,
+        instance_template_resource: compute.InstanceTemplate = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an instance template in the specified project
@@ -946,12 +933,12 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertInstanceTemplateRequest, dict]] = None,
+        request: Union[compute.InsertInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        instance_template_resource: Optional[compute.InstanceTemplate] = None,
+        project: str = None,
+        instance_template_resource: compute.InstanceTemplate = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an instance template in the specified project
@@ -1058,11 +1045,11 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListInstanceTemplatesRequest, dict]] = None,
+        request: Union[compute.ListInstanceTemplatesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of instance templates that are
@@ -1145,17 +1132,13 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def set_iam_policy(
         self,
-        request: Optional[
-            Union[compute.SetIamPolicyInstanceTemplateRequest, dict]
-        ] = None,
+        request: Union[compute.SetIamPolicyInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        global_set_policy_request_resource: Optional[
-            compute.GlobalSetPolicyRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        global_set_policy_request_resource: compute.GlobalSetPolicyRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1290,17 +1273,13 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsInstanceTemplateRequest, dict]
-        ] = None,
+        request: Union[compute.TestIamPermissionsInstanceTemplateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

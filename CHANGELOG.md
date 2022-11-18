@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.7.0rc1](https://github.com/googleapis/python-compute/compare/v1.6.1...v1.7.0rc1) (2022-11-18)
+
+
+### Features
+
+* add support for `google.cloud.compute.__version__` ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
+* Add typing to proto.Message based class attributes ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
+* Update Compute Engine API to revision 20221011 ([#736](https://github.com/googleapis/python-compute/issues/736)) ([#355](https://github.com/googleapis/python-compute/issues/355)) ([65a443f](https://github.com/googleapis/python-compute/commit/65a443f6ed6cdc9612035edd25950b1c02e6a518))
+
+
+### Bug Fixes
+
+* Add dict typing for client_options ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
+* **deps:** require google-api-core &gt;=1.33.2 ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
+
+
+### Documentation
+
+* **samples:** Snippetgen handling of repeated enum field ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
+
 ## [1.6.1](https://github.com/googleapis/python-compute/compare/v1.6.0...v1.6.1) (2022-10-10)
 
 

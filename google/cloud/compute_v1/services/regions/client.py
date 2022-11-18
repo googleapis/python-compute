@@ -16,18 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -65,7 +54,7 @@ class RegionsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[RegionsTransport]:
         """Returns an appropriate transport class.
 
@@ -318,7 +307,7 @@ class RegionsClient(metaclass=RegionsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, RegionsTransport]] = None,
+        transport: Union[str, RegionsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -419,12 +408,12 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetRegionRequest, dict]] = None,
+        request: Union[compute.GetRegionRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Region:
         r"""Returns the specified Region resource. Gets a list of available
@@ -518,11 +507,11 @@ class RegionsClient(metaclass=RegionsClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListRegionsRequest, dict]] = None,
+        request: Union[compute.ListRegionsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of region resources available to the

@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class NetworkEndpointGroupsClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[NetworkEndpointGroupsTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, NetworkEndpointGroupsTransport]] = None,
+        transport: Union[str, NetworkEndpointGroupsTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,13 +413,11 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[
-            Union[compute.AggregatedListNetworkEndpointGroupsRequest, dict]
-        ] = None,
+        request: Union[compute.AggregatedListNetworkEndpointGroupsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of network endpoint groups and
@@ -512,18 +499,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def attach_network_endpoints_unary(
         self,
-        request: Optional[
-            Union[compute.AttachNetworkEndpointsNetworkEndpointGroupRequest, dict]
+        request: Union[
+            compute.AttachNetworkEndpointsNetworkEndpointGroupRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
-        network_endpoint_groups_attach_endpoints_request_resource: Optional[
-            compute.NetworkEndpointGroupsAttachEndpointsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
+        network_endpoint_groups_attach_endpoints_request_resource: compute.NetworkEndpointGroupsAttachEndpointsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Attach a list of network endpoints to the specified
@@ -640,18 +625,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def attach_network_endpoints(
         self,
-        request: Optional[
-            Union[compute.AttachNetworkEndpointsNetworkEndpointGroupRequest, dict]
+        request: Union[
+            compute.AttachNetworkEndpointsNetworkEndpointGroupRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
-        network_endpoint_groups_attach_endpoints_request_resource: Optional[
-            compute.NetworkEndpointGroupsAttachEndpointsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
+        network_endpoint_groups_attach_endpoints_request_resource: compute.NetworkEndpointGroupsAttachEndpointsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Attach a list of network endpoints to the specified
@@ -793,15 +776,13 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteNetworkEndpointGroupRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteNetworkEndpointGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified network endpoint group. The
@@ -902,15 +883,13 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteNetworkEndpointGroupRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteNetworkEndpointGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified network endpoint group. The
@@ -1036,18 +1015,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def detach_network_endpoints_unary(
         self,
-        request: Optional[
-            Union[compute.DetachNetworkEndpointsNetworkEndpointGroupRequest, dict]
+        request: Union[
+            compute.DetachNetworkEndpointsNetworkEndpointGroupRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
-        network_endpoint_groups_detach_endpoints_request_resource: Optional[
-            compute.NetworkEndpointGroupsDetachEndpointsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
+        network_endpoint_groups_detach_endpoints_request_resource: compute.NetworkEndpointGroupsDetachEndpointsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Detach a list of network endpoints from the specified
@@ -1164,18 +1141,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def detach_network_endpoints(
         self,
-        request: Optional[
-            Union[compute.DetachNetworkEndpointsNetworkEndpointGroupRequest, dict]
+        request: Union[
+            compute.DetachNetworkEndpointsNetworkEndpointGroupRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
-        network_endpoint_groups_detach_endpoints_request_resource: Optional[
-            compute.NetworkEndpointGroupsDetachEndpointsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
+        network_endpoint_groups_detach_endpoints_request_resource: compute.NetworkEndpointGroupsDetachEndpointsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Detach a list of network endpoints from the specified
@@ -1317,13 +1292,13 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetNetworkEndpointGroupRequest, dict]] = None,
+        request: Union[compute.GetNetworkEndpointGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NetworkEndpointGroup:
         r"""Returns the specified network endpoint group. Gets a
@@ -1430,15 +1405,13 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertNetworkEndpointGroupRequest, dict]
-        ] = None,
+        request: Union[compute.InsertNetworkEndpointGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group_resource: compute.NetworkEndpointGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a network endpoint group in the specified
@@ -1535,15 +1508,13 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertNetworkEndpointGroupRequest, dict]
-        ] = None,
+        request: Union[compute.InsertNetworkEndpointGroupRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group_resource: compute.NetworkEndpointGroup = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a network endpoint group in the specified
@@ -1665,12 +1636,12 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListNetworkEndpointGroupsRequest, dict]] = None,
+        request: Union[compute.ListNetworkEndpointGroupsRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of network endpoint groups that
@@ -1767,18 +1738,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def list_network_endpoints(
         self,
-        request: Optional[
-            Union[compute.ListNetworkEndpointsNetworkEndpointGroupsRequest, dict]
+        request: Union[
+            compute.ListNetworkEndpointsNetworkEndpointGroupsRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        network_endpoint_group: Optional[str] = None,
-        network_endpoint_groups_list_endpoints_request_resource: Optional[
-            compute.NetworkEndpointGroupsListEndpointsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        network_endpoint_group: str = None,
+        network_endpoint_groups_list_endpoints_request_resource: compute.NetworkEndpointGroupsListEndpointsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListNetworkEndpointsPager:
         r"""Lists the network endpoints in the specified network
@@ -1905,18 +1874,16 @@ class NetworkEndpointGroupsClient(metaclass=NetworkEndpointGroupsClientMeta):
 
     def test_iam_permissions(
         self,
-        request: Optional[
-            Union[compute.TestIamPermissionsNetworkEndpointGroupRequest, dict]
+        request: Union[
+            compute.TestIamPermissionsNetworkEndpointGroupRequest, dict
         ] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        resource: Optional[str] = None,
-        test_permissions_request_resource: Optional[
-            compute.TestPermissionsRequest
-        ] = None,
+        project: str = None,
+        zone: str = None,
+        resource: str = None,
+        test_permissions_request_resource: compute.TestPermissionsRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

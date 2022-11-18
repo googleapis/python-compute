@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class RegionSslCertificatesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[RegionSslCertificatesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, RegionSslCertificatesTransport]] = None,
+        transport: Union[str, RegionSslCertificatesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,15 +413,13 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[
-            Union[compute.DeleteRegionSslCertificateRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteRegionSslCertificateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        ssl_certificate: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        ssl_certificate: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource in the
@@ -528,15 +515,13 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def delete(
         self,
-        request: Optional[
-            Union[compute.DeleteRegionSslCertificateRequest, dict]
-        ] = None,
+        request: Union[compute.DeleteRegionSslCertificateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        ssl_certificate: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        ssl_certificate: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified SslCertificate resource in the
@@ -657,13 +642,13 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetRegionSslCertificateRequest, dict]] = None,
+        request: Union[compute.GetRegionSslCertificateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        ssl_certificate: Optional[str] = None,
+        project: str = None,
+        region: str = None,
+        ssl_certificate: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslCertificate:
         r"""Returns the specified SslCertificate resource in the
@@ -774,15 +759,13 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[
-            Union[compute.InsertRegionSslCertificateRequest, dict]
-        ] = None,
+        request: Union[compute.InsertRegionSslCertificateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        ssl_certificate_resource: Optional[compute.SslCertificate] = None,
+        project: str = None,
+        region: str = None,
+        ssl_certificate_resource: compute.SslCertificate = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a SslCertificate resource in the specified
@@ -876,15 +859,13 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def insert(
         self,
-        request: Optional[
-            Union[compute.InsertRegionSslCertificateRequest, dict]
-        ] = None,
+        request: Union[compute.InsertRegionSslCertificateRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
-        ssl_certificate_resource: Optional[compute.SslCertificate] = None,
+        project: str = None,
+        region: str = None,
+        ssl_certificate_resource: compute.SslCertificate = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a SslCertificate resource in the specified
@@ -1003,12 +984,12 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListRegionSslCertificatesRequest, dict]] = None,
+        request: Union[compute.ListRegionSslCertificatesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        region: Optional[str] = None,
+        project: str = None,
+        region: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of SslCertificate resources

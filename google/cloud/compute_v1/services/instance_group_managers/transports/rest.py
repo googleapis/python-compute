@@ -714,10 +714,10 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -809,7 +809,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.AbandonInstancesInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the abandon instances method over HTTP.
@@ -923,7 +923,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.AggregatedListInstanceGroupManagersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManagerAggregatedList:
             r"""Call the aggregated list method over HTTP.
@@ -1010,7 +1010,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ApplyUpdatesToInstancesInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the apply updates to
@@ -1126,7 +1126,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.CreateInstancesInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the create instances method over HTTP.
@@ -1239,7 +1239,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.DeleteInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -1341,7 +1341,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.DeleteInstancesInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete instances method over HTTP.
@@ -1454,7 +1454,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.DeletePerInstanceConfigsInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete per instance
@@ -1570,7 +1570,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.GetInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManager:
             r"""Call the get method over HTTP.
@@ -1666,7 +1666,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.InsertInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -1777,7 +1777,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ListInstanceGroupManagersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManagerList:
             r"""Call the list method over HTTP.
@@ -1864,7 +1864,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ListErrorsInstanceGroupManagersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManagersListErrorsResponse:
             r"""Call the list errors method over HTTP.
@@ -1951,7 +1951,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ListManagedInstancesInstanceGroupManagersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManagersListManagedInstancesResponse:
             r"""Call the list managed instances method over HTTP.
@@ -2042,7 +2042,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ListPerInstanceConfigsInstanceGroupManagersRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.InstanceGroupManagersListPerInstanceConfigsResp:
             r"""Call the list per instance configs method over HTTP.
@@ -2133,7 +2133,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.PatchInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -2244,7 +2244,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.PatchPerInstanceConfigsInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch per instance
@@ -2360,7 +2360,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.RecreateInstancesInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the recreate instances method over HTTP.
@@ -2477,7 +2477,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.ResizeInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the resize method over HTTP.
@@ -2579,7 +2579,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.SetInstanceTemplateInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set instance template method over HTTP.
@@ -2694,7 +2694,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.SetTargetPoolsInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set target pools method over HTTP.
@@ -2807,7 +2807,7 @@ class InstanceGroupManagersRestTransport(InstanceGroupManagersTransport):
             request: compute.UpdatePerInstanceConfigsInstanceGroupManagerRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the update per instance

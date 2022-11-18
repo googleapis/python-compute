@@ -302,10 +302,10 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -397,7 +397,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.DeleteRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -499,7 +499,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.GetRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetHttpsProxy:
             r"""Call the get method over HTTP.
@@ -598,7 +598,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.InsertRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -709,7 +709,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.ListRegionTargetHttpsProxiesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.TargetHttpsProxyList:
             r"""Call the list method over HTTP.
@@ -798,7 +798,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.PatchRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.
@@ -909,7 +909,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.SetSslCertificatesRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set ssl certificates method over HTTP.
@@ -1024,7 +1024,7 @@ class RegionTargetHttpsProxiesRestTransport(RegionTargetHttpsProxiesTransport):
             request: compute.SetUrlMapRegionTargetHttpsProxyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the set url map method over HTTP.

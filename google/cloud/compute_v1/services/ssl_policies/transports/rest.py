@@ -297,10 +297,10 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
         self,
         *,
         host: str = "compute.googleapis.com",
-        credentials: Optional[ga_credentials.Credentials] = None,
-        credentials_file: Optional[str] = None,
-        scopes: Optional[Sequence[str]] = None,
-        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id: Optional[str] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
         always_use_jwt_access: Optional[bool] = False,
@@ -392,7 +392,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.AggregatedListSslPoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.SslPoliciesAggregatedList:
             r"""Call the aggregated list method over HTTP.
@@ -479,7 +479,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.DeleteSslPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the delete method over HTTP.
@@ -581,7 +581,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.GetSslPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.SslPolicy:
             r"""Call the get method over HTTP.
@@ -674,7 +674,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.InsertSslPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the insert method over HTTP.
@@ -785,7 +785,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.ListSslPoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.SslPoliciesList:
             r"""Call the list method over HTTP.
@@ -872,7 +872,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.ListAvailableFeaturesSslPoliciesRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.SslPoliciesListAvailableFeaturesResponse:
             r"""Call the list available features method over HTTP.
@@ -961,7 +961,7 @@ class SslPoliciesRestTransport(SslPoliciesTransport):
             request: compute.PatchSslPolicyRequest,
             *,
             retry: OptionalRetry = gapic_v1.method.DEFAULT,
-            timeout: Optional[float] = None,
+            timeout: Union[float, object] = gapic_v1.method.DEFAULT,
             metadata: Sequence[Tuple[str, str]] = (),
         ) -> compute.Operation:
             r"""Call the patch method over HTTP.

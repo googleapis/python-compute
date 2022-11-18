@@ -16,18 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -65,7 +54,7 @@ class DiskTypesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[DiskTypesTransport]:
         """Returns an appropriate transport class.
 
@@ -318,7 +307,7 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, DiskTypesTransport]] = None,
+        transport: Union[str, DiskTypesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -419,11 +408,11 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
     def aggregated_list(
         self,
-        request: Optional[Union[compute.AggregatedListDiskTypesRequest, dict]] = None,
+        request: Union[compute.AggregatedListDiskTypesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of disk types.
@@ -504,13 +493,13 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetDiskTypeRequest, dict]] = None,
+        request: Union[compute.GetDiskTypeRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
-        disk_type: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
+        disk_type: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DiskType:
         r"""Returns the specified disk type. Gets a list of
@@ -612,12 +601,12 @@ class DiskTypesClient(metaclass=DiskTypesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListDiskTypesRequest, dict]] = None,
+        request: Union[compute.ListDiskTypesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        zone: Optional[str] = None,
+        project: str = None,
+        zone: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of disk types available to the

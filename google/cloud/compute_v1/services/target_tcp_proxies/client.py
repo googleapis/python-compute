@@ -17,18 +17,7 @@ from collections import OrderedDict
 import functools
 import os
 import re
-from typing import (
-    Dict,
-    Mapping,
-    MutableMapping,
-    MutableSequence,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -70,7 +59,7 @@ class TargetTcpProxiesClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: Optional[str] = None,
+        label: str = None,
     ) -> Type[TargetTcpProxiesTransport]:
         """Returns an appropriate transport class.
 
@@ -323,7 +312,7 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Optional[Union[str, TargetTcpProxiesTransport]] = None,
+        transport: Union[str, TargetTcpProxiesTransport, None] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -424,12 +413,12 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def delete_unary(
         self,
-        request: Optional[Union[compute.DeleteTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.DeleteTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -514,12 +503,12 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def delete(
         self,
-        request: Optional[Union[compute.DeleteTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.DeleteTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -628,12 +617,12 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def get(
         self,
-        request: Optional[Union[compute.GetTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.GetTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetTcpProxy:
         r"""Returns the specified TargetTcpProxy resource. Gets a
@@ -726,12 +715,12 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def insert_unary(
         self,
-        request: Optional[Union[compute.InsertTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.InsertTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
+        project: str = None,
+        target_tcp_proxy_resource: compute.TargetTcpProxy = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -810,12 +799,12 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def insert(
         self,
-        request: Optional[Union[compute.InsertTargetTcpProxyRequest, dict]] = None,
+        request: Union[compute.InsertTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
+        project: str = None,
+        target_tcp_proxy_resource: compute.TargetTcpProxy = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -918,11 +907,11 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def list(
         self,
-        request: Optional[Union[compute.ListTargetTcpProxiesRequest, dict]] = None,
+        request: Union[compute.ListTargetTcpProxiesRequest, dict] = None,
         *,
-        project: Optional[str] = None,
+        project: str = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of TargetTcpProxy resources
@@ -1006,17 +995,13 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def set_backend_service_unary(
         self,
-        request: Optional[
-            Union[compute.SetBackendServiceTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.SetBackendServiceTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
-        target_tcp_proxies_set_backend_service_request_resource: Optional[
-            compute.TargetTcpProxiesSetBackendServiceRequest
-        ] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
+        target_tcp_proxies_set_backend_service_request_resource: compute.TargetTcpProxiesSetBackendServiceRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetTcpProxy.
@@ -1117,17 +1102,13 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def set_backend_service(
         self,
-        request: Optional[
-            Union[compute.SetBackendServiceTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.SetBackendServiceTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
-        target_tcp_proxies_set_backend_service_request_resource: Optional[
-            compute.TargetTcpProxiesSetBackendServiceRequest
-        ] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
+        target_tcp_proxies_set_backend_service_request_resource: compute.TargetTcpProxiesSetBackendServiceRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the BackendService for TargetTcpProxy.
@@ -1252,17 +1233,13 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def set_proxy_header_unary(
         self,
-        request: Optional[
-            Union[compute.SetProxyHeaderTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.SetProxyHeaderTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
-        target_tcp_proxies_set_proxy_header_request_resource: Optional[
-            compute.TargetTcpProxiesSetProxyHeaderRequest
-        ] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
+        target_tcp_proxies_set_proxy_header_request_resource: compute.TargetTcpProxiesSetProxyHeaderRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetTcpProxy.
@@ -1362,17 +1339,13 @@ class TargetTcpProxiesClient(metaclass=TargetTcpProxiesClientMeta):
 
     def set_proxy_header(
         self,
-        request: Optional[
-            Union[compute.SetProxyHeaderTargetTcpProxyRequest, dict]
-        ] = None,
+        request: Union[compute.SetProxyHeaderTargetTcpProxyRequest, dict] = None,
         *,
-        project: Optional[str] = None,
-        target_tcp_proxy: Optional[str] = None,
-        target_tcp_proxies_set_proxy_header_request_resource: Optional[
-            compute.TargetTcpProxiesSetProxyHeaderRequest
-        ] = None,
+        project: str = None,
+        target_tcp_proxy: str = None,
+        target_tcp_proxies_set_proxy_header_request_resource: compute.TargetTcpProxiesSetProxyHeaderRequest = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the ProxyHeaderType for TargetTcpProxy.
