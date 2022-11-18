@@ -12,8 +12,9 @@
 
 ### Bug Fixes
 
+* **deps:** require google-api-core >= 2.11.0rc1
+* Fix timeout default values
 * Add dict typing for client_options ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
-* **deps:** require google-api-core &gt;=1.33.2 ([a6193cf](https://github.com/googleapis/python-compute/commit/a6193cfa1b6ae7d3115e0f9c2a2c54be7dcacb7d))
 
 
 ### Documentation

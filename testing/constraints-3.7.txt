@@ -6,6 +6,6 @@
 # Then this file should have google-cloud-foo==1.14.0
 # This file is intentionally left empty to test the
 # latest versions of dependencies.
-google-api-core==1.33.2
+google-api-core==2.11.0rc1
 proto-plus==1.22.0
 protobuf==3.19.5
