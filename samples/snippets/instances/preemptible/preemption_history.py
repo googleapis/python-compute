@@ -21,7 +21,7 @@
 
 # [START compute_preemptible_history]
 import datetime
-from typing import List, Tuple, Optional
+from typing import List, Optional, Tuple
 
 from google.cloud import compute_v1
 from google.cloud.compute_v1.services.zone_operations import pagers
