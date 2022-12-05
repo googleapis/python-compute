@@ -428,7 +428,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all HealthCheck resources,
@@ -517,7 +517,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project: Optional[str] = None,
         health_check: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified HealthCheck resource.
@@ -607,7 +607,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project: Optional[str] = None,
         health_check: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified HealthCheck resource.
@@ -721,7 +721,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project: Optional[str] = None,
         health_check: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.HealthCheck:
         r"""Returns the specified HealthCheck resource. Gets a
@@ -830,7 +830,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a HealthCheck resource in the specified
@@ -914,7 +914,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         project: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a HealthCheck resource in the specified
@@ -1021,7 +1021,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of HealthCheck resources available
@@ -1111,7 +1111,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         health_check: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates a HealthCheck resource in the specified
@@ -1212,7 +1212,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         health_check: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates a HealthCheck resource in the specified
@@ -1337,7 +1337,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         health_check: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates a HealthCheck resource in the specified
@@ -1436,7 +1436,7 @@ class HealthChecksClient(metaclass=HealthChecksClientMeta):
         health_check: Optional[str] = None,
         health_check_resource: Optional[compute.HealthCheck] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates a HealthCheck resource in the specified

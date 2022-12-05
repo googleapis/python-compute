@@ -430,7 +430,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified autoscaler.
@@ -529,7 +529,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified autoscaler.
@@ -653,7 +653,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Autoscaler:
         r"""Returns the specified autoscaler.
@@ -761,7 +761,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an autoscaler in the specified project using
@@ -860,7 +860,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an autoscaler in the specified project using
@@ -983,7 +983,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of autoscalers contained within the
@@ -1086,7 +1086,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates an autoscaler in the specified project using
@@ -1187,7 +1187,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates an autoscaler in the specified project using
@@ -1313,7 +1313,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates an autoscaler in the specified project using
@@ -1412,7 +1412,7 @@ class RegionAutoscalersClient(metaclass=RegionAutoscalersClientMeta):
         region: Optional[str] = None,
         autoscaler_resource: Optional[compute.Autoscaler] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates an autoscaler in the specified project using

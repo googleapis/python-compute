@@ -424,7 +424,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
         project: Optional[str] = None,
         zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Zone:
         r"""Returns the specified Zone resource. Gets a list of
@@ -515,7 +515,7 @@ class ZonesClient(metaclass=ZonesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of Zone resources available to the

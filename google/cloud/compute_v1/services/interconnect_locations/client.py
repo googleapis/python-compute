@@ -426,7 +426,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         project: Optional[str] = None,
         interconnect_location: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectLocation:
         r"""Returns the details for the specified interconnect
@@ -522,7 +522,7 @@ class InterconnectLocationsClient(metaclass=InterconnectLocationsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of interconnect locations

@@ -429,7 +429,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified instance template. Deleting an
@@ -522,7 +522,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified instance template. Deleting an
@@ -639,7 +639,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         instance_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceTemplate:
         r"""Returns the specified instance template. Gets a list
@@ -734,7 +734,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -863,7 +863,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         instance_template_resource: Optional[compute.InstanceTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an instance template in the specified project
@@ -951,7 +951,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         project: Optional[str] = None,
         instance_template_resource: Optional[compute.InstanceTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an instance template in the specified project
@@ -1062,7 +1062,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of instance templates that are
@@ -1155,7 +1155,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
             compute.GlobalSetPolicyRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1300,7 +1300,7 @@ class InstanceTemplatesClient(metaclass=InstanceTemplatesClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

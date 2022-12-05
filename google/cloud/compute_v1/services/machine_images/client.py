@@ -427,7 +427,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified machine image. Deleting a
@@ -518,7 +518,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified machine image. Deleting a
@@ -633,7 +633,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         machine_image: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.MachineImage:
         r"""Returns the specified machine image. Gets a list of
@@ -728,7 +728,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -857,7 +857,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         machine_image_resource: Optional[compute.MachineImage] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a machine image in the specified project
@@ -945,7 +945,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         project: Optional[str] = None,
         machine_image_resource: Optional[compute.MachineImage] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a machine image in the specified project
@@ -1056,7 +1056,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of machine images that are contained
@@ -1147,7 +1147,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
             compute.GlobalSetPolicyRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1292,7 +1292,7 @@ class MachineImagesClient(metaclass=MachineImagesClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

@@ -432,7 +432,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region: Optional[str] = None,
         health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified regional HealthCheckService.
@@ -536,7 +536,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region: Optional[str] = None,
         health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified regional HealthCheckService.
@@ -665,7 +665,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region: Optional[str] = None,
         health_check_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.HealthCheckService:
         r"""Returns the specified regional HealthCheckService
@@ -770,7 +770,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region: Optional[str] = None,
         health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a regional HealthCheckService resource in the
@@ -872,7 +872,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         region: Optional[str] = None,
         health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a regional HealthCheckService resource in the
@@ -998,7 +998,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists all the HealthCheckService resources that have
@@ -1104,7 +1104,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         health_check_service: Optional[str] = None,
         health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified regional HealthCheckService
@@ -1221,7 +1221,7 @@ class RegionHealthCheckServicesClient(metaclass=RegionHealthCheckServicesClientM
         health_check_service: Optional[str] = None,
         health_check_service_resource: Optional[compute.HealthCheckService] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified regional HealthCheckService

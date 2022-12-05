@@ -432,7 +432,7 @@ class NetworkEdgeSecurityServicesClient(
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all NetworkEdgeSecurityService
@@ -526,7 +526,7 @@ class NetworkEdgeSecurityServicesClient(
         region: Optional[str] = None,
         network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified service.
@@ -632,7 +632,7 @@ class NetworkEdgeSecurityServicesClient(
         region: Optional[str] = None,
         network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified service.
@@ -763,7 +763,7 @@ class NetworkEdgeSecurityServicesClient(
         region: Optional[str] = None,
         network_edge_security_service: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NetworkEdgeSecurityService:
         r"""Gets a specified NetworkEdgeSecurityService.
@@ -871,7 +871,7 @@ class NetworkEdgeSecurityServicesClient(
             compute.NetworkEdgeSecurityService
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new service in the specified project using
@@ -978,7 +978,7 @@ class NetworkEdgeSecurityServicesClient(
             compute.NetworkEdgeSecurityService
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a new service in the specified project using
@@ -1111,7 +1111,7 @@ class NetworkEdgeSecurityServicesClient(
             compute.NetworkEdgeSecurityService
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified policy with the data included
@@ -1237,7 +1237,7 @@ class NetworkEdgeSecurityServicesClient(
             compute.NetworkEdgeSecurityService
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified policy with the data included

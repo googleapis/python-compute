@@ -434,7 +434,7 @@ class RegionNetworkEndpointGroupsClient(
         region: Optional[str] = None,
         network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified network endpoint group. Note
@@ -541,7 +541,7 @@ class RegionNetworkEndpointGroupsClient(
         region: Optional[str] = None,
         network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified network endpoint group. Note
@@ -673,7 +673,7 @@ class RegionNetworkEndpointGroupsClient(
         region: Optional[str] = None,
         network_endpoint_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NetworkEndpointGroup:
         r"""Returns the specified network endpoint group. Gets a
@@ -788,7 +788,7 @@ class RegionNetworkEndpointGroupsClient(
         region: Optional[str] = None,
         network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a network endpoint group in the specified
@@ -893,7 +893,7 @@ class RegionNetworkEndpointGroupsClient(
         region: Optional[str] = None,
         network_endpoint_group_resource: Optional[compute.NetworkEndpointGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a network endpoint group in the specified
@@ -1022,7 +1022,7 @@ class RegionNetworkEndpointGroupsClient(
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of regional network endpoint

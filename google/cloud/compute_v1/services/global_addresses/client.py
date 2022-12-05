@@ -429,7 +429,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         project: Optional[str] = None,
         address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified address resource.
@@ -519,7 +519,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         project: Optional[str] = None,
         address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified address resource.
@@ -633,7 +633,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         project: Optional[str] = None,
         address: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Address:
         r"""Returns the specified address resource. Gets a list
@@ -729,7 +729,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         project: Optional[str] = None,
         address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an address resource in the specified project
@@ -813,7 +813,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         project: Optional[str] = None,
         address_resource: Optional[compute.Address] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an address resource in the specified project
@@ -920,7 +920,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of global addresses.
@@ -1010,7 +1010,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on a GlobalAddress. To learn more
@@ -1115,7 +1115,7 @@ class GlobalAddressesClient(metaclass=GlobalAddressesClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on a GlobalAddress. To learn more

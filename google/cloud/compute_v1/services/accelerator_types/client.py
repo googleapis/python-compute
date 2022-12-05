@@ -429,7 +429,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of accelerator types.
@@ -516,7 +516,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         zone: Optional[str] = None,
         accelerator_type: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.AcceleratorType:
         r"""Returns the specified accelerator type.
@@ -622,7 +622,7 @@ class AcceleratorTypesClient(metaclass=AcceleratorTypesClientMeta):
         project: Optional[str] = None,
         zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of accelerator types that are

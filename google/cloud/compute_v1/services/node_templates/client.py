@@ -428,7 +428,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of node templates.
@@ -515,7 +515,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         node_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NodeTemplate resource.
@@ -616,7 +616,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         node_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified NodeTemplate resource.
@@ -742,7 +742,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         node_template: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NodeTemplate:
         r"""Returns the specified node template. Gets a list of
@@ -845,7 +845,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -985,7 +985,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         node_template_resource: Optional[compute.NodeTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a NodeTemplate resource in the specified
@@ -1084,7 +1084,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         region: Optional[str] = None,
         node_template_resource: Optional[compute.NodeTemplate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a NodeTemplate resource in the specified
@@ -1207,7 +1207,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of node templates available to the
@@ -1313,7 +1313,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
             compute.RegionSetPolicyRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1469,7 +1469,7 @@ class NodeTemplatesClient(metaclass=NodeTemplatesClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

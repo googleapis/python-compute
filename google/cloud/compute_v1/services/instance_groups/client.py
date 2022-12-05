@@ -433,7 +433,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsAddInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds a list of instances to the specified instance
@@ -556,7 +556,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsAddInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds a list of instances to the specified instance
@@ -701,7 +701,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of instance groups and sorts them
@@ -789,7 +789,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         zone: Optional[str] = None,
         instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified instance group. The instances
@@ -893,7 +893,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         zone: Optional[str] = None,
         instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified instance group. The instances
@@ -1022,7 +1022,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         zone: Optional[str] = None,
         instance_group: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceGroup:
         r"""Returns the specified zonal instance group. Get a
@@ -1137,7 +1137,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         zone: Optional[str] = None,
         instance_group_resource: Optional[compute.InstanceGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates an instance group in the specified project
@@ -1236,7 +1236,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         zone: Optional[str] = None,
         instance_group_resource: Optional[compute.InstanceGroup] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates an instance group in the specified project
@@ -1359,7 +1359,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
         project: Optional[str] = None,
         zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of zonal instance group resources
@@ -1469,7 +1469,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsListInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListInstancesPager:
         r"""Lists the instances in the specified instance group. The orderBy
@@ -1605,7 +1605,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsRemoveInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes one or more instances from the specified
@@ -1732,7 +1732,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsRemoveInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes one or more instances from the specified
@@ -1884,7 +1884,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsSetNamedPortsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the named ports for the specified instance
@@ -2007,7 +2007,7 @@ class InstanceGroupsClient(metaclass=InstanceGroupsClientMeta):
             compute.InstanceGroupsSetNamedPortsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the named ports for the specified instance

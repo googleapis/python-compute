@@ -423,7 +423,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
         project: Optional[str] = None,
         license_code: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.LicenseCode:
         r"""Return a specified license code. License codes are mirrored
@@ -524,7 +524,7 @@ class LicenseCodesClient(metaclass=LicenseCodesClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the specified resource.

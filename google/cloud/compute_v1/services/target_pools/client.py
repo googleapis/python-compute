@@ -431,7 +431,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsAddHealthCheckRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds health check URLs to a target pool.
@@ -551,7 +551,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsAddHealthCheckRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds health check URLs to a target pool.
@@ -696,7 +696,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsAddInstanceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds an instance to a target pool.
@@ -811,7 +811,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsAddInstanceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds an instance to a target pool.
@@ -946,7 +946,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target pools.
@@ -1033,7 +1033,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region: Optional[str] = None,
         target_pool: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified target pool.
@@ -1134,7 +1134,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region: Optional[str] = None,
         target_pool: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified target pool.
@@ -1260,7 +1260,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region: Optional[str] = None,
         target_pool: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetPool:
         r"""Returns the specified target pool. Gets a list of
@@ -1368,7 +1368,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         target_pool: Optional[str] = None,
         instance_reference_resource: Optional[compute.InstanceReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetPoolInstanceHealth:
         r"""Gets the most recent health check results for each IP
@@ -1478,7 +1478,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region: Optional[str] = None,
         target_pool_resource: Optional[compute.TargetPool] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a target pool in the specified project and
@@ -1577,7 +1577,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         region: Optional[str] = None,
         target_pool_resource: Optional[compute.TargetPool] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a target pool in the specified project and
@@ -1700,7 +1700,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of target pools available to the
@@ -1809,7 +1809,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsRemoveHealthCheckRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes health check URL from a target pool.
@@ -1929,7 +1929,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsRemoveHealthCheckRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes health check URL from a target pool.
@@ -2072,7 +2072,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsRemoveInstanceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes instance URL from a target pool.
@@ -2192,7 +2192,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
             compute.TargetPoolsRemoveInstanceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes instance URL from a target pool.
@@ -2335,7 +2335,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         target_pool: Optional[str] = None,
         target_reference_resource: Optional[compute.TargetReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes a backup target pool's configurations.
@@ -2446,7 +2446,7 @@ class TargetPoolsClient(metaclass=TargetPoolsClientMeta):
         target_pool: Optional[str] = None,
         target_reference_resource: Optional[compute.TargetReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes a backup target pool's configurations.

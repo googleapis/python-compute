@@ -430,7 +430,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all TargetHttpProxy resources,
@@ -519,7 +519,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project: Optional[str] = None,
         target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetHttpProxy resource.
@@ -609,7 +609,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project: Optional[str] = None,
         target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetHttpProxy resource.
@@ -723,7 +723,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project: Optional[str] = None,
         target_http_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetHttpProxy:
         r"""Returns the specified TargetHttpProxy resource. Gets
@@ -826,7 +826,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project: Optional[str] = None,
         target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetHttpProxy resource in the specified
@@ -910,7 +910,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         project: Optional[str] = None,
         target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetHttpProxy resource in the specified
@@ -1017,7 +1017,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of TargetHttpProxy resources
@@ -1106,7 +1106,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         target_http_proxy: Optional[str] = None,
         target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified TargetHttpProxy resource with
@@ -1209,7 +1209,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         target_http_proxy: Optional[str] = None,
         target_http_proxy_resource: Optional[compute.TargetHttpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified TargetHttpProxy resource with
@@ -1336,7 +1336,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         target_http_proxy: Optional[str] = None,
         url_map_reference_resource: Optional[compute.UrlMapReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the URL map for TargetHttpProxy.
@@ -1436,7 +1436,7 @@ class TargetHttpProxiesClient(metaclass=TargetHttpProxiesClientMeta):
         target_http_proxy: Optional[str] = None,
         url_map_reference_resource: Optional[compute.UrlMapReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the URL map for TargetHttpProxy.

@@ -427,7 +427,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         region: Optional[str] = None,
         disk_type: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DiskType:
         r"""Returns the specified regional disk type. Gets a list
@@ -535,7 +535,7 @@ class RegionDiskTypesClient(metaclass=RegionDiskTypesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of regional disk types available to

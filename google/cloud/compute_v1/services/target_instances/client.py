@@ -430,7 +430,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of target instances.
@@ -517,7 +517,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         zone: Optional[str] = None,
         target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetInstance resource.
@@ -618,7 +618,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         zone: Optional[str] = None,
         target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetInstance resource.
@@ -744,7 +744,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         zone: Optional[str] = None,
         target_instance: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetInstance:
         r"""Returns the specified TargetInstance resource. Gets a
@@ -853,7 +853,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         zone: Optional[str] = None,
         target_instance_resource: Optional[compute.TargetInstance] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetInstance resource in the specified
@@ -952,7 +952,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         zone: Optional[str] = None,
         target_instance_resource: Optional[compute.TargetInstance] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetInstance resource in the specified
@@ -1075,7 +1075,7 @@ class TargetInstancesClient(metaclass=TargetInstancesClientMeta):
         project: Optional[str] = None,
         zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of TargetInstance resources

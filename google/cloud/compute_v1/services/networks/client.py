@@ -430,7 +430,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksAddPeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds a peering to the specified network.
@@ -534,7 +534,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksAddPeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds a peering to the specified network.
@@ -659,7 +659,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified network.
@@ -746,7 +746,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified network.
@@ -857,7 +857,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Network:
         r"""Returns the specified network. Gets a list of
@@ -950,7 +950,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NetworksGetEffectiveFirewallsResponse:
         r"""Returns the effective firewalls on a given network.
@@ -1036,7 +1036,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network_resource: Optional[compute.Network] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a network in the specified project using the
@@ -1119,7 +1119,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network_resource: Optional[compute.Network] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a network in the specified project using the
@@ -1225,7 +1225,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of networks available to the
@@ -1312,7 +1312,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPeeringRoutesPager:
         r"""Lists the peering routes exchanged over peering
@@ -1412,7 +1412,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         network: Optional[str] = None,
         network_resource: Optional[compute.Network] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified network with the data included
@@ -1509,7 +1509,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         network: Optional[str] = None,
         network_resource: Optional[compute.Network] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified network with the data included
@@ -1632,7 +1632,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksRemovePeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes a peering from the specified network.
@@ -1736,7 +1736,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksRemovePeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes a peering from the specified network.
@@ -1861,7 +1861,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Switches the network mode from auto subnet mode to
@@ -1950,7 +1950,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
         project: Optional[str] = None,
         network: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Switches the network mode from auto subnet mode to
@@ -2066,7 +2066,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksUpdatePeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified network peering with the data included in
@@ -2173,7 +2173,7 @@ class NetworksClient(metaclass=NetworksClientMeta):
             compute.NetworksUpdatePeeringRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified network peering with the data included in

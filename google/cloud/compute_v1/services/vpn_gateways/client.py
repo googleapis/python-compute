@@ -426,7 +426,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of VPN gateways.
@@ -513,7 +513,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified VPN gateway.
@@ -610,7 +610,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified VPN gateway.
@@ -732,7 +732,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.VpnGateway:
         r"""Returns the specified VPN gateway. Gets a list of
@@ -836,7 +836,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.VpnGatewaysGetStatusResponse:
         r"""Returns the status for the specified VPN gateway.
@@ -931,7 +931,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway_resource: Optional[compute.VpnGateway] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a VPN gateway in the specified project and
@@ -1028,7 +1028,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         region: Optional[str] = None,
         vpn_gateway_resource: Optional[compute.VpnGateway] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a VPN gateway in the specified project and
@@ -1149,7 +1149,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of VPN gateways available to the
@@ -1254,7 +1254,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
             compute.RegionSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on a VpnGateway. To learn more about
@@ -1368,7 +1368,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
             compute.RegionSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on a VpnGateway. To learn more about
@@ -1509,7 +1509,7 @@ class VpnGatewaysClient(metaclass=VpnGatewaysClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

@@ -430,7 +430,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of commitments by
@@ -518,7 +518,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         region: Optional[str] = None,
         commitment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Commitment:
         r"""Returns the specified commitment resource. Gets a
@@ -624,7 +624,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         region: Optional[str] = None,
         commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a commitment in the specified project using
@@ -721,7 +721,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         region: Optional[str] = None,
         commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a commitment in the specified project using
@@ -842,7 +842,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of commitments contained within the
@@ -945,7 +945,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         commitment: Optional[str] = None,
         commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified commitment with the data included in the
@@ -1055,7 +1055,7 @@ class RegionCommitmentsClient(metaclass=RegionCommitmentsClientMeta):
         commitment: Optional[str] = None,
         commitment_resource: Optional[compute.Commitment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified commitment with the data included in the

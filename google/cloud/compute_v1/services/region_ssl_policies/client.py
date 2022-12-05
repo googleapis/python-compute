@@ -430,7 +430,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         region: Optional[str] = None,
         ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified SSL policy. The SSL policy
@@ -534,7 +534,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         region: Optional[str] = None,
         ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified SSL policy. The SSL policy
@@ -663,7 +663,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         region: Optional[str] = None,
         ssl_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslPolicy:
         r"""Lists all of the ordered rules present in a single
@@ -770,7 +770,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         region: Optional[str] = None,
         ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project and
@@ -869,7 +869,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         region: Optional[str] = None,
         ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a new policy in the specified project and
@@ -992,7 +992,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists all the SSL policies that have been configured
@@ -1095,7 +1095,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslPoliciesListAvailableFeaturesResponse:
         r"""Lists all features that can be specified in the SSL
@@ -1188,7 +1188,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         ssl_policy: Optional[str] = None,
         ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified SSL policy with the data
@@ -1299,7 +1299,7 @@ class RegionSslPoliciesClient(metaclass=RegionSslPoliciesClientMeta):
         ssl_policy: Optional[str] = None,
         ssl_policy_resource: Optional[compute.SslPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified SSL policy with the data

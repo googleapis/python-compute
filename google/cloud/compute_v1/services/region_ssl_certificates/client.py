@@ -432,7 +432,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource in the
@@ -536,7 +536,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified SslCertificate resource in the
@@ -663,7 +663,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslCertificate:
         r"""Returns the specified SslCertificate resource in the
@@ -782,7 +782,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region: Optional[str] = None,
         ssl_certificate_resource: Optional[compute.SslCertificate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a SslCertificate resource in the specified
@@ -884,7 +884,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         region: Optional[str] = None,
         ssl_certificate_resource: Optional[compute.SslCertificate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a SslCertificate resource in the specified
@@ -1008,7 +1008,7 @@ class RegionSslCertificatesClient(metaclass=RegionSslCertificatesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of SslCertificate resources

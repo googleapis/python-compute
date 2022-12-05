@@ -429,7 +429,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project: Optional[str] = None,
         target_ssl_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetSslProxy resource.
@@ -519,7 +519,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project: Optional[str] = None,
         target_ssl_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetSslProxy resource.
@@ -633,7 +633,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project: Optional[str] = None,
         target_ssl_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetSslProxy:
         r"""Returns the specified TargetSslProxy resource. Gets a
@@ -731,7 +731,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project: Optional[str] = None,
         target_ssl_proxy_resource: Optional[compute.TargetSslProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetSslProxy resource in the specified
@@ -815,7 +815,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         project: Optional[str] = None,
         target_ssl_proxy_resource: Optional[compute.TargetSslProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetSslProxy resource in the specified
@@ -922,7 +922,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of TargetSslProxy resources
@@ -1016,7 +1016,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetBackendServiceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the BackendService for TargetSslProxy.
@@ -1127,7 +1127,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetBackendServiceRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the BackendService for TargetSslProxy.
@@ -1262,7 +1262,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetCertificateMapRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the Certificate Map for TargetSslProxy.
@@ -1374,7 +1374,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetCertificateMapRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the Certificate Map for TargetSslProxy.
@@ -1510,7 +1510,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetProxyHeaderRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the ProxyHeaderType for TargetSslProxy.
@@ -1620,7 +1620,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetProxyHeaderRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the ProxyHeaderType for TargetSslProxy.
@@ -1754,7 +1754,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetSslCertificatesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes SslCertificates for TargetSslProxy.
@@ -1865,7 +1865,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
             compute.TargetSslProxiesSetSslCertificatesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes SslCertificates for TargetSslProxy.
@@ -1998,7 +1998,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         target_ssl_proxy: Optional[str] = None,
         ssl_policy_reference_resource: Optional[compute.SslPolicyReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the SSL policy for TargetSslProxy. The SSL
@@ -2106,7 +2106,7 @@ class TargetSslProxiesClient(metaclass=TargetSslProxiesClientMeta):
         target_ssl_proxy: Optional[str] = None,
         ssl_policy_reference_resource: Optional[compute.SslPolicyReference] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the SSL policy for TargetSslProxy. The SSL

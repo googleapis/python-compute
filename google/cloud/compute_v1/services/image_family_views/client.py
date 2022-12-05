@@ -426,7 +426,7 @@ class ImageFamilyViewsClient(metaclass=ImageFamilyViewsClientMeta):
         zone: Optional[str] = None,
         family: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ImageFamilyView:
         r"""Returns the latest image that is part of an image

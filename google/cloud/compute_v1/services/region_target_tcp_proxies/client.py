@@ -432,7 +432,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         region: Optional[str] = None,
         target_tcp_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -535,7 +535,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         region: Optional[str] = None,
         target_tcp_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified TargetTcpProxy resource.
@@ -661,7 +661,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         region: Optional[str] = None,
         target_tcp_proxy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TargetTcpProxy:
         r"""Returns the specified TargetTcpProxy resource.
@@ -770,7 +770,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         region: Optional[str] = None,
         target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -872,7 +872,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         region: Optional[str] = None,
         target_tcp_proxy_resource: Optional[compute.TargetTcpProxy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a TargetTcpProxy resource in the specified
@@ -998,7 +998,7 @@ class RegionTargetTcpProxiesClient(metaclass=RegionTargetTcpProxiesClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of TargetTcpProxy resources

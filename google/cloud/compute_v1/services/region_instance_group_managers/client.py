@@ -437,7 +437,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersAbandonInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified instances to be immediately
@@ -577,7 +577,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersAbandonInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified instances to be immediately
@@ -744,7 +744,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersApplyUpdatesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Apply updates to selected instances the managed
@@ -878,7 +878,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersApplyUpdatesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Apply updates to selected instances the managed
@@ -1035,7 +1035,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersCreateInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates instances with per-instance configurations in
@@ -1170,7 +1170,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersCreateInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates instances with per-instance configurations in
@@ -1327,7 +1327,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified managed instance group and all
@@ -1431,7 +1431,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified managed instance group and all
@@ -1563,7 +1563,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersDeleteInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified instances in the managed instance
@@ -1702,7 +1702,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersDeleteInstancesRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified instances in the managed instance
@@ -1868,7 +1868,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerDeleteInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes selected per-instance configurations for the
@@ -2002,7 +2002,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerDeleteInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes selected per-instance configurations for the
@@ -2156,7 +2156,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InstanceGroupManager:
         r"""Returns all of the details about the specified
@@ -2267,7 +2267,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a managed instance group using the
@@ -2378,7 +2378,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a managed instance group using the
@@ -2513,7 +2513,7 @@ class RegionInstanceGroupManagersClient(
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of managed instance groups that
@@ -2619,7 +2619,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListErrorsPager:
         r"""Lists all errors thrown by actions on instances for a
@@ -2738,7 +2738,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListManagedInstancesPager:
         r"""Lists the instances in the managed instance group and instances
@@ -2863,7 +2863,7 @@ class RegionInstanceGroupManagersClient(
         region: Optional[str] = None,
         instance_group_manager: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPerInstanceConfigsPager:
         r"""Lists all of the per-instance configurations defined
@@ -2985,7 +2985,7 @@ class RegionInstanceGroupManagersClient(
         instance_group_manager: Optional[str] = None,
         instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates a managed instance group using the
@@ -3113,7 +3113,7 @@ class RegionInstanceGroupManagersClient(
         instance_group_manager: Optional[str] = None,
         instance_group_manager_resource: Optional[compute.InstanceGroupManager] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates a managed instance group using the
@@ -3270,7 +3270,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerPatchInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts or patches per-instance configurations for
@@ -3406,7 +3406,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerPatchInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts or patches per-instance configurations for
@@ -3565,7 +3565,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersRecreateRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Flags the specified VM instances in the managed
@@ -3702,7 +3702,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersRecreateRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Flags the specified VM instances in the managed
@@ -3862,7 +3862,7 @@ class RegionInstanceGroupManagersClient(
         instance_group_manager: Optional[str] = None,
         size: Optional[int] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Changes the intended size of the managed instance
@@ -3985,7 +3985,7 @@ class RegionInstanceGroupManagersClient(
         instance_group_manager: Optional[str] = None,
         size: Optional[int] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Changes the intended size of the managed instance
@@ -4135,7 +4135,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersSetTemplateRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the instance template to use when creating new
@@ -4263,7 +4263,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersSetTemplateRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the instance template to use when creating new
@@ -4416,7 +4416,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersSetTargetPoolsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Modifies the target pools to which all new instances
@@ -4543,7 +4543,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagersSetTargetPoolsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Modifies the target pools to which all new instances
@@ -4697,7 +4697,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerUpdateInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts or updates per-instance configurations for
@@ -4833,7 +4833,7 @@ class RegionInstanceGroupManagersClient(
             compute.RegionInstanceGroupManagerUpdateInstanceConfigReq
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts or updates per-instance configurations for

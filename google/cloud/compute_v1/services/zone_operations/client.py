@@ -427,7 +427,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         zone: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteZoneOperationResponse:
         r"""Deletes the specified zone-specific Operations
@@ -528,7 +528,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         zone: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified zone-specific Operations
@@ -640,7 +640,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         project: Optional[str] = None,
         zone: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of Operation resources contained
@@ -742,7 +742,7 @@ class ZoneOperationsClient(metaclass=ZoneOperationsClientMeta):
         zone: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Waits for the specified Operation resource to return as ``DONE``

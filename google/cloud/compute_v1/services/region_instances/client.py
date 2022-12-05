@@ -431,7 +431,7 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
             compute.BulkInsertInstanceResource
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates multiple instances in a given region. Count
@@ -536,7 +536,7 @@ class RegionInstancesClient(metaclass=RegionInstancesClientMeta):
             compute.BulkInsertInstanceResource
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates multiple instances in a given region. Count

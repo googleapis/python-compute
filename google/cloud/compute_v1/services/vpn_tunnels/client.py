@@ -426,7 +426,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves an aggregated list of VPN tunnels.
@@ -513,7 +513,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         region: Optional[str] = None,
         vpn_tunnel: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified VpnTunnel resource.
@@ -612,7 +612,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         region: Optional[str] = None,
         vpn_tunnel: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified VpnTunnel resource.
@@ -736,7 +736,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         region: Optional[str] = None,
         vpn_tunnel: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.VpnTunnel:
         r"""Returns the specified VpnTunnel resource. Gets a list
@@ -836,7 +836,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         region: Optional[str] = None,
         vpn_tunnel_resource: Optional[compute.VpnTunnel] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a VpnTunnel resource in the specified project
@@ -933,7 +933,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         region: Optional[str] = None,
         vpn_tunnel_resource: Optional[compute.VpnTunnel] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a VpnTunnel resource in the specified project
@@ -1054,7 +1054,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of VpnTunnel resources contained in
@@ -1158,7 +1158,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
             compute.RegionSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on a VpnTunnel. To learn more about
@@ -1272,7 +1272,7 @@ class VpnTunnelsClient(metaclass=VpnTunnelsClientMeta):
             compute.RegionSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on a VpnTunnel. To learn more about

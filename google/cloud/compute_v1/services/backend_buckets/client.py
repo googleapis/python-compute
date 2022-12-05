@@ -432,7 +432,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Adds a key for validating requests with signed URLs
@@ -535,7 +535,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         signed_url_key_resource: Optional[compute.SignedUrlKey] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Adds a key for validating requests with signed URLs
@@ -659,7 +659,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project: Optional[str] = None,
         backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified BackendBucket resource.
@@ -749,7 +749,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project: Optional[str] = None,
         backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified BackendBucket resource.
@@ -866,7 +866,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         key_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a key for validating requests with signed
@@ -971,7 +971,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         key_name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes a key for validating requests with signed
@@ -1097,7 +1097,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project: Optional[str] = None,
         backend_bucket: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.BackendBucket:
         r"""Returns the specified BackendBucket resource. Gets a
@@ -1192,7 +1192,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a BackendBucket resource in the specified
@@ -1276,7 +1276,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         project: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a BackendBucket resource in the specified
@@ -1383,7 +1383,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of BackendBucket resources
@@ -1473,7 +1473,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified BackendBucket resource with the
@@ -1574,7 +1574,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified BackendBucket resource with the
@@ -1703,7 +1703,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
             compute.SecurityPolicyReference
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the edge security policy for the specified
@@ -1811,7 +1811,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
             compute.SecurityPolicyReference
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the edge security policy for the specified
@@ -1939,7 +1939,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified BackendBucket resource with the
@@ -2038,7 +2038,7 @@ class BackendBucketsClient(metaclass=BackendBucketsClientMeta):
         backend_bucket: Optional[str] = None,
         backend_bucket_resource: Optional[compute.BackendBucket] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified BackendBucket resource with the

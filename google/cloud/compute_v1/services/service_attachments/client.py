@@ -430,7 +430,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all ServiceAttachment
@@ -523,7 +523,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified ServiceAttachment in the given
@@ -623,7 +623,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified ServiceAttachment in the given
@@ -748,7 +748,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         service_attachment: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.ServiceAttachment:
         r"""Returns the specified ServiceAttachment resource in
@@ -857,7 +857,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -997,7 +997,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a ServiceAttachment in the specified project
@@ -1095,7 +1095,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         region: Optional[str] = None,
         service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a ServiceAttachment in the specified project
@@ -1217,7 +1217,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the ServiceAttachments for a project in the
@@ -1318,7 +1318,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         service_attachment: Optional[str] = None,
         service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified ServiceAttachment resource with
@@ -1434,7 +1434,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
         service_attachment: Optional[str] = None,
         service_attachment_resource: Optional[compute.ServiceAttachment] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified ServiceAttachment resource with
@@ -1579,7 +1579,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
             compute.RegionSetPolicyRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -1735,7 +1735,7 @@ class ServiceAttachmentsClient(metaclass=ServiceAttachmentsClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

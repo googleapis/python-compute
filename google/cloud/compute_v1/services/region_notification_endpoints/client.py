@@ -434,7 +434,7 @@ class RegionNotificationEndpointsClient(
         region: Optional[str] = None,
         notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified NotificationEndpoint in the
@@ -538,7 +538,7 @@ class RegionNotificationEndpointsClient(
         region: Optional[str] = None,
         notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified NotificationEndpoint in the
@@ -667,7 +667,7 @@ class RegionNotificationEndpointsClient(
         region: Optional[str] = None,
         notification_endpoint: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.NotificationEndpoint:
         r"""Returns the specified NotificationEndpoint resource
@@ -776,7 +776,7 @@ class RegionNotificationEndpointsClient(
         region: Optional[str] = None,
         notification_endpoint_resource: Optional[compute.NotificationEndpoint] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Create a NotificationEndpoint in the specified
@@ -878,7 +878,7 @@ class RegionNotificationEndpointsClient(
         region: Optional[str] = None,
         notification_endpoint_resource: Optional[compute.NotificationEndpoint] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Create a NotificationEndpoint in the specified
@@ -1004,7 +1004,7 @@ class RegionNotificationEndpointsClient(
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the NotificationEndpoints for a project in the

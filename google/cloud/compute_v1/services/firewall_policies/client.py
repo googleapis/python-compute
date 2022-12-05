@@ -433,7 +433,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
             compute.FirewallPolicyAssociation
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts an association for the specified firewall
@@ -529,7 +529,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
             compute.FirewallPolicyAssociation
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts an association for the specified firewall
@@ -644,7 +644,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts a rule into a firewall policy.
@@ -731,7 +731,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts a rule into a firewall policy.
@@ -840,7 +840,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Copies rules to the specified firewall policy.
@@ -919,7 +919,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Copies rules to the specified firewall policy.
@@ -1021,7 +1021,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified policy.
@@ -1100,7 +1100,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified policy.
@@ -1202,7 +1202,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.FirewallPolicy:
         r"""Returns the specified firewall policy.
@@ -1281,7 +1281,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.FirewallPolicyAssociation:
         r"""Gets an association with the specified name.
@@ -1360,7 +1360,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         resource: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Gets the access control policy for a resource. May be
@@ -1476,7 +1476,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.FirewallPolicyRule:
         r"""Gets a rule of the specified priority.
@@ -1558,7 +1558,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         parent_id: Optional[str] = None,
         firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project using
@@ -1640,7 +1640,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         parent_id: Optional[str] = None,
         firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a new policy in the specified project using
@@ -1744,7 +1744,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         request: Optional[Union[compute.ListFirewallPoliciesRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists all the policies that have been configured for
@@ -1807,7 +1807,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.FirewallPoliciesListAssociationsResponse:
         r"""Lists associations of a specified target, i.e.,
@@ -1858,7 +1858,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         parent_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Moves the specified firewall policy.
@@ -1947,7 +1947,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         parent_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Moves the specified firewall policy.
@@ -2060,7 +2060,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified policy with the data included
@@ -2148,7 +2148,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_resource: Optional[compute.FirewallPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified policy with the data included
@@ -2259,7 +2259,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches a rule of the specified priority.
@@ -2346,7 +2346,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         firewall_policy: Optional[str] = None,
         firewall_policy_rule_resource: Optional[compute.FirewallPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches a rule of the specified priority.
@@ -2457,7 +2457,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Removes an association for the specified firewall
@@ -2539,7 +2539,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Removes an association for the specified firewall
@@ -2642,7 +2642,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a rule of the specified priority.
@@ -2721,7 +2721,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
         *,
         firewall_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes a rule of the specified priority.
@@ -2828,7 +2828,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
             compute.GlobalOrganizationSetPolicyRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Policy:
         r"""Sets the access control policy on the specified
@@ -2960,7 +2960,7 @@ class FirewallPoliciesClient(metaclass=FirewallPoliciesClientMeta):
             compute.TestPermissionsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.TestPermissionsResponse:
         r"""Returns permissions that a caller has on the

@@ -427,7 +427,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         project: Optional[str] = None,
         route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified Route resource.
@@ -514,7 +514,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         project: Optional[str] = None,
         route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified Route resource.
@@ -625,7 +625,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         project: Optional[str] = None,
         route: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Route:
         r"""Returns the specified Route resource. Gets a list of
@@ -717,7 +717,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         project: Optional[str] = None,
         route_resource: Optional[compute.Route] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a Route resource in the specified project
@@ -800,7 +800,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         project: Optional[str] = None,
         route_resource: Optional[compute.Route] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a Route resource in the specified project
@@ -906,7 +906,7 @@ class RoutesClient(metaclass=RoutesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of Route resources available to

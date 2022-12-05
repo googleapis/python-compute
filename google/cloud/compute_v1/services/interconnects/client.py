@@ -427,7 +427,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified interconnect.
@@ -515,7 +515,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified interconnect.
@@ -627,7 +627,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Interconnect:
         r"""Returns the specified interconnect. Get a list of
@@ -722,7 +722,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.InterconnectsGetDiagnosticsResponse:
         r"""Returns the interconnectDiagnostics for the specified
@@ -813,7 +813,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a Interconnect in the specified project using
@@ -897,7 +897,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         project: Optional[str] = None,
         interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a Interconnect in the specified project using
@@ -1004,7 +1004,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of interconnect available to the
@@ -1094,7 +1094,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         interconnect: Optional[str] = None,
         interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Updates the specified interconnect with the data
@@ -1193,7 +1193,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
         interconnect: Optional[str] = None,
         interconnect_resource: Optional[compute.Interconnect] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Updates the specified interconnect with the data
@@ -1318,7 +1318,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on an Interconnect. To learn more
@@ -1423,7 +1423,7 @@ class InterconnectsClient(metaclass=InterconnectsClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on an Interconnect. To learn more

@@ -430,7 +430,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_rule_resource: Optional[compute.SecurityPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Inserts a rule into a security policy.
@@ -530,7 +530,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_rule_resource: Optional[compute.SecurityPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Inserts a rule into a security policy.
@@ -654,7 +654,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all SecurityPolicy resources,
@@ -743,7 +743,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified policy.
@@ -833,7 +833,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified policy.
@@ -947,7 +947,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SecurityPolicy:
         r"""List all of the ordered rules present in a single
@@ -1040,7 +1040,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SecurityPolicyRule:
         r"""Gets a rule at the specified priority.
@@ -1132,7 +1132,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a new policy in the specified project using
@@ -1216,7 +1216,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a new policy in the specified project using
@@ -1323,7 +1323,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""List all the policies that have been configured for
@@ -1411,7 +1411,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse:
         r"""Gets the current list of preconfigured Web
@@ -1493,7 +1493,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified policy with the data included
@@ -1596,7 +1596,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_resource: Optional[compute.SecurityPolicy] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified policy with the data included
@@ -1723,7 +1723,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_rule_resource: Optional[compute.SecurityPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches a rule at the specified priority.
@@ -1823,7 +1823,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         security_policy: Optional[str] = None,
         security_policy_rule_resource: Optional[compute.SecurityPolicyRule] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches a rule at the specified priority.
@@ -1946,7 +1946,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes a rule at the specified priority.
@@ -2036,7 +2036,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
         project: Optional[str] = None,
         security_policy: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes a rule at the specified priority.
@@ -2153,7 +2153,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Sets the labels on a security policy. To learn more
@@ -2258,7 +2258,7 @@ class SecurityPoliciesClient(metaclass=SecurityPoliciesClientMeta):
             compute.GlobalSetLabelsRequest
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Sets the labels on a security policy. To learn more

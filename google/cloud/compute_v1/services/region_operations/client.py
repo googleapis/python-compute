@@ -427,7 +427,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         region: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.DeleteRegionOperationResponse:
         r"""Deletes the specified region-specific Operations
@@ -528,7 +528,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         region: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Retrieves the specified region-specific Operations
@@ -640,7 +640,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         project: Optional[str] = None,
         region: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves a list of Operation resources contained
@@ -742,7 +742,7 @@ class RegionOperationsClient(metaclass=RegionOperationsClientMeta):
         region: Optional[str] = None,
         operation: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Waits for the specified Operation resource to return as ``DONE``

@@ -433,7 +433,7 @@ class GlobalPublicDelegatedPrefixesClient(
         project: Optional[str] = None,
         public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified global PublicDelegatedPrefix.
@@ -525,7 +525,7 @@ class GlobalPublicDelegatedPrefixesClient(
         project: Optional[str] = None,
         public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified global PublicDelegatedPrefix.
@@ -641,7 +641,7 @@ class GlobalPublicDelegatedPrefixesClient(
         project: Optional[str] = None,
         public_delegated_prefix: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.PublicDelegatedPrefix:
         r"""Returns the specified global PublicDelegatedPrefix
@@ -743,7 +743,7 @@ class GlobalPublicDelegatedPrefixesClient(
             compute.PublicDelegatedPrefix
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a global PublicDelegatedPrefix in the
@@ -834,7 +834,7 @@ class GlobalPublicDelegatedPrefixesClient(
             compute.PublicDelegatedPrefix
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a global PublicDelegatedPrefix in the
@@ -946,7 +946,7 @@ class GlobalPublicDelegatedPrefixesClient(
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Lists the global PublicDelegatedPrefixes for a
@@ -1038,7 +1038,7 @@ class GlobalPublicDelegatedPrefixesClient(
             compute.PublicDelegatedPrefix
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Patches the specified global PublicDelegatedPrefix
@@ -1147,7 +1147,7 @@ class GlobalPublicDelegatedPrefixesClient(
             compute.PublicDelegatedPrefix
         ] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Patches the specified global PublicDelegatedPrefix

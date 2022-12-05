@@ -430,7 +430,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.AggregatedListPager:
         r"""Retrieves the list of all SslCertificate resources,
@@ -519,7 +519,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Deletes the specified SslCertificate resource.
@@ -609,7 +609,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Deletes the specified SslCertificate resource.
@@ -723,7 +723,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project: Optional[str] = None,
         ssl_certificate: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.SslCertificate:
         r"""Returns the specified SslCertificate resource. Gets a
@@ -829,7 +829,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project: Optional[str] = None,
         ssl_certificate_resource: Optional[compute.SslCertificate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> compute.Operation:
         r"""Creates a SslCertificate resource in the specified
@@ -913,7 +913,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         project: Optional[str] = None,
         ssl_certificate_resource: Optional[compute.SslCertificate] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> extended_operation.ExtendedOperation:
         r"""Creates a SslCertificate resource in the specified
@@ -1020,7 +1020,7 @@ class SslCertificatesClient(metaclass=SslCertificatesClientMeta):
         *,
         project: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListPager:
         r"""Retrieves the list of SslCertificate resources
