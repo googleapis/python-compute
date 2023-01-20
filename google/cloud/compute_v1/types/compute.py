@@ -93,6 +93,8 @@ __protobuf__ = proto.module(
         "AggregatedListVpnGatewaysRequest",
         "AggregatedListVpnTunnelsRequest",
         "AliasIpRange",
+        "AllocationResourceStatus",
+        "AllocationResourceStatusSpecificSKUAllocation",
         "AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk",
         "AllocationSpecificSKUAllocationReservedInstanceProperties",
         "AllocationSpecificSKUReservation",
@@ -9385,6 +9387,45 @@ class AliasIpRange(proto.Message):
     )
 
 
+class AllocationResourceStatus(proto.Message):
+    r"""
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        specific_sku_allocation (google.cloud.compute_v1.types.AllocationResourceStatusSpecificSKUAllocation):
+
+            This field is a member of `oneof`_ ``_specific_sku_allocation``.
+    """
+
+    specific_sku_allocation: "AllocationResourceStatusSpecificSKUAllocation" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=196231151,
+            optional=True,
+            message="AllocationResourceStatusSpecificSKUAllocation",
+        )
+    )
+
+
+class AllocationResourceStatusSpecificSKUAllocation(proto.Message):
+    r"""
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        source_instance_template_id (str):
+
+            This field is a member of `oneof`_ ``_source_instance_template_id``.
+    """
+
+    source_instance_template_id: str = proto.Field(
+        proto.STRING,
+        number=111196154,
+        optional=True,
+    )
+
+
 class AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk(
     proto.Message
 ):
@@ -9525,6 +9566,19 @@ class AllocationSpecificSKUReservation(proto.Message):
             The instance properties for the reservation.
 
             This field is a member of `oneof`_ ``_instance_properties``.
+        source_instance_template (str):
+            Specifies the instance template to create the
+            reservation. If you use this field, you must
+            exclude the instanceProperties field. This field
+            is optional, and it can be a full or partial
+            URL. For example, the following are all valid
+            URLs to an instance template: -
+            https://www.googleapis.com/compute/v1/projects/project
+            /global/instanceTemplates/instanceTemplate -
+            projects/project/global/instanceTemplates/instanceTemplate
+            - global/instanceTemplates/instanceTemplate
+
+            This field is a member of `oneof`_ ``_source_instance_template``.
     """
 
     assured_count: int = proto.Field(
@@ -9549,6 +9603,11 @@ class AllocationSpecificSKUReservation(proto.Message):
             optional=True,
             message="AllocationSpecificSKUAllocationReservedInstanceProperties",
         )
+    )
+    source_instance_template: str = proto.Field(
+        proto.STRING,
+        number=332423616,
+        optional=True,
     )
 
 
@@ -24632,10 +24691,8 @@ class FirewallPolicyRule(proto.Message):
 
     Attributes:
         action (str):
-            The Action to perform when the client
-            connection triggers the rule. Can currently be
-            either "allow" or "deny()" where valid values
-            for status are 403, 404, and 502.
+            The Action to perform when the client connection triggers
+            the rule. Valid actions are "allow", "deny" and "goto_next".
 
             This field is a member of `oneof`_ ``_action``.
         description (str):
@@ -25312,13 +25369,16 @@ class ForwardingRule(proto.Message):
             in the same region as the forwarding rule. For global
             forwarding rules, this target must be a global load
             balancing resource. The forwarded traffic must be of a type
-            appropriate to the target object. For more information, see
+            appropriate to the target object. - For load balancers, see
             the "Target" column in `Port
             specifications <https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications>`__.
-            For Private Service Connect forwarding rules that forward
+            - For Private Service Connect forwarding rules that forward
             traffic to Google APIs, provide the name of a supported
             Google API bundle: - vpc-sc - APIs that support VPC Service
-            Controls. - all-apis - All supported Google APIs.
+            Controls. - all-apis - All supported Google APIs. - For
+            Private Service Connect forwarding rules that forward
+            traffic to managed services, the target must be a service
+            attachment.
 
             This field is a member of `oneof`_ ``_target``.
     """
@@ -30180,6 +30240,8 @@ class GuestOsFeature(proto.Message):
 
             SEV_CAPABLE (87083793):
 
+            SEV_SNP_CAPABLE (426919):
+
             UEFI_COMPATIBLE (195865408):
 
             VIRTIO_SCSI_MULTIQUEUE (201597069):
@@ -30193,6 +30255,7 @@ class GuestOsFeature(proto.Message):
         MULTI_IP_SUBNET = 151776719
         SECURE_BOOT = 376811194
         SEV_CAPABLE = 87083793
+        SEV_SNP_CAPABLE = 426919
         UEFI_COMPATIBLE = 195865408
         VIRTIO_SCSI_MULTIQUEUE = 201597069
         WINDOWS = 456863331
@@ -41548,8 +41611,11 @@ class Interconnect(proto.Message):
             operations and maintenance notifications
             regarding this Interconnect. If specified, this
             will be used for notifications in addition to
-            all other forms described, such as Stackdriver
-            logs alerting and Cloud Notifications.
+            all other forms described, such as Cloud
+            Monitoring logs alerting and Cloud
+            Notifications. This field is required for users
+            who sign up for Cloud Interconnect using
+            workforce identity federation.
 
             This field is a member of `oneof`_ ``_noc_contact_email``.
         operational_status (str):
@@ -61008,6 +61074,12 @@ class NetworkInterface(proto.Message):
             global/networks/default
 
             This field is a member of `oneof`_ ``_network``.
+        network_attachment (str):
+            The URL of the network attachment that this interface should
+            connect to in the following format:
+            projects/{project_number}/regions/{region_name}/networkAttachments/{network_attachment_name}.
+
+            This field is a member of `oneof`_ ``_network_attachment``.
         network_i_p (str):
             An IPv4 internal IP address to assign to the
             instance for this network interface. If not
@@ -61170,6 +61242,11 @@ class NetworkInterface(proto.Message):
     network: str = proto.Field(
         proto.STRING,
         number=232872494,
+        optional=True,
+    )
+    network_attachment: str = proto.Field(
+        proto.STRING,
+        number=224644052,
         optional=True,
     )
     network_i_p: str = proto.Field(
@@ -72422,10 +72499,11 @@ class Reservation(proto.Message):
 
             This field is a member of `oneof`_ ``_name``.
         resource_policies (MutableMapping[str, str]):
-            Resource policies to be added to this
-            reservation. The key is defined by user, and the
-            value is resource policy url. This is to define
-            placement policy with reservation.
+
+        resource_status (google.cloud.compute_v1.types.AllocationResourceStatus):
+            [Output Only] Status information for Reservation resource.
+
+            This field is a member of `oneof`_ ``_resource_status``.
         satisfies_pzs (bool):
             [Output Only] Reserved for future use.
 
@@ -72529,6 +72607,12 @@ class Reservation(proto.Message):
         proto.STRING,
         proto.STRING,
         number=22220385,
+    )
+    resource_status: "AllocationResourceStatus" = proto.Field(
+        proto.MESSAGE,
+        number=249429315,
+        optional=True,
+        message="AllocationResourceStatus",
     )
     satisfies_pzs: bool = proto.Field(
         proto.BOOL,
