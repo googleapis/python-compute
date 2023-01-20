@@ -1944,9 +1944,9 @@ class AccessConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DIRECT_IPV6 (4397213):
-
+                No description available.
             ONE_TO_ONE_NAT (84090205):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         DIRECT_IPV6 = 4397213
@@ -3279,7 +3279,7 @@ class Address(proto.Message):
                 Instance or Internal Load Balancer forwarding
                 rule.
             UNSPECIFIED_TYPE (53933922):
-
+                No description available.
         """
         UNDEFINED_ADDRESS_TYPE = 0
         EXTERNAL = 35607499
@@ -3296,11 +3296,11 @@ class Address(proto.Message):
                 A value indicating that the enum field is not
                 set.
             IPV4 (2254341):
-
+                No description available.
             IPV6 (2254343):
-
+                No description available.
             UNSPECIFIED_VERSION (21850000):
-
+                No description available.
         """
         UNDEFINED_IP_VERSION = 0
         IPV4 = 2254341
@@ -9460,9 +9460,9 @@ class AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk(
                 A value indicating that the enum field is not
                 set.
             NVME (2408800):
-
+                No description available.
             SCSI (2539686):
-
+                No description available.
         """
         UNDEFINED_INTERFACE = 0
         NVME = 2408800
@@ -10091,9 +10091,9 @@ class AttachedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NVME (2408800):
-
+                No description available.
             SCSI (2539686):
-
+                No description available.
         """
         UNDEFINED_INTERFACE = 0
         NVME = 2408800
@@ -10130,9 +10130,9 @@ class AttachedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             PERSISTENT (460683927):
-
+                No description available.
             SCRATCH (496778970):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         PERSISTENT = 460683927
@@ -11211,7 +11211,7 @@ class AutoscalerStatusDetails(proto.Message):
                 Autoscaler always recommends at least
                 minNumReplicas instances.
             UNKNOWN (433141802):
-
+                No description available.
             UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION (330845009):
                 Autoscaling does not work with an HTTP/S load
                 balancer that has been configured for maxRate.
@@ -12349,7 +12349,7 @@ class BackendBucketCdnPolicy(proto.Message):
                 may result in Cloud CDN caching private,
                 per-user (user identifiable) content.
             INVALID_CACHE_MODE (381295560):
-
+                No description available.
             USE_ORIGIN_HEADERS (55380261):
                 Requires the origin to set valid caching
                 headers to cache content. Responses without
@@ -12982,7 +12982,7 @@ class BackendService(proto.Message):
                 Signifies that this will be used by Traffic
                 Director.
             INVALID_LOAD_BALANCING_SCHEME (275352060):
-
+                No description available.
         """
         UNDEFINED_LOAD_BALANCING_SCHEME = 0
         EXTERNAL = 35607499
@@ -13026,7 +13026,7 @@ class BackendService(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INVALID_LB_POLICY (323318707):
-
+                No description available.
             LEAST_REQUEST (46604921):
                 An O(1) algorithm which selects two random
                 healthy hosts and picks the host which has fewer
@@ -13085,11 +13085,11 @@ class BackendService(proto.Message):
             GRPC (2196510):
                 gRPC (available for Traffic Director).
             HTTP (2228360):
-
+                No description available.
             HTTP2 (69079210):
                 HTTP/2 with SSL.
             HTTPS (69079243):
-
+                No description available.
             SSL (82412):
                 TCP proxying with SSL.
             TCP (82881):
@@ -13650,7 +13650,7 @@ class BackendServiceCdnPolicy(proto.Message):
                 may result in Cloud CDN caching private,
                 per-user (user identifiable) content.
             INVALID_CACHE_MODE (381295560):
-
+                No description available.
             USE_ORIGIN_HEADERS (55380261):
                 Requires the origin to set valid caching
                 headers to cache content. Responses without
@@ -13881,11 +13881,11 @@ class BackendServiceConnectionTrackingPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ALWAYS_PERSIST (38400900):
-
+                No description available.
             DEFAULT_FOR_PROTOCOL (145265356):
-
+                No description available.
             NEVER_PERSIST (138646241):
-
+                No description available.
         """
         UNDEFINED_CONNECTION_PERSISTENCE_ON_UNHEALTHY_BACKENDS = 0
         ALWAYS_PERSIST = 38400900
@@ -13909,11 +13909,11 @@ class BackendServiceConnectionTrackingPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INVALID_TRACKING_MODE (49234371):
-
+                No description available.
             PER_CONNECTION (85162848):
-
+                No description available.
             PER_SESSION (182099252):
-
+                No description available.
         """
         UNDEFINED_TRACKING_MODE = 0
         INVALID_TRACKING_MODE = 49234371
@@ -14284,7 +14284,7 @@ class BackendServiceLocalityLoadBalancingPolicyConfigPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INVALID_LB_POLICY (323318707):
-
+                No description available.
             LEAST_REQUEST (46604921):
                 An O(1) algorithm which selects two random
                 healthy hosts and picks the host which has fewer
@@ -14533,25 +14533,25 @@ class BfdPacket(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ADMINISTRATIVELY_DOWN (121685798):
-
+                No description available.
             CONCATENATED_PATH_DOWN (26186892):
-
+                No description available.
             CONTROL_DETECTION_TIME_EXPIRED (135478383):
-
+                No description available.
             DIAGNOSTIC_UNSPECIFIED (58720895):
-
+                No description available.
             ECHO_FUNCTION_FAILED (220687466):
-
+                No description available.
             FORWARDING_PLANE_RESET (19715882):
-
+                No description available.
             NEIGHBOR_SIGNALED_SESSION_DOWN (374226742):
-
+                No description available.
             NO_DIAGNOSTIC (222503141):
-
+                No description available.
             PATH_DOWN (290605180):
-
+                No description available.
             REVERSE_CONCATENATED_PATH_DOWN (479337129):
-
+                No description available.
         """
         UNDEFINED_DIAGNOSTIC = 0
         ADMINISTRATIVELY_DOWN = 121685798
@@ -14574,15 +14574,15 @@ class BfdPacket(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ADMIN_DOWN (128544690):
-
+                No description available.
             DOWN (2104482):
-
+                No description available.
             INIT (2252048):
-
+                No description available.
             STATE_UNSPECIFIED (470755401):
-
+                No description available.
             UP (2715):
-
+                No description available.
         """
         UNDEFINED_STATE = 0
         ADMIN_DOWN = 128544690
@@ -14755,11 +14755,11 @@ class BfdStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACTIVE (314733318):
-
+                No description available.
             DISABLED (516696700):
-
+                No description available.
             PASSIVE (462813959):
-
+                No description available.
         """
         UNDEFINED_BFD_SESSION_INITIALIZATION_MODE = 0
         ACTIVE = 314733318
@@ -14778,25 +14778,25 @@ class BfdStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ADMINISTRATIVELY_DOWN (121685798):
-
+                No description available.
             CONCATENATED_PATH_DOWN (26186892):
-
+                No description available.
             CONTROL_DETECTION_TIME_EXPIRED (135478383):
-
+                No description available.
             DIAGNOSTIC_UNSPECIFIED (58720895):
-
+                No description available.
             ECHO_FUNCTION_FAILED (220687466):
-
+                No description available.
             FORWARDING_PLANE_RESET (19715882):
-
+                No description available.
             NEIGHBOR_SIGNALED_SESSION_DOWN (374226742):
-
+                No description available.
             NO_DIAGNOSTIC (222503141):
-
+                No description available.
             PATH_DOWN (290605180):
-
+                No description available.
             REVERSE_CONCATENATED_PATH_DOWN (479337129):
-
+                No description available.
         """
         UNDEFINED_LOCAL_DIAGNOSTIC = 0
         ADMINISTRATIVELY_DOWN = 121685798
@@ -14819,15 +14819,15 @@ class BfdStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ADMIN_DOWN (128544690):
-
+                No description available.
             DOWN (2104482):
-
+                No description available.
             INIT (2252048):
-
+                No description available.
             STATE_UNSPECIFIED (470755401):
-
+                No description available.
             UP (2715):
-
+                No description available.
         """
         UNDEFINED_LOCAL_STATE = 0
         ADMIN_DOWN = 128544690
@@ -15788,11 +15788,11 @@ class Commitment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CATEGORY_UNSPECIFIED (509189462):
-
+                No description available.
             LICENSE (347869217):
-
+                No description available.
             MACHINE (469553191):
-
+                No description available.
         """
         UNDEFINED_CATEGORY = 0
         CATEGORY_UNSPECIFIED = 509189462
@@ -15809,11 +15809,11 @@ class Commitment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INVALID (530283991):
-
+                No description available.
             THIRTY_SIX_MONTH (266295942):
-
+                No description available.
             TWELVE_MONTH (173083962):
-
+                No description available.
         """
         UNDEFINED_PLAN = 0
         INVALID = 530283991
@@ -15830,15 +15830,15 @@ class Commitment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACTIVE (314733318):
-
+                No description available.
             CANCELLED (41957681):
-
+                No description available.
             CREATING (455564985):
-
+                No description available.
             EXPIRED (482489093):
-
+                No description available.
             NOT_YET_ACTIVE (20607337):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         ACTIVE = 314733318
@@ -15859,27 +15859,27 @@ class Commitment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACCELERATOR_OPTIMIZED (280848403):
-
+                No description available.
             COMPUTE_OPTIMIZED (158349023):
-
+                No description available.
             COMPUTE_OPTIMIZED_C2D (383246453):
-
+                No description available.
             GENERAL_PURPOSE (299793543):
-
+                No description available.
             GENERAL_PURPOSE_E2 (301911877):
-
+                No description available.
             GENERAL_PURPOSE_N2 (301912156):
-
+                No description available.
             GENERAL_PURPOSE_N2D (232471400):
-
+                No description available.
             GENERAL_PURPOSE_T2D (232477166):
-
+                No description available.
             MEMORY_OPTIMIZED (281753417):
-
+                No description available.
             MEMORY_OPTIMIZED_M3 (276301372):
-
+                No description available.
             TYPE_UNSPECIFIED (437714322):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         ACCELERATOR_OPTIMIZED = 280848403
@@ -21260,13 +21260,13 @@ class DeprecationStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACTIVE (314733318):
-
+                No description available.
             DELETED (120962041):
-
+                No description available.
             DEPRECATED (463360435):
-
+                No description available.
             OBSOLETE (66532761):
-
+                No description available.
         """
         UNDEFINED_STATE = 0
         ACTIVE = 314733318
@@ -23904,11 +23904,11 @@ class FileContentBuffer(proto.Message):
                 A value indicating that the enum field is not
                 set.
             BIN (65767):
-
+                No description available.
             UNDEFINED (137851184):
-
+                No description available.
             X509 (2674086):
-
+                No description available.
         """
         UNDEFINED_FILE_TYPE = 0
         BIN = 65767
@@ -24319,9 +24319,9 @@ class FirewallLogConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             EXCLUDE_ALL_METADATA (334519954):
-
+                No description available.
             INCLUDE_ALL_METADATA (164619908):
-
+                No description available.
         """
         UNDEFINED_METADATA = 0
         EXCLUDE_ALL_METADATA = 334519954
@@ -24782,9 +24782,9 @@ class FirewallPolicyRule(proto.Message):
                 A value indicating that the enum field is not
                 set.
             EGRESS (432880501):
-
+                No description available.
             INGRESS (516931221):
-
+                No description available.
         """
         UNDEFINED_DIRECTION = 0
         EGRESS = 432880501
@@ -24969,9 +24969,9 @@ class FirewallPolicyRuleSecureTag(proto.Message):
                 A value indicating that the enum field is not
                 set.
             EFFECTIVE (244201863):
-
+                No description available.
             INEFFECTIVE (304458242):
-
+                No description available.
         """
         UNDEFINED_STATE = 0
         EFFECTIVE = 244201863
@@ -25395,19 +25395,19 @@ class ForwardingRule(proto.Message):
                 A value indicating that the enum field is not
                 set.
             AH (2087):
-
+                No description available.
             ESP (68962):
-
+                No description available.
             ICMP (2241597):
-
+                No description available.
             L3_DEFAULT (48151369):
-
+                No description available.
             SCTP (2539724):
-
+                No description available.
             TCP (82881):
-
+                No description available.
             UDP (83873):
-
+                No description available.
         """
         UNDEFINED_I_P_PROTOCOL_ENUM = 0
         AH = 2087
@@ -25427,11 +25427,11 @@ class ForwardingRule(proto.Message):
                 A value indicating that the enum field is not
                 set.
             IPV4 (2254341):
-
+                No description available.
             IPV6 (2254343):
-
+                No description available.
             UNSPECIFIED_VERSION (21850000):
-
+                No description available.
         """
         UNDEFINED_IP_VERSION = 0
         IPV4 = 2254341
@@ -25447,17 +25447,17 @@ class ForwardingRule(proto.Message):
                 A value indicating that the enum field is not
                 set.
             EXTERNAL (35607499):
-
+                No description available.
             EXTERNAL_MANAGED (512006923):
-
+                No description available.
             INTERNAL (279295677):
-
+                No description available.
             INTERNAL_MANAGED (37350397):
-
+                No description available.
             INTERNAL_SELF_MANAGED (236211150):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
         """
         UNDEFINED_LOAD_BALANCING_SCHEME = 0
         EXTERNAL = 35607499
@@ -25524,7 +25524,7 @@ class ForwardingRule(proto.Message):
                 The connection has been rejected by the
                 producer.
             STATUS_UNSPECIFIED (42133066):
-
+                No description available.
         """
         UNDEFINED_PSC_CONNECTION_STATUS = 0
         ACCEPTED = 246714279
@@ -30231,23 +30231,23 @@ class GuestOsFeature(proto.Message):
                 A value indicating that the enum field is not
                 set.
             FEATURE_TYPE_UNSPECIFIED (531767259):
-
+                No description available.
             GVNIC (68209305):
-
+                No description available.
             MULTI_IP_SUBNET (151776719):
-
+                No description available.
             SECURE_BOOT (376811194):
-
+                No description available.
             SEV_CAPABLE (87083793):
-
+                No description available.
             SEV_SNP_CAPABLE (426919):
-
+                No description available.
             UEFI_COMPATIBLE (195865408):
-
+                No description available.
             VIRTIO_SCSI_MULTIQUEUE (201597069):
-
+                No description available.
             WINDOWS (456863331):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         FEATURE_TYPE_UNSPECIFIED = 531767259
@@ -30401,9 +30401,9 @@ class HTTP2HealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -30581,9 +30581,9 @@ class HTTPHealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -30760,9 +30760,9 @@ class HTTPSHealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -30936,19 +30936,19 @@ class HealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             GRPC (2196510):
-
+                No description available.
             HTTP (2228360):
-
+                No description available.
             HTTP2 (69079210):
-
+                No description available.
             HTTPS (69079243):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
             SSL (82412):
-
+                No description available.
             TCP (82881):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         GRPC = 2196510
@@ -31647,9 +31647,9 @@ class HealthStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             HEALTHY (439801213):
-
+                No description available.
             UNHEALTHY (462118084):
-
+                No description available.
         """
         UNDEFINED_HEALTH_STATE = 0
         HEALTHY = 439801213
@@ -31786,13 +31786,13 @@ class HealthStatusForNetworkEndpoint(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DRAINING (480455402):
-
+                No description available.
             HEALTHY (439801213):
-
+                No description available.
             UNHEALTHY (462118084):
-
+                No description available.
             UNKNOWN (433141802):
-
+                No description available.
         """
         UNDEFINED_HEALTH_STATE = 0
         DRAINING = 480455402
@@ -33187,7 +33187,7 @@ class Image(proto.Message):
                 A value indicating that the enum field is not
                 set.
             RAW (80904):
-
+                No description available.
         """
         UNDEFINED_SOURCE_TYPE = 0
         RAW = 80904
@@ -41255,13 +41255,13 @@ class InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy(proto.Messag
                 A value indicating that the enum field is not
                 set.
             HIERARCHY (69902869):
-
+                No description available.
             NETWORK (413984270):
-
+                No description available.
             NETWORK_REGIONAL (190804272):
-
+                No description available.
             UNSPECIFIED (526786327):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         HIERARCHY = 69902869
@@ -42261,11 +42261,11 @@ class InterconnectAttachment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             AVAILABILITY_DOMAIN_1 (349552090):
-
+                No description available.
             AVAILABILITY_DOMAIN_2 (349552091):
-
+                No description available.
             AVAILABILITY_DOMAIN_ANY (375256373):
-
+                No description available.
         """
         UNDEFINED_EDGE_AVAILABILITY_DOMAIN = 0
         AVAILABILITY_DOMAIN_1 = 349552090
@@ -42396,7 +42396,7 @@ class InterconnectAttachment(proto.Message):
                 A newly created PARTNER attachment that has
                 not yet been configured on the Partner side.
             STATE_UNSPECIFIED (470755401):
-
+                No description available.
             UNPROVISIONED (517333979):
                 Indicates that attachment is not ready to use
                 yet, because turnup is not complete.
@@ -43491,25 +43491,25 @@ class InterconnectLocation(proto.Message):
                 A value indicating that the enum field is not
                 set.
             AFRICA (317443706):
-
+                No description available.
             ASIA_PAC (119782269):
-
+                No description available.
             C_AFRICA (71993846):
-
+                No description available.
             C_ASIA_PAC (465668089):
-
+                No description available.
             C_EUROPE (200369438):
-
+                No description available.
             C_NORTH_AMERICA (275697048):
-
+                No description available.
             C_SOUTH_AMERICA (397149792):
-
+                No description available.
             EUROPE (445819298):
-
+                No description available.
             NORTH_AMERICA (448015508):
-
+                No description available.
             SOUTH_AMERICA (32597340):
-
+                No description available.
         """
         UNDEFINED_CONTINENT = 0
         AFRICA = 317443706
@@ -44271,7 +44271,7 @@ class LicenseCode(proto.Message):
                 Use of this license is limited to a project
                 whitelist.
             STATE_UNSPECIFIED (470755401):
-
+                No description available.
             TERMINATED (250018339):
                 Reserved state.
         """
@@ -57860,15 +57860,15 @@ class MachineImage(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CREATING (455564985):
-
+                No description available.
             DELETING (528602024):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
             READY (77848963):
-
+                No description available.
             UPLOADING (267603489):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         CREATING = 455564985
@@ -58588,11 +58588,11 @@ class ManagedInstance(proto.Message):
             STOPPED (444276141):
                 The instance has stopped successfully.
             STOPPING (350791796):
-
+                No description available.
             SUSPENDED (51223995):
                 The instance has suspended.
             SUSPENDING (514206246):
-
+                No description available.
             TERMINATED (250018339):
                 The instance has stopped (either by explicit
                 action or underlying failure).
@@ -59255,9 +59255,9 @@ class Network(proto.Message):
                 A value indicating that the enum field is not
                 set.
             AFTER_CLASSIC_FIREWALL (154582608):
-
+                No description available.
             BEFORE_CLASSIC_FIREWALL (338458349):
-
+                No description available.
         """
         UNDEFINED_NETWORK_FIREWALL_POLICY_ENFORCEMENT_ORDER = 0
         AFTER_CLASSIC_FIREWALL = 154582608
@@ -59450,11 +59450,11 @@ class NetworkAttachment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACCEPT_AUTOMATIC (75250580):
-
+                No description available.
             ACCEPT_MANUAL (373061341):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
         """
         UNDEFINED_CONNECTION_PREFERENCE = 0
         ACCEPT_AUTOMATIC = 75250580
@@ -59667,7 +59667,7 @@ class NetworkAttachmentConnectedEndpoint(proto.Message):
                 The consumer prohibits traffic from the
                 producer to reach its VPC.
             STATUS_UNSPECIFIED (42133066):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         ACCEPTED = 246714279
@@ -60765,7 +60765,7 @@ class NetworkEndpointGroupPscData(proto.Message):
                 The connection has been rejected by the
                 producer.
             STATUS_UNSPECIFIED (42133066):
-
+                No description available.
         """
         UNDEFINED_PSC_CONNECTION_STATUS = 0
         ACCEPTED = 246714279
@@ -61143,7 +61143,7 @@ class NetworkInterface(proto.Message):
                 This network interface can have internal
                 IPv6.
             UNSPECIFIED_IPV6_ACCESS_TYPE (313080613):
-
+                No description available.
         """
         UNDEFINED_IPV6_ACCESS_TYPE = 0
         EXTERNAL = 35607499
@@ -61187,7 +61187,7 @@ class NetworkInterface(proto.Message):
                 The network interface will be assigned IPv4
                 address.
             UNSPECIFIED_STACK_TYPE (298084569):
-
+                No description available.
         """
         UNDEFINED_STACK_TYPE = 0
         IPV4_IPV6 = 22197249
@@ -61573,9 +61573,9 @@ class NetworkPerformanceConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DEFAULT (115302945):
-
+                No description available.
             TIER_1 (326919444):
-
+                No description available.
         """
         UNDEFINED_TOTAL_EGRESS_BANDWIDTH_TIER = 0
         DEFAULT = 115302945
@@ -61623,9 +61623,9 @@ class NetworkRoutingConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             GLOBAL (494663587):
-
+                No description available.
             REGIONAL (92288543):
-
+                No description available.
         """
         UNDEFINED_ROUTING_MODE = 0
         GLOBAL = 494663587
@@ -61762,11 +61762,11 @@ class NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy(proto.Message
                 A value indicating that the enum field is not
                 set.
             HIERARCHY (69902869):
-
+                No description available.
             NETWORK (413984270):
-
+                No description available.
             UNSPECIFIED (526786327):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         HIERARCHY = 69902869
@@ -61952,7 +61952,7 @@ class NodeGroup(proto.Message):
                 Allow the node and corresponding instances to
                 retain default maintenance behavior.
             MAINTENANCE_POLICY_UNSPECIFIED (72964182):
-
+                No description available.
             MIGRATE_WITHIN_NODE_GROUP (153483394):
                 When maintenance must be done on a node, the
                 instances on that node will be moved to other
@@ -61983,13 +61983,13 @@ class NodeGroup(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CREATING (455564985):
-
+                No description available.
             DELETING (528602024):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
             READY (77848963):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         CREATING = 455564985
@@ -62198,7 +62198,7 @@ class NodeGroupAutoscalingPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             MODE_UNSPECIFIED (371348091):
-
+                No description available.
             OFF (78159):
                 Autoscaling is disabled.
             ON (2527):
@@ -62406,11 +62406,11 @@ class NodeGroupNode(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CPU_OVERCOMMIT_TYPE_UNSPECIFIED (520665615):
-
+                No description available.
             ENABLED (182130465):
-
+                No description available.
             NONE (2402104):
-
+                No description available.
         """
         UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
         CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
@@ -62425,15 +62425,15 @@ class NodeGroupNode(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CREATING (455564985):
-
+                No description available.
             DELETING (528602024):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
             READY (77848963):
-
+                No description available.
             REPAIRING (413483285):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         CREATING = 455564985
@@ -62775,11 +62775,11 @@ class NodeTemplate(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CPU_OVERCOMMIT_TYPE_UNSPECIFIED (520665615):
-
+                No description available.
             ENABLED (182130465):
-
+                No description available.
             NONE (2402104):
-
+                No description available.
         """
         UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
         CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
@@ -63835,11 +63835,11 @@ class Operation(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DONE (2104194):
-
+                No description available.
             PENDING (35394935):
-
+                No description available.
             RUNNING (121282975):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         DONE = 2104194
@@ -64377,13 +64377,13 @@ class PacketIntervals(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DURATION_UNSPECIFIED (529071340):
-
+                No description available.
             HOUR (2223588):
-
+                No description available.
             MAX (76100):
                 From BfdSession object creation time.
             MINUTE (126786068):
-
+                No description available.
         """
         UNDEFINED_DURATION = 0
         DURATION_UNSPECIFIED = 529071340
@@ -64408,7 +64408,7 @@ class PacketIntervals(proto.Message):
             TRANSMIT (452903600):
                 Intervals between transmitted packets.
             TYPE_UNSPECIFIED (437714322):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         LOOPBACK = 356174219
@@ -64559,9 +64559,9 @@ class PacketMirroring(proto.Message):
                 A value indicating that the enum field is not
                 set.
             FALSE (66658563):
-
+                No description available.
             TRUE (2583950):
-
+                No description available.
         """
         UNDEFINED_ENABLE = 0
         FALSE = 66658563
@@ -68245,9 +68245,9 @@ class PreservedStatePreservedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NEVER (74175084):
-
+                No description available.
             ON_PERMANENT_INSTANCE_DELETION (95727719):
-
+                No description available.
         """
         UNDEFINED_AUTO_DELETE = 0
         NEVER = 74175084
@@ -68449,13 +68449,13 @@ class Project(proto.Message):
                 A value indicating that the enum field is not
                 set.
             GLOBAL_DEFAULT (345419141):
-
+                No description available.
             UNSPECIFIED_VM_DNS_SETTING (35691930):
-
+                No description available.
             ZONAL_DEFAULT (368475782):
-
+                No description available.
             ZONAL_ONLY (521198951):
-
+                No description available.
         """
         UNDEFINED_VM_DNS_SETTING = 0
         GLOBAL_DEFAULT = 345419141
@@ -68473,9 +68473,9 @@ class Project(proto.Message):
                 A value indicating that the enum field is not
                 set.
             HOST (2223528):
-
+                No description available.
             UNSPECIFIED_XPN_PROJECT_STATUS (340393257):
-
+                No description available.
         """
         UNDEFINED_XPN_PROJECT_STATUS = 0
         HOST = 2223528
@@ -69452,9 +69452,9 @@ class PublicDelegatedPrefixPublicDelegatedSubPrefix(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACTIVE (314733318):
-
+                No description available.
             INACTIVE (270421099):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         ACTIVE = 314733318
@@ -69562,288 +69562,288 @@ class Quota(proto.Message):
                 A value indicating that the enum field is not
                 set.
             A2_CPUS (153206585):
-
+                No description available.
             AFFINITY_GROUPS (108303563):
-
+                No description available.
             AUTOSCALERS (471248988):
-
+                No description available.
             BACKEND_BUCKETS (137626846):
-
+                No description available.
             BACKEND_SERVICES (269623753):
-
+                No description available.
             C2D_CPUS (508182517):
-
+                No description available.
             C2_CPUS (317601211):
-
+                No description available.
             C3_CPUS (346230362):
-
+                No description available.
             COMMITMENTS (456141790):
-
+                No description available.
             COMMITTED_A2_CPUS (59330902):
-
+                No description available.
             COMMITTED_C2D_CPUS (282390904):
-
+                No description available.
             COMMITTED_C2_CPUS (223725528):
-
+                No description available.
             COMMITTED_C3_CPUS (252354679):
-
+                No description available.
             COMMITTED_CPUS (292394702):
-
+                No description available.
             COMMITTED_E2_CPUS (388120154):
-
+                No description available.
             COMMITTED_LICENSES (357606869):
-
+                No description available.
             COMMITTED_LOCAL_SSD_TOTAL_GB (308393480):
-
+                No description available.
             COMMITTED_M3_CPUS (585985):
-
+                No description available.
             COMMITTED_MEMORY_OPTIMIZED_CPUS (489057886):
-
+                No description available.
             COMMITTED_N2A_CPUS (40064304):
-
+                No description available.
             COMMITTED_N2D_CPUS (125951757):
-
+                No description available.
             COMMITTED_N2_CPUS (322589603):
-
+                No description available.
             COMMITTED_NVIDIA_A100_80GB_GPUS (464326565):
-
+                No description available.
             COMMITTED_NVIDIA_A100_GPUS (375799445):
-
+                No description available.
             COMMITTED_NVIDIA_K80_GPUS (3857188):
-
+                No description available.
             COMMITTED_NVIDIA_P100_GPUS (107528100):
-
+                No description available.
             COMMITTED_NVIDIA_P4_GPUS (347952897):
-
+                No description available.
             COMMITTED_NVIDIA_T4_GPUS (139871237):
-
+                No description available.
             COMMITTED_NVIDIA_V100_GPUS (219562):
-
+                No description available.
             COMMITTED_T2A_CPUS (296378986):
-
+                No description available.
             COMMITTED_T2D_CPUS (382266439):
-
+                No description available.
             CPUS (2075595):
                 Guest CPUs
             CPUS_ALL_REGIONS (470911149):
-
+                No description available.
             DISKS_TOTAL_GB (353520543):
-
+                No description available.
             E2_CPUS (481995837):
-
+                No description available.
             EXTERNAL_MANAGED_FORWARDING_RULES (150790089):
-
+                No description available.
             EXTERNAL_NETWORK_LB_FORWARDING_RULES (374298265):
-
+                No description available.
             EXTERNAL_PROTOCOL_FORWARDING_RULES (63478888):
-
+                No description available.
             EXTERNAL_VPN_GATEWAYS (272457134):
-
+                No description available.
             FIREWALLS (374485843):
-
+                No description available.
             FORWARDING_RULES (432668949):
-
+                No description available.
             GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES (164566753):
-
+                No description available.
             GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES (327611949):
-
+                No description available.
             GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES (400256169):
-
+                No description available.
             GLOBAL_INTERNAL_ADDRESSES (42738332):
-
+                No description available.
             GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES (256608303):
-
+                No description available.
             GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES (323514196):
-
+                No description available.
             GPUS_ALL_REGIONS (39387177):
-
+                No description available.
             HEALTH_CHECKS (289347502):
-
+                No description available.
             IMAGES (15562360):
-
+                No description available.
             INSTANCES (131337822):
-
+                No description available.
             INSTANCE_GROUPS (355919038):
-
+                No description available.
             INSTANCE_GROUP_MANAGERS (101798192):
-
+                No description available.
             INSTANCE_TEMPLATES (226188271):
-
+                No description available.
             INTERCONNECTS (415204741):
-
+                No description available.
             INTERCONNECT_ATTACHMENTS_PER_REGION (159968086):
-
+                No description available.
             INTERCONNECT_ATTACHMENTS_TOTAL_MBPS (425090419):
-
+                No description available.
             INTERCONNECT_TOTAL_GBPS (285341866):
-
+                No description available.
             INTERNAL_ADDRESSES (197899392):
-
+                No description available.
             INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES (266433668):
-
+                No description available.
             IN_PLACE_SNAPSHOTS (151359133):
-
+                No description available.
             IN_USE_ADDRESSES (402125072):
-
+                No description available.
             IN_USE_BACKUP_SCHEDULES (32786705):
-
+                No description available.
             IN_USE_SNAPSHOT_SCHEDULES (462104083):
-
+                No description available.
             LOCAL_SSD_TOTAL_GB (330878021):
-
+                No description available.
             M1_CPUS (37203366):
-
+                No description available.
             M2_CPUS (65832517):
-
+                No description available.
             M3_CPUS (94461668):
-
+                No description available.
             MACHINE_IMAGES (446986640):
-
+                No description available.
             N2A_CPUS (265855917):
-
+                No description available.
             N2D_CPUS (351743370):
-
+                No description available.
             N2_CPUS (416465286):
-
+                No description available.
             NETWORKS (485481477):
-
+                No description available.
             NETWORK_ENDPOINT_GROUPS (102144909):
-
+                No description available.
             NETWORK_FIREWALL_POLICIES (101117374):
-
+                No description available.
             NODE_GROUPS (24624817):
-
+                No description available.
             NODE_TEMPLATES (474896668):
-
+                No description available.
             NVIDIA_A100_80GB_GPUS (286389320):
-
+                No description available.
             NVIDIA_A100_GPUS (504872978):
-
+                No description available.
             NVIDIA_K80_GPUS (163886599):
-
+                No description available.
             NVIDIA_P100_GPUS (236601633):
-
+                No description available.
             NVIDIA_P100_VWS_GPUS (213970574):
-
+                No description available.
             NVIDIA_P4_GPUS (283841470):
-
+                No description available.
             NVIDIA_P4_VWS_GPUS (528296619):
-
+                No description available.
             NVIDIA_T4_GPUS (75759810):
-
+                No description available.
             NVIDIA_T4_VWS_GPUS (319813039):
-
+                No description available.
             NVIDIA_V100_GPUS (129293095):
-
+                No description available.
             PACKET_MIRRORINGS (15578407):
-
+                No description available.
             PD_EXTREME_TOTAL_PROVISIONED_IOPS (69593965):
-
+                No description available.
             PREEMPTIBLE_CPUS (251184841):
-
+                No description available.
             PREEMPTIBLE_LOCAL_SSD_GB (260819336):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_A100_80GB_GPUS (151942410):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_A100_GPUS (68832784):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_K80_GPUS (374960201):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_P100_GPUS (337432351):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_P100_VWS_GPUS (313544076):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_P4_GPUS (429197628):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_P4_VWS_GPUS (252981545):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_T4_GPUS (221115968):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_T4_VWS_GPUS (44497965):
-
+                No description available.
             PREEMPTIBLE_NVIDIA_V100_GPUS (230123813):
-
+                No description available.
             PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK (231164291):
-
+                No description available.
             PSC_INTERNAL_LB_FORWARDING_RULES (169005435):
-
+                No description available.
             PUBLIC_ADVERTISED_PREFIXES (471371980):
-
+                No description available.
             PUBLIC_DELEGATED_PREFIXES (532465974):
-
+                No description available.
             REGIONAL_AUTOSCALERS (29363772):
-
+                No description available.
             REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES (4240989):
-
+                No description available.
             REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES (409564525):
-
+                No description available.
             REGIONAL_INSTANCE_GROUP_MANAGERS (37543696):
-
+                No description available.
             REGIONAL_INTERNAL_LB_BACKEND_SERVICES (137983760):
-
+                No description available.
             REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES (96282539):
-
+                No description available.
             RESERVATIONS (32644647):
-
+                No description available.
             RESOURCE_POLICIES (83955297):
-
+                No description available.
             ROUTERS (493018666):
-
+                No description available.
             ROUTES (275680074):
-
+                No description available.
             SECURITY_POLICIES (189518703):
-
+                No description available.
             SECURITY_POLICIES_PER_REGION (249041734):
-
+                No description available.
             SECURITY_POLICY_CEVAL_RULES (470815689):
-
+                No description available.
             SECURITY_POLICY_RULES (203549225):
-
+                No description available.
             SECURITY_POLICY_RULES_PER_REGION (126510156):
-
+                No description available.
             SERVICE_ATTACHMENTS (471521510):
-
+                No description available.
             SNAPSHOTS (343405327):
                 The total number of snapshots allowed for a
                 single project.
             SSD_TOTAL_GB (161732561):
-
+                No description available.
             SSL_CERTIFICATES (378372399):
-
+                No description available.
             STATIC_ADDRESSES (93624049):
-
+                No description available.
             STATIC_BYOIP_ADDRESSES (275809649):
-
+                No description available.
             STATIC_EXTERNAL_IPV6_ADDRESS_RANGES (472346774):
-
+                No description available.
             SUBNETWORKS (421330469):
-
+                No description available.
             T2A_CPUS (522170599):
-
+                No description available.
             T2D_CPUS (71187140):
-
+                No description available.
             TARGET_HTTPS_PROXIES (219522506):
-
+                No description available.
             TARGET_HTTP_PROXIES (164117155):
-
+                No description available.
             TARGET_INSTANCES (284519728):
-
+                No description available.
             TARGET_POOLS (348261257):
-
+                No description available.
             TARGET_SSL_PROXIES (159216235):
-
+                No description available.
             TARGET_TCP_PROXIES (182243136):
-
+                No description available.
             TARGET_VPN_GATEWAYS (75029928):
-
+                No description available.
             URL_MAPS (378660743):
-
+                No description available.
             VPN_GATEWAYS (35620282):
-
+                No description available.
             VPN_TUNNELS (104327296):
-
+                No description available.
             XPN_SERVICE_PROJECTS (95191981):
-
+                No description available.
         """
         UNDEFINED_METRIC = 0
         A2_CPUS = 153206585
@@ -70103,7 +70103,7 @@ class RawDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             TAR (82821):
-
+                No description available.
         """
         UNDEFINED_CONTAINER_TYPE = 0
         TAR = 82821
@@ -70362,9 +70362,9 @@ class Region(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DOWN (2104482):
-
+                No description available.
             UP (2715):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         DOWN = 2104482
@@ -71475,13 +71475,13 @@ class RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewal
                 A value indicating that the enum field is not
                 set.
             HIERARCHY (69902869):
-
+                No description available.
             NETWORK (413984270):
-
+                No description available.
             NETWORK_REGIONAL (190804272):
-
+                No description available.
             UNSPECIFIED (526786327):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         HIERARCHY = 69902869
@@ -72560,7 +72560,7 @@ class Reservation(proto.Message):
             DELETING (528602024):
                 Reservation is currently being deleted.
             INVALID (530283991):
-
+                No description available.
             READY (77848963):
                 Reservation has allocated all its resources.
             UPDATING (494614342):
@@ -72703,7 +72703,7 @@ class ReservationAffinity(proto.Message):
                 Must specify key value fields for specifying the
                 reservations.
             UNSPECIFIED (526786327):
-
+                No description available.
         """
         UNDEFINED_CONSUME_RESERVATION_TYPE = 0
         ANY_RESERVATION = 200008121
@@ -73326,15 +73326,15 @@ class ResourceCommitment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACCELERATOR (429815371):
-
+                No description available.
             LOCAL_SSD (508934896):
-
+                No description available.
             MEMORY (123056385):
-
+                No description available.
             UNSPECIFIED (526786327):
-
+                No description available.
             VCPU (2628978):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         ACCELERATOR = 429815371
@@ -73497,7 +73497,7 @@ class ResourcePolicy(proto.Message):
                 Resource policy is expired and will not run
                 again.
             INVALID (530283991):
-
+                No description available.
             READY (77848963):
                 Resource policy is ready to be used.
         """
@@ -73746,9 +73746,9 @@ class ResourcePolicyGroupPlacementPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             COLLOCATED (103257554):
-
+                No description available.
             UNSPECIFIED_COLLOCATION (464308205):
-
+                No description available.
         """
         UNDEFINED_COLLOCATION = 0
         COLLOCATED = 103257554
@@ -74119,11 +74119,11 @@ class ResourcePolicySnapshotSchedulePolicyRetentionPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             APPLY_RETENTION_POLICY (535071332):
-
+                No description available.
             KEEP_AUTO_SNAPSHOTS (258925689):
-
+                No description available.
             UNSPECIFIED_ON_SOURCE_DISK_DELETE (239140769):
-
+                No description available.
         """
         UNDEFINED_ON_SOURCE_DISK_DELETE = 0
         APPLY_RETENTION_POLICY = 535071332
@@ -74283,21 +74283,21 @@ class ResourcePolicyWeeklyCycleDayOfWeek(proto.Message):
                 A value indicating that the enum field is not
                 set.
             FRIDAY (471398751):
-
+                No description available.
             INVALID (530283991):
-
+                No description available.
             MONDAY (132310288):
-
+                No description available.
             SATURDAY (279037881):
-
+                No description available.
             SUNDAY (309626320):
-
+                No description available.
             THURSDAY (207198682):
-
+                No description available.
             TUESDAY (277509677):
-
+                No description available.
             WEDNESDAY (422029110):
-
+                No description available.
         """
         UNDEFINED_DAY = 0
         FRIDAY = 471398751
@@ -74581,13 +74581,13 @@ class Route(proto.Message):
                 A value indicating that the enum field is not
                 set.
             BGP (65707):
-
+                No description available.
             STATIC (308331118):
-
+                No description available.
             SUBNET (309278557):
-
+                No description available.
             TRANSIT (187793843):
-
+                No description available.
         """
         UNDEFINED_ROUTE_TYPE = 0
         BGP = 65707
@@ -74739,13 +74739,13 @@ class RouteAsPath(proto.Message):
                 A value indicating that the enum field is not
                 set.
             AS_CONFED_SEQUENCE (222152624):
-
+                No description available.
             AS_CONFED_SET (374040307):
-
+                No description available.
             AS_SEQUENCE (106735918):
-
+                No description available.
             AS_SET (329846453):
-
+                No description available.
         """
         UNDEFINED_PATH_SEGMENT_TYPE = 0
         AS_CONFED_SEQUENCE = 222152624
@@ -75165,9 +75165,9 @@ class RouterBgp(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CUSTOM (388595569):
-
+                No description available.
             DEFAULT (115302945):
-
+                No description available.
         """
         UNDEFINED_ADVERTISE_MODE = 0
         CUSTOM = 388595569
@@ -75352,9 +75352,9 @@ class RouterBgpPeer(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CUSTOM (388595569):
-
+                No description available.
             DEFAULT (115302945):
-
+                No description available.
         """
         UNDEFINED_ADVERTISE_MODE = 0
         CUSTOM = 388595569
@@ -75386,9 +75386,9 @@ class RouterBgpPeer(proto.Message):
                 A value indicating that the enum field is not
                 set.
             FALSE (66658563):
-
+                No description available.
             TRUE (2583950):
-
+                No description available.
         """
         UNDEFINED_ENABLE = 0
         FALSE = 66658563
@@ -75576,11 +75576,11 @@ class RouterBgpPeerBfd(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACTIVE (314733318):
-
+                No description available.
             DISABLED (516696700):
-
+                No description available.
             PASSIVE (462813959):
-
+                No description available.
         """
         UNDEFINED_SESSION_INITIALIZATION_MODE = 0
         ACTIVE = 314733318
@@ -76539,11 +76539,11 @@ class RouterStatusBgpPeerStatus(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DOWN (2104482):
-
+                No description available.
             UNKNOWN (433141802):
-
+                No description available.
             UP (2715):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         DOWN = 2104482
@@ -76563,7 +76563,7 @@ class RouterStatusBgpPeerStatus(proto.Message):
                 particular reason can only be returned when
                 md5AuthEnabled is true and status is DOWN.
             STATUS_REASON_UNSPECIFIED (394331913):
-
+                No description available.
         """
         UNDEFINED_STATUS_REASON = 0
         MD5_AUTH_INTERNAL_PROBLEM = 140462259
@@ -77100,9 +77100,9 @@ class SSLHealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -77246,9 +77246,9 @@ class SavedAttachedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NVME (2408800):
-
+                No description available.
             SCSI (2539686):
-
+                No description available.
         """
         UNDEFINED_INTERFACE = 0
         NVME = 2408800
@@ -77287,9 +77287,9 @@ class SavedAttachedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             UPDATING (494614342):
-
+                No description available.
             UP_TO_DATE (101306702):
-
+                No description available.
         """
         UNDEFINED_STORAGE_BYTES_STATUS = 0
         UPDATING = 494614342
@@ -77304,9 +77304,9 @@ class SavedAttachedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             PERSISTENT (460683927):
-
+                No description available.
             SCRATCH (496778970):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         PERSISTENT = 460683927
@@ -77464,9 +77464,9 @@ class SavedDisk(proto.Message):
                 A value indicating that the enum field is not
                 set.
             UPDATING (494614342):
-
+                No description available.
             UP_TO_DATE (101306702):
-
+                No description available.
         """
         UNDEFINED_STORAGE_BYTES_STATUS = 0
         UPDATING = 494614342
@@ -77782,7 +77782,7 @@ class SchedulingNodeAffinity(proto.Message):
                 Requires Compute Engine to avoid certain
                 nodes.
             OPERATOR_UNSPECIFIED (128892924):
-
+                No description available.
         """
         UNDEFINED_OPERATOR = 0
         IN = 2341
@@ -78138,11 +78138,11 @@ class SecurityPolicy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CLOUD_ARMOR (260640373):
-
+                No description available.
             CLOUD_ARMOR_EDGE (250728775):
-
+                No description available.
             CLOUD_ARMOR_NETWORK (488527428):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         CLOUD_ARMOR = 260640373
@@ -78277,9 +78277,9 @@ class SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig(proto.Messag
                 A value indicating that the enum field is not
                 set.
             PREMIUM (399530551):
-
+                No description available.
             STANDARD (484642493):
-
+                No description available.
         """
         UNDEFINED_RULE_VISIBILITY = 0
         PREMIUM = 399530551
@@ -78328,9 +78328,9 @@ class SecurityPolicyAdvancedOptionsConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DISABLED (516696700):
-
+                No description available.
             STANDARD (484642493):
-
+                No description available.
         """
         UNDEFINED_JSON_PARSING = 0
         DISABLED = 516696700
@@ -78344,9 +78344,9 @@ class SecurityPolicyAdvancedOptionsConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NORMAL (161067239):
-
+                No description available.
             VERBOSE (532219234):
-
+                No description available.
         """
         UNDEFINED_LOG_LEVEL = 0
         NORMAL = 161067239
@@ -78412,9 +78412,9 @@ class SecurityPolicyDdosProtectionConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ADVANCED (63789090):
-
+                No description available.
             STANDARD (484642493):
-
+                No description available.
         """
         UNDEFINED_DDOS_PROTECTION = 0
         ADVANCED = 63789090
@@ -78904,21 +78904,21 @@ class SecurityPolicyRuleRateLimitOptions(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ALL (64897):
-
+                No description available.
             HTTP_COOKIE (494981627):
-
+                No description available.
             HTTP_HEADER (91597348):
-
+                No description available.
             HTTP_PATH (311503228):
-
+                No description available.
             IP (2343):
-
+                No description available.
             REGION_CODE (79559768):
-
+                No description available.
             SNI (82254):
-
+                No description available.
             XFF_IP (438707118):
-
+                No description available.
         """
         UNDEFINED_ENFORCE_ON_KEY = 0
         ALL = 64897
@@ -79033,9 +79033,9 @@ class SecurityPolicyRuleRedirectOptions(proto.Message):
                 A value indicating that the enum field is not
                 set.
             EXTERNAL_302 (395733761):
-
+                No description available.
             GOOGLE_RECAPTCHA (518803009):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         EXTERNAL_302 = 395733761
@@ -79227,7 +79227,7 @@ class ServerBinding(proto.Message):
                 Node may associate with minimal physical
                 servers over its lifetime.
             SERVER_BINDING_TYPE_UNSPECIFIED (180825512):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         RESTART_NODE_ON_ANY_SERVER = 502950985
@@ -79398,11 +79398,11 @@ class ServiceAttachment(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ACCEPT_AUTOMATIC (75250580):
-
+                No description available.
             ACCEPT_MANUAL (373061341):
-
+                No description available.
             CONNECTION_PREFERENCE_UNSPECIFIED (34590772):
-
+                No description available.
         """
         UNDEFINED_CONNECTION_PREFERENCE = 0
         ACCEPT_AUTOMATIC = 75250580
@@ -79633,7 +79633,7 @@ class ServiceAttachmentConnectedEndpoint(proto.Message):
                 The consumer is still connected but not using
                 the connection.
             STATUS_UNSPECIFIED (42133066):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         ACCEPTED = 246714279
@@ -84173,9 +84173,9 @@ class Snapshot(proto.Message):
                 A value indicating that the enum field is not
                 set.
             ARCHIVE (506752162):
-
+                No description available.
             STANDARD (484642493):
-
+                No description available.
         """
         UNDEFINED_SNAPSHOT_TYPE = 0
         ARCHIVE = 506752162
@@ -84219,9 +84219,9 @@ class Snapshot(proto.Message):
                 A value indicating that the enum field is not
                 set.
             UPDATING (494614342):
-
+                No description available.
             UP_TO_DATE (101306702):
-
+                No description available.
         """
         UNDEFINED_STORAGE_BYTES_STATUS = 0
         UPDATING = 494614342
@@ -84819,7 +84819,7 @@ class SslCertificate(proto.Message):
             SELF_MANAGED (434437516):
                 Certificate uploaded by user.
             TYPE_UNSPECIFIED (437714322):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         MANAGED = 479501183
@@ -85087,7 +85087,7 @@ class SslCertificateManagedSslCertificate(proto.Message):
                 The certificate management is working, and a
                 certificate has been provisioned.
             MANAGED_CERTIFICATE_STATUS_UNSPECIFIED (474800850):
-
+                No description available.
             PROVISIONING (290896621):
                 The certificate management is working. GCP
                 will attempt to provision the first certificate.
@@ -85820,9 +85820,9 @@ class StatefulPolicyPreservedStateDiskDevice(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NEVER (74175084):
-
+                No description available.
             ON_PERMANENT_INSTANCE_DELETION (95727719):
-
+                No description available.
         """
         UNDEFINED_AUTO_DELETE = 0
         NEVER = 74175084
@@ -86113,7 +86113,7 @@ class Subnetwork(proto.Message):
                 addresses that are only accessible over the VPC
                 network.
             UNSPECIFIED_IPV6_ACCESS_TYPE (313080613):
-
+                No description available.
         """
         UNDEFINED_IPV6_ACCESS_TYPE = 0
         EXTERNAL = 35607499
@@ -86219,7 +86219,7 @@ class Subnetwork(proto.Message):
                 New VMs in this subnet will only be assigned
                 IPv4 addresses.
             UNSPECIFIED_STACK_TYPE (298084569):
-
+                No description available.
         """
         UNDEFINED_STACK_TYPE = 0
         IPV4_IPV6 = 22197249
@@ -86596,17 +86596,17 @@ class SubnetworkLogConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INTERVAL_10_MIN (487155916):
-
+                No description available.
             INTERVAL_15_MIN (491773521):
-
+                No description available.
             INTERVAL_1_MIN (69052714):
-
+                No description available.
             INTERVAL_30_SEC (7548937):
-
+                No description available.
             INTERVAL_5_MIN (72746798):
-
+                No description available.
             INTERVAL_5_SEC (72752429):
-
+                No description available.
         """
         UNDEFINED_AGGREGATION_INTERVAL = 0
         INTERVAL_10_MIN = 487155916
@@ -86627,11 +86627,11 @@ class SubnetworkLogConfig(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CUSTOM_METADATA (62450749):
-
+                No description available.
             EXCLUDE_ALL_METADATA (334519954):
-
+                No description available.
             INCLUDE_ALL_METADATA (164619908):
-
+                No description available.
         """
         UNDEFINED_METADATA = 0
         CUSTOM_METADATA = 62450749
@@ -87066,9 +87066,9 @@ class TCPHealthCheck(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -89151,9 +89151,9 @@ class TargetSslProxiesSetProxyHeaderRequest(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -89273,9 +89273,9 @@ class TargetSslProxy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -89482,9 +89482,9 @@ class TargetTcpProxiesSetProxyHeaderRequest(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -89583,9 +89583,9 @@ class TargetTcpProxy(proto.Message):
                 A value indicating that the enum field is not
                 set.
             NONE (2402104):
-
+                No description available.
             PROXY_V1 (334352940):
-
+                No description available.
         """
         UNDEFINED_PROXY_HEADER = 0
         NONE = 2402104
@@ -89882,13 +89882,13 @@ class TargetVpnGateway(proto.Message):
                 A value indicating that the enum field is not
                 set.
             CREATING (455564985):
-
+                No description available.
             DELETING (528602024):
-
+                No description available.
             FAILED (455706685):
-
+                No description available.
             READY (77848963):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         CREATING = 455564985
@@ -94183,7 +94183,7 @@ class VpnGatewayStatusHighAvailabilityRequirementState(proto.Message):
                 A value indicating that the enum field is not
                 set.
             INCOMPLETE_TUNNELS_COVERAGE (55917437):
-
+                No description available.
         """
         UNDEFINED_UNSATISFIED_REASON = 0
         INCOMPLETE_TUNNELS_COVERAGE = 55917437
@@ -95571,9 +95571,9 @@ class XpnResourceId(proto.Message):
                 A value indicating that the enum field is not
                 set.
             PROJECT (408671993):
-
+                No description available.
             XPN_RESOURCE_TYPE_UNSPECIFIED (151607034):
-
+                No description available.
         """
         UNDEFINED_TYPE = 0
         PROJECT = 408671993
@@ -95659,9 +95659,9 @@ class Zone(proto.Message):
                 A value indicating that the enum field is not
                 set.
             DOWN (2104482):
-
+                No description available.
             UP (2715):
-
+                No description available.
         """
         UNDEFINED_STATUS = 0
         DOWN = 2104482
