@@ -70,7 +70,7 @@ Windows
 
 
 Authentication and Authorization
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This client library supports authentication via Google Application Default Credentials
 (see https://cloud.google.com/docs/authentication/production), or by providing a JSON
 key file for a Service Account. See examples below.
@@ -133,7 +133,7 @@ at https://developers.google.com/identity/protocols/oauth2/scopes. Example:
         print(network)
 
 Long Running Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 Any LRO (Long Running Operation), like the many ``insert()`` operations, can be handled using
 an ``ExtendedOperation`` object that is returned when a long running operation is started.
 
