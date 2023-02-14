@@ -149,10 +149,10 @@ code samples repository: [add link here]
 
 Code Samples
 ~~~~~~~~~~~~
-You can find useful code samples that will demonstrate the usage of this library in `the
-code sample browser`_.
+You can find useful code samples that will demonstrate the usage of this library on `the
+Google Cloud samples page`_.
 
-.. _the code sample browser: https://cloud.google.com/docs/samples?language=python&product=computeengine
+.. _the Google Cloud samples page: https://cloud.google.com/docs/samples?language=python&product=computeengine
 
 
 
@@ -161,7 +161,7 @@ PyCharm/JetBrains IDEs
 Since the library has grown in size, the files it consists of have outgrown the `default size limit of ~2.5Mb`_.
 As a result, the code completion in JetBrains products can fail to work with the classes from our library. To
 fix this, you need to update the ``idea.max.intellisense.filesize`` setting in custom properties
-(Help -> Edit custom properties...). Just add a line like ``idea.max.intellisense.filesize = 10000`` to change this
+(Help -> Edit custom properties...). Just add the following line ``idea.max.intellisense.filesize = 10000`` to change this
 limit to ~10Mb.
 
 .. _default size limit of ~2.5Mb: https://www.jetbrains.com/help/pycharm/file-idea-properties.html
