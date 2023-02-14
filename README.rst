@@ -71,14 +71,13 @@ Windows
 
 Authentication and Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This client library supports authentication via Google Application Default Credentials
-(see https://cloud.google.com/docs/authentication/production), or by providing a JSON
+This client library supports authentication via `Google Application Default Credentials`_
+, or by providing a JSON
 key file for a Service Account. See examples below.
 
 Google Application Default Credentials (ADC) is the recommended way to authorize and authenticate
-clients. For information on how to create and obtain Application Default Credentials,
-see https://cloud.google.com/docs/authentication/production. Here is an example of a client
-using ADC to authenticate:
+clients. To learn how to create and obtain `Google Application Default Credentials`_. Here is an
+example of a client using ADC to authenticate:
 
 .. code-block:: python
 
@@ -90,10 +89,12 @@ using ADC to authenticate:
 
 
 You can use a file with credentials to authenticate and authorize, such as a JSON key
-file associated with a Google service account. Service Account keys can be created and
-downloaded from https://console.cloud.google.com/iam-admin/serviceaccounts. The library used
-to create the credentials objects is ``google-auth``. This example uses the Networks Client, but
-the same steps apply to the other clients in this package.
+file associated with a Google service account. You can create service account keys and
+download them using the Google Cloud Console. For more information, see
+`Creating and managing Service Account keys`_.
+
+The library used to create the credentials objects is ``google-auth``. This example uses
+the Networks Client, but the same steps apply to the other clients in this package.
 Example:
 
 .. code-block:: python
@@ -110,9 +111,9 @@ Example:
 
 
 In some cases (for instance, you don't want to store secrets on disk), you can create credentials
-from in-memory JSON and use the from_service_account_info method. You can also limit the use of
-your credentials only to specified scopes. Note that scopes can be found
-at https://developers.google.com/identity/protocols/oauth2/scopes. Example:
+from in-memory JSON and use the ``from_service_account_info`` method. You can also limit the use of
+your credentials only to specified scopes. For more information about OAuth 2.0 scopes for Google APIs,
+see `Scopes documentation page`_. Example:
 
 .. code-block:: python
 
@@ -132,6 +133,10 @@ at https://developers.google.com/identity/protocols/oauth2/scopes. Example:
     for network in networks_client.list(project='YOUR_PROJECT'):
         print(network)
 
+.. _Google Application Default Credentials: https://cloud.google.com/docs/authentication/production
+.. _Creating and managing Service Account keys: https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating
+.. _Scopes documentation page: https://developers.google.com/identity/protocols/oauth2/scopes
+
 Long Running Operations
 ~~~~~~~~~~~~~~~~~~~~~~~
 Any LRO (Long Running Operation), like the many ``insert()`` operations, can be handled using
@@ -141,7 +146,7 @@ You can wait for the completion of an operation using ``result()`` method. This 
 a ``timeout`` argument, specifying how long you want your process to wait for completion of the
 operation (in seconds). When the call to ``result()`` times out, the operation is not automatically
 cancelled. To cancel an operation you can use the ``cancel()`` method. You can query the operation
-at any time to check if it's complete with ``done()``.
+at any time to check if it's complete by using the ``done()`` method.
 
 A sample method to handle LROs featuring error and warning reporting can be found in the Python
 code samples repository: [add link here]
@@ -176,5 +181,5 @@ Next Steps
 -  View this `README`_ to see the full list of Cloud
    APIs that we cover.
 
-.. _Compute Engine API Product documentation:  https://cloud.google.com/compute/
+.. _Compute Engine API Product documentation:  https://cloud.google.com/compute/docs/api/libraries
 .. _README: https://github.com/googleapis/google-cloud-python/blob/main/README.rst
