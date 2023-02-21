@@ -72,12 +72,10 @@ Windows
 Authentication and Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This client library supports authentication via `Google Application Default Credentials`_
-, or by providing a JSON
-key file for a Service Account. See examples below.
+, or by providing a JSON key file for a Service Account. See examples below.
 
-Google Application Default Credentials (ADC) is the recommended way to authorize and authenticate
-clients. To learn how to create and obtain `Google Application Default Credentials`_. Here is an
-example of a client using ADC to authenticate:
+`Google Application Default Credentials`_ (ADC) is the recommended way to authorize and authenticate
+clients. Here is an example of a client using ADC to authenticate:
 
 .. code-block:: python
 
@@ -149,7 +147,9 @@ cancelled. At any time, you can check whether the operation is complete by using
 at any time to check if it's complete by using the ``done()`` method.
 
 A sample method to handle LROs featuring error and warning reporting can be found in the Python
-code samples repository: [add link here]
+code samples repository: `GoogleCloudPlatform/python-docs-samples`_
+
+.. _GoogleCloudPlatform/python-docs-samples: https://github.com/GoogleCloudPlatform/python-docs-samples/blob/main/compute/client_library/snippets/operations/wait_for_extended_operation.py
 
 
 Code Samples
