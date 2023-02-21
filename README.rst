@@ -169,7 +169,7 @@ fix this, you need to update the ``idea.max.intellisense.filesize`` setting in c
 (Help -> Edit custom properties...). Just add the line ``idea.max.intellisense.filesize = 10000`` to change this
 limit to ~10Mb.
 
-.. _default size limit of ~2.5Mb: https://www.jetbrains.com/help/pycharm/file-idea-properties.html
+.. _JetBrains default size limit of ~2.5Mb: https://www.jetbrains.com/help/pycharm/file-idea-properties.html
 
 Next Steps
 ~~~~~~~~~~
