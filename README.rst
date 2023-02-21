@@ -110,7 +110,7 @@ Example:
         print(network)
 
 
-In some cases (for instance, you don't want to store secrets on disk), you can create credentials
+When you don't want to store secrets on disk, you can create credentials
 from in-memory JSON and use the ``from_service_account_info`` method. You can also limit the use of
 your credentials only to specified scopes. For more information about OAuth 2.0 scopes for Google APIs,
 see `Scopes documentation page`_. Example:
@@ -139,13 +139,13 @@ see `Scopes documentation page`_. Example:
 
 Long Running Operations
 ~~~~~~~~~~~~~~~~~~~~~~~
-Any LRO (Long Running Operation), like the many ``insert()`` operations, can be handled using
-an ``ExtendedOperation`` object that is returned when a long running operation is started.
+Long-Running Operations (LROs), like the many ``insert()`` operations, can be handled using
+the ``ExtendedOperation`` object that is returned when the LRO is started.
 
-You can wait for the completion of an operation using ``result()`` method. This method accepts
+You can wait for the completion of an operation using its ``result()`` method. This method accepts
 a ``timeout`` argument, specifying how long you want your process to wait for completion of the
 operation (in seconds). When the call to ``result()`` times out, the operation is not automatically
-cancelled. To cancel an operation you can use the ``cancel()`` method. You can query the operation
+cancelled. At any time, you can check whether the operation is complete by using its ``done()`` method. 
 at any time to check if it's complete by using the ``done()`` method.
 
 A sample method to handle LROs featuring error and warning reporting can be found in the Python
@@ -163,10 +163,10 @@ Google Cloud samples page`_.
 
 PyCharm/JetBrains IDEs
 ~~~~~~~~~~~~~~~~~~~~~~
-Since the library has grown in size, the files it consists of have outgrown the `default size limit of ~2.5Mb`_.
-As a result, the code completion in JetBrains products can fail to work with the classes from our library. To
+This library has now grown in size past the `JetBrains default size limit of ~2.5Mb`_.
+As a result, code completion in JetBrains products can fail to work with the classes from our library. To
 fix this, you need to update the ``idea.max.intellisense.filesize`` setting in custom properties
-(Help -> Edit custom properties...). Just add the following line ``idea.max.intellisense.filesize = 10000`` to change this
+(Help -> Edit custom properties...). Just add the line ``idea.max.intellisense.filesize = 10000`` to change this
 limit to ~10Mb.
 
 .. _default size limit of ~2.5Mb: https://www.jetbrains.com/help/pycharm/file-idea-properties.html
