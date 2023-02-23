@@ -143,8 +143,7 @@ the ``ExtendedOperation`` object that is returned when the LRO is started.
 You can wait for the completion of an operation using its ``result()`` method. This method accepts
 a ``timeout`` argument, specifying how long you want your process to wait for completion of the
 operation (in seconds). When the call to ``result()`` times out, the operation is not automatically
-cancelled. At any time, you can check whether the operation is complete by using its ``done()`` method. 
-at any time to check if it's complete by using the ``done()`` method.
+cancelled. At any time, you can check whether the operation is complete by using its ``done()`` method.
 
 A sample method to handle LROs featuring error and warning reporting can be found in the Python
 code samples repository: `GoogleCloudPlatform/python-docs-samples`_
