@@ -23992,7 +23992,7 @@ class ErrorDetails(proto.Message):
         error_info (google.cloud.compute_v1.types.ErrorInfo):
 
             This field is a member of `oneof`_ ``_error_info``.
-        help (google.cloud.compute_v1.types.Help):
+        help_ (google.cloud.compute_v1.types.Help):
 
             This field is a member of `oneof`_ ``_help``.
         localized_message (google.cloud.compute_v1.types.LocalizedMessage):
@@ -24009,7 +24009,7 @@ class ErrorDetails(proto.Message):
         optional=True,
         message="ErrorInfo",
     )
-    help: "Help" = proto.Field(
+    help_: "Help" = proto.Field(
         proto.MESSAGE,
         number=3198785,
         optional=True,
