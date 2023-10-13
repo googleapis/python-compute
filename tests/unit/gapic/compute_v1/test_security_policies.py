@@ -657,6 +657,76 @@ def test_add_rule_rest(request_type):
         },
         "redirect_options": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.AddRuleSecurityPolicyRequest.meta.fields[
+        "security_policy_rule_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_rule_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["security_policy_rule_resource"][field])
+                ):
+                    del request_init["security_policy_rule_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["security_policy_rule_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -690,8 +760,9 @@ def test_add_rule_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -794,8 +865,9 @@ def test_add_rule_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -890,70 +962,6 @@ def test_add_rule_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_rule_resource"] = {
-        "action": "action_value",
-        "description": "description_value",
-        "header_action": {
-            "request_headers_to_adds": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                }
-            ]
-        },
-        "kind": "kind_value",
-        "match": {
-            "config": {
-                "src_ip_ranges": ["src_ip_ranges_value1", "src_ip_ranges_value2"]
-            },
-            "expr": {
-                "description": "description_value",
-                "expression": "expression_value",
-                "location": "location_value",
-                "title": "title_value",
-            },
-            "versioned_expr": "versioned_expr_value",
-        },
-        "preconfigured_waf_config": {
-            "exclusions": [
-                {
-                    "request_cookies_to_exclude": [
-                        {"op": "op_value", "val": "val_value"}
-                    ],
-                    "request_headers_to_exclude": {},
-                    "request_query_params_to_exclude": {},
-                    "request_uris_to_exclude": {},
-                    "target_rule_ids": [
-                        "target_rule_ids_value1",
-                        "target_rule_ids_value2",
-                    ],
-                    "target_rule_set": "target_rule_set_value",
-                }
-            ]
-        },
-        "preview": True,
-        "priority": 898,
-        "rate_limit_options": {
-            "ban_duration_sec": 1680,
-            "ban_threshold": {"count": 553, "interval_sec": 1279},
-            "conform_action": "conform_action_value",
-            "enforce_on_key": "enforce_on_key_value",
-            "enforce_on_key_configs": [
-                {
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "enforce_on_key_type": "enforce_on_key_type_value",
-                }
-            ],
-            "enforce_on_key_name": "enforce_on_key_name_value",
-            "exceed_action": "exceed_action_value",
-            "exceed_redirect_options": {
-                "target": "target_value",
-                "type_": "type__value",
-            },
-            "rate_limit_threshold": {},
-        },
-        "redirect_options": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -995,8 +1003,9 @@ def test_add_rule_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1117,6 +1126,76 @@ def test_add_rule_unary_rest(request_type):
         },
         "redirect_options": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.AddRuleSecurityPolicyRequest.meta.fields[
+        "security_policy_rule_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_rule_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["security_policy_rule_resource"][field])
+                ):
+                    del request_init["security_policy_rule_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["security_policy_rule_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -1150,8 +1229,9 @@ def test_add_rule_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -1232,8 +1312,9 @@ def test_add_rule_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -1328,70 +1409,6 @@ def test_add_rule_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_rule_resource"] = {
-        "action": "action_value",
-        "description": "description_value",
-        "header_action": {
-            "request_headers_to_adds": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                }
-            ]
-        },
-        "kind": "kind_value",
-        "match": {
-            "config": {
-                "src_ip_ranges": ["src_ip_ranges_value1", "src_ip_ranges_value2"]
-            },
-            "expr": {
-                "description": "description_value",
-                "expression": "expression_value",
-                "location": "location_value",
-                "title": "title_value",
-            },
-            "versioned_expr": "versioned_expr_value",
-        },
-        "preconfigured_waf_config": {
-            "exclusions": [
-                {
-                    "request_cookies_to_exclude": [
-                        {"op": "op_value", "val": "val_value"}
-                    ],
-                    "request_headers_to_exclude": {},
-                    "request_query_params_to_exclude": {},
-                    "request_uris_to_exclude": {},
-                    "target_rule_ids": [
-                        "target_rule_ids_value1",
-                        "target_rule_ids_value2",
-                    ],
-                    "target_rule_set": "target_rule_set_value",
-                }
-            ]
-        },
-        "preview": True,
-        "priority": 898,
-        "rate_limit_options": {
-            "ban_duration_sec": 1680,
-            "ban_threshold": {"count": 553, "interval_sec": 1279},
-            "conform_action": "conform_action_value",
-            "enforce_on_key": "enforce_on_key_value",
-            "enforce_on_key_configs": [
-                {
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "enforce_on_key_type": "enforce_on_key_type_value",
-                }
-            ],
-            "enforce_on_key_name": "enforce_on_key_name_value",
-            "exceed_action": "exceed_action_value",
-            "exceed_redirect_options": {
-                "target": "target_value",
-                "type_": "type__value",
-            },
-            "rate_limit_threshold": {},
-        },
-        "redirect_options": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -1433,8 +1450,9 @@ def test_add_rule_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1508,8 +1526,9 @@ def test_aggregated_list_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -1600,8 +1619,9 @@ def test_aggregated_list_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -1738,8 +1758,9 @@ def test_aggregated_list_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPoliciesAggregatedList.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -1894,8 +1915,9 @@ def test_delete_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -1995,8 +2017,9 @@ def test_delete_rest_required_fields(request_type=compute.DeleteSecurityPolicyRe
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -2128,8 +2151,9 @@ def test_delete_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -2216,8 +2240,9 @@ def test_delete_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -2297,8 +2322,9 @@ def test_delete_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -2430,8 +2456,9 @@ def test_delete_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -2506,8 +2533,9 @@ def test_get_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicy.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicy.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -2593,8 +2621,9 @@ def test_get_rest_required_fields(request_type=compute.GetSecurityPolicyRequest)
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.SecurityPolicy.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.SecurityPolicy.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -2728,8 +2757,9 @@ def test_get_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicy.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicy.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -2799,8 +2829,9 @@ def test_get_rule_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicyRule.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicyRule.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -2885,8 +2916,9 @@ def test_get_rule_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.SecurityPolicyRule.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.SecurityPolicyRule.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -3020,8 +3052,9 @@ def test_get_rule_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicyRule.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicyRule.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -3172,6 +3205,72 @@ def test_insert_rest(request_type):
         "self_link": "self_link_value",
         "type_": "type__value",
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.InsertSecurityPolicyRequest.meta.fields[
+        "security_policy_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(0, len(request_init["security_policy_resource"][field])):
+                    del request_init["security_policy_resource"][field][i][subfield]
+            else:
+                del request_init["security_policy_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -3205,8 +3304,9 @@ def test_insert_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -3308,8 +3408,9 @@ def test_insert_rest_required_fields(request_type=compute.InsertSecurityPolicyRe
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -3408,103 +3509,6 @@ def test_insert_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["security_policy_resource"] = {
-        "adaptive_protection_config": {
-            "layer7_ddos_defense_config": {
-                "enable": True,
-                "rule_visibility": "rule_visibility_value",
-            }
-        },
-        "advanced_options_config": {
-            "json_custom_config": {
-                "content_types": ["content_types_value1", "content_types_value2"]
-            },
-            "json_parsing": "json_parsing_value",
-            "log_level": "log_level_value",
-        },
-        "creation_timestamp": "creation_timestamp_value",
-        "ddos_protection_config": {"ddos_protection": "ddos_protection_value"},
-        "description": "description_value",
-        "fingerprint": "fingerprint_value",
-        "id": 205,
-        "kind": "kind_value",
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-        "name": "name_value",
-        "recaptcha_options_config": {"redirect_site_key": "redirect_site_key_value"},
-        "region": "region_value",
-        "rules": [
-            {
-                "action": "action_value",
-                "description": "description_value",
-                "header_action": {
-                    "request_headers_to_adds": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                        }
-                    ]
-                },
-                "kind": "kind_value",
-                "match": {
-                    "config": {
-                        "src_ip_ranges": [
-                            "src_ip_ranges_value1",
-                            "src_ip_ranges_value2",
-                        ]
-                    },
-                    "expr": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "versioned_expr": "versioned_expr_value",
-                },
-                "preconfigured_waf_config": {
-                    "exclusions": [
-                        {
-                            "request_cookies_to_exclude": [
-                                {"op": "op_value", "val": "val_value"}
-                            ],
-                            "request_headers_to_exclude": {},
-                            "request_query_params_to_exclude": {},
-                            "request_uris_to_exclude": {},
-                            "target_rule_ids": [
-                                "target_rule_ids_value1",
-                                "target_rule_ids_value2",
-                            ],
-                            "target_rule_set": "target_rule_set_value",
-                        }
-                    ]
-                },
-                "preview": True,
-                "priority": 898,
-                "rate_limit_options": {
-                    "ban_duration_sec": 1680,
-                    "ban_threshold": {"count": 553, "interval_sec": 1279},
-                    "conform_action": "conform_action_value",
-                    "enforce_on_key": "enforce_on_key_value",
-                    "enforce_on_key_configs": [
-                        {
-                            "enforce_on_key_name": "enforce_on_key_name_value",
-                            "enforce_on_key_type": "enforce_on_key_type_value",
-                        }
-                    ],
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "exceed_action": "exceed_action_value",
-                    "exceed_redirect_options": {
-                        "target": "target_value",
-                        "type_": "type__value",
-                    },
-                    "rate_limit_threshold": {},
-                },
-                "redirect_options": {},
-            }
-        ],
-        "self_link": "self_link_value",
-        "type_": "type__value",
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -3549,8 +3553,9 @@ def test_insert_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -3707,6 +3712,72 @@ def test_insert_unary_rest(request_type):
         "self_link": "self_link_value",
         "type_": "type__value",
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.InsertSecurityPolicyRequest.meta.fields[
+        "security_policy_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(0, len(request_init["security_policy_resource"][field])):
+                    del request_init["security_policy_resource"][field][i][subfield]
+            else:
+                del request_init["security_policy_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -3740,8 +3811,9 @@ def test_insert_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -3823,8 +3895,9 @@ def test_insert_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -3923,103 +3996,6 @@ def test_insert_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1"}
-    request_init["security_policy_resource"] = {
-        "adaptive_protection_config": {
-            "layer7_ddos_defense_config": {
-                "enable": True,
-                "rule_visibility": "rule_visibility_value",
-            }
-        },
-        "advanced_options_config": {
-            "json_custom_config": {
-                "content_types": ["content_types_value1", "content_types_value2"]
-            },
-            "json_parsing": "json_parsing_value",
-            "log_level": "log_level_value",
-        },
-        "creation_timestamp": "creation_timestamp_value",
-        "ddos_protection_config": {"ddos_protection": "ddos_protection_value"},
-        "description": "description_value",
-        "fingerprint": "fingerprint_value",
-        "id": 205,
-        "kind": "kind_value",
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-        "name": "name_value",
-        "recaptcha_options_config": {"redirect_site_key": "redirect_site_key_value"},
-        "region": "region_value",
-        "rules": [
-            {
-                "action": "action_value",
-                "description": "description_value",
-                "header_action": {
-                    "request_headers_to_adds": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                        }
-                    ]
-                },
-                "kind": "kind_value",
-                "match": {
-                    "config": {
-                        "src_ip_ranges": [
-                            "src_ip_ranges_value1",
-                            "src_ip_ranges_value2",
-                        ]
-                    },
-                    "expr": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "versioned_expr": "versioned_expr_value",
-                },
-                "preconfigured_waf_config": {
-                    "exclusions": [
-                        {
-                            "request_cookies_to_exclude": [
-                                {"op": "op_value", "val": "val_value"}
-                            ],
-                            "request_headers_to_exclude": {},
-                            "request_query_params_to_exclude": {},
-                            "request_uris_to_exclude": {},
-                            "target_rule_ids": [
-                                "target_rule_ids_value1",
-                                "target_rule_ids_value2",
-                            ],
-                            "target_rule_set": "target_rule_set_value",
-                        }
-                    ]
-                },
-                "preview": True,
-                "priority": 898,
-                "rate_limit_options": {
-                    "ban_duration_sec": 1680,
-                    "ban_threshold": {"count": 553, "interval_sec": 1279},
-                    "conform_action": "conform_action_value",
-                    "enforce_on_key": "enforce_on_key_value",
-                    "enforce_on_key_configs": [
-                        {
-                            "enforce_on_key_name": "enforce_on_key_name_value",
-                            "enforce_on_key_type": "enforce_on_key_type_value",
-                        }
-                    ],
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "exceed_action": "exceed_action_value",
-                    "exceed_redirect_options": {
-                        "target": "target_value",
-                        "type_": "type__value",
-                    },
-                    "rate_limit_threshold": {},
-                },
-                "redirect_options": {},
-            }
-        ],
-        "self_link": "self_link_value",
-        "type_": "type__value",
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -4064,8 +4040,9 @@ def test_insert_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -4139,8 +4116,9 @@ def test_list_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicyList.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicyList.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -4225,8 +4203,9 @@ def test_list_rest_required_fields(request_type=compute.ListSecurityPoliciesRequ
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.SecurityPolicyList.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.SecurityPolicyList.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -4362,8 +4341,9 @@ def test_list_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.SecurityPolicyList.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.SecurityPolicyList.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -4481,12 +4461,13 @@ def test_list_preconfigured_expression_sets_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = (
+        # Convert return value to protobuf type
+        return_value = (
             compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse.pb(
                 return_value
             )
         )
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -4572,12 +4553,13 @@ def test_list_preconfigured_expression_sets_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = (
+            # Convert return value to protobuf type
+            return_value = (
                 compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse.pb(
                     return_value
                 )
             )
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -4722,12 +4704,13 @@ def test_list_preconfigured_expression_sets_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = (
+        # Convert return value to protobuf type
+        return_value = (
             compute.SecurityPoliciesListPreconfiguredExpressionSetsResponse.pb(
                 return_value
             )
         )
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -4879,6 +4862,72 @@ def test_patch_rest(request_type):
         "self_link": "self_link_value",
         "type_": "type__value",
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.PatchSecurityPolicyRequest.meta.fields[
+        "security_policy_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(0, len(request_init["security_policy_resource"][field])):
+                    del request_init["security_policy_resource"][field][i][subfield]
+            else:
+                del request_init["security_policy_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -4912,8 +4961,9 @@ def test_patch_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -5014,8 +5064,9 @@ def test_patch_rest_required_fields(request_type=compute.PatchSecurityPolicyRequ
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -5110,103 +5161,6 @@ def test_patch_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_resource"] = {
-        "adaptive_protection_config": {
-            "layer7_ddos_defense_config": {
-                "enable": True,
-                "rule_visibility": "rule_visibility_value",
-            }
-        },
-        "advanced_options_config": {
-            "json_custom_config": {
-                "content_types": ["content_types_value1", "content_types_value2"]
-            },
-            "json_parsing": "json_parsing_value",
-            "log_level": "log_level_value",
-        },
-        "creation_timestamp": "creation_timestamp_value",
-        "ddos_protection_config": {"ddos_protection": "ddos_protection_value"},
-        "description": "description_value",
-        "fingerprint": "fingerprint_value",
-        "id": 205,
-        "kind": "kind_value",
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-        "name": "name_value",
-        "recaptcha_options_config": {"redirect_site_key": "redirect_site_key_value"},
-        "region": "region_value",
-        "rules": [
-            {
-                "action": "action_value",
-                "description": "description_value",
-                "header_action": {
-                    "request_headers_to_adds": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                        }
-                    ]
-                },
-                "kind": "kind_value",
-                "match": {
-                    "config": {
-                        "src_ip_ranges": [
-                            "src_ip_ranges_value1",
-                            "src_ip_ranges_value2",
-                        ]
-                    },
-                    "expr": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "versioned_expr": "versioned_expr_value",
-                },
-                "preconfigured_waf_config": {
-                    "exclusions": [
-                        {
-                            "request_cookies_to_exclude": [
-                                {"op": "op_value", "val": "val_value"}
-                            ],
-                            "request_headers_to_exclude": {},
-                            "request_query_params_to_exclude": {},
-                            "request_uris_to_exclude": {},
-                            "target_rule_ids": [
-                                "target_rule_ids_value1",
-                                "target_rule_ids_value2",
-                            ],
-                            "target_rule_set": "target_rule_set_value",
-                        }
-                    ]
-                },
-                "preview": True,
-                "priority": 898,
-                "rate_limit_options": {
-                    "ban_duration_sec": 1680,
-                    "ban_threshold": {"count": 553, "interval_sec": 1279},
-                    "conform_action": "conform_action_value",
-                    "enforce_on_key": "enforce_on_key_value",
-                    "enforce_on_key_configs": [
-                        {
-                            "enforce_on_key_name": "enforce_on_key_name_value",
-                            "enforce_on_key_type": "enforce_on_key_type_value",
-                        }
-                    ],
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "exceed_action": "exceed_action_value",
-                    "exceed_redirect_options": {
-                        "target": "target_value",
-                        "type_": "type__value",
-                    },
-                    "rate_limit_threshold": {},
-                },
-                "redirect_options": {},
-            }
-        ],
-        "self_link": "self_link_value",
-        "type_": "type__value",
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -5252,8 +5206,9 @@ def test_patch_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -5411,6 +5366,72 @@ def test_patch_unary_rest(request_type):
         "self_link": "self_link_value",
         "type_": "type__value",
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.PatchSecurityPolicyRequest.meta.fields[
+        "security_policy_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(0, len(request_init["security_policy_resource"][field])):
+                    del request_init["security_policy_resource"][field][i][subfield]
+            else:
+                del request_init["security_policy_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -5444,8 +5465,9 @@ def test_patch_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -5526,8 +5548,9 @@ def test_patch_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -5622,103 +5645,6 @@ def test_patch_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_resource"] = {
-        "adaptive_protection_config": {
-            "layer7_ddos_defense_config": {
-                "enable": True,
-                "rule_visibility": "rule_visibility_value",
-            }
-        },
-        "advanced_options_config": {
-            "json_custom_config": {
-                "content_types": ["content_types_value1", "content_types_value2"]
-            },
-            "json_parsing": "json_parsing_value",
-            "log_level": "log_level_value",
-        },
-        "creation_timestamp": "creation_timestamp_value",
-        "ddos_protection_config": {"ddos_protection": "ddos_protection_value"},
-        "description": "description_value",
-        "fingerprint": "fingerprint_value",
-        "id": 205,
-        "kind": "kind_value",
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-        "name": "name_value",
-        "recaptcha_options_config": {"redirect_site_key": "redirect_site_key_value"},
-        "region": "region_value",
-        "rules": [
-            {
-                "action": "action_value",
-                "description": "description_value",
-                "header_action": {
-                    "request_headers_to_adds": [
-                        {
-                            "header_name": "header_name_value",
-                            "header_value": "header_value_value",
-                        }
-                    ]
-                },
-                "kind": "kind_value",
-                "match": {
-                    "config": {
-                        "src_ip_ranges": [
-                            "src_ip_ranges_value1",
-                            "src_ip_ranges_value2",
-                        ]
-                    },
-                    "expr": {
-                        "description": "description_value",
-                        "expression": "expression_value",
-                        "location": "location_value",
-                        "title": "title_value",
-                    },
-                    "versioned_expr": "versioned_expr_value",
-                },
-                "preconfigured_waf_config": {
-                    "exclusions": [
-                        {
-                            "request_cookies_to_exclude": [
-                                {"op": "op_value", "val": "val_value"}
-                            ],
-                            "request_headers_to_exclude": {},
-                            "request_query_params_to_exclude": {},
-                            "request_uris_to_exclude": {},
-                            "target_rule_ids": [
-                                "target_rule_ids_value1",
-                                "target_rule_ids_value2",
-                            ],
-                            "target_rule_set": "target_rule_set_value",
-                        }
-                    ]
-                },
-                "preview": True,
-                "priority": 898,
-                "rate_limit_options": {
-                    "ban_duration_sec": 1680,
-                    "ban_threshold": {"count": 553, "interval_sec": 1279},
-                    "conform_action": "conform_action_value",
-                    "enforce_on_key": "enforce_on_key_value",
-                    "enforce_on_key_configs": [
-                        {
-                            "enforce_on_key_name": "enforce_on_key_name_value",
-                            "enforce_on_key_type": "enforce_on_key_type_value",
-                        }
-                    ],
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "exceed_action": "exceed_action_value",
-                    "exceed_redirect_options": {
-                        "target": "target_value",
-                        "type_": "type__value",
-                    },
-                    "rate_limit_threshold": {},
-                },
-                "redirect_options": {},
-            }
-        ],
-        "self_link": "self_link_value",
-        "type_": "type__value",
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -5764,8 +5690,9 @@ def test_patch_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -5890,6 +5817,76 @@ def test_patch_rule_rest(request_type):
         },
         "redirect_options": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.PatchRuleSecurityPolicyRequest.meta.fields[
+        "security_policy_rule_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_rule_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["security_policy_rule_resource"][field])
+                ):
+                    del request_init["security_policy_rule_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["security_policy_rule_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -5923,8 +5920,9 @@ def test_patch_rule_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -6032,8 +6030,9 @@ def test_patch_rule_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -6133,70 +6132,6 @@ def test_patch_rule_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_rule_resource"] = {
-        "action": "action_value",
-        "description": "description_value",
-        "header_action": {
-            "request_headers_to_adds": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                }
-            ]
-        },
-        "kind": "kind_value",
-        "match": {
-            "config": {
-                "src_ip_ranges": ["src_ip_ranges_value1", "src_ip_ranges_value2"]
-            },
-            "expr": {
-                "description": "description_value",
-                "expression": "expression_value",
-                "location": "location_value",
-                "title": "title_value",
-            },
-            "versioned_expr": "versioned_expr_value",
-        },
-        "preconfigured_waf_config": {
-            "exclusions": [
-                {
-                    "request_cookies_to_exclude": [
-                        {"op": "op_value", "val": "val_value"}
-                    ],
-                    "request_headers_to_exclude": {},
-                    "request_query_params_to_exclude": {},
-                    "request_uris_to_exclude": {},
-                    "target_rule_ids": [
-                        "target_rule_ids_value1",
-                        "target_rule_ids_value2",
-                    ],
-                    "target_rule_set": "target_rule_set_value",
-                }
-            ]
-        },
-        "preview": True,
-        "priority": 898,
-        "rate_limit_options": {
-            "ban_duration_sec": 1680,
-            "ban_threshold": {"count": 553, "interval_sec": 1279},
-            "conform_action": "conform_action_value",
-            "enforce_on_key": "enforce_on_key_value",
-            "enforce_on_key_configs": [
-                {
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "enforce_on_key_type": "enforce_on_key_type_value",
-                }
-            ],
-            "enforce_on_key_name": "enforce_on_key_name_value",
-            "exceed_action": "exceed_action_value",
-            "exceed_redirect_options": {
-                "target": "target_value",
-                "type_": "type__value",
-            },
-            "rate_limit_threshold": {},
-        },
-        "redirect_options": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -6238,8 +6173,9 @@ def test_patch_rule_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -6360,6 +6296,76 @@ def test_patch_rule_unary_rest(request_type):
         },
         "redirect_options": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.PatchRuleSecurityPolicyRequest.meta.fields[
+        "security_policy_rule_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["security_policy_rule_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["security_policy_rule_resource"][field])
+                ):
+                    del request_init["security_policy_rule_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["security_policy_rule_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -6393,8 +6399,9 @@ def test_patch_rule_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -6480,8 +6487,9 @@ def test_patch_rule_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -6581,70 +6589,6 @@ def test_patch_rule_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "security_policy": "sample2"}
-    request_init["security_policy_rule_resource"] = {
-        "action": "action_value",
-        "description": "description_value",
-        "header_action": {
-            "request_headers_to_adds": [
-                {
-                    "header_name": "header_name_value",
-                    "header_value": "header_value_value",
-                }
-            ]
-        },
-        "kind": "kind_value",
-        "match": {
-            "config": {
-                "src_ip_ranges": ["src_ip_ranges_value1", "src_ip_ranges_value2"]
-            },
-            "expr": {
-                "description": "description_value",
-                "expression": "expression_value",
-                "location": "location_value",
-                "title": "title_value",
-            },
-            "versioned_expr": "versioned_expr_value",
-        },
-        "preconfigured_waf_config": {
-            "exclusions": [
-                {
-                    "request_cookies_to_exclude": [
-                        {"op": "op_value", "val": "val_value"}
-                    ],
-                    "request_headers_to_exclude": {},
-                    "request_query_params_to_exclude": {},
-                    "request_uris_to_exclude": {},
-                    "target_rule_ids": [
-                        "target_rule_ids_value1",
-                        "target_rule_ids_value2",
-                    ],
-                    "target_rule_set": "target_rule_set_value",
-                }
-            ]
-        },
-        "preview": True,
-        "priority": 898,
-        "rate_limit_options": {
-            "ban_duration_sec": 1680,
-            "ban_threshold": {"count": 553, "interval_sec": 1279},
-            "conform_action": "conform_action_value",
-            "enforce_on_key": "enforce_on_key_value",
-            "enforce_on_key_configs": [
-                {
-                    "enforce_on_key_name": "enforce_on_key_name_value",
-                    "enforce_on_key_type": "enforce_on_key_type_value",
-                }
-            ],
-            "enforce_on_key_name": "enforce_on_key_name_value",
-            "exceed_action": "exceed_action_value",
-            "exceed_redirect_options": {
-                "target": "target_value",
-                "type_": "type__value",
-            },
-            "rate_limit_threshold": {},
-        },
-        "redirect_options": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -6686,8 +6630,9 @@ def test_patch_rule_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -6777,8 +6722,9 @@ def test_remove_rule_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -6880,8 +6826,9 @@ def test_remove_rule_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -7013,8 +6960,9 @@ def test_remove_rule_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -7101,8 +7049,9 @@ def test_remove_rule_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -7182,8 +7131,9 @@ def test_remove_rule_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -7315,8 +7265,9 @@ def test_remove_rule_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -7374,6 +7325,76 @@ def test_set_labels_rest(request_type):
         "label_fingerprint": "label_fingerprint_value",
         "labels": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.SetLabelsSecurityPolicyRequest.meta.fields[
+        "global_set_labels_request_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["global_set_labels_request_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["global_set_labels_request_resource"][field])
+                ):
+                    del request_init["global_set_labels_request_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["global_set_labels_request_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -7407,8 +7428,9 @@ def test_set_labels_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -7509,8 +7531,9 @@ def test_set_labels_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -7605,10 +7628,6 @@ def test_set_labels_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "resource": "sample2"}
-    request_init["global_set_labels_request_resource"] = {
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -7650,8 +7669,9 @@ def test_set_labels_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
@@ -7712,6 +7732,76 @@ def test_set_labels_unary_rest(request_type):
         "label_fingerprint": "label_fingerprint_value",
         "labels": {},
     }
+    # The version of a generated dependency at test runtime may differ from the version used during generation.
+    # Delete any fields which are not present in the current runtime dependency
+    # See https://github.com/googleapis/gapic-generator-python/issues/1748
+
+    # Determine if the message type is proto-plus or protobuf
+    test_field = compute.SetLabelsSecurityPolicyRequest.meta.fields[
+        "global_set_labels_request_resource"
+    ]
+
+    def get_message_fields(field):
+        # Given a field which is a message (composite type), return a list with
+        # all the fields of the message.
+        # If the field is not a composite type, return an empty list.
+        message_fields = []
+
+        if hasattr(field, "message") and field.message:
+            is_field_type_proto_plus_type = not hasattr(field.message, "DESCRIPTOR")
+
+            if is_field_type_proto_plus_type:
+                message_fields = field.message.meta.fields.values()
+            else:
+                message_fields = field.message.DESCRIPTOR.fields
+        return message_fields
+
+    runtime_nested_fields = [
+        (field.name, nested_field.name)
+        for field in get_message_fields(test_field)
+        for nested_field in get_message_fields(field)
+    ]
+
+    subfields_not_in_runtime = []
+
+    # For each item in the sample request, create a list of sub fields which are not present at runtime
+    for field, value in request_init["global_set_labels_request_resource"].items():
+        result = None
+        is_repeated = False
+        # For repeated fields
+        if isinstance(value, list) and len(value):
+            is_repeated = True
+            result = value[0]
+        # For fields where the type is another message
+        if isinstance(value, dict):
+            result = value
+
+        if result and hasattr(result, "keys"):
+            for subfield in result.keys():
+                if (field, subfield) not in runtime_nested_fields:
+                    subfields_not_in_runtime.append(
+                        {
+                            "field": field,
+                            "subfield": subfield,
+                            "is_repeated": is_repeated,
+                        }
+                    )
+
+    # Remove fields from the sample request which are not present in the runtime version of the dependency
+    for subfield_to_delete in subfields_not_in_runtime:
+        field = subfield_to_delete.get("field")
+        field_repeated = subfield_to_delete.get("is_repeated")
+        subfield = subfield_to_delete.get("subfield")
+        if subfield:
+            if field_repeated:
+                for i in range(
+                    0, len(request_init["global_set_labels_request_resource"][field])
+                ):
+                    del request_init["global_set_labels_request_resource"][field][i][
+                        subfield
+                    ]
+            else:
+                del request_init["global_set_labels_request_resource"][field][subfield]
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a response.
@@ -7745,8 +7835,9 @@ def test_set_labels_unary_rest(request_type):
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
 
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
@@ -7825,8 +7916,9 @@ def test_set_labels_unary_rest_required_fields(
             response_value = Response()
             response_value.status_code = 200
 
-            pb_return_value = compute.Operation.pb(return_value)
-            json_return_value = json_format.MessageToJson(pb_return_value)
+            # Convert return value to protobuf type
+            return_value = compute.Operation.pb(return_value)
+            json_return_value = json_format.MessageToJson(return_value)
 
             response_value._content = json_return_value.encode("UTF-8")
             req.return_value = response_value
@@ -7921,10 +8013,6 @@ def test_set_labels_unary_rest_bad_request(
 
     # send a request that will satisfy transcoding
     request_init = {"project": "sample1", "resource": "sample2"}
-    request_init["global_set_labels_request_resource"] = {
-        "label_fingerprint": "label_fingerprint_value",
-        "labels": {},
-    }
     request = request_type(**request_init)
 
     # Mock the http request call within the method and fake a BadRequest error.
@@ -7966,8 +8054,9 @@ def test_set_labels_unary_rest_flattened():
         # Wrap the value into a proper Response obj
         response_value = Response()
         response_value.status_code = 200
-        pb_return_value = compute.Operation.pb(return_value)
-        json_return_value = json_format.MessageToJson(pb_return_value)
+        # Convert return value to protobuf type
+        return_value = compute.Operation.pb(return_value)
+        json_return_value = json_format.MessageToJson(return_value)
         response_value._content = json_return_value.encode("UTF-8")
         req.return_value = response_value
 
