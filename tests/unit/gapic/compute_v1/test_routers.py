@@ -2672,7 +2672,8 @@ def test_insert_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -2685,7 +2686,8 @@ def test_insert_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -2708,7 +2710,8 @@ def test_insert_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -3183,7 +3186,8 @@ def test_insert_unary_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -3196,7 +3200,8 @@ def test_insert_unary_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -3219,7 +3224,8 @@ def test_insert_unary_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -4028,7 +4034,8 @@ def test_patch_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -4041,7 +4048,8 @@ def test_patch_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -4064,7 +4072,8 @@ def test_patch_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -4550,7 +4559,8 @@ def test_patch_unary_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -4563,7 +4573,8 @@ def test_patch_unary_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -4586,7 +4597,8 @@ def test_patch_unary_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -5050,7 +5062,8 @@ def test_preview_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -5063,7 +5076,8 @@ def test_preview_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -5086,7 +5100,8 @@ def test_preview_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -5527,7 +5542,8 @@ def test_update_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -5540,7 +5556,8 @@ def test_update_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -5563,7 +5580,8 @@ def test_update_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
@@ -6049,7 +6067,8 @@ def test_update_unary_rest(request_type):
 
             if is_field_type_proto_plus_type:
                 message_fields = field.message.meta.fields.values()
-            else:
+            # Add `# pragma: NO COVER` because there may not be any `*_pb2` field types
+            else:  # pragma: NO COVER
                 message_fields = field.message.DESCRIPTOR.fields
         return message_fields
 
@@ -6062,7 +6081,8 @@ def test_update_unary_rest(request_type):
     subfields_not_in_runtime = []
 
     # For each item in the sample request, create a list of sub fields which are not present at runtime
-    for field, value in request_init["router_resource"].items():
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for field, value in request_init["router_resource"].items():  # pragma: NO COVER
         result = None
         is_repeated = False
         # For repeated fields
@@ -6085,7 +6105,8 @@ def test_update_unary_rest(request_type):
                     )
 
     # Remove fields from the sample request which are not present in the runtime version of the dependency
-    for subfield_to_delete in subfields_not_in_runtime:
+    # Add `# pragma: NO COVER` because this test code will not run if all subfields are present at runtime
+    for subfield_to_delete in subfields_not_in_runtime:  # pragma: NO COVER
         field = subfield_to_delete.get("field")
         field_repeated = subfield_to_delete.get("is_repeated")
         subfield = subfield_to_delete.get("subfield")
